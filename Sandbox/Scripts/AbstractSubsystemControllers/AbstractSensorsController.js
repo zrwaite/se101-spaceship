@@ -1,5 +1,5 @@
 //Based on AbstractSensorsController.cs
-import SubsystemController from "./AbstractSubsystemController";
-export default class SensorsController extends SubsystemController {
+import AbstractSubsystemController from "./AbstractSubsystemController";
+export default class AbstractSensorsController extends AbstractSubsystemController {
 	SensorsUpdate(shipStatusInfo, activeSensors, passiveSensors, deltaTime);
 }

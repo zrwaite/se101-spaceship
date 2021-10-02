@@ -1,5 +1,5 @@
 //Based on AbstractNavigationController.cs
-import SubsystemController from "./AbstractSubsystemController";
-export default class NavigationController extends SubsystemController {
+import AbstractSubsystemController from "./AbstractSubsystemController";
+export default class AbstractNavigationController extends AbstractSubsystemController {
 	NavigationUpdate(shipStatusInfo, galaxyMapData, deltaTime);
 }

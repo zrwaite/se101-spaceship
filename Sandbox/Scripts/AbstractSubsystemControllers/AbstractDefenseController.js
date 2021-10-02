@@ -1,5 +1,5 @@
 //Based on AbstractDefenceController.cs
-import SubsystemController from "./AbstractSubsystemController";
-export default class DefenceController extends SubsystemController {
+import AbstractSubsystemController from "./AbstractSubsystemController";
+export default class AbstractDefenceController extends AbstractSubsystemController {
 	DefenseUpdate(shipStatusInfo, turretControls, deltaTime);
 }
