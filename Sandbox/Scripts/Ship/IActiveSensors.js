@@ -4,5 +4,4 @@ export default class IActiveSensors{
         this.GConstant;
     }
     PerformScan (globalAngle, arcRadians, range);
-    //float EMSInterferenceScale {get;}
 }
