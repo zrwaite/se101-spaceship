@@ -8,7 +8,7 @@ export default class ActiveSensors extends IActiveSensors{
 	constructor(...args){
 		super(...args);
 		this.EMConstant = 1; //Don't know what this does
-		this.GConstant = 3; //Don't know what it does
+		this.GConstant = 3; //Constant for the strength of the sensor reading, proportional to distance
 		
 		
 		this.gameCore; //Primary game information
