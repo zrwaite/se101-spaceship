@@ -11,8 +11,8 @@ export default class ActiveSensors extends IActiveSensors{
 		this.GConstant = 3; //Constant for the strength of the sensor reading, proportional to distance
 		
 		
-		this.gameCore; //Primary game information
-		this.galaxyMap; //Current Level map
+		this.gameCore; //Primary game information //GameCore
+		this.galaxyMap; //Current Level map //GalaxyMap
 		
 	}
 	/* Events to watch for?

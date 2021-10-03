@@ -2,8 +2,8 @@
 
 export default class IPassiveSensors{
     constructor(){
-        this.PassiveReadings = [];
-        this.InterferenceScale;
-        this.GConstant;
+        this.PassiveReadings = []; //PassiveSensorReadings
+        this.InterferenceScale; //number
+        this.GConstant; //number
     }
 }
