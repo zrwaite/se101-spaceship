@@ -1,51 +1,60 @@
 // Animation handling, Drawing, and Parallax
 
-import Ship from "../Sandbox/Scripts/Ship/ColonyShip";
+//import Ship from "../Sandbox/Scripts/Ship/ColonyShip";
+// cannot use import statement outside of module....
 
 // SOME GLOBAL VARIABLES are below:
 
 let frame = 0; // Game animation frame.
 let paused = false; // Game can be paused.
 let fpsInterval = 1000 / 60; // frame rate in ms.
-let unit = window.innerWidth / 25; // screen unit.
+let screenSize = [window.innerWidth * 2, window.innerHeight * 2];
+let screenUnit = window.innerWidth / 25; // screen unit.
 
 
 // DRAWING FUNCTIONS are below:
 
 // The canvas names are:
 /*
-MissileCanvas
-ObjectCanvas
-ThrusterCanvas
-ShipCanvas
-ItemCanvas
+    MissileCanvas
+    ObjectCanvas
+    ThrusterCanvas
+    ShipCanvas
+    ItemCanvas
 */
 
-function clearCanvas(canvasName) { // clears contexts
-    ctx[index].clearRect(coor[0] - unit / 20, coor[1] - unit / 20, unit * 1.1, unit * 1.1);
+// Initialize the canvases.
+let contexts = {
+    MissileCanvas: document.body.querySelector("#MissileCanvas").getContext('2d'),
+    ObjectCanvas: document.body.querySelector("#ObjectCanvas").getContext('2d'),
+    ThrusterCanvas: document.body.querySelector("#ThrusterCanvas").getContext('2d'),
+    ShipCanvas: document.body.querySelector("#ShipCanvas").getContext('2d'),
+    ItemCanvas: document.body.querySelector("#ItemCanvas").getContext('2d')
 }
 
-// draw things on to the screen
-
-// inputs:
-/*object {
-    canvas: "ShipCanvas", // canvas ID
-    size: [1, 1], // size, in units
-    location: [0, 0]. // coordinates in the world
+// Function for clearing a context!
+function clearContext(canvasName) {
+    contexts[canvasName].clearRect(0, 0, screenSize[0], screenSize[1]);
 }
+
+// let testShip = new Ship(); // issues from importing
+
+/*
+NEXT TASK IN FUTURE:::::
+
+Extend the Ship class so it has a method
+that draws itself on the screen in the correct orientation.
 */
-let testShip = new Ship();
 
-function drawOnScreen(object, clear = false) {
+let shipImageDefault = new Image();
+shipImageDefault.src = "Sandbox/Sprites/ShipSprites/ColonyShip.png";
+console.log(shipImageDefault);
+console.log(contexts["ShipCanvas"]);
+
+function drawOnScreen(item, clear = false) {
     if (!clear) { // draw the given shape
-
-    } else { // clear where they are
-
-    }
-}
-
-class Element {
-    constructor (type, coordinates, size) {
+        contexts["ShipCanvas"].drawImage(shipImageDefault, 0, 0, item.width, item.height);
+    } else { // clear the context, only where the item is...
 
     }
 }
@@ -58,7 +67,6 @@ window.onload = function () {
     startAnimating();
 }
 
-let frameCount = 0;
 let startTime, now, then, elapsed;
 
 function startAnimating() {
@@ -79,8 +87,9 @@ function animate() {
             
             // run the game here!!!!!
 
-            
-            drawOnScreen(testShip);
+            clearContext("ShipCanvas");
+            //drawOnScreen(testShip); // issues from importing
+            drawOnScreen({width: 66, height: 50});
 
             console.log("Frame: " + frame);
         }
