@@ -28,7 +28,24 @@ let images = {};
 let contexts = {};
 let imageInfo = [
     ["background", "SpaceObjects/Space.png"],
-    ["ship", "ShipSprites/ColonyShip.png"]
+    ["ship", "ShipSprites/ColonyShip.png"],
+    ["thruste", "ShipSprites/ThrusterNozzle.png"],
+    ["thrusterFlame", "ShipSprites/ThrusterFlame.png"],
+    ["turret", "ShipSprites/TurretSprite.png"],
+    ["planet1", "SpaceObjects/CreamVioletPlanet.png"],
+    ["planet2", "SpaceObjects/CyanPlanet.png"],
+    ["planet3", "SpaceObjects/CyanPlanet1.png"],
+    ["planet4", "SpaceObjects/DarkPlanet.png"],
+    ["planet5", "SpaceObjects/EarthLikePlanet.png"],
+    ["planet6", "SpaceObjects/FrostPlanet.png"],
+    ["planet7", "SpaceObjects/IcePlanet.png"],
+    ["planet8", "SpaceObjects/OrangePlanet.png"],
+    ["planet9", "SpaceObjects/PurplePlanet.png"],
+    ["planet10", "SpaceObjects/RedLinesPlanet.png"],
+    ["planet11", "SpaceObjects/RedPlanet1.png"],
+    ["planet12", "SpaceObjects/RedPlanetSputnik.png"],
+    ["planet13", "SpaceObjects/SandPlanet.png"],
+    ["planet14", "SpaceObjects/StormPlanet.png"]
 ];
 let contextNames = [
     "background", // static
