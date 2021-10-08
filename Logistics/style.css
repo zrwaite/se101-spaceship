@@ -4,27 +4,21 @@
 }
 
 body {
+    --unit: 30px; /* screen.js updates this. */
+    --border: 6px; /* screen.js updates this. */
+    --width: 32; /* screen.js updates this. */
+    --height: 24; /* screen.js updates this. */
     font-family: NotoSans-Black;
     overflow: hidden;
-}
-
-#BackgroundImage {
-    background-image: url("../Sandbox/Sprites/SpaceObjects/Space.png");
-    z-index: -1;
-    width: 200%;
-    height: 200%;
-    background-repeat: repeat;
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    transition-duration: 0.1s;
+    background-color: black;
 }
 
 canvas {
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0);
+    /* Math to center the canvases in the viewing window. */
+    left: calc(50% - var(--width) / 2);
+    top: calc(50% - var(--height) / 2);
+    width: calc(var(--width) * var(--unit));
+    height: calc(var(--height) * var(--unit));
+    outline: var(--border) solid rgba(50, 50, 50);
 }

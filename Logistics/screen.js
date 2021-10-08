@@ -1,4 +1,4 @@
-// Animation handling, Drawing, and Parallax
+// Animation handling, Asset Initialization, and Drawing
 
 //import Ship from "../Sandbox/Scripts/Ship/ColonyShip";
 // cannot use import statement outside of module....
@@ -7,64 +7,89 @@
 
 let frame = 0; // Game animation frame.
 let paused = false; // Game can be paused.
-let fpsInterval = 1000 / 60; // frame rate in ms.
-let screenSize = [window.innerWidth * 2, window.innerHeight * 2];
-let screenUnit = window.innerWidth / 25; // screen unit.
-
-
-// DRAWING FUNCTIONS are below:
-
-// The canvas names are:
-/*
-    MissileCanvas
-    ObjectCanvas
-    ThrusterCanvas
-    ShipCanvas
-    ItemCanvas
-*/
-
-// Initialize the canvases.
-let contexts = {
-    MissileCanvas: document.body.querySelector("#MissileCanvas").getContext('2d'),
-    ObjectCanvas: document.body.querySelector("#ObjectCanvas").getContext('2d'),
-    ThrusterCanvas: document.body.querySelector("#ThrusterCanvas").getContext('2d'),
-    ShipCanvas: document.body.querySelector("#ShipCanvas").getContext('2d'),
-    ItemCanvas: document.body.querySelector("#ItemCanvas").getContext('2d')
+let fpsInterval = 1000 / 60; // Frame rate in ms.
+let screenSize = [32, 24]; // Window dimensions (in "unit"s).
+let spritePath = "Sandbox/Sprites/";
+let border = 6;
+let unit = Math.floor((window.innerWidth - border * 2) / (4 * screenSize[0])) * 4; // Screen unit as a multiple of 4
+if ((window.innerWidth - border * 2) / (window.innerHeight - border * 2) > screenSize[0] / screenSize[1]) { // Unit based on height
+    unit = Math.floor((window.innerHeight - border * 2) / (4 * screenSize[1])) * 4;
 }
+console.log("Unit: " + unit);
 
-// Function for clearing a context!
-function clearContext(canvasName) {
-    contexts[canvasName].clearRect(0, 0, screenSize[0], screenSize[1]);
-}
+// Initialize the CSS variables so that the css can do dynamic calculations for displays.
+document.body.style.setProperty("--unit", unit + "px");
+document.body.style.setProperty("--border", border + "px");
+document.body.style.setProperty("--width", screenSize[0] * unit + "px");
+document.body.style.setProperty("--height", screenSize[1] * unit + "px");
 
-// let testShip = new Ship(); // issues from importing
+let imagesLoaded = 0; // Updates as the images load, until all are loaded.
+let images = {};
+let contexts = {};
+let imageInfo = [
+    ["background", "SpaceObjects/Space.png"],
+    ["ship", "ShipSprites/ColonyShip.png"]
+];
+let contextNames = [
+    "background", // static
+    "missiles",
+    "objects",
+    "thrusters",
+    "ships",
+    "items"
+];
 
-/*
-NEXT TASK IN FUTURE:::::
-
-Extend the Ship class so it has a method
-that draws itself on the screen in the correct orientation.
-*/
-
-let shipImageDefault = new Image();
-shipImageDefault.src = "Sandbox/Sprites/ShipSprites/ColonyShip.png";
-console.log(shipImageDefault);
-console.log(contexts["ShipCanvas"]);
-
-function drawOnScreen(item, clear = false) {
-    if (!clear) { // draw the given shape
-        contexts["ShipCanvas"].drawImage(shipImageDefault, 0, 0, item.width, item.height);
-    } else { // clear the context, only where the item is...
-
+function initializeImages(imageInfo) {
+    /* Create the images with the given info: [imageName, src]. */
+    for (let i = 0; i < imageInfo.length; i++) {
+        let image = new Image();
+        image.src = spritePath + imageInfo[i][1];
+        image.onload = iterateLoad;
+        images[imageInfo[i][0]] = image;
     }
 }
 
+function initializeContexts(contextNames) {
+    /* Create the contexts with the given names: first name is farthest back. */
+    for (let i = 0; i < contextNames.length; i++) {
+        let canvas = document.createElement("CANVAS");
+        canvas.id = contextNames[i];
+        canvas.width = unit * screenSize[0];
+        canvas.height = unit * screenSize[1];
+        document.body.querySelector(".canvasHolder").appendChild(canvas);
+        let ctx = canvas.getContext('2d');
+        ctx.imageSmoothingEnabled = false;
+        if (contextNames[i] == "background") {
+            ctx.drawImage(images["background"], 0, 0, screenSize[0] * unit, screenSize[1] * unit);
+        }
+        contexts[contextNames[i]] = ctx;
+    }
+}
 
-// ANIMATION LOOP is below:
+function iterateLoad() {
+    imagesLoaded++;
+    if (imagesLoaded >= imageInfo.length) {
+        initializeGame();
+    }
+}
 
-window.onload = function () {
-    // any images that need to be loaded first (*cough cough* the ship) can be drawn for the first time here.
+initializeImages(imageInfo);
+
+// Here is where everything should begin.
+function initializeGame() {
+    console.log("Images have loaded!");
+    initializeContexts(contextNames);
     startAnimating();
+}
+
+// Function for clearing a context.
+function clearContext(contextName) {
+    contexts[contextName].clearRect(0, 0, screenSize[0] * unit, screenSize[1] * unit);
+}
+
+// Function for drawing an image (very basic, for now).
+function drawOnScreen(item, contextName, imageName) {
+    contexts[contextName].drawImage(images[imageName], item.x * unit, item.y * unit, item.width * unit, item.height * unit);
 }
 
 let startTime, now, then, elapsed;
@@ -87,11 +112,11 @@ function animate() {
             
             // run the game here!!!!!
 
-            clearContext("ShipCanvas");
-            //drawOnScreen(testShip); // issues from importing
-            drawOnScreen({width: 66, height: 50});
+            // testing out drawing onto the screen:
+            clearContext("ships");
+            drawOnScreen({width: 66 / 22, height: 50 / 22, x: 10, y: 7}, "ships", "ship");
 
-            console.log("Frame: " + frame);
+            //console.log("Frame: " + frame);
         }
     }
 }
