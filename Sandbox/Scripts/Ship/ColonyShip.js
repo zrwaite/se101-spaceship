@@ -37,7 +37,7 @@ export default class Ship{
 		//(I am going to give these values here, 
 		//because we add to it later with no other initialization, 
 		//which is probably something that works in c# but would be a bug here
-		this.TimeElapsed = 0; 
+		this.TimeElapsed = 0;
 		this.TotalJumpCost = 0;
 		this.TotalDamage = 0;
 		//Might be godot specific:
