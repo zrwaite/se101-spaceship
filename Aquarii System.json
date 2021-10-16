@@ -39,14 +39,14 @@
         "type":"WarpGates",
         "link":1,
         "position":{"x":-639,"y":-91},
-        "destinationSolarSystemName":"Groombridge System"
+        "to":"Groombridge System"
     },
     {
         "name":"Warpgate to Wolf 359 System",
         "type":"WarpGates",
         "link":1,
         "position":{"x":576,"y":199},
-        "destinationSolarSystemName":"Wolf 359 System"
+        "to":"Wolf 359 System"
     },
     {
         "name":"Asteroid",
