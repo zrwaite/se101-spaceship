@@ -42,28 +42,28 @@
             "type":"WarpGates",
             "link":1,
             "position":{"x":485,"y":-397},
-            "destinationSolarSystemName":"Quaid System"
+            "to":"Quaid System"
         },
         {
             "name":"Warpgate to Kepler 438 System",
             "type":"WarpGates",
             "link":1,
             "position":{"x":892,"y":381},
-            "destinationSolarSystemName":"Keple 438 System"
+            "to":"Kepler 438 System"
         },
         {
             "name":"Warpgate to Wolf 359 System",
             "type":"WarpGates",
             "link":1,
             "position":{"x":-431,"y":-217},
-            "destinationSolarSystemName":"Wolf 359 System"
+            "to":"Wolf 359 System"
         },
         {
             "name":"Warpgate to Aquarii System",
             "type":"WarpGates",
             "link":1,
             "position":{"x":-306,"y":302},
-            "destinationSolarSystemName":"Aquarii System"
+            "to":"Aquarii System"
         },
         {
             "name":"SpaceObjects"
