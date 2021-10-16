@@ -42,35 +42,35 @@
             "type":"WarpGates",
             "link":1,
             "position":{"x":-424,"y":410},
-            "destinationSolarSystemName":"Quaid System"
+            "to":"Quaid System"
         },
         {
             "name":"Warpgate to Sirius System",
             "type":"WarpGates",
             "link":1,
             "position":{"x":719,"y":-141},
-            "destinationSolarSystemName":"Sirius System"
+            "to":"Sirius System"
         },
         {
             "name":"Warpgate to Alpha Centauri System",
             "type":"WarpGates",
             "link":1,
             "position":{"x":-621,"y":-45},
-            "destinationSolarSystemName":"Alpha Centauri System"
+            "to":"Alpha Centauri System"
         },
         {
             "name":"Warpgate to Wolf 359 System",
             "type":"WarpGates",
             "link":1,
             "position":{"x":-8,"y":-342},
-            "destinationSolarSystemName":"Wolf 359 System"
+            "to":"Wolf 359 System"
         },
         {
             "name":"Warpgate to Groombridge System",
             "type":"WarpGates",
             "link":1,
             "position":{"x":245,"y":558},
-            "destinationSolarSystemName":"Groombridge System"
+            "to":"Groombridge System"
         },
         {
             "name":"Planet Kepler 438",
