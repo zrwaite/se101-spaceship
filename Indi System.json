@@ -38,21 +38,21 @@
             "type":"WarpGates",
             "link":1,
             "position":{"x":669,"y":-292},
-            "destinationSolarSystemName":"Quaid System"
+            "to":"Quaid System"
         },
         {
             "name":"Warpgate to Luyten System",
             "type":"WarpGates",
             "link":1,
             "position":{"x":-382,"y":358},
-            "destinationSolarSystemName":"Luyten System"
+            "to":"Luyten System"
         },
         {
             "name":"Warpgate to Barnard's Star System System",
             "type":"WarpGates",
             "link":1,
             "position":{"x":648,"y":391},
-            "destinationSolarSystemName":"Barnard's Star System"
+            "to":"Barnard's Star System"
         },
         {
             "name":"Asteroid",
