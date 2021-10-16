@@ -43,33 +43,33 @@
         "type":"WarpGates",
         "link":1,
         "position":{"x":640,"y":-147},
-        "destinationSolarSystemName":"Yennefer System"
+        "to":"Yennefer System"
     },
     {   
         "name":"warpgate to Indi System",
         "type":"WarpGates",
         "link":1,
         "position":{"x":285,"y":440},
-        "destinationSolarSystemName":"Indi System"
+        "to":"Indi System"
     },
     {
         "name":"Warpgate to Kepler 438 System",
         "type":"WarpGates",
         "link":1,
         "position":{"x":905,"y":-33},
-        "destinationSolarSystemName":"Kepler 438 System"
+        "to":"Kepler 438 System"
     },
     {   "name":"Warpgate to Cygni System",
         "type":"WarpGates",
         "link":1,
         "position":{"x":-316,"y":115},
-        "destinationSolarSystemName":"Cygni System"
+        "to":"Cygni System"
     },
     {   "name":"Warpgate to Groombridge System",
         "type":"WarpGates",
         "link":1,
         "position":{"x":7,"y":-244},
-        "destinationSolarSystemName":"Groombridge System"
+        "to":"Groombridge System"
     },
     {
         "name":"Asteroid",
