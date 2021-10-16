@@ -1,0 +1,183 @@
+{
+    "links":[{
+        "path":"res://Sandbox/Scenes/GalaxyMaps/GalaxyMapEdge.tscn",
+        "type":"PackedScene",
+        "id":1
+    },
+    {
+        "path":"res://Sandbox/Scenes/GalaxyMaps/GalaxyMapNode.tscn",
+        "type":"PackedScene", 
+        "id":2
+    },
+    {
+        "path":"res://Sandbox/Sprites/SpaceObjects/Space.png",
+        "type":"Texture",
+        "id":3
+    },
+    {
+        "path":"res://Sandbox/Scripts/Galaxy/GalaxyMap.cs",
+        "type":"Script",
+        "id":17
+    }],
+    "objects":[
+        {
+            "name":"GalaxyMapGamma",
+            "script":17
+        },
+        {
+            "name":"Sprite",
+            "img":3
+        },
+        {
+            "name":"Sol System",
+            "link":2,
+            "position":{"x":116,"y":521}
+        },
+        {
+            "name":"Alpha Centauri System",
+            "link":2,
+            "position":{"x":513,"y":464}
+        },
+        {
+            "name":"Kepler 438 System",
+            "link":2,
+            "position":{"x":652,"y":209}
+        },
+        {
+            "name":"Barnard's Star System",
+            "link":2,
+            "position":{"x":355,"y":344}
+        },
+        {
+            "name":"Wolf 359 System",
+            "link":2,
+            "position":{"x":736,"y":408}
+        },
+        {
+            "name":"Sirius System",
+            "link":2,
+            "position":{"x":189,"y":381}
+        },
+        {
+            "name":"Luyten System",
+            "link":2,
+            "position":{"x":136,"y":215}
+        },
+        {
+            "name":"Groombridge System",
+            "link":2,
+            "position":{"x":861,"y":220}
+        },
+        {
+            "name":"Kruger Sytsem",
+            "link":2,
+            "position":{"x":914,"y":530}              
+        },
+        {
+            "name":"Aquarii System",
+            "link":2,
+            "position":{"x":932,"y":356}
+        },
+        {
+            "name":"Cygni System",
+            "link":2,
+            "position":{"x":314,"y":120}
+        },
+        {
+            "name":"Indi System",
+            "link":2,
+            "position":{"x":79,"y":68}
+        },
+        {
+            "name":"Yennefer System",
+            "link":2,
+            "position":{"x":546,"y":44}
+        },
+        {
+            "name":"Quaid System",
+            "link":2,
+            "position":{"x":842,"y":79}
+        },
+        {
+            "name":"Sol_Alpha Centauri",
+            "link":1
+        }, 
+        {
+            "name":"Sol_Sirius",
+            "link":1
+        }, 
+        {
+            "name":"Alpha Centauri_Bernard's Star",
+            "link":1
+        },
+        {
+            "name":"Alpha Centauri_Wolf 359",
+            "link":1
+        },
+        {
+            "name":"Alpha Cnetauri_Kruger",
+            "link":1
+        },
+        {
+            "name":"Bernard's Star_Sirius",
+            "link":1
+        },
+        {
+            "name":"Bernard's Star_Wolf 359",
+            "link":1
+        },
+        {
+            "name":"Bernard's Star_Indi",
+            "link":1
+        },
+        {
+            "name":"Wolf 359_Aquarii",
+            "link":1
+        }, 
+        {
+            "name":"Wolf 359_Groombridge",
+            "link":1
+        },
+        {
+            "name":"Aquarii_Groombridge",
+            "link":1
+        },
+        {
+            "name":"Sirius_Luyten",
+            "link":1
+        },
+        {
+            "name":"Luyten_Cygni",
+            "link":1
+        }, 
+        {
+            "name":"Indi_Quaid",
+            "link":1
+        }, 
+        {
+            "name":"Groombridge_Kepler 438",
+            "link":1
+        }, 
+        {
+            "name":"Groombridge_Quaid",
+            "link":1
+        },
+        {
+            "name":"Cygni_quaid",
+            "link":1
+        },
+        {
+            "name":"Quaid_Yennefer",
+            "link":1
+        },
+        {
+            "name":"Quaid_Kepler 438",
+            "link":1
+        },
+        {
+            "name":"Indi_Luyten",
+            "link":1
+        }
+
+    ]
+}
