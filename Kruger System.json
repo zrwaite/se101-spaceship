@@ -39,7 +39,7 @@
             "type":"WarpGates",
             "link":1,
             "position":{"x":-505,"y":-286},
-            "destinationSolarSystemName":"Alpha Centauri System"
+            "to":"Alpha Centauri System"
         },
         {
             "name":"Asteroid",
