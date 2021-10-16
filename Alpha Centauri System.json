@@ -38,35 +38,35 @@
         "type":"WarpGates",
         "link":1,
         "position":{"x":-643,"y":-269},
-        "destinationSolarSystemName":"Sol System"
+        "to":"Sol System"
     },
     {
         "name":"Warpgate to Bernard's Star System",
         "type":"WarpGates",
         "link":1,
         "position":{"x":-313,"y":468},
-        "destinationSolarSystemName":"Bernard's Star System"
+        "to":"Bernard's Star System"
     },
     {
         "name":"Warpgate to Kruger System",
         "type":"WarpGates",
         "link":1,
         "position":{"x":676,"y":525},
-        "destinationSolarSystemName":"Kruger System"
+        "to":"Kruger System"
     },
     {
         "name":"Warpgate to Wolf 359 System",
         "type":"WarpGates",
         "link":1,
         "position":{"x":730,"y":-268},
-        "destinationSolarSystemName":"Wolf 359 System"
+        "to":"Wolf 359 System"
     },
     {
         "name":"Warpgate to Kepler 438 System",
         "type":"WarpGates",
         "link":1,
         "position":{"x":313,"y":386},
-        "destinationSolarSystemName":"Kepler 438 System"
+        "to":"Kepler 438 System"
     },
     {
         "name":"Asteroid",
