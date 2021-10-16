@@ -49,35 +49,35 @@
         "type":"WarpGates",
         "link":5,
         "position":{"x":-418,"y":-320},
-        "destinationSolarSystemName":"Alpha Centauri System"
+        "to":"Alpha Centauri System"
     },
     {
         "name":"Warpgate to Sol System",
         "type":"WarpGates",
         "link":5,
         "position":{"x":-66,"y":547},
-        "destinationSolarSystemName":"Sol System"
+        "to":"Sol System"
     },
     {
         "name":"Warpgate to Sirius System",
         "type":"WarpGates",
         "link":5,
         "position":{"x":763,"y":-142},
-        "destinationSolarSystemName":"Sirius System"
+        "to":"Sirius System"
     },
     {
         "name":"Warpgate to Wolf 359 System",
         "type":"WarpGates",
         "link":5,
         "position":{"x":693,"y":256},
-        "destinationSolarSystemName":"Wolf 359 System"
+        "to":"Wolf 359 System"
     },
     {
         "name":"Warpgate to Indi System",
         "type":"WarpGates",
         "link":5,
         "position":{"x":-440,"y":246},
-        "destinationSolarSystemName":"Indi System"
+        "to":"Indi System"
     },
     {
         "name":"Asteroid",
