@@ -44,21 +44,21 @@
             "type":"WarpGates",
             "link":1,
             "position":{"x":3,"y":-329},
-            "destinationSolarSystemName":"Cygni System"
+            "to":"Cygni System"
         },
         {
             "name":"Warpgate to Sirius System",
             "type":"WarpGates",
             "link":1,
             "position":{"x":-396,"y":303},
-            "destinationSolarSystemName":"Sirius System"
+            "to":"Sirius System"
         },
         {
             "name":"Warpgate to Indi System",
             "type":"WarpGates",
             "link":1,
             "position":{"x":401,"y":329},
-            "destinationSolarSystemName":"Indi System"
+            "to":"Indi System"
         },
         {
             "name":"Asteroid",
