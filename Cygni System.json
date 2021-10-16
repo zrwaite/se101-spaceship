@@ -43,14 +43,14 @@
             "type":"WarpGates",
             "link":1,
             "position":{"x":-266,"y":377},
-            "destinationSolarSystemName":"Quaid System"
+            "to":"Quaid System"
         },
         {
             "name":"Warpgate to Luyten System",
             "type":"WarpGates",
             "link":1,
             "position":{"x":870,"y":-246},
-            "destinationSolarSystemName":"Luyten System"
+            "to":"Luyten System"
         },
         {
             "name":"Asteroid",
