@@ -1,0 +1,63 @@
+{
+    "link":[{
+        "path": "res://Sandbox/Sprites/SpaceObjects/Space.png",
+        "type":"img", 
+        "id":1
+    },
+    {
+        "path":"res://Sandbox/Scenes/GalaxyMaps/GalaxyMapEdge.tscn",
+        "type":"json", 
+        "id":4
+    },
+    {
+        "path":"res://Sandbox/Scenes/GalaxyMaps/GalaxyMapNode.tscn",
+        "type":"json",
+        "id":5
+    },
+    {
+        "path":"res://Sandbox/Scripts/Galaxy/GalaxyMap.cs",
+        "type":"script", 
+        "id":6
+    }],
+    "objects":[
+        {
+            "name":"GalaxyMapA",
+            "script":6
+        },
+        {
+            "name":"Sprite",
+            "img":1
+        },
+        {
+            "name":"Sol System",
+            "link": 5,
+            "position": {"x":148,"y":407}
+        },
+        {
+            "name":"Alpha Centauri System",
+            "link":5,
+            "position":{"x":509,"y":218}
+        },
+        {
+            "name":"Kepler 438 System",
+            "link":5,
+            "position":{"x":873,"y":378}
+        },
+        {
+            "name":"Sol_Alpha Centauri",
+            "link":4
+        },
+        {
+            "name":"Alpha Centauri_Kepler 438",
+            "link":4
+            
+    }]
+    
+}
+
+
+
+
+
+
+

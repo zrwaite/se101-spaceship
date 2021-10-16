@@ -1,0 +1,114 @@
+{
+    "links":[{
+        "path":"res://Sandbox/Scenes/SpaceObjects/WarpGate.tscn",
+        "type":"json",
+        "id":1
+    },
+    {
+        "path":"res://Sandbox/Scenes/SolarSystemBackgrounds/ParallaxSpaceBackground.tscn",
+        "type":"json",
+        "id":3
+    },
+    {
+        "path":"res://Sandbox/Sprites/SpaceObjects/CreamVioletPlanet.png",
+        "type":"img",
+        "id":4
+    },
+    {
+        "path":"res://Sandbox/Scenes/SpaceObjects/Asteroid.tscn",
+        "type":"json",
+        "id":2
+    }],
+   "objects":[
+    {
+        "name":"Alpha Centauri System"
+    },
+    {
+        "name":"ParallaxSpaceBackground",
+        "link":3
+    },
+    {
+        "name":"Sprite",
+        "type":"ParallaxSpaceBackground/NearBackground",
+        "index":0,
+        "img":4
+    },
+    {
+        "name":"Warpgate to Sol System",
+        "type":"WarpGates",
+        "link":1,
+        "position":{"x":-643,"y":-269},
+        "destinationSolarSystemName":"Sol System"
+    },
+    {
+        "name":"Warpgate to Bernard's Star System",
+        "type":"WarpGates",
+        "link":1,
+        "position":{"x":-313,"y":468},
+        "destinationSolarSystemName":"Bernard's Star System"
+    },
+    {
+        "name":"Warpgate to Kruger System",
+        "type":"WarpGates",
+        "link":1,
+        "position":{"x":676,"y":525},
+        "destinationSolarSystemName":"Kruger System"
+    },
+    {
+        "name":"Warpgate to Wolf 359 System",
+        "type":"WarpGates",
+        "link":1,
+        "position":{"x":730,"y":-268},
+        "destinationSolarSystemName":"Wolf 359 System"
+    },
+    {
+        "name":"Warpgate to Kepler 438 System",
+        "type":"WarpGates",
+        "link":1,
+        "position":{"x":313,"y":386},
+        "destinationSolarSystemName":"Kepler 438 System"
+    },
+    {
+        "name":"Asteroid",
+        "type":"SpaceObjects",
+        "link":2,
+        "position":{"x":-261,"y":343}
+    },
+    {
+        "name":"Asteroid2",
+        "type":"SpaceObjects",
+        "link":2,
+        "position":{"x":-395,"y":-272}
+    },
+    {
+        "name":"Asteroid3",
+        "type":"SpaceObjects",
+        "link":2,
+        "position":{"x":458,"y":-272}
+    },
+    {
+        "name":"Asteroid4",
+        "type":"SpaceObjects",
+        "link":2,
+        "position":{"x":607,"y":233}
+    },
+    {
+        "name":"Asteroid5",
+        "type":"SpaceObjects",
+        "link":2,
+        "position":{"x":153,"y":166}
+    },
+    {
+        "name":"Asteroid6",
+        "type":"SpaceObjects",
+        "link":2,
+        "position":{"x":117,"y":-222}
+    },
+    {
+        "name":"Asteroid7",
+        "type":"SpaceObjects",
+        "link":2,
+        "position":{"x":-548,"y":194}
+    }
+   ]
+}
