@@ -38,28 +38,28 @@
         "type":"WarpGate",
         "link":1,
         "position":{"x":-297,"y":155},
-        "destinationSolarSystemName":"Luyten System"
+        "to":"Luyten System"
     },    
      {
         "name":"Warpgate to Barnard's Star System",
         "type":"WarpGate",
         "link":1,
         "position":{"x":179,"y":-152},
-        "destinationSolarSystemName":"Barnard's Star System"
+        "to":"Barnard's Star System"
      },   
     {
         "name":"Warpgate to Kepler 438 System",
         "type":"WarpGate",
         "link":1,
         "position":{"x":513,"y":-453},
-        "destinationSolarSystemName":"Kepler 438 System"
+        "to":"Kepler 438 System"
     },  
     {
         "name":"Warpgate to Sol System",
         "type":"WarpGate",
         "link":1,
         "position":{"x":-506,"y":-33},
-        "destinationSolarSystemName":"Sol System"    
+        "to":"Sol System"    
     },
     {
         "name":"SpaceObjects",

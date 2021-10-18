@@ -55,20 +55,20 @@
                 "type":"WarpGates",
                 "link":3,
                 "position":{"x":800,"y":0},
-                "destinationSolarSystemName":"Alpha Centauri System"
+                "to":"Alpha Centauri System"
             },
             {   "name":"warpgate to Barnard's Star System",
                 "type":"WarpGates",
                 "link":3,
                 "position":{"x":746,"y":599},
-                "destinationSolarSystemName":"Barnard's Star System"
+                "to":"Barnard's Star System"
             },
             {   
                 "name":"Warpgate to Sirius System",
                 "type":"WarpGates",
                 "link":3,
                 "position":{"x":1107,"y":-369},
-                "destinationSolarSystemName":"Sirius System"
+                "to":"Sirius System"
             },
             {
                 "name":"Asteroid",

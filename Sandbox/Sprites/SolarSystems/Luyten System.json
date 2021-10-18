@@ -10,7 +10,7 @@
         "id":2
     },
     {
-        "path":"res://Sandbox/Sprites/SpaceObjects/StormPlanet.png",
+        "path":"res://Sandbox/Sprites/SpaceObjects/CyanPlanet.png",
         "type":"img",
         "id":3
     },
@@ -18,10 +18,15 @@
         "path":"res://Sandbox/Scenes/SpaceObjects/Asteroid.tscn",
         "type":"json",
         "id":4
+    },
+    {
+        "path":"res://Sandbox/Scenes/SpaceObjects/AsteroidSpawnLauncher.tscn",
+        "type":"json",
+        "id":5
     }],
     "objects":[
         {
-            "name":"Kruger System"
+            "name":"Luyten System"
         },
         {
             "name":"ParallaxSpaceBackground",
@@ -35,65 +40,86 @@
             "img":3
         },
         {
-            "name":"Warpgate to Alpha Centauri System",
+            "name":"Warpgate to Cygni System",
             "type":"WarpGates",
             "link":1,
-            "position":{"x":-505,"y":-286},
-            "to":"Alpha Centauri System"
+            "position":{"x":3,"y":-329},
+            "to":"Cygni System"
+        },
+        {
+            "name":"Warpgate to Sirius System",
+            "type":"WarpGates",
+            "link":1,
+            "position":{"x":-396,"y":303},
+            "to":"Sirius System"
+        },
+        {
+            "name":"Warpgate to Indi System",
+            "type":"WarpGates",
+            "link":1,
+            "position":{"x":401,"y":329},
+            "to":"Indi System"
         },
         {
             "name":"Asteroid",
-            "type":"SpaceObjects", 
+            "type":"SpaceObjects",
             "link":4,
-            "position":{"x":-503,"y":-107}
+            "position":{"x":-308,"y":66}
         },
         {
             "name":"Asteroid2",
             "type":"SpaceObjects",
             "link":4,
-            "position":{"x":-392,"y":-195}
+            "position":{"x":-138,"y":300}
         },
         {
             "name":"Asteroid3",
             "type":"SpaceObjects",
             "link":4,
-            "position":{"x":-320,"y":-380}
+            "position":{"x":-341,"y":497}
         },
         {
             "name":"Asteroid4",
             "type":"SpaceObjects",
             "link":4,
-            "position":{"x":-501,"y":-429}
+            "position":{"x":275,"y":76}
         },
         {
             "name":"Asteroid5",
             "type":"SpaceObjects",
             "link":4,
-            "position":{"x":-656,"y":-364}
+            "position":{"x":185,"y":-185}
         },
         {
             "name":"Asteroid6",
             "type":"SpaceObjects",
             "link":4,
-            "position":{"x":-636,"y":-204}
-        },
+            "position":{"x":-94,"y":-175}
+         },
         {
             "name":"Asteroid7",
             "type":"SpaceObjects",
             "link":4,
-            "position":{"x":47,"y":-200}
+            "position":{"x":-121,"y":-434}
         },
         {
             "name":"Asteroid8",
             "type":"SpaceObjects",
             "link":4,
-            "position":{"x":200,"y":188}
+            "position":{"x":247,"y":209}
         },
         {
             "name":"Asteroid9",
             "type":"SpaceObjects",
             "link":4,
-            "position":{"x":-293,"y":265}
+            "position":{"x":543,"y":-191}
+        },
+        {
+            "name":"AsteroidSpawnLauncher",
+            "link":5,
+            "position":{"x":-532,"y":-499},
+            "rotation":1.00155,
+            "maSpawnCount":20
         }
     ]
 }

@@ -36,32 +36,32 @@
             "type":"WarpGates",
             "link":1,
             "position":{"x":-498,"y":-345},
-            "destinationSolarSystemName":"Aquarii System"
+            "to":"Aquarii System"
         },
         {
             "name":"WarpGate to Groombridge System",
             "type":"WarpGates",
             "link":1,
             "position":{"x":800,"y":-266},
-            "destinationSolarSystemName":"Groombridge System"
+            "to":"Groombridge System"
         },
         {    "name":"Warpgate to Kepler 438 System",
              "type":"WarpGates", 
              "link":1,
              "position":{"x":-718,"y":359},    
-             "destinationSolarSystemName":"Kepler 438 System"
+             "to":"Kepler 438 System"
         },
         {    "name":"Warpgate to Alpha Centauri System",
              "type":"WarpGates",
              "link":1,
              "position":{"x":145,"y":573},
-             "destinationSolarSystemName":"Alpha Centauri System"
+             "to":"Alpha Centauri System"
         },
         {    "name":"warpgate to Barnard's Star System",
              "type":"WarpGates",
              "link":1,
              "position":{"x":759,"y":218},
-             "destinationSolarSystemName":"Barnard's Star System"
+             "to":"Barnard's Star System"
         },
         {     "name":"Asteroid",
               "type":"SpaceObjects",

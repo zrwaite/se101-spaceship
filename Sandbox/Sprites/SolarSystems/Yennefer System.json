@@ -33,7 +33,7 @@
             "type":"WarpGates",
             "link":1,
             "position":{"x":575,"y":-116},
-            "destinationSolarSystemName":"Quaid System"
+            "to":"Quaid System"
         },
         {
             "name":"SpaceObjects"

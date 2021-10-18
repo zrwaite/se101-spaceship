@@ -10,7 +10,7 @@
         "id":2
     },
     {
-        "path":"res://Sandbox/Sprites/SpaceObjects/CyanPlanet.png",
+        "path":"res://Sandbox/Sprites/SpaceObjects/IcePlanet.png",
         "type":"img",
         "id":3
     },
@@ -18,15 +18,10 @@
         "path":"res://Sandbox/Scenes/SpaceObjects/Asteroid.tscn",
         "type":"json",
         "id":4
-    },
-    {
-        "path":"res://Sandbox/Scenes/SpaceObjects/AsteroidSpawnLauncher.tscn",
-        "type":"json",
-        "id":5
     }],
     "objects":[
         {
-            "name":"Luyten System"
+            "name":"Indi System"
         },
         {
             "name":"ParallaxSpaceBackground",
@@ -36,90 +31,94 @@
             "name":"Sprite",
             "type":"ParallaxSpaceBackground/NearBackground",
             "index":0,
-            "scale":{"x":0.2,"y":0.2},
             "img":3
         },
         {
-            "name":"Warpgate to Cygni System",
+            "name":"Warpgate to Quaid System",
             "type":"WarpGates",
             "link":1,
-            "position":{"x":3,"y":-329},
-            "to":"Cygni System"
+            "position":{"x":669,"y":-292},
+            "to":"Quaid System"
         },
         {
-            "name":"Warpgate to Sirius System",
+            "name":"Warpgate to Luyten System",
             "type":"WarpGates",
             "link":1,
-            "position":{"x":-396,"y":303},
-            "to":"Sirius System"
+            "position":{"x":-382,"y":358},
+            "to":"Luyten System"
         },
         {
-            "name":"Warpgate to Indi System",
+            "name":"Warpgate to Barnard's Star System System",
             "type":"WarpGates",
             "link":1,
-            "position":{"x":401,"y":329},
-            "to":"Indi System"
+            "position":{"x":648,"y":391},
+            "to":"Barnard's Star System"
         },
         {
             "name":"Asteroid",
             "type":"SpaceObjects",
             "link":4,
-            "position":{"x":-308,"y":66}
+            "position":{"x":-207,"y":86}
         },
         {
             "name":"Asteroid2",
             "type":"SpaceObjects",
             "link":4,
-            "position":{"x":-138,"y":300}
+            "position":{"x":-91,"y":196}
         },
         {
             "name":"Asteroid3",
             "type":"SpaceObjects",
             "link":4,
-            "position":{"x":-341,"y":497}
+            "position":{"x":220,"y":276}
         },
         {
             "name":"Asteroid4",
             "type":"SpaceObjects",
             "link":4,
-            "position":{"x":275,"y":76}
+            "position":{"x":490,"y":91}
         },
         {
             "name":"Asteroid5",
             "type":"SpaceObjects",
             "link":4,
-            "position":{"x":185,"y":-185}
+            "position":{"x":389,"y":-240}
         },
         {
             "name":"Asteroid6",
             "type":"SpaceObjects",
             "link":4,
-            "position":{"x":-94,"y":-175}
-         },
+            "position":{"x":190,"y":-257}
+        },
         {
             "name":"Asteroid7",
             "type":"SpaceObjects",
             "link":4,
-            "position":{"x":-121,"y":-434}
+            "position":{"x":753,"y":-140}
         },
         {
             "name":"Asteroid8",
             "type":"SpaceObjects",
             "link":4,
-            "position":{"x":247,"y":209}
+            "position":{"x":702,"y":194}
         },
         {
             "name":"Asteroid9",
             "type":"SpaceObjects",
             "link":4,
-            "position":{"x":543,"y":-191}
+            "position":{"x":123,"y":417}
         },
         {
-            "name":"AsteroidSpawnLauncher",
-            "link":5,
-            "position":{"x":-532,"y":-499},
-            "rotation":1.00155,
-            "maSpawnCount":20
+            "name":"Asteroid10",
+            "type":"SpaceObjects",
+            "link":4,
+            "position":{"x":-186,"y":512}
+        },
+        {
+            "name":"Asteroid11",
+            "type":"SpaceObjects",
+            "link":4,
+            "position":{"x":-218,"y":-233}
         }
     ]
 }
