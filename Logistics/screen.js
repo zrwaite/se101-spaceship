@@ -1,7 +1,6 @@
 // Animation handling, Asset Initialization, and Drawing
 
-//import Ship from "../Sandbox/Scripts/Ship/ColonyShip";
-// cannot use import statement outside of module....
+import TestShip from "../Sandbox/Scripts/Ship/ColonyShipTester.js";
 
 // SOME GLOBAL VARIABLES are below:
 
@@ -15,6 +14,13 @@ let unit = Math.floor((window.innerWidth - border * 2) / (4 * screenSize[0])) * 
 if ((window.innerWidth - border * 2) / (window.innerHeight - border * 2) > screenSize[0] / screenSize[1]) { // Unit based on height
     unit = Math.floor((window.innerHeight - border * 2) / (4 * screenSize[1])) * 4;
 }
+let testShip = new TestShip();
+let testShip2 = new TestShip();
+testShip2.angularPosition = Math.PI * 3 / 2;
+testShip2.linearPosition.y = 15;
+let testShip3 = new TestShip();
+testShip3.angularPosition = Math.PI / 6;
+testShip3.linearPosition.x = 15;
 console.log("Unit: " + unit);
 
 // Initialize the CSS variables so that the css can do dynamic calculations for displays.
@@ -24,12 +30,13 @@ document.body.style.setProperty("--width", screenSize[0] * unit + "px");
 document.body.style.setProperty("--height", screenSize[1] * unit + "px");
 
 let imagesLoaded = 0; // Updates as the images load, until all are loaded.
-let images = {};
-let contexts = {};
+let images = {}; // image locations, by name
+let contexts = {}; // contexts, by name
+//let imageContexts = {}; // pre-loaded contexts, by name
 let imageInfo = [
     ["background", "SpaceObjects/Space.png"],
     ["ship", "ShipSprites/ColonyShip.png"],
-    ["thruste", "ShipSprites/ThrusterNozzle.png"],
+    ["thruster", "ShipSprites/ThrusterNozzle.png"],
     ["thrusterFlame", "ShipSprites/ThrusterFlame.png"],
     ["turret", "ShipSprites/TurretSprite.png"],
     ["planet1", "SpaceObjects/CreamVioletPlanet.png"],
@@ -55,6 +62,9 @@ let contextNames = [
     "ships",
     "items"
 ];
+/*let imageContextInfo = [
+    ["ship", "ships", {x: 4, y: 3}]
+];*/
 
 function initializeImages(imageInfo) {
     /* Create the images with the given info: [imageName, src]. */
@@ -83,6 +93,10 @@ function initializeContexts(contextNames) {
     }
 }
 
+/*function initializeImageContexts() {
+    console.log("use imagecontextsInfo to perform the initialization of the preloaded contexts.");
+}*/
+
 function iterateLoad() {
     imagesLoaded++;
     if (imagesLoaded >= imageInfo.length) {
@@ -95,6 +109,7 @@ initializeImages(imageInfo);
 // Here is where everything should begin.
 function initializeGame() {
     console.log("Images have loaded!");
+    //initializeImageContexts();
     initializeContexts(contextNames);
     startAnimating();
 }
@@ -104,9 +119,15 @@ function clearContext(contextName) {
     contexts[contextName].clearRect(0, 0, screenSize[0] * unit, screenSize[1] * unit);
 }
 
-// Function for drawing an image (very basic, for now).
-function drawOnScreen(item, contextName, imageName) {
-    contexts[contextName].drawImage(images[imageName], item.x * unit, item.y * unit, item.width * unit, item.height * unit);
+// Function for drawing an image.
+function drawOnScreen(object) {
+    // Set the context's translation.
+    contexts[object.context].setTransform(1, 0, 0, 1, object.linearPosition.x * unit, object.linearPosition.y * unit);
+    if (object.angularPosition != 0) {
+        contexts[object.context].rotate(object.angularPosition);
+    }
+    // Draw the image with a half-size offset, so that rotating works properly and the coor represent the center.
+    contexts[object.context].drawImage(images[object.image],  -object.size.x * unit / 2,  -object.size.y * unit / 2, object.size.x * unit, object.size.y * unit);
 }
 
 let startTime, now, then, elapsed;
@@ -129,9 +150,12 @@ function animate() {
             
             // run the game here!!!!!
 
+            // the below code is the kind of thing that I'll be making into a universal function once a bunch of things are integrated.
             // testing out drawing onto the screen:
             clearContext("ships");
-            drawOnScreen({width: 66 / 22, height: 50 / 22, x: 10, y: 7}, "ships", "ship");
+            drawOnScreen(testShip);
+            drawOnScreen(testShip2);
+            drawOnScreen(testShip3);
 
             //console.log("Frame: " + frame);
         }
