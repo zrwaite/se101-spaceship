@@ -14,14 +14,19 @@ let unit = Math.floor((window.innerWidth - border * 2) / (4 * screenSize[0])) * 
 if ((window.innerWidth - border * 2) / (window.innerHeight - border * 2) > screenSize[0] / screenSize[1]) { // Unit based on height
     unit = Math.floor((window.innerHeight - border * 2) / (4 * screenSize[1])) * 4;
 }
+console.log("Unit: " + unit);
+
+// The below initialization will disappear as soon as I make a system to store the ships.
 let testShip = new TestShip();
+testShip.linearVelocity.x = 0.07;
 let testShip2 = new TestShip();
 testShip2.angularPosition = Math.PI * 3 / 2;
 testShip2.linearPosition.y = 15;
+testShip2.linearVelocity.y = -0.12;
 let testShip3 = new TestShip();
-testShip3.angularPosition = Math.PI / 6;
+testShip3.angularPosition = Math.PI / 4;
 testShip3.linearPosition.x = 15;
-console.log("Unit: " + unit);
+testShip3.linearVelocity = {x: 0.034, y: 0.034};
 
 // Initialize the CSS variables so that the css can do dynamic calculations for displays.
 document.body.style.setProperty("--unit", unit + "px");
@@ -116,6 +121,7 @@ function initializeGame() {
 
 // Function for clearing a context.
 function clearContext(contextName) {
+    contexts[contextName].setTransform(1, 0, 0, 1, 0, 0); // reset the canvas
     contexts[contextName].clearRect(0, 0, screenSize[0] * unit, screenSize[1] * unit);
 }
 
@@ -153,6 +159,9 @@ function animate() {
             // the below code is the kind of thing that I'll be making into a universal function once a bunch of things are integrated.
             // testing out drawing onto the screen:
             clearContext("ships");
+            testShip.simplePhysicsUpdate();
+            testShip2.simplePhysicsUpdate();
+            testShip3.simplePhysicsUpdate();
             drawOnScreen(testShip);
             drawOnScreen(testShip2);
             drawOnScreen(testShip3);
