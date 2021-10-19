@@ -1,0 +1,39 @@
+{
+    "links": [
+        {
+            "path": "res://Sandbox/Scenes/UIScenes/SensorsSubsystemInformationPanel.cs",
+            "type": "script",
+            "id": 1
+        },
+        {
+            "path": "res://Sandbox/CustomUITheme.tres",
+            "type": "theme",
+            "id": 2
+        }
+    ],
+    "objects": [
+        {
+            "name": "SensorsSubsystemInformationPanel",
+            "type": "PanelContainer",
+            "anchor": {"top": 1, "bottom": 1},
+            "theme": 2,
+            "script": 1
+        },
+        {
+            "name": "VBoxContainer",
+            "type": "VBoxContainer"
+        },
+        {
+            "name": "Sensors Info",
+            "type": "Label",
+            "parent": "VBoxContainer",
+            "text": "Sensors Info"
+        },
+        {
+            "name": "InfoText",
+            "type": "Label",
+            "parent": "VBoxContainer",
+            "text": "Nerby Readings: 00\nTotal Jump Cost: 00000.00"
+        }
+    ]
+}

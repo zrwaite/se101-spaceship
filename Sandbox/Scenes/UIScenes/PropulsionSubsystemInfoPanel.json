@@ -1,0 +1,205 @@
+{
+    "links": [
+        {
+            "path": "res://Sandbox/Scenes/UIScenes/PropulsionSubsystemInfoPanel.js",
+            "type": "script",
+            "id": 1
+        },
+        {
+            "path": "res://Sandbox/Sprites/BasicShapes/Stripes.png",
+            "type": "img",
+            "id": 2
+        }
+    ],
+    "objects": [
+        {
+            "name": "PropulsionSubsystemInformationPanel",
+            "type": "PanelContainer",
+            "anchor": {"top": -164, "bottom": 318},
+            "script": 1
+        },
+        {
+            "name": "VBoxContainer",
+            "type": "VBoxContainer",
+            "size_flags": {"horizontal": 3, "vertical": 0},
+            "custom_constants/separation": 10
+        },
+        {
+            "name": "Propulsion Info",
+            "type": "Label",
+            "parent": "VBoxContainer",
+            "size_flags": {"horizontal": 0, "vertical": 0},
+            "custom_constants/separation": 10,
+            "text": "Propulsion Info"
+        },
+        {
+            "name": "VBoxContainer",
+            "type": "VBoxContainer",
+            "parent": "VBoxContainer"
+        },
+        {
+            "name": "AutomaticControllerCheckBox",
+            "type": "CheckBox",
+            "parent": "VBoxContainer/VBoxContainer",
+            "pressed": true,
+            "text": "Automatic Controller"
+        },
+        {
+            "name": "UFODriveCheckBox",
+            "type": "CheckBox",
+            "parent": "VBoxContainer/VBoxContainer",
+            "text": "UFO Drive"
+        },
+        {
+            "name": "HBoxContainer",
+            "type": "HBoxContainer",
+            "parent": "VBoxContainer",
+            "visible": false
+        },
+        {
+            "name": "DriveSelectOptionButton",
+            "type": "OptionButton",
+            "parent": "VBoxContainer/HBoxContainer",
+            "text": "Automatic Controller",
+            "options": [
+                "Automatic Controller", null, false, 0, null,
+                "Manual Thruster Drive", null, false, 1, null,
+                "Manual UFO Drive", null, false, 2, null
+            ],
+            "selected": 0
+        },
+        {
+            "name": "GridContainer",
+            "type": "GridContainer",
+            "parent": "VBoxContainer",
+            "size_flags": {"horizontal": 3},
+            "columns": 4
+        },
+        {
+            "name": "Port Retro Thruster",
+            "type": "Label",
+            "parent": "VBoxContainer/GridContainer",
+            "size_flags": {"horizontal": 0},
+            "text": "Port Retro"
+        },
+        {
+            "name": "PortRetroThrusterProgressBar",
+            "type": "TextureProgress",
+            "parent": "VBoxContainer/GridContainer",
+            "size_flags": {"horizontal": 3, "vertical": 3},
+            "max_value": 1,
+            "step": 0.01,
+            "value": 0.5,
+            "texture_under": 2,
+            "nine_patch_stretch": true
+        },
+        {
+            "name": "Starboard Retro Thruster",
+            "type": "Label",
+            "parent": "VBoxContainer/GridContainer",
+            "size_flags": {"horizontal": 0},
+            "text": "Starboard Retro"
+        },
+        {
+            "name": "StarboardRetroThrusterProgressBar",
+            "type": "TextureProgress",
+            "parent": "VBoxContainer/GridContainer",
+            "size_flags": {"horizontal": 3, "vertical": 3},
+            "max_value": 1,
+            "step": 0.01,
+            "value": 0.5,
+            "texture_under": 2,
+            "nine_patch_stretch": true
+        },
+        {
+            "name": "Port Fore Thruster",
+            "type": "Label",
+            "parent": "VBoxContainer/GridContainer",
+            "size_flags": {"horizontal": 0},
+            "text": "Port Fore"
+        },
+        {
+            "name": "PortForeThrusterProgressBar",
+            "type": "TextureProgress",
+            "parent": "VBoxContainer/GridContainer",
+            "size_flags": {"horizontal": 3, "vertical": 3},
+            "max_value": 1,
+            "step": 0.01,
+            "value": 0.5,
+            "texture_under": 2,
+            "nine_patch_stretch": true
+        },
+        {
+            "name": "Starboard Fore Thruster",
+            "type": "Label",
+            "parent": "VBoxContainer/GridContainer",
+            "size_flags": {"horizontal": 0},
+            "text": "Starboard Fore"
+        },
+        {
+            "name": "StarboardForeThrusterProgressBar",
+            "type": "TextureProgress",
+            "parent": "VBoxContainer/GridContainer",
+            "size_flags": {"horizontal": 3, "vertical": 3},
+            "max_value": 1,
+            "step": 0.01,
+            "value": 0.5,
+            "texture_under": 2,
+            "nine_patch_stretch": true
+        },
+        {
+            "name": "Port Aft Thruster",
+            "type": "Label",
+            "parent": "VBoxContainer/GridContainer",
+            "size_flags": {"horizontal": 0},
+            "text": "Port Aft"
+        },
+        {
+            "name": "PortAftThrusterProgressBar",
+            "type": "TextureProgress",
+            "parent": "VBoxContainer/GridContainer",
+            "size_flags": {"horizontal": 3, "vertical": 3},
+            "max_value": 1,
+            "step": 0.01,
+            "value": 0.5,
+            "texture_under": 2,
+            "nine_patch_stretch": true
+        },
+        {
+            "name": "Starboard Aft Thruster",
+            "type": "Label",
+            "parent": "VBoxContainer/GridContainer",
+            "size_flags": {"horizontal": 0},
+            "text": "Starboard Aft"
+        },
+        {
+            "name": "StarboardAftThrusterProgressBar",
+            "type": "TextureProgress",
+            "parent": "VBoxContainer/GridContainer",
+            "size_flags": {"horizontal": 3, "vertical": 3},
+            "max_value": 1,
+            "step": 0.01,
+            "value": 0.5,
+            "texture_under": 2,
+            "nine_patch_stretch": true
+        },
+        {
+            "name": "Main Thruster",
+            "type": "Label",
+            "parent": "VBoxContainer/GridContainer",
+            "size_flags": {"horizontal": 0},
+            "text": "Main Thruster"
+        },
+        {
+            "name": "MainThrusterProgressBar",
+            "type": "TextureProgress",
+            "parent": "VBoxContainer/GridContainer",
+            "size_flags": {"horizontal": 3, "vertical": 3},
+            "max_value": 1,
+            "step": 0.01,
+            "value": 0.5,
+            "texture_under": 2,
+            "nine_patch_stretch": true
+        }
+    ]
+}

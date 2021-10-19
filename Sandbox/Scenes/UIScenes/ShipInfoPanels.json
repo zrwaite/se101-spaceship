@@ -1,0 +1,69 @@
+{
+    "links": [
+        {
+            "path": "res://Sandbox/Scenes/UIScenes/ShipInfoPanels.cs",
+            "type": "script",
+            "id": 1
+        },
+        {
+            "path": "res://Sandbox/Scenes/UIScenes/SensorsSubsystemInformationPanel",
+            "type": "json",
+            "id": 4
+        },
+        {
+            "path": "res://Sandbox/Scenes/UIScenes/PropulsionSubsystemInfoPanel.tscn",
+            "type": "json",
+            "id": 5
+        },
+        {
+            "path": "res://Sandbox/Scenes/UIScenes/DefenceSubsystemInformationPanel.tscn",
+            "type": "json",
+            "id": 6
+        },
+        {
+            "path": "res://Sandbox/Scenes/UIScenes/ShipSelectPanel.tscn",
+            "type": "json",
+            "id": 7
+        }
+    ],
+    "objects": [
+        {
+            "name": "ShipInfoPanels",
+            "type": "VBoxContainer",
+            "anchor": {"top": 1, "bottom": 1},
+            "script": 1
+        },
+        {
+            "name": "ShipSelectPanel",
+            "type": "VBoxContainer",
+            "anchor": {"top": 0, "bottom": 0},
+            "link": 7
+        },
+        {
+            "name": "InfoPanels",
+            "type": "HBoxContainer",
+            "custom_constants/separation": 10
+        },
+        {
+            "name": "SensorsSubsystemInformationPanel",
+            "parent": "InfoPanels",
+            "anchor": {"top": 0, "bottom": 0},
+            "size_flags": {"horizontal": 3, "vertical": 0},
+            "link": 4
+        },
+        {
+            "name": "PropulsionSubsystemInformationPanel",
+            "parent": "InfoPanels",
+            "anchor": {"top": 0, "bottom": 0},
+            "size_flags": {"horizontal": 3},
+            "link": 5
+        },
+        {
+            "name": "DefenceSubsystemInformationPanel",
+            "parent": "InfoPanels",
+            "anchor": {"top": 0, "bottom": 0},
+            "size_flags": {"horizontal": 3, "stretch_ratio": 0.5},
+            "link": 6
+        }
+    ]
+}

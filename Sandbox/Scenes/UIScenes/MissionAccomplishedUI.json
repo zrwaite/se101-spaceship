@@ -1,0 +1,141 @@
+{
+    "links": [
+        {
+            "path": "res://Sandbox/Scenes/UIScenes/MissionAccomplishedUI.cs",
+            "type": "script",
+            "id": 1
+        },
+        {
+            "path": "res://Sandbox/Fonts/NotoSans-Black.ttf",
+            "type": "dynamicfontdata",
+            "id": 2
+        }
+    ],
+    "objects": [
+        {
+            "name": "MissionAccomplishedUI",
+            "type": "Control",
+            "pause_mode": 2,
+            "anchor": {"right": 1, "bottom": 1},
+            "script": 1
+        },
+        {
+            "name": "Panel",
+            "type": "Panel",
+            "anchor": {"right": 0.5, "bottom": 0.5, "left": 0.5, "top": 0.5}
+        },
+        {
+            "name": "VBoxContainer",
+            "type": "VBoxContainer",
+            "parent": "Panel",
+            "anchor": {"right": 1, "bottom": 1},
+            "alignment": 1
+        },
+        {
+            "name": "MissionAccomplished",
+            "type": "Label",
+            "parent": "Panel/VBoxContainer",
+            "text": "Mission Accomplished!",
+            "align": 1,
+            "valign": 1,
+            "theme": 2
+        },
+        {
+            "name": "HBoxContainer",
+            "type": "HBoxContainer",
+            "parent": "Panel/VBoxContainer",
+            "alignment": 1
+        },
+        {
+            "name": "GridContainer",
+            "type": "GridContainer",
+            "parent": "Panel/VBoxContainer/HBoxContainer",
+            "custom_constants/hseparation": 16,
+            "columns": 2
+        },
+        {
+            "name": "ShipNameLabel",
+            "type": "Label",
+            "parent": "Panel/VBoxContainer/HBoxContainer/GridContainer",
+            "text": "Ship Name"
+        },
+        {
+            "name": "ShipName",
+            "type": "Label",
+            "parent": "Panel/VBoxContainer/HBoxContainer/GridContainer",
+            "text": "Ship Name"
+        },
+        {
+            "name": "TimeTakenLabel",
+            "type": "Label",
+            "parent": "Panel/VBoxContainer/HBoxContainer/GridContainer",
+            "text": "Time Taken"
+        },
+        {
+            "name": "TimeTakenData",
+            "type": "Label",
+            "parent": "Panel/VBoxContainer/HBoxContainer/GridContainer",
+            "text": "Time Taken"
+        },
+        {
+            "name": "DamageTakenLabel",
+            "type": "Label",
+            "parent": "Panel/VBoxContainer/HBoxContainer/GridContainer",
+            "text": "Total Damage Taken"
+        },
+        {
+            "name": "DamageTakenData",
+            "type": "Label",
+            "parent": "Panel/VBoxContainer/HBoxContainer/GridContainer",
+            "text": "0000"
+        },
+        {
+            "name": "CollisionsNumberLabel",
+            "type": "Label",
+            "parent": "Panel/VBoxContainer/HBoxContainer/GridContainer",
+            "text": "Total Collisions "
+        },
+        {
+            "name": "CollisionsNumber",
+            "type": "Label",
+            "parent": "Panel/VBoxContainer/HBoxContainer/GridContainer",
+            "text": "Collisions Number"
+        },
+        {
+            "name": "TorpedoesFiredLabel",
+            "type": "Label",
+            "parent": "Panel/VBoxContainer/HBoxContainer/GridContainer",
+            "text": "Torpedoes Fired"
+        },
+        {
+            "name": "TorpedoesFired",
+            "type": "Label",
+            "parent": "Panel/VBoxContainer/HBoxContainer/GridContainer",
+            "text": "Torpedoes Fired"
+        },
+        {
+            "name": "ScanEnergyUsedLabel",
+            "type": "Label",
+            "parent": "Panel/VBoxContainer/HBoxContainer/GridContainer",
+            "text": "Scan Energy Used"
+        },
+        {
+            "name": "ScanEnergyUsed",
+            "type": "Label",
+            "parent": "Panel/VBoxContainer/HBoxContainer/GridContainer",
+            "text": "Torpedoes Fired"
+        },
+        {
+            "name": "JumpCostLabel",
+            "type": "Label",
+            "parent": "Panel/VBoxContainer/HBoxContainer/GridContainer",
+            "text": "Total Jump Cost"
+        },
+        {
+            "name": "JumpCost",
+            "type": "Label",
+            "parent": "Panel/VBoxContainer/HBoxContainer/GridContainer",
+            "text": "Jump Cost"
+        }
+    ]
+}
