@@ -1,0 +1,72 @@
+{
+    "links":[{
+        "path":"res://Sandbox/Scenes/SpaceObjects/WarpGate.tscn",
+        "type":"json",
+        "id":1
+    },
+    {
+        "path":"res://Sandbox/Scenes/SolarSystemBackgrounds/ParallaxSpaceBackground.tscn",
+        "type":"json",
+        "id":2
+    },
+    {
+        "path":"res://Sandbox/Sprites/SpaceObjects/OrangePlanet.png",
+        "type":"img",
+        "id":3
+    },
+    {
+        "path":"res://Sandbox/Scenes/SpaceObjects/GravityWell.tscn",
+        "type":"json",
+        "id":4
+    }],
+    "objects":[
+        {
+            "name":"Groombridge System"
+        },
+        {
+            "name":"ParallaxSpaceBackground",
+            "link":2
+        },
+        {
+            "name":"Sprite",
+            "index":0,
+            "img":3
+        },
+        {
+            "name":"GravityWell",
+            "link":4,
+            "gravity":200.0
+        },
+        {
+            "name":"Warpgate to Quaid System",
+            "type":"WarpGates",
+            "link":1,
+            "position":{"x":485,"y":-397},
+            "to":"Quaid System"
+        },
+        {
+            "name":"Warpgate to Kepler 438 System",
+            "type":"WarpGates",
+            "link":1,
+            "position":{"x":892,"y":381},
+            "to":"Kepler 438 System"
+        },
+        {
+            "name":"Warpgate to Wolf 359 System",
+            "type":"WarpGates",
+            "link":1,
+            "position":{"x":-431,"y":-217},
+            "to":"Wolf 359 System"
+        },
+        {
+            "name":"Warpgate to Aquarii System",
+            "type":"WarpGates",
+            "link":1,
+            "position":{"x":-306,"y":302},
+            "to":"Aquarii System"
+        },
+        {
+            "name":"SpaceObjects"
+        }
+    ]
+}
