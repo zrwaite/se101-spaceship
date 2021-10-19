@@ -14,29 +14,25 @@
     "objects": [
         {
             "name": "ShipSelectPanel",
-            "type": "PanelContainer",
             "anchor": {"top": 1, "bottom": 1},
             "theme": 2,
             "script": 1
         },
         {
             "name": "HBoxContainer",
-            "type": "HBoxContainer",
             "custom_constants/separation": 10
         },
         {
             "name": "ShipSelect",
-            "type": "Label",
-            "parent": "HBoxContainer",
+            "type": "HBoxContainer",
             "text": "Ship Select"
         },
         {
             "name": "OptionButton",
-            "type": "OptionButton",
-            "parent": "HBoxContainer",
+            "type": "HBoxContainer",
             "size_flags": {"horizontal": 3},
             "custom_constants/separation": 10,
-            "connection": "[connection signal="item_selected" from="HBoxContainer/OptionButton" to="." method="HandleOptionButtonItemSelected"]"
+            "connection": "[connection signal=\"item_selected\" from=\"HBoxContainer/OptionButton\" to=\".\" method=\"HandleOptionButtonItemSelected\"]"
         }
     ]
 }

@@ -2,7 +2,6 @@
     "objects": [
         {
             "name": "SubsystemInfoPanel",
-            "type": "Control",
             "anchor": {"right": 1, "bottom": 1}
         }    
     ]

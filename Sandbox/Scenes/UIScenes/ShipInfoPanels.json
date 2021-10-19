@@ -29,38 +29,35 @@
     "objects": [
         {
             "name": "ShipInfoPanels",
-            "type": "VBoxContainer",
             "anchor": {"top": 1, "bottom": 1},
             "script": 1
         },
         {
             "name": "ShipSelectPanel",
-            "type": "VBoxContainer",
             "anchor": {"top": 0, "bottom": 0},
             "link": 7
         },
         {
             "name": "InfoPanels",
-            "type": "HBoxContainer",
             "custom_constants/separation": 10
         },
         {
             "name": "SensorsSubsystemInformationPanel",
-            "parent": "InfoPanels",
+            "type": "InfoPanels",
             "anchor": {"top": 0, "bottom": 0},
             "size_flags": {"horizontal": 3, "vertical": 0},
             "link": 4
         },
         {
             "name": "PropulsionSubsystemInformationPanel",
-            "parent": "InfoPanels",
+            "type": "InfoPanels",
             "anchor": {"top": 0, "bottom": 0},
             "size_flags": {"horizontal": 3},
             "link": 5
         },
         {
             "name": "DefenceSubsystemInformationPanel",
-            "parent": "InfoPanels",
+            "type": "InfoPanels",
             "anchor": {"top": 0, "bottom": 0},
             "size_flags": {"horizontal": 3, "stretch_ratio": 0.5},
             "link": 6
