@@ -10,6 +10,7 @@ export default class Vector2 {
 
 	static zero = new Vector2(0,0);
 	static right = new Vector2(1,0);
+	static one = new Vector2(1,1);
 
 	set(x, y) {
 		this.x = x || 0;
