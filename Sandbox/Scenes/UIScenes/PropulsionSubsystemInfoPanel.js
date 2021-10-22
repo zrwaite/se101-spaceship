@@ -82,7 +82,7 @@ export class PropulsionSubsystemInfoPanel /* extends Control */ {
      * Unsubscribe from old ship and subscribe to input ship
      * @param {ColonyShip} ship 
      */
-    SetFocusShip(ship) {
+    setFocusShip(ship) {
         //Unsubscribe from old
         if (focusShip != null) {
             focusShip.PropulsionController.IsProcessingChanged -= HandlePropulsionControllerProcessingChanged;
@@ -106,22 +106,22 @@ export class PropulsionSubsystemInfoPanel /* extends Control */ {
      * 
      * @param {boolean} pressed 
      */
-    HandleAutomaticControllerCheckBoxChanged(pressed) {
-        SynchronizePropulsionMode();
+    handleAutomaticControllerCheckBoxChanged(pressed) {
+        synchronizePropulsionMode();
     }
 
     /**
      * 
      * @param {boolean} pressed 
      */
-    HandleUFODriveCheckBoxChanged(pressed) {
-        SynchronizePropulsionMode();
+    handleUFODriveCheckBoxChanged(pressed) {
+        synchronizePropulsionMode();
     }
 
     /**
      * 
      */
-    SynchronizePropulsionMode() {
+    synchronizePropulsionMode() {
         if (focusShip == null) {
             return;
         }
@@ -149,7 +149,7 @@ export class PropulsionSubsystemInfoPanel /* extends Control */ {
      * @param {AbstractSubsystemController} controller 
      * @param {boolean} isEnabled 
      */
-    HandlePropulsionControllerProcessingChanged(controller, isEnabled) {
+    handlePropulsionControllerProcessingChanged(controller, isEnabled) {
         automaticControllerCheckBox.Pressed = isEnabled;
 
         //If the automatic propulsion controller is enabled, don't allow the user to affect the UFO drive checkbox
@@ -161,7 +161,7 @@ export class PropulsionSubsystemInfoPanel /* extends Control */ {
      * 
      * @param {boolean} isEnabled 
      */
-    HandleUFODriveEnabledChanged(isEnabled) {
+    handleUFODriveEnabledChanged(isEnabled) {
         ufoDriveCheckBox.Pressed = isEnabled;
     }
 }

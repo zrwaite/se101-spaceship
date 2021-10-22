@@ -1,4 +1,4 @@
-import { ShipNames } from '../../Scripts/ShipNames.js';
+// import { ShipNames } from '../../Scripts/ShipNames.js';
 
 export class ShipSelectPanel /* extends PanelContainer */ {
 
@@ -27,7 +27,7 @@ export class ShipSelectPanel /* extends PanelContainer */ {
      * Updates focused ship in optionButton to argument
      * @param {ColonyShip} ship
      */
-    SetFocusShip(ship) {
+    setFocusShip(ship) {
         for (let i = 0; i < optionButton.GetItemCount(); i++) {
             if (optionButton.GetItemText(i).CompareTo(ship.ShipName.ToString()) == 0) {
                 optionButton.Select(i);
@@ -39,7 +39,7 @@ export class ShipSelectPanel /* extends PanelContainer */ {
      * Add new ship to optionButton panel
      * @param {ColonyShip} newColonyShip 
      */
-    HandleColonyShipSpawned(newColonyShip) {
+    handleColonyShipSpawned(newColonyShip) {
         optionButton.AddItem(newColonyShip.ShipName.ToString());
     }
 
@@ -47,7 +47,7 @@ export class ShipSelectPanel /* extends PanelContainer */ {
      * Update selected ship in optionButton on item select
      * @param {int} id 
      */
-    HandleOptionButtonItemSelected(id) {        
+    handleOptionButtonItemSelected(id) {        
         if (onShipSelectionChanged) {
             onShipSelectionChanged(ShipNames[optionButton.GetItemText(id)]);
         }

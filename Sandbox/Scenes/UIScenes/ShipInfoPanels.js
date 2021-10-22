@@ -13,6 +13,10 @@ export class ShipInfoPanels /* extends VBoxContainer */ {
         // public event Action<ColonyShip, ColonyShip> FocusShipChanged; //Old focus, new focus
     }
 
+    // Getter and setter for focusShip (need to update event Action FocusShipChanged)
+    get FocusShip() { return this.focusShip; }
+    // set FocusShip(value) { if (this.focusShip != value) { let oldValue = this.focusShip; this.focusShip = value; FocusShipChanged?.Invoke(oldValue, focusShip); } }
+
 
     /**
      * Called when the node enters the scene tree for the first time.
@@ -49,7 +53,7 @@ export class ShipInfoPanels /* extends VBoxContainer */ {
      * 
      * @param {ShipNames} newShipName 
      */
-    HandleShipSelectionChanged(newShipName) {
+    handleShipSelectionChanged(newShipName) {
         if (newShipName in gameCore.ColonyShips) {
             FocusShip = gameCore.ColonyShips[newShipName];
         }
@@ -60,7 +64,7 @@ export class ShipInfoPanels /* extends VBoxContainer */ {
      * @param {ColonyShip} oldFocusShip 
      * @param {ColonyShip} newFocusShip 
      */
-    HandleFocusShipChanged(oldFocusShip, newFocusShip) {
+    handleFocusShipChanged(oldFocusShip, newFocusShip) {
         // Unsubscribe
         if (oldFocusShip != null) {
             oldFocusShip.OnShipWarped -= HandleFocusShipWarped;            
@@ -70,7 +74,6 @@ export class ShipInfoPanels /* extends VBoxContainer */ {
         mainCamera.GetParent().RemoveChild(mainCamera);
         mainCamera.SetFocus(newFocusShip);
 
-        // var startingViewportContainer = gameCore.SolarSystemViewportContainersByName[gameCore.GalaxyMap.StartingNode.Name];
         let targetViewportContainer = newFocusShip.FindParent("*ViewportContainer*");
         targetViewportContainer.GetChild(0).AddChild(mainCamera);
 
@@ -100,7 +103,7 @@ export class ShipInfoPanels /* extends VBoxContainer */ {
      * @param {string} oldSolarSystem 
      * @param {string} newSolarSystem 
      */
-    HandleFocusShipWarped(ship, oldSolarSystem, newSolarSystem) {
+    handleFocusShipWarped(ship, oldSolarSystem, newSolarSystem) {
         if (gameCore.MainCamera.GetParent()) {
             gameCore.MainCamera.GetParent().RemoveChild(gameCore.MainCamera);
         }
@@ -115,7 +118,7 @@ export class ShipInfoPanels /* extends VBoxContainer */ {
      * @param {float} delta 
      * @returns 
      */
-    ComputeManualThrusterInputs(delta) {
+    computeManualThrusterInputs(delta) {
         if (focusShip == null) {
             return;
         }
@@ -177,7 +180,7 @@ export class ShipInfoPanels /* extends VBoxContainer */ {
      * @param {float} delta 
      * @returns 
      */
-    ComputeUFOThrusterInputs(delta) {
+    computeUFOThrusterInputs(delta) {
         if (focusShip == null)
             return;
 

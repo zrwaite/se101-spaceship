@@ -60,9 +60,9 @@ export class DefenceSubsystemInformationPanel /* extends PanelContainer */ {
      * @param {ColonyShip} ship 
      * @returns 
      */
-    SetFocusShip(ship) {
+    setFocusShip(ship) {
         if (ship == null) {
-            console.error("Cannot SetFocusShip(null)")
+            console.error("Cannot setFocusShip(null)")
             // GD.PrintErr("Cannot SetFocusShip(null)");
             return;
         }

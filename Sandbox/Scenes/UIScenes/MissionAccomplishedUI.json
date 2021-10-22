@@ -9,6 +9,21 @@
             "path": "res://Sandbox/Fonts/NotoSans-Black.ttf",
             "type": "dynamicfontdata",
             "id": 2
+        },
+        {
+            "type": "StyleBoxFlat",
+            "id": 3,
+            "bg_color": "Color( 0.156863, 0.156863, 0.156863, 0.392157 )"
+        },
+        {
+            "type": "theme",
+            "id": 4
+        },
+        {
+            "type": "DynamicFont",
+            "size": 32,
+            "font_data": 2,
+            "id": 5
         }
     ],
     "objects": [
@@ -20,7 +35,8 @@
         },
         {
             "name": "Panel",
-            "anchor": {"right": 0.5, "bottom": 0.5, "left": 0.5, "top": 0.5}
+            "anchor": {"right": 0.5, "bottom": 0.5, "left": 0.5, "top": 0.5},
+            "custom_styles/panel": 3
         },
         {
             "name": "VBoxContainer",
@@ -34,7 +50,9 @@
             "text": "Mission Accomplished!",
             "align": 1,
             "valign": 1,
-            "theme": 2
+            "theme": 4,
+            "custom_fonts/font": 5,
+            "custom_colors/font_outline_modulate": "Color( 0.411765, 0.0509804, 0.611765, 1 )"
         },
         {
             "name": "HBoxContainer",
@@ -105,7 +123,7 @@
         {
             "name": "ScanEnergyUsed",
             "type": "Panel/VBoxContainer/HBoxContainer/GridContainer",
-            "text": "Torpedoes Fired"
+            "text": "Scan Energy Used"
         },
         {
             "name": "JumpCostLabel",

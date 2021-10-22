@@ -15,24 +15,33 @@
         {
             "name": "ShipSelectPanel",
             "anchor": {"top": 1, "bottom": 1},
+            "margin": {"top": -52, "right": 291},
             "theme": 2,
             "script": 1
         },
         {
             "name": "HBoxContainer",
+            "margin": {"right": 291, "bottom": 52},
             "custom_constants/separation": 10
         },
         {
             "name": "ShipSelect",
             "type": "HBoxContainer",
+            "margin": {"top": 19, "right": 70, "bottom": 33},
             "text": "Ship Select"
         },
         {
             "name": "OptionButton",
             "type": "HBoxContainer",
             "size_flags": {"horizontal": 3},
+            "margin": {"left": 80, "right": 291, "bottom": 52},
             "custom_constants/separation": 10,
-            "connection": "[connection signal=\"item_selected\" from=\"HBoxContainer/OptionButton\" to=\".\" method=\"HandleOptionButtonItemSelected\"]"
+            "connection": {
+                "sginal": "item_selected",
+                "from": "HBoxContainer/OptionButton",
+                "to": ".",
+                "method": "HandleOptionButtonItemSelected"
+            }
         }
     ]
 }
