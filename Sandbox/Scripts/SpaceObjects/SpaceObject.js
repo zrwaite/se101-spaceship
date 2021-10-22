@@ -2,22 +2,27 @@
 // using System.Collections.Generic;
 
 export default class SpaceObject /* extends Node2D */ {
-    // [Export] string description = "An interesting space object...";
-    // [Export] List<SpaceMaterials> materials;
-    // [Export] GravitySignature gravitySignature;
 
-    // public GravitySignature GravitySignature { get { return gravitySignature; } }
-    // public int MaterialSignature { get; private set; }
+    constructor() {
+        this.description = "An interesting space object...";
+        this.materials = null;
+        this.gravitySignature = null;
+        this.materialSignature = null;
+    }
+
+    get GravitySignature() { return this.gravitySignature; }
+    get MaterialSignature() { return this.materialSignature; }
+    set MaterialSignature(value) { return this.materialSignature; }
 
     // Called when the node enters the scene tree for the first time.
     _Ready(){
-        CalculateMaterialSignature();
+        calculateMaterialSignature();
     }
 
     /**
      * @returns void
      */
-    CalculateMaterialSignature() {
+    calculateMaterialSignature() {
         MaterialSignature = 0;
         if(materials.Count > 0) {
             for (const material of materials){

@@ -8,8 +8,11 @@ export default class WarpGate /* extends Area2D */ {
 
     constructor() {
         this.gameCore = null;
+        this.destinationSolarSystemName = null;
         this.currentSolarSystemName = null;
     }
+
+    get DestinationSolarSystemName() { return this.destinationSolarSystemName; }
 
     _Ready() {
         this.gameCore = FindParent("GameCore"); // as GameCore;

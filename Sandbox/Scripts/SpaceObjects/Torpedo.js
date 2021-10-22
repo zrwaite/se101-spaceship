@@ -1,24 +1,40 @@
 
 export default class Torpedo /* extends Area2D, IHasScanSignature, IHasCollisionRadius */ {
-    // [Export] float maxAge = 10f;
-    // [Export] PackedScene explosionScene;
-
-    // public static float ExplosionRadius { get; private set; } = 150f;
-    // public static float LaunchSpeed {get; private set;} = 600;
 
     constructor() {
         this.age = 0;
+        this.maxAge = 1000;
+        this.explosionScene = null;
         this. collisionShape2D = null; // CollisionShape2D
         this.explosionArea = null; // Area2D
         this.hasExploded = false;
+
+        this.explosionRadius = 150;
+        this.launchSpeed = 600;
+        this.scanSignature = "Metals:25|Antimatter:75";
+        this.linearVelocity = null;
+        this.ownedByShip = null;
+        this.fuseDuration = null;
     }
 
-    //Properties
-    // public string ScanSignature { get { return "Metals:25|Antimatter:75"; } }
-    // public float CollisionRadius { get { return Mathf.Max((collisionShape2D.Shape as CapsuleShape2D).Radius, (collisionShape2D.Shape as CapsuleShape2D).Height); } }
-    // public Vector2 LinearVelocity { get; set; }
-    // public ColonyShip OwnedByShip { get; set; }
-    // public float FuseDuration { get; set; }
+    // Define getters and setters
+    get ExplosionRadius() { return this.explosionRadius; }
+    set ExplosionRadius(value) { this.explosionRadius = value; }
+
+    get LaunchSpeed() { return this.launchSpeed; }
+    set LaunchSpeed(value) { this.launchSpeed = value; }
+
+    get ScanSignature() { return this.scanSignature; }
+    get CollisionRadius() { return Mathf.Max(collisionShape2D.Shape.Radius, collisionShape2D.Shape.Height); }
+
+    get LinearVelocity() { return this.linearVelocity; }
+    set LinearVelocity(value) { this.linearVelocity = value; }
+
+    get OwnedByShip() { return this.ownedByShip; }
+    set OwnedByShip(value) { this.ownedByShip = value; }
+
+    get FuseDuration() { return this.fuseDuration; }
+    set FuseDuration(value) { this.fuseDuration = value; }
 
 
     // Called when the node enters the scene tree for the first time.
@@ -45,7 +61,7 @@ export default class Torpedo /* extends Area2D, IHasScanSignature, IHasCollision
 
         //Explode after fuse expires
         if (FuseDuration > 0 && age >= FuseDuration) {
-            Explode();
+            explode();
         }
     }
 
@@ -54,7 +70,7 @@ export default class Torpedo /* extends Area2D, IHasScanSignature, IHasCollision
      * @param {Node} node
      * @returns void
      */
-    OnBodyEntered(node)
+    onBodyEntered(node)
     {
         switch (node) {
             case ship:
@@ -64,7 +80,7 @@ export default class Torpedo /* extends Area2D, IHasScanSignature, IHasCollision
                 //TODO: Do we want ships to be able to shoot other ships?
                 break;
             case body2D:
-                Explode();
+                explode();
                 break;
             default:
                 console.error("Unexpected torpedo collision with: " + node.Name);
@@ -77,7 +93,7 @@ export default class Torpedo /* extends Area2D, IHasScanSignature, IHasCollision
      * 
      * @returns void
      */
-    Explode() {
+    explode() {
         //Only explode once
         if (hasExploded)
             return;
