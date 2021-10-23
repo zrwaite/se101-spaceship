@@ -1,102 +1,111 @@
-using Godot;
-using System;
-using System.Collections.Generic;
+import { Node2D, GetNode } from '<SOMEWHERE>';
+import { GalaxyMapData, GenerateGalaxyMapData, GalaxyMapNodeData, GalaxyMapEdgeData } from '<SOMERWHERE>';
+import RandomNumberGenerator from '<SOMEWHERE>';
 
-public class GalaxyMap : Node2D
-{
-    [Export] NodePath startingNodePath;
+export default class GalaxyMap extends Node2D {
 
-    public GalaxyMapNode StartingNode { get; private set; }
+  constructor() {
+    this.startingNodePath = null;
+    this.startingNode = null;
 
-    public Godot.Collections.Array Nodes { get; private set; }
-    public Godot.Collections.Array Edges { get; private set; }
+    this.nodes = null;
+    this.edges = null;
 
-    public GalaxyMapData GalaxyMapData { get; private set; }
+    this.galaxyMapData = null;
+  }
 
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-    {
-        if (startingNodePath != null)
-        {
-            var startNode = GetNode(startingNodePath);
-            StartingNode = startNode as GalaxyMapNode;
-        }
+  // Define getters and setters
+  get StartingNode() { return this.startingNode; }
+  set StartingNode(value) { this.startingNode = value; }
 
-        Nodes = GetNode("Nodes").GetChildren();
-        Edges = GetNode("Edges").GetChildren();
+  get Nodes() { return this.nodes; }
+  set Nodes(value) { this.nodes = value; }
 
-        GalaxyMapData = GenerateGalaxyMapData();
+  get Edges() { return this.edges; }
+  set Edges(value) { this.edges = value; }
+
+  get GalaxyMapData() { return this.galaxyMapData; }
+  set GalaxyMapData(value) { this.galaxyMapData = value; }
+
+  // Called when the node enters the scene tree for the first time.
+  _Ready() {
+    if (this.startingNodePath) {
+        let startNode = GetNode(this.startingNodePath);
+        this.startingNode = startNode; // as GalaxyMapNode;
     }
 
-    //Copy Godot-side hierarchy information over into "student safe" data containers
-    GalaxyMapData GenerateGalaxyMapData()
-    {
-        //Data copies for GalaxyMapNodes
-        var nodeDataToReturn = new List<GalaxyMapNodeData>();
-        foreach (Node2D node in Nodes)
-        {
-            var newNodeData = new GalaxyMapNodeData();
-            newNodeData.systemName = node.Name;
-            newNodeData.galacticPosition = node.Position;
-            nodeDataToReturn.Add(newNodeData);
-        }
+    this.nodes = GetNode("Nodes").GetChildren();
+    this.edges = GetNode("Edges").GetChildren();
 
-        //Data copies for GalaxyMapEdges
-        var edgeDataToReturn = new List<GalaxyMapEdgeData>();
-        foreach (GalaxyMapEdge edge in Edges)
-        {
-            var newEdgeData = new GalaxyMapEdgeData();
-            newEdgeData.edgeCost = edge.EdgeCost;
+    this.galaxyMapData = GenerateGalaxyMapData();
+  }
 
-            foreach (var nodeData in nodeDataToReturn)
-            {
-                if (nodeData.systemName == edge.NodeA.Name)
-                {
-                    newEdgeData.nodeA = nodeData;
-                }
+  //Copy Godot-side hierarchy information over into "student safe" data containers
+  /**
+ *
+ * @returns GalaxyMapData
+ */
+  GenerateGalaxyMapData() {
+      //Data copies for GalaxyMapNodes
+      let nodeDataToReturn = []; // GalaxyMapNodeData
+      for (let node of this.nodes) {
+          let newNodeData = new GalaxyMapNodeData();
+          newNodeData.systemName = node.Name;
+          newNodeData.galacticPosition = node.Position;
+          nodeDataToReturn.push(newNodeData);
+      }
 
-                if (nodeData.systemName == edge.NodeB.Name)
-                {
-                    newEdgeData.nodeB = nodeData;
-                }
-            }
+      //Data copies for GalaxyMapEdges
+      var edgeDataToReturn = []; // GalaxyMapEdgeData
+      for (let edge of this.Edges) {
+          let newEdgeData = new GalaxyMapEdgeData();
+          newEdgeData.edgeCost = edge.EdgeCost;
 
-            edgeDataToReturn.Add(newEdgeData);
-        }
+          for (let nodeData of nodeDataToReturn) {
+              if (nodeData.systemName === edge.NodeA.Name) {
+                  newEdgeData.nodeA = nodeData;
+              }
+              if (nodeData.systemName === edge.NodeB.Name) {
+                  newEdgeData.nodeB = nodeData;
+              }
+          }
+          edgeDataToReturn.push(newEdgeData);
+      }
 
-        //Let each NodeData know about relevant EdgeData
-        foreach (var node in nodeDataToReturn)
-        {
-            List<GalaxyMapEdgeData> edges = new List<GalaxyMapEdgeData>();
-            foreach (var edge in edgeDataToReturn)
-            {
-                if (edge.nodeA == node || edge.nodeB == node)
-                {
-                    edges.Add(edge);
-                }
-            }
-            node.edges = edges.ToArray();
-        }
+      //Let each NodeData know about relevant EdgeData
+      for (let node of nodeDataToReturn) {
+          let edges = []; // GalaxyMapEdgeData
+          for (let edge of edgeDataToReturn) {
+              if (edge.nodeA === node || edge.nodeB === node) {
+                  edges.push(edge);
+              }
+          }
+          node.edges = edges.ToArray();
+      }
 
-        //Package the data up and return it to the caller
-        GalaxyMapData dataToReturn = new GalaxyMapData();
-        dataToReturn.nodeData = nodeDataToReturn.ToArray();
-        dataToReturn.edgeData = edgeDataToReturn.ToArray();
-        return dataToReturn;
-    }
+      //Package the data up and return it to the caller
+      let dataToReturn = new GalaxyMapData();
+      dataToReturn.nodeData = nodeDataToReturn.ToArray();
+      dataToReturn.edgeData = edgeDataToReturn.ToArray();
+      return dataToReturn;
+  }
 
-    public void RandomizeEdgeWeights(ulong seed)
-    {
-        if (seed == 0)
-            return;
+  /**
+   *
+   * @param {number} seed
+   * @returns void
+   */
+  RandomizeEdgeWeights(seed)
+  {
+      if (seed == 0) {
+          return;
+      }
 
-        var randomizer = new RandomNumberGenerator();
-        randomizer.Seed = seed;
+      let randomizer = new RandomNumberGenerator();
+      randomizer.Seed = seed;
 
-        foreach (GalaxyMapEdge edge in Edges)
-        {            
-            edge.EdgeCost = randomizer.RandiRange(3,10);
-        }
-
-    }
+      for (let edge of this.Edges) {
+          edge.EdgeCost = randomizer.RandiRange(3,10);
+      }
+  }
 }
