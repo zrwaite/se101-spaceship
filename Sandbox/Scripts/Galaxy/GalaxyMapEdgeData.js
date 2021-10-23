@@ -1,5 +1,5 @@
 
-export default class GalaxyMapData {
+export default class GalaxyMapEdgeData {
 
   constructor() {
     this.edgeCost = null;
