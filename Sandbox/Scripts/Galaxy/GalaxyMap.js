@@ -1,5 +1,7 @@
 import { Node2D, GetNode } from '<SOMEWHERE>';
-import { GalaxyMapData, GenerateGalaxyMapData, GalaxyMapNodeData, GalaxyMapEdgeData } from '<SOMERWHERE>';
+import GalaxyMapData from './GalaxyMapData.js';
+import GalaxyMapNodeData from './GalaxyMapNodeData.js';
+import GalaxyMapEdgeData from './GalaxyMapEdgeData.js';
 import RandomNumberGenerator from '<SOMEWHERE>';
 
 export default class GalaxyMap extends Node2D {
@@ -37,7 +39,7 @@ export default class GalaxyMap extends Node2D {
     this.nodes = GetNode("Nodes").GetChildren();
     this.edges = GetNode("Edges").GetChildren();
 
-    this.galaxyMapData = GenerateGalaxyMapData();
+    this.galaxyMapData = this.GenerateGalaxyMapData();
   }
 
   //Copy Godot-side hierarchy information over into "student safe" data containers
