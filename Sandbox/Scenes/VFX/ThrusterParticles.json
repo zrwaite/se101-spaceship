@@ -1,0 +1,70 @@
+{
+  "links": [
+    {
+      "path": "res://Sandbox/Sprites/BasicShapes/Circle.png",
+      "type": "Texture",
+      "id": 1
+    },
+    {
+      "type": "Gradient",
+      "id": 2,
+      "offsets": [ 0, 0.0452261, 0.170854, 1 ],
+      "colors": [ 1, 1, 1, 1, 1, 0.624023, 0, 1, 1, 0.131579, 0.892295, 1, 1, 1, 1, 0 ]
+    },
+    {
+      "type": "GradientTexture",
+      "id": 3,
+      "gradient": 2
+    },
+    {
+      "type": "Curve",
+      "id": 4,
+      "max_value": 1000.0,
+      "_data": [
+        [ 0, 1 ],
+        0.0,
+        0.0,
+        0,
+        0,
+        [ 1, 1000 ],
+        0.0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "type": "CurveTexture",
+      "id": 5,
+      "curve": 4
+    },
+    {
+      "type": "ParticlesMaterial",
+      "id": 6,
+      "flag_disable_z": true,
+      "spread": 10.0,
+      "gravity": [ 0, 0, 0 ],
+      "initial_velocity": 100.0,
+      "orbit_velocity": 0.0,
+      "orbit_velocity_random": 0.0,
+      "damping_curve": 5,
+      "scale": 0.01,
+      "color_ramp": 3
+    }
+  ],
+  "objects": [
+    {
+      "name": "ThrusterParticles",
+      "type": "Node2D"
+    },
+    {
+      "name": "Particles2D",
+      "type": "Particles2D",
+      "amount": 100,
+      "lifetime": 0.5,
+      "local_coords": false,
+      "process_material": 6,
+      "texture": 1
+    }
+  ]
+}

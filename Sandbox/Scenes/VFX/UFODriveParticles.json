@@ -1,34 +1,59 @@
-[gd_scene load_steps=8 format=2]
+{
+  "links": [
+    {
+      "path": "res://Sandbox/Sprites/BasicShapes/Ring.svg",
+      "type": "Texture",
+      "id": 1
+    },
+    {
+      "path": "res://Sandbox/Scenes/VFX/UFODriveParticles.js",
+      "type": "Script",
+      "id": 2
+    },
+    {
+      "type": "Gradient",
+      "id": 3,
+      "offsets": [ 0, 0.190955, 1 ],
+      "colors": [ 0, 0, 0, 1, 0, 0.0390625, 1, 1, 1, 1, 1, 0 ]
+    },
+    {
+      "type": "GradientTexture",
+      "id": 4,
+      "gradient": 3
+    },
+    {
+      "type": "Curve",
+      "id": 5,
+      "_data": [
+        [ 0.00475059, 0 ],
+        0.0,
+        0.0,
+        0,
+        0,
+        [ 1, 1 ],
+        0.0,
+        0.0,
+        0,
+        0
+      ]
+    },
+    {
+      "type": "CurveTexture",
+      "id": 6,
+      "curve": 5
+    },
+    {
+      "type": "ParticlesMaterial",
+      "id": 7,
+      "flag_disable_z": true,
+      "gravity": [ 0, 0, 0 ],
+      "orbit_velocity": 0.0,
+      "orbit_velocity_random": 0.0,
+      "scale_curve": 6,
+      "color_ramp": 4
+    }
+  ],
+  "objects": [
 
-[ext_resource path="res://Sandbox/Sprites/BasicShapes/Ring.svg" type="Texture" id=1]
-[ext_resource path="res://Sandbox/Scenes/VFX/UFODriveParticles.cs" type="Script" id=2]
-
-[sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0, 0.190955, 1 )
-colors = PoolColorArray( 0, 0, 0, 1, 0, 0.0390625, 1, 1, 1, 1, 1, 0 )
-
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
-
-[sub_resource type="Curve" id=3]
-_data = [ Vector2( 0.00475059, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=4]
-curve = SubResource( 3 )
-
-[sub_resource type="ParticlesMaterial" id=5]
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale_curve = SubResource( 4 )
-color_ramp = SubResource( 2 )
-
-[node name="UFODriveParticles" type="Node2D"]
-script = ExtResource( 2 )
-
-[node name="RingParticles" type="Particles2D" parent="."]
-amount = 4
-local_coords = false
-process_material = SubResource( 5 )
-texture = ExtResource( 1 )
+  ]
+}
