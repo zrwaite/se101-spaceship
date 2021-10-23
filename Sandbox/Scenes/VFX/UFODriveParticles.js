@@ -3,7 +3,7 @@
 export default class UFODriveParticles extends Node2D {
 
   constructor() {
-    this.ringParticles = undefined;
+    this.ringParticles = null;
   }
 
   // Called when the node enters the scene tree for the first time.
