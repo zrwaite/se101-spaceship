@@ -1,4 +1,4 @@
-// import Node2D from '<SOMEWHERE>';
+import { Node2D, GetNode } from '<SOMEWHERE>';
 
 export default class UFODriveParticles extends Node2D {
 

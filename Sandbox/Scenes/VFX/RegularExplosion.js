@@ -1,4 +1,4 @@
-// import Node2D from '<SOMEWHERE>';
+import { Node2D, FindNode } from '<SOMEWHERE>';
 
 export default class RegularExplosion extends Node2D {
 
@@ -7,6 +7,6 @@ export default class RegularExplosion extends Node2D {
     let animator = FindNode("AnimationPlayer"); // as AnimationPlayer;
     animator.Play("Explosion");
 
-    Rotation = Math.random() * 360;
+    this.Rotation = Math.random() * 360;
   }
 }
