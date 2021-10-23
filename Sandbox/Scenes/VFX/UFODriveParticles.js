@@ -1,19 +1,24 @@
-using Godot;
-using System;
+// import Node2D from '<SOMEWHERE>';
 
-public class UFODriveParticles : Node2D
-{
-    Particles2D ringParticles;
+export default class UFODriveParticles extends Node2D {
 
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-    {
-        ringParticles = GetNode<Particles2D>("RingParticles");
-        ringParticles.Emitting = false;
-    }
+  constructor() {
+    this.ringParticles = undefined;
+  }
 
-    public void SetEmitting(bool isEmitting)
-    {
-        ringParticles.Emitting = isEmitting;
-    }
+  // Called when the node enters the scene tree for the first time.
+  _Ready() {
+    // Pass in type as optional second param
+    this.ringParticles = GetNode("RingParticles", "Particles2D");
+    this.ringParticles.Emitting = false;
+  }
+
+  /**
+   *
+   * @param {bool} isEmitting
+   * @returns void
+   */
+  SetEmitting(isEmitting) {
+    this.ringParticles.Emitting = isEmitting;
+  }
 }
