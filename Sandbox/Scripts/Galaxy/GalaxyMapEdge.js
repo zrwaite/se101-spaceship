@@ -1,58 +1,69 @@
-using Godot;
-using System;
+import { Node2D, FindNode, GetNode } from '<SOMEWHERE>';
+import Vector2 from '../Helpers/Vector2.js';
 
-public class GalaxyMapEdge : Node2D
-{
-    [Export] NodePath nodeAPath;
-    [Export] NodePath nodeBPath;
-    [Export] float edgeCost = 1;
+export default class GalaxyMapEdge extends Node2D {
 
-    Label cost;
+  constructor() {
+    this.nodeAPath = null;
+    this.nodeBPath = null;
+    this.edgeCost = 1;
+    this.cost = null;
+    this.nodeA = null;
+    this.nodeB = null;
+    this.line = null;
+  }
 
-    public GalaxyMapNode NodeA { get; private set; }
-    public GalaxyMapNode NodeB { get; private set; }
+  // Define getters and setters
+  get NodeA() { return this.nodeA; }
+  set NodeA(value) { this.nodeA = value; }
 
-    public Node2D Line { get; private set; }
+  get NodeB() { return this.nodeB; }
+  set NodeB(value) { this.nodeB = value; }
 
-    public float EdgeCost { get { return edgeCost; } set { edgeCost = value; } }
+  get Line() { return this.line; }
+  set Line(value) { this.line = value; }
 
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-    {
-        ConnectNodeEndpoints();
-        cost = FindNode("EdgeCost") as Label;
+  get EdgeCost() { return this.edgeCost; }
+  set EdgeCost(value) { this.edgeCost = value; }
+
+  // Called when the node enters the scene tree for the first time.
+  // @Override
+  _Ready() {
+    this.ConnectNodeEndpoints();
+    this.cost = FindNode("EdgeCost"); // as Label;
+  }
+
+  /**
+   *
+   * @returns void
+   */
+  ConnectNodeEndpoints() {
+    try {
+        console.log("Connecting Node endpoints - " + this.nodeAPath + " to " + this.nodeBPath);
+        // Pass in type as optional second param
+        this.nodeA = GetNode(this.nodeAPath, "GalaxyMapNode");
+        this.nodeB = GetNode(this.nodeBPath, "GalaxyMapNode");
+        this.line = GetNode("Line", "Node2D");
+    } catch (ex) {
+      console.error("Exception: " + ex);
     }
+  }
 
-    public void ConnectNodeEndpoints()
-    {
-        try
-        {
-            //GD.Print($"Connecting Node endpoints - {nodeAPath} to {nodeBPath}");
-            NodeA = GetNode<GalaxyMapNode>(nodeAPath);
-            NodeB = GetNode<GalaxyMapNode>(nodeBPath);
-            Line = GetNode<Node2D>("Line");
-        }
-        catch (Exception ex)
-        {
-            GD.PrintErr("Exception: " + ex);
-        }
+  // Called every frame. 'delta' is the elapsed time since the previous frame.
+  /**
+   *
+   * @param {float} delta
+   * @returns void
+   */
+  _Process(delta) {
+    if (this.nodeA && this.nodeA) {
+      let AtoB = this.nodeB.GlobalPosition.subtract(this.nodeA.GlobalPosition);
+      this.Position = this.nodeA.GlobalPosition.add(AtoB).scale(0.5);
+      this.cost.Text = this.edgeCost.ToString();
+      this.line.GlobalScale = new Vector2(AtoB.Length() * 0.25, 1);
+      this.line.LookAt(this.NodeB.GlobalPosition);
+    } else {
+      console.error("Both Node endpoints must be specified. " + this.nodeA + " : " + this.nodeB);
     }
-
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(float delta)
-    {
-        if (NodeA != null && NodeB != null)
-        {
-            Vector2 AtoB = (NodeB.GlobalPosition - NodeA.GlobalPosition);
-            this.Position = NodeA.GlobalPosition + AtoB * 0.5f;
-            cost.Text = edgeCost.ToString();
-            Line.GlobalScale = new Vector2(AtoB.Length() * 0.25f, 1f);
-            Line.LookAt(NodeB.GlobalPosition);
-        }
-        else
-        {
-            //GD.Print($"Both Node endpoints must be specified. {NodeA} : {NodeB}");
-        }
-
-    }
+  }
 }

@@ -1,8 +1,7 @@
-using Godot;
-using System;
 
-public class GalaxyMapData
-{
-    public GalaxyMapNodeData[] nodeData;
-    public GalaxyMapEdgeData[] edgeData;
+export default class GalaxyMapData {
+    constructor() {
+      this.nodeData = null;
+      this.edgeData = null;
+    }
 }

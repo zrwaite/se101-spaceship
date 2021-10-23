@@ -1,24 +1,15 @@
-using Godot;
-using System;
+import { Node2D, FindNode } from '<SOMEWHERE>';
 
-public class GalaxyMapNode : Node2D
-{
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
+export default class GalaxyMapNode extends Node2D {
 
-    Label SystemName;
+  constructor() {
+    this.SystemName = null;
+  }
 
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-    {
-        SystemName = FindNode("SystemName") as Label;
-        SystemName.Text = this.Name;
-    }
-
-    //  // Called every frame. 'delta' is the elapsed time since the previous frame.
-    //  public override void _Process(float delta)
-    //  {
-    //      
-    //  }
+  // Called when the node enters the scene tree for the first time.
+  // @Override
+  _Ready() {
+      this.SystemName = FindNode("SystemName"); // as Label;
+      this.SystemName.Text = this.Name;
+  }
 }

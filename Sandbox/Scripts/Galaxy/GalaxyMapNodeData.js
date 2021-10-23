@@ -1,6 +1,9 @@
-public class GalaxyMapNodeData
-{
-    public string systemName;
-    public Godot.Vector2 galacticPosition;
-    public GalaxyMapEdgeData[] edges;    
+
+export default class GalaxyMapNodeData {
+
+    constructor() {
+      this.systemName = null;
+      this.galacticPosition = null;
+      this.edges = null;
+    }
 }
