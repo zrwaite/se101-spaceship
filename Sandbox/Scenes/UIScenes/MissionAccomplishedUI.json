@@ -1,7 +1,7 @@
 {
     "links": [
         {
-            "path": "res://Sandbox/Scenes/UIScenes/MissionAccomplishedUI.cs",
+            "path": "res://Sandbox/Scenes/UIScenes/MissionAccomplishedUI.js",
             "type": "script",
             "id": 1
         },
@@ -13,7 +13,7 @@
         {
             "type": "StyleBoxFlat",
             "id": 3,
-            "bg_color": "Color( 0.156863, 0.156863, 0.156863, 0.392157 )"
+            "bg_color": [0.156863, 0.156863, 0.156863, 0.392157]
         },
         {
             "type": "theme",
@@ -52,7 +52,7 @@
             "valign": 1,
             "theme": 4,
             "custom_fonts/font": 5,
-            "custom_colors/font_outline_modulate": "Color( 0.411765, 0.0509804, 0.611765, 1 )"
+            "custom_colors/font_outline_modulate": [0.411765, 0.0509804, 0.611765, 1]
         },
         {
             "name": "HBoxContainer",

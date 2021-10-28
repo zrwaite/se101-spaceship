@@ -1,7 +1,7 @@
 {
     "links": [
         {
-            "path": "res://Sandbox/Scenes/UIScenes/SensorsSubsystemInformationPanel.cs",
+            "path": "res://Sandbox/Scenes/UIScenes/SensorsSubsystemInformationPanel.js",
             "type": "script",
             "id": 1
         },

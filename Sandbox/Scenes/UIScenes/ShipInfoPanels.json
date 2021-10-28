@@ -1,34 +1,34 @@
 {
     "links": [
         {
-            "path": "res://Sandbox/Scenes/UIScenes/ShipInfoPanels.cs",
+            "path": "res://Sandbox/Scenes/UIScenes/ShipInfoPanels.js",
             "type": "script",
             "id": 1
         },
         {
-            "path": "res://Sandbox/Scenes/UIScenes/SensorsSubsystemInformationPanel",
+            "path": "res://Sandbox/Scenes/UIScenes/SensorsSubsystemInformationPanel.json",
             "type": "json",
             "id": 4
         },
         {
-            "path": "res://Sandbox/Scenes/UIScenes/PropulsionSubsystemInfoPanel.tscn",
+            "path": "res://Sandbox/Scenes/UIScenes/PropulsionSubsystemInfoPanel.json",
             "type": "json",
             "id": 5
         },
         {
-            "path": "res://Sandbox/Scenes/UIScenes/DefenceSubsystemInformationPanel.tscn",
+            "path": "res://Sandbox/Scenes/UIScenes/DefenceSubsystemInformationPanel.json",
             "type": "json",
             "id": 6
         },
         {
-            "path": "res://Sandbox/Scenes/UIScenes/ShipSelectPanel.tscn",
+            "path": "res://Sandbox/Scenes/UIScenes/ShipSelectPanel.json",
             "type": "json",
             "id": 7
         },
         {
             "type": "StyleBoxFlat",
             "id": 8,
-            "bg_color": "Color( 0, 0, 0, 0.196078 )"
+            "bg_color": [0, 0, 0, 0.196078]
         }
     ],
     "objects": [
