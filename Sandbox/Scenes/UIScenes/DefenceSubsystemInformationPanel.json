@@ -1,0 +1,86 @@
+{
+    "links": [
+        {
+            "path": "res://Sandbox/Scenes/UIScenes/DefenceSubsystemInformationPanel.js",
+            "type": "script",
+            "id": 1
+        },
+        {
+            "path": "res://Sandbox/CustomUITheme.tres",
+            "type": "theme",
+            "id": 2
+        }
+    ],
+    "objects": [
+        {
+            "name": "DefenceSubsystemInformationPanel",
+            "theme": 2,
+            "script": 1
+        },
+        {
+            "name": "VBoxContainer"
+        },
+        {
+            "name": "DefenceInfo",
+            "type": "VBoxContainer",
+            "text": "Defence Info"
+        },
+        {
+            "name": "TotalCollisions",
+            "type": "VBoxContainer",
+            "text": "Collisions: 0"
+        },
+        {
+            "name": "CollisionDamage",
+            "type": "VBoxContainer",
+            "text": "Collisions: 0"
+        },
+        {
+            "name": "TubeCooldowns",
+            "type": "VBoxContainer",
+            "columns": 2,
+            "custom_constants/hseparation": 10
+        },
+        {
+            "name": "Tube0",
+            "type": "VBoxContainer/TubeCooldowns",
+            "text": "Tube 0"
+        },
+        {
+            "name": "Tube0ProgressBar",
+            "type": "VBoxContainer/TubeCooldowns",
+            "size_flags": {"horizontal": 3, "vertical": 2},
+            "value": 50
+        },
+        {
+            "name": "Tube1",
+            "type": "VBoxContainer/TubeCooldowns",
+            "text": "Tube 1"
+        },
+        {
+            "name": "Tube1ProgressBar",
+            "type": "VBoxContainer/TubeCooldowns",
+            "size_flags": {"horizontal": 3, "vertical": 2}
+        },
+        {
+            "name": "Tube2",
+            "type": "VBoxContainer/TubeCooldowns",
+            "text": "Tube 2"
+        },
+        {
+            "name": "Tube2ProgressBar",
+            "type": "VBoxContainer/TubeCooldowns",
+            "size_flags": {"horizontal": 3, "vertical": 2}
+        },
+        {
+            "name": "Tube3",
+            "type": "VBoxContainer/TubeCooldowns",
+            "text": "Tube 3"
+        },
+        {
+            "name": "Tube3ProgressBar",
+            "type": "VBoxContainer/TubeCooldowns",
+            "size_flags": {"horizontal": 3, "vertical": 2}
+        }
+    ]
+}

@@ -1,0 +1,82 @@
+{
+    "links": [
+        {
+            "path": "res://Sandbox/Scenes/UIScenes/ShipInfoPanels.js",
+            "type": "script",
+            "id": 1
+        },
+        {
+            "path": "res://Sandbox/Scenes/UIScenes/SensorsSubsystemInformationPanel.json",
+            "type": "json",
+            "id": 4
+        },
+        {
+            "path": "res://Sandbox/Scenes/UIScenes/PropulsionSubsystemInfoPanel.json",
+            "type": "json",
+            "id": 5
+        },
+        {
+            "path": "res://Sandbox/Scenes/UIScenes/DefenceSubsystemInformationPanel.json",
+            "type": "json",
+            "id": 6
+        },
+        {
+            "path": "res://Sandbox/Scenes/UIScenes/ShipSelectPanel.json",
+            "type": "json",
+            "id": 7
+        },
+        {
+            "type": "StyleBoxFlat",
+            "id": 8,
+            "bg_color": [0, 0, 0, 0.196078]
+        }
+    ],
+    "objects": [
+        {
+            "name": "ShipInfoPanels",
+            "anchor": {"top": 1, "bottom": 1},
+            "margin": {"top": -197, "right": 672},
+            "script": 1
+        },
+        {
+            "name": "ShipSelectPanel",
+            "anchor": {"top": 0, "bottom": 0},
+            "margin": {"top": 0, "right": 672, "bottom": 20},
+            "instance": 8,
+            "link": 7
+        },
+        {
+            "name": "InfoPanels",
+            "margin": {"top": 24, "right": 672, "bottom": 178},
+            "custom_constants/separation": 10
+        },
+        {
+            "name": "SensorsSubsystemInformationPanel",
+            "type": "InfoPanels",
+            "anchor": {"top": 0, "bottom": 0},
+            "margin": {"top": 0, "right": 167, "bottom": 154},
+            "instance": 4,
+            "size_flags": {"horizontal": 3, "vertical": 0},
+            "link": 4
+        },
+        {
+            "name": "PropulsionSubsystemInformationPanel",
+            "type": "InfoPanels",
+            "instance": 5,
+            "anchor": {"top": 0, "bottom": 0},
+            "margin": {"left": 177, "top": 0, "right": 500, "bottom": 154},
+            "size_flags": {"horizontal": 3},
+            "custom_styles/panel": 8,
+            "link": 5
+        },
+        {
+            "name": "DefenceSubsystemInformationPanel",
+            "type": "InfoPanels",
+            "instance": 6,
+            "anchor": {"top": 0, "bottom": 0},
+            "margin": {"left": 510, "top": 0, "right": 672, "bottom": 154},
+            "size_flags": {"horizontal": 3, "stretch_ratio": 0.5},
+            "link": 6
+        }
+    ]
+}
