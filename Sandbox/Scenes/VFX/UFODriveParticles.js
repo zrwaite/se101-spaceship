@@ -3,7 +3,7 @@ import { Node2D, GetNode } from '<SOMEWHERE>';
 export default class UFODriveParticles extends Node2D {
 
   constructor() {
-    this.ringParticles = null;
+    this.ringParticles = null;    // Particles2D
   }
 
   // Called when the node enters the scene tree for the first time.

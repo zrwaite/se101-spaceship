@@ -2,9 +2,9 @@
 export default class GalaxyMapEdgeData {
 
   constructor() {
-    this.edgeCost = null;
-    this.nodeA = null;
-    this.nodeB = null;
+    this.edgeCost = null;   // float
+    this.nodeA = null;      // GalaxyMapNodeData
+    this.nodeB = null;      // GalaxyMapNodeData
   }
 
   // Convenience function for returning the node at the other end of an edge

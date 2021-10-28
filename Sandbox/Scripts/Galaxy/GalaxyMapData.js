@@ -1,7 +1,7 @@
 
 export default class GalaxyMapData {
     constructor() {
-      this.nodeData = null;
-      this.edgeData = null;
+      this.nodeData = null; // GalaxyMapNodeData[]
+      this.edgeData = null; // GalaxyMapEdgeData[]
     }
 }

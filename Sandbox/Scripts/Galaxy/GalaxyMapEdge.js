@@ -4,13 +4,13 @@ import Vector2 from '../Helpers/Vector2.js';
 export default class GalaxyMapEdge extends Node2D {
 
   constructor() {
-    this.nodeAPath = null;
-    this.nodeBPath = null;
-    this.edgeCost = 1;
-    this.cost = null;
-    this.nodeA = null;
-    this.nodeB = null;
-    this.line = null;
+    this.nodeAPath = null;  // NodePath
+    this.nodeBPath = null;  // NodePath
+    this.edgeCost = 1;      // float
+    this.cost = null;       // Label
+    this.nodeA = null;      // GalaxyMapNode
+    this.nodeB = null;      // GalaxyMapNode
+    this.line = null;       // Node2D
   }
 
   // Define getters and setters
@@ -57,7 +57,7 @@ export default class GalaxyMapEdge extends Node2D {
    */
   _Process(delta) {
     if (this.nodeA && this.nodeA) {
-      let AtoB = this.nodeB.GlobalPosition.subtract(this.nodeA.GlobalPosition);
+      let AtoB = this.nodeB.GlobalPosition.subtract(this.nodeA.GlobalPosition); // Vector2
       this.Position = this.nodeA.GlobalPosition.add(AtoB).scale(0.5);
       this.cost.Text = this.edgeCost.ToString();
       this.line.GlobalScale = new Vector2(AtoB.Length() * 0.25, 1);

@@ -3,7 +3,7 @@ import { Node2D, FindNode } from '<SOMEWHERE>';
 export default class GalaxyMapNode extends Node2D {
 
   constructor() {
-    this.SystemName = null;
+    this.SystemName = null; // Label
   }
 
   // Called when the node enters the scene tree for the first time.

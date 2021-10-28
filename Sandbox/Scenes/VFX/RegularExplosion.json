@@ -142,7 +142,7 @@
     },
     {
       "name": "AnimationPlayer",
-      "type": "Node2D",
+      "type": "AnimationPlayer",
       "playback_speed": 2.0,
       "anims/Explosion": 12
     },

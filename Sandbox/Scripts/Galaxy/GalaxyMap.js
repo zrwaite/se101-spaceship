@@ -7,13 +7,13 @@ import RandomNumberGenerator from '<SOMEWHERE>';
 export default class GalaxyMap extends Node2D {
 
   constructor() {
-    this.startingNodePath = null;
-    this.startingNode = null;
+    this.startingNodePath = null; // NodePath
+    this.startingNode = null;     // GalaxyMapNode
 
-    this.nodes = null;
-    this.edges = null;
+    this.nodes = null;            // Godot.Collections.Array
+    this.edges = null;            // Godot.Collections.Array
 
-    this.galaxyMapData = null;
+    this.galaxyMapData = null;    // GalaxyMapData
   }
 
   // Define getters and setters
@@ -50,7 +50,7 @@ export default class GalaxyMap extends Node2D {
   GenerateGalaxyMapData() {
       //Data copies for GalaxyMapNodes
       let nodeDataToReturn = []; // GalaxyMapNodeData
-      for (let node of this.nodes) {
+      for (let node of this.nodes) { // Node2D
           let newNodeData = new GalaxyMapNodeData();
           newNodeData.systemName = node.Name;
           newNodeData.galacticPosition = node.Position;
@@ -106,7 +106,7 @@ export default class GalaxyMap extends Node2D {
       let randomizer = new RandomNumberGenerator();
       randomizer.Seed = seed;
 
-      for (let edge of this.Edges) {
+      for (let edge of this.Edges) {  // GalaxyMapEdge
           edge.EdgeCost = randomizer.RandiRange(3,10);
       }
   }
