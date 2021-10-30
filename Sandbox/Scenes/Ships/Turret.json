@@ -1,0 +1,32 @@
+{
+    "links": [
+        {
+            "path": "res://Sandbox/Scripts/Ship/Turret.js",
+            "type": "script",
+            "id": 1
+        },
+        {
+            "path": "res://Sandbox/Sprites/ShipSprites/TurretSprite.png",
+            "type": "img",
+            "id": 2
+        },
+        {
+            "path": "res://Sandbox/Scenes/SpaceObjects/Torpedo.json",
+            "type": "json",
+            "id": 3
+        }
+    ],
+    "objects": [
+        {
+            "name": "Turret",
+            "link": 1,
+            "launchSpeed": 1000,
+            "torpedoScene": 3
+        },
+        {
+            "name": "Sprite",
+            "link": 2,
+            "rotation": 1.57
+        }
+    ]
+}

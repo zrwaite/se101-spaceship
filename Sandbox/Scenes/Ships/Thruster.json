@@ -1,0 +1,36 @@
+{
+    "links": [
+        {
+            "path": "res://Sandbox/Sprites/ShipSprites/ThrusterFlame.png",
+            "type": "img",
+            "id": 1
+        },
+        {
+            "path": "res://Sandbox/Sprites/ShipSprites/ThrusterNozzle.png",
+            "type": "img",
+            "id": 2
+        },
+        {
+            "path": "res://Sandbox/Scenes/Ships/Thruster.js",
+            "type": "script",
+            "id": 3
+        }
+    ],
+    "objects": [
+        {
+            "name": "Thruster",
+            "link": 3,
+            "maxThrustForce": 100
+        },
+        {
+            "name": "Flame",
+            "link": 1,
+            "position": { "x": -25, "y": 0 },
+            "offset": { "x": -25, "y": 0 }
+        },
+        {
+            "name": "Nozzle",
+            "link": 2
+        }
+    ]
+}

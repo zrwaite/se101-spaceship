@@ -1,0 +1,193 @@
+{
+    "links": [
+        {
+            "path": "res://SubsystemControllers/ExamplePropulsionController.js",
+            "type": "script",
+            "id": 1
+        }, 
+        {
+            "path": "res://SubsystemControllers/ExampleDefenceController.js",
+            "type": "script",
+            "id": 2
+        },
+        {
+            "path": "res://SubsystemControllers/ExampleSensorsController.js",
+            "type": "script",
+            "id": 3
+        }, 
+        {
+            "path": "res://SubsystemControllers/ExampleNavigationController.js",
+            "type": "script",
+            "id": 4
+        }, 
+        {
+            "path": "res://Sandbox/Sprites/ShipSprites/ColonyShip.png",
+            "type": "img",
+            "id": 5
+        }, 
+        {
+            "path": "res://Sandbox/Scripts/Ship/PassiveSensors.js",
+            "type": "script",
+            "id": 6
+        },
+        {
+            "path": "res://Sandbox/Scripts/Ship/ActiveSensors.js",
+            "type": "script",
+            "id": 7
+        }, 
+        {
+            "path": "res://Sandbox/Scripts/Ship/ColonyShip.js",
+            "type": "script",
+            "id": 8
+        }, 
+        {
+            "path": "res://Sandbox/Scenes/Ships/Turret.json",
+            "type": "json",
+            "id": 9
+        },
+        {
+            "path": "res://Sandbox/Scenes/VFX/UFODriveParticles.json",
+            "type": "json",
+            "id": 10
+        },
+        {
+            "path": "res://Sandbox/Scenes/Ships/Thruster.json",
+            "type": "json",
+            "id": 11
+        },
+        {
+            "path": "res://Sandbox/Scenes/Ships/VelocityRecord.js",
+            "type": "script",
+            "id": 12
+        }
+    ],
+    "objects": [
+        {
+            "name": "ColonyShip",
+            "type": "RigidBody2D",
+            "script": 8,
+            "maxTorque": 500,
+            "ufoDriveMaxSpeed": 400
+        },
+        {
+            "name": "UFODriveParticles",
+            "link": 10
+        },
+        {
+            "name": "PortForeThruster",
+            "link": 11,
+            "position": { "x": 16, "y": -16 },
+            "rotation": 1.57
+        },
+        {
+            "name": "PortAftThruster",
+            "link": 11,
+            "position": { "x": -25, "y": -20 },
+            "rotation": 1.57
+        },
+        {
+            "name": "StarboardForeThruster",
+            "link": 11,
+            "position": { "x": 16, "y": 16 },
+            "rotation": -1.57
+        },
+        {
+            "name": "StarboardAftThruster",
+            "link": 11,
+            "position": { "x": -25, "y": 20 },
+            "rotation": -1.57
+        },
+        {
+            "name": "MainThruster",
+            "link": 11,
+            "position": { "x": -30, "y": 0 },
+            "maxTrustForce": 400
+        },
+        {
+            "name": "PortRetroThruster",
+            "link": 11,
+            "position": { "x": 22, "y": -12.5 },
+            "rotation": 3.1415
+        },
+        {
+            "name": "StarboardRetroThruster",
+            "link": 11,
+            "position": { "x": 22, "y": 12.5 },
+            "rotation": 3.1415
+        },
+        {
+            "name": "Sprite",
+            "link": 5
+        },
+        {
+            "name": "CollisionShape2D",
+            "link": 1,
+            "rotation": 1.57
+        },
+        {
+            "name": "OverlapArea2D",
+            "rotation": 1.57,
+            "collision_layer": 0, 
+            "collision_mask": 6
+        },
+        {
+            "name": "CollisionShape2D",
+            "link": 1,
+            "type": "OverlapArea2D"
+        },
+        {
+            "name": "ActiveSensors",
+            "collision_layer": 0, 
+            "collision_mask": 7,
+            "link": 7
+        },
+        {
+            "name": "CollisionShape2D",
+            "link": 3,
+            "type": "ActiveSensors"
+        },
+        {
+            "name": "PassiveSensors",
+            "visible": false,
+            "collision_layer": 8, 
+            "collision_mask": 4,
+            "link": 6
+        },
+        {
+            "name": "CollisionShape2D",
+            "link": 4,
+            "type": "PassiveSensors"
+        },
+        {
+            "name": "Turret",
+            "link": 9
+        },
+        {
+            "name": "SubsystemControllers"
+        },
+        {
+            "name": "SensorsSubsystemController",
+            "type": "SubsystemControllers",
+            "link": 3
+        },
+        {
+            "name": "NavigationSubsystemController",
+            "type": "SubsystemControllers",
+            "link": 4
+        },
+        {
+            "name": "DefenceSubsystemController",
+            "type": "SubsystemControllers",
+            "link": 2
+        },
+        {
+            "name": "PropulsionSubsystemController",
+            "type": "SubsystemControllers",
+            "link": 1
+        },
+        {
+            "name": "VelocityRecord",
+            "link": 12
+        }
+    ]
+}
