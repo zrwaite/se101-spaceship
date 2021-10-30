@@ -2,12 +2,12 @@
   "links": [
     {
       "path": "res://Sandbox/Sprites/BasicShapes/Ring.svg",
-      "type": "Texture",
+      "type": "img",
       "id": 1
     },
     {
       "path": "res://Sandbox/Scenes/VFX/UFODriveParticles.js",
-      "type": "Script",
+      "type": "script",
       "id": 2
     },
     {
@@ -46,7 +46,6 @@
       "type": "ParticlesMaterial",
       "id": 7,
       "flag_disable_z": true,
-      "gravity": [ 0, 0, 0 ],
       "orbit_velocity": 0.0,
       "orbit_velocity_random": 0.0,
       "scale_curve": 6,
