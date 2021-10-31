@@ -1,28 +1,28 @@
 {
     "links":[
         {
-            "path":"res://Sandbox/Scripts/GameCore.cs",
+            "path":"res://Sandbox/Scripts/GameCore.js",
             "type":"script",
             "id":1
         },
         {
-            "path":"res://Sandbox/Scenes/UIScenes/MissionAccomplishedUI.tscn",
+            "path":"res://Sandbox/Scenes/UIScenes/MissionAccomplishedUI.json",
             "type":"json",
             "id":2
         },
         {
-            "path":"res://Sandbox/Scripts/MainCamera.cs",
+            "path":"res://Sandbox/Scripts/MainCamera.js",
             "type":"script",
             "id":5
         },
         {
-            "path":"res://Sandbox/Scenes/UIScenes/ShipInfoPanels.tscn",
+            "path":"res://Sandbox/Scenes/UIScenes/ShipInfoPanels.json",
             "type":"json",
             "id":7
         },
         {
             "type":"StyleBoxFlat",
-            "bg_color":"Color( 0, 0, 0, 0.196078 )",
+            "bg_color": [0, 0, 0, 0.196078],
             "id":8
         }
     ],
@@ -52,8 +52,7 @@
         {
             "name":"HelpUI",
             "type":"HUD",
-            "anchor_right":1.0,
-            "anchor_bottom":1.0,
+            "anchor": {"right": 1.0, "bottom": 1},
             "custom_styles/panel":8,
             "__meta__":{
                 "_edit_use_anchors_": false
@@ -62,10 +61,7 @@
         {
             "name":"MarginContainer",
             "type":"HUD/HelpUI",
-            "custom_constants/margin_right":10,
-            "custom_constants/margin_top":10,
-            "custom_constants/margin_left":10,
-            "custom_constants/margin_bottom":10
+            "custom_constants/margin": {"right": 10, "bottom":10, "left": 10, "top": 10},
         },
         {
             "name":"Label",

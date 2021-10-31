@@ -1,7 +1,7 @@
 {
     "links":[
         {
-            "path":"res://Sandbox/Scenes/SpaceObjects/TurbulenceField.cs",
+            "path":"res://Sandbox/Scenes/SpaceObjects/TurbulenceField.js",
             "type":"script",
             "id":1
         },
@@ -12,8 +12,8 @@
         },
         {
             "type":"Gradient",
-            "offsets":"PoolRealArray( 0, 0.514768, 1 )",
-            "colors":"PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0 )",
+            "offsets":[0, 0.514768, 1],
+            "colors":[1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0],
             "id":3
         },
         {
@@ -26,9 +26,9 @@
             "emission_shape":1,
             "emission_sphere_radius":200.0,
             "flag_disable_z":true,
-            "direction":"Vector3( -1, 1, 0 )",
+            "direction":[-1, 1, 0],
             "spread":0.0,
-            "gravity":"Vector3( 0, 0, 0 )",
+            "gravity":[0, 0, 0],
             "initial_velocity":500.0,
             "orbit_velocity":0.0,
             "orbit_velocity_random":0.0,

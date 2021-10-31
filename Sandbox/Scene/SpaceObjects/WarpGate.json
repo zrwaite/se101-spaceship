@@ -6,7 +6,7 @@
             "id":1
         },
         {
-            "path":"res://Sandbox/Scripts/SpaceObjects/WarpGate.cs",
+            "path":"res://Sandbox/Scripts/SpaceObjects/WarpGate.js",
             "type":"script",
             "id":2
         },

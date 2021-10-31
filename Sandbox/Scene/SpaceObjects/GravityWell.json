@@ -2,8 +2,8 @@
     "links":[
         {
             "type":"Gradient",
-            "offsets":"PoolRealArray( 0, 0.126582, 0.890295, 1 )",
-            "colors":"PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )",
+            "offsets": [0, 0.126582, 0.890295, 1],
+            "colors": [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
             "id":1
         },
         {
@@ -16,7 +16,7 @@
             "emission_shape":1,
             "emission_sphere_radius":100.0,
             "flag_disable_z":true,
-            "gravity":"Vector3( 0, 0, 0 )",
+            "gravity":[0, 0, 0],
             "orbit_velocity":0.0,
             "orbit_velocity_random":0.0,
             "radial_accel":-100.0,
@@ -35,7 +35,7 @@
             "name":"GravityWell",
             "space_override":1,
             "gravity_point":true,
-            "gravity_vec":"Vector2( 0, 0 )",
+            "gravity_vec": [0, 0],
             "gravity":100.0
         },
         {

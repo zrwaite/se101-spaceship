@@ -1,7 +1,7 @@
 {
     "links":[
         {
-            "path":"res://Sandbox/Scripts/SpaceObjects/AsteroidDebris.cs",
+            "path":"res://Sandbox/Scripts/SpaceObjects/AsteroidDebris.js",
             "type":"script",
             "id":1
         },
@@ -23,7 +23,7 @@
         },
         {
             "name":"Sprite",
-            "modulate":"Color( 0.74902, 0.611765, 0.239216, 1 )",
+            "modulate": [0.74902, 0.611765, 0.239216, 1],
             "img":2
         },
         {

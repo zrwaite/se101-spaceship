@@ -1,7 +1,7 @@
 {
     "links":[
         {
-            "path":"res://Sandbox/Scripts/SpaceObjects/Torpedo.cs",
+            "path":"res://Sandbox/Scripts/SpaceObjects/Torpedo.js",
             "type":"script",
             "id":1
         },
@@ -11,7 +11,7 @@
             "id":2
         },
         {
-            "path":"res://Sandbox/Scenes/VFX/RegularExplosion.tscn",
+            "path":"res://Sandbox/Scenes/VFX/RegularExplosion.json",
             "type":"json",
             "id":3
         },
@@ -22,8 +22,8 @@
         },
         {
             "type":"Gradient",
-            "offsets":"PoolRealArray( 0, 0.0421941, 0.113924, 0.219409, 1 )",
-            "colors":"PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 0.96875, 1, 0, 0.92511, 1, 0.46875, 0, 0.814978, 1, 0, 0.867188, 0 )",
+            "offsets":[0, 0.0421941, 0.113924, 0.219409, 1],
+            "colors":[1, 1, 1, 0, 1, 1, 1, 1, 0.96875, 1, 0, 0.92511, 1, 0.46875, 0, 0.814978, 1, 0, 0.867188, 0],
             "id":5
 
         },
@@ -34,7 +34,7 @@
         },
         {
             "type":"Curve",
-            "_data":"[ Vector2( 0, 1 ), 0.0, -0.053719, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]",
+            "_data":[ [0, 1], 0.0, -0.053719, 0, 0, [1, 0], 0.0, 0.0, 0, 0 ],
             "id":7
         },
         {
@@ -45,7 +45,7 @@
         {
             "type":"ParticlesMaterial",
             "flag_disable_z":true,
-            "gravity":"Vector3( 0, 0, 0 )",
+            "gravity":[0, 0, 0],
             "orbit_velocity":0.0,
             "orbit_velocity_random":0.0,
             "scale_curve":8,
@@ -71,7 +71,7 @@
         },
         {
             "name":"Particles2D",
-            "position":"Vector2( -15.8263, 0.184029 )",
+            "position":[-15.8263, 0.184029],
             "amount":100,
             "local_coords":false,
             "process_material":9,

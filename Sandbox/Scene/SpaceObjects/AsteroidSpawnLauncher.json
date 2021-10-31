@@ -1,7 +1,7 @@
 {
     "links":[
         {
-            "path":"res://Sandbox/Scenes/SpaceObjects/AsteroidSpawnLauncher.cs",
+            "path":"res://Sandbox/Scenes/SpaceObjects/AsteroidSpawnLauncher.js",
             "type":"script",
             "id":1
         }

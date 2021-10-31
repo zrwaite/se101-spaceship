@@ -1,3 +1,5 @@
+import { Vector2 } from '../../Scripts/Helpers/Vector2.js';
+
 export class TurbulenceField /*extends Area2D*/ {
     constructor() {
         this.particleFieldNodePath;                                 //NodePath
@@ -27,8 +29,8 @@ export class TurbulenceField /*extends Area2D*/ {
         sampleVelocity.y += this.randomNumberGenerator.RandfRange(-1, 1);
         samplePosition += sampleVelocity * delta;
         
-        var xNoise = this.noise.GetNoise2d(samplePosition.x, samplePosition.y);     //float
-        var yNoise = this.noise.GetNoise2d(samplePosition.y, samplePosition.x);     //float
+        let xNoise = this.noise.GetNoise2d(samplePosition.x, samplePosition.y);     //float
+        let yNoise = this.noise.GetNoise2d(samplePosition.y, samplePosition.x);     //float
 
         this.particlesMaterial.Direction = new Vector3(xNoise, yNoise, 0);
 

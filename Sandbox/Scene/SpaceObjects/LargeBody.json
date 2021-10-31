@@ -6,7 +6,7 @@
             "id":1
         },
         {
-            "path":"res://Sandbox/Scenes/SpaceObjects/LargeBody.cs",
+            "path":"res://Sandbox/Scenes/SpaceObjects/LargeBody.js",
             "type":"script",
             "id":2
         },
