@@ -1,0 +1,16 @@
+{
+    "links":[
+        {
+            "path":"res://Sandbox/Scripts/SpaceObjects/SpaceMaterialSignature.js",
+            "type":"script",
+            "id":1
+        }
+        
+    ],
+    "objects":[
+        {
+            "name":"SpaceMaterialSignature",
+            "script":1
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "links":[
+        {
+            "path":"res://Sandbox/Sprites/SpaceObjects/WhiteDwarfStar.png",
+            "type":"img",
+            "id":1
+        },
+        {
+            "path":"res://Sandbox/Scripts/SpaceObjects/WarpGate.js",
+            "type":"script",
+            "id":2
+        },
+        {
+            "type":"CircleShape2D",
+            "radius":41,
+            "id":3
+        }
+        
+    ],
+    "objects":[
+        {
+            "name":"WarpGate",
+            "groups":["WarpGates"],
+            "script":2
+        },
+        {
+            "name":"WhiteDwarfStar",
+            "img":1
+        },
+        {
+            "name":"CollisionShape2D",
+            "shape":1
+        }
+    ]
+}
