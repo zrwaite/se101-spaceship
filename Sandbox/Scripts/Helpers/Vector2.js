@@ -78,6 +78,10 @@ export default class Vector2 {
 	angle() {
 		return Math.atan2(this.y, this.x);
 	}
+
+	angleTo(vector) {
+		return vector.angle() - this.angle();
+	}
 	
 	rotate(alpha) {
 		var cos = Math.cos(alpha);
