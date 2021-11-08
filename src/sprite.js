@@ -3,13 +3,13 @@ import RenderedObject from "./renderedObject.js";
 export default class Sprite extends RenderedObject{
 	constructor(...args){
 		super(...args)
-		this.speed = new Vector2(0, 0);
-		this.accel = new Vector2(0, 0);
-		this.maxSpeed = 100;
-		this.aPos = new Vector2(0,1);
-		this.aSpeed = new Vector2(0,0);
-		this.aAccel = new Vector2(0,0);
-		this.maxASpeed = 20;
+		this.speed = new Vector2(0, 0); //linear speed
+		this.accel = new Vector2(0, 0); //linier acceleration
+		this.maxSpeed = 100; //Max linear speed
+		this.aPos = new Vector2(0,1); // angle position
+		this.aSpeed = new Vector2(0,0); //angle speed
+		this.aAccel = new Vector2(0,0); //angle acceleration
+		this.maxASpeed = 20; //Max angle speed
 		this.radius; 
 		this.mass;
 	}
@@ -17,11 +17,11 @@ export default class Sprite extends RenderedObject{
 		//Simple physics
 		this.speed.x += this.accel.x;
 		this.speed.y += this.accel.y;
-		this.aSpeed += this.aAccel;
+		this.aSpeed += this.aAccel; //add accelerations to speeds
 		this.pos.x += this.speed.x;
 		this.pos.y += this.speed.y;
-		this.aPos += this.aSpeed;
-		this.boundsDetect();
+		this.aPos += this.aSpeed; //Add speeds to positions
+		this.boundsDetect(); //Detect boundaries for position and speed
 	}
 	boundsDetect(){
 		if (this.pos.y>this.game.height){ //y pos bounds

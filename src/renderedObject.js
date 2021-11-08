@@ -1,4 +1,4 @@
-class RenderedObject{
+class RenderedObject{ //Base class for everything that gets drawn
 	constructor(pos, game) {
 		this.game = game;
 		this.pos = pos;
