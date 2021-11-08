@@ -5,6 +5,7 @@ export default class ThrusterController{
 		this.parentShip = parentShip;
 	}
 	//You can implement this differently:
+	//This is just the simplest version
 	igniteThrusters(thrusters){
 		thrusters.forEach((thruster)=>{
 			//do stuff for each thruster
