@@ -47,7 +47,7 @@ export default class ActiveSensors extends IActiveSensors{
 			let velocity = Vector2.zero;
 			let collisionRadius = -1;
 			let specialInfo = null;
-			if (nodes[i] is 
+			//if (nodes[i] is 
 
 			/* 			
 			IHasScanSignature is an object with one attribute, ScanSignature

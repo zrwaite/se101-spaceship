@@ -29,4 +29,7 @@ export default class SolarSystem{
 	addWarpGate(){
 		//Link togethers solarsystems with warpgates
 	}
+	getMapData(pos){
+		//Get map data about a position for users to get data
+	}
 }
