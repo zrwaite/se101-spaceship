@@ -1,7 +1,7 @@
 //Based on BebopPropulsionController.cs
 import Vector2 from "../../Sandbox/Scripts/Helpers/Vector2";
-import PropulsionController from "../../Sandbox/Scripts/AbstractSubsystemControllers/AbstractPropulsionController"
-export default class BebopPropulsionController extends PropulsionController{
+import SubsystemController from "../../src/subsystemController.js";
+export default class BebopPropulsionController extends SubsystemController{
 	constructor(...args){
     	super(...args);
   	}

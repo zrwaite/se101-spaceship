@@ -1,6 +1,6 @@
 //Based on ExampleSensorsController.cs
-import SensorsController from "../../Sandbox/Scripts/AbstractSubsystemControllers/AbstractSensorsController"
-export default class ExampleSensorsController extends SensorsController{
+import SubsystemController from "../../src/subsystemController.js";
+export default class ExampleSensorsController extends SubsystemController{
 	constructor(...args){
     	super(...args);
   	}

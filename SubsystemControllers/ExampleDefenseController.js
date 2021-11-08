@@ -1,6 +1,6 @@
 //Based on ExampleDefenceController.cs
-import DefenceController from "../../Sandbox/Scripts/AbstractSubsystemControllers/AbstractDefenseController"
-export default class ExampleDefenceController extends DefenceController{
+import SubsystemController from "../../src/subsystemController.js";
+export default class ExampleDefenceController extends SubsystemController{
 	constructor(...args){
     	super(...args);
   	}

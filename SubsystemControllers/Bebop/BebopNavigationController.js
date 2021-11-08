@@ -1,7 +1,7 @@
 //Based on BebopNavigationController.cs
 import Vector2 from "../../Sandbox/Scripts/Helpers/Vector2";
-import NavigationController from "../../Sandbox/Scripts/AbstractSubsystemControllers/AbstractNavigationController"
-export default class BebopNavigationController extends NavigationController{
+import SubsystemController from "../../src/subsystemController.js";
+export default class BebopNavigationController extends SubsystemController{
 	constructor(...args){
     	super(...args);
   	}

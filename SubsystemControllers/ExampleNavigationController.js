@@ -1,6 +1,6 @@
 //Based on ExampleNavigationController.cs
-import NavigationController from "../../Sandbox/Scripts/AbstractSubsystemControllers/AbstractNavigationController"
-export default class ExampleNavigationController extends NavigationController{
+import SubsystemController from "../../src/subsystemController.js";
+export default class ExampleNavigationController extends SubsystemController{
 	constructor(...args){
     	super(...args);
   	}
