@@ -1,6 +1,6 @@
 //Based on ExamplePropulsionController.cs
-import PropulsionController from "../../Sandbox/Scripts/AbstractSubsystemControllers/AbstractPropulsionController"
-export default class ExamplePropulsionController extends PropulsionController{
+import SubsystemController from "../../src/subsystemController.js";
+export default class ExamplePropulsionController extends SubsystemController{
 	constructor(...args){
     	super(...args);
   	}

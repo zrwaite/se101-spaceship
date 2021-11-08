@@ -1,7 +1,7 @@
 //Based on BebopDefenceController.cs
 import Vector2 from "../../Sandbox/Scripts/Helpers/Vector2";
-import DefenceController from "../../Sandbox/Scripts/AbstractSubsystemControllers/AbstractDefenseController"
-export default class BebopDefenceController extends DefenceController{
+import SubsystemController from "../../src/subsystemController.js";
+export default class BebopDefenceController extends SubsystemController{
 	constructor(...args){
     	super(...args);
   	}
