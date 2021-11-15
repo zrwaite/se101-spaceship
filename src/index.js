@@ -3,13 +3,15 @@ import Game from "./game.js";
 let game; // YEET
 
 const gameSize = {
-	x: 32,
-	y: 24
+	x: 100,
+	y: 60,
+    border: 1
 }
-const unit = (window.innerWidth / window.innerHeight > gameSize.x / gameSize.y) ? Math.floor(window.innerHeight / 4 * gameSize.y) * 4 : Math.floor(window.innerWidth / 4 * gameSize.x) * 4;
+const unit = ((window.innerWidth - gameSize.border * 2) / (window.innerHeight - gameSize.border * 2) > gameSize.x / gameSize.y) ? Math.floor(window.innerHeight / (4 * gameSize.y)) * 4 : Math.floor(window.innerWidth / (4 * gameSize.x)) * 4;
 
 // Initialize the CSS variables so that the css can do dynamic calculations for displays.
 document.body.style.setProperty("--unit", unit + "px");
+document.body.style.setProperty("--border", gameSize.border + "px");
 document.body.style.setProperty("--width", gameSize.x * unit + "px");
 document.body.style.setProperty("--height", gameSize.y * unit + "px");
 
@@ -33,6 +35,7 @@ function initializeContexts(contextNames) {
     for (let i = 0; i < contextNames.length; i++) {
         let canvas = document.createElement("CANVAS");
         canvas.id = contextNames[i];
+        console.log(unit + ", " + gameSize.x);
         canvas.width = unit * gameSize.x;
         canvas.height = unit * gameSize.y;
         document.body.querySelector(".canvasHolder").appendChild(canvas);
@@ -57,6 +60,8 @@ function iterateLoad(length) {
 function initializeGame() {
     contexts["background"].drawImage(images["background"], 0, 0, gameSize.x * unit, gameSize.y * unit);
     game = new Game(gameSize.x, gameSize.y, images, contexts);
+    game.unit = unit;
+    game.start("test", 1, "bebop");
     startAnimating();
 }
 
@@ -75,6 +80,7 @@ initializeImages([
     ["thruster", "ShipSprites/ThrusterNozzle.png"],
     ["thrusterFlame", "ShipSprites/ThrusterFlame.png"],
     ["turret", "ShipSprites/TurretSprite.png"],
+    ["asteroid", "SpaceObjects/SpaceMeteors001.png"],
     ["planet1", "SpaceObjects/CreamVioletPlanet.png"],
     ["planet2", "SpaceObjects/CyanPlanet.png"],
     ["planet3", "SpaceObjects/CyanPlanet1.png"],

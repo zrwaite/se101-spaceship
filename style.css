@@ -5,7 +5,7 @@
 
 body {
     --unit: 30px; /* screen.js updates this. */
-    --border: 6px; /* screen.js updates this. */
+    --border: 2px; /* screen.js updates this. */
     --width: 32; /* screen.js updates this. */
     --height: 24; /* screen.js updates this. */
     font-family: NotoSans-Black;
@@ -20,5 +20,9 @@ canvas {
     top: calc(50% - var(--height) / 2);
     width: calc(var(--width) * var(--unit));
     height: calc(var(--height) * var(--unit));
-    outline: var(--border) solid rgba(50, 50, 50);
+    outline: var(--border) solid rgba(255, 255, 255);
+}
+
+#objects {
+    background-color: rgba(100, 0, 0, 0.4);
 }

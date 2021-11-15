@@ -3,24 +3,25 @@ import RenderedObject from "./renderedObject.js";
 export default class Sprite extends RenderedObject{
 	constructor(...args){
 		super(...args)
+		// this.pos = new Vector(0, 0); --> Already from RenderedObject
 		this.speed = new Vector2(0, 0); //linear speed
-		this.accel = new Vector2(0, 0); //linier acceleration
+		this.accel = new Vector2(0, 0); //linear acceleration
 		this.maxSpeed = 100; //Max linear speed
-		this.aPos = new Vector2(0,1); // angle position
-		this.aSpeed = new Vector2(0,0); //angle speed
-		this.aAccel = new Vector2(0,0); //angle acceleration
-		this.maxASpeed = 20; //Max angle speed
+		// this.angle = 0; --> Already, from RenderedObject
+		this.aSpeed = 0; //angle speed
+		this.aAccel = 0; //angle acceleration
+		this.maxASpeed = 20; //Max anglular speed
 		this.radius; 
 		this.mass;
 	}
 	update() {
-		//Simple physics
-		this.speed.x += this.accel.x;
-		this.speed.y += this.accel.y;
-		this.aSpeed += this.aAccel; //add accelerations to speeds
-		this.pos.x += this.speed.x;
-		this.pos.y += this.speed.y;
-		this.aPos += this.aSpeed; //Add speeds to positions
+		// All Simple Physics
+		// Add accelerations to speeds:
+		this.speed.add(this.accel);
+		this.aSpeed += this.aAccel;
+		// Add speeds to positions
+		this.pos.add(this.speed);
+		this.aPos += this.aSpeed;
 		this.boundsDetect(); //Detect boundaries for position and speed
 	}
 	boundsDetect(){
