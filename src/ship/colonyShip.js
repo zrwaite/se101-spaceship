@@ -33,14 +33,15 @@ export default class ColonyShip extends Sprite{
 		this.navigationController.navigationController(this.shipStatusInfo, this.game.solarSystem.getMapData(this.pos))
 		this.propulsionController.propulsionUpdate(this.shipStatusInfo, this.thrusterController)
 		this.manualControls(); //use the data from keyboard control for testing
+		this.boundaries();
 		super.update() //parent update;
 	}
 	manualControls(){
-		if (this.game.inputs.pressed.left) this.aAccel.set(1, -0.01);
-		else if (this.game.inputs.pressed.right) this.aAccel.set(1, 0.01)
+		if (this.game.inputs.pressed.left) this.aAccel.set(1, -0.005);
+		else if (this.game.inputs.pressed.right) this.aAccel.set(1, 0.005)
 		else this.aAccel.set(1, 0);
-		if (this.game.inputs.pressed.up) this.accel = this.accel.add(this.angle.scale(0.005))
-		else if (this.game.inputs.pressed.down) this.accel = this.accel.add(this.angle.scale(-0.005));
+		if (this.game.inputs.pressed.up) this.accel = this.accel.add(this.angle.scale(0.001))
+		else if (this.game.inputs.pressed.down) this.accel = this.accel.add(this.angle.scale(-0.001));
 		else this.accel.set(0,0);
 
 		//react to the controller data
@@ -48,5 +49,21 @@ export default class ColonyShip extends Sprite{
 	}
 	updateShipStatusInfo(){
 		//see past function
-	}	
+	}
+	boundaries(){
+		if (this.pos.y>this.game.height){ //y pos bounds
+			this.pos.y = this.game.height;
+			this.speed.y = 0;
+		} else if (this.pos.y<0) {
+			this.pos.y = 0;
+			this.speed.y = 0;
+		}
+		if (this.pos.x>this.game.width){ // x pos bounds
+			this.pos.x = this.game.width;
+			this.speed.x = 0;
+		} else if (this.pos.x<0) {
+			this.pos.x = 0;
+			this.speed.x = 0;
+		}
+	}
 }

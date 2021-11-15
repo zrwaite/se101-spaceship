@@ -26,20 +26,6 @@ export default class Sprite extends RenderedObject{
 		this.boundsDetect(); //Detect boundaries for position and speed
 	}
 	boundsDetect(){
-		if (this.pos.y>this.game.height){ //y pos bounds
-			this.pos.y = this.game.height;
-			this.speed.y = 0;
-		} else if (this.pos.y<0) {
-			this.pos.y = 0;
-			this.speed.y = 0;
-		}
-		if (this.pos.x>this.game.width){ // x pos bounds
-			this.pos.x = this.game.width;
-			this.speed.x = 0;
-		} else if (this.pos.x<0) {
-			this.pos.x = 0;
-			this.speed.x = 0;
-		}
 		// y speed bounds
 		if (this.speed.y>this.maxSpeed) this.speed.y = this.maxSpeed;
 		// x speed bounds
