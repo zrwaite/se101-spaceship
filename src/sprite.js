@@ -1,4 +1,4 @@
-import Vector2 from "../Sandbox/Scripts/Helpers/Vector2";
+import Vector2 from "../Sandbox/Scripts/Helpers/Vector2.js";
 import RenderedObject from "./renderedObject.js";
 export default class Sprite extends RenderedObject{
 	constructor(...args){
@@ -13,7 +13,7 @@ export default class Sprite extends RenderedObject{
 		this.radius; 
 		this.mass;
 	}
-	update(deltaTime) {
+	update() {
 		//Simple physics
 		this.speed.x += this.accel.x;
 		this.speed.y += this.accel.y;

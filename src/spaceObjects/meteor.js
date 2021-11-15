@@ -10,7 +10,7 @@ export default class Meteor extends Sprite {
 		this.width = 20;
 		this.radius = 20;
 	}
-	update(deltaTime) {
+	update() {
 		//Add special update code here if needed
 		super.update();
 	}

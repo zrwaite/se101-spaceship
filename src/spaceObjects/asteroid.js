@@ -10,7 +10,7 @@ export default class Asteroid extends Sprite {
 		this.width = 50;
 		this.radius = 50;
 	}
-	update(deltaTime) {
+	update() {
 		//Add special update code here if needed
 		super.update();
 	}
