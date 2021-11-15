@@ -3,9 +3,10 @@ import Galaxy from "./galaxy.js";
 import {buildShip} from "./ships/buildShip.js"
 
 export default class Game {
-    constructor(width, height){
+    constructor(width, height, ctxList){
 		this.width = width;
         this.height = height;
+		this.ctxList = ctxList;
         this.inputs; // Controller values
 		this.drawnObjects = []; //stores objects that always need to be drawn and updated
 		this.hiddenObjects = []; //stores objects that need to be update only
@@ -43,8 +44,8 @@ export default class Game {
 		[...this.drawnObjects, ...this.delObjects, this.hiddenObjects].forEach((object) =>object.update(deltaTime));//Updates all objects
 		this.delObjects=this.delObjects.filter(this.deleter) //Removes objects no longer needed
     }
-    draw(ctx){
-        [...this.drawnObjects, ...this.delObjects].forEach(object => object.draw(ctx)); //Draws all drawn objects
+    draw(){
+        [...this.drawnObjects, ...this.delObjects].forEach(object => object.draw()); //Draws all drawn objects
     }
 	deleter(sprite){ //Deletes objects from deletable array that aren't needed
 		if(sprite.delete) return false;

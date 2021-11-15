@@ -5,8 +5,10 @@ class RenderedObject{ //Base class for everything that gets drawn
 		this.image;
 		this.height;
 		this.width;
+		this.angle;
+		this.ctx;
 	}
-	draw(ctx) {
-		ctx.drawImage(this.image, this.pos.x, this.pos.y, this.width, this.height);
+	draw() {
+		this.game.ctxList[this.ctx].drawImage(this.image, this.pos.x, this.pos.y, this.width, this.height);
 	}
 }	
