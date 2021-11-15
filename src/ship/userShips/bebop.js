@@ -7,7 +7,7 @@ import ColonyShip from "../colonyShip.js";
 //Instance of colonyship for bebop group
 const buildBebop = (pos, game) =>{
 	//build bebop with its subsystems and info
-	bebop = new ColonyShip(
+	let bebop = new ColonyShip(
 		BebopDefenceController, 
 		BebopNavigationController, 
 		BebopPropulsionController, 

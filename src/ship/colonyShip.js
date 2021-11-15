@@ -19,7 +19,7 @@ export default class ColonyShip extends Sprite{
 		this.passiveSensors = new PassiveSensors(this);
 		this.activeSensors = new ActiveSensors(this);
 		this.thrusterController = new ThrusterController(this);
-		this.image = document.getElementById("ship"); //Get image for rendering
+		this.image = this.game.images["ship"];
 		this.height = 40;
 		this.width = 40;
 		this.shipStatusInfo;

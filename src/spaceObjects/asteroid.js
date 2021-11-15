@@ -5,15 +5,19 @@ export default class Asteroid extends Sprite {
 	constructor(speed, ...args) {
 		super(...args);
 		this.speed = speed;
-		this.image = document.getElementById("asteroid");
+		console.log(this.game.images);
+		console.log(this.game.images["asteroid"]);
+		this.image = this.game.images["asteroid"];
+		this.ctx = "objects";
 		this.delete = false; //Once an item needs to be deleted and stop rendering, set to true
-		this.height = 50;
-		this.width = 50;
+		this.size.x = 50;
+		this.size.y = 50;
 		this.radius = 50;
 	}
 	update() {
 		//Add special update code here if needed
 		super.update();
+
 	}
 	shatter() {
 		//Create a bunch of meteors, somewhat randomly.
