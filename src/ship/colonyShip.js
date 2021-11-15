@@ -1,14 +1,14 @@
 import Vector2 from "../helpers/Vector2.js";
 import Sprite from "../sprite.js";
-import PassiveSensors from "./passiveSensors";
-import ActiveSensors from "./activeSensors";
+import PassiveSensors from "./passiveSensors.js";
+import ActiveSensors from "./activeSensors.js";
 import TurretControls from "./tordedo.js";
 import ThrusterController from "./thrusterController.js";
 /* Reference other colonyship.js file for reference to make this one
 If you aren't sure about if a function should be copied or not, ask on discord. 
 */
 
-class ColonyShip extends Sprite{
+export default class ColonyShip extends Sprite{
 	constructor(DefenceClass, NavigationClass, PropulsionClass, SensorsClass, ...args){
 		super(...args) //parent constructor
 		this.defenceController = new DefenceClass(this); 
@@ -25,7 +25,7 @@ class ColonyShip extends Sprite{
 		this.shipStatusInfo;
 		this.solarSystem;
 	}
-	update(deltaTime) {
+	update() {
 		//Add special update code here if needed
 		this.defenceController.defenceUpdate(this.shipStatusInfo, this.turretControls, deltaTime);
 		this.sensorsController.sensorsUpdate(this.shipStatusInfo, this.activeSensors, this.passiveSensors, deltaTime)

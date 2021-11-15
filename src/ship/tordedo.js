@@ -10,7 +10,7 @@ export default class Torpedo extends Sprite {
 		this.width = 10;
 		this.radius = 10;
 	}
-	update(deltaTime) {
+	update() {
 		//Add special update code here if needed
 		super.update();
 	}

@@ -1,4 +1,4 @@
-import Vector2 from "../Helpers/Vector2";
+import Vector2 from "../Helpers/Vector2.js";
 
 export default class PassiveSensors{
     constructor(parentShip){

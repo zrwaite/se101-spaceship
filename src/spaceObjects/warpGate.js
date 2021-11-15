@@ -1,4 +1,5 @@
 import Sprite from "../sprite.js";
+import RenderedObject from "../renderedObject.js";
 export default class WarpGate extends RenderedObject {
 	constructor(...args) {
 		super(...args);
@@ -7,7 +8,7 @@ export default class WarpGate extends RenderedObject {
 		this.width = 50;
 		this.destinationSolarSystem;
 	}
-	update(deltaTime) {
+	update() {
 		//Add special update code here if needed
 		super.update();
 	}

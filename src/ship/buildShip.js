@@ -1,7 +1,7 @@
+import buildBebop from "./userShips/bebop.js";
 const buildShip = (shipName, pos, game) => {
 	switch (shipName){
 		case "Bebop": case "bebop":
-			import buildBebop from "./userShips/bebop.js";
 			return buildBebop(pos, game); //build the ship and return it 
 		// fill out cases for all ships
 		case "All": case "all":
@@ -12,4 +12,4 @@ const buildShip = (shipName, pos, game) => {
 			return ships;
 	}
 }	
-export default {buildShip};
+export {buildShip};

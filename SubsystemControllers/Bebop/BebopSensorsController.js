@@ -1,5 +1,5 @@
 //Based on BebopSensorsController.cs
-import Vector2 from "../../Sandbox/Scripts/Helpers/Vector2";
+import Vector2 from "../../Sandbox/Scripts/Helpers/Vector2.js";
 import SubsystemController from "../../src/subsystemController.js";
 export default class BebopSensorsController extends SubsystemController{
 	constructor(...args){

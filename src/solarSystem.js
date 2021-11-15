@@ -1,4 +1,4 @@
-import Vector2 from "../Sandbox/"
+//import Vector2 from "./helpser"
 import Asteroid from "./spaceObjects/asteroid.js";
 import WarpGate from "./spaceObjects/warpGate.js";
 import Planet from "./spaceObjects/planet.js";

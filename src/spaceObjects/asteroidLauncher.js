@@ -1,5 +1,5 @@
 import Asteroid from "./asteroid.js";
-class AsteroidLauncher{
+export default class AsteroidLauncher{
 	constructor(pos, game) {
 		this.game = game;
 		this.pos = pos;
