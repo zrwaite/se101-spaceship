@@ -1,5 +1,5 @@
 //Based on BebopSensorsController.cs
-import Vector2 from "../../Sandbox/Scripts/Helpers/Vector2.js";
+import Vector2 from "../../src/helpers/Vector2.js";
 import SubsystemController from "../../src/subsystemController.js";
 export default class BebopSensorsController extends SubsystemController{
 	constructor(...args){
@@ -13,7 +13,7 @@ export default class BebopSensorsController extends SubsystemController{
 	  this.propulsion
 	  see SandBox/Scripts/Ship/README.md for an explanation of return values. (maybe, haven't added it yet)
 	*/
-	sensorsUpdate(shipStatusInfo, activeSensors, passiveSensors, deltaTime){
+	sensorsUpdate(shipStatusInfo, activeSensors, passiveSensors){
 		//Student code goes here
 	}
 }

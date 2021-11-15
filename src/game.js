@@ -1,9 +1,9 @@
+import Vector2 from "./helpers/Vector2.js";
 import Controller from "./controller.js";
 import Galaxy from "./galaxy.js";
 import {buildShip} from "./ship/buildShip.js"
-
 export default class Game {
-    constructor(width, height, images, contexts){
+    constructor(width, height, images, contexts) {
 		this.width = width;
         this.height = height;
         this.images = images;
@@ -30,14 +30,13 @@ export default class Game {
 		this.numShips = numShips;
 		this.watchShipName = watchShipName;
         this.inputs = new Controller(this); //controller created
-		this.galaxy = new Galaxy(galaxyName); //Create galaxy
-		this.solarSystem = this.galaxy.startingSolarSystem; //Starting solatsystem from galaxy
-		this.newSolarSystem(this.solarSystem, numShips); //another version of start function basically
-		this.delObjects.forEach((object) => object = null); //Clears deletable objects
-		this.objects.forEach((object) => object = null)
+		this.galaxy = new Galaxy(galaxyName, this); //Create galaxy
+		this.solarSystem = this.galaxy.startingSolarSystem; //Starting solar system from galaxy
+		this.newSolarSystem(this.solarSystem, numShips); //Another version of start function basically
+		this.delObjects.forEach((object) => object = null); //Clears delete-able objects
     }
 	newSolarSystem(solarSystemName, numShips){
-		let startPosition = new Vector2(0,0); //start at centre for now
+		let startPosition = new Vector2(30,30); //start at centre for now
 		if (numShips > 1){
 			this.ships.push(...buildShip("all", startPosition, this)); //Build all ships for now
 			//get watchship by name in this.ships list
@@ -47,8 +46,8 @@ export default class Game {
 		}
 		this.solarSystem = this.galaxy.getSolarSystem(solarSystemName); 
 		this.delObjects = [...this.solarSystem.asteroids] //Asteroids get deleted
-		this.drawnObjects = [...this.solarSystem.warpGates, ...this.solarSystem.planets] //Warpgates and planets get drawn
-		this.hiddenObjects = [...this.asteroidLaunchers]; //Launchers are hidden
+		this.drawnObjects = [...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.ships] //Warpgates and planets get drawn
+		this.hiddenObjects = [...this.solarSystem.asteroidLaunchers]; //Launchers are hidden
 	}
     update () {
         let g = this;
@@ -56,17 +55,9 @@ export default class Game {
 
         this.frame++;
 
-        ["missiles", "objects", "thrusters", "ships", "items"].forEach((object) => {g.contexts[object].clearRect(0, 0, g.contexts[object].canvas.width, g.contexts[object].canvas.height);});
-
-        /*testShip.simplePhysicsUpdate();
-        testShip2.simplePhysicsUpdate();
-        testShip3.simplePhysicsUpdate();
-        drawOnScreen(testShip);
-        drawOnScreen(testShip2);
-        drawOnScreen(testShip3);*/
-
-		[...this.drawnObjects, ...this.delObjects, ...this.hiddenObjects].forEach((object) => object.update());//Updates all objects
-		
+        ["missiles", "objects", "thrusters", "ships", "items"].forEach((object) => {g.contexts[object].clearRect(0, 0, g.width * g.unit, g.height * g.unit);});
+		[...this.drawnObjects, ...this.delObjects, ...this.hiddenObjects].forEach((object) => object.update()); //Updates all objects
+		["missiles", "objects", "thrusters", "ships", "items"].forEach((object) => {g.contexts[object].setTransform(1, 0, 0, 1, 0, 0);});
 
 
     }

@@ -1,5 +1,5 @@
 //Based on BebopNavigationController.cs
-import Vector2 from "../../Sandbox/Scripts/Helpers/Vector2.js";
+import Vector2 from "../../src/helpers/Vector2.js";
 import SubsystemController from "../../src/subsystemController.js";
 export default class BebopNavigationController extends SubsystemController{
 	constructor(...args){
@@ -11,7 +11,7 @@ export default class BebopNavigationController extends SubsystemController{
 	  this.sensors
 	  see SandBox/Scripts/Ship/README.md for an explanation of return values.
 	*/
-	navigationController(shipStatusInfo, mapData, deltaTime){
+	navigationController(shipStatusInfo, mapData){
 		//Student code goes here
 	}
 }

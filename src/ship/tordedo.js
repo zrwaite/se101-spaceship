@@ -1,4 +1,6 @@
 import Sprite from "../sprite.js";
+import Vector2 from "../helpers/Vector2.js";
+
 export default class Torpedo extends Sprite {
 	//Mini asteroid from asteroid explosion
 	constructor(speed, ...args) {
