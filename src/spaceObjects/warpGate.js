@@ -5,7 +5,7 @@ import RenderedObject from "../renderedObject.js";
 export default class WarpGate extends RenderedObject {
 	constructor(...args) {
 		super(...args);
-		this.image = this.game.images[""];
+		//this.image = this.game.images[""];
 		this.height = 50;
 		this.width = 50;
 		this.destinationSolarSystem;

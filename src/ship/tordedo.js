@@ -6,7 +6,7 @@ export default class Torpedo extends Sprite {
 	constructor(speed, ...args) {
 		super(...args);
 		this.speed = speed;
-		this.image = this.game.images[""];
+		//this.image = this.game.images[""];
 		this.delete = false; //Once an item needs to be deleted and stop rendering, set to true
 		this.height = 20;
 		this.width = 10;
