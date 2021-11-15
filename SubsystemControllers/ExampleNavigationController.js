@@ -10,7 +10,7 @@ export default class ExampleNavigationController extends SubsystemController{
 	  getPropulsionController()
 	  see SandBox/Scripts/Ship/README.md for an explanation of return values.
 	*/
-	NavigationController(shipStatusInfo, galaxyMapData, deltaTime){
+	NavigationController(shipStatusInfo, galaxyMapData){
 		//Student code goes here
 	}
 }

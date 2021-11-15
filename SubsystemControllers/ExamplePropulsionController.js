@@ -10,7 +10,7 @@ export default class ExamplePropulsionController extends SubsystemController{
 	  getDefenceController()
 	  see SandBox/Scripts/Ship/README.md for an explanation of return values.
 	*/
-	PropulsionUpdate(shipStatusInfo, thrusters, deltaTime){
+	PropulsionUpdate(shipStatusInfo, thrusters){
 		//Student code goes here
 	}
 }

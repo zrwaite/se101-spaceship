@@ -10,7 +10,7 @@ export default class ExampleSensorsController extends SubsystemController{
 	  getPropulsionController()
 	  see SandBox/Scripts/Ship/README.md for an explanation of return values. (maybe, haven't added it yet)
 	*/
-	SensorsUpdate(shipStatusInfo, activeSensors, passiveSensors, deltaTime){
+	SensorsUpdate(shipStatusInfo, activeSensors, passiveSensors){
 		//Student code goes here
 	}
 }

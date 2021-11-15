@@ -13,7 +13,7 @@ export default class BebopSensorsController extends SubsystemController{
 	  this.propulsion
 	  see SandBox/Scripts/Ship/README.md for an explanation of return values. (maybe, haven't added it yet)
 	*/
-	sensorsUpdate(shipStatusInfo, activeSensors, passiveSensors, deltaTime){
+	sensorsUpdate(shipStatusInfo, activeSensors, passiveSensors){
 		//Student code goes here
 	}
 }

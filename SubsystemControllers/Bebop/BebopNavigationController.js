@@ -11,7 +11,7 @@ export default class BebopNavigationController extends SubsystemController{
 	  this.sensors
 	  see SandBox/Scripts/Ship/README.md for an explanation of return values.
 	*/
-	navigationController(shipStatusInfo, mapData, deltaTime){
+	navigationController(shipStatusInfo, mapData){
 		//Student code goes here
 	}
 }

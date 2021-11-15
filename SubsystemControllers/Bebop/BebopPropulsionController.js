@@ -5,8 +5,7 @@ export default class BebopPropulsionController extends SubsystemController{
 	constructor(...args){
     	super(...args);
   	}
-	propulsionUpdate(shipStatusInfo, thrusters, deltaTime){
+	propulsionUpdate(shipStatusInfo, thrusters){
 		//Student code goes here
-		let positionDifference = this.sensors.desiredPosition.subtract(this.pos);
 	}
 }
