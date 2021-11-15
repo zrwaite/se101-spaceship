@@ -1,5 +1,5 @@
-import Sprite from "../sprite.js";
 import RenderedObject from "../renderedObject.js";
+import Vector2 from "../helpers/Vector2.js";
 
 export default class Planet extends RenderedObject {
 	constructor(...args) {

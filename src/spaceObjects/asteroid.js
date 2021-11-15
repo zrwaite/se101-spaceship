@@ -1,5 +1,6 @@
 import Sprite from "../sprite.js";
 import Meteor from "./meteor.js";
+import Vector2 from "../helpers/Vector2.js";
 export default class Asteroid extends Sprite {
 	constructor(speed, ...args) {
 		super(...args);

@@ -1,4 +1,5 @@
 import SolarSystem from "./solarSystem.js";
+import Vector2 from "./helpers/Vector2.js";
 
 //Parent class for galaxies, use data from galaxy jsons and GalaxyMaps scripts
 //The constructor is going to build the galaxies
