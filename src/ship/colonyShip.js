@@ -20,17 +20,17 @@ export default class ColonyShip extends Sprite{
 		this.activeSensors = new ActiveSensors(this);
 		this.thrusterController = new ThrusterController(this);
 		this.image = this.game.images["ship"];
-		this.height = 40;
-		this.width = 40;
+		this.size = new Vector2(40, 40);
 		this.shipStatusInfo;
 		this.solarSystem;
+		this.ctx = "ships";
 	}
 	update() {
 		//Add special update code here if needed
-		this.defenceController.defenceUpdate(this.shipStatusInfo, this.turretControls, deltaTime);
-		this.sensorsController.sensorsUpdate(this.shipStatusInfo, this.activeSensors, this.passiveSensors, deltaTime)
-		this.navigationController.navigationController(this.shipStatusInfo, this.solarSystem.getMapData(this.pos), deltaTime)
-		this.propulsionController.propulsionUpdate(this.shipStatusInfo, this.thrusterController, deltaTime)
+		this.defenceController.defenceUpdate(this.shipStatusInfo, this.turretControls);
+		this.sensorsController.sensorsUpdate(this.shipStatusInfo, this.activeSensors, this.passiveSensors)
+		this.navigationController.navigationController(this.shipStatusInfo, this.game.solarSystem.getMapData(this.pos))
+		this.propulsionController.propulsionUpdate(this.shipStatusInfo, this.thrusterController)
 		this.manualControls(); //use the data from keyboard control for testing
 		super.update() //parent update;
 	}

@@ -10,8 +10,7 @@ export default class Asteroid extends Sprite {
 		this.image = this.game.images["asteroid"];
 		this.ctx = "objects";
 		this.delete = false; //Once an item needs to be deleted and stop rendering, set to true
-		this.size.x = 50;
-		this.size.y = 50;
+		this.size = new Vector2(40, 40);
 		this.radius = 50;
 	}
 	update() {
