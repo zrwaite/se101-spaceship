@@ -5,12 +5,10 @@ export default class Asteroid extends Sprite {
 	constructor(speed, ...args) {
 		super(...args);
 		this.speed = speed;
-		console.log(this.game.images);
-		console.log(this.game.images["asteroid"]);
 		this.image = this.game.images["asteroid"];
 		this.ctx = "objects";
 		this.delete = false; //Once an item needs to be deleted and stop rendering, set to true
-		this.size = new Vector2(40, 40);
+		this.size = new Vector2(10, 10);
 		this.radius = 50;
 	}
 	update() {

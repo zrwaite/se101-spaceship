@@ -55,8 +55,10 @@ export default class Game {
 
         this.frame++;
 
-        ["missiles", "objects", "thrusters", "ships", "items"].forEach((object) => {g.contexts[object].clearRect(0, 0, g.contexts[object].canvas.width, g.contexts[object].canvas.height);});
+        ["missiles", "objects", "thrusters", "ships", "items"].forEach((object) => {g.contexts[object].clearRect(0, 0, g.width * g.unit, g.height * g.unit);});
 		[...this.drawnObjects, ...this.delObjects, ...this.hiddenObjects].forEach((object) => object.update()); //Updates all objects
+		["missiles", "objects", "thrusters", "ships", "items"].forEach((object) => {g.contexts[object].setTransform(1, 0, 0, 1, 0, 0);});
+
 
     }
     draw(){

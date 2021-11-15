@@ -8,8 +8,9 @@ export default class Sprite extends RenderedObject{
 		this.accel = new Vector2(0, 0); //linear acceleration
 		this.maxSpeed = 100; //Max linear speed
 		// this.angle = 0; --> Already, from RenderedObject
-		this.aSpeed = 0; //angle speed
-		this.aAccel = 0; //angle acceleration
+		this.aSpeed = new Vector2(1, 0); //angle speed
+		this.aAccel = new Vector2(1, 0); //angle acceleration
+		console.log(this.aAccel.angle());
 		this.maxASpeed = 20; //Max anglular speed
 		this.radius; 
 		this.mass;
@@ -17,11 +18,11 @@ export default class Sprite extends RenderedObject{
 	update() {
 		// All Simple Physics
 		// Add accelerations to speeds:
-		this.speed.add(this.accel);
-		this.aSpeed += this.aAccel;
+		this.speed = this.speed.add(this.accel);
+		this.aSpeed = this.aSpeed.rotate(this.aAccel.angle());
 		// Add speeds to positions
-		this.pos.add(this.speed);
-		this.aPos += this.aSpeed;
+		this.pos = this.pos.add(this.speed);
+		this.angle = this.angle.rotate(this.aSpeed.angle());
 		this.boundsDetect(); //Detect boundaries for position and speed
 	}
 	boundsDetect(){

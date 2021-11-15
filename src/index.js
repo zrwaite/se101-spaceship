@@ -1,19 +1,19 @@
 import Game from "./game.js";
 
-let game; // YEET
+let game; // Initialized properly in initializeGame().
 
-const gameSize = {
-	x: 100,
-	y: 60,
+const windowSize = { // that is, game.width and game.height...
+	x: 64,
+	y: 48,
     border: 1
 }
-const unit = ((window.innerWidth - gameSize.border * 2) / (window.innerHeight - gameSize.border * 2) > gameSize.x / gameSize.y) ? Math.floor(window.innerHeight / (4 * gameSize.y)) * 4 : Math.floor(window.innerWidth / (4 * gameSize.x)) * 4;
+const unit = ((window.innerWidth - windowSize.border * 2) / (window.innerHeight - windowSize.border * 2) > windowSize.x / windowSize.y) ? Math.floor(window.innerHeight / (4 * windowSize.y)) * 4 : Math.floor(window.innerWidth / (4 * windowSize.x)) * 4;
 
 // Initialize the CSS variables so that the css can do dynamic calculations for displays.
 document.body.style.setProperty("--unit", unit + "px");
-document.body.style.setProperty("--border", gameSize.border + "px");
-document.body.style.setProperty("--width", gameSize.x * unit + "px");
-document.body.style.setProperty("--height", gameSize.y * unit + "px");
+document.body.style.setProperty("--border", windowSize.border + "px");
+document.body.style.setProperty("--width", windowSize.x * unit + "px");
+document.body.style.setProperty("--height", windowSize.y * unit + "px");
 
 let spritePath = "Sandbox/Sprites/";
 let imagesLoaded = 0; // Updates as the images load, until all are loaded.
@@ -35,9 +35,9 @@ function initializeContexts(contextNames) {
     for (let i = 0; i < contextNames.length; i++) {
         let canvas = document.createElement("CANVAS");
         canvas.id = contextNames[i];
-        console.log(unit + ", " + gameSize.x);
-        canvas.width = unit * gameSize.x;
-        canvas.height = unit * gameSize.y;
+        console.log(unit + ", " + windowSize.x);
+        canvas.width = unit * windowSize.x;
+        canvas.height = unit * windowSize.y;
         document.body.querySelector(".canvasHolder").appendChild(canvas);
         let ctx = canvas.getContext('2d');
         ctx.imageSmoothingEnabled = false;
@@ -58,8 +58,8 @@ function iterateLoad(length) {
 }
 
 function initializeGame() {
-    contexts["background"].drawImage(images["background"], 0, 0, gameSize.x * unit, gameSize.y * unit);
-    game = new Game(gameSize.x, gameSize.y, images, contexts);
+    contexts["background"].drawImage(images["background"], 0, 0, windowSize.x * unit, windowSize.y * unit);
+    game = new Game(windowSize.x, windowSize.y, images, contexts);
     game.unit = unit;
     game.start("test", 1, "bebop");
     startAnimating();
