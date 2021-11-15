@@ -21,9 +21,11 @@ export default class SolarSystem{
 				asteroid1.aSpeed.set(1, 0.1);
 				let asteroid2 = new Asteroid(new Vector2(-0.3, -0.3), new Vector2(40, 40), this.game);
 				asteroid2.aSpeed.set(1, -0.2);
-				this.asteroids.push(asteroid1, asteroid2);
+				let planet1 = new Planet("planet1", new Vector2(50, 10), this.game);
+				let planet2 = new Planet("planet2", new Vector2(10, 50), this.game);
 				
-
+				this.asteroids.push(asteroid1, asteroid2);
+				this.planets.push(planet1, planet2);
 				break;
 			case "Alpha Centauri":
 				// asteroid1 = new Asteroid(new Vector2(1,2));
