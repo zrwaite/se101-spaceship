@@ -23,8 +23,9 @@ export default class SolarSystem{
 		this.warpGates = [];
 		this.planets = [];
 		this.asteroidLaunchers = [];
-		this.solarSystemData = {asteroids: [], warpgates: [], planets: []};
+		this.solarSystemData = {asteroids: [], asteroidLaunchers: [], warpgates: [], planets: []};
 	
+		// Set the solar system data according to respective JSON file
 		switch(this.name){
 			case "test":
 				let asteroid1 = new Asteroid(new Vector2(0.2, 0.2), new Vector2(10, 10), this.game);
@@ -68,6 +69,16 @@ export default class SolarSystem{
 		// Add planets to solar system (containing name, scan signature, gravity signature, etc)
 		for (const planet of this.solarSystemData.planets) {
 			this.planets.push(new Planet(planet.name, planet.scanSignature, planet.gravitySignature, new Vector2(planet.position.x, planet.position.y), this.game));
+		}
+
+		// Add asteroid launchers (containing position)
+		for (const asteroidLaunchers of this.solarSystemData.asteroidLaunchers) {
+			this.asteroidLaunchers.push(new AsteroidLauncher(asteroidLaunchers.position, this.game));
+		}
+
+		// Add warpgates (containing destination solar system name, position)
+		for (const warpgate of this.solarSystemData.warpgates) {
+			this.warpGates.push(new WarpGate(warpgate.to, warpgate.position, this.game));
 		}
 	}
 	addWarpGate(){

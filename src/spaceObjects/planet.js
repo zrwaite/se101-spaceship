@@ -6,6 +6,7 @@ export default class Planet extends RenderedObject {
 		super(...args);
 		this.ctx = "background";
 		this.image = this.game.images[planetName];
+		this.name = planetName;
 		this.composition = composition;
 		this.gravitySignature = gravitySignature;
 		this.size = new Vector2(35, 35);
