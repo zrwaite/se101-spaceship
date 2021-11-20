@@ -10,7 +10,7 @@ export default class Sprite extends RenderedObject{
 		// this.angle = 0; --> Already, from RenderedObject
 		this.aSpeed = new Vector2(1, 0); //angle speed
 		this.aAccel = new Vector2(1, 0); //angle acceleration
-		console.log(this.aAccel.angle());
+		//console.log(this.aAccel.angle());
 		this.maxASpeed = 20; //Max anglular speed
 		this.radius; 
 		this.mass;
