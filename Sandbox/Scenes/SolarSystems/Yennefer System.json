@@ -38,5 +38,15 @@
         {
             "name":"SpaceObjects"
         }
+    ],
+    "asteroids": [],
+    "asteroidLaunchers": [],
+    "planets": [],
+    "warpgates": [
+        {
+            "name":"Warpgate to Quaid System",
+            "position":{"x":575,"y":-116},
+            "to":"Quaid System"
+        }
     ]
 }

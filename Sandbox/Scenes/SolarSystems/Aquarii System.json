@@ -108,5 +108,63 @@
         "link":4,
         "position":{"x":352,"y":283}
     }
+   ],
+   "asteroids": [
+    {
+        "name":"Asteroid",
+        "position":{"x":-369,"y":-227}
+    },
+    {
+        "name":"Asteroid2",
+        "position":{"x":-351,"y":-123}
+    },
+    {
+        "name":"Asteroid3",
+        "position":{"x":-390,"y":-15}
+    },
+    {
+        "name":"Asteroid4",
+        "position":{"x":-472,"y":76}
+    },
+    {
+        "name":"Asteroid5",
+        "position":{"x":-585,"y":130}
+    },
+    {
+        "name":"Asteroid6",
+        "position":{"x":646,"y":-67}
+    },
+    {
+        "name":"Asteroid7",
+        "position":{"x":531,"y":-32}
+    },
+    {
+        "name":"Asteroid8",
+        "position":{"x":441,"y":-43}
+    },
+    {
+        "name":"Asteroid9",
+        "position":{"x":378,"y":153}
+    },
+    {
+        "name":"Asteroid10",
+        "position":{"x":352,"y":283}
+    }
+   ],
+   "asteroidLaunchers": [],
+   "planets": [
+
+   ],
+   "warpgates": [
+    {
+        "name":"Warpgate to Groombridge System",
+        "position":{"x":-639,"y":-91},
+        "to":"Groombridge System"
+    },
+    {
+        "name":"Warpgate to Wolf 359 System",
+        "position":{"x":576,"y":199},
+        "to":"Wolf 359 System"
+    }
    ]
 }

@@ -101,5 +101,61 @@
             "launchSpeedMin":400.0,
             "launchSpeedMax":500.0
         }
+    ],
+    "asteroids": [
+        {
+            "name":"Asteroid",
+            "position":{"x":576,"y":235}
+        },
+        {
+            "name":"Asteroid2",
+            "position":{"x":484,"y":109}
+        },
+        {
+            "name":"Asteroid3",
+            "position":{"x":387,"y":-21}
+        },
+        {
+            "name":"Asteroid4",
+            "position":{"x":248,"y":-151}
+        },
+        {
+            "name":"Asteroid5",
+            "position":{"x":118,"y":-231}
+        }
+    ],
+    "asteroidLaunchers": [
+        {
+            "name":"AsteroidSpawnLauncher",
+            "position":{"x":997,"y":1152},
+            "rotation":-2.35259,
+            "maxSpawnCount":10,
+            "spawnPeriod":4.0,
+            "launchSpeedMin":400.0,
+            "launchSpeedMax":500.0
+        },
+        {
+            "name":"AsteroidSpawnLauncher2",
+            "position":{"x":-198,"y":-1068},
+            "rotation":0.844737,
+            "maxSpawnCount":12,
+            "launchSpeedMin":400.0,
+            "launchSpeedMax":500.0
+        }
+    ],
+    "planets": [
+
+    ],
+    "warpgates": [
+        {
+            "name":"Warpgate to Quaid System",
+            "position":{"x":-266,"y":377},
+            "to":"Quaid System"
+        },
+        {
+            "name":"Warpgate to Luyten System",
+            "position":{"x":870,"y":-246},
+            "to":"Luyten System"
+        }
     ]
 }

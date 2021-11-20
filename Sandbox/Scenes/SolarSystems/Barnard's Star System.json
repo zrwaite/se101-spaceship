@@ -133,5 +133,76 @@
         "link":3,
         "position":{"x":-155,"y":-284}
     }
+   ],
+   "asteroids": [
+    {
+        "name":"Asteroid",
+        "position":{"x":-321,"y":172}
+    },
+    {
+        "name":"Asteroid2",
+        "position":{"x":-309,"y":-256}
+    },
+    {
+        "name":"Asteroid3",
+        "position":{"x":644,"y":-109}
+    },
+    {
+        "name":"Asteroid4",
+        "position":{"x":574,"y":228}
+    },
+    {
+        "name":"Asteroid5",
+        "position":{"x":-39,"y":415}
+    },
+    {
+        "name":"Asteroid6",
+        "position":{"x":-103,"y":277}
+    },
+    {
+        "name":"Asteroid7",
+        "position":{"x":324,"y":191}
+    },
+    {
+        "name":"Asteroid8",
+        "position":{"x":412,"y":-38}
+    },
+    {
+        "name":"Asteroid9",
+        "position":{"x":-155,"y":-284}
+    }
+   ],
+   "asteroidLaunchers": [
+       
+   ],
+   "planets": [
+
+   ],
+   "warpgates": [
+    {
+        "name":"Warpgate to Alpha Centauri System",
+        "position":{"x":-418,"y":-320},
+        "to":"Alpha Centauri System"
+    },
+    {
+        "name":"Warpgate to Sol System",
+        "position":{"x":-66,"y":547},
+        "to":"Sol System"
+    },
+    {
+        "name":"Warpgate to Sirius System",
+        "position":{"x":763,"y":-142},
+        "to":"Sirius System"
+    },
+    {
+        "name":"Warpgate to Wolf 359 System",
+        "position":{"x":693,"y":256},
+        "to":"Wolf 359 System"
+    },
+    {
+        "name":"Warpgate to Indi System",
+        "position":{"x":-440,"y":246},
+        "to":"Indi System"
+    }
    ]
 }

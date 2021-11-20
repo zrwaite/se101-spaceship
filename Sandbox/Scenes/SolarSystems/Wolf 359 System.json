@@ -99,5 +99,54 @@
                "link":4,
                "position":{"x":-45,"y":202}
         }
+    ],
+    "asteroids": [
+      {     "name":"Asteroid",
+            "position":{"x":-479,"y":-7}
+      },
+      {      "name":"Asteroid2",
+             "position":{"x":-334,"y":318}
+                  
+      },
+      {      "name":"Asteroid3",
+             "position":{"x":320,"y":361}
+      },
+      {      "name":"Asteroid4",
+             "position":{"x":454,"y":-70}
+      },
+      {      "name":"Asteroid5",
+             "position":{"x":0,"y":-298}
+      },
+      {      "name":"Asteroid6",
+             "position":{"x":223,"y":84}
+      },
+      {      "name":"Asteroid",
+             "position":{"x":-45,"y":202}
+      }
+    ],
+    "asteroidLaunchers": [],
+    "planets": [],
+    "warpgates": [
+        {   "name":"Warpgate to Aquarii System",
+            "position":{"x":-498,"y":-345},
+            "to":"Aquarii System"
+        },
+        {
+            "name":"WarpGate to Groombridge System",
+            "position":{"x":800,"y":-266},
+            "to":"Groombridge System"
+        },
+        {    "name":"Warpgate to Kepler 438 System",
+             "position":{"x":-718,"y":359},    
+             "to":"Kepler 438 System"
+        },
+        {    "name":"Warpgate to Alpha Centauri System",
+             "position":{"x":145,"y":573},
+             "to":"Alpha Centauri System"
+        },
+        {    "name":"warpgate to Barnard's Star System",
+             "position":{"x":759,"y":218},
+             "to":"Barnard's Star System"
+        }
     ]
 }

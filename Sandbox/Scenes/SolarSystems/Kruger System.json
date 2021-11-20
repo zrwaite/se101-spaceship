@@ -95,5 +95,52 @@
             "link":4,
             "position":{"x":-293,"y":265}
         }
+    ],
+    "asteroids": [
+        {
+            "name":"Asteroid",
+            "position":{"x":-503,"y":-107}
+        },
+        {
+            "name":"Asteroid2",
+            "position":{"x":-392,"y":-195}
+        },
+        {
+            "name":"Asteroid3",
+            "position":{"x":-320,"y":-380}
+        },
+        {
+            "name":"Asteroid4",
+            "position":{"x":-501,"y":-429}
+        },
+        {
+            "name":"Asteroid5",
+            "position":{"x":-656,"y":-364}
+        },
+        {
+            "name":"Asteroid6",
+            "position":{"x":-636,"y":-204}
+        },
+        {
+            "name":"Asteroid7",
+            "position":{"x":47,"y":-200}
+        },
+        {
+            "name":"Asteroid8",
+            "position":{"x":200,"y":188}
+        },
+        {
+            "name":"Asteroid9",
+            "position":{"x":-293,"y":265}
+        }
+    ],
+    "asteroidLaunchers": [],
+    "planets": [],
+    "warpgates": [
+        {
+            "name":"Warpgate to Alpha Centauri System",
+            "position":{"x":-505,"y":-286},
+            "to":"Alpha Centauri System"
+        }
     ]
 }

@@ -139,6 +139,24 @@
         "position":{"x":584,"y":-56}
     },
     {
+        "name":"Asteroid12",
+        "type":"SpaceObjects",
+        "link":4,
+        "position":{"x":819,"y":-259}
+    },
+    {
+        "name":"Asteroid13",
+        "type":"SpaceObjects",
+        "link":4,
+        "position":{"x":579,"y":122}
+    },
+    {
+        "name":"Asteroid14",
+        "type":"SpaceObjects",
+        "link":4,
+        "position":{"x":692,"y":162}
+    },
+    {
         "name":"Asteroid15",
         "type":"SpaceObjects",
         "link":4,
@@ -229,24 +247,6 @@
         "position":{"x":1017,"y":309}
     },
     {
-        "name":"Asteroid12",
-        "type":"SpaceObjects",
-        "link":4,
-        "position":{"x":819,"y":-259}
-    },
-    {
-        "name":"Asteroid13",
-        "type":"SpaceObjects",
-        "link":4,
-        "position":{"x":579,"y":122}
-    },
-    {
-        "name":"Asteroid14",
-        "type":"SpaceObjects",
-        "link":4,
-        "position":{"x":692,"y":162}
-    },
-    {
         "name":"AsteroidSpawnLauncher",
         "link":5,
         "position":{"x":-704,"y":-725},
@@ -262,5 +262,166 @@
         "position":{"x":-243,"y":529},
         "rotation":-1.06762
     }
-   ]
+   ],
+    "asteroids": [
+        {
+            "name":"Asteroid",
+            "position":{"x":890,"y":-39}
+        },
+        {   
+            "name":"Asteroid2",
+            "position":{"x":811,"y":36}
+        },
+        {
+            "name":"Asteroid3",
+            "position":{"x":786,"y":-65}
+        },
+        {
+            "name":"Asteroid4",
+            "position":{"x":698,"y":18}
+        },
+        {
+            "name":"Asteroid5",
+            "position":{"x":803,"y":154}
+        },
+        {   
+            "name":"Asteroid6",
+            "position":{"x":927,"y":83}
+        },
+        {
+            "name":"Asteroid7",
+            "position":{"x":1011,"y":-5}
+        },
+        {
+            "name":"Asteroid8",
+            "position":{"x":887,"y":-156}
+        },
+        {
+            
+            "name":"Asteroid9",
+            "position":{"x":1011,"y":-128}
+        },
+        {
+            "name":"Asteroid10",
+            "position":{"x":728,"y":-154}
+        },
+        {   
+            "name":"Asteroid11",
+            "position":{"x":584,"y":-56}
+        },
+        {
+            "name":"Asteroid12",
+            "position":{"x":819,"y":-259}
+        },
+        {
+            "name":"Asteroid13",
+            "position":{"x":579,"y":122}
+        },
+        {
+            "name":"Asteroid14",
+            "position":{"x":692,"y":162}
+        },
+        {
+            "name":"Asteroid15",
+            "position":{"x":472,"y":27}
+        },
+        {
+            "name":"Asteroid16",
+            "position":{"x":519,"y":-202}    
+        },
+        {
+            "name":"Asteroid17",
+            "position":{"x":322,"y":-314}
+        },
+        {
+            "name":"Asteroid18",
+            "position":{"x":240,"y":-135}
+        },
+        {
+            "name":"Asteroid19",
+            "position":{"x":254,"y":117}
+        },
+        {
+            "name":"Asteroid20",
+            "position":{"x":478,"y":265}
+        },
+        {
+            "name":"Asteroid21",
+            "position":{"x":681,"y":350}
+        },
+        {
+            "name":"Asteroid22",
+            "position":{"x":245,"y":304}
+        },
+        {
+            "name":"Asteroid23",
+            "position":{"x":100,"y":176}
+        },
+        {
+            "name":"Asteroid24",
+            "position":{"x":262,"y":-13}
+        },
+        {
+            "name":"Asteroid25",
+            "position":{"x":432,"y":-91}
+        },
+        {
+            "name":"Asteroid26",
+            "position":{"x":445,"y":147}
+        },
+        {
+            "name":"Asteroid27",
+            "position":{"x":622,"y":-267}            
+        },
+        {
+            "name":"Asteroid28",
+            "position":{"x":989,"y":-351}
+        },
+        {
+            "name":"Asteroid29",
+            "position":{"x":1017,"y":309}
+        }
+    ],
+    "asteroidLaunchers": [
+        {
+            "name":"AsteroidSpawnLauncher",
+            "position":{"x":-704,"y":-725},
+            "rotation":1.02696,
+            "maxSpawnCount":12,
+            "spawnPeriod":6.0,
+            "launchSpeedMin":300.0,
+            "launchSpeedMax":500.0
+        },
+        {
+            "name":"AsteroidSpawnLauncher2",
+            "position":{"x":-243,"y":529},
+            "rotation":-1.06762
+        }
+    ],
+    "planets": [],
+    "warpgates": [
+        {
+            "name":"Warpgate to Yennefer System",
+            "position":{"x":640,"y":-147},
+            "to":"Yennefer System"
+        },
+        {   
+            "name":"warpgate to Indi System",
+            "position":{"x":285,"y":440},
+            "to":"Indi System"
+        },
+        {
+            "name":"Warpgate to Kepler 438 System",
+            "position":{"x":905,"y":-33},
+            "to":"Kepler 438 System"
+        },
+        {   "name":"Warpgate to Cygni System",
+            "position":{"x":-316,"y":115},
+            "to":"Cygni System"
+        },
+        {   "name":"Warpgate to Groombridge System",
+            "position":{"x":7,"y":-244},
+            "to":"Groombridge System"
+        }
+    ]
 }

@@ -544,6 +544,7 @@
             "position":{"x":298,"y":37}
         }
     ],
+    "asteroidLauncher": [],
     "planets": [
         {
             "name":"Planet Kepler 438",

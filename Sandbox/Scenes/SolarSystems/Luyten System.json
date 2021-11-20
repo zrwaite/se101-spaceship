@@ -121,5 +121,69 @@
             "rotation":1.00155,
             "maSpawnCount":20
         }
+    ],
+    "asteroids": [
+        {
+            "name":"Asteroid",
+            "position":{"x":-308,"y":66}
+        },
+        {
+            "name":"Asteroid2",
+            "position":{"x":-138,"y":300}
+        },
+        {
+            "name":"Asteroid3",
+            "position":{"x":-341,"y":497}
+        },
+        {
+            "name":"Asteroid4",
+            "position":{"x":275,"y":76}
+        },
+        {
+            "name":"Asteroid5",
+            "position":{"x":185,"y":-185}
+        },
+        {
+            "name":"Asteroid6",
+            "position":{"x":-94,"y":-175}
+         },
+        {
+            "name":"Asteroid7",
+            "position":{"x":-121,"y":-434}
+        },
+        {
+            "name":"Asteroid8",
+            "position":{"x":247,"y":209}
+        },
+        {
+            "name":"Asteroid9",
+            "position":{"x":543,"y":-191}
+        }
+    ],
+    "asteroidLaunchers": [
+        {
+            "name":"AsteroidSpawnLauncher",
+            "position":{"x":-532,"y":-499},
+            "rotation":1.00155,
+            "maSpawnCount":20
+        }
+    ],
+    "planets": [],
+    "warpgates": [
+        {
+            "name":"Warpgate to Cygni System",
+            "position":{"x":3,"y":-329},
+            "to":"Cygni System"
+        },
+        {
+            "name":"Warpgate to Sirius System",
+            "position":{"x":-396,"y":303},
+            "to":"Sirius System"
+        },
+        {
+            "name":"Warpgate to Indi System",
+            "position":{"x":401,"y":329},
+            "to":"Indi System"
+        }
     ]
 }
