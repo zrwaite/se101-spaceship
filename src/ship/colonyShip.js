@@ -20,11 +20,10 @@ export default class ColonyShip extends Sprite{
 		this.activeSensors = new ActiveSensors(this);
 		this.thrusterController = new ThrusterController(this);
 		this.image = this.game.images["ship"];
-		this.size = new Vector2(9, 6);
+		this.size = new Vector2(3, 2);
 		this.shipStatusInfo;
 		this.solarSystem;
 		this.ctx = "ships";
-		console.log(this.aAccel)
 	}
 	update() {
 		//Add special update code here if needed

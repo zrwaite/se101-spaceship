@@ -20,8 +20,10 @@ export default class Game {
 		this.watchShipName;
 
         // Animation Elements (UI uses these too)
-        this.view = 0;
-        this.frame = 0; // Increments
+        this.initializing = 1; // goes to 0 once everything has been drawn once
+        this.zoom = 1; // zoomed-out --> 1; zoomed-in --> 3;
+
+        this.frame = 0; // this increments every frame
         this.paused = false; // If the whole game is paused
         this.unit; // Global Unit
         this.fpsInterval = 1000 / 60;
@@ -34,6 +36,9 @@ export default class Game {
 		this.solarSystem = this.galaxy.startingSolarSystem; //Starting solar system from galaxy
 		this.newSolarSystem(this.solarSystem, numShips); //Another version of start function basically
 		this.delObjects.forEach((object) => object = null); //Clears delete-able objects
+        this.draw();
+        this.update();
+        this.initializing = false; // DONE STARTING
     }
 	newSolarSystem(solarSystemName, numShips){
 		let startPosition = new Vector2(30,30); //start at centre for now
@@ -45,33 +50,42 @@ export default class Game {
 			this.watchShip = this.ships[0];
 		}
 		this.solarSystem = this.galaxy.getSolarSystem(solarSystemName); 
-		this.delObjects = [...this.solarSystem.asteroids] //Asteroids get deleted
-		this.drawnObjects = [...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.ships] //Warpgates and planets get drawn
+		this.delObjects = [...this.solarSystem.asteroids]; //Asteroids get deleted
+		this.drawnObjects = [...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.ships]; //Warpgates and planets get drawn
 		this.hiddenObjects = [...this.solarSystem.asteroidLaunchers]; //Launchers are hidden
 	}
     update () {
-        let g = this;
+        let game = this;
         this.delObjects = this.delObjects.filter(this.deleter); //Removes objects no longer needed
 
-        this.frame++;
-
-        ["missiles", "objects", "thrusters", "ships", "items"].forEach((object) => {g.contexts[object].clearRect(0, 0, g.width * g.unit, g.height * g.unit);});
+        ["missiles", "planets", "objects", "thrusters", "ships", "items"].forEach((object) => {
+            if (object !== "planets" || game.zoom !== 1) {
+                game.contexts[object].setTransform(1, 0, 0, 1, 0, 0);
+                game.contexts[object].clearRect(0, 0, game.width * game.unit, game.height * game.unit);
+            }
+        });
 		[...this.drawnObjects, ...this.delObjects, ...this.hiddenObjects].forEach((object) => object.update()); //Updates all objects
-		["missiles", "objects", "thrusters", "ships", "items"].forEach((object) => {g.contexts[object].setTransform(1, 0, 0, 1, 0, 0);});
-
-
+        
+        this.frame++;
     }
-    draw(){
-        [...this.drawnObjects, ...this.delObjects].forEach(object => object.draw()); //Draws all drawn objects
+    draw () {
+        let game = this;
+        [...game.drawnObjects, ...game.delObjects].forEach((object) => {
+            // Doesn't draw if zoomed out (game.zoom == 1) and planet :)
+            if (!(object.ctx === "planets") || game.zoom !== 1 || game.initializing) object.draw();
+        }); //Draws all drawn objects
     }
 	deleter(sprite){ //Deletes objects from deletable array that aren't needed
 		if(sprite.delete) return false;
 		return true;
 	}
 	collide(obj1, obj2){
-		/* Physics and collision detection function for 
+		/*
+        Physics and collision detection function for 
 		detemining the collision between every relevant set
-		of objects
+		of objects; will be tricky to make, but very worth it!
+        Consult Zac or Josiah if you need info on how this
+        function will be used.
 		*/
 	}
 }

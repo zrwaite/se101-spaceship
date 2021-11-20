@@ -13,36 +13,28 @@ export default class Controller {
 			down: 40
 		};
 		document.addEventListener("keydown", (event) => {
-			switch (event.keyCode) {
-				case this.controls.left:
-					this.pressed.left = true; //Click left
-					break;
-				case this.controls.up:
-					this.pressed.up = true;//Click up
-					break;
-				case this.controls.right:
-					this.pressed.right = true;//Click right
-					break;
-				case this.controls.down:
-					this.pressed.down = true;//Click down
-					break;
-			}
+            let pressCode = event.keyCode;
+            if (pressCode == 37 || pressCode == 65) {
+                this.pressed.left = true; // Press Left
+            } else if (pressCode == 38 || pressCode == 87) {
+                this.pressed.up = true; // Press Up
+            } else if (pressCode == 39 || pressCode == 68) {
+                this.pressed.right = true; // Press Right
+            } else if (pressCode == 40 || pressCode == 83) {
+                this.pressed.down = true; // Press Down
+            }
 		});
 		document.addEventListener("keyup", (event) => {
-			switch (event.keyCode) {
-				case this.controls.left:
-					this.pressed.left = false;//unClick left
-					break;
-				case this.controls.up:
-					this.pressed.up = false;//unClick up
-					break;
-				case this.controls.right:
-					this.pressed.right = false;//unClick right
-					break;
-				case this.controls.down:
-					this.pressed.down = false;//unClick down
-					break;
-			}
+			let pressCode = event.keyCode;
+            if (pressCode == 37 || pressCode == 65) {
+                this.pressed.left = false; // un-Press Left
+            } else if (pressCode == 38 || pressCode == 87) {
+                this.pressed.up = false; // un-Press Up
+            } else if (pressCode == 39 || pressCode == 68) {
+                this.pressed.right = false; // un-Press Right
+            } else if (pressCode == 40 || pressCode == 83) {
+                this.pressed.down = false; // un-Press Down
+            }
 		});
 	}
 }
