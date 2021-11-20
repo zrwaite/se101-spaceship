@@ -3,12 +3,12 @@ import Vector2 from "../helpers/Vector2.js";
 
 import RenderedObject from "../renderedObject.js";
 export default class WarpGate extends RenderedObject {
-	constructor(...args) {
+	constructor(destinationSolarystem, ...args) {
 		super(...args);
 		//this.image = this.game.images[""];
 		this.height = 50;
 		this.width = 50;
-		this.destinationSolarSystem;
+		this.destinationSolarSystem = destinationSolarystem;
 	}
 	update() {
 		//Add special update code here if needed
