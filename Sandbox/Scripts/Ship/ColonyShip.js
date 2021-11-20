@@ -16,11 +16,11 @@ export default class Ship{
 	  	this.height = 50;
 	  	this.width = 66;
 		this.maxHealth = 100; 
-		this.maxTorque = 10;
-		this.maxThrust = 10;
-		this.ufoDriveMaxSpeed = 200;
-		this.ufoDriveRotationSpeed = 180;
-		this.safeJumpSpeed = 100;
+		this.maxTorque = 1;
+		this.maxThrust = 1;
+		this.ufoDriveMaxSpeed = 0.1; // in Units
+		this.ufoDriveRotationSpeed = 0.1;
+		this.safeJumpSpeed = 6;
 		this.jumpVelocityDamageMultiplier = 1;
 		this.isLanded = false;
 		this.MissionResult = "In progess";
