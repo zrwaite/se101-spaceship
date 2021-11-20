@@ -117,5 +117,74 @@
             {
                 "name":"SpaceObjects"
             }
+        ],
+        "asteroids": [
+            {
+                "name":"Asteroid",
+                "type":"Asteroids",
+                "link":7,
+                "position":{"x":600,"y":0}
+            },            
+            {
+                "name":"Asteroid2",
+                "type":"Asteroids",
+                "link":7,
+                "position":{"x":1011,"y":-469}  
+            },
+            {
+                "name":"Asteroid3",
+                "type":"Asteroids",
+                "link":7,
+                "position":{"x":729,"y":429}
+            },   
+            {
+                "name":"Asteroid4",
+                "type":"Asteroids",
+                "link":7,
+                "position":{"x":830,"y":-493}
+                       
+            },   
+            {
+                "name":"Asteroid5",
+                "type":"Asteroids",
+                "link":7,
+                "position":{"x":539,"y":484}
+            },   
+            {
+                "name":"Asteroid",
+                "type":"Asteroids",
+                "link":7,
+                "position":{"x":800,"y":-200}
+            },   
+            {
+                "name":"Asteroid7",
+                "type":"Asteroids",
+                "link":7,
+                "position":{"x":800,"y":200}
+                       
+            }
+        ],
+        "planets": [],
+        "warpgates": [
+            {
+                "name":"Warpgate to Alpha Centauri System",
+                "type":"WarpGates",
+                "link":3,
+                "position":{"x":800,"y":0},
+                "to":"Alpha Centauri System"
+            },
+            {   "name":"warpgate to Barnard's Star System",
+                "type":"WarpGates",
+                "link":3,
+                "position":{"x":746,"y":599},
+                "to":"Barnard's Star System"
+            },
+            {   
+                "name":"Warpgate to Sirius System",
+                "type":"WarpGates",
+                "link":3,
+                "position":{"x":1107,"y":-369},
+                "to":"Sirius System"
+            }
         ]
 }

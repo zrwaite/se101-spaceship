@@ -110,5 +110,88 @@
         "link":2,
         "position":{"x":-548,"y":194}
     }
+   ],
+
+   "asteroids": [
+    {
+        "name":"Asteroid",
+        "type":"SpaceObjects",
+        "link":2,
+        "position":{"x":-261,"y":343}
+    },
+    {
+        "name":"Asteroid2",
+        "type":"SpaceObjects",
+        "link":2,
+        "position":{"x":-395,"y":-272}
+    },
+    {
+        "name":"Asteroid3",
+        "type":"SpaceObjects",
+        "link":2,
+        "position":{"x":458,"y":-272}
+    },
+    {
+        "name":"Asteroid4",
+        "type":"SpaceObjects",
+        "link":2,
+        "position":{"x":607,"y":233}
+    },
+    {
+        "name":"Asteroid5",
+        "type":"SpaceObjects",
+        "link":2,
+        "position":{"x":153,"y":166}
+    },
+    {
+        "name":"Asteroid6",
+        "type":"SpaceObjects",
+        "link":2,
+        "position":{"x":117,"y":-222}
+    },
+    {
+        "name":"Asteroid7",
+        "type":"SpaceObjects",
+        "link":2,
+        "position":{"x":-548,"y":194}
+    }
+   ],
+   "planets": [],
+   "warpgates": [
+    {
+        "name":"Warpgate to Sol System",
+        "type":"WarpGates",
+        "link":1,
+        "position":{"x":-643,"y":-269},
+        "to":"Sol System"
+    },
+    {
+        "name":"Warpgate to Bernard's Star System",
+        "type":"WarpGates",
+        "link":1,
+        "position":{"x":-313,"y":468},
+        "to":"Bernard's Star System"
+    },
+    {
+        "name":"Warpgate to Kruger System",
+        "type":"WarpGates",
+        "link":1,
+        "position":{"x":676,"y":525},
+        "to":"Kruger System"
+    },
+    {
+        "name":"Warpgate to Wolf 359 System",
+        "type":"WarpGates",
+        "link":1,
+        "position":{"x":730,"y":-268},
+        "to":"Wolf 359 System"
+    },
+    {
+        "name":"Warpgate to Kepler 438 System",
+        "type":"WarpGates",
+        "link":1,
+        "position":{"x":313,"y":386},
+        "to":"Kepler 438 System"
+    }
    ]
 }
