@@ -5,6 +5,7 @@ import {buildShip} from "./ship/buildShip.js"
 
 import Asteroid from "./spaceObjects/asteroid.js";
 import Torpedo from "./ship/torpedo.js";
+import Meteor from "./spaceObjects/meteor.js";
 import AsteroidLauncher from "./spaceObjects/asteroidLauncher.js";
 
 export default class Game {
