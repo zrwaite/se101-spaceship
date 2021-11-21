@@ -16,13 +16,24 @@ export default class Torpedo extends Sprite {
 		this.size = new Vector2(1, 1);
 		this.radius = 0.5;
 		this.ctx = "objects";
+		this.hasExploded = false;
 	}
 	update() {
 		//Add special update code here if needed
 		super.update();
 	}
 	explode(){
-		//fun explosion stuffssssss
-		// this.delete = true;
+		// currently, I am not sure if this flag variable is necessary
+		// but it wont hurt, and it will help if we need to ever keep the torpedo alive while its exploding
+		if (this.hasExploded ) {
+			return;
+		}
+		this.hasExploded = true;
+
+		// If the torpedo has an explosion radius larger than its hitbox, then here would be where 
+		// we would do the check and shatter any asteroids if necessary. 
+		// For the time being, we can have the game shatter asteroidsm instead
+
+		this.delete = true;
 	}
 }

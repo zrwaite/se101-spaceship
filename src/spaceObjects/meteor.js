@@ -5,14 +5,17 @@ export default class Meteor extends Sprite {
 	constructor(speed, ...args) {
 		super(...args);
 		this.speed = speed;
-		//this.image = this.game.images[""];
+		this.image = this.game.images["asteroid"];
 		this.delete = false; //Once an item needs to be deleted and stop rendering, set to true
-		this.height = 20;
-		this.width = 20;
-		this.radius = 20;
+		this.size = new Vector2(1, 1);
+		this.radius = 0.5;
+		this.ctx = "objects";
 	}
 	update() {
 		//Add special update code here if needed
 		super.update();
+	}
+	shatter() {
+		this.delete = true
 	}
 }

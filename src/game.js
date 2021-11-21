@@ -5,6 +5,7 @@ import {buildShip} from "./ship/buildShip.js"
 
 import Asteroid from "./spaceObjects/asteroid.js";
 import Torpedo from "./ship/torpedo.js";
+import AsteroidLauncher from "./spaceObjects/asteroidLauncher.js";
 
 export default class Game {
     constructor(width, height, images, contexts) {
@@ -72,19 +73,32 @@ export default class Game {
 
 	// METHOD 1, simple O(n^2), check every pair for collision
 	detectCollisions() {
-		// console.log('aisgdkagsd')
-		// check ships with 
+		// check ships collided with anything
 		this.ships.forEach((ship, i) => {
-			this.delObjects.forEach((a, i) => {
-				// asdasd
-				if (a instanceof(Asteroid) && this.ifCollide(ship, a)) {
-					console.log('asdasdas');
+			this.delObjects.forEach((obj, i) => {
+				if (this.ifCollide(ship, obj)) {
+					if (obj instanceof(Asteroid)) {
+						console.log('Ship hit Asteroid');
+					}
+					else if (obj instanceof(Torpedo)) {
+						console.log('Ship hit Torpedo')
+					}
 				}
-				else if (a instanceof(Torpedo) && this.ifCollide(ship, a)) {
-					console.log('yoyyoy')
-				}
-				// check if
 			})
+		});
+
+		// torpedo to asteroid
+		this.delObjects.forEach((a, i) => {
+			this.delObjects.forEach((b, i) => {
+				if (a instanceof(Torpedo) && b instanceof(Asteroid) && this.ifCollide(a, b)) {
+					b.shatter();
+					a.explode();
+				}
+				else if (a instanceof(Torpedo) && b instanceof(Meteor) && this.ifCollide(a, b)) {
+					b.shatter();
+					a.explode();
+				}
+			});
 		});
 	}
 
@@ -115,17 +129,5 @@ export default class Game {
 	deleter(sprite){ //Deletes objects from deletable array that aren't needed
 		if(sprite.delete) return false;
 		return true;
-	}
-	collide(obj1, obj2){
-		/* METHOD 1, simple n^2, check every pair of objects for collision */
-
-		
-		/*
-        Physics and collision detection function for 
-		detemining the collision between every relevant set
-		of objects; will be tricky to make, but very worth it!
-        Consult Zac or Josiah if you need info on how this
-        function will be used.
-		*/
 	}
 }
