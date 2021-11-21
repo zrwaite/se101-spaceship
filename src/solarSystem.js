@@ -24,19 +24,41 @@ export default class SolarSystem{
 		this.planets = [];
 		this.asteroidLaunchers = [];
 		this.solarSystemData = {asteroids: [], asteroidLaunchers: [], warpgates: [], planets: []};
-	
-		// Set the solar system data according to respective JSON file
+
+        /* INITIALIZATION FORMATTING:
+
+        ----- Asteroid -----
+        newAsteroid([speed.x, speed.y], aspeed, [pos.x, pos.y], this.game);
+        -----  Planet  -----
+        new Planet("imageName", [pos.x, pos.y], this.game);
+
+        */
 		switch(this.name){
 			case "test":
-				let asteroid1 = new Asteroid(new Vector2(0.2, 0.2), new Vector2(10, 10), this.game);
-				asteroid1.aSpeed.set(1, 0.1);
-				let asteroid2 = new Asteroid(new Vector2(-0.3, -0.3), new Vector2(40, 40), this.game);
-				asteroid2.aSpeed.set(1, -0.2);
-				let planet1 = new Planet("planet1", {}, 2, new Vector2(50, 10), this.game);
-				let planet2 = new Planet("planet2", {}, 2, new Vector2(10, 50), this.game);
-				
-				this.asteroids.push(asteroid1, asteroid2);
-				this.planets.push(planet1, planet2);
+				this.asteroids.push(...[
+                    new Asteroid(new Vector2(0.07, 0.06), 0.06, new Vector2(25, 10), this.game),
+                    new Asteroid(new Vector2(-0.1, -0.1), -0.1, new Vector2(40, 40), this.game),
+                    new Asteroid(new Vector2(-0.04, 0), -0.05, new Vector2(70, 35), this.game),
+                    new Asteroid(new Vector2(0.02, 0.005), 0.04, new Vector2(4, 27), this.game),
+                    new Asteroid(new Vector2(0, 0), -0.05, new Vector2(16, 45), this.game),
+                    new Asteroid(new Vector2(0, 0), 0.12, new Vector2(54, 20), this.game)
+                ]);
+				this.planets.push(...[
+                    new Planet("planet1", 2, {}, new Vector2(50, 10), this.game),
+                    new Planet("planet2", 2, {}, new Vector2(10, 50), this.game),
+                    new Planet("planet3", 2, {}, new Vector2(60, 35), this.game),
+                    new Planet("planet4", 2, {}, new Vector2(24, 19), this.game),
+                    new Planet("planet5", 2, {}, new Vector2(33, 44), this.game),
+                    new Planet("planet6", 2, {}, new Vector2(4, 9), this.game),
+                    new Planet("planet7", 2, {}, new Vector2(11, 6), this.game),
+                    new Planet("planet8", 2, {}, new Vector2(14, 23), this.game),
+                    new Planet("planet9", 2, {}, new Vector2(19, 21), this.game),
+                    new Planet("planet10", 2, {}, new Vector2(26, 46), this.game),
+                    new Planet("planet11", 2, {}, new Vector2(37, 27), this.game),
+                    new Planet("planet12", 2, {}, new Vector2(34, 40), this.game),
+                    new Planet("planet13", 2, {}, new Vector2(68, 11), this.game),
+                    new Planet("planet14", 2, {}, new Vector2(63, 48), this.game),
+                ]);
 				break;
 			case "Alpha Centauri System":
 				this.solarSystemData = AlphaCentauri;
@@ -63,7 +85,7 @@ export default class SolarSystem{
 
 		// Add asteroids to solar system
 		for (const asteroid of this.solarSystemData.asteroids) {
-			this.asteroids.push(new Asteroid(new Vector2(0,0), new Vector2(asteroid.position.x, asteroid.position.y), this.game));
+			this.asteroids.push(new Asteroid(new Vector2(0,0), 0, new Vector2(asteroid.position.x, asteroid.position.y), this.game));
 		}
 
 		// Add planets to solar system (containing name, scan signature, gravity signature, etc)

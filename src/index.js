@@ -2,12 +2,12 @@ import Game from "./game.js";
 
 let game; // Initialized properly in initializeGame().
 
-const windowSize = { // that is, game.width and game.height...
-	x: 64,
-	y: 48,
+const windowSize = { // Accessable through game.width and game.height.
+	x: 72,
+	y: 54,
     border: 1
 }
-const unit = ((window.innerWidth - windowSize.border * 2) / (window.innerHeight - windowSize.border * 2) > windowSize.x / windowSize.y) ? Math.floor(window.innerHeight / (4 * windowSize.y)) * 4 : Math.floor(window.innerWidth / (4 * windowSize.x)) * 4;
+const unit = ((window.innerWidth - windowSize.border * 2) / (window.innerHeight - windowSize.border * 2) > windowSize.x / windowSize.y) ? Math.floor(window.innerHeight / windowSize.y) : Math.floor(window.innerWidth / windowSize.x);
 
 // Initialize the CSS variables so that the css can do dynamic calculations for displays.
 document.body.style.setProperty("--unit", unit + "px");
@@ -35,7 +35,6 @@ function initializeContexts(contextNames) {
     for (let i = 0; i < contextNames.length; i++) {
         let canvas = document.createElement("CANVAS");
         canvas.id = contextNames[i];
-        console.log(unit + ", " + windowSize.x);
         canvas.width = unit * windowSize.x;
         canvas.height = unit * windowSize.y;
         document.body.querySelector(".canvasHolder").appendChild(canvas);
@@ -67,6 +66,7 @@ function initializeGame() {
 
 initializeContexts([
     "background", // static background
+    "planets", // only drawn once if game.zoom == 1
     "missiles",
     "objects",
     "thrusters",

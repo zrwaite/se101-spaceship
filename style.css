@@ -22,7 +22,3 @@ canvas {
     height: calc(var(--height) * var(--unit));
     outline: var(--border) solid rgba(255, 255, 255);
 }
-
-#objects {
-    background-color: rgba(100, 0, 0, 0.4);
-}

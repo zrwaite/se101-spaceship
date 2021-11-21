@@ -2,14 +2,14 @@ import Sprite from "../sprite.js";
 import Meteor from "./meteor.js";
 import Vector2 from "../helpers/Vector2.js";
 export default class Asteroid extends Sprite {
-	constructor(speed, ...args) {
+	constructor(speed, aSpeed, ...args) {
 		super(...args);
 		this.speed = speed;
+        this.aSpeed.set(1, aSpeed);
 		this.image = this.game.images["asteroid"];
 		this.ctx = "objects";
 		this.delete = false; //Once an item needs to be deleted and stop rendering, set to true
-		this.size = new Vector2(10, 10);
-		this.radius = 50;
+		this.size = new Vector2(3, 3);
 	}
 	update() {
 		//Add special update code here if needed
