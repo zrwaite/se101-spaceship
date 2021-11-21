@@ -100,5 +100,51 @@
         "link":4,
         "position":{"x":655,"y":-189}  
     }     
+   ],
+   "asteroids": [
+    {
+        "name":"Asteroid2",
+        "position":{"x":222,"y":-117}
+    },    
+    {
+        "name":"Asteroid3",
+        "position":{"x":142,"y":177}
+    },   
+    {
+        "name":"Asteroid4",
+        "position":{"x":434,"y":339}
+    },   
+    {
+        "name":"Asteroid5",
+        "position":{"x":701,"y":216}
+    },   
+    {
+        "name":"Asteroid6",
+        "position":{"x":655,"y":-189}  
+    }
+   ],
+   "asteroidLaunchers": [],
+   "planets": [],
+   "warpgates": [
+    {
+        "name":"Warpgate to Luyten System",
+        "position":{"x":-297,"y":155},
+        "to":"Luyten System"
+    },    
+     {
+        "name":"Warpgate to Barnard's Star System",
+        "position":{"x":179,"y":-152},
+        "to":"Barnard's Star System"
+     },   
+    {
+        "name":"Warpgate to Kepler 438 System",
+        "position":{"x":513,"y":-453},
+        "to":"Kepler 438 System"
+    },  
+    {
+        "name":"Warpgate to Sol System",
+        "position":{"x":-506,"y":-33},
+        "to":"Sol System"    
+    }
    ]
 }

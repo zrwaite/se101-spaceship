@@ -19,4 +19,6 @@ export default class RenderedObject{ //Base class for everything that gets drawn
         // Draw the image with a half-size offset, so that rotating works properly and the coor represent the center.
         ctx.drawImage(this.image,  -this.size.x * this.game.unit / 2,  -this.size.y * this.game.unit / 2, this.size.x * this.game.unit, this.size.y * this.game.unit);
 	}
+
+	update() {}
 }

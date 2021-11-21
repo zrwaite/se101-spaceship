@@ -102,7 +102,7 @@
                 "position":{"x":539,"y":484}
             },   
             {
-                "name":"Asteroid",
+                "name":"Asteroid6",
                 "type":"Asteroids",
                 "link":7,
                 "position":{"x":800,"y":-200}
@@ -116,6 +116,56 @@
             },  
             {
                 "name":"SpaceObjects"
+            }
+        ],
+        "asteroids": [
+            {
+                "name":"Asteroid",
+                "position":{"x":600,"y":0}
+            },            
+            {
+                "name":"Asteroid2",
+                "position":{"x":1011,"y":-469}  
+            },
+            {
+                "name":"Asteroid3",
+                "position":{"x":729,"y":429}
+            },   
+            {
+                "name":"Asteroid4",
+                "position":{"x":830,"y":-493}
+                       
+            },   
+            {
+                "name":"Asteroid5",
+                "position":{"x":539,"y":484}
+            },   
+            {
+                "name":"Asteroid6",
+                "position":{"x":800,"y":-200}
+            },
+            {
+                "name":"Asteroid7",
+                "position":{"x":800,"y":200}
+                       
+            }
+        ],
+        "asteroidLaunchers": [],
+        "planets": [],
+        "warpgates": [
+            {
+                "name":"Warpgate to Alpha Centauri System",
+                "position":{"x":800,"y":0},
+                "to":"Alpha Centauri System"
+            },
+            {   "name":"warpgate to Barnard's Star System",
+                "position":{"x":746,"y":599},
+                "to":"Barnard's Star System"
+            },
+            {   
+                "name":"Warpgate to Sirius System",
+                "position":{"x":1107,"y":-369},
+                "to":"Sirius System"
             }
         ]
 }

@@ -9,19 +9,34 @@ export default class Galaxy{
 		this.game = game;
 		this.solarSystems = [];
 		this.startingSolarSystem;
+
+		let solarSystemNames = [];
 		switch(galaxyName){
 			case "Alpha":
-				// solarsystem1 = new SolarSystem("solarsystem 1");
-				//Set solarSystems and starting solar system
+				solarSystemNames.push("Sol System", "Alpha Centauri System", "Kepler 438 System");
 				break;
 			case "test":
-				let testSS = new SolarSystem("test", this.game);
-				this.solarSystems.push(testSS);
-				this.startingSolarSystem = testSS.name;
+				solarSystemNames.push("test");
 				break;
-			case "Beta": 
+			case "Beta":
+				solarSystemNames.push("Sol System", "Kepler 438 System", "Barnard's Star System", 
+										"Wolf 359 System", "Sirius System");
+				break;
+			case "Gamma":
+				solarSystemNames.push("Sol System", "Alpha Centauri System", "Kepler 438 System",
+										"Barnard's Star System", "Wolf 359 System", "Sirius System", "Luyten System",
+										"Groombridge System", "Kruger System", "Aquarii System", "Cygni System",
+										"Indi System", "Yennefer System", "Quaid System");
 				break;
 		}
+
+		// Create solar systems with associated galaxy
+		for (const name of solarSystemNames) {
+			this.solarSystems.push(new SolarSystem(name, this.game));
+		}
+		
+		// Set starting solar system to the first system in the list
+		this.startingSolarSystem = this.solarSystems[0].name;
 	}
 	getSolarSystem(solarSystemName){
 		let returnSolarSystem = false;

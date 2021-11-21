@@ -94,7 +94,8 @@ initializeImages([
     ["planet11", "SpaceObjects/RedPlanet1.png"],
     ["planet12", "SpaceObjects/RedPlanetSputnik.png"],
     ["planet13", "SpaceObjects/SandPlanet.png"],
-    ["planet14", "SpaceObjects/StormPlanet.png"]
+    ["planet14", "SpaceObjects/StormPlanet.png"],
+    ["warpgate", "SpaceObjects/WhiteDwarfStar.png"]
 ]);
 
 let startTime, now, then, elapsed;

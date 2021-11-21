@@ -68,5 +68,32 @@
         {
             "name":"SpaceObjects"
         }
+    ],
+    "asteroids": [
+
+    ],
+    "asteroidLaunchers": [],
+    "planets": [],
+    "warpgates": [
+        {
+            "name":"Warpgate to Quaid System",
+            "position":{"x":485,"y":-397},
+            "to":"Quaid System"
+        },
+        {
+            "name":"Warpgate to Kepler 438 System",
+            "position":{"x":892,"y":381},
+            "to":"Kepler 438 System"
+        },
+        {
+            "name":"Warpgate to Wolf 359 System",
+            "position":{"x":-431,"y":-217},
+            "to":"Wolf 359 System"
+        },
+        {
+            "name":"Warpgate to Aquarii System",
+            "position":{"x":-306,"y":302},
+            "to":"Aquarii System"
+        }
     ]
 }
