@@ -2,7 +2,8 @@ import Vector2 from "../helpers/Vector2.js";
 import Sprite from "../sprite.js";
 import PassiveSensors from "./passiveSensors.js";
 import ActiveSensors from "./activeSensors.js";
-import TurretControls from "./tordedo.js";
+import TurretControls from "./../../Sandbox/Scripts/Ship/TurretControls.js";
+import Turret from "./../../Sandbox/Scripts/Ship/Turret.js"
 import ThrusterController from "./thrusterController.js";
 /* Reference other colonyship.js file for reference to make this one
 If you aren't sure about if a function should be copied or not, ask on discord. 
@@ -19,8 +20,11 @@ export default class ColonyShip extends Sprite{
 		this.passiveSensors = new PassiveSensors(this);
 		this.activeSensors = new ActiveSensors(this);
 		this.thrusterController = new ThrusterController(this);
+
+		this.turret = new Turret(this, this.turretControls);
 		this.image = this.game.images["ship"];
 		this.size = new Vector2(3, 2);
+		this.radius = (this.size.x + this.size.y) / 4;		// we say the hurt box is avg of width and height 
 		this.shipStatusInfo;
 		this.solarSystem;
 		this.ctx = "ships";
@@ -36,12 +40,26 @@ export default class ColonyShip extends Sprite{
 		super.update() //parent update;
 	}
 	manualControls(){
-		if (this.game.inputs.pressed.left) this.aAccel.set(1, -0.005);
-		else if (this.game.inputs.pressed.right) this.aAccel.set(1, 0.005)
-		else this.aAccel.set(1, 0);
-		if (this.game.inputs.pressed.up) this.accel = this.accel.add(this.angle.scale(0.001))
-		else if (this.game.inputs.pressed.down) this.accel = this.accel.add(this.angle.scale(-0.001));
-		else this.accel.set(0,0);
+		//	Manual controls for velocity 
+		if (this.game.inputs.pressed.left) this.aSpeed.set(1, -0.05);
+		else if (this.game.inputs.pressed.right) this.aSpeed.set(1, 0.05)
+		else this.aSpeed.set(1, 0);
+		if (this.game.inputs.pressed.up) this.speed = this.angle.scale(0.2)
+		// else if (this.game.inputs.pressed.down) this.speed = this.angle.scale(-0.2);
+		else this.speed.set(0,0);
+
+		// can fire missle every 30 frames
+		if (this.game.inputs.pressed.down && this.game.frame%30 == 0) {
+			this.turret.fireMissile(1)
+		}
+
+		// 	Manual controls for accel
+		// if (this.game.inputs.pressed.left) this.aAccel.set(1, -0.005);
+		// else if (this.game.inputs.pressed.right) this.aAccel.set(1, 0.005)
+		// else this.aAccel.set(1, 0);
+		// if (this.game.inputs.pressed.up) this.accel = this.accel.add(this.angle.scale(0.001))
+		// else if (this.game.inputs.pressed.down) this.accel = this.accel.add(this.angle.scale(-0.001));
+		// else this.accel.set(0,0);
 
 		//react to the controller data
 		//Calls this.thrusterController
@@ -64,5 +82,9 @@ export default class ColonyShip extends Sprite{
 			this.pos.x = 0;
 			this.speed.x = 0;
 		}
+	}
+	// called when ship hits an asteroid
+	receiveDamage() {
+
 	}
 }

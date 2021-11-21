@@ -1,6 +1,6 @@
-import Vector2 from "../Helpers/Vector2";
+import Vector2 from "../Helpers/Vector2.js";
 
-class TurretControls {
+export default class TurretControls {
 	constructor(parentTurret){
 		this.parentTurret = parentTurret;
 		this.aimTo = new Vector2(0,0);
@@ -12,5 +12,4 @@ class TurretControls {
 	triggerTube(tubeIndex, fuseDuration){
 		this.parentTurret.triggerTube(tubeIndex, fuseDuration);
 	}
-
 }

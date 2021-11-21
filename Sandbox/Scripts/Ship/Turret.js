@@ -1,10 +1,10 @@
-import Vector2 from "../Helpers/Vector2";
-// IMPORT TORPEDO
+import Vector2 from "../Helpers/Vector2.js";
+import Torpedo from "../../../src/ship/torpedo.js";
 
-class Turret {
+export default class Turret {
 	constructor(parentShip, turretControls){
 		this.tubeCount = 4;
-		this.launchSpeed = 100;
+		this.launchSpeed = 0.2;
 		this.torpedoScene;
 		this.turretControls;
 		this.parentShip;
@@ -12,6 +12,7 @@ class Turret {
 		this.cooldowns = new Array(this.tubeCount);
 		this.torpedoSpeed = this.launchSpeed;
 		this.parentShip = parentShip;
+		this.game = this.parentShip.game;
 		this.turretControls = turretControls;
 		this.direction = new Vector2(0, 1);
 	}
@@ -27,8 +28,10 @@ class Turret {
 			this.cooldowns[i]=Math.max(0, this.cooldowns[i]-delta);
 		}
 	}
-	fireMissle(fuseDuration){		//Position			//Direction			/Speed			//FuseDuration? (Whatever that means)
-		let newTorpedo = new Torpedo(this.parentShip.pos, this.direction, this.launchSpeed, fuseDuration)
+	fireMissile(fuseDuration){		
+		let torpedoVelocity = this.direction.scale(this.launchSpeed)		// calculate velocity of fired missile
+		let newTorpedo = new Torpedo(fuseDuration, this.parentShip, torpedoVelocity, this.parentShip.pos, this.game)
+		this.game.spawnDeletableObject(newTorpedo);
 		this.parentShip.TorpedoesFired++;
 	}
 	triggerTube(tubeIndex, fuseDuration){
@@ -38,7 +41,4 @@ class Turret {
 			this.cooldowns[tubeIndex] = this.cooldownDuration;
 		}
 	}
-
-
-
 }
