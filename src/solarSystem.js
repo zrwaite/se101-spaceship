@@ -4,13 +4,13 @@ import WarpGate from "./spaceObjects/warpGate.js";
 import Planet from "./spaceObjects/planet.js";
 import AsteroidLauncher from "./spaceObjects/asteroidLauncher.js";
 
-import AlphaCentauri from "../Sandbox/Scenes/SolarSystems/Alpha Centauri System.json" assert { type: "json" };
-import Sol from "../Sandbox/Scenes/SolarSystems/Sol System.json" assert { type: "json" };
-import Kepler438 from "../Sandbox/Scenes/SolarSystems/Kepler 438 System.json" assert { type: "json" };
-import Aquarii from "../Sandbox/Scenes/SolarSystems/Aquarii System.json" assert { type: "json" };
-import Barnards from "../Sandbox/Scenes/SolarSystems/Barnard's Star System.json" assert { type: "json" };
-import Kruger from "../Sandbox/Scenes/SolarSystems/Kruger System.json" assert { type: "json" };
-import Wolf359 from "../Sandbox/Scenes/SolarSystems/Wolf 359 System.json" assert { type: "json" };
+// import AlphaCentauri from "../Sandbox/Scenes/SolarSystems/Alpha Centauri System.json" assert { type: "json" };
+// import Sol from "../Sandbox/Scenes/SolarSystems/Sol System.json" assert { type: "json" };
+// import Kepler438 from "../Sandbox/Scenes/SolarSystems/Kepler 438 System.json" assert { type: "json" };
+// import Aquarii from "../Sandbox/Scenes/SolarSystems/Aquarii System.json" assert { type: "json" };
+// import Barnards from "../Sandbox/Scenes/SolarSystems/Barnard's Star System.json" assert { type: "json" };
+// import Kruger from "../Sandbox/Scenes/SolarSystems/Kruger System.json" assert { type: "json" };
+// import Wolf359 from "../Sandbox/Scenes/SolarSystems/Wolf 359 System.json" assert { type: "json" };
 
 //Parent class for solarsystems, use data from solarsystem jsons and galaxy and spaceobjects scripts
 //The constructor is going to build the levels
@@ -61,25 +61,25 @@ export default class SolarSystem{
                 ]);
 				break;
 			case "Alpha Centauri System":
-				this.solarSystemData = AlphaCentauri;
+				// this.solarSystemData = AlphaCentauri;
 				break;
 			case "Sol System":
-				this.solarSystemData = Sol;
+				// this.solarSystemData = Sol;
 				break;
 			case "Kepler 438 System":
-				this.solarSystemData = Kepler438;
+				// this.solarSystemData = Kepler438;
 				break;
 			case "Aquarii System": 
-				this.solarSystemData = Aquarii;
+				// this.solarSystemData = Aquarii;
 				break;
 			case "Barnard's Star System":
-				this.solarSystemData = Barnards;
+				// this.solarSystemData = Barnards;
 				break;
 			case "Kruger System": 
-				this.solarSystemData = Kruger;
+				// this.solarSystemData = Kruger;
 				break;
 			case "Wolf 359 System": 
-				this.solarSystemData = Wolf359;
+				// this.solarSystemData = Wolf359;
 				break;
 		}
 

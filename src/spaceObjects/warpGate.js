@@ -6,14 +6,13 @@ export default class WarpGate extends RenderedObject {
 	constructor(destinationSolarystem, ...args) {
 		super(...args);
 		this.image = this.game.images["warpgate"];
-		this.ctx = "objects";
 		this.height = 50;
 		this.width = 50;
 		this.destinationSolarSystem = destinationSolarystem;
 	}
 	update() {
 		//Add special update code here if needed
-		super.update();
+		// super.update();
 	}
 	warp(){
 		//send signal to game to start new solarSystem
