@@ -10,6 +10,7 @@ export default class Asteroid extends Sprite {
 		this.ctx = "objects";
 		this.delete = false; //Once an item needs to be deleted and stop rendering, set to true
 		this.size = new Vector2(3, 3);
+		this.radius = this.size.x/2;		// asteroids are circles
 	}
 	update() {
 		//Add special update code here if needed
@@ -17,10 +18,16 @@ export default class Asteroid extends Sprite {
 		this.boundaries();
 	}
 	shatter() {
-		//Create a bunch of meteors, somewhat randomly.
-		//this.delete = true
-		// meteor1 = new Meteor(new Vector2(50, 30), this.pos, this.game);
-		// this.game.delObjects.push(meteor1);
+		// Create a bunch of meteors, somewhat randomly.
+		this.delete = true
+		// randomly 2-5 meteors
+		const numMeteors = Math.floor(2 + Math.random() * 4);
+		for (let i=0; i<numMeteors; i++) {
+			// generate a random direction for meteor to go
+			const velocity = Vector2.right.rotate(Math.random()*2*Math.PI).scale(0.1);
+			let meteor = new Meteor(velocity, this.pos, this.game);
+			this.game.spawnDeletableObject(meteor);
+		}
 	}
 	boundaries(){
 		if (this.pos.y>this.game.height+this.size.y || this.pos.y<-this.size.y || 

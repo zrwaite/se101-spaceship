@@ -24,6 +24,11 @@ export default class Sprite extends RenderedObject{
 		this.pos = this.pos.add(this.speed);
 		this.angle = this.angle.rotate(this.aSpeed.angle());
 		this.boundsDetect(); //Detect boundaries for position and speed
+		
+		// delete sprites that are heavily oob
+		if (this.pos.x < -2*this.game.width || this.pos.x > 2*this.game.width || this.pos.y < -2*this.game.height || this.pos.y > 2*this.game.height) {
+			this.delete = true;
+		}
 	}
 	boundsDetect(){
 		// y speed bounds

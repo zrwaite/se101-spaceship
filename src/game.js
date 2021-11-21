@@ -2,6 +2,11 @@ import Vector2 from "./helpers/Vector2.js";
 import Controller from "./controller.js";
 import Galaxy from "./galaxy.js";
 import {buildShip} from "./ship/buildShip.js"
+
+import Asteroid from "./spaceObjects/asteroid.js";
+import Torpedo from "./ship/torpedo.js";
+import AsteroidLauncher from "./spaceObjects/asteroidLauncher.js";
+
 export default class Game {
     constructor(width, height, images, contexts) {
 		this.width = width;
@@ -54,9 +59,55 @@ export default class Game {
 		this.drawnObjects = [...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.ships]; //Warpgates and planets get drawn
 		this.hiddenObjects = [...this.solarSystem.asteroidLaunchers]; //Launchers are hidden
 	}
-    update () {
+	// add deletable game object (missles/asteroids) to the list
+	spawnDeletableObject(obj) {
+		this.delObjects.push(obj);
+	}
+	// check if two Sprites overlaps with each other
+	ifCollide(obj1, obj2) {
+		const xDiff = obj1.pos.x-obj2.pos.x;
+		const yDiff = obj1.pos.y-obj2.pos.y;
+		const rTotal = obj1.radius + obj2.radius;
+		return xDiff*xDiff + yDiff*yDiff < rTotal*rTotal;
+	}
+
+	// METHOD 1, simple O(n^2), check every pair for collision
+	detectCollisions() {
+		// check ships collided with anything
+		this.ships.forEach((ship, i) => {
+			this.delObjects.forEach((obj, i) => {
+				if (this.ifCollide(ship, obj)) {
+					if (obj instanceof(Asteroid)) {
+						console.log('Ship hit Asteroid');
+					}
+					else if (obj instanceof(Torpedo)) {
+						console.log('Ship hit Torpedo')
+					}
+				}
+			})
+		});
+
+		// torpedo to asteroid
+		this.delObjects.forEach((a, i) => {
+			this.delObjects.forEach((b, i) => {
+				if (a instanceof(Torpedo) && b instanceof(Asteroid) && this.ifCollide(a, b)) {
+					b.shatter();
+					a.explode();
+				}
+				else if (a instanceof(Torpedo) && b instanceof(Meteor) && this.ifCollide(a, b)) {
+					b.shatter();
+					a.explode();
+				}
+			});
+		});
+	}
+
+	update () {
         let game = this;
-        this.delObjects = this.delObjects.filter(this.deleter); //Removes objects no longer needed
+
+		this.detectCollisions();
+
+		this.delObjects = this.delObjects.filter(this.deleter); //Removes objects no longer needed
 
         ["missiles", "planets", "objects", "thrusters", "ships", "items"].forEach((object) => {
             if (object !== "planets" || game.zoom !== 1) {
@@ -78,14 +129,5 @@ export default class Game {
 	deleter(sprite){ //Deletes objects from deletable array that aren't needed
 		if(sprite.delete) return false;
 		return true;
-	}
-	collide(obj1, obj2){
-		/*
-        Physics and collision detection function for 
-		detemining the collision between every relevant set
-		of objects; will be tricky to make, but very worth it!
-        Consult Zac or Josiah if you need info on how this
-        function will be used.
-		*/
 	}
 }
