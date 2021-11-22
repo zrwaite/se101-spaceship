@@ -21,6 +21,8 @@ export default class ColonyShip extends Sprite{
 		this.activeSensors = new ActiveSensors(this);
 		this.thrusterController = new ThrusterController(this);
 
+		this.totalDamage = 0;
+
 		this.turret = new Turret(this, this.turretControls);
 		this.image = this.game.images["ship"];
 		this.size = new Vector2(3, 2);
@@ -89,7 +91,8 @@ export default class ColonyShip extends Sprite{
 		}
 	}
 	// called when ship hits an asteroid
-	receiveDamage() {
-
+	receiveDamage(amount) {
+		console.log("SHIP TOOK ", amount, "DMG")
+		this.totalDamage += amount;
 	}
 }

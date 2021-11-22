@@ -4,7 +4,7 @@ export default class Matrix2 {
         this.m = [[x11, x12],[x21, x22]];
     }
 
-    // construct matrix base on 2 vectors
+    // construct matrix based on 2 vectors
     // used for basis vector calculations
     static MakeBasisMatrix(v1, v2) {
         return new Matrix2(v1.x, v2.x, v1.y, v2.y);

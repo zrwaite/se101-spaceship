@@ -39,4 +39,7 @@ export default class Asteroid extends Sprite {
 			this.pos.x>this.game.width+this.size.x || this.pos.x<-this.size.x) 
 			this.delete=true; // bounds detection for deletion
 	}
+	receiveDamage() { // asteroids have 1hp
+		this.shatter();
+	}
 }

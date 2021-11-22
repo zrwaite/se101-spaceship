@@ -16,6 +16,9 @@ export default class Meteor extends Sprite {
 		//Add special update code here if needed
 		super.update();
 	}
+	receiveDamage() { // meteors have 1hp
+		this.shatter();
+	}
 	shatter() {
 		this.delete = true
 	}
