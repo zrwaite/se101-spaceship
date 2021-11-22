@@ -103,4 +103,9 @@ export default class Vector2 {
 		var vector = this.toPrecision(1);
 		return ("[" + vector.x + "; " + vector.y + "]");
 	}
+
+	// M is a Matrix2, returns Mv
+	matrixMultiply(M) {
+		return new Vector2(M.m[0][0]*this.x + M.m[0][1]*this.y, M.m[1][0]*this.x + M.m[1][1]*this.y);
+	}
 }

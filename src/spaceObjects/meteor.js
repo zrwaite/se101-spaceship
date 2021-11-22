@@ -10,10 +10,14 @@ export default class Meteor extends Sprite {
 		this.size = new Vector2(1, 1);
 		this.radius = 0.5;
 		this.ctx = "objects";
+		this.mass = 0.4;
 	}
 	update() {
 		//Add special update code here if needed
 		super.update();
+	}
+	receiveDamage() { // meteors have 1hp
+		this.shatter();
 	}
 	shatter() {
 		this.delete = true

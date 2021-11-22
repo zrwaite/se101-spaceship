@@ -36,4 +36,7 @@ export default class Torpedo extends Sprite {
 
 		this.delete = true;
 	}
+	receiveDamage() { // torpedos have 1hp and explode when hitting something
+		this.explode();
+	}
 }
