@@ -28,6 +28,7 @@ export default class ColonyShip extends Sprite{
 		this.shipStatusInfo;
 		this.solarSystem;
 		this.ctx = "ships";
+		this.mass = 3;
 	}
 	update() {
 		//Add special update code here if needed
@@ -41,7 +42,7 @@ export default class ColonyShip extends Sprite{
 	}
 	manualControls(){
 		//	Manual controls for velocity 
-		if (this.game.inputs.pressed.left) this.aSpeed.set(1, -0.05);
+		/*if (this.game.inputs.pressed.left) this.aSpeed.set(1, -0.05);
 		else if (this.game.inputs.pressed.right) this.aSpeed.set(1, 0.05)
 		else this.aSpeed.set(1, 0);
 		if (this.game.inputs.pressed.up) this.speed = this.angle.scale(0.2)
@@ -51,15 +52,19 @@ export default class ColonyShip extends Sprite{
 		// can fire missle every 30 frames
 		if (this.game.inputs.pressed.down && this.game.frame%30 == 0) {
 			this.turret.fireMissile(1)
-		}
+		}*/
 
 		// 	Manual controls for accel
-		// if (this.game.inputs.pressed.left) this.aAccel.set(1, -0.005);
-		// else if (this.game.inputs.pressed.right) this.aAccel.set(1, 0.005)
-		// else this.aAccel.set(1, 0);
-		// if (this.game.inputs.pressed.up) this.accel = this.accel.add(this.angle.scale(0.001))
+		if (this.game.inputs.pressed.left) this.aAccel.set(1, -0.005);
+		else if (this.game.inputs.pressed.right) this.aAccel.set(1, 0.005)
+		else this.aAccel.set(1, 0);
+		if (this.game.inputs.pressed.up) this.accel = this.accel.add(this.angle.scale(0.001))
 		// else if (this.game.inputs.pressed.down) this.accel = this.accel.add(this.angle.scale(-0.001));
-		// else this.accel.set(0,0);
+		else this.accel.set(0,0);
+
+		if (this.game.inputs.pressed.down && this.game.frame%30 == 0) {
+			this.turret.fireMissile(1)
+		}
 
 		//react to the controller data
 		//Calls this.thrusterController

@@ -1,4 +1,4 @@
-import Vector2 from "../Sandbox/Scripts/Helpers/Vector2.js";
+import Vector2 from "./helpers/Vector2.js";
 import RenderedObject from "./renderedObject.js";
 export default class Sprite extends RenderedObject{
 	constructor(...args){

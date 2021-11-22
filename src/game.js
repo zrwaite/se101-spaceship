@@ -7,6 +7,7 @@ import Asteroid from "./spaceObjects/asteroid.js";
 import Torpedo from "./ship/torpedo.js";
 import Meteor from "./spaceObjects/meteor.js";
 import AsteroidLauncher from "./spaceObjects/asteroidLauncher.js";
+import Matrix2 from "./helpers/Matrix2.js";
 
 export default class Game {
     constructor(width, height, images, contexts) {
@@ -72,14 +73,43 @@ export default class Game {
 		return xDiff*xDiff + yDiff*yDiff < rTotal*rTotal;
 	}
 
+	// do some clanking
+	clank(obj1, obj2) {
+		const norm = (new Vector2(obj1.pos.x-obj2.pos.x, obj1.pos.y-obj2.pos.y)).normalize();
+		// When meteorites spawn, they start off right on top of each other
+		// clanking does not really make sense of objects right on top of one another
+		if (norm.x == 0 && norm.y == 0) { return; }
+		const tan = norm.matrixMultiply(Matrix2.Rotate90CCW);
+		const basisMatrix = Matrix2.MakeBasisMatrix(norm, tan);
+		const basisMatrixInverse = basisMatrix.inverse();
+		// the speeds are broken down into the norm/tan components
+		// x represents the norm velocity and y represednts the tan velocity
+		// console.log(obj1)
+		const obj1SpeedComponents = obj1.speed.matrixMultiply(basisMatrixInverse);
+		const obj2SpeedComponents = obj2.speed.matrixMultiply(basisMatrixInverse);
+		// the tangiential velocities do no affect the collision tragetory
+		// no we can treat this is a 1d elastic collision
+		const D = 1/(obj1.mass + obj2.mass);
+		const obj1NormSpeedNew = (obj1.mass-obj2.mass)*D*obj1SpeedComponents.x + (2*obj2.mass)*D*obj2SpeedComponents.x
+		const obj2NormSpeedNew = (obj2.mass-obj1.mass)*D*obj2SpeedComponents.x + (2*obj1.mass)*D*obj1SpeedComponents.x
+		obj1SpeedComponents.x = obj1NormSpeedNew;
+		obj2SpeedComponents.x = obj2NormSpeedNew;
+		// change the base back to x and y components
+		const obj1SpeedNew = obj1SpeedComponents.matrixMultiply(basisMatrix);
+		const obj2SpeedNew = obj2SpeedComponents.matrixMultiply(basisMatrix);
+		obj1.speed = obj1SpeedNew;
+		obj2.speed = obj2SpeedNew;
+		console.log(obj1SpeedNew, obj2SpeedNew)
+	}
+
 	// METHOD 1, simple O(n^2), check every pair for collision
 	detectCollisions() {
 		// check ships collided with anything
 		this.ships.forEach((ship, i) => {
 			this.delObjects.forEach((obj, i) => {
 				if (this.ifCollide(ship, obj)) {
-					if (obj instanceof(Asteroid)) {
-						console.log('Ship hit Asteroid');
+					if (obj instanceof(Asteroid) || obj instanceof(Meteor)) {
+						this.clank(ship, obj);
 					}
 					else if (obj instanceof(Torpedo)) {
 						console.log('Ship hit Torpedo')
@@ -88,19 +118,22 @@ export default class Game {
 			})
 		});
 
-		// torpedo to asteroid
-		this.delObjects.forEach((a, i) => {
-			this.delObjects.forEach((b, i) => {
-				if (a instanceof(Torpedo) && b instanceof(Asteroid) && this.ifCollide(a, b)) {
-					b.shatter();
-					a.explode();
+		for (let i=0; i<this.delObjects.length; i++) {
+			for (let j=i+1; j<this.delObjects.length; j++) {
+				const a = this.delObjects[i];
+				const b = this.delObjects[j];
+				if (this.ifCollide(a, b)) {
+					if (a instanceof(Torpedo) || b instanceof(Torpedo)) {
+						let torpedo = a instanceof(Torpedo) ? a : b;
+						let target = a instanceof(Torpedo) ? b : a;
+						target.shatter();
+						torpedo.explode();
+					} else {
+						this.clank(a, b)
+					}
 				}
-				else if (a instanceof(Torpedo) && b instanceof(Meteor) && this.ifCollide(a, b)) {
-					b.shatter();
-					a.explode();
-				}
-			});
-		});
+			}
+		}
 	}
 
 	update () {

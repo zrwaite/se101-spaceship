@@ -10,6 +10,7 @@ export default class Meteor extends Sprite {
 		this.size = new Vector2(1, 1);
 		this.radius = 0.5;
 		this.ctx = "objects";
+		this.mass = 0.4;
 	}
 	update() {
 		//Add special update code here if needed
