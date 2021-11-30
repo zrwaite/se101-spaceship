@@ -23,7 +23,7 @@ export default class SolarSystem{
 		----- AsteroidLauncher -----
 		new AsteroidLauncher([pos.x, pos.y], this.game, spawnPeriod = 4, spawnCount = -1, rotation = -1);
         -----      Planet      -----
-        new Planet("imageName", [pos.x, pos.y], this.game);
+        new Planet("imageName", composition, gravitySignature, [pos.x, pos.y], this.game);
 		-----     Warp Gate    -----
 		new WarpGate("destination", [pos.x, pos.y], this.game);
 
@@ -39,20 +39,20 @@ export default class SolarSystem{
                     new Asteroid(new Vector2(0, 0), 0.12, new Vector2(54, 20), this.game)
                 ]);
 				this.planets.push(...[
-                    new Planet("planet1", 2, {}, new Vector2(50, 10), this.game),
-                    new Planet("planet2", 2, {}, new Vector2(10, 50), this.game),
-                    new Planet("planet3", 2, {}, new Vector2(60, 35), this.game),
-                    new Planet("planet4", 2, {}, new Vector2(24, 19), this.game),
-                    new Planet("planet5", 2, {}, new Vector2(33, 44), this.game),
-                    new Planet("planet6", 2, {}, new Vector2(4, 9), this.game),
-                    new Planet("planet7", 2, {}, new Vector2(11, 6), this.game),
-                    new Planet("planet8", 2, {}, new Vector2(14, 23), this.game),
-                    new Planet("planet9", 2, {}, new Vector2(19, 21), this.game),
-                    new Planet("planet10", 2, {}, new Vector2(26, 46), this.game),
-                    new Planet("planet11", 2, {}, new Vector2(37, 27), this.game),
-                    new Planet("planet12", 2, {}, new Vector2(34, 40), this.game),
-                    new Planet("planet13", 2, {}, new Vector2(68, 11), this.game),
-                    new Planet("planet14", 2, {}, new Vector2(63, 48), this.game),
+                    new Planet("planet1", {}, 2, new Vector2(50, 10), this.game),
+                    new Planet("planet2", {}, 2, new Vector2(10, 50), this.game),
+                    new Planet("planet3", {}, 2, new Vector2(60, 35), this.game),
+                    new Planet("planet4", {}, 2, new Vector2(24, 19), this.game),
+                    new Planet("planet5", {}, 2, new Vector2(33, 44), this.game),
+                    new Planet("planet6", {}, 2, new Vector2(4, 9), this.game),
+                    new Planet("planet7", {}, 2, new Vector2(11, 6), this.game),
+                    new Planet("planet8", {}, 2, new Vector2(14, 23), this.game),
+                    new Planet("planet9", {}, 2, new Vector2(19, 21), this.game),
+                    new Planet("planet10", {}, 2, new Vector2(26, 46), this.game),
+                    new Planet("planet11", {}, 2, new Vector2(37, 27), this.game),
+                    new Planet("planet12", {}, 2, new Vector2(34, 40), this.game),
+                    new Planet("planet13", {}, 2, new Vector2(68, 11), this.game),
+                    new Planet("planet14", {}, 2, new Vector2(63, 48), this.game),
                 ]);
 
 				this.asteroidLaunchers.push(new AsteroidLauncher(new Vector2(50, 50), this.game, 4, 10, Math.PI * 3 / 4));
