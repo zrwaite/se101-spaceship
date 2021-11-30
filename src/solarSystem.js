@@ -15,7 +15,6 @@ export default class SolarSystem{
 		this.warpGates = [];
 		this.planets = [];
 		this.asteroidLaunchers = [];
-		this.solarSystemData = {asteroids: [], asteroidLaunchers: [], warpgates: [], planets: []};
 
         /* INITIALIZATION FORMATTING:
 
@@ -160,22 +159,21 @@ export default class SolarSystem{
 				break;
 			case "Kepler 438 System":
 				// Generate asteroids at modulo offsets (to prevent hardcoding large # of asteroids)
-				//! TODO: UPDATE
-				for (let i = 0; i < 30; i++) {
-					this.asteroids.push(new Asteroid(new Vector2(0, 0), 0, new Vector2(-308, 66), this.game));
+				for (let i = 0; i < 10; i++) {
+					this.asteroids.push(new Asteroid(new Vector2(0, 0), 0, new Vector2((31 + 25 * i) % 71, (17 + 29 * i) % 53), this.game));
 				}
 				this.planets.push(...[
-					new Planet("Planet Kepler 438", {"Common":70, "Metal":20, "Water":10},
-						2, new Vector2(1276, 108), this.game),
-					new Planet("Planet Avallac", {"Common":70, "Metal":20, "Terror":10, "Water":0},
-						2, new Vector2(-1219, -211), this.game)
+					new Planet("planet6", {"Common":70, "Metal":20, "Water":10},
+						2, new Vector2(69, 41), this.game),
+					new Planet("planet4", {"Common":70, "Metal":20, "Terror":10, "Water":0},
+						2, new Vector2(8, 13), this.game)
 				]);
 				this.warpGates.push(...[
-					new WarpGate("Quaid System", new Vector2(-424, 410), this.game),
-					new WarpGate("Sirius System", new Vector2(719, -141), this.game),
-					new WarpGate("Alpha Centauri System", new Vector2(-621, -45), this.game),
-					new WarpGate("Wolf 359 System", new Vector2(-8, -342), this.game),
-					new WarpGate("Groombridge System", new Vector2(245, 558), this.game)
+					new WarpGate("Quaid System", new Vector2(14, 37), this.game),
+					new WarpGate("Sirius System", new Vector2(58, 16), this.game),
+					new WarpGate("Alpha Centauri System", new Vector2(6, 21), this.game),
+					new WarpGate("Wolf 359 System", new Vector2(34, 18), this.game),
+					new WarpGate("Groombridge System", new Vector2(42, 44), this.game)
 				]);
 				break;
 			case "Kruger System": 
@@ -213,20 +211,19 @@ export default class SolarSystem{
 				break;
 			case "Quaid System":
 				// Generate asteroids at modulo offsets (to prevent hardcoding large # of asteroids)
-				//! TODO: UPDATE
-				for (let i = 0; i < 30; i++) {
-					this.asteroids.push(new Asteroid(new Vector2(0, 0), 0, new Vector2(-308, 66), this.game));
+				for (let i = 0; i < 5; i++) {
+					this.asteroids.push(new Asteroid(new Vector2(0, 0), 0, new Vector2((51 + 41 * i) % 71, (41 + 41 * i) % 53), this.game));
 				}
 				this.asteroidLaunchers.push(...[
-					new AsteroidLauncher(new Vector2(-704, -725), this.game),
-					new AsteroidLauncher(new Vector2(-243, 529), this.game)
+					new AsteroidLauncher(new Vector2(8, 5), this.game, 4, 15),
+					new AsteroidLauncher(new Vector2(26, 41), this.game, 7, 10)
 				]);
 				this.warpGates.push(...[
-					new WarpGate("Yennefer System", new Vector2(640, -147), this.game),
-					new WarpGate("Indi System", new Vector2(285, 440), this.game),
-					new WarpGate("Kepler 438 System", new Vector2(905, -33), this.game),
-					new WarpGate("Cygni System", new Vector2(-316, 115), this.game),
-					new WarpGate("Groombridge System", new Vector2(7, -244), this.game)
+					new WarpGate("Yennefer System", new Vector2(59, 19), this.game),
+					new WarpGate("Indi System", new Vector2(41, 41), this.game),
+					new WarpGate("Kepler 438 System", new Vector2(70, 24), this.game),
+					new WarpGate("Cygni System", new Vector2(11, 28), this.game),
+					new WarpGate("Groombridge System", new Vector2(30, 16), this.game)
 				]);
 				break;
 			case "Sirius System":
