@@ -21,7 +21,7 @@ export default class SolarSystem{
         -----     Asteroid     -----
         new Asteroid([speed.x, speed.y], aspeed, [pos.x, pos.y], this.game);
 		----- AsteroidLauncher -----
-		new AsteroidLauncher([pos.x, pos.y], this.game, spawnPeriod = 4, spawnCount = 10, rotation = -1);
+		new AsteroidLauncher([pos.x, pos.y], this.game, spawnPeriod = 4, spawnCount = -1, rotation = -1);
         -----      Planet      -----
         new Planet("imageName", [pos.x, pos.y], this.game);
 		-----     Warp Gate    -----
