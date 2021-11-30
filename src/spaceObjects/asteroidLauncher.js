@@ -2,16 +2,53 @@ import Asteroid from "./asteroid.js";
 import Vector2 from "../helpers/Vector2.js";
 
 const MAX_SPAWN_SPEED = 0.4;
+const FRAMES_PER_SECOND = 60;
 
 export default class AsteroidLauncher{
-	constructor(pos, game) {
+	constructor(pos, game, spawnPeriod = 4, spawnCount = -1, rotation = -1) {
 		this.game = game;
 		this.pos = pos;
+		console.log(rotation);
+
+		this.currentDelay = 0;
+		this.spawnPeriod = spawnPeriod * FRAMES_PER_SECOND;
+
+		// Expects positive integer... -1 denotes infinite projectiles
+		this.spawnCount = spawnCount;
+
+		// Expects positive radians values... rotation == -1 denotes random angle
+		this.rotation = rotation;
 	}
+
+	/**
+	 * Functions gets the rotation angle for the launcher. Rotation can either be fixed or randomized depending on ctor input
+	 * @returns Positive float denoting rotation angle in radians
+	 */
+	getAngle() {
+		return this.rotation != -1 ? this.rotation : Math.random()*2*Math.PI;
+	}
+
 	launchAsteroid(){
+		// Check if additional objects should be created (decrement spawnCount if there are finite asteroids to create)
+		if (this.spawnCount == 0) return;
+		else if (this.spawnCount != -1) this.spawnCount--;
+
 		const speed = Math.random()*MAX_SPAWN_SPEED;									// random speed		
-		const velocity = Vector2.right.rotate(Math.random()*2*Math.PI).scale(speed); 	// random direction
-		let asteroid = new Asteroid(velocity, Math.random()-0.5, this.pos, this.game);	
+		const angle = this.getAngle();
+		const velocity = Vector2.right.rotate(angle).scale(speed); 	// random direction
+		console.log(angle);
+		let asteroid = new Asteroid(velocity, Math.random()-0.5, this.pos, this.game);
 		this.game.spawnDeletableObject(asteroid);
+	}
+
+	update() {
+		if (this.spawnCount === 0) return;
+		if (this.currentDelay === this.spawnPeriod) {
+			console.log("Spawned new asteroid");
+			this.launchAsteroid();
+			this.currentDelay = 0;
+		} else {
+			this.currentDelay++;
+		}
 	}
 }	
