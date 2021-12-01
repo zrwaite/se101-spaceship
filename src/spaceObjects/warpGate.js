@@ -10,6 +10,7 @@ export default class WarpGate extends RenderedObject {
 		this.height = 50;
 		this.width = 50;
 		this.destinationSolarSystem = destinationSolarystem;
+        this.gravitySignature = 1;
 	}
 	update() {
 		//Add special update code here if needed

@@ -51,6 +51,7 @@ export default class Game {
     }
 	newSolarSystem(solarSystemName, numShips){
 		let startPosition = new Vector2(30,30); //start at centre for now
+        this.solarSystem = this.galaxy.getSolarSystem(solarSystemName); 
 		if (numShips > 1){
 			this.ships.push(...buildShip("all", startPosition, this)); //Build all ships for now
 			//get watchship by name in this.ships list
@@ -58,7 +59,6 @@ export default class Game {
 			this.ships.push(buildShip(this.watchShipName, startPosition, this)) //build a single ship
 			this.watchShip = this.ships[0];
 		}
-		this.solarSystem = this.galaxy.getSolarSystem(solarSystemName); 
 		this.delObjects = [...this.solarSystem.asteroids]; //Asteroids get deleted
 		this.drawnObjects = [...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.ships]; //Warpgates and planets get drawn
 		this.hiddenObjects = [...this.solarSystem.asteroidLaunchers]; //Launchers are hidden

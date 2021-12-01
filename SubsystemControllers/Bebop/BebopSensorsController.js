@@ -15,5 +15,5 @@ export default class BebopSensorsController extends SubsystemController{
 	*/
 	sensorsUpdate(shipStatusInfo, activeSensors, passiveSensors){
 		//Student code goes here
-	}
+    }
 }
