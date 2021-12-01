@@ -25,7 +25,7 @@ export default class ThrusterController{
 		}
 		this.thrusterPower = Object.fromEntries(Object.keys(this.thrusterData).map(thruster => [thruster, 0]));
 	}
-	// Successful responses contains a numeric field `power` giving the actualy pwoer the thruster was set to (in case power was out of bounds)
+	// Successful responses contains a numeric field `power` giving the actualy power the thruster was set to (in case power was out of bounds)
 	// and a boolean field `powerLimited` indicating whether the power requested was greater than the MAX_POWER and thus reduced to equal MAX_POWER
 	setThruster(thrusterName, power){
 		if (power < 0) {
