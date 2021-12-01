@@ -2,8 +2,7 @@ import Vector2 from "../helpers/Vector2.js";
 import Sprite from "../sprite.js";
 import PassiveSensors from "./passiveSensors.js";
 import ActiveSensors from "./activeSensors.js";
-import TurretControls from "./../../Sandbox/Scripts/Ship/TurretControls.js";
-import Turret from "./../../Sandbox/Scripts/Ship/Turret.js"
+import TurretControls from "./TurretControls.js";
 import ThrusterController from "./thrusterController.js";
 /* Reference other colonyship.js file for reference to make this one
 If you aren't sure about if a function should be copied or not, ask on discord. 
@@ -23,7 +22,6 @@ export default class ColonyShip extends Sprite{
 
 		this.totalDamage = 0;
 
-		this.turret = new Turret(this, this.turretControls);
 		this.image = this.game.images["ship"];
 		this.size = new Vector2(3, 2);
 		this.radius = (this.size.x + this.size.y) / 4;		// we say the hurt box is avg of width and height 
@@ -31,6 +29,10 @@ export default class ColonyShip extends Sprite{
 		this.solarSystem;
 		this.ctx = "ships";
 		this.mass = 3;
+		
+		// used in manual mode to force tap shooting and prevent
+		// burst shots that cause torpedos fired to hit each other and explode immediately
+		this.canTorpedo = true;
 	}
 	update() {
 		//Add special update code here if needed
@@ -61,11 +63,30 @@ export default class ColonyShip extends Sprite{
 		else if (this.game.inputs.pressed.right) this.aAccel.set(1, 0.005)
 		else this.aAccel.set(1, 0);
 		if (this.game.inputs.pressed.up) this.accel = this.accel.add(this.angle.scale(0.001))
-		// else if (this.game.inputs.pressed.down) this.accel = this.accel.add(this.angle.scale(-0.001));
+		else if (this.game.inputs.pressed.down) this.accel = this.accel.add(this.angle.scale(-0.001));
 		else this.accel.set(0,0);
-
-		if (this.game.inputs.pressed.down && this.game.frame%30 == 0) {
-			this.turret.fireMissile(1)
+		
+		// Manual controls for firing torpedos (tap shooting)
+		if (!this.game.inputs.pressed.space) {
+			this.canTorpedo = true;
+		} else if (this.game.inputs.pressed.space && this.canTorpedo) {
+			try {
+				this.turretControls.aimTurret(this.angle);
+				let numberOfTubesResponse = this.turretControls.getNumberOfTubes();
+				if (!numberOfTubesResponse.success) { 
+					throw numberOfTubesResponse;
+				}
+				let numberOfTubes = numberOfTubesResponse.response["numberOfTubes"];
+				let tubeIndex = this.game.frame % numberOfTubes;
+				console.log("firing tubeIndex " + tubeIndex);
+				let fireTorpedoResponse = this.turretControls.fireTorpedo(tubeIndex);
+				if (!fireTorpedoResponse.success) {
+					throw fireTorpedoResponse;
+				}
+				this.canTorpedo = false;
+			} catch (e) {
+				console.log(e);
+			}
 		}
 
 		//react to the controller data
