@@ -33,6 +33,12 @@ export default class ColonyShip extends Sprite{
 		// used in manual mode to force tap shooting and prevent
 		// burst shots that cause torpedos fired to hit each other and explode immediately
 		this.canTorpedo = true;
+
+		// stores the linear acceleration from the frame of reference of the ship (e.g. forward-backward, left-right)
+		// used to update accel by converting to global frame of reference
+		// useful for thrusterControls to only need to recompute accels once per thruster power update
+		// instead of every frame as the ship rotates
+		this.localAccel = Vector2.zero;
 	}
 	update() {
 		//Add special update code here if needed
@@ -42,29 +48,38 @@ export default class ColonyShip extends Sprite{
 		this.propulsionController.propulsionUpdate(this.shipStatusInfo, this.thrusterController)
 		this.manualControls(); //use the data from keyboard control for testing
 		this.boundaries();
+		this.accel = this.localAccel.rotate(this.angle.angle());
 		super.update() //parent update;
 	}
 	manualControls(){
-		//	Manual controls for velocity 
-		/*if (this.game.inputs.pressed.left) this.aSpeed.set(1, -0.05);
-		else if (this.game.inputs.pressed.right) this.aSpeed.set(1, 0.05)
-		else this.aSpeed.set(1, 0);
-		if (this.game.inputs.pressed.up) this.speed = this.angle.scale(0.2)
-		// else if (this.game.inputs.pressed.down) this.speed = this.angle.scale(-0.2);
-		else this.speed.set(0,0);
 
-		// can fire missle every 30 frames
-		if (this.game.inputs.pressed.down && this.game.frame%30 == 0) {
-			this.turret.fireMissile(1)
-		}*/
-
-		// 	Manual controls for accel
-		if (this.game.inputs.pressed.left) this.aAccel.set(1, -0.005);
-		else if (this.game.inputs.pressed.right) this.aAccel.set(1, 0.005)
-		else this.aAccel.set(1, 0);
-		if (this.game.inputs.pressed.up) this.accel = this.accel.add(this.angle.scale(0.001))
-		else if (this.game.inputs.pressed.down) this.accel = this.accel.add(this.angle.scale(-0.001));
-		else this.accel.set(0,0);
+		// 	Manual controls for propulsion
+		if (this.game.inputs.pressed.up) {
+			this.thrusterController.igniteThrusters("mainThruster", 50);
+		} else {
+			this.thrusterController.igniteThrusters("mainThruster", 0);
+		}
+		if (this.game.inputs.pressed.down) {
+			this.thrusterController.igniteThrusters("portRetroThruster", 25);
+			this.thrusterController.igniteThrusters("starboardRetroThruster", 25);
+		} else {
+			this.thrusterController.igniteThrusters("portRetroThruster", 0);
+			this.thrusterController.igniteThrusters("starboardRetroThruster", 0);
+		}
+		if (this.game.inputs.pressed.left) {
+			this.thrusterController.igniteThrusters("starboardForeThruster", 25);
+			this.thrusterController.igniteThrusters("portAftThruster", 25);
+		} else {
+			this.thrusterController.igniteThrusters("starboardForeThruster", 0);
+			this.thrusterController.igniteThrusters("portAftThruster", 0);
+		}
+		if (this.game.inputs.pressed.right) {
+			this.thrusterController.igniteThrusters("portForeThruster", 25);
+			this.thrusterController.igniteThrusters("starboardAftThruster", 25);
+		} else {
+			this.thrusterController.igniteThrusters("portForeThruster", 0);
+			this.thrusterController.igniteThrusters("starboardAftThruster", 0);
+		}
 		
 		// Manual controls for firing torpedos (tap shooting)
 		if (!this.game.inputs.pressed.space) {
