@@ -27,7 +27,7 @@ export default class ThrusterController{
 	}
 	// Successful responses contains a numeric field `power` giving the actualy pwoer the thruster was set to (in case power was out of bounds)
 	// and a boolean field `powerLimited` indicating whether the power requested was greater than the MAX_POWER and thus reduced to equal MAX_POWER
-	igniteThrusters(thrusterName, power){
+	setThruster(thrusterName, power){
 		if (power < 0) {
 			const errorMessage = "igniteThrusters failed as requested power must be non-negative";
 			console.log(errorMessage);
@@ -41,9 +41,6 @@ export default class ThrusterController{
 		const powerLimited = power > MAX_POWER;
 		power = Math.min(power, MAX_POWER);
 		const deltaPower = power - this.thrusterPower[thrusterName];
-		if (deltaPower == 0) {
-			return;
-		}
 		this.thrusterPower[thrusterName] = power;
 		// update physics
 		const thrusterDatum = this.thrusterData[thrusterName];

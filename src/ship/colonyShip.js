@@ -55,30 +55,30 @@ export default class ColonyShip extends Sprite{
 
 		// 	Manual controls for propulsion
 		if (this.game.inputs.pressed.up) {
-			this.thrusterController.igniteThrusters("mainThruster", 50);
+			this.thrusterController.setThruster("mainThruster", 50);
 		} else {
-			this.thrusterController.igniteThrusters("mainThruster", 0);
+			this.thrusterController.setThruster("mainThruster", 0);
 		}
 		if (this.game.inputs.pressed.down) {
-			this.thrusterController.igniteThrusters("portRetroThruster", 25);
-			this.thrusterController.igniteThrusters("starboardRetroThruster", 25);
+			this.thrusterController.setThruster("portRetroThruster", 25);
+			this.thrusterController.setThruster("starboardRetroThruster", 25);
 		} else {
-			this.thrusterController.igniteThrusters("portRetroThruster", 0);
-			this.thrusterController.igniteThrusters("starboardRetroThruster", 0);
+			this.thrusterController.setThruster("portRetroThruster", 0);
+			this.thrusterController.setThruster("starboardRetroThruster", 0);
 		}
 		if (this.game.inputs.pressed.left) {
-			this.thrusterController.igniteThrusters("starboardForeThruster", 25);
-			this.thrusterController.igniteThrusters("portAftThruster", 25);
+			this.thrusterController.setThruster("starboardForeThruster", 25);
+			this.thrusterController.setThruster("portAftThruster", 25);
 		} else {
-			this.thrusterController.igniteThrusters("starboardForeThruster", 0);
-			this.thrusterController.igniteThrusters("portAftThruster", 0);
+			this.thrusterController.setThruster("starboardForeThruster", 0);
+			this.thrusterController.setThruster("portAftThruster", 0);
 		}
 		if (this.game.inputs.pressed.right) {
-			this.thrusterController.igniteThrusters("portForeThruster", 25);
-			this.thrusterController.igniteThrusters("starboardAftThruster", 25);
+			this.thrusterController.setThruster("portForeThruster", 25);
+			this.thrusterController.setThruster("starboardAftThruster", 25);
 		} else {
-			this.thrusterController.igniteThrusters("portForeThruster", 0);
-			this.thrusterController.igniteThrusters("starboardAftThruster", 0);
+			this.thrusterController.setThruster("portForeThruster", 0);
+			this.thrusterController.setThruster("starboardAftThruster", 0);
 		}
 		
 		// Manual controls for firing torpedos (tap shooting)
