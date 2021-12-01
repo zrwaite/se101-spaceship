@@ -95,7 +95,17 @@ initializeImages([
     ["planet12", "SpaceObjects/RedPlanetSputnik.png"],
     ["planet13", "SpaceObjects/SandPlanet.png"],
     ["planet14", "SpaceObjects/StormPlanet.png"],
-    ["warpgate", "SpaceObjects/WhiteDwarfStar.png"]
+    ["warpgate", "SpaceObjects/WhiteDwarfStar.png"],
+    ["torpedo", "SpaceObjects/SpaceMissiles040.png"],
+    ["explosion0", "Explosions/regularExplosion00.png"],
+    ["explosion1", "Explosions/regularExplosion01.png"],
+    ["explosion2", "Explosions/regularExplosion02.png"],
+    ["explosion3", "Explosions/regularExplosion03.png"],
+    ["explosion4", "Explosions/regularExplosion04.png"],
+    ["explosion5", "Explosions/regularExplosion05.png"],
+    ["explosion6", "Explosions/regularExplosion06.png"],
+    ["explosion7", "Explosions/regularExplosion07.png"],
+    ["explosion8", "Explosions/regularExplosion08.png"]
 ]);
 
 let startTime, now, then, elapsed;
