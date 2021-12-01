@@ -87,14 +87,14 @@ export default class ColonyShip extends Sprite{
 		} else if (this.game.inputs.pressed.space && this.canTorpedo) {
 			try {
 				this.turretControls.aimTurret(this.angle);
-				let numberOfTubesResponse = this.turretControls.getNumberOfTubes();
+				const numberOfTubesResponse = this.turretControls.getNumberOfTubes();
 				if (!numberOfTubesResponse.success) { 
 					throw numberOfTubesResponse;
 				}
-				let numberOfTubes = numberOfTubesResponse.response["numberOfTubes"];
-				let tubeIndex = this.game.frame % numberOfTubes;
+				const numberOfTubes = numberOfTubesResponse.response["numberOfTubes"];
+				const tubeIndex = this.game.frame % numberOfTubes;
 				console.log("firing tubeIndex " + tubeIndex);
-				let fireTorpedoResponse = this.turretControls.fireTorpedo(tubeIndex);
+				const fireTorpedoResponse = this.turretControls.fireTorpedo(tubeIndex);
 				if (!fireTorpedoResponse.success) {
 					throw fireTorpedoResponse;
 				}

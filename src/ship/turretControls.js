@@ -19,12 +19,12 @@ export default class TurretControls{
 	// This is currently assumed to be an absolute direction, it can be implemented as a relative direction through a change of basis
 	aimTurret(aimTo){
 		//User called function for aiming turret
-		let newDirection = aimTo.normalize();
+		const newDirection = aimTo.normalize();
 		if (newDirection.magnitude() > 0) {
 			this.direction = newDirection;
 			return new response(200, [], {}, true);
 		} else {
-			let errorMessage = "aimTurret failed due to zero aimTo and undefined direction; no update to aim made";
+			const errorMessage = "aimTurret failed due to zero aimTo and undefined direction; no update to aim made";
 			console.log(errorMessage);
 			return new response(400, [errorMessage], {}, false);
 		}
@@ -34,34 +34,34 @@ export default class TurretControls{
 	}
 	getTubeCooldown(tubeIndex){
 		if (tubeIndex < 0 || tubeIndex >= NUMBER_OF_TUBES) {
-			let errorMessage = "getTubeCooldownFailed due to invalid tube index; expected tubeIndex from 0 (inclusive) up to " + NUMBER_OF_TUBES + " (exclusive) but received " + tubeIndex;
+			const errorMessage = "getTubeCooldownFailed due to invalid tube index; expected tubeIndex from 0 (inclusive) up to " + NUMBER_OF_TUBES + " (exclusive) but received " + tubeIndex;
 			console.log(errorMessage);
 			return new response(400, [errorMessage], {}, false);
 		}
 		//User called function for getting tube cooldown
-		let currentFrame = this.parentShip.game.frame;
-		let framesWaited = currentFrame - this.lastFrameFiredByTube[tubeIndex];
-		let framesToWait = Math.max(TUBE_COOLDOWN_FRAMES - framesWaited, 0);
+		const currentFrame = this.parentShip.game.frame;
+		const framesWaited = currentFrame - this.lastFrameFiredByTube[tubeIndex];
+		const framesToWait = Math.max(TUBE_COOLDOWN_FRAMES - framesWaited, 0);
 		return new response(200, [], {tubeCooldown: framesToWait}, true);
 	}
 	fireTorpedo(tubeIndex){
 		//User called function for firing torpedo
 		//check for valid torpedo stuff, then create new one
 		if (tubeIndex < 0 || tubeIndex >= NUMBER_OF_TUBES) {
-			let errorMessage = "fireTorpedo due to invalid tube index; expected tubeIndex from 0 (inclusive) up to " + NUMBER_OF_TUBES + " (exclusive) but received " + tubeIndex;
+			const errorMessage = "fireTorpedo due to invalid tube index; expected tubeIndex from 0 (inclusive) up to " + NUMBER_OF_TUBES + " (exclusive) but received " + tubeIndex;
 			console.log(errorMessage);
 			return new response(400, [errorMessage], {}, false);
 		}
-		let tubeCooldownResponse = this.getTubeCooldown(tubeIndex);
+		const tubeCooldownResponse = this.getTubeCooldown(tubeIndex);
 		if (!tubeCooldownResponse.success) {
-			let errorMessage = "fireTorpedo failed due to failure of internal call to getTubeCooldown";
+			const errorMessage = "fireTorpedo failed due to failure of internal call to getTubeCooldown";
 			console.log(errorMessage);
 			tubeCooldownResponse.errors.push(errorMessage);
 			return tubeCooldownResponse;
 		}
 		if (tubeCooldownResponse.response["tubeCooldown"] == 0) {
-			let torpedoVelocity = this.direction.scale(this.launchSpeed)		// calculate velocity of fired missile
-			let newTorpedo = new Torpedo(FUSE_FRAME_DURATION, this.parentShip, torpedoVelocity, this.parentShip.pos, this.parentShip.game)
+			const torpedoVelocity = this.direction.scale(this.launchSpeed)		// calculate velocity of fired missile
+			const newTorpedo = new Torpedo(FUSE_FRAME_DURATION, this.parentShip, torpedoVelocity, this.parentShip.pos, this.parentShip.game)
 			this.parentShip.game.spawnDeletableObject(newTorpedo);
 			this.parentShip.TorpedoesFired++;
 			this.lastFrameFiredByTube[tubeIndex] = this.parentShip.game.frame;

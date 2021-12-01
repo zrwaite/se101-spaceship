@@ -33,9 +33,9 @@ export default class Torpedo extends Sprite {
 			this.explode();  // Explode after fuse expires
 		}
 		if (this.hasExploded) {
-			let currentFrame = this.parentShip.game.frame;
-			let framesSinceExploded = currentFrame - this.frameExploded;
-			let explosionNumber = Math.floor(framesSinceExploded * NUMBER_OF_EXPLOSION_SPRITES / FRAMES_FOR_EXPLOSION);
+			const currentFrame = this.parentShip.game.frame;
+			const framesSinceExploded = currentFrame - this.frameExploded;
+			const explosionNumber = Math.floor(framesSinceExploded * NUMBER_OF_EXPLOSION_SPRITES / FRAMES_FOR_EXPLOSION);
 			if (explosionNumber < NUMBER_OF_EXPLOSION_SPRITES) {
 				this.image = this.game.images["explosion" + explosionNumber];
 				this.size = this.originalSize.scale(EXPLOSION_MAX_SCALE * Math.sqrt(framesSinceExploded / FRAMES_FOR_EXPLOSION));
