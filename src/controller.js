@@ -5,14 +5,14 @@ export default class Controller {
 			up: false,
 			right: false,
 			down: false,
-            space: false
+			space: false
 		};
 		this.controls = { //Store the control keycodes for readability
 			left: 37,
 			up: 38,
 			right: 39,
 			down: 40,
-            space: 32
+			space: 32
 		};
 		document.addEventListener("keydown", (event) => {
             let pressCode = event.keyCode;
