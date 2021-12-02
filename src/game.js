@@ -13,25 +13,27 @@ const DMG_COEFFICIENT = 20;
 
 export default class Game {
     constructor(width, height, images, contexts) {
-		this.width = width;
-        this.height = height;
+		this.width = width; // in units
+        this.height = height; // in units
         this.images = images;
 		this.contexts = contexts;
         this.inputs; // Controller values
-		this.drawnObjects = []; //stores objects that always need to be drawn and updated
-		this.hiddenObjects = []; //stores objects that need to be update only
-		this.delObjects = []; //Stores objects that need to be drawn and updated until deleted
-		this.numShips; //Stores the number of ships that are rendered
-		this.ships = []; //Array of ship objects
-		this.galaxy; //Stores Galaxy Object
-		this.solarSystem; //Stores Solar System Info
-		this.watchShip; //Ship being watched
+		this.drawnObjects = []; // stores objects that always need to be drawn and updated
+		this.hiddenObjects = []; // stores objects that need to be update only
+		this.delObjects = []; // Stores objects that need to be drawn and updated until deleted
+		this.numShips; // Stores the number of ships that are rendered
+		this.ships = []; // Array of ship objects
+		this.galaxy; // Stores Galaxy Object
+		this.solarSystem; // Stores Solar System Info
+		this.watchShip; // Ship being watched
 		this.watchShipName;
 
         // Animation Elements (UI uses these too)
         this.initializing = 1; // goes to 0 once everything has been drawn once
-        this.zoom = 1; // zoomed-out --> 1; zoomed-in --> 3;
-
+        this.zoom = 2.5; // zoomed-out --> 1; zoomed-in --> any other number; standard: 2.5;
+        // --- The rendered width is:   (Math.floor(this.width / this.zoom) * this.unit);
+        this.camera = new Vector2(0, 0); // pixels from top-left
+        
         this.frame = 0; // this increments every frame
         this.paused = false; // If the whole game is paused
         this.unit; // Global Unit
@@ -52,7 +54,7 @@ export default class Game {
 	newSolarSystem(solarSystemName, numShips){
 		let startPosition = new Vector2(30,30); //start at centre for now
         this.solarSystem = this.galaxy.getSolarSystem(solarSystemName); 
-		if (numShips > 1){
+		if (numShips > 1) {
 			this.ships.push(...buildShip("all", startPosition, this)); //Build all ships for now
 			//get watchship by name in this.ships list
 		} else {
@@ -157,7 +159,17 @@ export default class Game {
 
 		this.detectCollisions();
 
-		this.delObjects = this.delObjects.filter(this.deleter); //Removes objects no longer needed
+		this.delObjects = this.delObjects.filter(this.deleter); // Removes objects no longer needed
+
+        
+        //let camOffset = new Vector2(-this.watchShip.speed.x * this.unit * this.dragConst, -this.watchShip.speed.y * this.unit * this.dragConst);
+        let candidateX = (this.watchShip.pos.x - this.width / this.zoom / 2) * this.unit;
+        let candidateY = (this.watchShip.pos.y - this.height / this.zoom / 2) * this.unit;
+        candidateX = (candidateX <= 0) ? 0 : ((candidateX / this.unit <= this.width - this.width / this.zoom) ? candidateX : (this.width - this.width / this.zoom) * this.unit);
+        candidateY = (candidateY <= 0) ? 0 : ((candidateY / this.unit <= this.height - this.height / this.zoom) ? candidateY : (this.height - this.height / this.zoom) * this.unit);
+        
+        this.camera.x = candidateX;
+        this.camera.y = candidateY;
 
         ["missiles", "planets", "objects", "thrusters", "ships", "items"].forEach((object) => {
             if (object !== "planets" || game.zoom !== 1) {
@@ -165,8 +177,17 @@ export default class Game {
                 game.contexts[object].clearRect(0, 0, game.width * game.unit, game.height * game.unit);
             }
         });
+
+        // Temporary drawing of the zoomed-in view
+        /*let ctx = game.contexts["items"];
+        ctx.lineWidth = "5";
+        ctx.strokeStyle = "red";
+        ctx.beginPath();
+        ctx.rect(this.camera.x, this.camera.y, Math.floor(this.width / this.zoom * this.unit), Math.floor(this.height / this.zoom * this.unit));
+        ctx.stroke();*/
+
 		[...this.drawnObjects, ...this.delObjects, ...this.hiddenObjects].forEach((object) => object.update()); //Updates all objects
-        
+
         this.frame++;
     }
     draw () {
