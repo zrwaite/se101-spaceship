@@ -11,7 +11,7 @@ export default class Asteroid extends Sprite {
 		this.delete = false; //Once an item needs to be deleted and stop rendering, set to true
 		this.size = new Vector2(3, 3);
 		this.radius = this.size.x/2;		// asteroids are circles
-		this.mass = 1;
+		this.mass = 5;
 	}
 	update() {
 		//Add special update code here if needed
