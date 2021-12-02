@@ -59,9 +59,14 @@ export default class Game {
 			this.ships.push(buildShip(this.watchShipName, startPosition, this)) //build a single ship
 			this.watchShip = this.ships[0];
 		}
+		
 		this.delObjects = [...this.solarSystem.asteroids]; //Asteroids get deleted
 		this.drawnObjects = [...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.ships]; //Warpgates and planets get drawn
 		this.hiddenObjects = [...this.solarSystem.asteroidLaunchers]; //Launchers are hidden
+		this.ships.forEach((ship)=> {
+			this.drawnObjects.push(ship.turretControls);
+			ship.turretControls.ctx = "ships";
+		})
 	}
 	// add deletable game object (missles/asteroids) to the list
 	spawnDeletableObject(obj) {

@@ -31,6 +31,10 @@ export default class Vector2 {
 	scale(scalar) {
 		return new Vector2(this.x * scalar, this.y * scalar);
 	}
+	scaleTo(magnitude) {
+		let ratio = magnitude/this.magnitude();
+		return this.scale(ratio);
+	}
 	
 	dot(vector) {
 		return (this.x * vector.x + this.y + vector.y);
@@ -90,6 +94,13 @@ export default class Vector2 {
 		vector.x = this.x * cos - this.y * sin;
 		vector.y = this.x * sin + this.y * cos;
 		return vector;
+	}
+
+	rotateTo(angle) {
+		console.log(angle)
+		console.log(this.angle())
+		let rotateBy = angle-this.angle();
+		return this.rotate(rotateBy);
 	}
 	
 	toPrecision(precision) {

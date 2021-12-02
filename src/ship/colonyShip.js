@@ -83,9 +83,8 @@ export default class ColonyShip extends Sprite{
 		// 	this.thrusterController.setThruster("starboardAftThruster", 0);
 		// }
 		
-
-		if (this.game.inputs.pressed.left && this.aSpeed.angle() > -this.maxASpeed) this.aAccel.set(1, -0.005);
-		else if (this.game.inputs.pressed.right && this.aSpeed.angle() < this.maxASpeed) this.aAccel.set(1, 0.005)
+		if (this.game.inputs.pressed.left) this.aAccel.set(1, -0.005);
+		else if (this.game.inputs.pressed.right ) this.aAccel.set(1, 0.005)
  		else this.aAccel.set(1, 0);
  		if (this.game.inputs.pressed.up) this.accel = this.accel.add(this.angle.scale(0.0001))
  		else if (this.game.inputs.pressed.down) this.accel = this.accel.add(this.angle.scale(-0.0001));
@@ -138,6 +137,12 @@ export default class ColonyShip extends Sprite{
 		//Max speeds
 		if (this.speed.magnitude() > this.maxSpeed) {
 			this.speed = this.speed.scaleTo(this.maxSpeed);
+		}
+		if (this.aSpeed.angle() > this.maxASpeed) {
+			this.aSpeed = this.aSpeed.rotateTo(this.maxASpeed);
+		}
+		if (this.aSpeed.angle() < -this.maxASpeed) {
+			this.aSpeed = this.aSpeed.rotateTo(-this.maxASpeed);
 		}
 	}
 	// called when ship hits an asteroid
