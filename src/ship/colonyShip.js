@@ -86,8 +86,14 @@ export default class ColonyShip extends Sprite{
 		if (this.game.inputs.pressed.left) this.aAccel.set(1, -0.005);
 		else if (this.game.inputs.pressed.right ) this.aAccel.set(1, 0.005)
  		else this.aAccel.set(1, 0);
- 		if (this.game.inputs.pressed.up) this.accel = this.accel.add(this.angle.scale(0.0001))
- 		else if (this.game.inputs.pressed.down) this.accel = this.accel.add(this.angle.scale(-0.0001));
+ 		if (this.game.inputs.pressed.up) {
+			this.accel.set(0, 0);
+			this.accel = this.accel.add(this.angle.scale(0.002));
+		}
+ 		else if (this.game.inputs.pressed.down){
+			this.accel.set(0, 0);
+			this.accel = this.accel.add(this.angle.scale(-0.002));
+		}
  		else this.accel.set(0,0);
 		
 		// Manual controls for firing torpedos (tap shooting)
@@ -123,16 +129,20 @@ export default class ColonyShip extends Sprite{
 		if (this.pos.y>this.game.height){ //y pos bounds
 			this.pos.y = this.game.height;
 			this.speed.y = 0;
+			this.accel.y = 0;
 		} else if (this.pos.y<0) {
 			this.pos.y = 0;
 			this.speed.y = 0;
+			this.accel.y = 0;
 		}
 		if (this.pos.x>this.game.width){ // x pos bounds
 			this.pos.x = this.game.width;
 			this.speed.x = 0;
+			this.accel.x = 0;
 		} else if (this.pos.x<0) {
 			this.pos.x = 0;
 			this.speed.x = 0;
+			this.accel.x = 0;
 		}
 		//Max speeds
 		if (this.speed.magnitude() > this.maxSpeed) {
