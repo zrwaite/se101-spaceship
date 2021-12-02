@@ -5,14 +5,9 @@ export default class Controller {
 			up: false,
 			right: false,
 			down: false,
-			space: false
-		};
-		this.controls = { //Store the control keycodes for readability
-			left: 37,
-			up: 38,
-			right: 39,
-			down: 40,
-			space: 32
+			space: false,
+            q: false,
+            e: false
 		};
 		document.addEventListener("keydown", (event) => {
             let pressCode = event.keyCode;
@@ -26,6 +21,10 @@ export default class Controller {
                 this.pressed.down = true; // Press Down
             } else if (pressCode == 32) {
                 this.pressed.space = true; // Press Space
+            } else if (pressCode == 81) {
+                this.pressed.q = true;
+            } else if (pressCode == 69) {
+                this.pressed.e = true;
             }
 		});
 		document.addEventListener("keyup", (event) => {
@@ -40,6 +39,10 @@ export default class Controller {
                 this.pressed.down = false; // un-Press Down
             } else if (pressCode == 32) {
                 this.pressed.space = false; // un-Press Space
+            } else if (pressCode == 81) {
+                this.pressed.q = false;
+            } else if (pressCode == 69) {
+                this.pressed.e = false;
             }
 		});
 	}

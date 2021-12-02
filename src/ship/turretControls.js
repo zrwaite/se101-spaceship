@@ -1,20 +1,28 @@
 import Vector2 from "../helpers/Vector2.js";
 import Torpedo from "./torpedo.js";
 import response from "../helpers/response.js";
+import RenderedObject from "../renderedObject.js";
 
 const TUBE_COOLDOWN_FRAMES = 30;
 const NUMBER_OF_TUBES  = 4;
 const TORPEDO_VELOCITY = 0.2;
 const FUSE_FRAME_DURATION = undefined;
 
-export default class TurretControls{
-    constructor(parentShip){
+export default class TurretControls extends RenderedObject{
+    constructor(parentShip, ...args){
+		super(...args);
+		this.image = this.game.images["turret"];
 		this.parentShip = parentShip;
 		this.cooldown_frames = TUBE_COOLDOWN_FRAMES;
 		this.numberOfTubes = NUMBER_OF_TUBES;
 		this.direction = new Vector2(1,0); // Default
 		this.lastFrameFiredByTube = Array(NUMBER_OF_TUBES).fill(-Infinity);
 		this.launchSpeed = TORPEDO_VELOCITY;
+		this.pos = this.parentShip.pos;
+	}
+	update() {
+		//Add special update code here if needed
+		this.pos = this.parentShip.pos;
 	}
 	// This is currently assumed to be an absolute direction, it can be implemented as a relative direction through a change of basis
 	aimTurret(aimTo){
