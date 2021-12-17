@@ -1,6 +1,6 @@
 import Game from "./game.js";
 
-let game; // Initialized properly in initializeGame().
+let game; // Initialized properly in DOM.doneLoad().
 
 const windowSize = { // Accessable through game.width and game.height.
 	x: 72,
@@ -51,17 +51,9 @@ function iterateLoad(length) {
 
         // **** This begins the whole game! *** //
 
-        initializeGame();
+        DOM.doneLoad();
 
     }
-}
-
-function initializeGame() {
-    contexts["background"].drawImage(images["background"], 0, 0, windowSize.x * unit, windowSize.y * unit);
-    game = new Game(windowSize.x, windowSize.y, images, contexts);
-    game.unit = unit;
-    game.start("test", 1, "bebop");
-    startAnimating();
 }
 
 initializeContexts([
@@ -108,6 +100,50 @@ initializeImages([
     ["explosion8", "Explosions/regularExplosion08.png"]
 ]);
 
+let DOM = {
+    loaded: false,
+    gameInitialized: false,
+    buttons: [
+        document.querySelector("#FirstStart"), // `Start` button on first title screen
+    ],
+    menus: [
+        document.querySelector("#Title"), // Very first title screen
+    ],
+    elementsInit() {
+        this.buttons[0].onclick = function() {DOM.startGame();}
+    },
+    doneLoad: function() {
+        // Get rid of loading screen
+        contexts["background"].drawImage(images["background"], 0, 0, windowSize.x * unit, windowSize.y * unit);
+        game = new Game(windowSize.x, windowSize.y, images, contexts);
+        game.unit = unit;
+        this.loaded = true;
+        // The below is what needs to be buffered :)
+        //this.startGame();
+    },
+    startGame: function() {
+        console.log("Attempted starting the game...");
+        if (this.loaded && !this.gameInitialized) {
+            game.start("test", 1, "bebop");
+            startAnimating();
+            this.menus[0].style.display = "none";
+            this.gameInitialized = true;
+        }
+    }
+}
+
+DOM.elementsInit();
+
+
+
+
+
+
+
+
+
+
+
 let startTime, now, then, elapsed;
 
 function startAnimating() {
@@ -128,15 +164,3 @@ function animate() {
         }
     }
 }
-
-// The below initialization will disappear as soon as I make a system to store the ships.
-/*let testShip = new TestShip();
-testShip.linearVelocity.x = 0.07;
-let testShip2 = new TestShip();
-testShip2.angularPosition = Math.PI * 3 / 2;
-testShip2.linearPosition.y = 15;
-testShip2.linearVelocity.y = -0.12;
-let testShip3 = new TestShip();
-testShip3.angularPosition = Math.PI / 4;
-testShip3.linearPosition.x = 15;
-testShip3.linearVelocity = {x: 0.034, y: 0.034};*/
