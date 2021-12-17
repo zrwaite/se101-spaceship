@@ -13,12 +13,35 @@ body {
     background-color: black;
 }
 
-canvas {
+.fullscreen, canvas {
     position: absolute;
-    /* Math to center the canvases in the viewing window. */
+    /* Math to center within the viewing window. */
     left: calc(50% - var(--width) / 2);
     top: calc(50% - var(--height) / 2);
     width: calc(var(--width) * var(--unit));
     height: calc(var(--height) * var(--unit));
+    border-radius: calc(var(--unit) / 2);
+}
+
+canvas {
     outline: var(--border) solid rgba(255, 255, 255);
+}
+
+#Title {
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#FirstStart {
+    border: none;
+    outline: var(--border) solid rgba(255, 255, 255);
+    position: absolute;
+    width: calc(var(--unit) * 16);
+    height: calc(var(--unit) * 8);
+    left: calc(var(--unit) * 28);
+    top: calc(var(--unit) * 22);
+    font-size: calc(var(--unit) * 3);
+    border-radius: calc(var(--unit) / 2);
+    background-color: rgb(0, 0, 0);
+    color: white;
 }
