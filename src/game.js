@@ -56,7 +56,9 @@ export default class Game {
         this.solarSystem = this.galaxy.getSolarSystem(solarSystemName); 
 		if (numShips > 1) {
 			this.ships.push(...buildShip("all", startPosition, this)); //Build all ships for now
+
 			//get watchship by name in this.ships list
+            
 		} else {
 			this.ships.push(buildShip(this.watchShipName, startPosition, this)) //build a single ship
 			this.watchShip = this.ships[0];
@@ -201,4 +203,21 @@ export default class Game {
 		if(sprite.delete) return false;
 		return true;
 	}
+    endGame() {
+        let game = this;
+        ["missiles", "planets", "objects", "thrusters", "ships", "items"].forEach((object) => {
+            game.contexts[object].setTransform(1, 0, 0, 1, 0, 0);
+            game.contexts[object].clearRect(0, 0, game.width * game.unit, game.height * game.unit);
+        });
+		delete game.contexts;
+        delete game.inputs;
+		delete game.drawnObjects;
+		delete game.hiddenObjects;
+		delete game.delObjects;
+		delete game.ships;
+		delete game.galaxy;
+		delete game.solarSystem;
+		delete game.watchShip;
+        delete game.camera;
+    }
 }
