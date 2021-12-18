@@ -30,7 +30,7 @@ export default class Game {
 
         // Animation Elements (UI uses these too)
         this.initializing = 1; // goes to 0 once everything has been drawn once
-        this.zoom = 2.5; // zoomed-out --> 1; zoomed-in --> any other number; standard: 2.5;
+        this.zoom = 1; // zoomed-out --> 1; zoomed-in --> any other number; standard: 2.5;
         // --- The rendered width is:   (Math.floor(this.width / this.zoom) * this.unit);
         this.camera = new Vector2(0, 0); // pixels from top-left
         
