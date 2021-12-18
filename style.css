@@ -2,13 +2,47 @@
     font-family: NotoSans-Black;
     src: url("../Sandbox/Fonts/NotoSans-Black.ttf");
 }
+@font-face {
+    font-family: Montserrat;
+    src: url("../Sandbox/Fonts/Montserrat-ExtraLight.ttf");
+    font-weight: 200;
+}
+@font-face {
+    font-family: Montserrat;
+    src: url("../Sandbox/Fonts/Montserrat-Light.ttf");
+    font-weight: 300;
+}
+@font-face {
+    font-family: Montserrat;
+    src: url("../Sandbox/Fonts/Montserrat-Regular.ttf");
+}
+@font-face {
+    font-family: Montserrat;
+    src: url("../Sandbox/Fonts/Montserrat-SemiBold.ttf");
+    font-weight: 600;
+}
+@font-face {
+    font-family: Montserrat;
+    src: url("../Sandbox/Fonts/Montserrat-Bold.ttf");
+    font-weight: bold;
+}
+
+* {
+    font-family: 'Montserrat';
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;
+}
 
 body {
     --unit: 30px; /* screen.js updates this. */
     --border: 2px; /* screen.js updates this. */
-    --width: 32; /* screen.js updates this. */
-    --height: 24; /* screen.js updates this. */
-    font-family: NotoSans-Black;
+    --width: 72; /* screen.js updates this. */
+    --height: 54; /* screen.js updates this. */
+    --leftMenu: 26; /* MANUALLY adjust this. */
+    --radius: calc(var(--unit) / 3); /* MANUALLY adjust this. */
+    --px: 1px;
     overflow: hidden;
     background-color: black;
 }
@@ -16,32 +50,342 @@ body {
 .fullscreen, canvas {
     position: absolute;
     /* Math to center within the viewing window. */
-    left: calc(50% - var(--width) / 2);
-    top: calc(50% - var(--height) / 2);
+    left: calc(50% - var(--width) * var(--unit) / 2);
+    top: calc(50% - var(--height) * var(--unit) / 2);
     width: calc(var(--width) * var(--unit));
     height: calc(var(--height) * var(--unit));
-    border-radius: calc(var(--unit) / 2);
+    border-radius: var(--radius);
 }
-
 canvas {
     outline: var(--border) solid rgba(255, 255, 255);
 }
 
-#Title {
+.menu {
+    position: absolute;
     z-index: 1;
-    background-color: rgba(0, 0, 0, 0);
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius);
+    color: white;
+    pointer-events: none;
+    opacity: 0;
+}
+.menu.on {
+    pointer-events: all;
+    opacity: 1;
 }
 
-#FirstStart {
-    border: none;
-    outline: var(--border) solid rgba(255, 255, 255);
+/* Initial Title Menu */
+#Title {
+    border-radius: var(--radius);
+    background-image: url("Sandbox/Sprites/UIImages/TitleBackground.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#Title h1 {
+    margin-top: calc(var(--unit) * 10);
+    font-size: calc(var(--unit) * 5);
+    text-align: center;
+    font-weight: 200;
+}
+#Title .start {
+    width: calc(var(--unit) * 18);
+    height: calc(var(--unit) * 6);
+    left: calc(var(--unit) * 27);
+    bottom: calc(var(--unit) * 8);
+    font-size: calc(var(--unit) * 3.5);
+    font-weight: 200;
+}
+
+/* Game Menu */
+#Game {
+    font-weight: 300;
+    font-size: calc(var(--unit) * 1.3);
+    background-color: rgba(0, 0, 0, 0);
+}
+#Game h1 {
+    font-weight: 300;
+    font-size: calc(var(--unit) * 2.2);
+    text-align: center;
+}
+#Game #DevTools h1 {
+    margin-top: calc(var(--unit) * 1.8);
+}
+#Game button#PauseButton {
     position: absolute;
-    width: calc(var(--unit) * 16);
-    height: calc(var(--unit) * 8);
-    left: calc(var(--unit) * 28);
-    top: calc(var(--unit) * 22);
-    font-size: calc(var(--unit) * 3);
-    border-radius: calc(var(--unit) / 2);
-    background-color: rgb(0, 0, 0);
+    width: calc(var(--unit) * 3);
+    height: calc(var(--unit) * 3);
+    top: calc(var(--unit) * 1.5);
+    right: calc(var(--unit) * 1.5);
+}
+#PauseButton:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+#PauseButton .bars {
+    position: absolute;
+    top: calc(var(--unit) * 0.8);
+    right: calc(var(--unit) * 1.1 - var(--border) * 2);
+    width: calc(var(--unit) * 0.8);
+    height: calc(var(--unit) * 1.4);
+    border-left: calc(var(--border) * 2) solid white;
+    border-right: calc(var(--border) * 2) solid white;
+}
+#Game section#DevTools {
+    padding: 0;
+    position: absolute;
+    width: calc(var(--unit) * 19);
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    left: 0;
+    top: 0;
+}
+#DevTools section.darken {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+#DevTools table {
+    width: 100%;
+    border-spacing: calc(var(--unit) * 2);
+    border-collapse: collapse;
+    font-weight: 400;
+    table-layout: fixed;
+}
+#DevTools table td {
+    height: calc(var(--unit) * 2);
+    padding: 0 0 0 calc(var(--unit) * 1);
+}
+#DevTools table tr.title>td {
+    padding: calc(var(--unit) * 1.5) 0 0 calc(var(--unit) * 1);
+}
+#DevTools table tr:not(.title)>td {
+    width: 50%;
+}
+
+/* Main Menu */
+#Main {
+    font-weight: 300;
+    font-size: calc(var(--unit) * 1.3);
+    background-image: url("Sandbox/Sprites/SpaceObjects/Space.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#Main section {
+    position: absolute;
+}
+#Main section h1 {
+    text-align: center;
+    font-weight: 200;
+    font-size: calc(var(--unit) * 4);
+    margin-top: calc(var(--unit) * 2.5);
+}
+#Main section#Ship {
+    width: calc(var(--unit) * var(--leftMenu));
+    height: calc(var(--unit) * 16);
+    top: 0;
+    left: 0;
+}
+#Ship #ShipSelect {
+    transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+    z-index: 2;
+    position: absolute;
+    overflow: hidden;
+    background-color: white;
+    border-radius: var(--radius);
+    border: var(--border) solid white;
+    width: calc(var(--unit) * 12);
+    height: calc(var(--unit) * 2.25);
+    top: calc(var(--unit) * 11);
+    left: calc(var(--unit) * (var(--leftMenu) - 12) / 2);
+    color: black;
+    font-weight: 400;
+    font-size: calc(var(--unit) * 1.6);
+    cursor: pointer;
+}
+#Ship #ShipSelect.open {
+    height: calc(var(--unit) * 2.25 * 18);
+}
+#ShipSelect figure {
+    margin: 0;
+    padding: calc(var(--unit) * 0.125) 0 calc(var(--unit) * 0.125) calc(var(--unit) * 0.8);
+    display: block;
+    width: calc(var(--unit) * (12 - 0.8));
+    height: calc(var(--unit) * 2);
+    background-color: black;
     color: white;
 }
+#ShipSelect figure.small {
+    padding: calc(var(--unit) * 0.425) 0 calc(var(--unit) * 0.425) calc(var(--unit) * 0.8);
+    font-size: calc(var(--unit) * 1);
+    height: calc(var(--unit) * 1.4);
+}
+#ShipSelect figure:not(.active):hover {
+    cursor: pointer;
+    background-color: rgb(50, 50, 50);
+}
+#ShipSelect figure.active {
+    position: sticky;
+    bottom: 0;
+    margin: 0;
+    background-color: white;
+    color: black;
+}
+#Main section#Settings {
+    width: calc(var(--unit) * var(--leftMenu));
+    height: calc(var(--unit) * (var(--height) - 16));
+    top: calc(var(--unit) * 16);
+    left: 0;
+    text-align: left;
+}
+#Settings table {
+    margin-left: calc(var(--unit) * 3);
+    border-spacing: calc(var(--unit) * 1) 0;
+}
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    background-color: black;
+    border-radius: var(--radius);
+    border: var(--border) solid white;
+    padding: calc(var(--unit) / 2 + 1.5px);
+    cursor: pointer;
+}
+input[type="checkbox"]:hover, input[type="checkbox"]:checked:active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+input[type="checkbox"]:checked:hover, input[type="checkbox"]:active {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+input[type="checkbox"]:checked {
+    background-color: rgba(255, 255, 255, 1);
+}
+#Main section#Divider {
+    background-color: white;
+    width: calc(var(--border));
+    height: calc(var(--unit) * (var(--height) - 4));
+    top: calc(var(--unit) * 2);
+    left: calc(var(--unit) * var(--leftMenu));
+    border-radius: var(--radius);
+}
+#Main section#Galaxy {
+    width: calc(var(--unit) * (var(--width) - var(--leftMenu)) - var(--border));
+    height: 100%;
+    top: 0;
+    left: calc(var(--unit) * var(--leftMenu) + var(--border));
+}
+#Galaxy table {
+    border-spacing: calc(var(--unit) * 3.5);
+}
+#Galaxy table td {
+    background-color: rgba(255, 255, 255, 0.2);
+    width: calc(var(--unit) * 18);
+    height: calc(var(--unit) * 13.5);
+    border-radius: var(--radius);
+    font-size: calc(var(--unit) * 1.5);
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
+#Galaxy table td:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 1);
+}
+#Main section#Info {
+    overflow: hidden;
+    cursor: pointer;
+    transition-duration: left 0.4s, bottom 0.4s, background-color 0.2s;
+    -o-transition-duration: left 0.4s, bottom 0.4s, background-color 0.2s;
+    -moz-transition-duration: left 0.4s, bottom 0.4s, background-color 0.2s;
+    -webkit-transition-duration: left 0.4s, bottom 0.4s, background-color 0.2s;
+}
+#Info:not(.active) {
+    width: calc(var(--unit) * 8);
+    font-size: calc(var(--unit) * 1.3);
+    height: calc(var(--unit) * 1.8);
+    bottom: calc(var(--unit) * 4.3);
+    left: calc(var(--unit) * (var(--leftMenu) - 8) / 2);
+    z-index: 1;
+}
+#Info.active {
+    z-index: 3;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: calc(var(--unit) * var(--width));
+    height: calc(var(--unit) * var(--height));
+    left: 0;
+    bottom: 0;
+}
+#Info:not(.active) button {
+    outline: none;
+    background-color: white;
+    color: black;
+    width: calc(var(--unit) * 8);
+    height: calc(var(--unit) * 1.8);
+    left: 0;
+    bottom: 0;
+}
+#Info:not(.active) button:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+#Info.active button:hover {
+    background-color: black;
+}
+#Info.active button {
+    text-align: left;
+    background-color: black;
+    left: calc(var(--unit) * 20);
+    bottom: calc(var(--unit) * 15);
+    width: calc(var(--unit) * 32);
+    height: calc(var(--unit) * 24);
+    padding: 0 calc(var(--unit) * 2) 0 calc(var(--unit) * 2);
+    font-size: calc(var(--unit) * 1.3);
+}
+#Info h3 {
+    text-align: center;
+    margin-top: calc(var(--unit) * -3);
+    font-weight: 300;
+    font-size: calc(var(--unit) * 2.5);
+}
+
+
+mark {
+    background-color: rgb(0, 0, 0);
+    color: inherit;
+}
+
+.warning {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: calc(var(--unit) * 2 + var(--border));
+    font-size: calc(var(--unit) * 1);
+    color: rgb(240, 80, 80);
+    font-weight: 300;
+    display: none;
+}
+.warning .on {
+    display: block;
+}
+
+button {
+    position: absolute;
+    border: none;
+    outline: var(--border) solid rgba(255, 255, 255);
+    border-radius: var(--radius);
+    background-color: rgb(0, 0, 0);
+    cursor: pointer;
+    color: white;
+    transition-duration: 0.2s;
+    -o-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    -webkit-transition-duration: 0.2s;
+}
+button:hover {
+    background-color: rgb(25, 25, 25);
+}
+

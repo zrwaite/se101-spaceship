@@ -5,7 +5,8 @@ import Vector2 from "./helpers/Vector2.js";
 //The constructor is going to build the galaxies
 //Think of this as creating all the links between solar system levels
 export default class Galaxy{
-	constructor(galaxyName, game ){
+	constructor(galaxyName, game){
+        this.name = galaxyName;
 		this.game = game;
 		this.solarSystems = [];
 		this.startingSolarSystem;
