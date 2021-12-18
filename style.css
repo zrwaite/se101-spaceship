@@ -2,13 +2,46 @@
     font-family: NotoSans-Black;
     src: url("../Sandbox/Fonts/NotoSans-Black.ttf");
 }
+@font-face {
+    font-family: Montserrat;
+    src: url("../Sandbox/Fonts/Montserrat-ExtraLight.ttf");
+    font-weight: 200;
+}
+@font-face {
+    font-family: Montserrat;
+    src: url("../Sandbox/Fonts/Montserrat-Light.ttf");
+    font-weight: 300;
+}
+@font-face {
+    font-family: Montserrat;
+    src: url("../Sandbox/Fonts/Montserrat-Regular.ttf");
+}
+@font-face {
+    font-family: Montserrat;
+    src: url("../Sandbox/Fonts/Montserrat-SemiBold.ttf");
+    font-weight: 600;
+}
+@font-face {
+    font-family: Montserrat;
+    src: url("../Sandbox/Fonts/Montserrat-Bold.ttf");
+    font-weight: bold;
+}
+
+* {
+    font-family: 'Montserrat';
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;
+}
 
 body {
     --unit: 30px; /* screen.js updates this. */
     --border: 2px; /* screen.js updates this. */
-    --width: 32; /* screen.js updates this. */
-    --height: 24; /* screen.js updates this. */
-    font-family: NotoSans-Black;
+    --width: 72; /* screen.js updates this. */
+    --height: 54; /* screen.js updates this. */
+    --leftMenu: 26; /* We manually adjust this. */
+    --px: 1px;
     overflow: hidden;
     background-color: black;
 }
@@ -16,32 +49,182 @@ body {
 .fullscreen, canvas {
     position: absolute;
     /* Math to center within the viewing window. */
-    left: calc(50% - var(--width) / 2);
-    top: calc(50% - var(--height) / 2);
+    left: calc(50% - var(--width) * var(--unit) / 2);
+    top: calc(50% - var(--height) * var(--unit) / 2);
     width: calc(var(--width) * var(--unit));
     height: calc(var(--height) * var(--unit));
-    border-radius: calc(var(--unit) / 2);
+    border-radius: calc(var(--unit) / 3);
 }
-
 canvas {
     outline: var(--border) solid rgba(255, 255, 255);
 }
 
-#Title {
+.menu {
+    position: absolute;
     z-index: 1;
-    background-color: rgba(0, 0, 0, 0);
+    width: 100%;
+    height: 100%;
+    border-radius: calc(var(--unit) / 3);
+    color: white;
+    pointer-events: none;
+    opacity: 0;
+}
+.menu.on {
+    pointer-events: all;
+    opacity: 1;
 }
 
-#FirstStart {
+/* Initial Title Menu */
+#Title {
+    border-radius: calc(var(--unit) / 3);
+    background-image: url("Sandbox/Sprites/UIImages/TitleBackground.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#Title h1 {
+    margin-top: calc(var(--unit) * 10);
+    font-size: calc(var(--unit) * 5);
+    text-align: center;
+    font-weight: 200;
+}
+#Title .start {
+    width: calc(var(--unit) * 18);
+    height: calc(var(--unit) * 6);
+    left: calc(var(--unit) * 27);
+    bottom: calc(var(--unit) * 8);
+    font-size: calc(var(--unit) * 3.5);
+    font-weight: 200;
+}
+
+/* Main Menu */
+#Main {
+    font-weight: 300;
+    font-size: calc(var(--unit) * 1.3);
+    background-image: url("Sandbox/Sprites/SpaceObjects/Space.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#Main section {
+    position: absolute;
+}
+#Main section h1 {
+    text-align: center;
+    font-weight: 200;
+    font-size: calc(var(--unit) * 4);
+    margin-top: calc(var(--unit) * 2.5);
+}
+#Main section#Ship {
+    width: calc(var(--unit) * var(--leftMenu));
+    height: calc(var(--unit) * 16);
+    top: 0;
+    left: 0;
+}
+#Main section#Settings {
+    width: calc(var(--unit) * var(--leftMenu));
+    height: calc(var(--unit) * (var(--height) - 16));
+    top: calc(var(--unit) * 16);
+    left: 0;
+    text-align: left;
+}
+#Settings table {
+    margin-left: calc(var(--unit) * 1);
+    border-spacing: calc(var(--unit) * 1) 0;
+}
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    background-color: black;
+    border-radius: calc(var(--unit) / 3);
+    border: var(--border) solid white;
+    padding: calc(var(--unit) / 2 + 1.5px);
+    cursor: pointer;
+}
+input[type="checkbox"]:hover, input[type="checkbox"]:checked:active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+input[type="checkbox"]:checked:hover, input[type="checkbox"]:active {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+input[type="checkbox"]:checked {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+
+
+
+
+#Main section#Divider {
+    background-color: white;
+    width: calc(var(--border));
+    height: calc(var(--unit) * (var(--height) - 4));
+    top: calc(var(--unit) * 2);
+    left: calc(var(--unit) * var(--leftMenu));
+    border-radius: calc(var(--unit) / 3);
+}
+#Main section#Galaxy {
+    width: calc(var(--unit) * (var(--width) - var(--leftMenu)) - var(--border));
+    height: 100%;
+    top: 0;
+    left: calc(var(--unit) * var(--leftMenu) + var(--border));
+}
+#Galaxy table {
+    border-spacing: calc(var(--unit) * 3.5);
+}
+#Galaxy table td {
+    background-color: rgba(255, 255, 255, 0.2);
+    width: calc(var(--unit) * 18);
+    height: calc(var(--unit) * 13.5);
+    border-radius: calc(var(--unit) / 3);
+    font-size: calc(var(--unit) * 1.5);
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
+#Galaxy table td:hover {
+    cursor: pointer;
+}
+#Galaxy table td#galaxy1:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 1);
+}
+
+
+
+
+mark {
+    background-color: rgb(0, 0, 0);
+    color: inherit;
+}
+
+.warning {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: calc(var(--unit) * 2 + var(--border));
+    font-size: calc(var(--unit) * 1);
+    color: rgb(240, 80, 80);
+    font-weight: 300;
+    display: none;
+}
+.warning .on {
+    display: block;
+}
+
+button {
+    position: absolute;
     border: none;
     outline: var(--border) solid rgba(255, 255, 255);
-    position: absolute;
-    width: calc(var(--unit) * 16);
-    height: calc(var(--unit) * 8);
-    left: calc(var(--unit) * 28);
-    top: calc(var(--unit) * 22);
-    font-size: calc(var(--unit) * 3);
-    border-radius: calc(var(--unit) / 2);
+    border-radius: calc(var(--unit) / 3);
     background-color: rgb(0, 0, 0);
+    cursor: pointer;
     color: white;
+    transition-duration: 0.2s;
+    -o-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    -webkit-transition-duration: 0.2s;
 }
+button:hover {
+    background-color: rgb(25, 25, 25);
+}
+
