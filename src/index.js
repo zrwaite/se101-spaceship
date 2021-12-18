@@ -19,6 +19,8 @@ let spritePath = "Sandbox/Sprites/";
 let imagesLoaded = 0; // Updates as the images load, until all are loaded.
 let images = {}; // image locations, by name
 let contexts = {}; // contexts, by name
+let galaxies = ["test", "Alpha", "Beta", "Gamma"];
+let ships = ["Bebop", "Bismark", "Enterprise", "Event Horizon", "Flying Dutchman", "Galactica", "Milano", "Normandy", "Nostromo", "Pillar Of Autumn", "Planet Express", "Rama", "Red Dwarf", "Serenity", "ssAnne", "Thunderbird III", "Yamato", "All Ships"];
 
 function initializeImages(imageInfo) {
     /* Create the images with the given info: [imageName, src]. */
@@ -27,6 +29,19 @@ function initializeImages(imageInfo) {
         image.src = spritePath + imageInfo[i][1];
         image.onload = () => iterateLoad(imageInfo.length);
         images[imageInfo[i][0]] = image;
+    }
+}
+
+function initializeShipSelect(shipNames, active) {
+    /* Create the ship DOM elements with the given names, in alphabetical order. */
+    for (let i = 0; i < shipNames.length; i++) {
+        let ship = document.createElement("FIGURE");
+        ship.id = shipNames[i];
+        ship.innerHTML = shipNames[i];
+        ship.onclick = function() {DOM.shipActive(this);}
+        if (shipNames[i].length >= 12) ship.classList.add("small");
+        if (shipNames[i] == active) ship.classList.add("active");
+        document.body.querySelector("#ShipSelect").appendChild(ship);
     }
 }
 
@@ -40,7 +55,6 @@ function initializeContexts(contextNames) {
         document.body.querySelector(".canvasHolder").appendChild(canvas);
         let ctx = canvas.getContext('2d');
         ctx.imageSmoothingEnabled = false;
-        
         contexts[contextNames[i]] = ctx;
     }
 }
@@ -49,7 +63,7 @@ function iterateLoad(length) {
     imagesLoaded++;
     if (imagesLoaded >= length) {
 
-        // **** This begins the whole game! *** //
+        // **** This begins the whole system! *** //
 
         DOM.doneLoad();
 
@@ -133,32 +147,55 @@ let DOM = {
     data: {
         "veryFirst": true, // NOT CHANGED BY USER: Haven't ever pressed play on the game before...
         "skipMenu": false, // `true`: skip menu; get right in to the game!
-        "focusShip": "Bebop", // Ship the camera follows
-        "devDefault": false, // The default toggle state of the dev window when starting to play
+        "defaultShip": "Bebop", // Ship the camera follows
+        "devDisplay": true, // The default toggle state of the dev window when starting to play
         "defaultGalaxy": 0, // Galaxy index default
         "manualControls": true, // Use manual controls, not student-programmed systems
         "zoom": 1 // zoom aspect ratio (1 vs 2.5)
     },
     elements: {
         "TitleStart": document.querySelector("#Title .start"), // `Start` button on first title screen
-        "TItleWarning": document.querySelector("#Title .warning"), // Storage warning on the title screen
+        "TitleWarning": document.querySelector("#Title .warning"), // Storage warning on the title screen
         "checkboxes": document.querySelectorAll("input[type='checkbox']"), // An array of the checkboxes
-        "galaxy1": document.querySelector("#galaxy1"), // First galaxy (the only one that can be clicked atm)
+        "Info": document.querySelector("#Info"), // Info button
+        "PauseButton": document.querySelector("#PauseButton"),
+        "GalaxyName": document.querySelector("#GalaxyName"),
+        "SolarSystemName": document.querySelector("#SolarSystemName"),
+        "DevTools": document.querySelector("#DevTools"),
+        "ShipSelect": document.querySelector("#ShipSelect"), // Ship selection menu holder
+        "galaxy1": document.querySelector("#galaxy1"), // First galaxy :)
+        "galaxy2": document.querySelector("#galaxy2"),
+        "galaxy3": document.querySelector("#galaxy3"),
+        "galaxy4": document.querySelector("#galaxy4"),
     },
     menus: {
         "Title": document.querySelector("#Title"), // Very first title screen
+        "Game": document.querySelector("#Game"), // Game menu; appears when in the game (dev tools, etc)
         "Main": document.querySelector("#Main"), // Main ship, galaxy, and preference selection page
-        "Pause": document.querySelector("#Title"), // Pause menu :)
     },
     initialize() {
         this.elements["TitleStart"].onclick = function() {DOM.newMenu("Main");}
-        // WILL EVENTUALLY WRITE A FOR LOOP to initialize all the galaxy buttons, like below
-        this.elements["galaxy1"].onclick = function() {
-            if (DOM.data["defaultGalaxy"] !== 0) {
-                DOM.data["defaultGalaxy"] = 0;
-                DOM.save();
+        this.elements["PauseButton"].onclick = function() {
+            game.paused = true;
+            DOM.newMenu("Main");
+        }
+        this.elements["ShipSelect"].onclick = function() {this.classList.toggle("open");}
+        this.elements["Info"].onclick = function() {
+            this.classList.toggle("active");
+            if (this.classList.contains("active")) {
+                this.querySelector("button").innerHTML = "<h3>&#x1F6C8; Info & Tips</h3>&emsp;&emsp;&emsp;Here we write a bit of information and tips the students could benefit from.<br><br>&emsp;&emsp;&emsp;To do with the UI, we'll mention stuff like how the local storage works, and for the game, we'll perhaps give some tips or troubleshooting advice.";
+            } else {
+                this.querySelector("button").innerHTML = "&#x1F6C8; Info & Tips";
             }
-            DOM.startGame(0);
+        }
+        for (let i = 0; i < 4; i++) {
+            this.elements["galaxy" + (i + 1)].onclick = function() {
+                if (DOM.data["defaultGalaxy"] !== i) {
+                    DOM.data["defaultGalaxy"] = i;
+                    DOM.save();
+                }
+                DOM.startGame(i);
+            }
         }
         setTimeout(function () {
             document.querySelectorAll(".menu").forEach(function (menu) {
@@ -196,7 +233,8 @@ let DOM = {
                     } else {
                         this.newMenu("Main");
                     }
-                    return;
+                    initializeShipSelect(ships, this.data["defaultShip"]);
+                    return; /* Don't forget that I DO return from this function early. */
                 }
             }
             console.log("This is your first time playing Intergalactic Adventures!");
@@ -207,10 +245,27 @@ let DOM = {
             this.newMenu("Title");
             this.elements["TitleWarning"].classList.add("on");
         }
+        /* Initialize stuff in the UI */
+        let boxes = this.elements["checkboxes"];
+        for (let i = 0; i < boxes.length; i++) {
+            if (boxes[i].id !== "zoom") boxes[i].checked = this.data[boxes[i].id];
+            else boxes[i].checked = (this.data[boxes[i].id] == 1) ? false : true;
+        }
+        initializeShipSelect(ships, this.data["defaultShip"]);
     },
-    newMenu: function(menu) {
+    shipActive: function (ship) {
+        if (ship.classList.contains("active") || !this.elements["ShipSelect"].classList.contains("open")) return;
+        this.elements["ShipSelect"].querySelector(".active").classList.remove("active");
+        ship.classList.add("active");
+        this.updatePreference("defaultShip", ship.id);
+    },
+    newMenu: function(menu = "Game") {
         for (const key in this.menus) this.menus[key].classList.remove("on");
-        if (menu) this.menus[menu].classList.add("on");
+        if (menu == "Game") {
+            if (this.data["devDisplay"]) this.elements["DevTools"].style.display = "block";
+            else this.elements["DevTools"].style.display = "none";
+        }
+        this.menus[menu].classList.add("on");
     },
     save: function() {
         localStorage.setItem('data', JSON.stringify(this.data));
@@ -227,12 +282,23 @@ let DOM = {
         this.loaded = true;
         DOM.initialize();
     },
+    gameMenuTitle: function (galaxy, solarSystem) {
+        this.elements["GalaxyName"].innerHTML = galaxy;
+        this.elements["SolarSystemName"].innerHTML = solarSystem;
+    },
+    devToolsUpdate: function () {
+        let entries = this.elements["DevTools"].querySelectorAll("tr:not(.title)>td");
+        entries[0].innerHTML = "X: " + Math.floor(game.watchShip.speed.x * 100) / 100;
+        entries[1].innerHTML = "Y: " + Math.floor(game.watchShip.speed.y * 100) / 100;
+        entries[2].innerHTML = "X: " + Math.floor(game.watchShip.pos.x * 10) / 10;
+        entries[3].innerHTML = "Y: " + Math.floor(game.watchShip.pos.y * 10) / 10;
+    },
     startGame: function(galaxy = 0) {
         if (this.loaded && !this.gameInitialized) {
-
-            // USE GALAXY TO START THE ACTUAL RIGHT GALAXY
+            game.paused = false;
             game.zoom = this.data["zoom"];
-            game.start("test", 1, "bebop");
+            game.start(galaxies[galaxy], 1, "bebop");
+            this.gameMenuTitle(galaxies[galaxy], game.galaxy.startingSolarSystem);
             startAnimating();
             this.newMenu();
             this.gameInitialized = true;
@@ -240,6 +306,18 @@ let DOM = {
                 this.data["veryFirst"] = false;
                 this.save();
             }
+        } else if (this.gameInitialized) {
+            if (galaxies[galaxy] !== game.galaxy.name) {
+                console.log("Destroying the game object and remaking it!");
+                game.endGame();
+                game = new Game(windowSize.x, windowSize.y, images, contexts);
+                game.unit = unit;
+                game.zoom = this.data["zoom"];
+                game.start(galaxies[galaxy], 1, "bebop");
+                this.gameMenuTitle(galaxies[galaxy], game.galaxy.startingSolarSystem);
+            }
+            game.paused = false;
+            this.newMenu();
         }
     }
 }
@@ -262,6 +340,7 @@ function animate() {
         if (!game.paused) {
             game.update();
             game.draw();
+            DOM.devToolsUpdate();
         }
     }
 }

@@ -10,33 +10,40 @@
 </head>
 <body>
     <section class="fullscreen">
-        <div id="Pause" class="menu">
-            <h1><mark>Docking Station</mark></h1>
-            <button id="Resume" class="menuButton">Resume</button>
-            <button id="Restart" class="menuButton">Restart</button>
-            <button id="Back" class="menuButton">Main Menu</button>
+        <div id="Game" class="menu">
+            <h1><span id="GalaxyName">Test</span>&ensp;<strong>|</strong>&ensp;<span id="SolarSystemName">Tester Solar System</span></h1>
+            <button id="PauseButton">
+                <div class="bars"></div>
+            </button>
+            <section id="DevTools"><section class="darken">
+                <h1>Dev Tools</h1>
+                <table>
+                    <tr class="title">
+                        <td colspan="2">Ship Velocity:</td>
+                    </tr><tr>
+                        <td>X: 8</td>
+                        <td>Y: -6</td>
+                    </tr><tr class="title">
+                        <td colspan="2">Ship Position:</td>
+                    </tr><tr>
+                        <td>X: 460</td>
+                        <td>Y: 237</td>
+                    </tr>
+                </table>
+            </section></section>
         </div>
         <div id="Main" class="menu">
-            <section id="Ship">
-                <h1><mark>Ship</mark></h1>
-                <select id="ShipSelect" name="Ship">
-                    <option value="Bebop">Bebop</option>
-                    <option value="Bismark">Bismark</option>
-                    <option value="Ship3">Another</option>
-                    <option value="Ship4">option</option>
-                </select>
-            </section>
             <section id="Settings">
                 <h1><mark>Settings</mark></h1>
                 <table>
                     <tr>
-                        <td><input id="manualControls" type="checkbox" checked></td>
+                        <td><input id="manualControls" type="checkbox"></td>
                         <td><p>Manual controls</p></td>
                     </tr><tr>
                         <td><input id="zoom" type="checkbox"></td>
                         <td><p>Zoomed-in view</p></td>
                     </tr><tr>
-                        <td><input id="devDefault" type="checkbox"></td>
+                        <td><input id="devDisplay" type="checkbox"></td>
                         <td><p>Dev tools display</p></td>
                     </tr><tr>
                         <td><input id="skipMenu" type="checkbox"></td>
@@ -44,19 +51,31 @@
                     </tr>
                 </table>
             </section>
+            <section id="Ship">
+                <h1><mark>Ship</mark></h1>
+                <div id="ShipSelect">
+                    <!--Dynamically added with Javascript; sample as follows: -->
+                    <!--
+                        <figure id="ship10" class="small active">Planet Express</figure>
+                    -->
+                </div>
+            </section>
             <section id="Divider"></section>
             <section id="Galaxy">
                 <h1><mark>Galaxy</mark></h1>
                 <table>
                     <tr>
-                        <td id="galaxy1">Galaxy 1<br><br>(click to play)</td>
-                        <td id="galaxy2">Galaxy 2</td>
+                        <td id="galaxy1">Test</td>
+                        <td id="galaxy2">Alpha</td>
                     </tr>
                     <tr>
-                        <td id="galaxy3">Galaxy 3</td>
-                        <td id="galaxy4">Galaxy 4</td>
+                        <td id="galaxy3">Beta</td>
+                        <td id="galaxy4">Gamma</td>
                     </tr>
                 </table>
+            </section>
+            <section id="Info">
+                <button>&#x1F6C8; Info & Tips</button>
             </section>
         </div>
         <div id="Title" class="menu">
