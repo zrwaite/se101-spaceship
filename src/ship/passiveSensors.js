@@ -1,5 +1,6 @@
-import Vector2 from "../helpers/Vector2.js";
 import PassiveSensorReading from "./passiveSensorReading.js";
+import response from "../helpers/response.js";
+
 export default class PassiveSensors{
     constructor(parentShip){
 		this.parentShip = parentShip;
@@ -19,6 +20,6 @@ export default class PassiveSensors{
             readings.push(newReading);
         }
 
-        return readings;
+        return new response(response=readings, success=true);
 	}
 }

@@ -1,5 +1,5 @@
-import Vector2 from "../helpers/Vector2.js";
 import EMSReading from "./EMSReading.js";
+import response from "../helpers/response.js";
 
 export default class ActiveSensors{
     constructor(parentShip){
@@ -37,6 +37,6 @@ export default class ActiveSensors{
                 readings.push(newReading);
             }
         }
-        return readings;
+        return new response(response=readings, success=true);
 	}
 }
