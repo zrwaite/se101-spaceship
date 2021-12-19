@@ -174,6 +174,11 @@ let DOM = {
         "Main": document.querySelector("#Main"), // Main ship, galaxy, and preference selection page
     },
     initialize() {
+        document.addEventListener("click", function (event) {
+            if (event.target.tagName !== "FIGURE") {
+                DOM.elements["ShipSelect"].classList.remove("open");
+            }
+        });
         this.elements["TitleStart"].onclick = function() {DOM.newMenu("Main");}
         this.elements["PauseButton"].onclick = function() {
             game.paused = true;
