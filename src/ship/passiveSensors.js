@@ -6,7 +6,8 @@ export default class PassiveSensors{
 		this.parentShip = parentShip;
 	}
 	generatePassiveSensorReadings(){
-        if (!this.parentShip.solarSystem) return;
+        // Ensure solar system is initialized before performing scan
+        if (!this.parentShip.solarSystem) return new response(400, ["Cannot perform PassiveSensors generatePassiveSensorReadings until solar system initalized"], []);
         let readings = []; 
         for (const planet of this.parentShip.solarSystem.planets){
             let angle = planet.pos.angleTo(this.parentShip.pos);    
@@ -20,6 +21,6 @@ export default class PassiveSensors{
             readings.push(newReading);
         }
 
-        return new response(response=readings, success=true);
+        return new response(200, [], readings, true);
 	}
 }
