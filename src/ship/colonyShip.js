@@ -26,7 +26,7 @@ export default class ColonyShip extends Sprite{
 		this.size = new Vector2(3, 2);
 		this.radius = (this.size.x + this.size.y) / 4;		// we say the hurt box is avg of width and height 
 		this.shipStatusInfo;
-		this.solarSystem = args[1].solarSystem;
+		this.solarSystem = this.game.solarSystem;
 		this.ctx = "ships";
 		this.mass = 3;
 		this.maxASpeed = 0.3;

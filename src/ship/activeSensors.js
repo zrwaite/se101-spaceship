@@ -1,5 +1,5 @@
-import Vector2 from "../helpers/Vector2.js";
 import EMSReading from "./EMSReading.js";
+import response from "../helpers/response.js";
 
 export default class ActiveSensors{
     constructor(parentShip){
@@ -7,7 +7,8 @@ export default class ActiveSensors{
 	}
 
 	performScan(heading, arc, range){
-        if (!this.parentShip.solarSystem) return;
+        // Ensure solar system is initialized before performing scan
+        if (!this.parentShip.solarSystem) return new response(400, ["Cannot perform ActiveSensors performScan until solar system initalized"], []);
         //User called function for getting sensor data
         let readings = [];
         for (const planet of this.parentShip.solarSystem.planets){
@@ -37,6 +38,6 @@ export default class ActiveSensors{
                 readings.push(newReading);
             }
         }
-        return readings;
+        return new response(200, [], readings, true);
 	}
 }

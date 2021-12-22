@@ -1,11 +1,13 @@
-import Vector2 from "../helpers/Vector2.js";
 import PassiveSensorReading from "./passiveSensorReading.js";
+import response from "../helpers/response.js";
+
 export default class PassiveSensors{
     constructor(parentShip){
 		this.parentShip = parentShip;
 	}
 	generatePassiveSensorReadings(){
-        if (!this.parentShip.solarSystem) return;
+        // Ensure solar system is initialized before performing scan
+        if (!this.parentShip.solarSystem) return new response(400, ["Cannot perform PassiveSensors generatePassiveSensorReadings until solar system initalized"], []);
         let readings = []; 
         for (const planet of this.parentShip.solarSystem.planets){
             let angle = planet.pos.angleTo(this.parentShip.pos);    
@@ -19,6 +21,6 @@ export default class PassiveSensors{
             readings.push(newReading);
         }
 
-        return readings;
+        return new response(200, [], readings, true);
 	}
 }
