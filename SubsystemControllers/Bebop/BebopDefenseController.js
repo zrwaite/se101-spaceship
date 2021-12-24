@@ -11,7 +11,7 @@ export default class BebopDefenceController extends SubsystemController{
 	  this.sensors
 	  see SandBox/Scripts/Ship/README.md for an explanation of return values.
 	*/
-  	defenceUpdate(shipStatusInfo, turretControls){
+  	defenceUpdate(shipStatusInfo, aimTurret, getTubeData, fireTorpedo){
 		//Student code goes here
 	}
 }

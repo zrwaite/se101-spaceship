@@ -5,7 +5,7 @@ export default class BebopPropulsionController extends SubsystemController{
 	constructor(...args){
     	super(...args);
   	}
-	propulsionUpdate(shipStatusInfo, thrusters){
+	propulsionUpdate(shipStatusInfo, setThrusters){
 		//Student code goes here
 	}
 }

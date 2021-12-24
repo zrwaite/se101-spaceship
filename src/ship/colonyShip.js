@@ -15,6 +15,12 @@ export default class ColonyShip extends Sprite{
 		this.navigationController = new NavigationClass(this);
 		this.propulsionController = new PropulsionClass(this);
 		this.sensorsController = new SensorsClass(this);
+
+		this.defenceController.initializeConnection(null, this.navigationController, this.propulsionController, this.sensorsController) 
+		this.navigationController.initializeConnection(this.defenceController, null, this.propulsionController, this.sensorsController) 
+		this.propulsionController.initializeConnection(this.defenceController, this.navigationController, null, this.sensorsController) 
+		this.sensorsController.initializeConnection(this.defenceController, this.navigationController, this.propulsionController, null) 
+
 		this.turretControls = new TurretControls(this, this.pos, this.game);
 		this.passiveSensors = new PassiveSensors(this);
 		this.activeSensors = new ActiveSensors(this);
@@ -45,10 +51,11 @@ export default class ColonyShip extends Sprite{
 	update() {
 		//Add special update code here if needed
 		this.manualControls(); //use the data from keyboard control for testing
-		this.defenceController.defenceUpdate(this.shipStatusInfo, this.turretControls);
-		this.sensorsController.sensorsUpdate(this.shipStatusInfo, this.activeSensors, this.passiveSensors)
+
+		this.defenceController.defenceUpdate(this.shipStatusInfo, this.turretControls.aimTurret, this.turretControls.getTubeCooldown, this.turretControls.fireTorpedo)
+		this.sensorsController.sensorsUpdate(this.shipStatusInfo, this.activeSensors.performScan, this.passiveSensors.generatePassiveSensorReadings)
 		this.navigationController.navigationController(this.shipStatusInfo, this.game.solarSystem.getMapData(this.pos))
-		this.propulsionController.propulsionUpdate(this.shipStatusInfo, this.thrusterController)
+		this.propulsionController.propulsionUpdate(this.shipStatusInfo, this.thrusterController.setThruster)
 		this.boundaries();
 		// this.accel = this.localAccel.rotate(this.angle.angle());
 		super.update() //parent update;
