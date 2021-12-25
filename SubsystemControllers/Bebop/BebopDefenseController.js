@@ -12,6 +12,8 @@ export default class BebopDefenceController extends SubsystemController{
 	  see SandBox/Scripts/Ship/README.md for an explanation of return values.
 	*/
   	defenceUpdate(shipStatusInfo, aimTurret, getTubeData, fireTorpedo){
+		//   console.log(aimTurret(new Vector2(-3, 3)));
+		  fireTorpedo(1)
 		//Student code goes here
 	}
 }

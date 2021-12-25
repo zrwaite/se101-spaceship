@@ -3,7 +3,7 @@ import Torpedo from "./torpedo.js";
 import response from "../helpers/response.js";
 import RenderedObject from "../renderedObject.js";
 
-const TUBE_COOLDOWN_FRAMES = 30;
+const TUBE_COOLDOWN_FRAMES = 100;
 const NUMBER_OF_TUBES  = 4;
 const TORPEDO_VELOCITY = 0.2;
 const FUSE_FRAME_DURATION = undefined;

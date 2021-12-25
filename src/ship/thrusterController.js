@@ -4,7 +4,7 @@ import response from "../helpers/response.js";
 // port left
 // starboard right
 
-const MAX_POWER = 100;
+const MAX_POWER = 1000;
 const LINEAR_SENSITIVITY = 5e-4;
 const ANGULAR_SENSITIVITY = 5e-4;
 

@@ -5,6 +5,7 @@ export default class BebopSensorsController extends SubsystemController{
 	constructor(...args){
     	super(...args);
 		this.desiredPosition = new Vector2(5,5);
+		this.timer = 0;
   	}
 	
 	/* To get ship information, use the following functions:
@@ -15,5 +16,15 @@ export default class BebopSensorsController extends SubsystemController{
 	*/
 	sensorsUpdate(shipStatusInfo, performActiveScan, performPassiveScan){
 		//Student code goes here
+		if (this.timer==200){
+			//(heading, arc, range)
+			let responses = performActiveScan(0, 1, 50).response
+			// console.log(responses);
+			responses.forEach((response) => {
+				console.log(response);
+				console.log(response.ScanSignature);
+			});
+		}
+		this.timer++;
     }
 }

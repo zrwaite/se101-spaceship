@@ -51,11 +51,23 @@ export default class ColonyShip extends Sprite{
 	update() {
 		//Add special update code here if needed
 		this.manualControls(); //use the data from keyboard control for testing
+		
+		this.defenceController.defenceUpdate(
+			this.shipStatusInfo, 
+			this.turretControls.aimTurret.bind(this.turretControls), 
+			this.turretControls.getTubeCooldown.bind(this.turretControls), 
+			this.turretControls.fireTorpedo.bind(this.turretControls));
 
-		this.defenceController.defenceUpdate(this.shipStatusInfo, this.turretControls.aimTurret, this.turretControls.getTubeCooldown, this.turretControls.fireTorpedo)
-		this.sensorsController.sensorsUpdate(this.shipStatusInfo, this.activeSensors.performScan, this.passiveSensors.generatePassiveSensorReadings)
-		this.navigationController.navigationController(this.shipStatusInfo, this.game.solarSystem.getMapData(this.pos))
-		this.propulsionController.propulsionUpdate(this.shipStatusInfo, this.thrusterController.setThruster)
+		this.sensorsController.sensorsUpdate(
+			this.shipStatusInfo, 
+			this.activeSensors.performScan.bind(this.activeSensors), 
+			this.passiveSensors.generatePassiveSensorReadings.bind(this.passiveSensors));
+		this.navigationController.navigationController(
+			this.shipStatusInfo, 
+			this.game.solarSystem.getMapData(this.pos));
+		this.propulsionController.propulsionUpdate(
+			this.shipStatusInfo, 
+			this.thrusterController.setThruster.bind(this.thrusterController));
 		this.boundaries();
 		// this.accel = this.localAccel.rotate(this.angle.angle());
 		super.update() //parent update;
