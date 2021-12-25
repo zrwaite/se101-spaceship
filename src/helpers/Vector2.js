@@ -97,8 +97,6 @@ export default class Vector2 {
 	}
 
 	rotateTo(angle) {
-		console.log(angle)
-		console.log(this.angle())
 		let rotateBy = angle-this.angle();
 		return this.rotate(rotateBy);
 	}
