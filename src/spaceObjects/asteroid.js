@@ -12,6 +12,7 @@ export default class Asteroid extends Sprite {
 		this.size = new Vector2(3, 3);
 		this.radius = this.size.x/2;		// asteroids are circles
 		this.mass = 5;
+		this.gravitySignature = 0;
 	}
 	update() {
 		//Add special update code here if needed
