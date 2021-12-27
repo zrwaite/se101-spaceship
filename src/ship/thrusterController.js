@@ -5,7 +5,7 @@ import response from "../helpers/response.js";
 // starboard right
 
 const MAX_POWER = 1000;
-const LINEAR_SENSITIVITY = 5e-4;
+const LINEAR_SENSITIVITY = 2e-5;
 const ANGULAR_SENSITIVITY = 5e-4;
 
 export default class ThrusterController{
