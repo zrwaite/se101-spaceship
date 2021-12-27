@@ -69,7 +69,7 @@ export default class ColonyShip extends Sprite{
 			this.shipStatusInfo, 
 			this.thrusterController.setThruster.bind(this.thrusterController));
 		this.boundaries();
-		// this.accel = this.localAccel.rotate(this.angle.angle());
+		this.accel = this.accel.add(this.localAccel.rotate(this.angle.angle()));
 		super.update() //parent update;
 	}
 	manualControls(){
@@ -100,7 +100,7 @@ export default class ColonyShip extends Sprite{
 		// } else {
 		// 	this.thrusterController.setThruster("portForeThruster", 0);
 		// 	this.thrusterController.setThruster("starboardAftThruster", 0);
-		// }
+		// } 
 		
 		if (this.game.inputs.pressed.left) this.aAccel.set(1, -0.005);
 		else if (this.game.inputs.pressed.right ) this.aAccel.set(1, 0.005)

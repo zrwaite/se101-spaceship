@@ -5,7 +5,7 @@ import response from "../helpers/response.js";
 // starboard right
 
 const MAX_POWER = 1000;
-const LINEAR_SENSITIVITY = 5e-4;
+const LINEAR_SENSITIVITY = 2e-5;
 const ANGULAR_SENSITIVITY = 5e-4;
 
 export default class ThrusterController{
@@ -28,7 +28,7 @@ export default class ThrusterController{
 	// Successful responses contains a numeric field `power` giving the actualy power the thruster was set to (in case power was out of bounds)
 	// and a boolean field `powerLimited` indicating whether the power requested was greater than the MAX_POWER and thus reduced to equal MAX_POWER
 	setThruster(thrusterName, power){
-		if (power < 0) {
+		if (!(power >= 0)) {
 			const errorMessage = "igniteThrusters failed as requested power must be non-negative";
 			console.log(errorMessage);
 			return new response(400, [errorMessage], {}, false);
