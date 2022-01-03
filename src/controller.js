@@ -1,5 +1,6 @@
 export default class Controller {
-	constructor() {
+	constructor(game) {
+        this.game = game;
 		this.pressed = { //Store if a key is pressed
 			left: false,
 			up: false,
@@ -25,6 +26,8 @@ export default class Controller {
                 this.pressed.q = true;
             } else if (pressCode == 69) {
                 this.pressed.e = true;
+            }else if (pressCode == 77) {
+                this.game.watchShip.tryWarp();
             }
 		});
 		document.addEventListener("keyup", (event) => {
@@ -43,7 +46,7 @@ export default class Controller {
                 this.pressed.q = false;
             } else if (pressCode == 69) {
                 this.pressed.e = false;
-            }
+            } 
 		});
 	}
 }

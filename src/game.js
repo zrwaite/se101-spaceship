@@ -46,7 +46,7 @@ export default class Game {
 		this.galaxy = new Galaxy(galaxyName, this); //Create galaxy
 		this.solarSystem = this.galaxy.startingSolarSystem; //Starting solar system from galaxy
 		this.newSolarSystem(this.solarSystem, numShips); //Another version of start function basically
-		this.delObjects.forEach((object) => object = null); //Clears delete-able objects
+		this.delObjects = []; //Clears delete-able objects
         this.draw();
         this.update();
         this.initializing = false; // DONE STARTING
@@ -56,14 +56,11 @@ export default class Game {
         this.solarSystem = this.galaxy.getSolarSystem(solarSystemName); 
 		if (numShips > 1) {
 			this.ships.push(...buildShip("all", startPosition, this)); //Build all ships for now
-
 			//get watchship by name in this.ships list
-            
 		} else {
 			this.ships.push(buildShip(this.watchShipName, startPosition, this)) //build a single ship
 			this.watchShip = this.ships[0];
 		}
-		
 		this.delObjects = [...this.solarSystem.asteroids]; //Asteroids get deleted
 		this.drawnObjects = [...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.ships]; //Warpgates and planets get drawn
 		this.hiddenObjects = [...this.solarSystem.asteroidLaunchers]; //Launchers are hidden
@@ -83,7 +80,6 @@ export default class Game {
 		const rTotal = obj1.radius + obj2.radius;
 		return xDiff*xDiff + yDiff*yDiff < rTotal*rTotal;
 	}
-
 	// two objects hit each other, handle perfectly elastic collision
 	// returns the velocity difference (in the norm direction) between the 2 objects 
 	// used to calculate dmg take if ship clanks with asteroid/meteor
@@ -200,8 +196,7 @@ export default class Game {
         }); //Draws all drawn objects
     }
 	deleter(sprite){ //Deletes objects from deletable array that aren't needed
-		if(sprite.delete) return false;
-		return true;
+		return !sprite.delete
 	}
     endGame() {
         let game = this;
