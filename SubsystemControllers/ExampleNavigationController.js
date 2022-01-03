@@ -10,7 +10,7 @@ export default class NavigationController extends SubsystemController{
 	this.sensors
 	see SandBox/Scripts/Ship/README.md for an explanation of return values.
 	*/
-	navigationController(shipStatusInfo, mapData){
+	navigationController(shipStatusInfo, warp, mapData){
 		//Student code goes here
 	}
 }
