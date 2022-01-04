@@ -21,7 +21,7 @@ export default class Game {
 		this.drawnObjects = []; // stores objects that always need to be drawn and updated
 		this.hiddenObjects = []; // stores objects that need to be update only
 		this.delObjects = []; // Stores objects that need to be drawn and updated until deleted
-		this.numShips; // Stores the number of ships that are rendered
+		this.allShips; // Stores the number of ships that are rendered
 		this.ships = []; // Array of ship objects
 		this.galaxy; // Stores Galaxy Object
 		this.solarSystem; // Stores Solar System Info
@@ -39,35 +39,42 @@ export default class Game {
         this.unit; // Global Unit
         this.fpsInterval = 1000 / 60;
     }
-    start(galaxyName, numShips, watchShipName) {
-		this.numShips = numShips;
+    start(galaxyName, allShips, watchShipName) {
+		this.allShips = allShips
+		let startPosition = new Vector2(30,30); //start at centre for now
 		this.watchShipName = watchShipName;
         this.inputs = new Controller(this); //controller created
 		this.galaxy = new Galaxy(galaxyName, this); //Create galaxy
 		this.solarSystem = this.galaxy.startingSolarSystem; //Starting solar system from galaxy
-		this.newSolarSystem(this.solarSystem, numShips); //Another version of start function basically
-		this.delObjects = []; //Clears delete-able objects
-        this.draw();
-        this.update();
-        this.initializing = false; // DONE STARTING
-    }
-	newSolarSystem(solarSystemName, numShips){
-		let startPosition = new Vector2(30,30); //start at centre for now
-        this.solarSystem = this.galaxy.getSolarSystem(solarSystemName); 
-		if (numShips > 1) {
-			this.ships.push(...buildShip("all", startPosition, this)); //Build all ships for now
-			//get watchship by name in this.ships list
-		} else {
+		if (this.allShips) this.ships.push(...buildShip("all", startPosition, this)); //Build all ships for now
+		else {
 			this.ships.push(buildShip(this.watchShipName, startPosition, this)) //build a single ship
 			this.watchShip = this.ships[0];
 		}
-		this.delObjects = [...this.solarSystem.asteroids]; //Asteroids get deleted
-		this.drawnObjects = [...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.ships]; //Warpgates and planets get drawn
-		this.hiddenObjects = [...this.solarSystem.asteroidLaunchers]; //Launchers are hidden
 		this.ships.forEach((ship)=> {
 			this.drawnObjects.push(ship.turretControls);
 			ship.turretControls.ctx = "ships";
 		})
+		this.newSolarSystem(this.solarSystem); //Another version of start function basically
+        this.draw();
+        this.update();
+        this.initializing = false; // DONE STARTING
+    }
+	newSolarSystem(solarSystemName){
+		console.log(solarSystemName);
+		let startPosition = new Vector2(30,30); //start at centre for now
+        this.solarSystem = this.galaxy.getSolarSystem(solarSystemName); 
+		console.log(this.solarSystem);
+		this.ships.forEach((ship) => ship.pos = startPosition);
+		// let objectsList = [...this.delObjects, ...this.drawnObjects, ...this.hiddenObjects];
+		// for (let i=0; i<objectsList.length; i++) delete objectsList[i];
+		this.delObjects = [...this.solarSystem.asteroids]; //Asteroids get deleted
+		this.drawnObjects = [...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.ships]; //Warpgates and planets get drawn
+		this.hiddenObjects = [...this.solarSystem.asteroidLaunchers]; //Launchers are hidden
+		this.rerenderStatic();
+		console.log(this.delObjects)
+		console.log(this.drawnObjects)
+		console.log(this.hiddenObjects)
 	}
 	// add deletable game object (missles/asteroids) to the list
 	spawnDeletableObject(obj) {
@@ -195,6 +202,13 @@ export default class Game {
             if (!(object.ctx === "planets") || game.zoom !== 1 || game.initializing) object.draw();
         }); //Draws all drawn objects
     }
+	rerenderStatic() {
+		["missiles", "planets", "objects", "thrusters", "ships", "items"].forEach((object) => {
+            this.contexts[object].setTransform(1, 0, 0, 1, 0, 0);
+            this.contexts[object].clearRect(0, 0, this.width * this.unit, this.height * this.unit);
+        });
+		[...this.drawnObjects, ...this.delObjects].forEach((object) => object.draw()); //Redrawns all objects, including static
+	}
 	deleter(sprite){ //Deletes objects from deletable array that aren't needed
 		return !sprite.delete
 	}
