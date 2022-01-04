@@ -67,10 +67,10 @@ export default class SolarSystem{
 					new Asteroid(new Vector2(0, 0), 0, new Vector2(4, 28), this.game)
 				]);
 				this.warpGates.push(...[
-					new WarpGate("Sol System", new Vector2(3, 8), this.game),
-					new WarpGate("Bernard's Star System", new Vector2(11, 41), this.game),
-					new WarpGate("Kruger System", new Vector2(51, 49), this.game),
-					new WarpGate("Wolf 359 System", new Vector2(53, 6), this.game),
+					// new WarpGate("Sol System", new Vector2(3, 8), this.game),
+					// new WarpGate("Bernard's Star System", new Vector2(11, 41), this.game),
+					// new WarpGate("Kruger System", new Vector2(51, 49), this.game),
+					// new WarpGate("Wolf 359 System", new Vector2(53, 6), this.game),
 					new WarpGate("Kepler 438 System", new Vector2(32, 39), this.game)
 				]);
 				break;
@@ -253,8 +253,8 @@ export default class SolarSystem{
 				]);
 				this.warpGates.push(...[
 					new WarpGate("Alpha Centauri System", new Vector2(43, 23), this.game),
-					new WarpGate("Barnard's Star System", new Vector2(35, 52), this.game),
-					new WarpGate("Sirius System", new Vector2(69, 14), this.game)
+					// new WarpGate("Barnard's Star System", new Vector2(35, 52), this.game),
+					// new WarpGate("Sirius System", new Vector2(69, 14), this.game)
 				]);
 				break;
 			case "Wolf 359 System": 

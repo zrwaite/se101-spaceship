@@ -7,8 +7,8 @@ export default class WarpGate extends RenderedObject {
 		super(...args);
 		this.image = this.game.images["warpgate"];
 		this.ctx = "planets";
-		this.height = 50;
-		this.width = 50;
+		this.size = new Vector2(5, 5);
+		this.radius = 1.5;
 		this.destinationSolarSystem = destinationSolarystem;
         this.gravitySignature = 1;
 	}
@@ -17,6 +17,8 @@ export default class WarpGate extends RenderedObject {
 		// super.update();
 	}
 	warp(){
+		console.log("warping");
+		this.game.newSolarSystem(this.destinationSolarSystem, this.game.numShips);
 		//send signal to game to start new solarSystem
 	}
 }

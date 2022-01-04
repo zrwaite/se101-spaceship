@@ -27,6 +27,7 @@ export default class ColonyShip extends Sprite{
 		this.thrusterController = new ThrusterController(this);
 
 		this.totalDamage = 0;
+		this.energyUsed = 0;
 
 		this.image = this.game.images["ship"];
 		this.size = new Vector2(3, 2);
@@ -64,6 +65,7 @@ export default class ColonyShip extends Sprite{
 			this.passiveSensors.generatePassiveSensorReadings.bind(this.passiveSensors));
 		this.navigationController.navigationController(
 			this.shipStatusInfo, 
+			this.tryWarp.bind(this),
 			this.game.solarSystem.getMapData(this.pos));
 		this.propulsionController.propulsionUpdate(
 			this.shipStatusInfo, 
@@ -178,5 +180,12 @@ export default class ColonyShip extends Sprite{
 	receiveDamage(amount) {
 		console.log("SHIP TOOK ", amount, "DMG")
 		this.totalDamage += amount;
+	}
+
+	tryWarp(){
+		this.energyUsed += 100;
+		this.game.solarSystem.warpGates.forEach((warpGate) => {
+			if (this.game.ifCollide(this, warpGate)) warpGate.warp();
+		})
 	}
 }
