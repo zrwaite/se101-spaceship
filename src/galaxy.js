@@ -20,14 +20,11 @@ export default class Galaxy{
 				solarSystemNames.push("test");
 				break;
 			case "Beta":
-				solarSystemNames.push("Sol System", "Kepler 438 System", "Barnard's Star System", 
-										"Wolf 359 System", "Sirius System");
+				solarSystemNames.push("Barnard's Star System", "Wolf 359 System", "Sirius System", "Luyten System");
 				break;
 			case "Gamma":
-				solarSystemNames.push("Sol System", "Alpha Centauri System", "Kepler 438 System",
-										"Barnard's Star System", "Wolf 359 System", "Sirius System", "Luyten System",
-										"Groombridge System", "Kruger System", "Aquarii System", "Cygni System",
-										"Indi System", "Yennefer System", "Quaid System");
+				solarSystemNames.push("Groombridge System", "Kruger System", "Aquarii System", 
+									"Cygni System","Indi System", "Yennefer System", "Quaid System");
 				break;
 		}
 

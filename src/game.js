@@ -38,6 +38,7 @@ export default class Game {
         this.paused = false; // If the whole game is paused
         this.unit; // Global Unit
         this.fpsInterval = 1000 / 60;
+		this.solarSystemName;
     }
     start(galaxyName, allShips, watchShipName) {
 		this.allShips = allShips
@@ -61,10 +62,9 @@ export default class Game {
         this.initializing = false; // DONE STARTING
     }
 	newSolarSystem(solarSystemName){
-		console.log(solarSystemName);
+		this.solarSystemName = solarSystemName;
 		let startPosition = new Vector2(30,30); //start at centre for now
         this.solarSystem = this.galaxy.getSolarSystem(solarSystemName); 
-		console.log(this.solarSystem);
 		this.ships.forEach((ship) => ship.pos = startPosition);
 		// let objectsList = [...this.delObjects, ...this.drawnObjects, ...this.hiddenObjects];
 		// for (let i=0; i<objectsList.length; i++) delete objectsList[i];
@@ -72,9 +72,6 @@ export default class Game {
 		this.drawnObjects = [...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.ships]; //Warpgates and planets get drawn
 		this.hiddenObjects = [...this.solarSystem.asteroidLaunchers]; //Launchers are hidden
 		this.rerenderStatic();
-		console.log(this.delObjects)
-		console.log(this.drawnObjects)
-		console.log(this.hiddenObjects)
 	}
 	// add deletable game object (missles/asteroids) to the list
 	spawnDeletableObject(obj) {
@@ -203,6 +200,7 @@ export default class Game {
         }); //Draws all drawn objects
     }
 	rerenderStatic() {
+        document.getElementById("SolarSystemName").innerHTML = this.solarSystemName;
 		["missiles", "planets", "objects", "thrusters", "ships", "items"].forEach((object) => {
             this.contexts[object].setTransform(1, 0, 0, 1, 0, 0);
             this.contexts[object].clearRect(0, 0, this.width * this.unit, this.height * this.unit);
