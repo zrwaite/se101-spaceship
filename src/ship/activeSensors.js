@@ -18,7 +18,7 @@ export default class ActiveSensors{
         for (const planet of this.parentShip.solarSystem.planets){
             let dist = this.parentShip.pos.distance(planet.pos);
             let angle = this.parentShip.angle.angleTo(new Vector2(planet.pos.x - this.parentShip.pos.x, this.parentShip.pos.y - planet.pos.y));
-            if (dist+planet.size.x<=range && angle>= heading && angle<= heading+arc){
+            if (dist+planet.size.x<=range && angle <= arc){
                 let newReading = new EMSReading(angle, dist, 0, planet.size.x, planet.composition, null);
                 readings.push(newReading);
             }
@@ -27,7 +27,7 @@ export default class ActiveSensors{
         for (const warpgate of this.parentShip.solarSystem.warpGates){
             let dist = this.parentShip.pos.distance(warpgate.pos);
             let angle = this.parentShip.angle.angleTo(new Vector2(warpgate.pos.x - this.parentShip.pos.x, this.parentShip.pos.y - warpgate.pos.y));
-            if (dist+warpgate.size.x<=range && angle>= heading && angle<= heading+arc){
+            if (dist+warpgate.size.x<=range && angle <= arc){
                 let newReading = new EMSReading(angle, dist, 0, warpgate.width, {}, warpgate.destinationSolarSystem);
                 readings.push(newReading);
             }
@@ -36,7 +36,7 @@ export default class ActiveSensors{
         for (const asteroid of this.parentShip.solarSystem.asteroids){
             let dist = this.parentShip.pos.distance(asteroid.pos);
             let angle = this.parentShip.angle.angleTo(new Vector2(asteroid.pos.x - this.parentShip.pos.x, this.parentShip.pos.y - asteroid.pos.y));
-            if (dist+asteroid.size.x<=range && angle>= heading && angle<= heading+arc){
+            if (dist+asteroid.size.x<=range && angle <= arc){
                 let newReading = new EMSReading(angle, dist, asteroid.speed, asteroid.radius, {}, null);
                 readings.push(newReading);
             }
