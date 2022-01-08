@@ -98,6 +98,22 @@ canvas {
     font-weight: 200;
 }
 
+/* Cross-Fade Styling */
+#SolarFade {
+    z-index: 1;
+    pointer-events: none;
+    transition-duration: 0.4s;
+    -o-transition-duration: 0.4s;
+    -moz-transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s;
+}
+#SolarFade:not(.on) {
+    background-color: rgba(0, 0, 0, 0.001);
+}
+#SolarFade.on {
+    background-color: rgba(0, 0, 0, 1);
+}
+
 /* Game Menu */
 #Game {
     font-weight: 300;
@@ -136,7 +152,7 @@ canvas {
     position: absolute;
     width: calc(var(--unit) * 19);
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.15);
     left: 0;
     top: 0;
 }
@@ -144,7 +160,7 @@ canvas {
     position: absolute;
     height: 100%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.3);
 }
 #DevTools table {
     width: 100%;
@@ -159,6 +175,7 @@ canvas {
 }
 #DevTools table tr.title>td {
     padding: calc(var(--unit) * 1.5) 0 0 calc(var(--unit) * 1);
+    font-weight: 600;
 }
 #DevTools table tr:not(.title)>td {
     width: 50%;
@@ -299,10 +316,10 @@ input[type="checkbox"]:checked {
 #Main section#Info {
     overflow: hidden;
     cursor: pointer;
-    transition-duration: left 0.4s, bottom 0.4s, background-color 0.2s;
-    -o-transition-duration: left 0.4s, bottom 0.4s, background-color 0.2s;
-    -moz-transition-duration: left 0.4s, bottom 0.4s, background-color 0.2s;
-    -webkit-transition-duration: left 0.4s, bottom 0.4s, background-color 0.2s;
+    transition-duration: 0.2s;
+    -o-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    -webkit-transition-duration: 0.2s;
 }
 #Info:not(.active) {
     width: calc(var(--unit) * 8);
