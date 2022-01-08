@@ -297,8 +297,8 @@ let DOM = {
         entries[1].innerHTML = "Y: " + Math.floor(game.watchShip.speed.y * 1000);
         entries[2].innerHTML = "X: " + Math.floor(game.watchShip.pos.x * 10);
         entries[3].innerHTML = "Y: " + Math.floor(game.watchShip.pos.y * 10);
-        entries[4].innerHTML = Math.floor(game.watchShip.energyUsed * 100) + " joules";
-        entries[5].innerHTML = Math.floor(game.watchShip.totalDamage * 100) + " kilopascals";
+        entries[4].innerHTML = Math.floor(game.watchShip.energyUsed * 100) + " J";
+        entries[5].innerHTML = Math.floor(game.watchShip.totalDamage * 100) + " Ns";
     },
     fadeInOut: function(func, params = [], middletime = 250) {
         let fade = this.elements["SolarFade"].classList;
