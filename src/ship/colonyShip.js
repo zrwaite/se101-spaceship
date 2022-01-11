@@ -48,8 +48,14 @@ export default class ColonyShip extends Sprite{
 		// useful for thrusterControls to only need to recompute accels once per thruster power update
 		// instead of every frame as the ship rotates
 		this.localAccel = Vector2.zero;
+		this.energyTimeCount = 0;
 	}
 	update() {
+		this.energyTimeCount++;
+		if (this.energyTimeCount>=10){
+			this.energyUsed += 0.1;
+			this.energyTimeCount=0;
+		}
 		//Add special update code here if needed
 		this.manualControls(); //use the data from keyboard control for testing
 		
@@ -104,16 +110,24 @@ export default class ColonyShip extends Sprite{
 		// 	this.thrusterController.setThruster("starboardAftThruster", 0);
 		// } 
 		
-		if (this.game.inputs.pressed.left) this.aAccel.set(1, -0.005);
-		else if (this.game.inputs.pressed.right ) this.aAccel.set(1, 0.005)
+		if (this.game.inputs.pressed.left) {
+			this.aAccel.set(1, -0.005);
+			this.energyUsed += 0.1;
+		}
+		else if (this.game.inputs.pressed.right ) {
+			this.aAccel.set(1, 0.005)
+			this.energyUsed += 0.1;
+		}
  		else this.aAccel.set(1, 0);
  		if (this.game.inputs.pressed.up) {
 			this.accel.set(0, 0);
 			this.accel = this.accel.add(this.angle.scale(0.002));
+			this.energyUsed += 0.1;
 		}
  		else if (this.game.inputs.pressed.down){
 			this.accel.set(0, 0);
 			this.accel = this.accel.add(this.angle.scale(-0.002));
+			this.energyUsed += 0.1;
 		}
  		else this.accel.set(0,0);
 		
