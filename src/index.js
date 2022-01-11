@@ -163,6 +163,7 @@ let DOM = {
         "SolarSystemName": document.querySelector("#SolarSystemName"),
         "DevTools": document.querySelector("#DevTools"),
         "ShipSelect": document.querySelector("#ShipSelect"), // Ship selection menu holder
+        "SolarFade": document.querySelector("#SolarFade"), // `div` for fading between solar systems
         "galaxy1": document.querySelector("#galaxy1"), // First galaxy :)
         "galaxy2": document.querySelector("#galaxy2"),
         "galaxy3": document.querySelector("#galaxy3"),
@@ -215,7 +216,6 @@ let DOM = {
                 DOM.updatePreference(this.id, this.checked);
             }
         }
-
 
         if (storageAvailable("localStorage")) {
             this.canStore = true;
@@ -293,10 +293,23 @@ let DOM = {
     },
     devToolsUpdate: function () {
         let entries = this.elements["DevTools"].querySelectorAll("tr:not(.title)>td");
-        entries[0].innerHTML = "X: " + Math.floor(game.watchShip.speed.x * 100) / 100;
-        entries[1].innerHTML = "Y: " + Math.floor(game.watchShip.speed.y * 100) / 100;
-        entries[2].innerHTML = "X: " + Math.floor(game.watchShip.pos.x * 10) / 10;
-        entries[3].innerHTML = "Y: " + Math.floor(game.watchShip.pos.y * 10) / 10;
+        entries[0].innerHTML = "X: " + Math.floor(game.watchShip.speed.x * 1000);
+        entries[1].innerHTML = "Y: " + Math.floor(game.watchShip.speed.y * 1000);
+        entries[2].innerHTML = "X: " + Math.floor(game.watchShip.pos.x * 10);
+        entries[3].innerHTML = "Y: " + Math.floor(game.watchShip.pos.y * 10);
+        entries[4].innerHTML = Math.floor(game.watchShip.energyUsed * 100) + " J";
+        entries[5].innerHTML = Math.floor(game.watchShip.totalDamage * 100) + " Ns";
+    },
+    fadeInOut: function(func, params = [], middletime = 250) {
+        let fade = this.elements["SolarFade"].classList;
+        if (fade.contains("on")) return;
+        fade.add("on");
+        setTimeout(function () {
+            setTimeout(function () {
+                func(...params);
+                fade.remove("on");
+            }, middletime); 
+        }, 400/* transition-duraiton of the `#SolarFade` */);
     },
     startGame: function(galaxy = 0) {
         if (this.loaded && !this.gameInitialized) {
