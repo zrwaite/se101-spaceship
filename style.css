@@ -192,7 +192,7 @@ canvas {
 #TurretCooldown div.tube {
     position: absolute;
     border-radius: calc(var(--unit) * 0.4);
-    background-image: linear-gradient(to left, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2));
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.3) calc(50% + var(--unit) * 2.4), rgba(255, 255, 255, 0.6) 100%);
     left: 0;
     top: 0;
     height: calc(var(--unit) * 0.8);
