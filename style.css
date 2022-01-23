@@ -329,6 +329,10 @@ input[type="checkbox"]:checked {
     -moz-transition-duration: 0.2s;
     -webkit-transition-duration: 0.2s;
 }
+#Info:not(.active) .material-icons {
+    font-size: calc(var(--unit) * 1.1);
+    width: calc(var(--unit) * 0);
+}
 #Info:not(.active) {
     width: calc(var(--unit) * 8);
     font-size: calc(var(--unit) * 1.3);
