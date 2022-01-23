@@ -64,6 +64,7 @@ export default class TurretControls extends RenderedObject{
 				const newTorpedo = new Torpedo(FUSE_FRAME_DURATION, this.parentShip, torpedoVelocity, this.parentShip.pos, this.parentShip.game)
 				this.parentShip.game.spawnDeletableObject(newTorpedo);
 				this.parentShip.TorpedoesFired++;
+                this.parentShip.energyUsed += 8;
 				this.lastFrameFiredByTube[tubeIndex] = this.parentShip.game.frame;
                 return new response(200, [], {}, true);
 			} else {

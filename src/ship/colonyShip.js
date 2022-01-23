@@ -54,9 +54,9 @@ export default class ColonyShip extends Sprite{
 	}
 	update() {
 		this.energyTimeCount++;
-		if (this.energyTimeCount>=10){
-			this.energyUsed += 0.1;
-			this.energyTimeCount=0;
+		if (this.energyTimeCount > 4){
+			this.energyUsed += 0.06;
+			this.energyTimeCount = 0;
 		}
 		//Add special update code here if needed
 		if (this.primary) this.manualControls(); //use the data from keyboard control for testing
@@ -114,22 +114,22 @@ export default class ColonyShip extends Sprite{
 		
 		if (this.game.inputs.pressed.left) {
 			this.aAccel.set(1, -0.005);
-			this.energyUsed += 0.1;
+			this.energyUsed += 0.04;
 		}
 		else if (this.game.inputs.pressed.right ) {
 			this.aAccel.set(1, 0.005)
-			this.energyUsed += 0.1;
+			this.energyUsed += 0.04;
 		}
  		else this.aAccel.set(1, 0);
  		if (this.game.inputs.pressed.up) {
 			this.accel.set(0, 0);
 			this.accel = this.accel.add(this.angle.scale(0.002));
-			this.energyUsed += 0.1;
+			this.energyUsed += 0.04;
 		}
  		else if (this.game.inputs.pressed.down){
 			this.accel.set(0, 0);
 			this.accel = this.accel.add(this.angle.scale(-0.002));
-			this.energyUsed += 0.1;
+			this.energyUsed += 0.04;
 		}
  		else this.accel.set(0,0);
 		
@@ -190,7 +190,7 @@ export default class ColonyShip extends Sprite{
 	}
 
 	tryWarp(){
-		this.energyUsed += 100;
+		this.energyUsed += 25;
 		this.game.solarSystem.warpGates.forEach((warpGate) => {
 			if (this.game.ifCollide(this, warpGate)) warpGate.warp();
 		})
