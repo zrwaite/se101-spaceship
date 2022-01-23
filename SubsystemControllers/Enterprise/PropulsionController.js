@@ -11,6 +11,7 @@ export default class PropulsionController extends SubsystemController{
 	see SandBox/Scripts/Ship/README.md for an explanation of return values.
 	*/
 	propulsionUpdate(shipStatusInfo, setThrusters){
+		setThrusters("mainThruster", 10);
 		//Student code goes here
 	}
 }
