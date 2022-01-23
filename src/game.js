@@ -47,11 +47,27 @@ export default class Game {
         this.inputs = new Controller(this); //controller created
 		this.galaxy = new Galaxy(galaxyName, this); //Create galaxy
 		this.solarSystem = this.galaxy.startingSolarSystem; //Starting solar system from galaxy
-		if (this.allShips) this.ships.push(...buildShip("all", startPosition, this)); //Build all ships for now
-		else {
+		if (this.allShips) {
+			this.ships.push(...buildShip("all", startPosition, this)); //Build all ships for now
+			console.log(this.ships);
+			let shipFound = false;
+			for (let i=0; i<this.ships.length; i++) {
+				if (this.ships[i].name === watchShipName) {
+					this.watchShip = this.ships[i];
+					shipFound = true;
+					break;
+				}
+			}
+			if (!shipFound) {
+				alert("shipName " + watchShipName + " not found");
+			} else {
+				console.log (this.watchShip);
+			}
+		} else {
 			this.ships.push(buildShip(this.watchShipName, startPosition, this)) //build a single ship
 			this.watchShip = this.ships[0];
 		}
+		this.watchShip.primary = true;
 		this.ships.forEach((ship)=> {
 			this.drawnObjects.push(ship.turretControls);
 			ship.turretControls.ctx = "ships";

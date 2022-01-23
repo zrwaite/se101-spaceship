@@ -315,7 +315,7 @@ let DOM = {
         if (this.loaded && !this.gameInitialized) {
             game.paused = false;
             game.zoom = this.data["zoom"];
-            game.start(galaxies[galaxy], false, "bebop");
+            game.start(galaxies[galaxy], true, "Bebop");
             this.gameMenuTitle(galaxies[galaxy], game.galaxy.startingSolarSystem);
             startAnimating();
             this.newMenu();
@@ -331,7 +331,7 @@ let DOM = {
                 game = new Game(windowSize.x, windowSize.y, images, contexts);
                 game.unit = unit;
                 game.zoom = this.data["zoom"];
-                game.start(galaxies[galaxy], false, "bebop");
+                game.start(galaxies[galaxy], true, "Bebop");
                 this.gameMenuTitle(galaxies[galaxy], game.galaxy.startingSolarSystem);
             }
             game.paused = false;

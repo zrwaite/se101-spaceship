@@ -89,6 +89,7 @@ const buildShip = (shipName, pos, game) => {
 	switch (shipName){
 		case "Bebop": case "bebop":
 			return new ColonyShip(
+				"Bebop",
 				BebopDefenceController, 
 				BebopNavigationController, 
 				BebopPropulsionController, 
@@ -97,6 +98,7 @@ const buildShip = (shipName, pos, game) => {
 			); 
 		case "Bismark":
 			return new ColonyShip(
+				"Bismark",
 				BismarkDefenceController,
 				BismarkNavigationController,
 				BismarkPropulsionController,
@@ -105,6 +107,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Enterprise":
 			return new ColonyShip(
+				"Enterprise",
 				EnterpriseDefenceController,
 				EnterpriseNavigationController,
 				EnterprisePropulsionController,
@@ -113,6 +116,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "EventHorizon":
 			return new ColonyShip(
+				"EventHorizon",
 				EventHorizonDefenceController,
 				EventHorizonNavigationController,
 				EventHorizonPropulsionController,
@@ -120,8 +124,9 @@ const buildShip = (shipName, pos, game) => {
 				pos, game
 			);
 
-		case "Flying Dutchma":
+		case "Flying Dutchman":
 			return new ColonyShip(
+				"Flying Dutchman",
 				FlyingDutchmanDefenceController,
 				FlyingDutchmanNavigationController,
 				FlyingDutchmanPropulsionController,
@@ -130,6 +135,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Galactica":
 			return new ColonyShip(
+				"Flying Dutchman",
 				GalacticaDefenceController,
 				GalacticaNavigationController,
 				GalacticaPropulsionController,
@@ -138,6 +144,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Milano":
 			return new ColonyShip(
+				"Milano",
 				MilanoDefenceController,
 				MilanoNavigationController,
 				MilanoPropulsionController,
@@ -146,6 +153,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Normandy":
 			return new ColonyShip(
+				"Normandy",
 				NormandyDefenceController,
 				NormandyNavigationController,
 				NormandyPropulsionController,
@@ -154,6 +162,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Nostromo":
 			return new ColonyShip(
+				"Nostromo", 
 				NostromoDefenceController,
 				NostromoNavigationController,
 				NostromoPropulsionController,
@@ -162,6 +171,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Pillar Of Autumn":
 			return new ColonyShip(
+				"Pillar Of Autumn", 
 				PillarOfAutumnDefenceController,
 				PillarOfAutumnNavigationController,
 				PillarOfAutumnPropulsionController,
@@ -170,6 +180,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Planet Express":
 			return new ColonyShip(
+				"Planet Express", 
 				PlanetExpressDefenceController,
 				PlanetExpressNavigationController,
 				PlanetExpressPropulsionController,
@@ -178,6 +189,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Rama":
 			return new ColonyShip(
+				"Rama",
 				RamaDefenceController,
 				RamaNavigationController,
 				RamaPropulsionController,
@@ -186,6 +198,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Red Dwarf":
 			return new ColonyShip(
+				"Red Dwarf", 
 				RedDwarfDefenceController,
 				RedDwarfNavigationController,
 				RedDwarfPropulsionController,
@@ -194,6 +207,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Serenity":
 			return new ColonyShip(
+				"Serenity", 
 				SerenityDefenceController,
 				SerenityNavigationController,
 				SerenityPropulsionController,
@@ -202,6 +216,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "ssAnne":
 			return new ColonyShip(
+				"ssAnne", 
 				SSAnneDefenceController,
 				SSAnneNavigationController,
 				SSAnnePropulsionController,
@@ -210,6 +225,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Thunderbird III":
 			return new ColonyShip(
+				"Thunderbird III",
 				Thunderbird3DefenceController,
 				Thunderbird3NavigationController,
 				Thunderbird3PropulsionController,
@@ -218,6 +234,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Yamato":
 			return new ColonyShip(
+				"Yamato", 
 				YamatoDefenceController,
 				YamatoNavigationController,
 				YamatoPropulsionController,
@@ -227,10 +244,11 @@ const buildShip = (shipName, pos, game) => {
 
 		// fill out cases for all ships
 		case "All": case "all":
+			const shipNames = ["Bebop", "Bismark", "Enterprise", "EventHorizon", "Flying Dutchman", "Galactica", "Milano", "Normandy", "Nostromo", "Pillar Of Autumn", "Planet Express", "Rama", "Red Dwarf", "Serenity", "ssAnne", "Thunderbird III", "Yamato"];
 			let ships = []; 
-			ships.push(getShip("bebop", pos, game)); //Build each ship into array to return
-			// ship.push(getShip("bismark")); // get all ships
-			// Fill this out for all ships
+			shipNames.forEach((shipName) => {
+				ships.push(buildShip(shipName, pos, game)); //Build each ship into array to return
+			})
 			return ships;
 	}
 }	

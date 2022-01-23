@@ -9,8 +9,9 @@ If you aren't sure about if a function should be copied or not, ask on discord.
 */
 
 export default class ColonyShip extends Sprite{
-	constructor(DefenceClass, NavigationClass, PropulsionClass, SensorsClass, ...args){
+	constructor(name, DefenceClass, NavigationClass, PropulsionClass, SensorsClass, ...args){
 		super(...args) //parent constructor
+		this.name = name;
 		this.defenceController = new DefenceClass(this); 
 		this.navigationController = new NavigationClass(this);
 		this.propulsionController = new PropulsionClass(this);
@@ -28,6 +29,7 @@ export default class ColonyShip extends Sprite{
 
 		this.totalDamage = 0;
 		this.energyUsed = 0;
+		this.primary = false;
 
 		this.image = this.game.images["ship"];
 		this.size = new Vector2(3, 2);
@@ -57,7 +59,7 @@ export default class ColonyShip extends Sprite{
 			this.energyTimeCount=0;
 		}
 		//Add special update code here if needed
-		this.manualControls(); //use the data from keyboard control for testing
+		if (this.primary) this.manualControls(); //use the data from keyboard control for testing
 		
 		this.defenceController.defenceUpdate(
 			this.shipStatusInfo, 
