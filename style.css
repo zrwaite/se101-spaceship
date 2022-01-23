@@ -226,7 +226,7 @@ canvas {
     cursor: pointer;
 }
 #Ship #ShipSelect.open {
-    height: calc(var(--unit) * 2.25 * 18);
+    height: calc(var(--unit) * 2.25 * 17);
 }
 #ShipSelect figure {
     margin: 0;
@@ -263,6 +263,14 @@ canvas {
 #Settings table {
     margin-left: calc(var(--unit) * 3);
     border-spacing: calc(var(--unit) * 1) 0;
+}
+/*#Settings table tr {
+    margin-top: calc(var(--unit) * 2);
+    height: calc(var(--unit) * 3);
+    padding: calc(var(--unit) * -1);
+}*/
+#Settings table tr td p {
+    margin: calc(var(--unit) * 0.75);
 }
 input[type="checkbox"] {
     -webkit-appearance: none;

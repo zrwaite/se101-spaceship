@@ -20,7 +20,7 @@ let imagesLoaded = 0; // Updates as the images load, until all are loaded.
 let images = {}; // image locations, by name
 let contexts = {}; // contexts, by name
 let galaxies = ["test", "Alpha", "Beta", "Gamma"];
-let ships = ["Bebop", "Bismark", "Enterprise", "Event Horizon", "Flying Dutchman", "Galactica", "Milano", "Normandy", "Nostromo", "Pillar Of Autumn", "Planet Express", "Rama", "Red Dwarf", "Serenity", "ssAnne", "Thunderbird III", "Yamato", "All Ships"];
+let ships = ["Bebop", "Bismark", "Enterprise", "Event Horizon", "Flying Dutchman", "Galactica", "Milano", "Normandy", "Nostromo", "Pillar Of Autumn", "Planet Express", "Rama", "Red Dwarf", "Serenity", "ssAnne", "Thunderbird III", "Yamato"];
 
 function initializeImages(imageInfo) {
     /* Create the images with the given info: [imageName, src]. */
@@ -151,6 +151,7 @@ let DOM = {
         "devDisplay": true, // The default toggle state of the dev window when starting to play
         "defaultGalaxy": 0, // Galaxy index default
         "manualControls": true, // Use manual controls, not student-programmed systems
+        "allShips": false, // Watch all ships?
         "zoom": 1 // zoom aspect ratio (1 vs 2.5)
     },
     elements: {
@@ -315,7 +316,7 @@ let DOM = {
         if (this.loaded && !this.gameInitialized) {
             game.paused = false;
             game.zoom = this.data["zoom"];
-            game.start(galaxies[galaxy], true, "Bebop");
+            game.start(galaxies[galaxy], this.data["allShips"], this.data["defaultShip"]);
             this.gameMenuTitle(galaxies[galaxy], game.galaxy.startingSolarSystem);
             startAnimating();
             this.newMenu();
@@ -325,13 +326,13 @@ let DOM = {
                 this.save();
             }
         } else if (this.gameInitialized) {
-            if (galaxies[galaxy] !== game.galaxy.name) {
+            if (galaxies[galaxy] !== game.galaxy.name || game.watchShipName !== this.data["defaultShip"]) {
                 console.log("Destroying the game object and remaking it!");
                 game.endGame();
                 game = new Game(windowSize.x, windowSize.y, images, contexts);
                 game.unit = unit;
                 game.zoom = this.data["zoom"];
-                game.start(galaxies[galaxy], true, "Bebop");
+                game.start(galaxies[galaxy], this.data["allShips"], this.data["defaultShip"]);
                 this.gameMenuTitle(galaxies[galaxy], game.galaxy.startingSolarSystem);
             }
             game.paused = false;

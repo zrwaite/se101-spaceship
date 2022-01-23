@@ -76,6 +76,7 @@ export default class Game {
         this.draw();
         this.update();
         this.initializing = false; // DONE STARTING
+		console.log(this.watchShip);
     }
 	newSolarSystem(solarSystemName){
 		this.solarSystemName = solarSystemName;
@@ -98,7 +99,7 @@ export default class Game {
 		const xDiff = obj1.pos.x-obj2.pos.x;
 		const yDiff = obj1.pos.y-obj2.pos.y;
 		const rTotal = obj1.radius + obj2.radius;
-		return xDiff*xDiff + yDiff*yDiff < rTotal*rTotal;
+		return xDiff * xDiff + yDiff * yDiff < rTotal * rTotal;
 	}
 	// two objects hit each other, handle perfectly elastic collision
 	// returns the velocity difference (in the norm direction) between the 2 objects 
@@ -166,6 +167,45 @@ export default class Game {
 						b.receiveDamage();
 					} else {
 						this.clank(a, b)
+					}
+				}
+			}
+		}
+	}
+
+	detectProcessCollisions(process) {
+		// check ships collided with anything
+		process.ships.forEach((ship, i) => {
+			process.delObjects.forEach((obj, j) => {
+				if (process.ifCollide(ship, obj)) {
+					if (obj instanceof(Asteroid) || obj instanceof(Meteor)) {
+						const vDiff = process.clank(ship, obj);
+						// when ships hit anything, they receive dmg
+						// we say the dmg recieved is propotional to the square of the velocity difference
+						const dmg = DMG_COEFFICIENT*vDiff*vDiff;
+						ship.receiveDamage(dmg);
+					}
+					// here we can test if ship hits torpedo and all that such
+					// else if (obj instanceof(Torpedo)) { console.log('Ship hit Torpedo')}
+				}
+			})
+		});
+
+		for (let i=0; i<process.delObjects.length; i++) {
+			for (let j=i+1; j<process.delObjects.length; j++) {
+				const a = process.delObjects[i];
+				const b = process.delObjects[j];
+				if (process.ifCollide(a, b)) {
+					if (a instanceof(Torpedo) || b instanceof(Torpedo)) {
+						// torpedos can hit each other for now but firing from multiple
+						// tubes at once instantly explodes all torpedos fired at that time
+						// if (a instanceof(Torpedo) && b instanceof(Torpedo)) {
+						// 	continue;
+						// }
+						a.receiveDamage();
+						b.receiveDamage();
+					} else {
+						process.clank(a, b)
 					}
 				}
 			}
