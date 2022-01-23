@@ -70,51 +70,6 @@ function iterateLoad(length) {
     }
 }
 
-initializeContexts([
-    "background", // static background
-    "planets", // only drawn once if game.zoom == 1
-    "missiles",
-    "objects",
-    "thrusters",
-    "ships",
-    "items"
-]);
-
-initializeImages([
-    //["titleBackground", "UIImages/TitleBackground.png"],
-    ["background", "SpaceObjects/Space.png"],
-    ["ship", "ShipSprites/ColonyShip.png"],
-    ["thruster", "ShipSprites/ThrusterNozzle.png"],
-    ["thrusterFlame", "ShipSprites/ThrusterFlame.png"],
-    ["turret", "ShipSprites/TurretSprite.png"],
-    ["asteroid", "SpaceObjects/SpaceMeteors001.png"],
-    ["planet1", "SpaceObjects/CreamVioletPlanet.png"],
-    ["planet2", "SpaceObjects/CyanPlanet.png"],
-    ["planet3", "SpaceObjects/CyanPlanet1.png"],
-    ["planet4", "SpaceObjects/DarkPlanet.png"],
-    ["planet5", "SpaceObjects/EarthLikePlanet.png"],
-    ["planet6", "SpaceObjects/FrostPlanet.png"],
-    ["planet7", "SpaceObjects/IcePlanet.png"],
-    ["planet8", "SpaceObjects/OrangePlanet.png"],
-    ["planet9", "SpaceObjects/PurplePlanet.png"],
-    ["planet10", "SpaceObjects/RedLinesPlanet.png"],
-    ["planet11", "SpaceObjects/RedPlanet1.png"],
-    ["planet12", "SpaceObjects/RedPlanetSputnik.png"],
-    ["planet13", "SpaceObjects/SandPlanet.png"],
-    ["planet14", "SpaceObjects/StormPlanet.png"],
-    ["warpgate", "SpaceObjects/WhiteDwarfStar.png"],
-    ["torpedo", "SpaceObjects/SpaceMissiles040.png"],
-    ["explosion0", "Explosions/regularExplosion00.png"],
-    ["explosion1", "Explosions/regularExplosion01.png"],
-    ["explosion2", "Explosions/regularExplosion02.png"],
-    ["explosion3", "Explosions/regularExplosion03.png"],
-    ["explosion4", "Explosions/regularExplosion04.png"],
-    ["explosion5", "Explosions/regularExplosion05.png"],
-    ["explosion6", "Explosions/regularExplosion06.png"],
-    ["explosion7", "Explosions/regularExplosion07.png"],
-    ["explosion8", "Explosions/regularExplosion08.png"]
-]);
-
 function storageAvailable(type) {
     var storage;
     try {
@@ -133,7 +88,6 @@ function storageAvailable(type) {
         ) && (storage && storage.length !== 0);
     }
 }
-
 
 
 // localStorage.setItem('data', JSON.stringify(DOM.data));
@@ -300,6 +254,9 @@ let DOM = {
         entries[3].innerHTML = "Y: " + Math.floor(game.watchShip.pos.y * 10);
         entries[4].innerHTML = Math.floor(game.watchShip.energyUsed * 100) + " J";
         entries[5].innerHTML = Math.floor(game.watchShip.totalDamage * 100) + " Ns";
+        for (let i = 0; i < 4/* 4 turrets! */; i++) {
+            entries[6].children[0].children[i].style.width = (100 - Math.floor((game.watchShip.turretControls.getTubeCooldown(i).response.tubeCooldown) / game.watchShip.turretControls.cooldownFrames * 100)) + "%";
+        }
     },
     fadeInOut: function(func, params = [], middletime = 250) {
         let fade = this.elements["SolarFade"].classList;
@@ -341,6 +298,56 @@ let DOM = {
     }
 }
 
+
+///////////////////////////////////////////////
+//////   Full Initialization Functions   //////
+///////////////////////////////////////////////
+
+
+initializeContexts([
+    "background", // static background
+    "planets", // only drawn once if game.zoom == 1
+    "missiles",
+    "objects",
+    "thrusters",
+    "ships",
+    "items"
+]);
+
+initializeImages([
+    //["titleBackground", "UIImages/TitleBackground.png"],
+    ["background", "SpaceObjects/Space.png"],
+    ["ship", "ShipSprites/ColonyShip.png"],
+    ["thruster", "ShipSprites/ThrusterNozzle.png"],
+    ["thrusterFlame", "ShipSprites/ThrusterFlame.png"],
+    ["turret", "ShipSprites/TurretSprite.png"],
+    ["asteroid", "SpaceObjects/SpaceMeteors001.png"],
+    ["planet1", "SpaceObjects/CreamVioletPlanet.png"],
+    ["planet2", "SpaceObjects/CyanPlanet.png"],
+    ["planet3", "SpaceObjects/CyanPlanet1.png"],
+    ["planet4", "SpaceObjects/DarkPlanet.png"],
+    ["planet5", "SpaceObjects/EarthLikePlanet.png"],
+    ["planet6", "SpaceObjects/FrostPlanet.png"],
+    ["planet7", "SpaceObjects/IcePlanet.png"],
+    ["planet8", "SpaceObjects/OrangePlanet.png"],
+    ["planet9", "SpaceObjects/PurplePlanet.png"],
+    ["planet10", "SpaceObjects/RedLinesPlanet.png"],
+    ["planet11", "SpaceObjects/RedPlanet1.png"],
+    ["planet12", "SpaceObjects/RedPlanetSputnik.png"],
+    ["planet13", "SpaceObjects/SandPlanet.png"],
+    ["planet14", "SpaceObjects/StormPlanet.png"],
+    ["warpgate", "SpaceObjects/WhiteDwarfStar.png"],
+    ["torpedo", "SpaceObjects/SpaceMissiles040.png"],
+    ["explosion0", "Explosions/regularExplosion00.png"],
+    ["explosion1", "Explosions/regularExplosion01.png"],
+    ["explosion2", "Explosions/regularExplosion02.png"],
+    ["explosion3", "Explosions/regularExplosion03.png"],
+    ["explosion4", "Explosions/regularExplosion04.png"],
+    ["explosion5", "Explosions/regularExplosion05.png"],
+    ["explosion6", "Explosions/regularExplosion06.png"],
+    ["explosion7", "Explosions/regularExplosion07.png"],
+    ["explosion8", "Explosions/regularExplosion08.png"]
+]);
 
 let startTime, now, then, elapsed;
 

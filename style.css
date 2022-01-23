@@ -180,6 +180,23 @@ canvas {
 #DevTools table tr:not(.title)>td {
     width: 50%;
 }
+#DevTools #TurretCooldown {
+    position: absolute;
+    background-color: transparent;
+    border-radius: calc(var(--unit) * 0.4);
+    width: calc(var(--unit) * 16.5);
+    height: calc(var(--unit) * 0.8);
+    margin: 0;
+    padding: 0;
+}
+#TurretCooldown div.tube {
+    position: absolute;
+    border-radius: calc(var(--unit) * 0.4);
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.3) calc(50% + var(--unit) * 2.4), rgba(255, 255, 255, 0.6) 100%);
+    left: 0;
+    top: 0;
+    height: calc(var(--unit) * 0.8);
+}
 
 /* Main Menu */
 #Main {
@@ -264,11 +281,6 @@ canvas {
     margin-left: calc(var(--unit) * 3);
     border-spacing: calc(var(--unit) * 1) 0;
 }
-/*#Settings table tr {
-    margin-top: calc(var(--unit) * 2);
-    height: calc(var(--unit) * 3);
-    padding: calc(var(--unit) * -1);
-}*/
 #Settings table tr td p {
     margin: calc(var(--unit) * 0.75);
 }
@@ -328,6 +340,10 @@ input[type="checkbox"]:checked {
     -o-transition-duration: 0.2s;
     -moz-transition-duration: 0.2s;
     -webkit-transition-duration: 0.2s;
+}
+#Info:not(.active) .material-icons {
+    font-size: calc(var(--unit) * 1.1);
+    width: calc(var(--unit) * 0);
 }
 #Info:not(.active) {
     width: calc(var(--unit) * 8);
