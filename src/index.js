@@ -254,6 +254,9 @@ let DOM = {
         entries[3].innerHTML = "Y: " + Math.floor(game.watchShip.pos.y * 10);
         entries[4].innerHTML = Math.floor(game.watchShip.energyUsed * 100) + " J";
         entries[5].innerHTML = Math.floor(game.watchShip.totalDamage * 100) + " Ns";
+        for (let i = 0; i < 4/* 4 turrets! */; i++) {
+            entries[6].children[0].children[i].style.width = (100 - Math.floor((game.watchShip.turretControls.getTubeCooldown(i).response.tubeCooldown) / game.watchShip.turretControls.cooldownFrames * 100)) + "%";
+        }
     },
     fadeInOut: function(func, params = [], middletime = 250) {
         let fade = this.elements["SolarFade"].classList;
