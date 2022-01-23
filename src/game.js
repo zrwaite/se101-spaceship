@@ -1,7 +1,8 @@
 import Vector2 from "./helpers/Vector2.js";
 import Controller from "./controller.js";
 import Galaxy from "./galaxy.js";
-import {buildShip} from "./ship/buildShip.js"
+import {buildShip} from "./ship/buildShip.js";
+import Process from "./gameProcess.js";
 
 import Asteroid from "./spaceObjects/asteroid.js";
 import Torpedo from "./ship/torpedo.js";
@@ -39,6 +40,7 @@ export default class Game {
         this.unit; // Global Unit
         this.fpsInterval = 1000 / 60;
 		this.solarSystemName;
+		this.processes = [];
     }
     start(galaxyName, allShips, watchShipName) {
 		this.allShips = allShips
@@ -46,9 +48,16 @@ export default class Game {
 		this.watchShipName = watchShipName;
         this.inputs = new Controller(this); //controller created
 		this.galaxy = new Galaxy(galaxyName, this); //Create galaxy
-		this.solarSystem = this.galaxy.startingSolarSystem; //Starting solar system from galaxy
+		this.solarSystemName = this.galaxy.startingSolarSystem; //Starting solar system from galaxy
+
+		this.galaxy.solarSystems.forEach((solarSystem) => {
+			this.processes.push(new Process(this, solarSystem));
+		})
+
+		this.drawnProcess = this.processes[0];
+
 		if (this.allShips) {
-			this.ships.push(...buildShip("all", startPosition, this)); //Build all ships for now
+			this.ships.push(...buildShip("all", startPosition, this, this.drawnProcess)); //Build all ships for now
 			console.log(this.ships);
 			let shipFound = false;
 			for (let i=0; i<this.ships.length; i++) {
@@ -64,7 +73,7 @@ export default class Game {
 				console.log (this.watchShip);
 			}
 		} else {
-			this.ships.push(buildShip(this.watchShipName, startPosition, this)) //build a single ship
+			this.ships.push(buildShip(this.watchShipName, startPosition, this, this.drawnProcess)) //build a single ship
 			this.watchShip = this.ships[0];
 		}
 		this.watchShip.primary = true;
@@ -72,7 +81,20 @@ export default class Game {
 			this.drawnObjects.push(ship.turretControls);
 			ship.turretControls.ctx = "ships";
 		})
-		this.newSolarSystem(this.solarSystem); //Another version of start function basically
+
+		this.processes.forEach((process) => {
+			if (process.solarSystem.name === this.solarSystemName) {
+				process.start(this.ships, this.watchShip);
+				process.rerenderStatic();
+			} else {
+				process.start([], null);
+			}
+		})
+
+
+		
+
+		// this.newSolarSystem(this.solarSystem); //Another version of start function basically
         this.draw();
         this.update();
         this.initializing = false; // DONE STARTING
@@ -134,10 +156,11 @@ export default class Game {
 	}
 
 	// METHOD 1, simple O(n^2), check every pair for collision
-	detectCollisions() {
+
+	detectProcessCollisions(process) {
 		// check ships collided with anything
-		this.ships.forEach((ship, i) => {
-			this.delObjects.forEach((obj, j) => {
+		process.ships.forEach((ship, i) => {
+			process.delObjects.forEach((obj, j) => {
 				if (this.ifCollide(ship, obj)) {
 					if (obj instanceof(Asteroid) || obj instanceof(Meteor)) {
 						const vDiff = this.clank(ship, obj);
@@ -152,10 +175,10 @@ export default class Game {
 			})
 		});
 
-		for (let i=0; i<this.delObjects.length; i++) {
-			for (let j=i+1; j<this.delObjects.length; j++) {
-				const a = this.delObjects[i];
-				const b = this.delObjects[j];
+		for (let i=0; i<process.delObjects.length; i++) {
+			for (let j=i+1; j<process.delObjects.length; j++) {
+				const a = process.delObjects[i];
+				const b = process.delObjects[j];
 				if (this.ifCollide(a, b)) {
 					if (a instanceof(Torpedo) || b instanceof(Torpedo)) {
 						// torpedos can hit each other for now but firing from multiple
@@ -173,53 +196,16 @@ export default class Game {
 		}
 	}
 
-	detectProcessCollisions(process) {
-		// check ships collided with anything
-		process.ships.forEach((ship, i) => {
-			process.delObjects.forEach((obj, j) => {
-				if (process.ifCollide(ship, obj)) {
-					if (obj instanceof(Asteroid) || obj instanceof(Meteor)) {
-						const vDiff = process.clank(ship, obj);
-						// when ships hit anything, they receive dmg
-						// we say the dmg recieved is propotional to the square of the velocity difference
-						const dmg = DMG_COEFFICIENT*vDiff*vDiff;
-						ship.receiveDamage(dmg);
-					}
-					// here we can test if ship hits torpedo and all that such
-					// else if (obj instanceof(Torpedo)) { console.log('Ship hit Torpedo')}
-				}
-			})
-		});
-
-		for (let i=0; i<process.delObjects.length; i++) {
-			for (let j=i+1; j<process.delObjects.length; j++) {
-				const a = process.delObjects[i];
-				const b = process.delObjects[j];
-				if (process.ifCollide(a, b)) {
-					if (a instanceof(Torpedo) || b instanceof(Torpedo)) {
-						// torpedos can hit each other for now but firing from multiple
-						// tubes at once instantly explodes all torpedos fired at that time
-						// if (a instanceof(Torpedo) && b instanceof(Torpedo)) {
-						// 	continue;
-						// }
-						a.receiveDamage();
-						b.receiveDamage();
-					} else {
-						process.clank(a, b)
-					}
-				}
-			}
-		}
-	}
-
 	update () {
+		this.processes.forEach((process) => {
+			process.update();
+		})
         let game = this;
 
-		this.detectCollisions();
+		// this.detectCollisions();
 
-		this.delObjects = this.delObjects.filter(this.deleter); // Removes objects no longer needed
+		// this.delObjects = this.delObjects.filter(this.deleter); // Removes objects no longer needed
 
-        
         //let camOffset = new Vector2(-this.watchShip.speed.x * this.unit * this.dragConst, -this.watchShip.speed.y * this.unit * this.dragConst);
         let candidateX = (this.watchShip.pos.x - this.width / this.zoom / 2) * this.unit;
         let candidateY = (this.watchShip.pos.y - this.height / this.zoom / 2) * this.unit;
@@ -244,25 +230,13 @@ export default class Game {
         ctx.rect(this.camera.x, this.camera.y, Math.floor(this.width / this.zoom * this.unit), Math.floor(this.height / this.zoom * this.unit));
         ctx.stroke();*/
 
-		[...this.drawnObjects, ...this.delObjects, ...this.hiddenObjects].forEach((object) => object.update()); //Updates all objects
+		// [...this.drawnObjects, ...this.delObjects, ...this.hiddenObjects].forEach((object) => object.update()); //Updates all objects
 
         this.frame++;
     }
     draw () {
-        let game = this;
-        [...game.drawnObjects, ...game.delObjects].forEach((object) => {
-            // Doesn't draw if zoomed out (game.zoom == 1) and planet :)
-            if (!(object.ctx === "planets") || game.zoom !== 1 || game.initializing) object.draw();
-        }); //Draws all drawn objects
+		this.drawnProcess.draw();
     }
-	rerenderStatic() {
-        document.getElementById("SolarSystemName").innerHTML = this.solarSystemName;
-		["missiles", "planets", "objects", "thrusters", "ships", "items"].forEach((object) => {
-            this.contexts[object].setTransform(1, 0, 0, 1, 0, 0);
-            this.contexts[object].clearRect(0, 0, this.width * this.unit, this.height * this.unit);
-        });
-		[...this.drawnObjects, ...this.delObjects].forEach((object) => object.draw()); //Redrawns all objects, including static
-	}
 	deleter(sprite){ //Deletes objects from deletable array that aren't needed
 		return !sprite.delete
 	}

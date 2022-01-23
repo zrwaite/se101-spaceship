@@ -9,9 +9,11 @@ If you aren't sure about if a function should be copied or not, ask on discord.
 */
 
 export default class ColonyShip extends Sprite{
-	constructor(name, DefenceClass, NavigationClass, PropulsionClass, SensorsClass, ...args){
+	constructor(name, process, DefenceClass, NavigationClass, PropulsionClass, SensorsClass, ...args){
 		super(...args) //parent constructor
 		this.name = name;
+		this.process = process;
+		if (!this.process) alert(this.name);
 		this.defenceController = new DefenceClass(this); 
 		this.navigationController = new NavigationClass(this);
 		this.propulsionController = new PropulsionClass(this);
@@ -35,7 +37,7 @@ export default class ColonyShip extends Sprite{
 		this.size = new Vector2(3, 2);
 		this.radius = (this.size.x + this.size.y) / 4;		// we say the hurt box is avg of width and height 
 		this.shipStatusInfo;
-		this.solarSystem = this.game.solarSystem;
+		this.solarSystem = this.process.solarSystem;
 		this.ctx = "ships";
 		this.mass = 3;
 		this.maxASpeed = 0.3;
@@ -74,7 +76,7 @@ export default class ColonyShip extends Sprite{
 		this.navigationController.navigationController(
 			this.shipStatusInfo, 
 			this.tryWarp.bind(this),
-			this.game.solarSystem.getMapData(this.pos));
+			this.process.solarSystem.getMapData(this.pos));
 		this.propulsionController.propulsionUpdate(
 			this.shipStatusInfo, 
 			this.thrusterController.setThruster.bind(this.thrusterController));
@@ -200,8 +202,8 @@ export default class ColonyShip extends Sprite{
 
 	tryWarp(){
 		this.energyUsed += 100;
-		this.game.solarSystem.warpGates.forEach((warpGate) => {
-			if (this.game.ifCollide(this, warpGate)) warpGate.warp();
+		this.process.solarSystem.warpGates.forEach((warpGate) => {
+			if (this.game.ifCollide(this, warpGate)) warpGate.warp(this);
 		})
 	}
 }
