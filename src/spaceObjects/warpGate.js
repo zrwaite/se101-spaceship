@@ -16,9 +16,20 @@ export default class WarpGate extends RenderedObject {
 		//Add special update code here if needed
 		// super.update();
 	}
-	warp(){
-		console.log("warping");
-		this.game.newSolarSystem(this.destinationSolarSystem, this.game.numShips);
-		//send signal to game to start new solarSystem
+	warp(ship){
+		let newProcess;
+		this.game.processes.forEach((process) => {
+			if (process.solarSystem.name === this.destinationSolarSystem) {
+				newProcess = process;
+			}
+		})
+		ship.solarSystem = newProcess.solarSystem;
+		newProcess.appendShip(ship);
+		ship.process.dealocateShip(ship);
+		if (ship.primary) {
+			this.game.drawnProcess = newProcess;
+			newProcess.rerenderStatic();
+		}
+		ship.process = newProcess;
 	}
 }
