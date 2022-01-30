@@ -98,7 +98,7 @@ export default class Game {
         this.draw();
         this.update();
         this.initializing = false; // DONE STARTING
-		console.log(this.watchShip);
+		//console.log(this.watchShip);
     }
 	newSolarSystem(solarSystemName){
 		this.solarSystemName = solarSystemName;
@@ -200,7 +200,6 @@ export default class Game {
 		this.processes.forEach((process) => {
 			process.update();
 		})
-        let game = this;
 
 		// this.detectCollisions();
 
@@ -215,13 +214,7 @@ export default class Game {
         this.camera.x = candidateX;
         this.camera.y = candidateY;
 
-        ["missiles", "planets", "objects", "thrusters", "ships", "items"].forEach((object) => {
-            if (object !== "planets" || game.zoom !== 1) {
-                game.contexts[object].setTransform(1, 0, 0, 1, 0, 0);
-                game.contexts[object].clearRect(0, 0, game.width * game.unit, game.height * game.unit);
-            }
-        });
-
+        
         // Temporary drawing of the zoomed-in view
         /*let ctx = game.contexts["items"];
         ctx.lineWidth = "5";
