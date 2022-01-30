@@ -73,18 +73,10 @@ export default class Process {
 	spawnDeletableObject(obj) {
 		this.delObjects.push(obj);
 	}
-
 	update () {
 		if (this.ships.length === 0) return;
 		this.game.detectProcessCollisions(this);
 		this.delObjects = this.delObjects.filter(this.game.deleter); // Removes objects no longer needed
-
-        ["missiles", "planets", "objects", "thrusters", "ships", "items"].forEach((object) => {
-            if (object !== "planets" || this.zoom !== 1) {
-                this.contexts[object].setTransform(1, 0, 0, 1, 0, 0);
-                this.contexts[object].clearRect(0, 0, this.width * this.unit, this.height * this.unit);
-            }
-        });
 
 		[...this.drawnObjects, ...this.delObjects, ...this.hiddenObjects].forEach((object) => object.update()); //Updates all objects
 
@@ -92,7 +84,9 @@ export default class Process {
     }
     draw () {
         [...this.drawnObjects, ...this.delObjects].forEach((object) => {
-            if (object.ctx !== "planets") object.draw();
+            //if (object.ctx !== "planets" || this.game.zoom !== 1 || this.initializing) {
+                object.draw();
+            //}
         }); //Draws all drawn objects
     }
 	rerenderStatic() {
@@ -101,13 +95,10 @@ export default class Process {
             this.contexts[object].setTransform(1, 0, 0, 1, 0, 0);
             this.contexts[object].clearRect(0, 0, this.width * this.unit, this.height * this.unit);
         });
+        console.log(this.drawnObjects);
 		[...this.drawnObjects, ...this.delObjects].forEach((object) => object.draw()); //Redrawns all objects, including static
 	}
     endProcess() {
-        ["missiles", "planets", "objects", "thrusters", "ships", "items"].forEach((object) => {
-            this.contexts[object].setTransform(1, 0, 0, 1, 0, 0);
-            this.contexts[object].clearRect(0, 0, this.width * this.unit, this.height * this.unit);
-        });
 		delete this.contexts;
         delete this.inputs;
 		delete this.drawnObjects;
