@@ -298,8 +298,8 @@ let DOM = {
         entries[1].innerHTML = "Y: " + Math.floor(game.watchShip.speed.y * 1000);
         entries[2].innerHTML = "X: " + Math.floor(game.watchShip.pos.x * 10);
         entries[3].innerHTML = "Y: " + Math.floor(game.watchShip.pos.y * 10);
-        entries[4].innerHTML = Math.floor(game.watchShip.energyUsed * 100) + " J";
-        entries[5].innerHTML = Math.floor(game.watchShip.totalDamage * 100) + " Ns";
+        entries[4].innerHTML = Math.round(game.watchShip.energyUsed * 1000) / 10 + " J";
+        entries[5].innerHTML = Math.round(game.watchShip.totalDamage * 100) + " Ns";
     },
     fadeInOut: function(func, params = [], middletime = 250) {
         let fade = this.elements["SolarFade"].classList;
@@ -358,6 +358,12 @@ function animate() {
         then = now - (elapsed % game.fpsInterval);
         if (!game.paused) {
             game.update();
+            ["missiles", "planets", "objects", "thrusters", "ships", "items"].forEach((object) => {
+                //if (object !== "planets" || game.zoom !== 1 || game.initializing || game.drawnProcess.initializing) {
+                    game.drawnProcess.contexts[object].setTransform(1, 0, 0, 1, 0, 0);
+                    game.drawnProcess.contexts[object].clearRect(0, 0, game.width * game.unit, game.height * game.unit);
+                //}
+            });
             game.draw();
             DOM.devToolsUpdate();
         }
