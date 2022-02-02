@@ -4,6 +4,7 @@ import PassiveSensors from "./passiveSensors.js";
 import ActiveSensors from "./activeSensors.js";
 import TurretControls from "./turretControls.js";
 import ThrusterController from "./thrusterController.js";
+import Response from "../helpers/response.js";
 /* Reference other colonyship.js file for reference to make this one
 If you aren't sure about if a function should be copied or not, ask on discord. 
 */
@@ -191,15 +192,29 @@ export default class ColonyShip extends Sprite{
 	tryWarp(){
 		this.energyUsed += 50;
 		this.process.solarSystem.warpGates.forEach((warpGate) => {
-			if (this.game.ifCollide(this, warpGate)) warpGate.warp(this);
+			if (this.game.ifCollide(this, warpGate)) {
+				warpGate.warp(this);
+				this.receiveDamage(this.speed.magnitude());
+				return new Response(200, [], "warped", true);
+			}
 		})
+		return new Response(400, ["No warp gates in range"]);
 	}
 
 	tryLand(){
 		this.energyUsed += 20;
+		console.log(this.speed.magnitude())
 		this.process.solarSystem.planets.forEach((planet) => {
-			if (this.game.ifCollide(this, planet)) this.land(planet);
+			if (this.game.ifCollide(this, planet)){
+				if (this.speed.magnitude()>0.05){
+					return new Response(400, ["Too fast!"]);
+				} else {
+					this.land(planet);
+					return new Response(200, [], "landed", true);
+				}
+			}
 		})
+		return new Response(400, ["No planets in range"]);
 	}
 
 	land(planet) {
