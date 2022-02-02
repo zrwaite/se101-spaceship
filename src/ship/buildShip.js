@@ -85,11 +85,11 @@ import YamatoNavigationController from "../../SubsystemControllers/Yamato/Naviga
 import YamatoPropulsionController from "../../SubsystemControllers/Yamato/PropulsionController.js";
 import YamatoSensorsController from "../../SubsystemControllers/Yamato/SensorsController.js";
 
-const buildShip = (shipName, pos, game) => {
+const buildShip = (shipName, pos, game, startProcess) => {
 	switch (shipName){
 		case "Bebop": case "bebop":
 			return new ColonyShip(
-				"Bebop",
+				"Bebop", startProcess,
 				BebopDefenceController, 
 				BebopNavigationController, 
 				BebopPropulsionController, 
@@ -98,7 +98,7 @@ const buildShip = (shipName, pos, game) => {
 			); 
 		case "Bismark":
 			return new ColonyShip(
-				"Bismark",
+				"Bismark", startProcess,
 				BismarkDefenceController,
 				BismarkNavigationController,
 				BismarkPropulsionController,
@@ -107,7 +107,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Enterprise":
 			return new ColonyShip(
-				"Enterprise",
+				"Enterprise", startProcess,
 				EnterpriseDefenceController,
 				EnterpriseNavigationController,
 				EnterprisePropulsionController,
@@ -116,7 +116,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "EventHorizon":
 			return new ColonyShip(
-				"EventHorizon",
+				"EventHorizon", startProcess,
 				EventHorizonDefenceController,
 				EventHorizonNavigationController,
 				EventHorizonPropulsionController,
@@ -126,7 +126,7 @@ const buildShip = (shipName, pos, game) => {
 
 		case "Flying Dutchman":
 			return new ColonyShip(
-				"Flying Dutchman",
+				"Flying Dutchman", startProcess,
 				FlyingDutchmanDefenceController,
 				FlyingDutchmanNavigationController,
 				FlyingDutchmanPropulsionController,
@@ -135,7 +135,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Galactica":
 			return new ColonyShip(
-				"Flying Dutchman",
+				"Flying Dutchman", startProcess,
 				GalacticaDefenceController,
 				GalacticaNavigationController,
 				GalacticaPropulsionController,
@@ -144,7 +144,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Milano":
 			return new ColonyShip(
-				"Milano",
+				"Milano", startProcess,
 				MilanoDefenceController,
 				MilanoNavigationController,
 				MilanoPropulsionController,
@@ -153,7 +153,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Normandy":
 			return new ColonyShip(
-				"Normandy",
+				"Normandy", startProcess,
 				NormandyDefenceController,
 				NormandyNavigationController,
 				NormandyPropulsionController,
@@ -162,7 +162,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Nostromo":
 			return new ColonyShip(
-				"Nostromo", 
+				"Nostromo",  startProcess,
 				NostromoDefenceController,
 				NostromoNavigationController,
 				NostromoPropulsionController,
@@ -171,7 +171,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Pillar Of Autumn":
 			return new ColonyShip(
-				"Pillar Of Autumn", 
+				"Pillar Of Autumn",  startProcess,
 				PillarOfAutumnDefenceController,
 				PillarOfAutumnNavigationController,
 				PillarOfAutumnPropulsionController,
@@ -180,7 +180,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Planet Express":
 			return new ColonyShip(
-				"Planet Express", 
+				"Planet Express", startProcess, 
 				PlanetExpressDefenceController,
 				PlanetExpressNavigationController,
 				PlanetExpressPropulsionController,
@@ -189,7 +189,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Rama":
 			return new ColonyShip(
-				"Rama",
+				"Rama", startProcess,
 				RamaDefenceController,
 				RamaNavigationController,
 				RamaPropulsionController,
@@ -198,7 +198,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Red Dwarf":
 			return new ColonyShip(
-				"Red Dwarf", 
+				"Red Dwarf", startProcess, 
 				RedDwarfDefenceController,
 				RedDwarfNavigationController,
 				RedDwarfPropulsionController,
@@ -207,7 +207,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Serenity":
 			return new ColonyShip(
-				"Serenity", 
+				"Serenity", startProcess, 
 				SerenityDefenceController,
 				SerenityNavigationController,
 				SerenityPropulsionController,
@@ -216,7 +216,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "ssAnne":
 			return new ColonyShip(
-				"ssAnne", 
+				"ssAnne", startProcess, 
 				SSAnneDefenceController,
 				SSAnneNavigationController,
 				SSAnnePropulsionController,
@@ -225,7 +225,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Thunderbird III":
 			return new ColonyShip(
-				"Thunderbird III",
+				"Thunderbird III", startProcess,
 				Thunderbird3DefenceController,
 				Thunderbird3NavigationController,
 				Thunderbird3PropulsionController,
@@ -234,7 +234,7 @@ const buildShip = (shipName, pos, game) => {
 			);
 		case "Yamato":
 			return new ColonyShip(
-				"Yamato", 
+				"Yamato", startProcess, 
 				YamatoDefenceController,
 				YamatoNavigationController,
 				YamatoPropulsionController,
@@ -247,7 +247,7 @@ const buildShip = (shipName, pos, game) => {
 			const shipNames = ["Bebop", "Bismark", "Enterprise", "EventHorizon", "Flying Dutchman", "Galactica", "Milano", "Normandy", "Nostromo", "Pillar Of Autumn", "Planet Express", "Rama", "Red Dwarf", "Serenity", "ssAnne", "Thunderbird III", "Yamato"];
 			let ships = []; 
 			shipNames.forEach((shipName) => {
-				ships.push(buildShip(shipName, pos, game)); //Build each ship into array to return
+				ships.push(buildShip(shipName, pos, game, startProcess)); //Build each ship into array to return
 			})
 			return ships;
 	}
