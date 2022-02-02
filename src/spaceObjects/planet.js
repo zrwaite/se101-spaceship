@@ -10,6 +10,10 @@ export default class Planet extends RenderedObject {
 		this.composition = composition;
 		this.gravitySignature = gravitySignature;
 		this.size = new Vector2(5, 5);
+		this.process;
+	}
+	initialize(process) {
+		this.process = process;
 	}
 	update() {
 		//Add special update code here for when zoomed in

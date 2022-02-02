@@ -62,7 +62,7 @@ export default class TurretControls extends RenderedObject{
 			if (tubeCooldownResponse.response["tubeCooldown"] == 0) {
 				const torpedoVelocity = this.direction.scale(this.launchSpeed)		// calculate velocity of fired missile
 				const newTorpedo = new Torpedo(FUSE_FRAME_DURATION, this.parentShip, torpedoVelocity, this.parentShip.pos, this.parentShip.game)
-				this.parentShip.game.spawnDeletableObject(newTorpedo);
+				this.parentShip.process.spawnDeletableObject(newTorpedo);
 				this.parentShip.TorpedoesFired++;
                 this.parentShip.energyUsed += 8;
 				this.lastFrameFiredByTube[tubeIndex] = this.parentShip.game.frame;
