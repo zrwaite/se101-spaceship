@@ -15,7 +15,7 @@ document.body.style.setProperty("--border", windowSize.border + "px");
 document.body.style.setProperty("--width", windowSize.x + "");
 document.body.style.setProperty("--height", windowSize.y + "");
 
-let spritePath = "Sandbox/Sprites/";
+let spritePath = "Sprites/";
 let imagesLoaded = 0; // Updates as the images load, until all are loaded.
 let images = {}; // image locations, by name
 let contexts = {}; // contexts, by name
