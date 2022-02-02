@@ -56,9 +56,9 @@ export default class ColonyShip extends Sprite{
 	}
 	update() {
 		this.energyTimeCount++;
-		if (this.energyTimeCount>=10){
-			this.energyUsed += 0.1;
-			this.energyTimeCount=0;
+		if (this.energyTimeCount > 4){
+			this.energyUsed += 0.06;
+			this.energyTimeCount = 0;
 		}
 		//Add special update code here if needed
 		if (this.primary) this.manualControls(); //use the data from keyboard control for testing
@@ -116,22 +116,22 @@ export default class ColonyShip extends Sprite{
 		
 		if (this.game.inputs.pressed.left) {
 			this.aAccel.set(1, -0.005);
-			this.energyUsed += 0.1;
+			this.energyUsed += 0.04;
 		}
 		else if (this.game.inputs.pressed.right ) {
 			this.aAccel.set(1, 0.005)
-			this.energyUsed += 0.1;
+			this.energyUsed += 0.04;
 		}
  		else this.aAccel.set(1, 0);
  		if (this.game.inputs.pressed.up) {
 			this.accel.set(0, 0);
 			this.accel = this.accel.add(this.angle.scale(0.002));
-			this.energyUsed += 0.1;
+			this.energyUsed += 0.04;
 		}
  		else if (this.game.inputs.pressed.down){
 			this.accel.set(0, 0);
 			this.accel = this.accel.add(this.angle.scale(-0.002));
-			this.energyUsed += 0.1;
+			this.energyUsed += 0.04;
 		}
  		else this.accel.set(0,0);
 		
@@ -139,23 +139,14 @@ export default class ColonyShip extends Sprite{
 		if (!this.game.inputs.pressed.space) {
 			this.canTorpedo = true;
 		} else if (this.game.inputs.pressed.space && this.canTorpedo) {
-			try {
-				this.turretControls.aimTurret(this.angle);
-				const numberOfTubesResponse = this.turretControls.getNumberOfTubes();
-				if (!numberOfTubesResponse.success) { 
-					throw numberOfTubesResponse;
-				}
-				const numberOfTubes = numberOfTubesResponse.response["numberOfTubes"];
-				const tubeIndex = this.game.frame % numberOfTubes;
-				console.log("firing tubeIndex " + tubeIndex);
-				const fireTorpedoResponse = this.turretControls.fireTorpedo(tubeIndex);
-				if (!fireTorpedoResponse.success) {
-					throw fireTorpedoResponse;
-				}
-				this.canTorpedo = false;
-			} catch (e) {
-				console.log(e);
-			}
+            this.turretControls.aimTurret(this.angle);
+            for (let i = 0; i < 4; i++) {
+                let fireResponse = this.turretControls.fireTorpedo(i);
+                if (fireResponse.success) {
+                    this.canTorpedo = false;
+                    break;
+                }
+            }
 		}
 
 		//react to the controller data
