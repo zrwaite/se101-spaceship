@@ -6,7 +6,6 @@ export default class Controller {
 			up: false,
 			right: false,
 			down: false,
-			space: false,
             q: false,
             e: false
 		};
@@ -20,14 +19,16 @@ export default class Controller {
                 this.pressed.right = true; // Press Right
             } else if (pressCode == 40 || pressCode == 83) {
                 this.pressed.down = true; // Press Down
-            } else if (pressCode == 32) {
-                this.pressed.space = true; // Press Space
             } else if (pressCode == 81) {
                 this.pressed.q = true;
             } else if (pressCode == 69) {
                 this.pressed.e = true;
-            }else if (pressCode == 77) {
+            } else if (pressCode == 32) { //Press space
+                this.game.watchShip.tryFire();
+            } else if (pressCode == 77) {
                 this.game.watchShip.tryWarp();
+            } else if (pressCode == 76) {
+                this.game.watchShip.tryLand();
             }
 		});
 		document.addEventListener("keyup", (event) => {
@@ -40,8 +41,6 @@ export default class Controller {
                 this.pressed.right = false; // un-Press Right
             } else if (pressCode == 40 || pressCode == 83) {
                 this.pressed.down = false; // un-Press Down
-            } else if (pressCode == 32) {
-                this.pressed.space = false; // un-Press Space
             } else if (pressCode == 81) {
                 this.pressed.q = false;
             } else if (pressCode == 69) {

@@ -33,7 +33,6 @@ export default class TurretControls extends RenderedObject{
 			return new response(200, [], {}, true);
 		} else {
 			const errorMessage = "aimTurret failed due to zero aimTo and undefined direction; no update to aim made";
-			console.log(errorMessage);
 			return new response(400, [errorMessage], {}, false);
 		}
 	}
@@ -50,7 +49,6 @@ export default class TurretControls extends RenderedObject{
 		} else {
 			// Invalid tubeIndex
 			const errorMessage = "getTubeCooldownFailed due to invalid tube index; expected tubeIndex from 0 (inclusive) up to " + NUMBER_OF_TUBES + " (exclusive) but received " + tubeIndex;
-			console.log(errorMessage);
 			return new response(400, [errorMessage], {}, false);
 		}
 	}
@@ -69,12 +67,10 @@ export default class TurretControls extends RenderedObject{
                 return new response(200, [], {}, true);
 			} else {
 				const errorMessage = "fireTorpedo failed due to internal call to getTubeCooldown not returning zero tubeCooldown response for tubeIndex " + tubeIndex;
-				console.log(errorMessage);
 				return new response(400, [errorMessage], {}, false);
 			}
 		} else {
 			const errorMessage = "fireTorpedo due to invalid tube index; expected tubeIndex from 0 (inclusive) up to " + NUMBER_OF_TUBES + " (exclusive) but received " + tubeIndex;
-			console.log(errorMessage);
 			return new response(400, [errorMessage], {}, false);
 		}
 	}
