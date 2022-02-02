@@ -67,14 +67,12 @@ export default class Game {
 					break;
 				}
 			}
-			if (!shipFound) {
-				alert("shipName " + watchShipName + " not found");
-			} else {
-				console.log (this.watchShip);
-			}
+			if (!shipFound) alert("shipName " + watchShipName + " not found");
+			else console.log(this.watchShip);
 		} else {
 			this.ships.push(buildShip(this.watchShipName, startPosition, this, this.drawnProcess)) //build a single ship
 			this.watchShip = this.ships[0];
+			if (!this.watchShip) console.error("Invalid ship name");
 		}
 		this.watchShip.primary = true;
 		this.ships.forEach((ship)=> {

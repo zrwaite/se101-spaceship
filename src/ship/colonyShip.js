@@ -134,20 +134,6 @@ export default class ColonyShip extends Sprite{
 			this.energyUsed += 0.04;
 		}
  		else this.accel.set(0,0);
-		
-		// Manual controls for firing torpedos (tap shooting)
-		if (!this.game.inputs.pressed.space) {
-			this.canTorpedo = true;
-		} else if (this.game.inputs.pressed.space && this.canTorpedo) {
-            this.turretControls.aimTurret(this.angle);
-            for (let i = 0; i < 4; i++) {
-                let fireResponse = this.turretControls.fireTorpedo(i);
-                if (fireResponse.success) {
-                    this.canTorpedo = false;
-                    break;
-                }
-            }
-		}
 
 		//react to the controller data
 		//Calls this.thrusterController
@@ -191,10 +177,33 @@ export default class ColonyShip extends Sprite{
 		this.totalDamage += amount;
 	}
 
+	tryFire() {
+		this.turretControls.aimTurret(this.angle);
+		for (let i = 0; i < 4; i++) {
+			let fireResponse = this.turretControls.fireTorpedo(i);
+			if (fireResponse.success) {
+				this.canTorpedo = false;
+				break;
+			}
+		}
+	}
+
 	tryWarp(){
-		this.energyUsed += 100;
+		this.energyUsed += 50;
 		this.process.solarSystem.warpGates.forEach((warpGate) => {
 			if (this.game.ifCollide(this, warpGate)) warpGate.warp(this);
 		})
+	}
+
+	tryLand(){
+		this.energyUsed += 20;
+		this.process.solarSystem.planets.forEach((planet) => {
+			if (this.game.ifCollide(this, planet)) this.land(planet);
+		})
+	}
+
+	land(planet) {
+		alert("YOU WIN");
+		console.log(planet);
 	}
 }

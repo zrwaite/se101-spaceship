@@ -99,7 +99,6 @@ export default class Process {
             this.contexts[object].setTransform(1, 0, 0, 1, 0, 0);
             this.contexts[object].clearRect(0, 0, this.width * this.unit, this.height * this.unit);
         });
-        console.log(this.drawnObjects);
 		[...this.drawnObjects, ...this.delObjects].forEach((object) => object.draw()); //Redrawns all objects, including static
 	}
     endProcess() {
