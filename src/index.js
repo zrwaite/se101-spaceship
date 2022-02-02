@@ -34,15 +34,22 @@ function initializeImages(imageInfo) {
 
 function initializeShipSelect(shipNames, active) {
     /* Create the ship DOM elements with the given names, in alphabetical order. */
+    let activeShipSet = false;
+    let firstShip;
     for (let i = 0; i < shipNames.length; i++) {
         let ship = document.createElement("FIGURE");
         ship.id = shipNames[i];
         ship.innerHTML = shipNames[i];
-        ship.onclick = function() {DOM.shipActive(this);}
+        ship.onclick = function() {console.log(this); DOM.shipActive(this);}
         if (shipNames[i].length >= 12) ship.classList.add("small");
-        if (shipNames[i] == active) ship.classList.add("active");
+        if (shipNames[i] == active) {
+            ship.classList.add("active");
+            activeShipSet = true;
+        }
         document.body.querySelector("#ShipSelect").appendChild(ship);
+        if (i==0) firstShip = ship;
     }
+    if (!activeShipSet) firstShip.classList.add("active");
 }
 
 function initializeContexts(contextNames) {
