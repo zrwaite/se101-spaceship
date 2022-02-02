@@ -4,6 +4,7 @@ import PassiveSensors from "./passiveSensors.js";
 import ActiveSensors from "./activeSensors.js";
 import TurretControls from "./turretControls.js";
 import ThrusterController from "./thrusterController.js";
+import Response from "../helpers/response.js";
 /* Reference other colonyship.js file for reference to make this one
 If you aren't sure about if a function should be copied or not, ask on discord. 
 */
@@ -134,20 +135,6 @@ export default class ColonyShip extends Sprite{
 			this.energyUsed += 0.04;
 		}
  		else this.accel.set(0,0);
-		
-		// Manual controls for firing torpedos (tap shooting)
-		if (!this.game.inputs.pressed.space) {
-			this.canTorpedo = true;
-		} else if (this.game.inputs.pressed.space && this.canTorpedo) {
-            this.turretControls.aimTurret(this.angle);
-            for (let i = 0; i < 4; i++) {
-                let fireResponse = this.turretControls.fireTorpedo(i);
-                if (fireResponse.success) {
-                    this.canTorpedo = false;
-                    break;
-                }
-            }
-		}
 
 		//react to the controller data
 		//Calls this.thrusterController
@@ -191,10 +178,47 @@ export default class ColonyShip extends Sprite{
 		this.totalDamage += amount;
 	}
 
+	tryFire() {
+		this.turretControls.aimTurret(this.angle);
+		for (let i = 0; i < 4; i++) {
+			let fireResponse = this.turretControls.fireTorpedo(i);
+			if (fireResponse.success) {
+				this.canTorpedo = false;
+				break;
+			}
+		}
+	}
+
 	tryWarp(){
-		this.energyUsed += 100;
+		this.energyUsed += 50;
 		this.process.solarSystem.warpGates.forEach((warpGate) => {
-			if (this.game.ifCollide(this, warpGate)) warpGate.warp(this);
+			if (this.game.ifCollide(this, warpGate)) {
+				warpGate.warp(this);
+				this.receiveDamage(this.speed.magnitude());
+				return new Response(200, [], "warped", true);
+			}
 		})
+		return new Response(400, ["No warp gates in range"]);
+	}
+
+	tryLand(){
+		this.energyUsed += 20;
+		console.log(this.speed.magnitude())
+		this.process.solarSystem.planets.forEach((planet) => {
+			if (this.game.ifCollide(this, planet)){
+				if (this.speed.magnitude()>0.05){
+					return new Response(400, ["Too fast!"]);
+				} else {
+					this.land(planet);
+					return new Response(200, [], "landed", true);
+				}
+			}
+		})
+		return new Response(400, ["No planets in range"]);
+	}
+
+	land(planet) {
+		alert("YOU WIN");
+		console.log(planet);
 	}
 }

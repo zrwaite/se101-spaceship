@@ -114,9 +114,9 @@ const buildShip = (shipName, pos, game, startProcess) => {
 				EnterpriseSensorsController,
 				pos, game
 			);
-		case "EventHorizon":
+		case "Event Horizon":
 			return new ColonyShip(
-				"EventHorizon", startProcess,
+				"Event Horizon", startProcess,
 				EventHorizonDefenceController,
 				EventHorizonNavigationController,
 				EventHorizonPropulsionController,

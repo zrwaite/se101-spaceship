@@ -49,16 +49,16 @@ export default class Game {
         this.inputs = new Controller(this); //controller created
 		this.galaxy = new Galaxy(galaxyName, this); //Create galaxy
 		this.solarSystemName = this.galaxy.startingSolarSystem; //Starting solar system from galaxy
-
+		let processIndex = 0;
 		this.galaxy.solarSystems.forEach((solarSystem) => {
-			this.processes.push(new Process(this, solarSystem));
+			this.processes.push(new Process(this, solarSystem, processIndex));
+			processIndex++;
 		})
 
 		this.drawnProcess = this.processes[0];
 
 		if (this.allShips) {
 			this.ships.push(...buildShip("all", startPosition, this, this.drawnProcess)); //Build all ships for now
-			console.log(this.ships);
 			let shipFound = false;
 			for (let i=0; i<this.ships.length; i++) {
 				if (this.ships[i].name === watchShipName) {
@@ -67,14 +67,12 @@ export default class Game {
 					break;
 				}
 			}
-			if (!shipFound) {
-				alert("shipName " + watchShipName + " not found");
-			} else {
-				console.log (this.watchShip);
-			}
+			if (!shipFound) alert("shipName " + watchShipName + " not found");
+			else console.log(this.watchShip);
 		} else {
 			this.ships.push(buildShip(this.watchShipName, startPosition, this, this.drawnProcess)) //build a single ship
 			this.watchShip = this.ships[0];
+			if (!this.watchShip) console.error("Invalid ship name");
 		}
 		this.watchShip.primary = true;
 		this.ships.forEach((ship)=> {
@@ -111,10 +109,6 @@ export default class Game {
 		this.drawnObjects = [...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.ships]; //Warpgates and planets get drawn
 		this.hiddenObjects = [...this.solarSystem.asteroidLaunchers]; //Launchers are hidden
 		this.rerenderStatic();
-	}
-	// add deletable game object (missles/asteroids) to the list
-	spawnDeletableObject(obj) {
-		this.delObjects.push(obj);
 	}
 	// check if two Sprites overlaps with each other
 	ifCollide(obj1, obj2) {
@@ -197,9 +191,7 @@ export default class Game {
 	}
 
 	update () {
-		this.processes.forEach((process) => {
-			process.update();
-		})
+		this.processes.forEach(process => process.update())
 
 		// this.detectCollisions();
 
@@ -249,5 +241,6 @@ export default class Game {
 		delete game.solarSystem;
 		delete game.watchShip;
         delete game.camera;
+		delete game.processes;
     }
 }

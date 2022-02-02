@@ -15,7 +15,7 @@ document.body.style.setProperty("--border", windowSize.border + "px");
 document.body.style.setProperty("--width", windowSize.x + "");
 document.body.style.setProperty("--height", windowSize.y + "");
 
-let spritePath = "Sandbox/Sprites/";
+let spritePath = "Sprites/";
 let imagesLoaded = 0; // Updates as the images load, until all are loaded.
 let images = {}; // image locations, by name
 let contexts = {}; // contexts, by name
@@ -34,15 +34,22 @@ function initializeImages(imageInfo) {
 
 function initializeShipSelect(shipNames, active) {
     /* Create the ship DOM elements with the given names, in alphabetical order. */
+    let activeShipSet = false;
+    let firstShip;
     for (let i = 0; i < shipNames.length; i++) {
         let ship = document.createElement("FIGURE");
         ship.id = shipNames[i];
         ship.innerHTML = shipNames[i];
-        ship.onclick = function() {DOM.shipActive(this);}
+        ship.onclick = function() {console.log(this); DOM.shipActive(this);}
         if (shipNames[i].length >= 12) ship.classList.add("small");
-        if (shipNames[i] == active) ship.classList.add("active");
+        if (shipNames[i] == active) {
+            ship.classList.add("active");
+            activeShipSet = true;
+        }
         document.body.querySelector("#ShipSelect").appendChild(ship);
+        if (i==0) firstShip = ship;
     }
+    if (!activeShipSet) firstShip.classList.add("active");
 }
 
 function initializeContexts(contextNames) {
@@ -252,13 +259,13 @@ let DOM = {
         entries[1].innerHTML = "Y: " + Math.floor(game.watchShip.speed.y * 1000);
         entries[2].innerHTML = "X: " + Math.floor(game.watchShip.pos.x * 10);
         entries[3].innerHTML = "Y: " + Math.floor(game.watchShip.pos.y * 10);
-        entries[4].innerHTML = Math.round(game.watchShip.energyUsed * 1000) / 10 + " J";
-        entries[5].innerHTML = Math.round(game.watchShip.totalDamage * 100) + " Ns";
-//         entries[4].innerHTML = Math.floor(game.watchShip.energyUsed * 100) + " J";
-//         entries[5].innerHTML = Math.floor(game.watchShip.totalDamage * 100) + " Ns";
-//         for (let i = 0; i < 4/* 4 turrets! */; i++) {
-//             entries[6].children[0].children[i].style.width = (100 - Math.floor((game.watchShip.turretControls.getTubeCooldown(i).response.tubeCooldown) / game.watchShip.turretControls.cooldownFrames * 100)) + "%";
-//         }
+//         entries[4].innerHTML = Math.round(game.watchShip.energyUsed * 1000) / 10 + " J";
+//         entries[5].innerHTML = Math.round(game.watchShip.totalDamage * 100) + " Ns";
+        entries[4].innerHTML = Math.floor(game.watchShip.energyUsed * 100) + " J";
+        entries[5].innerHTML = Math.floor(game.watchShip.totalDamage * 100) + " Ns";
+        for (let i = 0; i < 4/* 4 turrets! */; i++) {
+            entries[6].children[0].children[i].style.width = (100 - Math.floor((game.watchShip.turretControls.getTubeCooldown(i).response.tubeCooldown) / game.watchShip.turretControls.cooldownFrames * 100)) + "%";
+        }
     },
     fadeInOut: function(func, params = [], middletime = 250) {
         let fade = this.elements["SolarFade"].classList;

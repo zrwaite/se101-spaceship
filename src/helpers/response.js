@@ -1,4 +1,4 @@
-export default class response {
+export default class Response {
     constructor(status=400, errors=[], response={}, success=false) {
         this.success = success;
         this.status = status;

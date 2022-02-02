@@ -3,6 +3,7 @@ import Asteroid from "./spaceObjects/asteroid.js";
 import WarpGate from "./spaceObjects/warpGate.js";
 import Planet from "./spaceObjects/planet.js";
 import AsteroidLauncher from "./spaceObjects/asteroidLauncher.js";
+import Composition from "./spaceObjects/planetComposition.js";
 
 //Parent class for solarsystems, use data from solarsystem jsons and galaxy and spaceobjects scripts
 //The constructor is going to build the levels
@@ -23,7 +24,7 @@ export default class SolarSystem{
 		----- AsteroidLauncher -----
 		new AsteroidLauncher([pos.x, pos.y], this.game, spawnPeriod = 4, spawnCount = -1, rotation = -1);
         -----      Planet      -----
-        new Planet("imageName", composition, gravitySignature, [pos.x, pos.y], this.game);
+        new Planet("imageName", new Composition(), [pos.x, pos.y], this.game);
 		-----     Warp Gate    -----
 		new WarpGate("destination", [pos.x, pos.y], this.game);
 
@@ -39,20 +40,20 @@ export default class SolarSystem{
                     new Asteroid(new Vector2(0, 0), 0.12, new Vector2(54, 20), this.game)
                 ]);
 				this.planets.push(...[
-                    new Planet("planet1", {"Common":70, "Metal":20, "Wood":10, "Water":0}, 2, new Vector2(50, 10), this.game),
-                    new Planet("planet2", {"Common":10, "Metal":0, "Wood":70, "Water":0}, 2, new Vector2(10, 50), this.game),
-                    new Planet("planet3", {"Common":40, "Metal":0, "Wood":40, "Water":0}, 2, new Vector2(60, 35), this.game),
-                    new Planet("planet4", {"Common":70, "Metal":0, "Wood":40, "Water":0}, 2, new Vector2(24, 19), this.game),
-                    new Planet("planet5", {"Common":30, "Metal":20, "Terror":10, "Water":0}, 2, new Vector2(33, 44), this.game),
-                    new Planet("planet6", {"Common":70, "Metal":20, "Water":10}, 2, new Vector2(4, 9), this.game),
-                    new Planet("planet7", {"Common":40, "Metal":20, "Terror":10, "Water":0}, 2, new Vector2(11, 6), this.game),
-                    new Planet("planet8", {"Common":110, "Metal":20, "Terror":10, "Water":0}, 2, new Vector2(14, 23), this.game),
-                    new Planet("planet9", {"Common":0, "Metal":0, "Terror":10, "Water":0}, 2, new Vector2(19, 21), this.game),
-                    new Planet("planet10", {"Common":0, "Metal":20, "Terror":10, "Water":0}, 2, new Vector2(26, 46), this.game),
-                    new Planet("planet11", {"Common":10, "Metal":20, "Terror":10, "Water":0}, 2, new Vector2(37, 27), this.game),
-                    new Planet("planet12", {"Common":30, "Metal":20, "Terror":10, "Water":0}, 2, new Vector2(34, 40), this.game),
-                    new Planet("planet13", {"Common":50, "Metal":20, "Terror":10, "Water":0}, 2, new Vector2(68, 11), this.game),
-                    new Planet("planet14", {"Common":170, "Metal":20, "Terror":10, "Water":0}, 2, new Vector2(63, 48), this.game),
+                    new Planet("planet1", new Composition(0, 0, 0, 0, 0, 0), new Vector2(50, 10), this.game),
+                    new Planet("planet2", new Composition(0, 0, 0, 0, 0, 0), new Vector2(10, 50), this.game),
+                    new Planet("planet3", new Composition(0, 0, 0, 0, 0, 0), new Vector2(60, 35), this.game),
+                    new Planet("planet4", new Composition(0, 0, 0, 0, 0, 0), new Vector2(24, 19), this.game),
+                    new Planet("planet5", new Composition(0, 0, 0, 0, 0, 0), new Vector2(33, 44), this.game),
+                    new Planet("planet6", new Composition(0, 0, 0, 0, 0, 0), new Vector2(4, 9), this.game),
+                    new Planet("planet7", new Composition(0, 0, 0, 0, 0, 0), new Vector2(11, 6), this.game),
+                    new Planet("planet8", new Composition(0, 0, 0, 0, 0, 0), new Vector2(14, 23), this.game),
+                    new Planet("planet9", new Composition(0, 0, 0, 0, 0, 0), new Vector2(19, 21), this.game),
+                    new Planet("planet10", new Composition(0, 0, 0, 0, 0, 0), new Vector2(26, 46), this.game),
+                    new Planet("planet11", new Composition(0, 0, 0, 0, 0, 0), new Vector2(37, 27), this.game),
+                    new Planet("planet12", new Composition(0, 0, 0, 0, 0, 0), new Vector2(34, 40), this.game),
+                    new Planet("planet13", new Composition(0, 0, 0, 0, 0, 0), new Vector2(68, 11), this.game),
+                    new Planet("planet14", new Composition(0, 0, 0, 0, 0, 0), new Vector2(63, 48), this.game),
                 ]);
 
 				this.asteroidLaunchers.push(new AsteroidLauncher(new Vector2(50, 50), this.game, 4, 10, Math.PI * 3 / 4));
@@ -158,10 +159,8 @@ export default class SolarSystem{
 					this.asteroids.push(new Asteroid(new Vector2(0, 0), 0, new Vector2((31 + 25 * i) % 71, (17 + 29 * i) % 53), this.game));
 				}
 				this.planets.push(...[
-					new Planet("planet6", {"Common":70, "Metal":20, "Water":10},
-						2, new Vector2(69, 41), this.game),
-					new Planet("planet4", {"Common":70, "Metal":20, "Terror":10, "Water":0},
-						2, new Vector2(8, 13), this.game)
+					new Planet("planet6", new Composition(0, 0, 0, 0, 0, 0), new Vector2(69, 41), this.game),
+					new Planet("planet4", new Composition(0, 0, 0, 0, 0, 0), new Vector2(8, 13), this.game)
 				]);
 				this.warpGates.push(...[
 					new WarpGate("Sol System", new Vector2(14, 37), this.game),
@@ -204,10 +203,8 @@ export default class SolarSystem{
 					new WarpGate("Wolf 359 System", new Vector2(61, 39), this.game)
 				]);
 				this.planets.push(...[
-					new Planet("planet2", {"Common":70, "Metal":20, "Water":10},
-						2, new Vector2(45, 65), this.game),
-					new Planet("planet1", {"Common":70, "Metal":20, "Terror":10, "Water":0},
-						2, new Vector2(8, 8), this.game)
+					new Planet("planet2", new Composition(0, 0, 0, 0, 0, 0), new Vector2(45, 65), this.game),
+					new Planet("planet1", new Composition(0, 0, 0, 0, 0, 0), new Vector2(8, 8), this.game)
 				]);
 				break;
 			case "Quaid System":
@@ -280,9 +277,6 @@ export default class SolarSystem{
 				break;
 		}
 
-	}
-	addWarpGate(){
-		//Link togethers solarsystems with warpgates
 	}
 	getMapData(pos){
 		//Get map data about a position for users to get data

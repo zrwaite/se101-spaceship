@@ -11,6 +11,10 @@ export default class Meteor extends Sprite {
 		this.radius = 0.5;
 		this.ctx = "objects";
 		this.mass = 0.5;
+		this.process;
+	}
+	initialize(process) {
+		this.process = process;
 	}
 	update() {
 		//Add special update code here if needed

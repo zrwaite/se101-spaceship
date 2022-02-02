@@ -11,6 +11,10 @@ export default class WarpGate extends RenderedObject {
 		this.radius = 1.5;
 		this.destinationSolarSystem = destinationSolarystem;
         this.gravitySignature = 1;
+		this.process;
+	}
+	initialize(process) {
+		this.process = process;
 	}
 	update() {
 		//Add special update code here if needed

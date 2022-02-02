@@ -30,12 +30,10 @@ export default class ThrusterController{
 	setThruster(thrusterName, power){
 		if (!(power >= 0)) {
 			const errorMessage = "igniteThrusters failed as requested power must be non-negative";
-			console.log(errorMessage);
 			return new response(400, [errorMessage], {}, false);
 		}
 		if (!(thrusterName in this.thrusterPower)) {
 			const errorMessage = "igniteThrusters failed as thruster name was not valid; expected one of the following: " + Object.keys(this.thrusterPower);
-			console.log(errorMessage);
 			return new response(400, [errorMessage], {}, false);
 		}
 		const powerLimited = power > MAX_POWER;

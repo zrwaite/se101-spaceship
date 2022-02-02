@@ -12,9 +12,10 @@ import Matrix2 from "./helpers/Matrix2.js";
 const DMG_COEFFICIENT = 20;
 
 export default class Process {
-    constructor(game, solarSystem) {
+    constructor(game, solarSystem, index) {
 		this.game = game;
 		this.solarSystem = solarSystem
+		this.index = index;
 
 		this.width = this.game.width; // in units
         this.height = this.game.height; // in units
@@ -44,6 +45,9 @@ export default class Process {
 		this.delObjects = [...this.solarSystem.asteroids]; //Asteroids get deleted
 		this.drawnObjects = [...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.ships]; //Warpgates and planets get drawn
 		this.hiddenObjects = [...this.solarSystem.asteroidLaunchers]; //Launchers are hidden
+		[...this.delObjects, ...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.hiddenObjects].forEach((object) => {
+			object.initialize(this);
+		});
         this.draw();
         this.update();
         this.initializing = false; // DONE STARTING
@@ -95,7 +99,6 @@ export default class Process {
             this.contexts[object].setTransform(1, 0, 0, 1, 0, 0);
             this.contexts[object].clearRect(0, 0, this.width * this.unit, this.height * this.unit);
         });
-        console.log(this.drawnObjects);
 		[...this.drawnObjects, ...this.delObjects].forEach((object) => object.draw()); //Redrawns all objects, including static
 	}
     endProcess() {

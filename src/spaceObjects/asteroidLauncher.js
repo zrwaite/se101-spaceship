@@ -17,8 +17,11 @@ export default class AsteroidLauncher{
 
 		// Expects positive radians values... rotation == -1 denotes random angle
 		this.rotation = rotation;
+		this.process;
 	}
-
+	initialize(process) {
+		this.process = process;
+	}
 	/**
 	 * Functions gets the rotation angle for the launcher. Rotation can either be fixed or randomized depending on ctor input
 	 * @returns Positive float denoting rotation angle in radians
@@ -36,7 +39,7 @@ export default class AsteroidLauncher{
 		const angle = this.getAngle();
 		const velocity = Vector2.right.rotate(angle).scale(speed); 	// random direction
 		let asteroid = new Asteroid(velocity, Math.random()-0.5, this.pos, this.game);
-		this.game.spawnDeletableObject(asteroid);
+		this.process.spawnDeletableObject(asteroid);
 	}
 
 	update() {
