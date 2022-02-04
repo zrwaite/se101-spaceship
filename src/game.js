@@ -11,8 +11,29 @@ import Matrix2 from "./helpers/Matrix2.js";
 const DMG_COEFFICIENT = 20;
 
 export default class Game {
-	unit; //Global Unit
+	/* Constructor Params */
 	width; //Ship Width
+	height; 
+	images;
+	contexts;
+
+	/* Default Attributes */
+	drawnObjects = []; // stores objects that always need to be drawn and updated
+	hiddenObjects = []; // stores objects that need to be update only
+	delObjects = []; // Stores objects that need to be drawn and updated until deleted
+	ships = []; // Array of ship objects
+	// Animation Elements (UI uses these too)
+	initializing = 1; // goes to 0 once everything has been drawn once
+	zoom = 1; // zoomed-out --> 1; zoomed-in --> any other number; standard: 2.5;
+	// --- The rendered width is:   (Math.floor(this.width / this.zoom) * this.unit);
+	camera = new Vector2(0, 0); // pixels from top-left
+	frame = 0; // this increments every frame
+	paused = false; // If the whole game is paused
+	fpsInterval = 1000 / 60;
+	processes = [];
+
+	/* Other Attributes */
+	unit; //Global Unit
 	inputs;// Controller values
 	allShips; // Stores the number of ships that are rendered
 	galaxy; // Stores Galaxy Object
@@ -20,27 +41,12 @@ export default class Game {
 	watchShip; // Ship being watched
 	watchShipName;
 	solarSystemName;
+	
 	constructor(width, height, images, contexts) {
 		this.width = width; // in units
         this.height = height; // in units
         this.images = images;
 		this.contexts = contexts;
-		this.drawnObjects = []; // stores objects that always need to be drawn and updated
-		this.hiddenObjects = []; // stores objects that need to be update only
-		this.delObjects = []; // Stores objects that need to be drawn and updated until deleted
-		this.ships = []; // Array of ship objects
-
-
-        // Animation Elements (UI uses these too)
-        this.initializing = 1; // goes to 0 once everything has been drawn once
-        this.zoom = 1; // zoomed-out --> 1; zoomed-in --> any other number; standard: 2.5;
-        // --- The rendered width is:   (Math.floor(this.width / this.zoom) * this.unit);
-        this.camera = new Vector2(0, 0); // pixels from top-left
-        
-        this.frame = 0; // this increments every frame
-        this.paused = false; // If the whole game is paused
-        this.fpsInterval = 1000 / 60;
-		this.processes = [];
     }
     start(galaxyName, allShips, watchShipName) {
 		this.allShips = allShips
@@ -89,27 +95,11 @@ export default class Game {
 			}
 		})
 
-
-		
-
-		// this.newSolarSystem(this.solarSystem); //Another version of start function basically
         this.draw();
         this.update();
         this.initializing = false; // DONE STARTING
 		//console.log(this.watchShip);
     }
-	newSolarSystem(solarSystemName){
-		this.solarSystemName = solarSystemName;
-		let startPosition = new Vector2(30,30); //start at centre for now
-        this.solarSystem = this.galaxy.getSolarSystem(solarSystemName); 
-		this.ships.forEach((ship) => ship.pos = startPosition);
-		// let objectsList = [...this.delObjects, ...this.drawnObjects, ...this.hiddenObjects];
-		// for (let i=0; i<objectsList.length; i++) delete objectsList[i];
-		this.delObjects = [...this.solarSystem.asteroids]; //Asteroids get deleted
-		this.drawnObjects = [...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.ships]; //Warpgates and planets get drawn
-		this.hiddenObjects = [...this.solarSystem.asteroidLaunchers]; //Launchers are hidden
-		this.rerenderStatic();
-	}
 	// check if two Sprites overlaps with each other
 	ifCollide(obj1, obj2) {
 		const xDiff = obj1.pos.x-obj2.pos.x;

@@ -1,14 +1,15 @@
 export default class Controller {
+    game;
+    pressed = { //Store if a key is pressed
+        left: false,
+        up: false,
+        right: false,
+        down: false,
+        q: false,
+        e: false
+    };
 	constructor(game) {
         this.game = game;
-		this.pressed = { //Store if a key is pressed
-			left: false,
-			up: false,
-			right: false,
-			down: false,
-            q: false,
-            e: false
-		};
 		document.addEventListener("keydown", (event) => {
             let pressCode = event.keyCode;
             if (pressCode === 37 || pressCode === 65) {

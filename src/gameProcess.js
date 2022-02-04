@@ -1,28 +1,38 @@
 import Vector2 from "./helpers/Vector2.js";
 
 export default class Process {
+	/* Constructor Params */
+	game;
+	solarSystem;
+	index;
+	width;
+	height;
+	images;
+	contexts;
+
+	/* Default Attributes */
+	drawnObjects = []; // stores objects that always need to be drawn and updated
+	hiddenObjects = []; // stores objects that need to be update only
+	delObjects = []; // Stores objects that need to be drawn and updated until deleted
+	ships = []; // Array of ship objects
+	// Animation Elements (UI uses these too)
+	// --- The rendered width is:   (Math.floor(this.width / this.zoom) * this.unit);
+	frame = 0; // this increments every frame
+	paused = false; // If the whole game is paused
+
+	/* Other Attributes */
 	allShips; // Stores the number of ships that are rendered
 	watchShip; // Ship being watched
 	unit; // Global Unit
+	
 	constructor(game, solarSystem, index) {
 		this.game = game;
 		this.solarSystem = solarSystem
 		this.index = index;
-
 		this.width = this.game.width; // in units
         this.height = this.game.height; // in units
         this.images = this.game.images;
 		this.contexts = this.game.contexts;
-		this.drawnObjects = []; // stores objects that always need to be drawn and updated
-		this.hiddenObjects = []; // stores objects that need to be update only
-		this.delObjects = []; // Stores objects that need to be drawn and updated until deleted
-		this.ships = []; // Array of ship objects
-
-        // Animation Elements (UI uses these too)
-        // --- The rendered width is:   (Math.floor(this.width / this.zoom) * this.unit);
-        
-        this.frame = 0; // this increments every frame
-        this.paused = false; // If the whole game is paused
     }
     start(ships, watchShip) {
 		this.ships = ships;
