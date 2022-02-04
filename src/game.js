@@ -18,9 +18,9 @@ export default class Game {
 	contexts;
 
 	/* Default Attributes */
-	drawnObjects = []; // stores objects that always need to be drawn and updated
-	hiddenObjects = []; // stores objects that need to be update only
-	delObjects = []; // Stores objects that need to be drawn and updated until deleted
+	drawnObjects = []; // Objects that always need to be drawn and updated
+	hiddenObjects = []; //Objects that need to be updated only
+	delObjects = []; // Objects that need to be drawn and updated until deleted
 	ships = []; // Array of ship objects
 	// Animation Elements (UI uses these too)
 	initializing = 1; // goes to 0 once everything has been drawn once
@@ -119,12 +119,12 @@ export default class Game {
 		const basisMatrix = Matrix2.MakeBasisMatrix(norm, tan);
 		const basisMatrixInverse = basisMatrix.inverse();
 		// the speeds are broken down into the norm/tan components
-		// x represents the norm velocity and y represednts the tan velocity
+		// x represents the norm velocity and y represents the tan velocity
 		const obj1SpeedComponents = obj1.speed.matrixMultiply(basisMatrixInverse);
 		const obj2SpeedComponents = obj2.speed.matrixMultiply(basisMatrixInverse);
 		// the head on (norm) velocity determines how much dmg each object would take upon clank
 		const headOnVelocityDiff = (obj1SpeedComponents.x - obj2SpeedComponents.x)
-		// the tangiential velocities do no affect the collision tragetory
+		// the tangential velocities do not affect the collision trajectory
 		// now we can treat this as a 1d elastic collision along the norm axis
 		const D = 1/(obj1.mass + obj2.mass);
 		const obj1NormSpeedNew = (obj1.mass-obj2.mass)*D*obj1SpeedComponents.x + (2*obj2.mass)*D*obj2SpeedComponents.x
@@ -149,7 +149,7 @@ export default class Game {
 					if (obj instanceof(Asteroid) || obj instanceof(Meteor)) {
 						const vDiff = this.clank(ship, obj);
 						// when ships hit anything, they receive dmg
-						// we say the dmg recieved is propotional to the square of the velocity difference
+						// we say the dmg received is proportional to the square of the velocity difference
 						const dmg = DMG_COEFFICIENT*vDiff*vDiff;
 						ship.receiveDamage(dmg);
 					}
@@ -165,11 +165,11 @@ export default class Game {
 				const b = process.delObjects[j];
 				if (this.ifCollide(a, b)) {
 					if (a instanceof(Torpedo) || b instanceof(Torpedo)) {
-						// torpedos can hit each other for now but firing from multiple
-						// tubes at once instantly explodes all torpedos fired at that time
-						// if (a instanceof(Torpedo) && b instanceof(Torpedo)) {
-						// 	continue;
-						// }
+						// torpedoes can hit each other for now but firing from multiple
+						// tubes at once instantly explodes all torpedoes fired at that time
+						if (a instanceof(Torpedo) && b instanceof(Torpedo)) {
+							continue;
+						}
 						a.receiveDamage();
 						b.receiveDamage();
 					} else {
@@ -212,7 +212,7 @@ export default class Game {
     draw () {
 		this.drawnProcess.draw();
     }
-	deleter(sprite){ //Deletes objects from deletable array that aren't needed
+	deleter(sprite){ //Filter objects from deletable array that aren't needed
 		return !sprite.delete
 	}
     endGame() {

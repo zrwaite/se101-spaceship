@@ -2,7 +2,7 @@ import Game from "./game.js";
 
 let game; // Initialized properly in DOM.doneLoad().
 
-const windowSize = { // Accessable through game.width and game.height.
+const windowSize = { // Accessible through game.width and game.height.
 	x: 72,
 	y: 54,
     border: 2
@@ -53,7 +53,7 @@ function initializeShipSelect(shipNames, active) {
 }
 
 function initializeContexts(contextNames) {
-    /* Create the contexts with the given names: first name is farthest back. */
+    /* Create the contexts with the given names: first name is the farthest back. */
     for (let i = 0; i < contextNames.length; i++) {
         let canvas = document.createElement("CANVAS");
         canvas.id = contextNames[i];
@@ -276,7 +276,7 @@ let DOM = {
                 func(...params);
                 fade.remove("on");
             }, middletime); 
-        }, 400/* transition-duraiton of the `#SolarFade` */);
+        }, 400/* transition-duration of the `#SolarFade` */);
     },
     startGame: function(galaxy = 0) {
         if (this.loaded && !this.gameInitialized) {

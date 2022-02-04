@@ -11,9 +11,9 @@ export default class Process {
 	contexts;
 
 	/* Default Attributes */
-	drawnObjects = []; // stores objects that always need to be drawn and updated
-	hiddenObjects = []; // stores objects that need to be update only
-	delObjects = []; // Stores objects that need to be drawn and updated until deleted
+	drawnObjects = []; //  Objects that always need to be drawn and updated
+	hiddenObjects = []; // Objects that need to be updated only
+	delObjects = []; // Objects that need to be drawn and updated until deleted
 	ships = []; // Array of ship objects
 	// Animation Elements (UI uses these too)
 	// --- The rendered width is:   (Math.floor(this.width / this.zoom) * this.unit);
@@ -42,7 +42,7 @@ export default class Process {
 		let objectsList = [...this.delObjects, ...this.drawnObjects, ...this.hiddenObjects];
 		for (let i=0; i<objectsList.length; i++) delete objectsList[i];
 		this.delObjects = [...this.solarSystem.asteroids]; //Asteroids get deleted
-		this.drawnObjects = [...this.ships]; //Warpgates and planets get drawn
+		this.drawnObjects = [...this.ships]; //Ships get drawn
 		this.staticObjects = [...this.solarSystem.warpGates, ...this.solarSystem.planets];
 		this.hiddenObjects = [...this.solarSystem.asteroidLaunchers]; //Launchers are hidden
 		[...this.delObjects, ...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.hiddenObjects].forEach((object) => {
@@ -80,7 +80,7 @@ export default class Process {
 	update () {
 		if (this.ships.length === 0) return;
 		this.game.detectProcessCollisions(this);
-		this.delObjects = this.delObjects.filter(this.game.deleter); // Removes objects no longer needed
+		this.delObjects = this.delObjects.filter(this.game.deleter); // Filter objects no longer needed
 
 		[...this.drawnObjects, ...this.delObjects, ...this.hiddenObjects].forEach((object) => object.update()); //Updates all objects
 
@@ -99,7 +99,7 @@ export default class Process {
             this.contexts[object].setTransform(1, 0, 0, 1, 0, 0);
             this.contexts[object].clearRect(0, 0, this.width * this.unit, this.height * this.unit);
         });
-		[...this.drawnObjects, ...this.staticObjects, ...this.delObjects].forEach((object) => object.draw()); //Redrawns all objects, including static
+		[...this.drawnObjects, ...this.staticObjects, ...this.delObjects].forEach((object) => object.draw()); //Redraws all objects, including static
 	}
     endProcess() {
 		delete this.contexts;

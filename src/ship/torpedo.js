@@ -58,7 +58,7 @@ export default class Torpedo extends Sprite {
 		this.hasExploded = true;
 		this.frameExploded = this.parentShip.game.frame;
 	}
-	receiveDamage() { // torpedos have 1hp and explode when hitting something
+	receiveDamage() { // torpedoes have 1hp and explode when hitting something
 		this.explode();
 	}
 }

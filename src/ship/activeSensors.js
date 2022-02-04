@@ -9,11 +9,11 @@ export default class ActiveSensors{
 	}
 	performScan(heading, arc, range){
         // Ensure solar system is initialized before performing scan
-        if (!this.#parentShip.solarSystem) return new response(400, ["Cannot perform ActiveSensors performScan until solar system initalized"], []);
+        if (!this.#parentShip.solarSystem) return new response(400, ["Cannot perform ActiveSensors performScan until solar system initialized"], []);
 
         // Note: angle must account for relative position of object to ship (not global position on board)
         // To find angle, find angle difference between the vector from ship to object & current ship heading
-        // y coord is inverted due to the flipped board axis (greater y value indicates lower position)
+        // y coordinate is inverted due to the flipped board axis (greater y value indicates lower position)
         let readings = [];
         for (const planet of this.#parentShip.solarSystem.planets){
             let dist = this.#parentShip.pos.distance(planet.pos);

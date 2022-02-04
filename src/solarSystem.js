@@ -5,9 +5,8 @@ import Planet from "./spaceObjects/planet.js";
 import AsteroidLauncher from "./spaceObjects/asteroidLauncher.js";
 import Composition from "./spaceObjects/planetComposition.js";
 
-//Parent class for solarsystems, use data from solarsystem jsons and galaxy and spaceobjects scripts
 //The constructor is going to build the levels
-//Think of this as sort of a level builder
+//Think of this as a sort of level builder
 export default class SolarSystem{
 	constructor(solarSystemName, game){
 		this.game = game;
@@ -154,7 +153,7 @@ export default class SolarSystem{
 				]);
 				break;
 			case "Kepler 438 System":
-				// Generate asteroids at modulo offsets (to prevent hardcoding large # of asteroids)
+				// Generate asteroids at modulo offsets (to prevent hard coding large # of asteroids)
 				for (let i = 0; i < 10; i++) {
 					this.asteroids.push(new Asteroid(new Vector2(0, 0), 0, new Vector2((31 + 25 * i) % 71, (17 + 29 * i) % 53), this.game));
 				}
@@ -208,7 +207,7 @@ export default class SolarSystem{
 				]);
 				break;
 			case "Quaid System":
-				// Generate asteroids at modulo offsets (to prevent hardcoding large # of asteroids)
+				// Generate asteroids at modulo offsets (to prevent hard coding large # of asteroids)
 				for (let i = 0; i < 5; i++) {
 					this.asteroids.push(new Asteroid(new Vector2(0, 0), 0, new Vector2((51 + 41 * i) % 71, (41 + 41 * i) % 53), this.game));
 				}

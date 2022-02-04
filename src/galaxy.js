@@ -7,7 +7,7 @@ export default class Galaxy{
 	/* constructor params */
 	name;
 	game;
-	/* Default Attrivutres */
+	/* Default Attributes */
 	solarSystems = [];
 	/* Other attributes */
 	startingSolarSystem;

@@ -15,7 +15,7 @@ export default class ColonyShip extends Sprite{
 
 	/* SubSystem Controllers */
 	defenceController; //Defence Subsystem
-	navigationController; //Navigation Subsysgtem
+	navigationController; //Navigation Subsystem
 	propulsionController; //Propulsion subsystem
 	sensorsController; //Sensors subsystem
 
@@ -38,11 +38,11 @@ export default class ColonyShip extends Sprite{
 	maxSpeed = 0.5;	
 
 	// used in manual mode to force tap shooting and prevent
-	// burst shots that cause torpedos fired to hit each other and explode immediately
+	// burst shots that cause torpedoes fired to hit each other and explode immediately
 
 	// stores the linear acceleration from the frame of reference of the ship (e.g. forward-backward, left-right)
 	// used to update accel by converting to global frame of reference
-	// useful for thrusterControls to only need to recompute accels once per thruster power update
+	// useful for thrusterControls to only need to recompute accelerations once per thruster power update
 	// instead of every frame as the ship rotates
 	localAccel = Vector2.zero;
 	energyTimeCount = 0;

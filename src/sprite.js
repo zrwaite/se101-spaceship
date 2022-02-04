@@ -7,7 +7,7 @@ export default class Sprite extends RenderedObject{
 	maxSpeed = 100; //Max linear speed
 	aSpeed = new Vector2(1, 0); //angle speed
 	aAccel = new Vector2(1, 0); //angle acceleration
-	maxASpeed = 20; //Max anglular speed
+	maxASpeed = 20; //Max angular speed
 	radius = 1; // Object collision Radius
 	mass = 1; //Object mass for collisions
 	constructor(...args){
