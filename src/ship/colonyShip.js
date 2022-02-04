@@ -200,11 +200,7 @@ export default class ColonyShip extends Sprite{
 	tryFire() {
 		this.turretControls.aimTurret(this.angle);
 		for (let i = 0; i < 4; i++) {
-			let fireResponse = this.turretControls.fireTorpedo(i);
-			if (fireResponse.success) {
-				this.canTorpedo = false;
-				break;
-			}
+			if (this.turretControls.fireTorpedo(i).success) break;
 		}
 	}
 

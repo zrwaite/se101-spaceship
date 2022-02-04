@@ -32,7 +32,8 @@ export default class Process {
 		let objectsList = [...this.delObjects, ...this.drawnObjects, ...this.hiddenObjects];
 		for (let i=0; i<objectsList.length; i++) delete objectsList[i];
 		this.delObjects = [...this.solarSystem.asteroids]; //Asteroids get deleted
-		this.drawnObjects = [...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.ships]; //Warpgates and planets get drawn
+		this.drawnObjects = [...this.ships]; //Warpgates and planets get drawn
+		this.staticObjects = [...this.solarSystem.warpGates, ...this.solarSystem.planets];
 		this.hiddenObjects = [...this.solarSystem.asteroidLaunchers]; //Launchers are hidden
 		[...this.delObjects, ...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.hiddenObjects].forEach((object) => {
 			object.initialize(this);
@@ -76,7 +77,7 @@ export default class Process {
         this.frame++;
     }
     draw () {
-        [...this.drawnObjects, ...this.delObjects].forEach((object) => {
+        [...this.drawnObjects, ...this.staticObjects, ...this.delObjects].forEach((object) => {
             //if (object.ctx !== "planets" || this.game.zoom !== 1 || this.initializing) {
                 object.draw();
             //}
@@ -88,11 +89,12 @@ export default class Process {
             this.contexts[object].setTransform(1, 0, 0, 1, 0, 0);
             this.contexts[object].clearRect(0, 0, this.width * this.unit, this.height * this.unit);
         });
-		[...this.drawnObjects, ...this.delObjects].forEach((object) => object.draw()); //Redrawns all objects, including static
+		[...this.drawnObjects, ...this.staticObjects, ...this.delObjects].forEach((object) => object.draw()); //Redrawns all objects, including static
 	}
     endProcess() {
 		delete this.contexts;
 		delete this.drawnObjects;
+		delete this.staticObjects;
 		delete this.hiddenObjects;
 		delete this.delObjects;
 		delete this.ships;

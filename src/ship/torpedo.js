@@ -46,9 +46,7 @@ export default class Torpedo extends Sprite {
 		}
 	}
 	explode(){
-		if (this.hasExploded ) {
-			return;
-		}
+		if (this.hasExploded ) return;
 		this.speed = Vector2.zero;
 		this.hasExploded = true;
 		this.frameExploded = this.parentShip.game.frame;

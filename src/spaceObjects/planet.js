@@ -16,8 +16,4 @@ export default class Planet extends RenderedObject {
 	initialize(process) {
 		this.process = process;
 	}
-	update() {
-		//Add special update code here for when zoomed in
-		//super.update();
-	}
 }

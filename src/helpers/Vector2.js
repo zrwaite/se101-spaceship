@@ -101,15 +101,15 @@ export default class Vector2 {
 		return this.rotate(rotateBy);
 	}
 	
-	toPrecision(precision) {
+	toPrecisionString(precision) {
 		let vector = this.clone();
-		vector.x = vector.x.toFixed(precision);
-		vector.y = vector.y.toFixed(precision);
-		return vector;
+		let x = vector.x.toFixed(precision);
+		let y = vector.y.toFixed(precision);
+		return {x:x, y:y};
 	}
 	
 	toString () {
-		let vector = this.toPrecision(1);
+		let vector = this.toPrecisionString(1);
 		return ("[" + vector.x + "; " + vector.y + "]");
 	}
 

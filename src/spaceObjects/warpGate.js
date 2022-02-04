@@ -15,10 +15,6 @@ export default class WarpGate extends RenderedObject {
 	initialize(process) {
 		this.process = process;
 	}
-	update() {
-		//Add special update code here if needed
-		// super.update();
-	}
 	warp(ship){
 		let newProcess;
 		this.game.processes.forEach((process) => {
