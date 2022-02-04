@@ -1,15 +1,14 @@
 import SolarSystem from "./solarSystem.js";
-import Vector2 from "./helpers/Vector2.js";
 
 //Parent class for galaxies, use data from galaxy jsons and GalaxyMaps scripts
 //The constructor is going to build the galaxies
 //Think of this as creating all the links between solar system levels
 export default class Galaxy{
+	startingSolarSystem;
 	constructor(galaxyName, game){
         this.name = galaxyName;
 		this.game = game;
 		this.solarSystems = [];
-		this.startingSolarSystem;
 
 		let solarSystemNames = [];
 		switch(galaxyName){
@@ -39,9 +38,9 @@ export default class Galaxy{
 	getSolarSystem(solarSystemName){
 		let returnSolarSystem = false;
 		this.solarSystems.forEach((solarSystem)=>{
-			if (solarSystem.name == solarSystemName) {
+			if (solarSystem.name === solarSystemName) {
 				returnSolarSystem =  solarSystem;
-			};
+			}
 		})
 		return returnSolarSystem;
 	}

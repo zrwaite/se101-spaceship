@@ -1,8 +1,8 @@
-import Sprite from "../sprite.js";
 import Vector2 from "../helpers/Vector2.js";
 
 import RenderedObject from "../renderedObject.js";
 export default class WarpGate extends RenderedObject {
+	process;
 	constructor(destinationSolarystem, ...args) {
 		super(...args);
 		this.image = this.game.images["warpgate"];
@@ -11,7 +11,6 @@ export default class WarpGate extends RenderedObject {
 		this.radius = 1.5;
 		this.destinationSolarSystem = destinationSolarystem;
         this.gravitySignature = 1;
-		this.process;
 	}
 	initialize(process) {
 		this.process = process;

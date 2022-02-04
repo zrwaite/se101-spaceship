@@ -6,6 +6,7 @@ export default class PlanetComposition {
 		this.metal = metal;
 		this.danger = danger;
 		this.temperature = temperature;
+		this.maintainRange();
 	}
 	maintainRange() {
 		if (this.water>100) this.water = 100;
@@ -21,7 +22,7 @@ export default class PlanetComposition {
 		if (this.temperature>100) this.temperature = 100;
 		else if (this.temperature<-100) this.temperature = -100;
 	}
-	getSurvivabilityChance() {
+	get survivabilityChance() {
 		let survivabilityChance = 0;
 		survivabilityChance+=8*this.getDistribution1(this.water);
 		survivabilityChance+=8*this.getDistribution1(this.air);

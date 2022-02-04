@@ -11,8 +11,8 @@ const ANGULAR_SENSITIVITY = 5e-4;
 export default class ThrusterController{
     constructor(parentShip){
 		this.parentShip = parentShip;
-		const width = parentShip.size.y;
-		const length = parentShip.size.x;
+		const width = parentShip.size.x;
+		const length = parentShip.size.y;
 		// direction is direction of thrust
 		this.thrusterData = {
 			mainThruster: { offset: new Vector2(-length / 2, 0), direction: new Vector2(1, 0) },

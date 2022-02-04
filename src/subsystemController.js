@@ -1,4 +1,5 @@
 export default class SubsystemController{
+	parentShip;
 	constructor(parentShip){
 		this.parentShip = parentShip;
 	}

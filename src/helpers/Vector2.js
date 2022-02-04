@@ -44,7 +44,7 @@ export default class Vector2 {
 		// Linearly interpolates between vectors A and B by t.
 		// t = 0 returns A, t = 1 returns B
 		t = Math.min(t, 1); // still allow negative t
-		var diff = vector.subtract(this);
+		let diff = vector.subtract(this);
 		return this.add(diff.scale(t));
 	}
 	
@@ -61,14 +61,14 @@ export default class Vector2 {
 	}
 	
 	distanceSqr (vector) {
-		var deltaX = this.x - vector.x;
-		var deltaY = this.y - vector.y;
+		let deltaX = this.x - vector.x;
+		let deltaY = this.y - vector.y;
 		return (deltaX * deltaX + deltaY * deltaY);
 	}
 	
 	normalize() {
-		var mag = this.magnitude();
-		var vector = this.clone();
+		let mag = this.magnitude();
+		let vector = this.clone();
 		if(Math.abs(mag) < 1e-9) {
 			vector.x = 0;
 			vector.y = 0;
@@ -88,9 +88,9 @@ export default class Vector2 {
 	}
 	
 	rotate(alpha) {
-		var cos = Math.cos(alpha);
-		var sin = Math.sin(alpha);
-		var vector = new Vector2();
+		let cos = Math.cos(alpha);
+		let sin = Math.sin(alpha);
+		let vector = new Vector2();
 		vector.x = this.x * cos - this.y * sin;
 		vector.y = this.x * sin + this.y * cos;
 		return vector;
@@ -102,14 +102,14 @@ export default class Vector2 {
 	}
 	
 	toPrecision(precision) {
-		var vector = this.clone();
+		let vector = this.clone();
 		vector.x = vector.x.toFixed(precision);
 		vector.y = vector.y.toFixed(precision);
 		return vector;
 	}
 	
 	toString () {
-		var vector = this.toPrecision(1);
+		let vector = this.toPrecision(1);
 		return ("[" + vector.x + "; " + vector.y + "]");
 	}
 

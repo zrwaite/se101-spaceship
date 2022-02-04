@@ -1,15 +1,4 @@
 import Vector2 from "./helpers/Vector2.js";
-import Controller from "./controller.js";
-import Galaxy from "./galaxy.js";
-import {buildShip} from "./ship/buildShip.js"
-
-import Asteroid from "./spaceObjects/asteroid.js";
-import Torpedo from "./ship/torpedo.js";
-import Meteor from "./spaceObjects/meteor.js";
-import AsteroidLauncher from "./spaceObjects/asteroidLauncher.js";
-import Matrix2 from "./helpers/Matrix2.js";
-
-const DMG_COEFFICIENT = 20;
 
 export default class Process {
     constructor(game, solarSystem, index) {
@@ -103,12 +92,10 @@ export default class Process {
 	}
     endProcess() {
 		delete this.contexts;
-        delete this.inputs;
 		delete this.drawnObjects;
 		delete this.hiddenObjects;
 		delete this.delObjects;
 		delete this.ships;
-		delete this.galaxy;
 		delete this.solarSystem;
 		delete this.watchShip;
     }

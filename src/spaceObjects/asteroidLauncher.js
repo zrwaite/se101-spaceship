@@ -27,13 +27,13 @@ export default class AsteroidLauncher{
 	 * @returns Positive float denoting rotation angle in radians
 	 */
 	getAngle() {
-		return this.rotation != -1 ? this.rotation : Math.random()*2*Math.PI;
+		return this.rotation !== -1 ? this.rotation : Math.random()*2*Math.PI;
 	}
 
 	launchAsteroid(){
 		// Check if additional objects should be created (decrement spawnCount if there are finite asteroids to create)
-		if (this.spawnCount == 0) return;
-		else if (this.spawnCount != -1) this.spawnCount--;
+		if (this.spawnCount === 0) return;
+		else if (this.spawnCount !== -1) this.spawnCount--;
 
 		const speed = Math.random()*MAX_SPAWN_SPEED;									// random speed		
 		const angle = this.getAngle();

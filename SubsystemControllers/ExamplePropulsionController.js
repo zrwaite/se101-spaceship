@@ -1,5 +1,5 @@
-import Vector2 from "../../src/helpers/Vector2.js";
-import SubsystemController from "../../src/subsystemController.js";
+import Vector2 from "../src/helpers/Vector2.js";
+import SubsystemController from "../src/subsystemController.js";
 export default class PropulsionController extends SubsystemController{
 	constructor(...args){
     	super(...args);
