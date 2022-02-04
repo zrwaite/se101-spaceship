@@ -33,20 +33,30 @@ export default class ColonyShip extends Sprite{
 		this.totalDamage = 0;
 		this.energyUsed = 0;
 		this.primary = false;
+		this.torpedoesFired = 0;
 
 		this.image = this.game.images["ship"];
 		this.size = new Vector2(3, 2);
-		this.radius = (this.size.x + this.size.y) / 4;		// we say the hurt box is avg of width and height 
-		this.shipStatusInfo;
+		this.radius = (this.size.x + this.size.y) / 4;		// we say the hurt box is avg of width and height
+		this.hasLanded = false;
+		this.shipStatusInfo = {
+			solarSystemName: this.process.solarSystem.name,
+			position: this.pos.clone(),
+			radius: this.radius,
+			linearVelocity: this.speed.clone(),
+			angularVelocity: this.aSpeed.clone(),
+			direction: this.angle,
+			torpedoSpeed: this.turretControls.launchSpeed,
+			hasLanded: this.hasLanded
+		};
 		this.solarSystem = this.process.solarSystem;
 		this.ctx = "ships";
 		this.mass = 3;
 		this.maxASpeed = 0.3;
 		this.maxSpeed = 0.5;
-		
+
 		// used in manual mode to force tap shooting and prevent
 		// burst shots that cause torpedos fired to hit each other and explode immediately
-		this.canTorpedo = true;
 
 		// stores the linear acceleration from the frame of reference of the ship (e.g. forward-backward, left-right)
 		// used to update accel by converting to global frame of reference
@@ -56,6 +66,7 @@ export default class ColonyShip extends Sprite{
 		this.energyTimeCount = 0;
 	}
 	update() {
+		this.updateShipStatusInfo();
 		this.energyTimeCount++;
 		if (this.energyTimeCount > 4){
 			this.energyUsed += 0.06;
@@ -140,6 +151,14 @@ export default class ColonyShip extends Sprite{
 		//Calls this.thrusterController
 	}
 	updateShipStatusInfo(){
+		this.shipStatusInfo.solarSystemName = this.process.solarSystem.name;
+		this.shipStatusInfo.position = this.pos.clone();
+		this.shipStatusInfo.radius = this.radius;
+		this.shipStatusInfo.linearVelocity = this.speed.clone();
+		this.shipStatusInfo.angularVelocity = this.aSpeed.clone();
+		this.shipStatusInfo.direction = this.angle;
+		this.shipStatusInfo.torpedoSpeed = this.turretControls.launchSpeed;
+		this.shipStatusInfo.hasLanded = this.hasLanded;
 		//see past function
 	}
 	boundaries(){

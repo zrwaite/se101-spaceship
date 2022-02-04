@@ -3,16 +3,15 @@ import Controller from "./controller.js";
 import Galaxy from "./galaxy.js";
 import {buildShip} from "./ship/buildShip.js";
 import Process from "./gameProcess.js";
-
 import Asteroid from "./spaceObjects/asteroid.js";
 import Torpedo from "./ship/torpedo.js";
 import Meteor from "./spaceObjects/meteor.js";
-import AsteroidLauncher from "./spaceObjects/asteroidLauncher.js";
 import Matrix2 from "./helpers/Matrix2.js";
 
 const DMG_COEFFICIENT = 20;
 
 export default class Game {
+	unit;
     constructor(width, height, images, contexts) {
 		this.width = width; // in units
         this.height = height; // in units
@@ -124,7 +123,7 @@ export default class Game {
 		const norm = (new Vector2(obj1.pos.x-obj2.pos.x, obj1.pos.y-obj2.pos.y)).normalize();
 		// When meteorites spawn, they start off right on top of each other
 		// clanking does not really make sense of objects right on top of one another
-		if (norm.x == 0 && norm.y == 0) { return; }
+		if (norm.x === 0 && norm.y === 0) { return; }
 		const tan = norm.matrixMultiply(Matrix2.Rotate90CCW);
 		const basisMatrix = Matrix2.MakeBasisMatrix(norm, tan);
 		const basisMatrixInverse = basisMatrix.inverse();
@@ -153,8 +152,8 @@ export default class Game {
 
 	detectProcessCollisions(process) {
 		// check ships collided with anything
-		process.ships.forEach((ship, i) => {
-			process.delObjects.forEach((obj, j) => {
+		process.ships.forEach((ship) => {
+			process.delObjects.forEach((obj) => {
 				if (this.ifCollide(ship, obj)) {
 					if (obj instanceof(Asteroid) || obj instanceof(Meteor)) {
 						const vDiff = this.clank(ship, obj);
@@ -241,6 +240,9 @@ export default class Game {
 		delete game.solarSystem;
 		delete game.watchShip;
         delete game.camera;
+		game.processes.forEach((process) => {
+			process.endProcess();
+		})
 		delete game.processes;
     }
 }
