@@ -9,6 +9,9 @@ const LINEAR_SENSITIVITY = 2e-5;
 const ANGULAR_SENSITIVITY = 5e-4;
 
 export default class ThrusterController{
+	parentShip;
+	thrusterData;
+	thrusterPower;
     constructor(parentShip){
 		this.parentShip = parentShip;
 		const width = parentShip.size.x;

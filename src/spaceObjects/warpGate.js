@@ -2,15 +2,20 @@ import Vector2 from "../helpers/Vector2.js";
 
 import RenderedObject from "../renderedObject.js";
 export default class WarpGate extends RenderedObject {
+	/* Constructor params */
+	destinationSolarSystem;
+	/* Default Attributes */
+	ctx = "planets";
+	size = new Vector2(5, 5);
+	radius = 1.5;
+	gravitySignature = 1;
+	/* Other attributes */
 	process;
+
 	constructor(destinationSolarystem, ...args) {
 		super(...args);
 		this.image = this.game.images["warpgate"];
-		this.ctx = "planets";
-		this.size = new Vector2(5, 5);
-		this.radius = 1.5;
 		this.destinationSolarSystem = destinationSolarystem;
-        this.gravitySignature = 1;
 	}
 	initialize(process) {
 		this.process = process;

@@ -4,42 +4,45 @@ import SolarSystem from "./solarSystem.js";
 //The constructor is going to build the galaxies
 //Think of this as creating all the links between solar system levels
 export default class Galaxy{
+	/* constructor params */
+	name;
+	game;
+	/* Default Attrivutres */
+	solarSystems = [];
+	/* Other attributes */
 	startingSolarSystem;
+	solarSystemNames = [];
 	constructor(galaxyName, game){
         this.name = galaxyName;
 		this.game = game;
-		this.solarSystems = [];
-
-		let solarSystemNames = [];
 		switch(galaxyName){
 			case "Alpha":
-				solarSystemNames.push("Sol System", "Alpha Centauri System", "Kepler 438 System");
+				this.solarSystemNames.push("Sol System", "Alpha Centauri System", "Kepler 438 System");
 				break;
 			case "test":
-				solarSystemNames.push("test");
+				this.solarSystemNames.push("test");
 				break;
 			case "Beta":
-				solarSystemNames.push("Barnard's Star System", "Wolf 359 System", "Sirius System", "Luyten System");
+				this.solarSystemNames.push("Barnard's Star System", "Wolf 359 System", "Sirius System", "Luyten System");
 				break;
 			case "Gamma":
-				solarSystemNames.push("Groombridge System", "Kruger System", "Aquarii System", 
+				this.solarSystemNames.push("Groombridge System", "Kruger System", "Aquarii System", 
 									"Cygni System","Indi System", "Yennefer System", "Quaid System");
 				break;
 		}
-
 		// Create solar systems with associated galaxy
-		for (const name of solarSystemNames) {
+		for (const name of this.solarSystemNames) {
 			this.solarSystems.push(new SolarSystem(name, this.game));
 		}
 		
 		// Set starting solar system to the first system in the list
-		this.startingSolarSystem = this.solarSystems[0].name;
+		this.startingSolarSystem = this.solarSystemsNames[0];
 	}
 	getSolarSystem(solarSystemName){
 		let returnSolarSystem = false;
 		this.solarSystems.forEach((solarSystem)=>{
 			if (solarSystem.name === solarSystemName) {
-				returnSolarSystem =  solarSystem;
+				returnSolarSystem = solarSystem;
 			}
 		})
 		return returnSolarSystem;

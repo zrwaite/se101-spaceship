@@ -22,7 +22,7 @@ export default class SolarSystem{
         -----     Asteroid     -----
         new Asteroid([speed.x, speed.y], aspeed, [pos.x, pos.y], this.game);
 		----- AsteroidLauncher -----
-		new AsteroidLauncher([pos.x, pos.y], this.game, spawnPeriod = 4, spawnCount = -1, rotation = -1);
+		new AsteroidLauncher([pos.x, pos.y], spawnPeriod = 4, spawnCount = -1, rotation = -1);
         -----      Planet      -----
         new Planet("imageName", new Composition(), [pos.x, pos.y], this.game);
 		-----     Warp Gate    -----
@@ -56,7 +56,7 @@ export default class SolarSystem{
                     new Planet("planet14", new Composition(0, 0, 0, 0, 0, 0), new Vector2(63, 48), this.game),
                 ]);
 
-				this.asteroidLaunchers.push(new AsteroidLauncher(new Vector2(50, 50), this.game, 4, 10, Math.PI * 3 / 4));
+				this.asteroidLaunchers.push(new AsteroidLauncher(new Vector2(50, 50), 4, 10, Math.PI * 3 / 4));
 				break;
 			case "Alpha Centauri System":
 				this.asteroids.push(...[
@@ -116,8 +116,8 @@ export default class SolarSystem{
 					new Asteroid(new Vector2(0, 0), 0, new Vector2(11, 7), this.game)
 				]);
 				this.asteroidLaunchers.push(...[
-					new AsteroidLauncher(new Vector2(61, 51), this.game, 5, 10),
-					new AsteroidLauncher(new Vector2(21, 2), this.game, 4, 12, Math.PI/4)
+					new AsteroidLauncher(new Vector2(61, 51), 5, 10),
+					new AsteroidLauncher(new Vector2(21, 2), 4, 12, Math.PI/4)
 				]);
 				this.warpGates.push(...[
 					new WarpGate("Kruger System", new Vector2(41, 31), this.game),
@@ -196,7 +196,7 @@ export default class SolarSystem{
 					new Asteroid(new Vector2(0, 0), 0, new Vector2(45, 31), this.game),
 					new Asteroid(new Vector2(0, 0), 0, new Vector2(65, 20), this.game)
 				]);
-				this.asteroidLaunchers.push(new AsteroidLauncher(new Vector2(0, 0), this.game, 4, 20, Math.PI / 6));
+				this.asteroidLaunchers.push(new AsteroidLauncher(new Vector2(0, 0), 4, 20, Math.PI / 6));
 				this.warpGates.push(...[
 					new WarpGate("Barnard's Star System", new Vector2(37, 9), this.game),
 					new WarpGate("Sirius System", new Vector2(11, 40), this.game),
@@ -213,8 +213,8 @@ export default class SolarSystem{
 					this.asteroids.push(new Asteroid(new Vector2(0, 0), 0, new Vector2((51 + 41 * i) % 71, (41 + 41 * i) % 53), this.game));
 				}
 				this.asteroidLaunchers.push(...[
-					new AsteroidLauncher(new Vector2(8, 5), this.game, 4, 15),
-					new AsteroidLauncher(new Vector2(26, 41), this.game, 7, 10)
+					new AsteroidLauncher(new Vector2(8, 5), 4, 15),
+					new AsteroidLauncher(new Vector2(26, 41), 7, 10)
 				]);
 				this.warpGates.push(...[
 					new WarpGate("Yennefer System", new Vector2(59, 19), this.game),

@@ -5,26 +5,33 @@ const NUMBER_OF_EXPLOSION_SPRITES = 9;
 const FRAMES_FOR_EXPLOSION = 81;
 const EXPLOSION_MAX_SCALE = 10;
 
+//Mini asteroid from asteroid explosion
 export default class Torpedo extends Sprite {
-	//Mini asteroid from asteroid explosion
+	/* Constructor Params */
+	parentShip;
+	fuseFrameDuration;
+	frameCreated;
+
+	/* Other attributes */
+	delete = false; //Once an item needs to be deleted and stop rendering, set to true
+	height = 20;
+	width = 10;
+	size = new Vector2(1, 1);
+	radius = 0.5;
+	originalSize = this.size.clone();
+	originalRadius = this.radius;
+	ctx = "objects";
+	hasExploded = false;
+	frameExploded = undefined;
+
 	constructor(fuseFrameDuration = 0, parentShip, velocity, ...args) {
 		super(...args);
 		this.speed = velocity;
 		this.angle = velocity.normalize(); 	// torpedoes point in the direction they are moving
 		this.parentShip = parentShip;
 		this.image = this.game.images["torpedo"];
-		this.delete = false; //Once an item needs to be deleted and stop rendering, set to true
-		this.height = 20;
-		this.width = 10;
-		this.size = new Vector2(1, 1);
-		this.radius = 0.5;
-		this.originalSize = this.size;
-		this.originalRadius = this.radius;
-		this.ctx = "objects";
-		this.hasExploded = false;
 		this.fuseFrameDuration = fuseFrameDuration;
 		this.frameCreated = this.parentShip.game.frame;
-		this.frameExploded = undefined;
 	}
 	update() {
 		//Add special update code here if needed

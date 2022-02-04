@@ -3,6 +3,7 @@ import response from "../helpers/response.js";
 import Vector2 from "../helpers/Vector2.js";
 
 export default class PassiveSensors{
+    parentShip;
     constructor(parentShip){
 		this.parentShip = parentShip;
 	}

@@ -1,4 +1,12 @@
 export default class PlanetComposition {
+	/* Attributes */
+	water;
+	air;
+	land;
+	metal;
+	danger;
+	temperature;
+
 	constructor(water, air, land, metal, danger, temperature) {
 		this.water = water;
 		this.air = air;

@@ -2,18 +2,22 @@ import Sprite from "../sprite.js";
 import Meteor from "./meteor.js";
 import Vector2 from "../helpers/Vector2.js";
 export default class Asteroid extends Sprite {
+	/* Constructor params */
 	process;
+
+	/* Other Attributes */
+	ctx = "objects";
+	delete = false; //Once an item needs to be deleted and stop rendering, set to true
+	size = new Vector2(3, 3);
+	mass = 5;
+	gravitySignature = 0;
+	radius = 1.5;
+
 	constructor(speed, aSpeed, ...args) {
 		super(...args);
 		this.speed = speed;
         this.aSpeed.set(1, aSpeed);
 		this.image = this.game.images["asteroid"];
-		this.ctx = "objects";
-		this.delete = false; //Once an item needs to be deleted and stop rendering, set to true
-		this.size = new Vector2(3, 3);
-		this.radius = this.size.x/2;		// asteroids are circles
-		this.mass = 5;
-		this.gravitySignature = 0;
 	}
 	initialize(process) {
 		this.process = process;

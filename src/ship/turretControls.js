@@ -9,19 +9,23 @@ const TORPEDO_VELOCITY = 0.3;
 const FUSE_FRAME_DURATION = undefined;
 
 export default class TurretControls extends RenderedObject{
+	/* Constuctor Params */
+	parentShip;
+
+	/* Other Attributes */
+	cooldownFrames = TUBE_COOLDOWN_FRAMES;
+	numberOfTubes = NUMBER_OF_TUBES;
+	direction = new Vector2(1,0); // Default
+	lastFrameFiredByTube = Array(NUMBER_OF_TUBES).fill(-Infinity);
+	launchSpeed = TORPEDO_VELOCITY;
+
     constructor(parentShip, ...args){
 		super(...args);
 		this.image = this.game.images["turret"];
 		this.parentShip = parentShip;
-		this.cooldownFrames = TUBE_COOLDOWN_FRAMES;
-		this.numberOfTubes = NUMBER_OF_TUBES;
-		this.direction = new Vector2(1,0); // Default
-		this.lastFrameFiredByTube = Array(NUMBER_OF_TUBES).fill(-Infinity);
-		this.launchSpeed = TORPEDO_VELOCITY;
 		this.pos = this.parentShip.pos;
 	}
 	update() {
-		//Add special update code here if needed
 		this.pos = this.parentShip.pos;
 	}
 	// This is currently assumed to be an absolute direction, it can be implemented as a relative direction through a change of basis
