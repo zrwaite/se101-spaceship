@@ -1,7 +1,10 @@
 import Vector2 from "./helpers/Vector2.js";
 
 export default class Process {
-    constructor(game, solarSystem, index) {
+	allShips; // Stores the number of ships that are rendered
+	watchShip; // Ship being watched
+	unit; // Global Unit
+	constructor(game, solarSystem, index) {
 		this.game = game;
 		this.solarSystem = solarSystem
 		this.index = index;
@@ -13,16 +16,13 @@ export default class Process {
 		this.drawnObjects = []; // stores objects that always need to be drawn and updated
 		this.hiddenObjects = []; // stores objects that need to be update only
 		this.delObjects = []; // Stores objects that need to be drawn and updated until deleted
-		this.allShips; // Stores the number of ships that are rendered
 		this.ships = []; // Array of ship objects
-		this.watchShip; // Ship being watched
 
         // Animation Elements (UI uses these too)
         // --- The rendered width is:   (Math.floor(this.width / this.zoom) * this.unit);
         
         this.frame = 0; // this increments every frame
         this.paused = false; // If the whole game is paused
-        this.unit; // Global Unit
     }
     start(ships, watchShip) {
 		this.ships = ships;

@@ -11,22 +11,25 @@ import Matrix2 from "./helpers/Matrix2.js";
 const DMG_COEFFICIENT = 20;
 
 export default class Game {
-	unit;
-    constructor(width, height, images, contexts) {
+	unit; //Global Unit
+	width; //Ship Width
+	inputs;// Controller values
+	allShips; // Stores the number of ships that are rendered
+	galaxy; // Stores Galaxy Object
+	solarSystem; // Stores Solar System Info
+	watchShip; // Ship being watched
+	watchShipName;
+	solarSystemName;
+	constructor(width, height, images, contexts) {
 		this.width = width; // in units
         this.height = height; // in units
         this.images = images;
 		this.contexts = contexts;
-        this.inputs; // Controller values
 		this.drawnObjects = []; // stores objects that always need to be drawn and updated
 		this.hiddenObjects = []; // stores objects that need to be update only
 		this.delObjects = []; // Stores objects that need to be drawn and updated until deleted
-		this.allShips; // Stores the number of ships that are rendered
 		this.ships = []; // Array of ship objects
-		this.galaxy; // Stores Galaxy Object
-		this.solarSystem; // Stores Solar System Info
-		this.watchShip; // Ship being watched
-		this.watchShipName;
+
 
         // Animation Elements (UI uses these too)
         this.initializing = 1; // goes to 0 once everything has been drawn once
@@ -36,9 +39,7 @@ export default class Game {
         
         this.frame = 0; // this increments every frame
         this.paused = false; // If the whole game is paused
-        this.unit; // Global Unit
         this.fpsInterval = 1000 / 60;
-		this.solarSystemName;
 		this.processes = [];
     }
     start(galaxyName, allShips, watchShipName) {

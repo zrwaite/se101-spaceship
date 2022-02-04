@@ -2,6 +2,7 @@ import Sprite from "../sprite.js";
 import Vector2 from "../helpers/Vector2.js";
 export default class Meteor extends Sprite {
 	//Mini asteroid from asteroid explosion
+	process;
 	constructor(speed, ...args) {
 		super(...args);
 		this.speed = speed;
@@ -11,7 +12,6 @@ export default class Meteor extends Sprite {
 		this.radius = 0.5;
 		this.ctx = "objects";
 		this.mass = 0.5;
-		this.process;
 	}
 	initialize(process) {
 		this.process = process;

@@ -1,13 +1,13 @@
 import Vector2 from "./helpers/Vector2.js";
 
 export default class RenderedObject{ //Base class for everything that gets drawn
+	ctx;
+	image; // Actual DOM image
 	constructor(pos, game) {
 		this.game = game;
 		this.pos = pos;
-		this.image; // Actual DOM image
 		this.size = {x: 1, y: 1}; // In units
 		this.angle = new Vector2(1, 0);
-		this.ctx;
 	}
 	draw () {
 		// Set the context's translation.

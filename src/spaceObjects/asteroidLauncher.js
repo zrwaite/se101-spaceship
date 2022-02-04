@@ -5,6 +5,7 @@ const MAX_SPAWN_SPEED = 0.4;
 const FRAMES_PER_SECOND = 60;
 
 export default class AsteroidLauncher{
+	process;
 	constructor(pos, game, spawnPeriod = 4, spawnCount = -1, rotation = -1) {
 		this.game = game;
 		this.pos = pos;
@@ -17,7 +18,6 @@ export default class AsteroidLauncher{
 
 		// Expects positive radians values... rotation == -1 denotes random angle
 		this.rotation = rotation;
-		this.process;
 	}
 	initialize(process) {
 		this.process = process;

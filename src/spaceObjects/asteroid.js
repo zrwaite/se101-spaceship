@@ -2,6 +2,7 @@ import Sprite from "../sprite.js";
 import Meteor from "./meteor.js";
 import Vector2 from "../helpers/Vector2.js";
 export default class Asteroid extends Sprite {
+	process;
 	constructor(speed, aSpeed, ...args) {
 		super(...args);
 		this.speed = speed;
@@ -13,7 +14,6 @@ export default class Asteroid extends Sprite {
 		this.radius = this.size.x/2;		// asteroids are circles
 		this.mass = 5;
 		this.gravitySignature = 0;
-		this.process;
 	}
 	initialize(process) {
 		this.process = process;

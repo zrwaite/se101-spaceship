@@ -1,6 +1,8 @@
 import Vector2 from "./helpers/Vector2.js";
 import RenderedObject from "./renderedObject.js";
 export default class Sprite extends RenderedObject{
+	radius;
+	mass;
 	constructor(...args){
 		super(...args)
 		// this.pos = new Vector(0, 0); --> Already from RenderedObject
@@ -12,8 +14,6 @@ export default class Sprite extends RenderedObject{
 		this.aAccel = new Vector2(1, 0); //angle acceleration
 		//console.log(this.aAccel.angle());
 		this.maxASpeed = 20; //Max anglular speed
-		this.radius; 
-		this.mass;
 	}
 	update() {
 		// All Simple Physics
