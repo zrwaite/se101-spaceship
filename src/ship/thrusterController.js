@@ -9,10 +9,13 @@ const LINEAR_SENSITIVITY = 2e-5;
 const ANGULAR_SENSITIVITY = 5e-4;
 
 export default class ThrusterController{
+	parentShip;
+	thrusterData;
+	thrusterPower;
     constructor(parentShip){
 		this.parentShip = parentShip;
-		const width = parentShip.size.y;
-		const length = parentShip.size.x;
+		const width = parentShip.size.x;
+		const length = parentShip.size.y;
 		// direction is direction of thrust
 		this.thrusterData = {
 			mainThruster: { offset: new Vector2(-length / 2, 0), direction: new Vector2(1, 0) },
@@ -25,7 +28,7 @@ export default class ThrusterController{
 		}
 		this.thrusterPower = Object.fromEntries(Object.keys(this.thrusterData).map(thruster => [thruster, 0]));
 	}
-	// Successful responses contains a numeric field `power` giving the actualy power the thruster was set to (in case power was out of bounds)
+	// Successful responses contains a numeric field `power` giving the actually power the thruster was set to (in case power was out of bounds)
 	// and a boolean field `powerLimited` indicating whether the power requested was greater than the MAX_POWER and thus reduced to equal MAX_POWER
 	setThruster(thrusterName, power){
 		if (!(power >= 0)) {

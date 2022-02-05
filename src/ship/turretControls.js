@@ -5,23 +5,28 @@ import RenderedObject from "../renderedObject.js";
 
 const TUBE_COOLDOWN_FRAMES = 100;
 const NUMBER_OF_TUBES  = 4;
-const TORPEDO_VELOCITY = 0.2;
+const TORPEDO_VELOCITY = 0.3;
 const FUSE_FRAME_DURATION = undefined;
 
 export default class TurretControls extends RenderedObject{
+	/* Constuctor Params */
+	parentShip;
+
+	/* Other Attributes */
+	cooldownFrames = TUBE_COOLDOWN_FRAMES;
+	numberOfTubes = NUMBER_OF_TUBES;
+	direction = new Vector2(1,0); // Default
+	lastFrameFiredByTube = Array(NUMBER_OF_TUBES).fill(-Infinity);
+	launchSpeed = TORPEDO_VELOCITY;
+	ctx = "ships";
+
     constructor(parentShip, ...args){
 		super(...args);
 		this.image = this.game.images["turret"];
 		this.parentShip = parentShip;
-		this.cooldownFrames = TUBE_COOLDOWN_FRAMES;
-		this.numberOfTubes = NUMBER_OF_TUBES;
-		this.direction = new Vector2(1,0); // Default
-		this.lastFrameFiredByTube = Array(NUMBER_OF_TUBES).fill(-Infinity);
-		this.launchSpeed = TORPEDO_VELOCITY;
 		this.pos = this.parentShip.pos;
 	}
 	update() {
-		//Add special update code here if needed
 		this.pos = this.parentShip.pos;
 	}
 	// This is currently assumed to be an absolute direction, it can be implemented as a relative direction through a change of basis
@@ -57,11 +62,11 @@ export default class TurretControls extends RenderedObject{
 		//check for valid torpedo stuff, then create new one
 		if (tubeIndex >= 0 && tubeIndex < NUMBER_OF_TUBES) {
 			const tubeCooldownResponse = this.getTubeCooldown(tubeIndex);
-			if (tubeCooldownResponse.response["tubeCooldown"] == 0) {
+			if (tubeCooldownResponse.response["tubeCooldown"] === 0) {
 				const torpedoVelocity = this.direction.scale(this.launchSpeed)		// calculate velocity of fired missile
 				const newTorpedo = new Torpedo(FUSE_FRAME_DURATION, this.parentShip, torpedoVelocity, this.parentShip.pos, this.parentShip.game)
 				this.parentShip.process.spawnDeletableObject(newTorpedo);
-				this.parentShip.TorpedoesFired++;
+				this.parentShip.torpedoesFired++;
                 this.parentShip.energyUsed += 8;
 				this.lastFrameFiredByTube[tubeIndex] = this.parentShip.game.frame;
                 return new response(200, [], {}, true);

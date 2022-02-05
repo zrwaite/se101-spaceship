@@ -1,34 +1,34 @@
 @font-face {
     font-family: NotoSans-Black;
-    src: url("../Fonts/NotoSans-Black.ttf");
+    src: url("Fonts/NotoSans-Black.ttf");
 }
 @font-face {
     font-family: Montserrat;
-    src: url("../Fonts/Montserrat-ExtraLight.ttf");
+    src: url("Fonts/Montserrat-ExtraLight.ttf");
     font-weight: 200;
 }
 @font-face {
     font-family: Montserrat;
-    src: url("../Fonts/Montserrat-Light.ttf");
+    src: url("Fonts/Montserrat-Light.ttf");
     font-weight: 300;
 }
 @font-face {
     font-family: Montserrat;
-    src: url("../Fonts/Montserrat-Regular.ttf");
+    src: url("Fonts/Montserrat-Regular.ttf");
 }
 @font-face {
     font-family: Montserrat;
-    src: url("../Fonts/Montserrat-SemiBold.ttf");
+    src: url("Fonts/Montserrat-SemiBold.ttf");
     font-weight: 600;
 }
 @font-face {
     font-family: Montserrat;
-    src: url("../Fonts/Montserrat-Bold.ttf");
+    src: url("Fonts/Montserrat-Bold.ttf");
     font-weight: bold;
 }
 
 * {
-    font-family: 'Montserrat';
+    font-family: 'Montserrat', serif;
     -webkit-user-select: none;  /* Chrome all / Safari all */
     -moz-user-select: none;     /* Firefox all */
     -ms-user-select: none;      /* IE 10+ */

@@ -1,7 +1,8 @@
 export default class SubsystemController{
-	constructor(parentShip){
-		this.parentShip = parentShip;
-	}
+	defence;
+	navigation;
+	propulsion;
+	sensors;
 	initializeConnection = (defence, navigation, propulsion, sensors) =>{
 		this.defence = defence;
 		this.navigation = navigation;

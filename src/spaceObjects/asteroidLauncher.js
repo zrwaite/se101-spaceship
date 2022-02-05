@@ -5,11 +5,16 @@ const MAX_SPAWN_SPEED = 0.4;
 const FRAMES_PER_SECOND = 60;
 
 export default class AsteroidLauncher{
-	constructor(pos, game, spawnPeriod = 4, spawnCount = -1, rotation = -1) {
+	/* Attributes */
+	game;
+	process;
+	spawnPeriod;
+	spawnCount;
+	rotation;
+	currentDelay = 0;
+	constructor(game, pos, spawnPeriod = 4, spawnCount = -1, rotation = -1) {
 		this.game = game;
 		this.pos = pos;
-
-		this.currentDelay = 0;
 		this.spawnPeriod = spawnPeriod * FRAMES_PER_SECOND;
 
 		// Expects positive integer... -1 denotes infinite projectiles
@@ -17,7 +22,6 @@ export default class AsteroidLauncher{
 
 		// Expects positive radians values... rotation == -1 denotes random angle
 		this.rotation = rotation;
-		this.process;
 	}
 	initialize(process) {
 		this.process = process;
@@ -27,13 +31,13 @@ export default class AsteroidLauncher{
 	 * @returns Positive float denoting rotation angle in radians
 	 */
 	getAngle() {
-		return this.rotation != -1 ? this.rotation : Math.random()*2*Math.PI;
+		return this.rotation !== -1 ? this.rotation : Math.random()*2*Math.PI;
 	}
 
 	launchAsteroid(){
 		// Check if additional objects should be created (decrement spawnCount if there are finite asteroids to create)
-		if (this.spawnCount == 0) return;
-		else if (this.spawnCount != -1) this.spawnCount--;
+		if (this.spawnCount === 0) return;
+		else if (this.spawnCount !== -1) this.spawnCount--;
 
 		const speed = Math.random()*MAX_SPAWN_SPEED;									// random speed		
 		const angle = this.getAngle();

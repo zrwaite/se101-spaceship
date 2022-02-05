@@ -2,7 +2,7 @@ import Game from "./game.js";
 
 let game; // Initialized properly in DOM.doneLoad().
 
-const windowSize = { // Accessable through game.width and game.height.
+const windowSize = { // Accessible through game.width and game.height.
 	x: 72,
 	y: 54,
     border: 2
@@ -42,18 +42,18 @@ function initializeShipSelect(shipNames, active) {
         ship.innerHTML = shipNames[i];
         ship.onclick = function() {console.log(this); DOM.shipActive(this);}
         if (shipNames[i].length >= 12) ship.classList.add("small");
-        if (shipNames[i] == active) {
+        if (shipNames[i] === active) {
             ship.classList.add("active");
             activeShipSet = true;
         }
         document.body.querySelector("#ShipSelect").appendChild(ship);
-        if (i==0) firstShip = ship;
+        if (i===0) firstShip = ship;
     }
     if (!activeShipSet) firstShip.classList.add("active");
 }
 
 function initializeContexts(contextNames) {
-    /* Create the contexts with the given names: first name is farthest back. */
+    /* Create the contexts with the given names: first name is the farthest back. */
     for (let i = 0; i < contextNames.length; i++) {
         let canvas = document.createElement("CANVAS");
         canvas.id = contextNames[i];
@@ -78,10 +78,10 @@ function iterateLoad(length) {
 }
 
 function storageAvailable(type) {
-    var storage;
+    let storage;
     try {
         storage = window[type];
-        var x = '__storage_test__';
+        let x = '__storage_test__';
         storage.setItem(x, x);
         storage.removeItem(x);
         return true;
@@ -192,7 +192,7 @@ let DOM = {
                     let boxes = this.elements["checkboxes"];
                     for (let i = 0; i < boxes.length; i++) {
                         if (boxes[i].id !== "zoom") boxes[i].checked = this.data[boxes[i].id];
-                        else boxes[i].checked = (this.data[boxes[i].id] == 1) ? false : true;
+                        else boxes[i].checked = (this.data[boxes[i].id] !== 1);
                     }
                     if (this.data["skipMenu"]) {
                         this.newMenu();
@@ -216,7 +216,7 @@ let DOM = {
         let boxes = this.elements["checkboxes"];
         for (let i = 0; i < boxes.length; i++) {
             if (boxes[i].id !== "zoom") boxes[i].checked = this.data[boxes[i].id];
-            else boxes[i].checked = (this.data[boxes[i].id] == 1) ? false : true;
+            else boxes[i].checked = (this.data[boxes[i].id] !== 1);
         }
         initializeShipSelect(ships, this.data["defaultShip"]);
     },
@@ -228,7 +228,7 @@ let DOM = {
     },
     newMenu: function(menu = "Game") {
         for (const key in this.menus) this.menus[key].classList.remove("on");
-        if (menu == "Game") {
+        if (menu === "Game") {
             if (this.data["devDisplay"]) this.elements["DevTools"].style.display = "block";
             else this.elements["DevTools"].style.display = "none";
         }
@@ -238,7 +238,7 @@ let DOM = {
         localStorage.setItem('data', JSON.stringify(this.data));
     },
     updatePreference: function(type, value) {
-        if (type == "zoom") this.data[type] = (value) ? 2.5 : 1;
+        if (type === "zoom") this.data[type] = (value) ? 2.5 : 1;
         else this.data[type] = value;
         this.save();
     },
@@ -276,7 +276,7 @@ let DOM = {
                 func(...params);
                 fade.remove("on");
             }, middletime); 
-        }, 400/* transition-duraiton of the `#SolarFade` */);
+        }, 400/* transition-duration of the `#SolarFade` */);
     },
     startGame: function(galaxy = 0) {
         if (this.loaded && !this.gameInitialized) {

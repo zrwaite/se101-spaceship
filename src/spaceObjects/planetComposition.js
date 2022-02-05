@@ -1,4 +1,11 @@
 export default class PlanetComposition {
+	/* Attributes */
+	water;
+	air;
+	land;
+	metal;
+	danger;
+	temperature;
 	constructor(water, air, land, metal, danger, temperature) {
 		this.water = water;
 		this.air = air;
@@ -6,6 +13,7 @@ export default class PlanetComposition {
 		this.metal = metal;
 		this.danger = danger;
 		this.temperature = temperature;
+		this.maintainRange();
 	}
 	maintainRange() {
 		if (this.water>100) this.water = 100;
@@ -21,7 +29,7 @@ export default class PlanetComposition {
 		if (this.temperature>100) this.temperature = 100;
 		else if (this.temperature<-100) this.temperature = -100;
 	}
-	getSurvivabilityChance() {
+	get survivabilityChance() {
 		let survivabilityChance = 0;
 		survivabilityChance+=8*this.getDistribution1(this.water);
 		survivabilityChance+=8*this.getDistribution1(this.air);
@@ -33,10 +41,10 @@ export default class PlanetComposition {
 		return survivabilityChance;
 	}
 	getDistribution1(num) {
-		return Math.atan(0.1*(num-50))+1.5
+		return Math.atan(0.1*(num-50))+1.5;
 	}
 	getDistribution2(num) {
-		return 20/(((0.1*(num-15))**2)+5)
+		return 20/(((0.1*(num-15))**2)+5);
 	}
 
 }
