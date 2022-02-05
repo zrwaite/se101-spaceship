@@ -6,7 +6,6 @@ export default class PlanetComposition {
 	metal;
 	danger;
 	temperature;
-
 	constructor(water, air, land, metal, danger, temperature) {
 		this.water = water;
 		this.air = air;
@@ -42,10 +41,10 @@ export default class PlanetComposition {
 		return survivabilityChance;
 	}
 	getDistribution1(num) {
-		return Math.atan(0.1*(num-50))+1.5
+		return Math.atan(0.1*(num-50))+1.5;
 	}
 	getDistribution2(num) {
-		return 20/(((0.1*(num-15))**2)+5)
+		return 20/(((0.1*(num-15))**2)+5);
 	}
 
 }

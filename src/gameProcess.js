@@ -85,11 +85,8 @@ export default class Process {
         this.frame++;
     }
     draw () {
-        [...this.drawnObjects, ...this.staticObjects, ...this.delObjects].forEach((object) => {
-            //if (object.ctx !== "planets" || this.game.zoom !== 1 || this.initializing) {
-                object.draw();
-            //}
-        }); //Draws all drawn objects
+		//Draws all drawn objects
+        [...this.drawnObjects, ...this.staticObjects, ...this.delObjects].forEach(object => object.draw()); 
     }
 	rerenderStatic() {
         document.getElementById("SolarSystemName").innerHTML = this.solarSystem.name;

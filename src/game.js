@@ -45,7 +45,7 @@ export default class Game {
         this.images = images;
 		this.contexts = contexts;
     }
-	
+
     start(galaxyName, allShips, watchShipName) {
 		this.allShips = allShips
 		this.watchShipName = watchShipName;
@@ -146,7 +146,9 @@ export default class Game {
 				const a = process.delObjects[i];
 				const b = process.delObjects[j];
 				if (this.ifCollide(a, b)) {
-					if ((a instanceof(Torpedo)) === (b instanceof(Torpedo))) { // XOR
+					if (a instanceof(Torpedo) || b instanceof(Torpedo)) { // XOR
+						if (a instanceof(Torpedo) && b instanceof(Torpedo)) continue;
+						if (a.hasExploded || b.hasExploded) continue;
 						// torpedoes can hit each other for now but firing from multiple
 						// tubes at once instantly explodes all torpedoes fired at that time
 						a.receiveDamage();

@@ -32,7 +32,7 @@ export default class WarpGate extends RenderedObject {
 		ship.process.dealocateShip(ship);
 		if (ship.primary) {
 			this.game.drawnProcess = newProcess;
-			newProcess.rerenderStatic();
+			// newProcess.rerenderStatic();
 		}
 		ship.process = newProcess;
 	}

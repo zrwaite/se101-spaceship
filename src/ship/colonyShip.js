@@ -115,6 +115,7 @@ export default class ColonyShip extends Sprite{
 		);
 		this.boundaries();
 		this.accel = this.accel.add(this.localAccel.rotate(this.angle.angle()));
+		this.turretControls.update()
 		super.update() //parent update;
 	}
 	manualControls(){
@@ -227,5 +228,10 @@ export default class ColonyShip extends Sprite{
 	land(planet) {
 		alert("YOU WIN");
 		console.log(planet);
+	}
+
+	draw() {
+		super.draw();
+		this.turretControls.draw();
 	}
 }
