@@ -18,9 +18,6 @@ export default class Game {
 	contexts;
 
 	/* Default Attributes */
-	drawnObjects = []; // Objects that always need to be drawn and updated
-	hiddenObjects = []; //Objects that need to be updated only
-	delObjects = []; // Objects that need to be drawn and updated until deleted
 	ships = []; // Array of ship objects
 	// Animation Elements (UI uses these too)
 	initializing = 1; // goes to 0 once everything has been drawn once
@@ -31,13 +28,13 @@ export default class Game {
 	paused = false; // If the whole game is paused
 	fpsInterval = 1000 / 60;
 	processes = [];
+	startPosition = new Vector2(30,30); //start at centre for now
 
 	/* Other Attributes */
 	unit; //Global Unit
 	inputs;// Controller values
 	allShips; // Stores the number of ships that are rendered
 	galaxy; // Stores Galaxy Object
-	solarSystem; // Stores Solar System Info
 	watchShip; // Ship being watched
 	watchShipName;
 	solarSystemName;
@@ -48,58 +45,42 @@ export default class Game {
         this.images = images;
 		this.contexts = contexts;
     }
+	
     start(galaxyName, allShips, watchShipName) {
 		this.allShips = allShips
-		let startPosition = new Vector2(30,30); //start at centre for now
 		this.watchShipName = watchShipName;
-        this.inputs = new Controller(this); //controller created
 		this.galaxy = new Galaxy(galaxyName, this); //Create galaxy
-		this.solarSystemName = this.galaxy.startingSolarSystem; //Starting solar system from galaxy
-		let processIndex = 0;
-		this.galaxy.solarSystems.forEach((solarSystem) => {
-			this.processes.push(new Process(this, solarSystem, processIndex));
-			processIndex++;
-		})
 
+        this.inputs = new Controller(this); //controller created
+		this.solarSystemName = this.galaxy.startingSolarSystem; //Starting solar system from galaxy
+
+		this.galaxy.solarSystems.forEach((solarSystem, i) => {
+			this.processes.push(new Process(this, solarSystem, i));
+		})
 		this.drawnProcess = this.processes[0];
 
 		if (this.allShips) {
-			this.ships.push(...buildShip("all", startPosition, this, this.drawnProcess)); //Build all ships for now
-			let shipFound = false;
+			this.ships.push(...buildShip("all", this.startPosition, this, this.drawnProcess)); //Build all ships for now
 			for (let i=0; i<this.ships.length; i++) {
 				if (this.ships[i].name === watchShipName) {
 					this.watchShip = this.ships[i];
-					shipFound = true;
 					break;
 				}
 			}
-			if (!shipFound) alert("shipName " + watchShipName + " not found");
-			else console.log(this.watchShip);
 		} else {
-			this.ships.push(buildShip(this.watchShipName, startPosition, this, this.drawnProcess)) //build a single ship
+			this.ships.push(buildShip(this.watchShipName, this.startPosition, this, this.drawnProcess)) //build a single ship
 			this.watchShip = this.ships[0];
-			if (!this.watchShip) console.error("Invalid ship name");
 		}
 		this.watchShip.primary = true;
-		this.ships.forEach((ship)=> {
-			this.drawnObjects.push(ship.turretControls);
-			ship.turretControls.ctx = "ships";
-		})
 
 		this.processes.forEach((process) => {
-			if (process.solarSystem.name === this.solarSystemName) {
+			if (process.solarSystem.name === this.solarSystemName) 
 				process.start(this.ships, this.watchShip);
-				process.rerenderStatic();
-			} else {
-				process.start([], null);
-			}
-		})
-
-        this.draw();
-        this.update();
+			else process.start([], null);
+		});
         this.initializing = false; // DONE STARTING
-		//console.log(this.watchShip);
     }
+
 	// check if two Sprites overlaps with each other
 	ifCollide(obj1, obj2) {
 		const xDiff = obj1.pos.x-obj2.pos.x;
@@ -107,6 +88,7 @@ export default class Game {
 		const rTotal = obj1.radius + obj2.radius;
 		return xDiff * xDiff + yDiff * yDiff < rTotal * rTotal;
 	}
+
 	// two objects hit each other, handle perfectly elastic collision
 	// returns the velocity difference (in the norm direction) between the 2 objects 
 	// used to calculate dmg take if ship clanks with asteroid/meteor
@@ -164,12 +146,9 @@ export default class Game {
 				const a = process.delObjects[i];
 				const b = process.delObjects[j];
 				if (this.ifCollide(a, b)) {
-					if (a instanceof(Torpedo) || b instanceof(Torpedo)) {
+					if ((a instanceof(Torpedo)) === (b instanceof(Torpedo))) { // XOR
 						// torpedoes can hit each other for now but firing from multiple
 						// tubes at once instantly explodes all torpedoes fired at that time
-						if (a instanceof(Torpedo) && b instanceof(Torpedo)) {
-							continue;
-						}
 						a.receiveDamage();
 						b.receiveDamage();
 					} else {
@@ -182,39 +161,16 @@ export default class Game {
 
 	update () {
 		this.processes.forEach(process => process.update())
-
-		// this.detectCollisions();
-
-		// this.delObjects = this.delObjects.filter(this.deleter); // Removes objects no longer needed
-
         //let camOffset = new Vector2(-this.watchShip.speed.x * this.unit * this.dragConst, -this.watchShip.speed.y * this.unit * this.dragConst);
         let candidateX = (this.watchShip.pos.x - this.width / this.zoom / 2) * this.unit;
         let candidateY = (this.watchShip.pos.y - this.height / this.zoom / 2) * this.unit;
         candidateX = (candidateX <= 0) ? 0 : ((candidateX / this.unit <= this.width - this.width / this.zoom) ? candidateX : (this.width - this.width / this.zoom) * this.unit);
         candidateY = (candidateY <= 0) ? 0 : ((candidateY / this.unit <= this.height - this.height / this.zoom) ? candidateY : (this.height - this.height / this.zoom) * this.unit);
-        
         this.camera.x = candidateX;
         this.camera.y = candidateY;
-
-        
-        // Temporary drawing of the zoomed-in view
-        /*let ctx = game.contexts["items"];
-        ctx.lineWidth = "5";
-        ctx.strokeStyle = "red";
-        ctx.beginPath();
-        ctx.rect(this.camera.x, this.camera.y, Math.floor(this.width / this.zoom * this.unit), Math.floor(this.height / this.zoom * this.unit));
-        ctx.stroke();*/
-
-		// [...this.drawnObjects, ...this.delObjects, ...this.hiddenObjects].forEach((object) => object.update()); //Updates all objects
-
         this.frame++;
     }
-    draw () {
-		this.drawnProcess.draw();
-    }
-	deleter(sprite){ //Filter objects from deletable array that aren't needed
-		return !sprite.delete
-	}
+    draw () {this.drawnProcess.draw();}
     endGame() {
         let game = this;
         ["missiles", "planets", "objects", "thrusters", "ships", "items"].forEach((object) => {
@@ -223,17 +179,21 @@ export default class Game {
         });
 		delete game.contexts;
         delete game.inputs;
-		delete game.drawnObjects;
-		delete game.hiddenObjects;
-		delete game.delObjects;
 		delete game.ships;
 		delete game.galaxy;
-		delete game.solarSystem;
 		delete game.watchShip;
         delete game.camera;
-		game.processes.forEach((process) => {
-			process.endProcess();
-		})
+		game.processes.forEach(process => process.endProcess());
 		delete game.processes;
     }
 }
+
+/* Previous update */
+        
+// Temporary drawing of the zoomed-in view
+/*let ctx = game.contexts["items"];
+ctx.lineWidth = "5";
+ctx.strokeStyle = "red";
+ctx.beginPath();
+ctx.rect(this.camera.x, this.camera.y, Math.floor(this.width / this.zoom * this.unit), Math.floor(this.height / this.zoom * this.unit));
+ctx.stroke();*/

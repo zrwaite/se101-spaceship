@@ -6,12 +6,14 @@ const FRAMES_PER_SECOND = 60;
 
 export default class AsteroidLauncher{
 	/* Attributes */
+	game;
 	process;
 	spawnPeriod;
 	spawnCount;
 	rotation;
 	currentDelay = 0;
-	constructor(pos, spawnPeriod = 4, spawnCount = -1, rotation = -1) {
+	constructor(game, pos, spawnPeriod = 4, spawnCount = -1, rotation = -1) {
+		this.game = game;
 		this.pos = pos;
 		this.spawnPeriod = spawnPeriod * FRAMES_PER_SECOND;
 
@@ -40,7 +42,7 @@ export default class AsteroidLauncher{
 		const speed = Math.random()*MAX_SPAWN_SPEED;									// random speed		
 		const angle = this.getAngle();
 		const velocity = Vector2.right.rotate(angle).scale(speed); 	// random direction
-		let asteroid = new Asteroid(velocity, Math.random()-0.5, this.pos);
+		let asteroid = new Asteroid(velocity, Math.random()-0.5, this.pos, this.game);
 		this.process.spawnDeletableObject(asteroid);
 	}
 

@@ -18,6 +18,7 @@ export default class TurretControls extends RenderedObject{
 	direction = new Vector2(1,0); // Default
 	lastFrameFiredByTube = Array(NUMBER_OF_TUBES).fill(-Infinity);
 	launchSpeed = TORPEDO_VELOCITY;
+	ctx = "ships";
 
     constructor(parentShip, ...args){
 		super(...args);

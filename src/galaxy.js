@@ -36,7 +36,7 @@ export default class Galaxy{
 		}
 		
 		// Set starting solar system to the first system in the list
-		this.startingSolarSystem = this.solarSystemsNames[0];
+		this.startingSolarSystem = this.solarSystemNames[0];
 	}
 	getSolarSystem(solarSystemName){
 		let returnSolarSystem = false;

@@ -80,10 +80,8 @@ export default class Process {
 	update () {
 		if (this.ships.length === 0) return;
 		this.game.detectProcessCollisions(this);
-		this.delObjects = this.delObjects.filter(this.game.deleter); // Filter objects no longer needed
-
+		this.delObjects = this.delObjects.filter(obj => !obj.delete); // Filter objects no longer needed
 		[...this.drawnObjects, ...this.delObjects, ...this.hiddenObjects].forEach((object) => object.update()); //Updates all objects
-
         this.frame++;
     }
     draw () {
