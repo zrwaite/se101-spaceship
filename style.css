@@ -180,6 +180,14 @@ canvas {
 #DevTools table tr:not(.title)>td {
     width: 50%;
 }
+@keyframes blink_animation {
+    0%   {color: #c71a14;}
+    100% {color: rgb(247, 136, 136);}
+}
+#DevTools table tr:not(.title)>td.blink {
+    animation: blink_animation 0.3s ease-in-out 0s 3 normal;
+    font-weight: 900;
+}
 #DevTools #TurretCooldown {
     position: absolute;
     background-color: transparent;

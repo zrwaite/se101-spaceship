@@ -136,6 +136,7 @@ let DOM = {
         "Game": document.querySelector("#Game"), // Game menu; appears when in the game (dev tools, etc)
         "Main": document.querySelector("#Main"), // Main ship, galaxy, and preference selection page
     },
+    previousDamage: [0, 0], // [<previousDamage>, <number of layered animations>]
     initialize() {
         document.addEventListener("click", function (event) {
             if (event.target.tagName !== "FIGURE") {
@@ -263,7 +264,18 @@ let DOM = {
         angle += (game.watchShip.angle.x < 0) ? 180 : ((game.watchShip.angle.y <= 0) ? 0 : 360);
         entries[4].innerHTML = "&theta;: " + angle + "&deg;";
         entries[5].innerHTML = Math.floor(game.watchShip.energyUsed * 100) + " J";
-        entries[6].innerHTML = Math.floor(game.watchShip.totalDamage * 100) + " Ns";
+        if (this.previousDamage[0] != Math.floor(game.watchShip.totalDamage * 100)) {
+            this.previousDamage[0] = Math.floor(game.watchShip.totalDamage * 100);
+            entries[6].innerHTML = this.previousDamage[0] + " Ns";
+            this.previousDamage[1]++;
+            entries[6].classList.add("blink");
+            setTimeout(function () {
+                DOM.previousDamage[1]--;
+                if (!DOM.previousDamage[1]) {
+                    entries[6].classList.remove("blink");
+                }
+            }, 900);
+        }
         for (let i = 0; i < 4/* 4 turrets! */; i++) {
             entries[7].children[0].children[i].style.width = (100 - Math.floor((game.watchShip.turretControls.getTubeCooldown(i).response.tubeCooldown) / game.watchShip.turretControls.cooldownFrames * 100)) + "%";
         }
