@@ -136,7 +136,9 @@ let DOM = {
         "Game": document.querySelector("#Game"), // Game menu; appears when in the game (dev tools, etc)
         "Main": document.querySelector("#Main"), // Main ship, galaxy, and preference selection page
     },
+    previousDamage: [0, 0], // [<previousDamage>, <number of layered animations>]
     initialize() {
+        // Event Listeners
         document.addEventListener("click", function (event) {
             if (event.target.tagName !== "FIGURE") {
                 DOM.elements["ShipSelect"].classList.remove("open");
@@ -156,6 +158,17 @@ let DOM = {
                 this.querySelector("button").innerHTML = "&#x1F6C8; Info & Tips";
             }
         }
+        let galaxyNames = ["galaxy1", "galaxy2", "galaxy3", "galaxy4"];
+        galaxyNames.forEach(function (name) {
+            document.querySelector("#" + name + ">.quit").onclick = function(event) {
+                DOM.resetGame();
+                this.classList.add("hidden");
+                console.log(game.paused);
+                event.stopPropagation();
+            }
+        });
+
+        // Set Data
         for (let i = 0; i < 4; i++) {
             this.elements["galaxy" + (i + 1)].onclick = function() {
                 if (DOM.data["defaultGalaxy"] !== i) {
@@ -163,6 +176,10 @@ let DOM = {
                     DOM.save();
                 }
                 DOM.startGame(i);
+
+                let galaxyNames = ["galaxy1", "galaxy2", "galaxy3", "galaxy4"];
+                
+                document.querySelector("#galaxy" + (i + 1) + ">.quit").classList.remove("hidden");
             }
         }
         setTimeout(function () {
@@ -259,12 +276,24 @@ let DOM = {
         entries[1].innerHTML = "Y: " + Math.floor(game.watchShip.speed.y * 1000);
         entries[2].innerHTML = "X: " + Math.floor(game.watchShip.pos.x * 10);
         entries[3].innerHTML = "Y: " + Math.floor(game.watchShip.pos.y * 10);
-//         entries[4].innerHTML = Math.round(game.watchShip.energyUsed * 1000) / 10 + " J";
-//         entries[5].innerHTML = Math.round(game.watchShip.totalDamage * 100) + " Ns";
-        entries[4].innerHTML = Math.floor(game.watchShip.energyUsed * 100) + " J";
-        entries[5].innerHTML = Math.floor(game.watchShip.totalDamage * 100) + " Ns";
+        let angle = Math.floor(Math.atan(-game.watchShip.angle.y / game.watchShip.angle.x) * 180 / Math.PI);
+        angle += (game.watchShip.angle.x < 0) ? 180 : ((game.watchShip.angle.y <= 0) ? 0 : 360);
+        entries[4].innerHTML = "&theta;: " + angle + "&deg;";
+        entries[5].innerHTML = Math.floor(game.watchShip.energyUsed * 100) + " J";
+        if (this.previousDamage[0] != Math.floor(game.watchShip.totalDamage * 100)) {
+            this.previousDamage[0] = Math.floor(game.watchShip.totalDamage * 100);
+            entries[6].innerHTML = this.previousDamage[0] + " Ns";
+            this.previousDamage[1]++;
+            entries[6].classList.add("blink");
+            setTimeout(function () {
+                DOM.previousDamage[1]--;
+                if (!DOM.previousDamage[1]) {
+                    entries[6].classList.remove("blink");
+                }
+            }, 900);
+        }
         for (let i = 0; i < 4/* 4 turrets! */; i++) {
-            entries[6].children[0].children[i].style.width = (100 - Math.floor((game.watchShip.turretControls.getTubeCooldown(i).response.tubeCooldown) / game.watchShip.turretControls.cooldownFrames * 100)) + "%";
+            entries[7].children[0].children[i].style.width = (100 - Math.floor((game.watchShip.turretControls.getTubeCooldown(i).response.tubeCooldown) / game.watchShip.turretControls.cooldownFrames * 100)) + "%";
         }
     },
     fadeInOut: function(func, params = [], middletime = 250) {
@@ -283,6 +312,7 @@ let DOM = {
             game.paused = false;
             game.zoom = this.data["zoom"];
             game.start(galaxies[galaxy], this.data["allShips"], this.data["defaultShip"]);
+            this.previousDamage[0] = 0; // Stop the damage from blinking when you start!
             this.gameMenuTitle(galaxies[galaxy], game.galaxy.startingSolarSystem);
             startAnimating();
             this.newMenu();
@@ -292,18 +322,34 @@ let DOM = {
                 this.save();
             }
         } else if (this.gameInitialized) {
+            console.log(game);
             if (galaxies[galaxy] !== game.galaxy.name || game.watchShipName !== this.data["defaultShip"]) {
-                console.log("Destroying the game object and remaking it!");
-                game.endGame();
-                game = new Game(windowSize.x, windowSize.y, images, contexts);
-                game.unit = unit;
-                game.zoom = this.data["zoom"];
+                this.resetGame();
+
+                game.paused = false;
+
+                // actually initializeing the game!
+                this.gameInitialized = true; // Cause this.resetGame(); sets it to false.
                 game.start(galaxies[galaxy], this.data["allShips"], this.data["defaultShip"]);
+                this.previousDamage[0] = 0; // Stop the damage from blinking when you start!
                 this.gameMenuTitle(galaxies[galaxy], game.galaxy.startingSolarSystem);
             }
             game.paused = false;
             this.newMenu();
         }
+    },
+    resetGame: function() {
+        console.log("Destroying the game object and remaking it!");
+        for (let i = 0; i < 4; i++) {
+            document.querySelector("#galaxy" + (i + 1) + ">.quit").classList.add("hidden");
+        }
+
+        game.endGame();
+        game = new Game(windowSize.x, windowSize.y, images, contexts);
+        game.unit = unit;
+        game.zoom = this.data["zoom"];
+        game.paused = true;
+        this.gameInitialized = false;
     }
 }
 

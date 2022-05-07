@@ -27,6 +27,11 @@
     font-weight: bold;
 }
 
+@keyframes blink_animation {
+    0%   {color: #c71a14;}
+    100% {color: rgb(247, 136, 136);}
+}
+
 * {
     font-family: 'Montserrat', serif;
     -webkit-user-select: none;  /* Chrome all / Safari all */
@@ -180,6 +185,10 @@ canvas {
 #DevTools table tr:not(.title)>td {
     width: 50%;
 }
+#DevTools table tr:not(.title)>td.blink {
+    animation: blink_animation 0.3s ease-in-out 0s 3 normal;
+    font-weight: 900;
+}
 #DevTools #TurretCooldown {
     position: absolute;
     background-color: transparent;
@@ -319,6 +328,7 @@ input[type="checkbox"]:checked {
     border-spacing: calc(var(--unit) * 3.5);
 }
 #Galaxy table td {
+    position: relative;
     background-color: rgba(255, 255, 255, 0.2);
     width: calc(var(--unit) * 18);
     height: calc(var(--unit) * 13.5);
@@ -332,6 +342,25 @@ input[type="checkbox"]:checked {
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0.3);
     color: rgba(255, 255, 255, 1);
+}
+#Galaxy table td>div.quit {
+    font-size: calc(var(--unit) * 1.4);
+    position: absolute;
+    right: calc(var(--unit) * 0.8);
+    bottom: calc(var(--unit) * 0.8);
+    border-radius: var(--radius);
+    color: rgba(170, 170, 170, 0.795);
+    background-color: rgba(201, 18, 18, 0.521);
+    width: calc(var(--unit) * 5);
+    height: calc(var(--unit) * 2.5);
+    line-height: calc(var(--unit) * 2.3);
+}
+#Galaxy table td>div.quit:hover {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgb(180, 25, 25);
+}
+#Galaxy table td>div.quit.hidden {
+    display: none;
 }
 #Main section#Info {
     overflow: hidden;
