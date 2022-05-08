@@ -1,89 +1,89 @@
 import ColonyShip from "./colonyShip.js";
 
-import BebopDefenceController from "../../SubsystemControllers/Bebop/DefenseController.js";
-import BebopNavigationController from "../../SubsystemControllers/Bebop/NavigationController.js";
-import BebopPropulsionController from "../../SubsystemControllers/Bebop/PropulsionController.js";
-import BebopSensorsController from "../../SubsystemControllers/Bebop/SensorsController.js";
+import BebopDefenceController from "../../students/Bebop/DefenseController.js";
+import BebopNavigationController from "../../students/Bebop/NavigationController.js";
+import BebopPropulsionController from "../../students/Bebop/PropulsionController.js";
+import BebopSensorsController from "../../students/Bebop/SensorsController.js";
 
-import BismarkDefenceController from "../../SubsystemControllers/Bismark/DefenseController.js";
-import BismarkNavigationController from "../../SubsystemControllers/Bismark/NavigationController.js";
-import BismarkPropulsionController from "../../SubsystemControllers/Bismark/PropulsionController.js";
-import BismarkSensorsController from "../../SubsystemControllers/Bismark/SensorsController.js";
+import BismarkDefenceController from "../../students/Bismark/DefenseController.js";
+import BismarkNavigationController from "../../students/Bismark/NavigationController.js";
+import BismarkPropulsionController from "../../students/Bismark/PropulsionController.js";
+import BismarkSensorsController from "../../students/Bismark/SensorsController.js";
 
-import EnterpriseDefenceController from "../../SubsystemControllers/Enterprise/DefenseController.js";
-import EnterpriseNavigationController from "../../SubsystemControllers/Enterprise/NavigationController.js";
-import EnterprisePropulsionController from "../../SubsystemControllers/Enterprise/PropulsionController.js";
-import EnterpriseSensorsController from "../../SubsystemControllers/Enterprise/SensorsController.js";
+import EnterpriseDefenceController from "../../students/Enterprise/DefenseController.js";
+import EnterpriseNavigationController from "../../students/Enterprise/NavigationController.js";
+import EnterprisePropulsionController from "../../students/Enterprise/PropulsionController.js";
+import EnterpriseSensorsController from "../../students/Enterprise/SensorsController.js";
 
-import EventHorizonDefenceController from "../../SubsystemControllers/EventHorizon/DefenseController.js";
-import EventHorizonNavigationController from "../../SubsystemControllers/EventHorizon/NavigationController.js";
-import EventHorizonPropulsionController from "../../SubsystemControllers/EventHorizon/PropulsionController.js";
-import EventHorizonSensorsController from "../../SubsystemControllers/EventHorizon/SensorsController.js";
+import EventHorizonDefenceController from "../../students/EventHorizon/DefenseController.js";
+import EventHorizonNavigationController from "../../students/EventHorizon/NavigationController.js";
+import EventHorizonPropulsionController from "../../students/EventHorizon/PropulsionController.js";
+import EventHorizonSensorsController from "../../students/EventHorizon/SensorsController.js";
 
-import FlyingDutchmanDefenceController from "../../SubsystemControllers/FlyingDutchman/DefenseController.js";
-import FlyingDutchmanNavigationController from "../../SubsystemControllers/FlyingDutchman/NavigationController.js";
-import FlyingDutchmanPropulsionController from "../../SubsystemControllers/FlyingDutchman/PropulsionController.js";
-import FlyingDutchmanSensorsController from "../../SubsystemControllers/FlyingDutchman/SensorsController.js";
+import FlyingDutchmanDefenceController from "../../students/FlyingDutchman/DefenseController.js";
+import FlyingDutchmanNavigationController from "../../students/FlyingDutchman/NavigationController.js";
+import FlyingDutchmanPropulsionController from "../../students/FlyingDutchman/PropulsionController.js";
+import FlyingDutchmanSensorsController from "../../students/FlyingDutchman/SensorsController.js";
 
-import GalacticaDefenceController from "../../SubsystemControllers/Galactica/DefenseController.js";
-import GalacticaNavigationController from "../../SubsystemControllers/Galactica/NavigationController.js";
-import GalacticaPropulsionController from "../../SubsystemControllers/Galactica/PropulsionController.js";
-import GalacticaSensorsController from "../../SubsystemControllers/Galactica/SensorsController.js";
+import GalacticaDefenceController from "../../students/Galactica/DefenseController.js";
+import GalacticaNavigationController from "../../students/Galactica/NavigationController.js";
+import GalacticaPropulsionController from "../../students/Galactica/PropulsionController.js";
+import GalacticaSensorsController from "../../students/Galactica/SensorsController.js";
 
-import MilanoDefenceController from "../../SubsystemControllers/Milano/DefenseController.js";
-import MilanoNavigationController from "../../SubsystemControllers/Milano/NavigationController.js";
-import MilanoPropulsionController from "../../SubsystemControllers/Milano/PropulsionController.js";
-import MilanoSensorsController from "../../SubsystemControllers/Milano/SensorsController.js";
+import MilanoDefenceController from "../../students/Milano/DefenseController.js";
+import MilanoNavigationController from "../../students/Milano/NavigationController.js";
+import MilanoPropulsionController from "../../students/Milano/PropulsionController.js";
+import MilanoSensorsController from "../../students/Milano/SensorsController.js";
 
-import NormandyDefenceController from "../../SubsystemControllers/Normandy/DefenseController.js";
-import NormandyNavigationController from "../../SubsystemControllers/Normandy/NavigationController.js";
-import NormandyPropulsionController from "../../SubsystemControllers/Normandy/PropulsionController.js";
-import NormandySensorsController from "../../SubsystemControllers/Normandy/SensorsController.js";
+import NormandyDefenceController from "../../students/Normandy/DefenseController.js";
+import NormandyNavigationController from "../../students/Normandy/NavigationController.js";
+import NormandyPropulsionController from "../../students/Normandy/PropulsionController.js";
+import NormandySensorsController from "../../students/Normandy/SensorsController.js";
 
-import NostromoDefenceController from "../../SubsystemControllers/Nostromo/DefenseController.js";
-import NostromoNavigationController from "../../SubsystemControllers/Nostromo/NavigationController.js";
-import NostromoPropulsionController from "../../SubsystemControllers/Nostromo/PropulsionController.js";
-import NostromoSensorsController from "../../SubsystemControllers/Nostromo/SensorsController.js";
+import NostromoDefenceController from "../../students/Nostromo/DefenseController.js";
+import NostromoNavigationController from "../../students/Nostromo/NavigationController.js";
+import NostromoPropulsionController from "../../students/Nostromo/PropulsionController.js";
+import NostromoSensorsController from "../../students/Nostromo/SensorsController.js";
 
-import PillarOfAutumnDefenceController from "../../SubsystemControllers/PillarOfAutumn/DefenseController.js";
-import PillarOfAutumnNavigationController from "../../SubsystemControllers/PillarOfAutumn/NavigationController.js";
-import PillarOfAutumnPropulsionController from "../../SubsystemControllers/PillarOfAutumn/PropulsionController.js";
-import PillarOfAutumnSensorsController from "../../SubsystemControllers/PillarOfAutumn/SensorsController.js";
+import PillarOfAutumnDefenceController from "../../students/PillarOfAutumn/DefenseController.js";
+import PillarOfAutumnNavigationController from "../../students/PillarOfAutumn/NavigationController.js";
+import PillarOfAutumnPropulsionController from "../../students/PillarOfAutumn/PropulsionController.js";
+import PillarOfAutumnSensorsController from "../../students/PillarOfAutumn/SensorsController.js";
 
-import PlanetExpressDefenceController from "../../SubsystemControllers/PlanetExpress/DefenseController.js";
-import PlanetExpressNavigationController from "../../SubsystemControllers/PlanetExpress/NavigationController.js";
-import PlanetExpressPropulsionController from "../../SubsystemControllers/PlanetExpress/PropulsionController.js";
-import PlanetExpressSensorsController from "../../SubsystemControllers/PlanetExpress/SensorsController.js";
+import PlanetExpressDefenceController from "../../students/PlanetExpress/DefenseController.js";
+import PlanetExpressNavigationController from "../../students/PlanetExpress/NavigationController.js";
+import PlanetExpressPropulsionController from "../../students/PlanetExpress/PropulsionController.js";
+import PlanetExpressSensorsController from "../../students/PlanetExpress/SensorsController.js";
 
-import RamaDefenceController from "../../SubsystemControllers/Rama/DefenseController.js";
-import RamaNavigationController from "../../SubsystemControllers/Rama/NavigationController.js";
-import RamaPropulsionController from "../../SubsystemControllers/Rama/PropulsionController.js";
-import RamaSensorsController from "../../SubsystemControllers/Rama/SensorsController.js";
+import RamaDefenceController from "../../students/Rama/DefenseController.js";
+import RamaNavigationController from "../../students/Rama/NavigationController.js";
+import RamaPropulsionController from "../../students/Rama/PropulsionController.js";
+import RamaSensorsController from "../../students/Rama/SensorsController.js";
 
-import RedDwarfDefenceController from "../../SubsystemControllers/RedDwarf/DefenseController.js";
-import RedDwarfNavigationController from "../../SubsystemControllers/RedDwarf/NavigationController.js";
-import RedDwarfPropulsionController from "../../SubsystemControllers/RedDwarf/PropulsionController.js";
-import RedDwarfSensorsController from "../../SubsystemControllers/RedDwarf/SensorsController.js";
+import RedDwarfDefenceController from "../../students/RedDwarf/DefenseController.js";
+import RedDwarfNavigationController from "../../students/RedDwarf/NavigationController.js";
+import RedDwarfPropulsionController from "../../students/RedDwarf/PropulsionController.js";
+import RedDwarfSensorsController from "../../students/RedDwarf/SensorsController.js";
 
-import SerenityDefenceController from "../../SubsystemControllers/Serenity/DefenseController.js";
-import SerenityNavigationController from "../../SubsystemControllers/Serenity/NavigationController.js";
-import SerenityPropulsionController from "../../SubsystemControllers/Serenity/PropulsionController.js";
-import SerenitySensorsController from "../../SubsystemControllers/Serenity/SensorsController.js";
+import SerenityDefenceController from "../../students/Serenity/DefenseController.js";
+import SerenityNavigationController from "../../students/Serenity/NavigationController.js";
+import SerenityPropulsionController from "../../students/Serenity/PropulsionController.js";
+import SerenitySensorsController from "../../students/Serenity/SensorsController.js";
 
-import SSAnneDefenceController from "../../SubsystemControllers/SSAnne/DefenseController.js";
-import SSAnneNavigationController from "../../SubsystemControllers/SSAnne/NavigationController.js";
-import SSAnnePropulsionController from "../../SubsystemControllers/SSAnne/PropulsionController.js";
-import SSAnneSensorsController from "../../SubsystemControllers/SSAnne/SensorsController.js";
+import SSAnneDefenceController from "../../students/SSAnne/DefenseController.js";
+import SSAnneNavigationController from "../../students/SSAnne/NavigationController.js";
+import SSAnnePropulsionController from "../../students/SSAnne/PropulsionController.js";
+import SSAnneSensorsController from "../../students/SSAnne/SensorsController.js";
 
-import Thunderbird3DefenceController from "../../SubsystemControllers/Thunderbird3/DefenseController.js";
-import Thunderbird3NavigationController from "../../SubsystemControllers/Thunderbird3/NavigationController.js";
-import Thunderbird3PropulsionController from "../../SubsystemControllers/Thunderbird3/PropulsionController.js";
-import Thunderbird3SensorsController from "../../SubsystemControllers/Thunderbird3/SensorsController.js";
+import Thunderbird3DefenceController from "../../students/Thunderbird3/DefenseController.js";
+import Thunderbird3NavigationController from "../../students/Thunderbird3/NavigationController.js";
+import Thunderbird3PropulsionController from "../../students/Thunderbird3/PropulsionController.js";
+import Thunderbird3SensorsController from "../../students/Thunderbird3/SensorsController.js";
 
-import YamatoDefenceController from "../../SubsystemControllers/Yamato/DefenseController.js";
-import YamatoNavigationController from "../../SubsystemControllers/Yamato/NavigationController.js";
-import YamatoPropulsionController from "../../SubsystemControllers/Yamato/PropulsionController.js";
-import YamatoSensorsController from "../../SubsystemControllers/Yamato/SensorsController.js";
+import YamatoDefenceController from "../../students/Yamato/DefenseController.js";
+import YamatoNavigationController from "../../students/Yamato/NavigationController.js";
+import YamatoPropulsionController from "../../students/Yamato/PropulsionController.js";
+import YamatoSensorsController from "../../students/Yamato/SensorsController.js";
 
 const buildShip = (shipName, pos, game, startProcess) => {
 	switch (shipName){

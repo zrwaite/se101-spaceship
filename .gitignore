@@ -9,3 +9,8 @@ SpaceshipJavasript.wiki
 
 #JetBrains
 .idea
+
+#Node modules
+node_modules
+
+build

@@ -1,0 +1,14 @@
+import Vector2 from "../../src/helpers/Vector2.js";
+import { ShipStatus } from "../../src/ship/shipStatus.js";
+import NavigationController from "../../src/subsystems/navigationController.js";
+export default class YourNavigationController extends NavigationController{
+	/* To get other subsystem information, use the following functions:
+	this.defence
+	this.propulsion
+	this.sensors
+	see SandBox/Scripts/Ship/README.md for an explanation of return values.
+	*/
+	navigationUpdate(shipStatusInfo:ShipStatus, warp:()=>Response, mapData: ()=>any) {
+		//Student code goes here
+	}
+}

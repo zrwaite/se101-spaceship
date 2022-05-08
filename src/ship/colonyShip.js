@@ -6,6 +6,8 @@ import TurretControls from "./turretControls.js";
 import ThrusterController from "./thrusterController.js";
 import Response from "../helpers/response.js";
 
+
+
 export default class ColonyShip extends Sprite{
 	/* Constructor Params */
 	name; //Ship name
@@ -76,7 +78,7 @@ export default class ColonyShip extends Sprite{
 			position: this.pos.clone(),
 			radius: this.radius,
 			linearVelocity: this.speed.clone(),
-			angularVelocity: this.aSpeed.clone(),
+			angularVelocity: this.aSpeed,
 			direction: this.angle,
 			torpedoSpeed: this.turretControls.launchSpeed,
 			hasLanded: this.hasLanded
@@ -104,7 +106,7 @@ export default class ColonyShip extends Sprite{
 			this.activeSensors.performScan.bind(this.activeSensors), 
 			this.passiveSensors.generatePassiveSensorReadings.bind(this.passiveSensors)
 		);
-		this.navigationController.navigationController(
+		this.navigationController.navigationUpdate(
 			this.shipStatusInfo, 
 			this.tryWarp.bind(this),
 			this.process.solarSystem.getMapData(this.pos)
@@ -120,14 +122,14 @@ export default class ColonyShip extends Sprite{
 	}
 	manualControls(){
 		if (this.game.inputs.pressed.left) {
-			this.aAccel.set(1, -0.005);
+			this.aAccel = -0.005;
 			this.energyUsed += 0.04;
 		}
 		else if (this.game.inputs.pressed.right ) {
-			this.aAccel.set(1, 0.005)
+			this.aAccel = 0.005;
 			this.energyUsed += 0.04;
 		}
- 		else this.aAccel.set(1, 0);
+ 		else this.aAccel = 0;
  		if (this.game.inputs.pressed.up) {
 			this.accel.set(0, 0);
 			this.accel = this.accel.add(this.angle.scale(0.002));
@@ -148,7 +150,7 @@ export default class ColonyShip extends Sprite{
 		this.shipStatusInfo.position = this.pos.clone();
 		this.shipStatusInfo.radius = this.radius;
 		this.shipStatusInfo.linearVelocity = this.speed.clone();
-		this.shipStatusInfo.angularVelocity = this.aSpeed.clone();
+		this.shipStatusInfo.angularVelocity = this.aSpeed;
 		this.shipStatusInfo.direction = this.angle;
 		this.shipStatusInfo.torpedoSpeed = this.turretControls.launchSpeed;
 		this.shipStatusInfo.hasLanded = this.hasLanded;
@@ -177,11 +179,11 @@ export default class ColonyShip extends Sprite{
 		if (this.speed.magnitude() > this.maxSpeed) {
 			this.speed = this.speed.scaleTo(this.maxSpeed);
 		}
-		if (this.aSpeed.angle() > this.maxASpeed) {
-			this.aSpeed = this.aSpeed.rotateTo(this.maxASpeed);
+		if (this.aSpeed > this.maxASpeed) {
+			this.aSpeed = this.aSpeed = this.maxASpeed;
 		}
-		if (this.aSpeed.angle() < -this.maxASpeed) {
-			this.aSpeed = this.aSpeed.rotateTo(-this.maxASpeed);
+		if (this.aSpeed < -this.maxASpeed) {
+			this.aSpeed = this.aSpeed = -this.maxASpeed;
 		}
 	}
 	// called when ship hits an asteroid
