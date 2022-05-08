@@ -15,7 +15,6 @@ export default class TurretControls extends RenderedObject{
 	/* Other Attributes */
 	cooldownFrames = TUBE_COOLDOWN_FRAMES;
 	numberOfTubes = NUMBER_OF_TUBES;
-	direction = new Vector2(1,0); // Default
 	lastFrameFiredByTube = Array(NUMBER_OF_TUBES).fill(-Infinity);
 	launchSpeed = TORPEDO_VELOCITY;
 	ctx = "ships";
@@ -34,7 +33,7 @@ export default class TurretControls extends RenderedObject{
 		//User called function for aiming turret
 		const newDirection = aimTo.normalize();
 		if (newDirection.magnitude() > 0) {
-			this.direction = newDirection;
+			this.angle = newDirection;
 			return new response(200, [], {}, true);
 		} else {
 			const errorMessage = "aimTurret failed due to zero aimTo and undefined direction; no update to aim made";
@@ -63,7 +62,7 @@ export default class TurretControls extends RenderedObject{
 		if (tubeIndex >= 0 && tubeIndex < NUMBER_OF_TUBES) {
 			const tubeCooldownResponse = this.getTubeCooldown(tubeIndex);
 			if (tubeCooldownResponse.response["tubeCooldown"] === 0) {
-				const torpedoVelocity = this.direction.scale(this.launchSpeed)		// calculate velocity of fired missile
+				const torpedoVelocity = this.angle.scale(this.launchSpeed)		// calculate velocity of fired missile
 				const newTorpedo = new Torpedo(FUSE_FRAME_DURATION, this.parentShip, torpedoVelocity, this.parentShip.pos, this.parentShip.game)
 				this.parentShip.process.spawnDeletableObject(newTorpedo);
 				this.parentShip.torpedoesFired++;

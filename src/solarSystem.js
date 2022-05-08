@@ -279,5 +279,9 @@ export default class SolarSystem{
 	}
 	getMapData(pos){
 		//Get map data about a position for users to get data
+		const mapData = {
+			name: this.name
+		}
+		return mapData;
 	}
 }

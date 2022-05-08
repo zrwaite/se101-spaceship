@@ -43,6 +43,7 @@ export default class AsteroidLauncher{
 		const angle = this.getAngle();
 		const velocity = Vector2.right.rotate(angle).scale(speed); 	// random direction
 		let asteroid = new Asteroid(velocity, Math.random()-0.5, this.pos, this.game);
+		asteroid.initialize(this.process);
 		this.process.spawnDeletableObject(asteroid);
 	}
 

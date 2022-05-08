@@ -26,7 +26,7 @@ export default class Game {
 	camera = new Vector2(0, 0); // pixels from top-left
 	frame = 0; // this increments every frame
 	paused = false; // If the whole game is paused
-	fpsInterval = 1000 / 60;
+	fpsInterval = 1000 / 50;
 	processes = [];
 	startPosition = new Vector2(30,30); //start at centre for now
 
