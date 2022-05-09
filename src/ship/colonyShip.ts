@@ -12,6 +12,8 @@ import PropulsionController from "../subsystems/propulsionController.js";
 import SensorsController from "../subsystems/sensorsController.js";
 import WarpGate from "../spaceObjects/warpGate.js";
 import Planet from "../spaceObjects/planet.js";
+import Process from "../gameProcess.js";
+import Game from "../game.js";
 
 
 
@@ -56,7 +58,7 @@ export default class ColonyShip extends Sprite{
 	localAccel = Vector2.zero;
 	energyTimeCount = 0;
 	
-	constructor(name:string, process:any, DefenceClass:typeof DefenceController, NavigationClass: typeof NavigationController, PropulsionClass:typeof PropulsionController, SensorsClass:typeof SensorsController, ...args:[pos:Vector2, game:any]){
+	constructor(name:string, process:Process, DefenceClass:typeof DefenceController, NavigationClass: typeof NavigationController, PropulsionClass:typeof PropulsionController, SensorsClass:typeof SensorsController, ...args:[pos:Vector2, game:Game]){
 		super(...args) //parent constructor
 		this.name = name;
 		this.process = process;
@@ -127,6 +129,7 @@ export default class ColonyShip extends Sprite{
 		super.update() //parent update;
 	}
 	manualControls(){
+		if (!this.game.inputs) throw Error("Game inputs not defined");
 		if (this.game.inputs.pressed.left) {
 			this.aAccel = -0.005;
 			this.energyUsed += 0.04;

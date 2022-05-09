@@ -5,6 +5,7 @@ import Planet from "./spaceObjects/planet.js";
 import AsteroidLauncher from "./spaceObjects/asteroidLauncher.js";
 import Composition from "./spaceObjects/planetComposition.js";
 import APIResponse from "./helpers/response.js";
+import Game from "./game.js";
 
 interface MapData {
 	galaxy: string,
@@ -17,11 +18,11 @@ export default class SolarSystem{
 	warpGates:WarpGate[];
 	planets:Planet[]
 	asteroids:Asteroid[];
-	game: any;
+	game: Game;
 	name: string;
 	galaxyName: string;
 	asteroidLaunchers: AsteroidLauncher[]
-	constructor(solarSystemName:string, galaxyName: string, game:any){
+	constructor(solarSystemName:string, galaxyName: string, game:Game){
 		this.game = game;
 		this.galaxyName = galaxyName
 		this.name = solarSystemName;

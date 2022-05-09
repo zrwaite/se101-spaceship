@@ -1,3 +1,4 @@
+import Game from "./game.js";
 import SolarSystem from "./solarSystem.js";
 
 //Parent class for galaxies, use data from galaxy jsons and GalaxyMaps scripts
@@ -12,7 +13,7 @@ export default class Galaxy{
 	/* Other attributes */
 	startingSolarSystem;
 	solarSystemNames:string[] = [];
-	constructor(galaxyName:string, game:any){
+	constructor(galaxyName:string, game:Game){
         this.name = galaxyName;
 		this.game = game;
 		switch(galaxyName){

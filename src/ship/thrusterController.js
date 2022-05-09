@@ -51,9 +51,9 @@ export default class ThrusterController {
         const offset = thrusterDatum.offset;
         const direction = thrusterDatum.direction;
         const deltaLinAccel = direction.scale(LINEAR_SENSITIVITY * deltaPower).scale(1 / this.parentShip.mass);
-        const deltaAngAccel = new Vector2(0, ANGULAR_SENSITIVITY * deltaPower * offset.magnitude() * Math.sin(offset.angleTo(direction)) / this.parentShip.mass);
+        const deltaAngAccel = ANGULAR_SENSITIVITY * deltaPower * offset.magnitude() * Math.sin(offset.angleTo(direction)) / this.parentShip.mass;
         this.parentShip.localAccel = this.parentShip.localAccel.add(deltaLinAccel);
-        this.parentShip.aAccel = this.parentShip.aAccel.add(deltaAngAccel);
+        this.parentShip.aAccel = this.parentShip.aAccel += deltaAngAccel;
         return new APIResponse(200, [], { power: power, powerLimited: powerLimited }, true);
     }
 }

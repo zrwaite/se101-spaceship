@@ -1,5 +1,6 @@
 import Vector2 from "../helpers/Vector2.js";
 import APIResponse from "../helpers/response.js";
+import ColonyShip from "./colonyShip.js";
 
 // port left
 // starboard right
@@ -12,7 +13,7 @@ const thrusterNames = ["mainThruster", "portRetroThruster", "starboardRetroThrus
 type ThrusterName = typeof thrusterNames[number];
 
 export default class ThrusterController{
-	parentShip;
+	parentShip:ColonyShip;
 	thrusterData;
 	thrusterPower = {
 		mainThruster: 0,
@@ -23,7 +24,7 @@ export default class ThrusterController{
 		starboardForeThruster: 0,
 		starboardAftThruster: 0,
 	}
-    constructor(parentShip:any){
+    constructor(parentShip:ColonyShip){
 		this.parentShip = parentShip;
 		const width = parentShip.size.x;
 		const length = parentShip.size.y;
@@ -58,9 +59,9 @@ export default class ThrusterController{
 		const offset = thrusterDatum.offset;
 		const direction = thrusterDatum.direction;
 		const deltaLinAccel = direction.scale(LINEAR_SENSITIVITY * deltaPower).scale(1 / this.parentShip.mass);
-		const deltaAngAccel = new Vector2(0, ANGULAR_SENSITIVITY * deltaPower * offset.magnitude() * Math.sin(offset.angleTo(direction)) / this.parentShip.mass);
+		const deltaAngAccel = ANGULAR_SENSITIVITY * deltaPower * offset.magnitude() * Math.sin(offset.angleTo(direction)) / this.parentShip.mass;
 		this.parentShip.localAccel = this.parentShip.localAccel.add(deltaLinAccel);
-		this.parentShip.aAccel = this.parentShip.aAccel.add(deltaAngAccel);
+		this.parentShip.aAccel = this.parentShip.aAccel += deltaAngAccel;
 		return new APIResponse(200, [], { power: power, powerLimited: powerLimited }, true);
 	}
 }

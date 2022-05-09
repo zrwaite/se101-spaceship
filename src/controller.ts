@@ -1,3 +1,5 @@
+import Game from "./game";
+
 export default class Controller {
     game;
     pressed = { //Store if a key is pressed
@@ -8,7 +10,7 @@ export default class Controller {
         q: false,
         e: false
     };
-	constructor(game:any) {
+	constructor(game:Game) {
         this.game = game;
 		document.addEventListener("keydown", (event) => {
             let pressCode = event.keyCode;
@@ -25,11 +27,11 @@ export default class Controller {
             } else if (pressCode === 69) {
                 this.pressed.e = true;
             } else if (pressCode === 32) { //Press space
-                this.game.watchShip.tryFire();
+                this.game.watchShip?.tryFire();
             } else if (pressCode === 77) {
-                this.game.watchShip.tryWarp();
+                this.game.watchShip?.tryWarp();
             } else if (pressCode === 76) {
-                this.game.watchShip.tryLand();
+                this.game.watchShip?.tryLand();
             }
 		});
 		document.addEventListener("keyup", (event) => {

@@ -1,10 +1,11 @@
 import PassiveSensorReading from "./passiveSensorReading.js";
 import APIResponse from "../helpers/response.js";
 import Vector2 from "../helpers/Vector2.js";
+import ColonyShip from "./colonyShip.js";
 
 export default class PassiveSensors{
-    parentShip;
-    constructor(parentShip:any){
+    parentShip:ColonyShip;
+    constructor(parentShip:ColonyShip){
 		this.parentShip = parentShip;
 	}
 	scan(){

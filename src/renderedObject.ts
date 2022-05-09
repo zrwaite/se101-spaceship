@@ -1,8 +1,9 @@
+import Game from "./game.js";
 import Vector2 from "./helpers/Vector2.js";
 
 export default abstract class RenderedObject{ //Base class for everything that gets drawn
 	/* Constructor Params */
-	game: any; 
+	game: Game; 
 	pos: Vector2;
 	/* Default or Empty Attributes */
 	size:Vector2 = new Vector2(1,1); //In units
@@ -10,7 +11,7 @@ export default abstract class RenderedObject{ //Base class for everything that g
 	ctx: string = "";
 	image:CanvasImageSource|null = null; // Actual DOM image
 
-	constructor(pos:Vector2, game:any) {
+	constructor(pos:Vector2, game:Game) {
 		this.game = game;
 		this.pos = pos;
 	}

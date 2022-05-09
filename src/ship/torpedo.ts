@@ -1,6 +1,8 @@
 import Sprite from "../sprite.js";
 import Vector2 from "../helpers/Vector2.js";
 import Process from "../gameProcess.js";
+import ColonyShip from "./colonyShip.js";
+import Game from "../game.js";
 
 const NUMBER_OF_EXPLOSION_SPRITES = 9;
 const FRAMES_FOR_EXPLOSION = 81;
@@ -9,7 +11,7 @@ const EXPLOSION_MAX_SCALE = 10;
 //Mini asteroid from asteroid explosion
 export default class Torpedo extends Sprite {
 	/* Constructor Params */
-	parentShip;
+	parentShip:ColonyShip;
 	fuseFrameDuration;
 	frameCreated;
 
@@ -26,7 +28,7 @@ export default class Torpedo extends Sprite {
 	frameExploded = 0;
 	process: Process|null = null;
 
-	constructor(fuseFrameDuration = 0, parentShip:any, velocity:Vector2, ...args:[pos:Vector2, game:any]) {
+	constructor(fuseFrameDuration = 0, parentShip:ColonyShip, velocity:Vector2, ...args:[pos:Vector2, game:Game]) {
 		super(...args);
 		this.speed = velocity;
 		this.angle = velocity.normalize(); 	// torpedoes point in the direction they are moving
@@ -63,7 +65,7 @@ export default class Torpedo extends Sprite {
 	receiveDamage() { // torpedoes have 1hp and explode when hitting something
 		this.explode();
 	}
-	initialize(process:any) {
+	initialize(process:Process) {
 		this.process = process;
 	}
 }

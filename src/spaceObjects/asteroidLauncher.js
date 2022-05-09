@@ -4,6 +4,7 @@ const MAX_SPAWN_SPEED = 0.4;
 const FRAMES_PER_SECOND = 60;
 export default class AsteroidLauncher {
     constructor(game, pos, spawnPeriod = 4, spawnCount = -1, rotation = -1) {
+        this.process = null;
         this.currentDelay = 0;
         this.game = game;
         this.pos = pos;
@@ -33,8 +34,12 @@ export default class AsteroidLauncher {
         const angle = this.getAngle();
         const velocity = Vector2.right.rotate(angle).scale(speed); // random direction
         let asteroid = new Asteroid(velocity, Math.random() - 0.5, this.pos, this.game);
-        asteroid.initialize(this.process);
-        this.process.spawnDeletableObject(asteroid);
+        if (this.process) {
+            asteroid.initialize(this.process);
+            this.process.spawnDeletableObject(asteroid);
+        }
+        else
+            throw Error("This.process is not defined");
     }
     update() {
         if (this.spawnCount === 0)

@@ -4,6 +4,8 @@ import Vector2 from "../helpers/Vector2.js";
 export default class Meteor extends Sprite {
     constructor(speed, ...args) {
         super(...args);
+        /* Other attributes */
+        this.process = null;
         this.delete = false; //Once an item needs to be deleted and stop rendering, set to true
         this.size = new Vector2(1, 1);
         this.radius = 0.5;

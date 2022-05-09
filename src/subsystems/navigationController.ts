@@ -5,5 +5,5 @@ import { MapData } from "../solarSystem.js";
 import SubsystemController from "./subsystemController.js";
 
 export default class NavigationController extends SubsystemController{
-	navigationUpdate(shipStatusInfo:ShipStatus, warp:()=>APIResponse, mapData: (pos:Vector2)=>APIResponse){};
+	navigationUpdate(shipStatusInfo:ShipStatus, warp:()=>APIResponse, mapData:APIResponse){};
 }

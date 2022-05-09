@@ -2,6 +2,8 @@ import Vector2 from "../helpers/Vector2.js";
 import Torpedo from "./torpedo.js";
 import APIResponse from "../helpers/response.js";
 import RenderedObject from "../renderedObject.js";
+import ColonyShip from "./colonyShip.js";
+import Game from "../game.js";
 
 const TUBE_COOLDOWN_FRAMES = 100;
 const NUMBER_OF_TUBES  = 4;
@@ -19,7 +21,7 @@ export default class TurretControls extends RenderedObject{
 	launchSpeed = TORPEDO_VELOCITY;
 	ctx = "ships";
 
-    constructor(parentShip:any, ...args:[pos:Vector2, game:any]){
+    constructor(parentShip:ColonyShip, ...args:[pos:Vector2, game:Game]){
 		super(...args);
 		this.image = this.game.images["turret"];
 		this.parentShip = parentShip;

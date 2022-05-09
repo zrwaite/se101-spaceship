@@ -8,8 +8,11 @@ import Torpedo from "./ship/torpedo.js";
 import Meteor from "./spaceObjects/meteor.js";
 import Matrix2 from "./helpers/Matrix2.js";
 import ColonyShip from "./ship/colonyShip.js";
+import WarpGate from "./spaceObjects/warpGate.js";
+import Planet from "./spaceObjects/planet.js";
 
 type CollisionObject = ColonyShip|Asteroid|Meteor|Torpedo;
+type IndirectCollisionObject = CollisionObject|Planet|WarpGate
 
 const DMG_COEFFICIENT = 20;
 
@@ -87,7 +90,7 @@ export default class Game {
     }
 
 	// check if two Sprites overlaps with each other
-	ifCollide(obj1:CollisionObject, obj2:CollisionObject) {
+	ifCollide(obj1:IndirectCollisionObject, obj2:IndirectCollisionObject) {
 		const xDiff = obj1.pos.x-obj2.pos.x;
 		const yDiff = obj1.pos.y-obj2.pos.y;
 		const rTotal = obj1.radius + obj2.radius;

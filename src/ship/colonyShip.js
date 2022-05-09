@@ -76,6 +76,8 @@ export default class ColonyShip extends Sprite {
         super.update(); //parent update;
     }
     manualControls() {
+        if (!this.game.inputs)
+            throw Error("Game inputs not defined");
         if (this.game.inputs.pressed.left) {
             this.aAccel = -0.005;
             this.energyUsed += 0.04;

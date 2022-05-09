@@ -1,3 +1,4 @@
+import Game from "./game.js";
 import Vector2 from "./helpers/Vector2.js";
 import RenderedObject from "./renderedObject.js";
 export default class Sprite extends RenderedObject{
@@ -11,7 +12,7 @@ export default class Sprite extends RenderedObject{
 	radius = 1; // Object collision Radius
 	mass = 1; //Object mass for collisions
 	delete = false;
-	constructor(...args:[pos:Vector2, game:any]){
+	constructor(...args:[pos:Vector2, game:Game]){
 		super(...args)
 	}
 	update() {

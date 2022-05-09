@@ -98,7 +98,7 @@ const buildAllShips = (pos:Vector2, game: Game, startProcess: Process):ColonyShi
 	})
 	return ships;
 }
-const buildShip = (shipName:string, pos:Vector2, game:any, startProcess:any):ColonyShip => {
+const buildShip = (shipName:string, pos:Vector2, game:Game, startProcess:Process):ColonyShip => {
 	switch (shipName){
 		case "Bebop": case "bebop":
 			return new ColonyShip(

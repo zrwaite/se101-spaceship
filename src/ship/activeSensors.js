@@ -38,7 +38,7 @@ export default class ActiveSensors {
             let dist = __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos.distance(warpgate.pos);
             let angle = __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").angle.angleTo(new Vector2(warpgate.pos.x - __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos.x, __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos.y - warpgate.pos.y));
             if (dist + warpgate.size.x <= range && angle <= arc) {
-                let newReading = new EMSReading(angle, dist, new Vector2(0, 0), warpgate.width, {}, warpgate.destinationSolarSystem);
+                let newReading = new EMSReading(angle, dist, new Vector2(0, 0), warpgate.radius, {}, warpgate.destinationSolarSystem);
                 readings.push(newReading);
             }
         }

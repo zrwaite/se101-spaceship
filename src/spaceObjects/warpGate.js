@@ -8,6 +8,8 @@ export default class WarpGate extends RenderedObject {
         this.size = new Vector2(5, 5);
         this.radius = 1.5;
         this.gravitySignature = 1;
+        /* Other attributes */
+        this.process = null;
         this.image = this.game.images["warpgate"];
         this.destinationSolarSystem = destinationSolarystem;
     }
@@ -15,12 +17,7 @@ export default class WarpGate extends RenderedObject {
         this.process = process;
     }
     warp(ship) {
-        let newProcess;
-        this.game.processes.forEach((process) => {
-            if (process.solarSystem.name === this.destinationSolarSystem) {
-                newProcess = process;
-            }
-        });
+        let newProcess = this.game.processes.find((process) => process.solarSystem.name === this.destinationSolarSystem);
         if (newProcess) {
             ship.solarSystem = newProcess.solarSystem;
             newProcess.appendShip(ship);
@@ -31,5 +28,7 @@ export default class WarpGate extends RenderedObject {
             }
             ship.process = newProcess;
         }
+        else
+            throw Error("Process not found");
     }
 }

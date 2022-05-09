@@ -10,6 +10,7 @@ export default class Controller {
         };
         this.game = game;
         document.addEventListener("keydown", (event) => {
+            var _a, _b, _c;
             let pressCode = event.keyCode;
             if (pressCode === 37 || pressCode === 65) {
                 this.pressed.left = true; // Press Left
@@ -30,13 +31,13 @@ export default class Controller {
                 this.pressed.e = true;
             }
             else if (pressCode === 32) { //Press space
-                this.game.watchShip.tryFire();
+                (_a = this.game.watchShip) === null || _a === void 0 ? void 0 : _a.tryFire();
             }
             else if (pressCode === 77) {
-                this.game.watchShip.tryWarp();
+                (_b = this.game.watchShip) === null || _b === void 0 ? void 0 : _b.tryWarp();
             }
             else if (pressCode === 76) {
-                this.game.watchShip.tryLand();
+                (_c = this.game.watchShip) === null || _c === void 0 ? void 0 : _c.tryLand();
             }
         });
         document.addEventListener("keyup", (event) => {

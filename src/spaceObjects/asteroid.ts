@@ -1,9 +1,11 @@
 import Sprite from "../sprite.js";
 import Meteor from "./meteor.js";
 import Vector2 from "../helpers/Vector2.js";
+import Process from "../gameProcess.js";
+import Game from "../game.js";
 export default class Asteroid extends Sprite {
 	/* Constructor params */
-	process:any;
+	process:Process|null = null;
 
 	/* Other Attributes */
 	ctx = "objects";
@@ -14,13 +16,13 @@ export default class Asteroid extends Sprite {
 	radius = 1.5;
 	hasExploded = false;
 
-	constructor(speed:Vector2, aSpeed:number, ...args:[pos:Vector2, game:any]) {
+	constructor(speed:Vector2, aSpeed:number, ...args:[pos:Vector2, game:Game]) {
 		super(...args);
 		this.speed = speed;
         this.aSpeed = aSpeed;
 		this.image = this.game.images["asteroid"];
 	}
-	initialize(process:any) {
+	initialize(process:Process) {
 		this.process = process;
 	}
 	update() {
@@ -41,7 +43,8 @@ export default class Asteroid extends Sprite {
 			const velocity = Vector2.right.rotate(Math.random()*2*Math.PI).scale(0.3*Math.random());
 
 			let meteor = new Meteor(velocity, posFromCenter.add(this.pos), this.game);
-			this.process.spawnDeletableObject(meteor);
+			if (this.process) this.process.spawnDeletableObject(meteor);
+			else throw Error("Process not defined");
 		}
 	}
 	boundaries(){

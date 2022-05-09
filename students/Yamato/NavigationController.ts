@@ -9,7 +9,7 @@ export default class YourNavigationController extends NavigationController{
 	this.sensors
 	see SandBox/Scripts/Ship/README.md for an explanation of return values.
 	*/
-	navigationUpdate(shipStatusInfo:ShipStatus, warp:()=>APIResponse, mapData: (pos:Vector2)=>APIResponse) {
+	navigationUpdate(shipStatusInfo:ShipStatus, warp:()=>APIResponse, mapData: APIResponse) {
 		//Student code goes here
 	}
 }

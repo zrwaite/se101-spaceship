@@ -4,6 +4,8 @@ import Vector2 from "../helpers/Vector2.js";
 export default class Asteroid extends Sprite {
     constructor(speed, aSpeed, ...args) {
         super(...args);
+        /* Constructor params */
+        this.process = null;
         /* Other Attributes */
         this.ctx = "objects";
         this.delete = false; //Once an item needs to be deleted and stop rendering, set to true
@@ -36,7 +38,10 @@ export default class Asteroid extends Sprite {
             // generate a random direction and speed for meteor to go
             const velocity = Vector2.right.rotate(Math.random() * 2 * Math.PI).scale(0.3 * Math.random());
             let meteor = new Meteor(velocity, posFromCenter.add(this.pos), this.game);
-            this.process.spawnDeletableObject(meteor);
+            if (this.process)
+                this.process.spawnDeletableObject(meteor);
+            else
+                throw Error("Process not defined");
         }
     }
     boundaries() {

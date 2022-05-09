@@ -1,5 +1,7 @@
 import Asteroid from "./asteroid.js";
 import Vector2 from "../helpers/Vector2.js";
+import Process from "../gameProcess.js";
+import Game from "../game.js";
 
 const MAX_SPAWN_SPEED = 0.4;
 const FRAMES_PER_SECOND = 60;
@@ -7,13 +9,13 @@ const FRAMES_PER_SECOND = 60;
 export default class AsteroidLauncher{
 	/* Attributes */
 	game;
-	process:any;
+	process:Process|null = null;
 	spawnPeriod;
 	spawnCount;
 	rotation;
 	currentDelay = 0;
 	pos: Vector2;
-	constructor(game:any, pos:Vector2, spawnPeriod = 4, spawnCount = -1, rotation = -1) {
+	constructor(game:Game, pos:Vector2, spawnPeriod = 4, spawnCount = -1, rotation = -1) {
 		this.game = game;
 		this.pos = pos;
 		this.spawnPeriod = spawnPeriod * FRAMES_PER_SECOND;
@@ -24,7 +26,7 @@ export default class AsteroidLauncher{
 		// Expects positive radians values... rotation == -1 denotes random angle
 		this.rotation = rotation;
 	}
-	initialize(process:any) {
+	initialize(process:Process) {
 		this.process = process;
 	}
 	/**
@@ -44,8 +46,10 @@ export default class AsteroidLauncher{
 		const angle = this.getAngle();
 		const velocity = Vector2.right.rotate(angle).scale(speed); 	// random direction
 		let asteroid = new Asteroid(velocity, Math.random()-0.5, this.pos, this.game);
-		asteroid.initialize(this.process);
-		this.process.spawnDeletableObject(asteroid);
+		if (this.process) {
+			asteroid.initialize(this.process);
+			this.process.spawnDeletableObject(asteroid);
+		} else throw Error ("This.process is not defined");
 	}
 
 	update() {

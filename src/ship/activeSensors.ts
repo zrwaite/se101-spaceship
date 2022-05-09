@@ -1,10 +1,11 @@
 import EMSReading from "./EMSReading.js";
 import APIResponse from "../helpers/response.js";
 import Vector2 from "../helpers/Vector2.js";
+import ColonyShip from "./colonyShip.js";
 
 export default class ActiveSensors{
-    #parentShip //Reference to the ColonyShip
-    constructor(parentShip:any){
+    #parentShip:ColonyShip; //Reference to the ColonyShip
+    constructor(parentShip:ColonyShip){
 		this.#parentShip = parentShip;
 	}
 	scan(heading:Vector2, arc:number, range:number){
@@ -28,7 +29,7 @@ export default class ActiveSensors{
             let dist = this.#parentShip.pos.distance(warpgate.pos);
             let angle = this.#parentShip.angle.angleTo(new Vector2(warpgate.pos.x - this.#parentShip.pos.x, this.#parentShip.pos.y - warpgate.pos.y));
             if (dist+warpgate.size.x<=range && angle <= arc){
-                let newReading = new EMSReading(angle, dist, new Vector2(0,0), warpgate.width, {}, warpgate.destinationSolarSystem);
+                let newReading = new EMSReading(angle, dist, new Vector2(0,0), warpgate.radius, {}, warpgate.destinationSolarSystem);
                 readings.push(newReading);
             }
         }
