@@ -18,6 +18,7 @@ export default class Torpedo extends Sprite {
         this.ctx = "objects";
         this.hasExploded = false;
         this.frameExploded = 0;
+        this.process = null;
         this.speed = velocity;
         this.angle = velocity.normalize(); // torpedoes point in the direction they are moving
         this.parentShip = parentShip;
@@ -54,5 +55,8 @@ export default class Torpedo extends Sprite {
     }
     receiveDamage() {
         this.explode();
+    }
+    initialize(process) {
+        this.process = process;
     }
 }

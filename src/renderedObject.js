@@ -20,4 +20,6 @@ export default class RenderedObject {
         // Draw the image with a half-size offset, so that rotating works properly and the coordinate represent the center.
         ctx.drawImage(this.image, -this.size.x * this.game.unit / 2 * this.game.zoom, -this.size.y * this.game.unit / 2 * this.game.zoom, this.size.x * this.game.unit * this.game.zoom, this.size.y * this.game.unit * this.game.zoom);
     }
+    update() { }
+    ;
 }

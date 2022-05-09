@@ -1,5 +1,5 @@
 import Vector2 from "../helpers/Vector2.js";
-import response from "../helpers/response.js";
+import APIResponse from "../helpers/response.js";
 
 // port left
 // starboard right
@@ -7,6 +7,9 @@ import response from "../helpers/response.js";
 const MAX_POWER = 10;
 const LINEAR_SENSITIVITY = 2e-5;
 const ANGULAR_SENSITIVITY = 5e-4;
+
+const thrusterNames = ["mainThruster", "portRetroThruster", "starboardRetroThruster", "portForeThruster", "portAftThruster", "starboardForeThruster", "starboardAftThruster"] as const;
+type ThrusterName = typeof thrusterNames[number];
 
 export default class ThrusterController{
 	parentShip;
@@ -37,14 +40,14 @@ export default class ThrusterController{
 	}
 	// Successful responses contains a numeric field `power` giving the actually power the thruster was set to (in case power was out of bounds)
 	// and a boolean field `powerLimited` indicating whether the power requested was greater than the MAX_POWER and thus reduced to equal MAX_POWER
-	setThruster(thrusterName: keyof typeof this.thrusterData, power:number){
+	setThruster(thrusterName: ThrusterName, power:number){
 		if (!(power >= 0)) {
 			const errorMessage = "igniteThrusters failed as requested power must be non-negative";
-			return new response(400, [errorMessage], {}, false);
+			return new APIResponse(400, [errorMessage], {}, false);
 		}
 		if (!(thrusterName in this.thrusterPower)) {
 			const errorMessage = "igniteThrusters failed as thruster name was not valid; expected one of the following: " + Object.keys(this.thrusterPower);
-			return new response(400, [errorMessage], {}, false);
+			return new APIResponse(400, [errorMessage], {}, false);
 		}
 		const powerLimited = power > MAX_POWER;
 		power = Math.min(power, MAX_POWER);
@@ -58,6 +61,8 @@ export default class ThrusterController{
 		const deltaAngAccel = new Vector2(0, ANGULAR_SENSITIVITY * deltaPower * offset.magnitude() * Math.sin(offset.angleTo(direction)) / this.parentShip.mass);
 		this.parentShip.localAccel = this.parentShip.localAccel.add(deltaLinAccel);
 		this.parentShip.aAccel = this.parentShip.aAccel.add(deltaAngAccel);
-		return new response(200, [], { power: power, powerLimited: powerLimited }, true);
+		return new APIResponse(200, [], { power: power, powerLimited: powerLimited }, true);
 	}
 }
+
+export type {ThrusterName}

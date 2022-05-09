@@ -10,6 +10,7 @@ export default class Meteor extends Sprite {
 	ctx:string = "objects";
 	mass = 0.5;
 	speed: Vector2;
+	hasExploded = false;
 
 	constructor(speed:Vector2, ...args:[pos:Vector2, game:any]) {
 		super(...args);
@@ -26,6 +27,7 @@ export default class Meteor extends Sprite {
 		this.shatter();
 	}
 	shatter() {
-		this.delete = true
+		this. hasExploded = true;
+		this.delete = true;
 	}
 }

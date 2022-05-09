@@ -4,11 +4,13 @@ import WarpGate from "./spaceObjects/warpGate.js";
 import Planet from "./spaceObjects/planet.js";
 import AsteroidLauncher from "./spaceObjects/asteroidLauncher.js";
 import Composition from "./spaceObjects/planetComposition.js";
+import APIResponse from "./helpers/response.js";
 //The constructor is going to build the levels
 //Think of this as a sort of level builder
 export default class SolarSystem {
-    constructor(solarSystemName, game) {
+    constructor(solarSystemName, galaxyName, game) {
         this.game = game;
+        this.galaxyName = galaxyName;
         this.name = solarSystemName;
         this.asteroids = [];
         this.warpGates = [];
@@ -267,8 +269,9 @@ export default class SolarSystem {
     getMapData(pos) {
         //Get map data about a position for users to get data
         const mapData = {
-            name: this.name
+            galaxy: this.galaxyName,
+            solarSystem: this.name
         };
-        return mapData;
+        return new APIResponse(200, [], mapData, true);
     }
 }

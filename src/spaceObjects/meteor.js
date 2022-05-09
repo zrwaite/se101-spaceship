@@ -9,6 +9,7 @@ export default class Meteor extends Sprite {
         this.radius = 0.5;
         this.ctx = "objects";
         this.mass = 0.5;
+        this.hasExploded = false;
         this.speed = speed;
         this.image = this.game.images["asteroid"];
     }
@@ -22,6 +23,7 @@ export default class Meteor extends Sprite {
         this.shatter();
     }
     shatter() {
+        this.hasExploded = true;
         this.delete = true;
     }
 }

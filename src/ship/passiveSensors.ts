@@ -1,5 +1,5 @@
 import PassiveSensorReading from "./passiveSensorReading.js";
-import response from "../helpers/response.js";
+import APIResponse from "../helpers/response.js";
 import Vector2 from "../helpers/Vector2.js";
 
 export default class PassiveSensors{
@@ -7,9 +7,9 @@ export default class PassiveSensors{
     constructor(parentShip:any){
 		this.parentShip = parentShip;
 	}
-	generatePassiveSensorReadings(){
+	scan(){
         // Ensure solar system is initialized before performing scan
-        if (!this.parentShip.solarSystem) return new response(400, ["Cannot perform PassiveSensors generatePassiveSensorReadings until solar system initialized"], []);
+        if (!this.parentShip.solarSystem) return new APIResponse(400, ["Cannot perform PassiveSensors scan until solar system initialized"], []);
 
         // Note: angle must account for relative position of object to ship (not global position on board)
         // To find angle, find angle difference between the vector from ship to object & current ship heading
@@ -27,6 +27,6 @@ export default class PassiveSensors{
             readings.push(newReading);
         }
 
-        return new response(200, [], readings, true);
+        return new APIResponse(200, [], readings, true);
 	}
 }

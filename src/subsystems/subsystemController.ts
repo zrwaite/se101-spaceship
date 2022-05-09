@@ -9,7 +9,7 @@ export default abstract class SubsystemController{
 	propulsion:PropulsionController|null = null;
 	sensors:SensorsController|null = null;
 	initialized = false;
-	initializeConnection = (defence:DefenceController, navigation:NavigationController, propulsion:PropulsionController, sensors:SensorsController) =>{
+	initializeConnection = (defence:DefenceController|null, navigation:NavigationController|null, propulsion:PropulsionController|null, sensors:SensorsController|null) =>{
 		this.defence = defence;
 		this.navigation = navigation;
 		this.propulsion = propulsion;

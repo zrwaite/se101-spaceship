@@ -6,7 +6,7 @@ export default class YourSensorsController extends SensorsController {
     this.propulsion
     see SandBox/Scripts/Ship/README.md for an explanation of return values. (maybe, haven't added it yet)
     */
-    sensorsUpdate(shipStatusInfo, performActiveScan, performPassiveScan) {
+    sensorsUpdate(shipStatusInfo, activeScan, passiveScan) {
         //Student code goes here
     }
 }

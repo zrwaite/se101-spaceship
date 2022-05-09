@@ -11,6 +11,7 @@ export default class Asteroid extends Sprite {
         this.mass = 5;
         this.gravitySignature = 0;
         this.radius = 1.5;
+        this.hasExploded = false;
         this.speed = speed;
         this.aSpeed = aSpeed;
         this.image = this.game.images["asteroid"];

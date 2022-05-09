@@ -32,7 +32,7 @@ export default class Galaxy{
 		}
 		// Create solar systems with associated galaxy
 		for (const name of this.solarSystemNames) {
-			this.solarSystems.push(new SolarSystem(name, this.game));
+			this.solarSystems.push(new SolarSystem(name, this.name, this.game));
 		}
 		
 		// Set starting solar system to the first system in the list

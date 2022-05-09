@@ -12,6 +12,7 @@ export default class Asteroid extends Sprite {
 	mass = 5;
 	gravitySignature = 0;
 	radius = 1.5;
+	hasExploded = false;
 
 	constructor(speed:Vector2, aSpeed:number, ...args:[pos:Vector2, game:any]) {
 		super(...args);

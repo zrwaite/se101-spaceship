@@ -1,4 +1,4 @@
-export default class Response {
+export default class APIResponse {
     constructor(status = 400, errors = [], response = {}, success = false) {
         this.success = success;
         this.status = status;

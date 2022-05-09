@@ -1,5 +1,5 @@
 import Torpedo from "./torpedo.js";
-import response from "../helpers/response.js";
+import APIResponse from "../helpers/response.js";
 import RenderedObject from "../renderedObject.js";
 const TUBE_COOLDOWN_FRAMES = 100;
 const NUMBER_OF_TUBES = 4;
@@ -27,15 +27,15 @@ export default class TurretControls extends RenderedObject {
         const newDirection = aimTo.normalize();
         if (newDirection.magnitude() > 0) {
             this.angle = newDirection;
-            return new response(200, [], {}, true);
+            return new APIResponse(200, [], {}, true);
         }
         else {
             const errorMessage = "aimTurret failed due to zero aimTo and undefined direction; no update to aim made";
-            return new response(400, [errorMessage], {}, false);
+            return new APIResponse(400, [errorMessage], {}, false);
         }
     }
     getNumberOfTubes() {
-        return new response(200, [], { numberOfTubes: this.numberOfTubes }, true);
+        return new APIResponse(200, [], { numberOfTubes: this.numberOfTubes }, true);
     }
     getTubeCooldown(tubeIndex) {
         if (tubeIndex >= 0 && tubeIndex < NUMBER_OF_TUBES) {
@@ -43,12 +43,12 @@ export default class TurretControls extends RenderedObject {
             const currentFrame = this.parentShip.game.frame;
             const framesWaited = currentFrame - this.lastFrameFiredByTube[tubeIndex];
             const framesToWait = Math.max(this.cooldownFrames - framesWaited, 0);
-            return new response(200, [], { tubeCooldown: framesToWait }, true);
+            return new APIResponse(200, [], { tubeCooldown: framesToWait }, true);
         }
         else {
             // Invalid tubeIndex
             const errorMessage = "getTubeCooldownFailed due to invalid tube index; expected tubeIndex from 0 (inclusive) up to " + NUMBER_OF_TUBES + " (exclusive) but received " + tubeIndex;
-            return new response(400, [errorMessage], {}, false);
+            return new APIResponse(400, [errorMessage], {}, false);
         }
     }
     fireTorpedo(tubeIndex) {
@@ -63,16 +63,16 @@ export default class TurretControls extends RenderedObject {
                 this.parentShip.torpedoesFired++;
                 this.parentShip.energyUsed += 8;
                 this.lastFrameFiredByTube[tubeIndex] = this.parentShip.game.frame;
-                return new response(200, [], {}, true);
+                return new APIResponse(200, [], {}, true);
             }
             else {
                 const errorMessage = "fireTorpedo failed due to internal call to getTubeCooldown not returning zero tubeCooldown response for tubeIndex " + tubeIndex;
-                return new response(400, [errorMessage], {}, false);
+                return new APIResponse(400, [errorMessage], {}, false);
             }
         }
         else {
             const errorMessage = "fireTorpedo due to invalid tube index; expected tubeIndex from 0 (inclusive) up to " + NUMBER_OF_TUBES + " (exclusive) but received " + tubeIndex;
-            return new response(400, [errorMessage], {}, false);
+            return new APIResponse(400, [errorMessage], {}, false);
         }
     }
 }

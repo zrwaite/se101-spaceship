@@ -1,5 +1,6 @@
 import Sprite from "../sprite.js";
 import Vector2 from "../helpers/Vector2.js";
+import Process from "../gameProcess.js";
 
 const NUMBER_OF_EXPLOSION_SPRITES = 9;
 const FRAMES_FOR_EXPLOSION = 81;
@@ -23,6 +24,7 @@ export default class Torpedo extends Sprite {
 	ctx = "objects";
 	hasExploded = false;
 	frameExploded = 0;
+	process: Process|null = null;
 
 	constructor(fuseFrameDuration = 0, parentShip:any, velocity:Vector2, ...args:[pos:Vector2, game:any]) {
 		super(...args);
@@ -60,5 +62,8 @@ export default class Torpedo extends Sprite {
 	}
 	receiveDamage() { // torpedoes have 1hp and explode when hitting something
 		this.explode();
+	}
+	initialize(process:any) {
+		this.process = process;
 	}
 }

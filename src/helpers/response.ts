@@ -1,4 +1,4 @@
-export default class Response {
+export default class APIResponse {
     success:boolean;
     status:number;
     errors:string[];
