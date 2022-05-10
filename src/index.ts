@@ -17,12 +17,12 @@ document.body.style.setProperty("--height", windowSize.y + "");
 
 let spritePath = "Sprites/";
 let imagesLoaded = 0; // Updates as the images load, until all are loaded.
-let images:any = {}; // image locations, by name
-let contexts:any = {}; // contexts, by name
+let images:{[key: string]: HTMLImageElement} = {}; // image locations, by name
+let contexts:{[key: string]: CanvasRenderingContext2D} = {}; // contexts, by name
 let galaxies = ["test", "Alpha", "Beta", "Gamma"];
 let ships = ["Bebop", "Bismark", "Enterprise", "Event Horizon", "Flying Dutchman", "Galactica", "Milano", "Normandy", "Nostromo", "Pillar Of Autumn", "Planet Express", "Rama", "Red Dwarf", "Serenity", "ssAnne", "Thunderbird III", "Yamato"];
 
-function initializeImages(imageInfo:any) {
+function initializeImages(imageInfo:string[][]) {
     /* Create the images with the given info: [imageName, src]. */
     for (let i = 0; i < imageInfo.length; i++) {
         let image = new Image();
@@ -149,8 +149,9 @@ let DOM:any = {
     previousDamage: [0, 0], // [<previousDamage>, <number of layered animations>]
     initialize() {
         // Event Listeners
-        document.addEventListener("click", function (event:any) {
-            if (event.target.tagName !== "FIGURE") {
+        document.addEventListener("click", function (event:MouseEvent) {
+            let evTarget = event?.target as HTMLElement;
+            if (evTarget?.tagName !== "FIGURE") {
                 if (DOM.elements["ShipSelect"]) DOM.elements["ShipSelect"].classList.remove("open");
             }
         });
@@ -171,8 +172,8 @@ let DOM:any = {
         }
         let galaxyNames = ["galaxy1", "galaxy2", "galaxy3", "galaxy4"];
         galaxyNames.forEach(function (name) {
-            let galaxyElement:any = document.querySelector("#" + name + ">.quit")
-            galaxyElement.onclick = function(event:any) {
+            let galaxyElement:HTMLElement = document.querySelector("#" + name + ">.quit") as HTMLElement;
+            galaxyElement.onclick = function(event:MouseEvent) {
                 DOM.resetGame();
                 this.classList.add("hidden");
                 event.stopPropagation();
@@ -196,7 +197,7 @@ let DOM:any = {
             }
         }
         setTimeout(function () {
-            document.querySelectorAll(".menu").forEach(function (menu:any) {
+            document.querySelectorAll(".menu").forEach(function (menu:any): void {
                 menu.style["transition-duration"] = "0.3s";
                 menu.style["-o-transition-duration"] = "0.3s";
                 menu.style["-moz-transition-duration"] = "0.3s";
@@ -250,7 +251,7 @@ let DOM:any = {
         }
         initializeShipSelect(ships, this.data["defaultShip"]);
     },
-    shipActive: function (ship:any) {
+    shipActive: function (ship:HTMLElement) {
         if (ship.classList.contains("active") || !this.elements["ShipSelect"].classList.contains("open")) return;
         this.elements["ShipSelect"].querySelector(".active").classList.remove("active");
         ship.classList.add("active");
@@ -267,7 +268,7 @@ let DOM:any = {
     save: function() {
         localStorage.setItem('data', JSON.stringify(this.data));
     },
-    updatePreference: function(type:string, value:any) {
+    updatePreference: function(type:string, value:number) {
         if (type === "zoom") this.data[type] = (value) ? 2.5 : 1;
         else this.data[type] = value;
         this.save();
@@ -310,7 +311,7 @@ let DOM:any = {
             entries[7].children[0].children[i].style.width = (100 - Math.floor((game.watchShip.turretControls.getTubeCooldown(i).response.tubeCooldown) / game.watchShip.turretControls.cooldownFrames * 100)) + "%";
         }
     },
-    fadeInOut: function(func:any, params = [], middletime = 250) {
+    fadeInOut: function(func:Function, params = [], middletime = 250) {
         let fade = this.elements["SolarFade"].classList;
         if (fade.contains("on")) return;
         fade.add("on");
