@@ -4,7 +4,7 @@
   "description": "Replacement for the SE101 Godot Spaceship System",
   "main": "src/index.js",
   "scripts": {
-    "onchange": "onchange '**/*.ts' -- npm run compile",
+    "dev": "onchange '**/*.ts' -- npm run compile",
     "compile": "tsc;"
   },
   "repository": {

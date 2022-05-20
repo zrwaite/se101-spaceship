@@ -7,7 +7,7 @@ const windowSize = { // Accessible through game.width and game.height.
 	y: 54,
     border: 2
 }
-const unit = ((window.innerWidth - windowSize.border * 2) / (window.innerHeight - windowSize.border * 2) > windowSize.x / windowSize.y) ? Math.floor((window.innerHeight - windowSize.border * 2) / windowSize.y) : Math.floor((window.innerWidth - windowSize.border * 2) / windowSize.x);
+const unit = (((window.innerWidth - windowSize.border * 2) / (window.innerHeight - windowSize.border * 2) > windowSize.x / windowSize.y) ? Math.floor((window.innerHeight - windowSize.border * 2) / windowSize.y) : Math.floor((window.innerWidth - windowSize.border * 2) / windowSize.x));
 
 // Initialize the CSS variables so that the css can do dynamic calculations for displays.
 document.body.style.setProperty("--unit", unit + "px");
@@ -287,16 +287,16 @@ let DOM:any = {
     devToolsUpdate: function () {
         let entries = this.elements["DevTools"].querySelectorAll("tr:not(.title)>td");
         if (!game || !game.watchShip) throw Error("Game or game watchship undefined");
-        entries[0].innerHTML = "X: " + Math.floor(game.watchShip.speed.x * 1000);
-        entries[1].innerHTML = "Y: " + Math.floor(game.watchShip.speed.y * 1000);
-        entries[2].innerHTML = "X: " + Math.floor(game.watchShip.pos.x * 10);
-        entries[3].innerHTML = "Y: " + Math.floor(game.watchShip.pos.y * 10);
+        entries[0].innerHTML = "X: " + Math.floor(game.watchShip.speed.x * 100)/100;
+        entries[1].innerHTML = "Y: " + Math.floor(game.watchShip.speed.y * 100)/100;
+        entries[2].innerHTML = "X: " + Math.floor(game.watchShip.pos.x * 10)/10;
+        entries[3].innerHTML = "Y: " + Math.floor(game.watchShip.pos.y * 10)/10;
         let angle = Math.floor(Math.atan(-game.watchShip.angle.y / game.watchShip.angle.x) * 180 / Math.PI);
         angle += (game.watchShip.angle.x < 0) ? 180 : ((game.watchShip.angle.y <= 0) ? 0 : 360);
         entries[4].innerHTML = "&theta;: " + angle + "&deg;";
         entries[5].innerHTML = Math.floor(game.watchShip.energyUsed * 100) + " J";
-        if (this.previousDamage[0] != Math.floor(game.watchShip.totalDamage * 100)) {
-            this.previousDamage[0] = Math.floor(game.watchShip.totalDamage * 100);
+        if (this.previousDamage[0] != Math.floor(game.watchShip.totalDamage * 10)) {
+            this.previousDamage[0] = Math.floor(game.watchShip.totalDamage * 10);
             entries[6].innerHTML = this.previousDamage[0] + " Ns";
             this.previousDamage[1]++;
             entries[6].classList.add("blink");

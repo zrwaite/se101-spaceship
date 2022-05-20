@@ -5,11 +5,11 @@ export default class Sprite extends RenderedObject{
 	/* Default Attributes */
 	speed = new Vector2(0, 0); //linear speed
 	accel = new Vector2(0, 0); //linear acceleration
-	maxSpeed = 100; //Max linear speed
+	maxSpeed = 1000; //Max linear speed
 	aSpeed:number = 0; //angle speed
 	aAccel:number = 0; //angle acceleration
 	maxASpeed = 20; //Max angular speed
-	radius = 1; // Object collision Radius
+	radius = 10; // Object collision Radius
 	mass = 1; //Object mass for collisions
 	delete = false;
 	constructor(...args:[pos:Vector2, game:Game]){

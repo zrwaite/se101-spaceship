@@ -3,7 +3,7 @@ import Vector2 from "../helpers/Vector2.js";
 import Process from "../gameProcess.js";
 import Game from "../game.js";
 
-const MAX_SPAWN_SPEED = 0.4;
+const MAX_SPAWN_SPEED = 4;
 const FRAMES_PER_SECOND = 60;
 
 export default class AsteroidLauncher{

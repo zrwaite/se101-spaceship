@@ -18,7 +18,7 @@ const DMG_COEFFICIENT = 20;
 
 export default class Game {
 	/* Constructor Params */
-	width:number; //Ship Width
+	width:number;
 	height:number; 
 	images:any;
 	contexts:any;
@@ -47,8 +47,8 @@ export default class Game {
 	drawnProcess: Process|null = null;
 	
 	constructor(width:number, height:number, images:object, contexts:object) {
-		this.width = width; // in units
-        this.height = height; // in units
+		this.width = width*10; // in units
+        this.height = height*10; // in units
         this.images = images;
 		this.contexts = contexts;
     }

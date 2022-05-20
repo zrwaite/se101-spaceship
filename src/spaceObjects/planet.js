@@ -5,8 +5,8 @@ export default class Planet extends RenderedObject {
         super(...args);
         /* Default Params */
         this.gravitySignature = 2;
-        this.size = new Vector2(5, 5);
-        this.radius = 1.5;
+        this.size = new Vector2(50, 50);
+        this.radius = 15;
         this.ctx = "planets";
         /* Other attributes */
         this.process = null;

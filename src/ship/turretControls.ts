@@ -7,7 +7,7 @@ import Game from "../game.js";
 
 const TUBE_COOLDOWN_FRAMES = 100;
 const NUMBER_OF_TUBES  = 4;
-const TORPEDO_VELOCITY = 0.3;
+const TORPEDO_VELOCITY = 3;
 const FUSE_FRAME_DURATION = undefined;
 
 export default class TurretControls extends RenderedObject{

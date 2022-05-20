@@ -6,11 +6,11 @@ export default class Sprite extends RenderedObject {
         /* Default Attributes */
         this.speed = new Vector2(0, 0); //linear speed
         this.accel = new Vector2(0, 0); //linear acceleration
-        this.maxSpeed = 100; //Max linear speed
+        this.maxSpeed = 1000; //Max linear speed
         this.aSpeed = 0; //angle speed
         this.aAccel = 0; //angle acceleration
         this.maxASpeed = 20; //Max angular speed
-        this.radius = 1; // Object collision Radius
+        this.radius = 10; // Object collision Radius
         this.mass = 1; //Object mass for collisions
         this.delete = false;
     }
