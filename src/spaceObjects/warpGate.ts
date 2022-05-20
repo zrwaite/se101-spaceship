@@ -10,8 +10,8 @@ export default class WarpGate extends RenderedObject {
 	destinationSolarSystem;
 	/* Default Attributes */
 	ctx = "planets";
-	size = new Vector2(5, 5);
-	radius = 1.5;
+	size = new Vector2(50, 50);
+	radius = 15;
 	gravitySignature = 1;
 	/* Other attributes */
 	process:Process|null = null;

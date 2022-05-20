@@ -10,10 +10,10 @@ export default class Asteroid extends Sprite {
 	/* Other Attributes */
 	ctx = "objects";
 	delete = false; //Once an item needs to be deleted and stop rendering, set to true
-	size = new Vector2(3, 3);
+	size = new Vector2(30, 30);
 	mass = 5;
 	gravitySignature = 0;
-	radius = 1.5;
+	radius = 15;
 	hasExploded = false;
 
 	constructor(speed:Vector2, aSpeed:number, ...args:[pos:Vector2, game:Game]) {

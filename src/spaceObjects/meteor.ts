@@ -7,8 +7,8 @@ export default class Meteor extends Sprite {
 	/* Other attributes */
 	process:Process|null = null;
 	delete = false; //Once an item needs to be deleted and stop rendering, set to true
-	size = new Vector2(1, 1);
-	radius = 0.5;
+	size = new Vector2(10, 10);
+	radius = 5;
 	ctx:string = "objects";
 	mass = 0.5;
 	speed: Vector2;

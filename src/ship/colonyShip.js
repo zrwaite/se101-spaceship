@@ -7,18 +7,19 @@ import ThrusterController from "./thrusterController.js";
 import APIResponse from "../helpers/response.js";
 export default class ColonyShip extends Sprite {
     constructor(name, process, DefenceClass, NavigationClass, PropulsionClass, SensorsClass, ...args) {
+        var _a;
         super(...args); //parent constructor
         /* Other info */
         this.totalDamage = 0;
         this.energyUsed = 0;
         this.primary = false;
         this.torpedoesFired = 0;
-        this.size = new Vector2(3, 2);
+        this.size = new Vector2(30, 20);
         this.hasLanded = false;
         this.ctx = "ships";
         this.mass = 3;
         this.maxASpeed = 0.3;
-        this.maxSpeed = 0.5;
+        this.maxSpeed = 5;
         // used in manual mode to force tap shooting and prevent
         // burst shots that cause torpedoes fired to hit each other and explode immediately
         // stores the linear acceleration from the frame of reference of the ship (e.g. forward-backward, left-right)
@@ -44,16 +45,20 @@ export default class ColonyShip extends Sprite {
         this.thrusterController = new ThrusterController(this);
         this.image = this.game.images["ship"];
         this.radius = (this.size.x + this.size.y) / 4; // we say the hurt box is avg of width and height
-        this.shipStatusInfo = {
-            solarSystemName: this.process.solarSystem.name,
-            position: this.pos.clone(),
-            radius: this.radius,
-            linearVelocity: this.speed.clone(),
-            angularVelocity: this.aSpeed,
-            direction: this.angle,
-            torpedoSpeed: this.turretControls.launchSpeed,
-            hasLanded: this.hasLanded
-        };
+        if (this.process.game.galaxy)
+            this.shipStatusInfo = {
+                galaxyName: (_a = this.process.game.galaxy) === null || _a === void 0 ? void 0 : _a.name,
+                solarSystemName: this.process.solarSystem.name,
+                position: this.pos.clone(),
+                radius: this.radius,
+                linearVelocity: this.speed.clone(),
+                angularVelocity: this.aSpeed,
+                direction: this.angle,
+                torpedoSpeed: this.turretControls.launchSpeed,
+                hasLanded: this.hasLanded
+            };
+        else
+            throw Error("Galaxy not found");
         this.solarSystem = this.process.solarSystem;
     }
     update() {
@@ -90,12 +95,12 @@ export default class ColonyShip extends Sprite {
             this.aAccel = 0;
         if (this.game.inputs.pressed.up) {
             this.accel.set(0, 0);
-            this.accel = this.accel.add(this.angle.scale(0.002));
+            this.accel = this.accel.add(this.angle.scale(0.02));
             this.energyUsed += 0.04;
         }
         else if (this.game.inputs.pressed.down) {
             this.accel.set(0, 0);
-            this.accel = this.accel.add(this.angle.scale(-0.002));
+            this.accel = this.accel.add(this.angle.scale(-0.02));
             this.energyUsed += 0.04;
         }
         else
@@ -174,7 +179,7 @@ export default class ColonyShip extends Sprite {
         console.log(this.speed.magnitude());
         this.process.solarSystem.planets.forEach((planet) => {
             if (this.game.ifCollide(this, planet)) {
-                if (this.speed.magnitude() > 0.05) {
+                if (this.speed.magnitude() > 0.5) {
                     return new APIResponse(400, ["Too fast!"]);
                 }
                 else {

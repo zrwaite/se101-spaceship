@@ -7,8 +7,8 @@ export default class Meteor extends Sprite {
         /* Other attributes */
         this.process = null;
         this.delete = false; //Once an item needs to be deleted and stop rendering, set to true
-        this.size = new Vector2(1, 1);
-        this.radius = 0.5;
+        this.size = new Vector2(10, 10);
+        this.radius = 5;
         this.ctx = "objects";
         this.mass = 0.5;
         this.hasExploded = false;

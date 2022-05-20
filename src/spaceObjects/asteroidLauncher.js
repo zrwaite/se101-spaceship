@@ -1,6 +1,6 @@
 import Asteroid from "./asteroid.js";
 import Vector2 from "../helpers/Vector2.js";
-const MAX_SPAWN_SPEED = 0.4;
+const MAX_SPAWN_SPEED = 4;
 const FRAMES_PER_SECOND = 60;
 export default class AsteroidLauncher {
     constructor(game, pos, spawnPeriod = 4, spawnCount = -1, rotation = -1) {

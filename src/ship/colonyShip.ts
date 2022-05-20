@@ -14,39 +14,41 @@ import WarpGate from "../spaceObjects/warpGate.js";
 import Planet from "../spaceObjects/planet.js";
 import Process from "../gameProcess.js";
 import Game from "../game.js";
+import { ShipStatus } from "./shipStatus.js";
+import SolarSystem from "../solarSystem.js";
 
 
 
 export default class ColonyShip extends Sprite{
 	/* Constructor Params */
-	name; //Ship name
-	process; //Process in which the ship is currently rendering
-	shipStatusInfo; //Stores information about the ship for subsystems
-	solarSystem; //Current solar system object
+	name:string; //Ship name
+	process:Process; //Process in which the ship is currently rendering
+	shipStatusInfo:ShipStatus; //Stores information about the ship for subsystems
+	solarSystem:SolarSystem; //Current solar system object
 
 	/* SubSystem Controllers */
-	defenceController; //Defence Subsystem
-	navigationController; //Navigation Subsystem
-	propulsionController; //Propulsion subsystem
-	sensorsController; //Sensors subsystem
+	defenceController:DefenceController; //Defence Subsystem
+	navigationController:NavigationController; //Navigation Subsystem
+	propulsionController:PropulsionController; //Propulsion subsystem
+	sensorsController:SensorsController; //Sensors subsystem
 
 	/* Components */
-	turretControls; //Implementation of torpedo functions
-	thrusterController; //Implementation of thruster functions
-	passiveSensors; //Passive sensors
-	activeSensors; //Active sensors
+	turretControls:TurretControls; //Implementation of torpedo functions
+	thrusterController:ThrusterController; //Implementation of thruster functions
+	passiveSensors:PassiveSensors; //Passive sensors
+	activeSensors:ActiveSensors; //Active sensors
 
 	/* Other info */
 	totalDamage = 0;
 	energyUsed = 0;
 	primary = false;
 	torpedoesFired = 0;
-	size = new Vector2(3, 2);
+	size = new Vector2(30, 20);
 	hasLanded = false;
 	ctx = "ships";
 	mass = 3;
 	maxASpeed = 0.3;
-	maxSpeed = 0.5;	
+	maxSpeed = 5;	
 
 	// used in manual mode to force tap shooting and prevent
 	// burst shots that cause torpedoes fired to hit each other and explode immediately
@@ -81,7 +83,8 @@ export default class ColonyShip extends Sprite{
 
 		this.image = this.game.images["ship"];
 		this.radius = (this.size.x + this.size.y) / 4;		// we say the hurt box is avg of width and height
-		this.shipStatusInfo = {
+		if (this.process.game.galaxy) this.shipStatusInfo = {
+			galaxyName: this.process.game.galaxy?.name,
 			solarSystemName: this.process.solarSystem.name,
 			position: this.pos.clone(),
 			radius: this.radius,
@@ -91,6 +94,7 @@ export default class ColonyShip extends Sprite{
 			torpedoSpeed: this.turretControls.launchSpeed,
 			hasLanded: this.hasLanded
 		};
+		else throw Error("Galaxy not found");
 		this.solarSystem = this.process.solarSystem;
 	}
 	update() {
@@ -141,12 +145,12 @@ export default class ColonyShip extends Sprite{
  		else this.aAccel = 0;
  		if (this.game.inputs.pressed.up) {
 			this.accel.set(0, 0);
-			this.accel = this.accel.add(this.angle.scale(0.002));
+			this.accel = this.accel.add(this.angle.scale(0.02));
 			this.energyUsed += 0.04;
 		}
  		else if (this.game.inputs.pressed.down){
 			this.accel.set(0, 0);
-			this.accel = this.accel.add(this.angle.scale(-0.002));
+			this.accel = this.accel.add(this.angle.scale(-0.02));
 			this.energyUsed += 0.04;
 		}
  		else this.accel.set(0,0);
@@ -225,7 +229,7 @@ export default class ColonyShip extends Sprite{
 		console.log(this.speed.magnitude())
 		this.process.solarSystem.planets.forEach((planet:Planet) => {
 			if (this.game.ifCollide(this, planet)){
-				if (this.speed.magnitude()>0.05){
+				if (this.speed.magnitude()>0.5){
 					return new APIResponse(400, ["Too fast!"]);
 				} else {
 					this.land(planet);

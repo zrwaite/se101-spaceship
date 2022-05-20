@@ -1,6 +1,7 @@
 import Vector2 from "../helpers/Vector2";
 
 interface ShipStatus {
+	galaxyName: string,
 	solarSystemName: string,
 	position: Vector2,
 	radius: number,

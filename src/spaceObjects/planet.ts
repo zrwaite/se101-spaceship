@@ -7,8 +7,8 @@ import Game from "../game.js";
 export default class Planet extends RenderedObject {
 	/* Default Params */
 	gravitySignature = 2;
-	size = new Vector2(5, 5);
-	radius = 1.5;
+	size = new Vector2(50, 50);
+	radius = 15;
 	ctx = "planets";
 	name:string;
 

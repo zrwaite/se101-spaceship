@@ -9,10 +9,8 @@ export default class Torpedo extends Sprite {
         super(...args);
         /* Other attributes */
         this.delete = false; //Once an item needs to be deleted and stop rendering, set to true
-        this.height = 20;
-        this.width = 10;
-        this.size = new Vector2(1, 1);
-        this.radius = 0.5;
+        this.size = new Vector2(10, 10);
+        this.radius = 5;
         this.originalSize = this.size.clone();
         this.originalRadius = this.radius;
         this.ctx = "objects";

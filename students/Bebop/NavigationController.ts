@@ -9,7 +9,10 @@ export default class YourNavigationController extends NavigationController{
 	this.sensors
 	see SandBox/Scripts/Ship/README.md for an explanation of return values.
 	*/
+	timer = 0;
 	navigationUpdate(shipStatusInfo:ShipStatus, warp:()=>APIResponse, mapData: APIResponse) {
+		this.timer++
+		if (!(this.timer%100)) console.log(shipStatusInfo)
 		//Student code goes here
 	}
 }

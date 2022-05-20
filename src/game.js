@@ -31,8 +31,8 @@ export default class Game {
         this.watchShipName = "";
         this.solarSystemName = "";
         this.drawnProcess = null;
-        this.width = width; // in units
-        this.height = height; // in units
+        this.width = width * 10; // in units
+        this.height = height * 10; // in units
         this.images = images;
         this.contexts = contexts;
     }

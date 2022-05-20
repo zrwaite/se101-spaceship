@@ -9,10 +9,10 @@ export default class Asteroid extends Sprite {
         /* Other Attributes */
         this.ctx = "objects";
         this.delete = false; //Once an item needs to be deleted and stop rendering, set to true
-        this.size = new Vector2(3, 3);
+        this.size = new Vector2(30, 30);
         this.mass = 5;
         this.gravitySignature = 0;
-        this.radius = 1.5;
+        this.radius = 15;
         this.hasExploded = false;
         this.speed = speed;
         this.aSpeed = aSpeed;
