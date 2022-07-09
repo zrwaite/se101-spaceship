@@ -1,10 +1,10 @@
-import Vector2 from "../helpers/Vector2.js";
-import Sprite from "../sprite.js";
-import PassiveSensors from "./passiveSensors.js";
-import ActiveSensors from "./activeSensors.js";
-import TurretControls from "./turretControls.js";
-import ThrusterController from "./thrusterController.js";
-import APIResponse from "../helpers/response.js";
+import Vector2 from '../helpers/Vector2.js';
+import Sprite from '../sprite.js';
+import PassiveSensors from './passiveSensors.js';
+import ActiveSensors from './activeSensors.js';
+import TurretControls from './turretControls.js';
+import ThrusterController from './thrusterController.js';
+import APIResponse from '../helpers/response.js';
 export default class ColonyShip extends Sprite {
     constructor(name, process, DefenceClass, NavigationClass, PropulsionClass, SensorsClass, ...args) {
         var _a;
@@ -16,7 +16,7 @@ export default class ColonyShip extends Sprite {
         this.torpedoesFired = 0;
         this.size = new Vector2(30, 20);
         this.hasLanded = false;
-        this.ctx = "ships";
+        this.ctx = 'ships';
         this.mass = 3;
         this.maxASpeed = 0.3;
         this.maxSpeed = 5;
@@ -43,7 +43,7 @@ export default class ColonyShip extends Sprite {
         this.passiveSensors = new PassiveSensors(this);
         this.activeSensors = new ActiveSensors(this);
         this.thrusterController = new ThrusterController(this);
-        this.image = this.game.images["ship"];
+        this.image = this.game.images['ship'];
         this.radius = (this.size.x + this.size.y) / 4; // we say the hurt box is avg of width and height
         if (this.process.game.galaxy)
             this.shipStatusInfo = {
@@ -53,12 +53,12 @@ export default class ColonyShip extends Sprite {
                 radius: this.radius,
                 linearVelocity: this.speed.clone(),
                 angularVelocity: this.aSpeed,
-                direction: this.angle,
+                angle: this.angle,
                 torpedoSpeed: this.turretControls.launchSpeed,
-                hasLanded: this.hasLanded
+                hasLanded: this.hasLanded,
             };
         else
-            throw Error("Galaxy not found");
+            throw Error('Galaxy not found');
         this.solarSystem = this.process.solarSystem;
     }
     update() {
@@ -76,13 +76,13 @@ export default class ColonyShip extends Sprite {
         this.navigationController.navigationUpdate(this.shipStatusInfo, this.tryWarp.bind(this), this.process.solarSystem.getMapData(this.pos));
         this.propulsionController.propulsionUpdate(this.shipStatusInfo, this.thrusterController.setThruster.bind(this.thrusterController));
         this.boundaries();
-        this.accel = this.accel.add(this.localAccel.rotate(this.angle.angle()));
+        this.accel = this.accel.add(this.localAccel.rotate(this.angle));
         this.turretControls.update();
         super.update(); //parent update;
     }
     manualControls() {
         if (!this.game.inputs)
-            throw Error("Game inputs not defined");
+            throw Error('Game inputs not defined');
         if (this.game.inputs.pressed.left) {
             this.aAccel = -0.005;
             this.energyUsed += 0.04;
@@ -95,12 +95,13 @@ export default class ColonyShip extends Sprite {
             this.aAccel = 0;
         if (this.game.inputs.pressed.up) {
             this.accel.set(0, 0);
-            this.accel = this.accel.add(this.angle.scale(0.02));
+            this.accel = this.accel.add(Vector2.right.rotateTo(this.angle).scale(0.02));
             this.energyUsed += 0.04;
         }
         else if (this.game.inputs.pressed.down) {
             this.accel.set(0, 0);
-            this.accel = this.accel.add(this.angle.scale(-0.02));
+            // this.accel = this.accel.add(this.angle.scale(-0.02))
+            this.accel = this.accel.add(Vector2.right.rotateTo(this.angle).scale(-0.02));
             this.energyUsed += 0.04;
         }
         else
@@ -114,13 +115,14 @@ export default class ColonyShip extends Sprite {
         this.shipStatusInfo.radius = this.radius;
         this.shipStatusInfo.linearVelocity = this.speed.clone();
         this.shipStatusInfo.angularVelocity = this.aSpeed;
-        this.shipStatusInfo.direction = this.angle;
+        this.shipStatusInfo.angle = this.angle;
         this.shipStatusInfo.torpedoSpeed = this.turretControls.launchSpeed;
         this.shipStatusInfo.hasLanded = this.hasLanded;
         //see past function
     }
     boundaries() {
-        if (this.pos.y > this.game.height) { //y pos bounds
+        if (this.pos.y > this.game.height) {
+            //y pos bounds
             this.pos.y = this.game.height;
             this.speed.y = 0;
             this.accel.y = 0;
@@ -130,7 +132,8 @@ export default class ColonyShip extends Sprite {
             this.speed.y = 0;
             this.accel.y = 0;
         }
-        if (this.pos.x > this.game.width) { // x pos bounds
+        if (this.pos.x > this.game.width) {
+            // x pos bounds
             this.pos.x = this.game.width;
             this.speed.x = 0;
             this.accel.x = 0;
@@ -153,7 +156,7 @@ export default class ColonyShip extends Sprite {
     }
     // called when ship hits an asteroid
     receiveDamage(amount) {
-        console.log("SHIP TOOK ", amount, "DMG");
+        console.log('SHIP TOOK ', amount, 'DMG');
         this.totalDamage += amount;
     }
     tryFire() {
@@ -169,10 +172,10 @@ export default class ColonyShip extends Sprite {
             if (this.game.ifCollide(this, warpGate)) {
                 warpGate.warp(this);
                 this.receiveDamage(this.speed.magnitude());
-                return new APIResponse(200, [], "warped", true);
+                return new APIResponse(200, [], 'warped', true);
             }
         });
-        return new APIResponse(400, ["No warp gates in range"]);
+        return new APIResponse(400, ['No warp gates in range']);
     }
     tryLand() {
         this.energyUsed += 20;
@@ -180,18 +183,18 @@ export default class ColonyShip extends Sprite {
         this.process.solarSystem.planets.forEach((planet) => {
             if (this.game.ifCollide(this, planet)) {
                 if (this.speed.magnitude() > 0.5) {
-                    return new APIResponse(400, ["Too fast!"]);
+                    return new APIResponse(400, ['Too fast!']);
                 }
                 else {
                     this.land(planet);
-                    return new APIResponse(200, [], "landed", true);
+                    return new APIResponse(200, [], 'landed', true);
                 }
             }
         });
-        return new APIResponse(400, ["No planets in range"]);
+        return new APIResponse(400, ['No planets in range']);
     }
     land(planet) {
-        alert("YOU WIN");
+        alert('YOU WIN');
         console.log(planet);
     }
     draw() {

@@ -1,4 +1,4 @@
-import NavigationController from "../../src/subsystems/navigationController.js";
+import NavigationController from '../../src/subsystems/navigationController.js';
 export default class YourNavigationController extends NavigationController {
     constructor() {
         super(...arguments);
@@ -11,9 +11,6 @@ export default class YourNavigationController extends NavigationController {
         this.timer = 0;
     }
     navigationUpdate(shipStatusInfo, warp, mapData) {
-        this.timer++;
-        if (!(this.timer % 100))
-            console.log(shipStatusInfo);
         //Student code goes here
     }
 }

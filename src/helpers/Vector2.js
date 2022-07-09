@@ -28,7 +28,7 @@ export default class Vector2 {
         return this.scale(ratio);
     }
     dot(vector) {
-        return (this.x * vector.x + this.y + vector.y);
+        return this.x * vector.x + this.y + vector.y;
     }
     moveTowards(vector, t) {
         // Linearly interpolates between vectors A and B by t.
@@ -41,7 +41,7 @@ export default class Vector2 {
         return Math.sqrt(this.magnitudeSqr());
     }
     magnitudeSqr() {
-        return (this.x * this.x + this.y * this.y);
+        return this.x * this.x + this.y * this.y;
     }
     distance(vector) {
         return Math.sqrt(this.distanceSqr(vector));
@@ -49,7 +49,7 @@ export default class Vector2 {
     distanceSqr(vector) {
         let deltaX = this.x - vector.x;
         let deltaY = this.y - vector.y;
-        return (deltaX * deltaX + deltaY * deltaY);
+        return deltaX * deltaX + deltaY * deltaY;
     }
     normalize() {
         let mag = this.magnitude();
@@ -88,7 +88,7 @@ export default class Vector2 {
     }
     toString() {
         let vector = this.toPrecisionString(1);
-        return ("[" + vector.x + "; " + vector.y + "]");
+        return '[' + vector.x + '; ' + vector.y + ']';
     }
     // M is a Matrix2, returns Mv
     matrixMultiply(M) {
