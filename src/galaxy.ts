@@ -11,7 +11,8 @@ export default class Galaxy{
 	/* Default Attributes */
 	solarSystems:SolarSystem[] = [];
 	/* Other attributes */
-	startingSolarSystem;
+	startingSolarSystem: SolarSystem;
+	startingSolarSystemName;
 	solarSystemNames:string[] = [];
 	constructor(galaxyName:string, game:Game){
         this.name = galaxyName;
@@ -37,7 +38,8 @@ export default class Galaxy{
 		}
 		
 		// Set starting solar system to the first system in the list
-		this.startingSolarSystem = this.solarSystemNames[0];
+		this.startingSolarSystem = this.solarSystems[0];
+		this.startingSolarSystemName = this.solarSystemNames[0];
 	}
 	getSolarSystem(solarSystemName:string){
 		let returnSolarSystem:SolarSystem|false = false;

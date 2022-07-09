@@ -18,6 +18,9 @@ export default class AsteroidLauncher{
 	constructor(game:Game, pos:Vector2, spawnPeriod = 4, spawnCount = -1, rotation = -1) {
 		this.game = game;
 		this.pos = pos;
+		if ((this.pos.x > 0 && this.pos.x < this.game.width) || (this.pos.y>0 && this.pos.y < this.game.height)) {
+			throw Error("Can't build asteroid launcher within map, that is buggy, and instead of solving it I just say we don't allow the bug");
+		}
 		this.spawnPeriod = spawnPeriod * FRAMES_PER_SECOND;
 
 		// Expects positive integer... -1 denotes infinite projectiles

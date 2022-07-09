@@ -21,7 +21,6 @@ export default class Game {
         this.paused = false; // If the whole game is paused
         this.fpsInterval = 1000 / 50;
         this.processes = [];
-        this.startPosition = new Vector2(30, 30); //start at centre for now
         /* Other Attributes */
         this.unit = 0; //Global Unit
         this.inputs = null; // Controller values
@@ -41,13 +40,13 @@ export default class Game {
         this.watchShipName = watchShipName;
         this.galaxy = new Galaxy(galaxyName, this); //Create galaxy
         this.inputs = new Controller(this); //controller created
-        this.solarSystemName = this.galaxy.startingSolarSystem; //Starting solar system from galaxy
+        this.solarSystemName = this.galaxy.startingSolarSystemName; //Starting solar system from galaxy
         this.galaxy.solarSystems.forEach((solarSystem, i) => {
             this.processes.push(new Process(this, solarSystem, i));
         });
         this.drawnProcess = this.processes[0];
         if (this.allShips) {
-            this.ships.push(...buildAllShips(this.startPosition, this, this.drawnProcess)); //Build all ships for now
+            this.ships.push(...buildAllShips(this.galaxy.startingSolarSystem.shipStartPosition, this, this.drawnProcess)); //Build all ships for now
             for (let i = 0; i < this.ships.length; i++) {
                 if (this.ships[i].name === watchShipName) {
                     this.watchShip = this.ships[i];
@@ -56,7 +55,7 @@ export default class Game {
             }
         }
         else {
-            this.ships.push(buildShip(this.watchShipName, this.startPosition, this, this.drawnProcess)); //build a single ship
+            this.ships.push(buildShip(this.watchShipName, this.galaxy.startingSolarSystem.shipStartPosition, this, this.drawnProcess)); //build a single ship
             this.watchShip = this.ships[0];
         }
         if (this.watchShip)
