@@ -9,6 +9,7 @@ import APIResponse from "./helpers/response.js";
 //Think of this as a sort of level builder
 export default class SolarSystem {
     constructor(solarSystemName, galaxyName, game) {
+        this.shipStartPosition = new Vector2(300, 300);
         this.game = game;
         this.galaxyName = galaxyName;
         this.name = solarSystemName;
@@ -54,7 +55,7 @@ export default class SolarSystem {
                     new Planet("planet13", new Composition(0, 0, 0, 0, 0, 0), new Vector2(680, 110), this.game),
                     new Planet("planet14", new Composition(0, 0, 0, 0, 0, 0), new Vector2(630, 480), this.game),
                 ]);
-                this.asteroidLaunchers.push(new AsteroidLauncher(this.game, new Vector2(50, 50), 4, 10, Math.PI * 3 / 4));
+                this.asteroidLaunchers.push(new AsteroidLauncher(this.game, new Vector2(-50, -50), 4, 10, Math.PI * 3 / 4));
                 break;
             case "Alpha Centauri System":
                 this.asteroids.push(...[

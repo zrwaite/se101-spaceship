@@ -29,7 +29,7 @@ export default class Meteor extends Sprite {
 		this.shatter();
 	}
 	shatter() {
-		this. hasExploded = true;
+		this.hasExploded = true;
 		this.delete = true;
 	}
 }
