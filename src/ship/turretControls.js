@@ -1,6 +1,7 @@
-import Torpedo from "./torpedo.js";
-import APIResponse from "../helpers/response.js";
-import RenderedObject from "../renderedObject.js";
+import Vector2 from '../helpers/Vector2.js';
+import Torpedo from './torpedo.js';
+import APIResponse from '../helpers/response.js';
+import RenderedObject from '../renderedObject.js';
 const TUBE_COOLDOWN_FRAMES = 100;
 const NUMBER_OF_TUBES = 4;
 const TORPEDO_VELOCITY = 3;
@@ -13,8 +14,8 @@ export default class TurretControls extends RenderedObject {
         this.numberOfTubes = NUMBER_OF_TUBES;
         this.lastFrameFiredByTube = Array(NUMBER_OF_TUBES).fill(-Infinity);
         this.launchSpeed = TORPEDO_VELOCITY;
-        this.ctx = "ships";
-        this.image = this.game.images["turret"];
+        this.ctx = 'ships';
+        this.image = this.game.images['turret'];
         this.parentShip = parentShip;
         this.pos = this.parentShip.pos;
     }
@@ -22,17 +23,10 @@ export default class TurretControls extends RenderedObject {
         this.pos = this.parentShip.pos;
     }
     // This is currently assumed to be an absolute direction, it can be implemented as a relative direction through a change of basis
-    aimTurret(aimTo) {
+    aimTurret(angle) {
         //User called function for aiming turret
-        const newDirection = aimTo.normalize();
-        if (newDirection.magnitude() > 0) {
-            this.angle = newDirection;
-            return new APIResponse(200, [], {}, true);
-        }
-        else {
-            const errorMessage = "aimTurret failed due to zero aimTo and undefined direction; no update to aim made";
-            return new APIResponse(400, [errorMessage], {}, false);
-        }
+        this.angle = angle;
+        return new APIResponse(200, [], {}, true);
     }
     getNumberOfTubes() {
         return new APIResponse(200, [], { numberOfTubes: this.numberOfTubes }, true);
@@ -47,7 +41,7 @@ export default class TurretControls extends RenderedObject {
         }
         else {
             // Invalid tubeIndex
-            const errorMessage = "getTubeCooldownFailed due to invalid tube index; expected tubeIndex from 0 (inclusive) up to " + NUMBER_OF_TUBES + " (exclusive) but received " + tubeIndex;
+            const errorMessage = 'getTubeCooldownFailed due to invalid tube index; expected tubeIndex from 0 (inclusive) up to ' + NUMBER_OF_TUBES + ' (exclusive) but received ' + tubeIndex;
             return new APIResponse(400, [errorMessage], {}, false);
         }
     }
@@ -56,8 +50,9 @@ export default class TurretControls extends RenderedObject {
         //check for valid torpedo stuff, then create new one
         if (tubeIndex >= 0 && tubeIndex < NUMBER_OF_TUBES) {
             const tubeCooldownResponse = this.getTubeCooldown(tubeIndex);
-            if (tubeCooldownResponse.response["tubeCooldown"] === 0) {
-                const torpedoVelocity = this.angle.scale(this.launchSpeed); // calculate velocity of fired missile
+            if (tubeCooldownResponse.response['tubeCooldown'] === 0) {
+                const relativeVelocity = new Vector2(0, this.launchSpeed).rotateTo(this.parentShip.angle);
+                const torpedoVelocity = relativeVelocity.add(this.parentShip.speed);
                 const newTorpedo = new Torpedo(FUSE_FRAME_DURATION, this.parentShip, torpedoVelocity, this.parentShip.pos, this.parentShip.game);
                 this.parentShip.process.spawnDeletableObject(newTorpedo);
                 this.parentShip.torpedoesFired++;
@@ -66,12 +61,12 @@ export default class TurretControls extends RenderedObject {
                 return new APIResponse(200, [], {}, true);
             }
             else {
-                const errorMessage = "fireTorpedo failed due to internal call to getTubeCooldown not returning zero tubeCooldown response for tubeIndex " + tubeIndex;
+                const errorMessage = 'fireTorpedo failed due to internal call to getTubeCooldown not returning zero tubeCooldown response for tubeIndex ' + tubeIndex;
                 return new APIResponse(400, [errorMessage], {}, false);
             }
         }
         else {
-            const errorMessage = "fireTorpedo due to invalid tube index; expected tubeIndex from 0 (inclusive) up to " + NUMBER_OF_TUBES + " (exclusive) but received " + tubeIndex;
+            const errorMessage = 'fireTorpedo due to invalid tube index; expected tubeIndex from 0 (inclusive) up to ' + NUMBER_OF_TUBES + ' (exclusive) but received ' + tubeIndex;
             return new APIResponse(400, [errorMessage], {}, false);
         }
     }

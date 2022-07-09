@@ -1,4 +1,4 @@
-import DefenceController from "../../src/subsystems/defenceController.js";
+import DefenceController from '../../src/subsystems/defenceController.js';
 export default class YourDefenceController extends DefenceController {
     /* To get other subsystem information, use the following functions:
     this.navigation
