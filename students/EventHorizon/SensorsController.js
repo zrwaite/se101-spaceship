@@ -1,4 +1,4 @@
-import SensorsController from "../../src/subsystems/sensorsController.js";
+import SensorsController from '../../src/subsystems/sensorsController.js';
 export default class YourSensorsController extends SensorsController {
     /* To get other subsystem information, use the following functions:
     this.defence

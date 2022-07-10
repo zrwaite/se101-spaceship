@@ -1,16 +1,17 @@
-import Vector2 from "../helpers/Vector2.js";
-import RenderedObject from "../renderedObject.js";
+import Vector2 from '../helpers/Vector2.js';
+import RenderedObject from '../renderedObject.js';
 export default class WarpGate extends RenderedObject {
     constructor(destinationSolarystem, ...args) {
         super(...args);
         /* Default Attributes */
-        this.ctx = "planets";
+        this.ctx = 'planets';
         this.size = new Vector2(50, 50);
         this.radius = 15;
+        this.mass = 5;
         this.gravitySignature = 1;
         /* Other attributes */
         this.process = null;
-        this.image = this.game.images["warpgate"];
+        this.image = this.game.images['warpgate'];
         this.destinationSolarSystem = destinationSolarystem;
     }
     initialize(process) {
@@ -29,6 +30,6 @@ export default class WarpGate extends RenderedObject {
             ship.process = newProcess;
         }
         else
-            throw Error("Process not found");
+            throw Error('Process not found');
     }
 }

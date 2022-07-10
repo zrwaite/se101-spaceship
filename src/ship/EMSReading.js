@@ -1,5 +1,5 @@
 export default class EMSReading {
-    constructor(angle, amplitude, velocity, radius, scanSignature, specialInfo = null) {
+    constructor(angle, amplitude, velocity, radius, scanSignature = undefined, specialInfo = null) {
         this.Angle = angle; // The angle of the reading (relative to global X axis) //number
         this.Amplitude = amplitude; // The strength of the reading, proportional to distance via activeSensors.GConstant //number
         this.Velocity = velocity; // The velocity of the detected object relative to current solar system coordinate frame //Vector

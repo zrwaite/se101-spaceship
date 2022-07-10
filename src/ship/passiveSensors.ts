@@ -18,12 +18,11 @@ export default class PassiveSensors {
 		let readings = []
 		for (const planet of this.parentShip.solarSystem.planets) {
 			let angle = Math.abs(this.parentShip.angle - new Vector2(planet.pos.x - this.parentShip.pos.x, this.parentShip.pos.y - planet.pos.y).angle())
-			let newReading = new PassiveSensorReading(angle, planet.gravitySignature)
+			let newReading = new PassiveSensorReading(angle, planet.mass)
 			readings.push(newReading)
 		}
 
 		for (const warpgate of this.parentShip.solarSystem.warpGates) {
-			// let angle = this.parentShip.angle.angleTo(new Vector2(warpgate.pos.x - this.parentShip.pos.x, this.parentShip.pos.y - warpgate.pos.y))
 			let angle = Math.abs(this.parentShip.angle - new Vector2(warpgate.pos.x - this.parentShip.pos.x, this.parentShip.pos.y - warpgate.pos.y).angle())
 
 			let newReading = new PassiveSensorReading(angle, warpgate.gravitySignature)
