@@ -9,19 +9,46 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _ActiveSensors_parentShip;
+var _ActiveSensors_instances, _ActiveSensors_parentShip, _ActiveSensors_pointInScanSlice;
+import EMSReading from './EMSReading.js';
 import APIResponse from '../helpers/response.js';
-export default class ActiveSensors {
-    constructor(parentShip) {
+import Vector2 from '../helpers/Vector2.js';
+import RenderedObject from '../renderedObject.js';
+import Planet from '../spaceObjects/planet.js';
+import Torpedo from './torpedo.js';
+export default class ActiveSensors extends RenderedObject {
+    constructor(parentShip, game) {
+        super(parentShip.pos, game);
+        _ActiveSensors_instances.add(this);
         _ActiveSensors_parentShip.set(this, void 0); //Reference to the ColonyShip
+        this.ctx = 'ships';
+        this.cooldown = 0;
+        this.radius = 5;
+        this.arcStartAngle = 0;
+        this.arcEndAngle = Math.PI * 0.5;
         __classPrivateFieldSet(this, _ActiveSensors_parentShip, parentShip, "f");
+        this.pos = __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos;
     }
     scan(heading, arc, range) {
         // Ensure solar system is initialized before performing scan
         if (!__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").solarSystem)
             return new APIResponse(400, ['Cannot perform ActiveSensors scan until solar system initialized'], []);
-        const startPoint = __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos;
-        const startAngle = heading.angle();
+        if (arc > Math.PI)
+            return new APIResponse(400, ['arc is too large. Max: Pi'], []);
+        if (arc < 0)
+            return new APIResponse(400, ['arc must be larger than 0'], []);
+        if (heading > Math.PI || heading < -Math.PI)
+            return new APIResponse(400, [`heading of ${heading} must be between Pi and -Pi `], []);
+        if (this.cooldown)
+            return new APIResponse(400, ['ActiveSensors is still on cooldown'], []);
+        this.cooldown = 50;
+        this.arcStartAngle = heading;
+        this.arcEndAngle = this.arcStartAngle + arc;
+        if (this.arcEndAngle > Math.PI)
+            this.arcEndAngle = -2 * Math.PI + this.arcEndAngle;
+        if (this.arcEndAngle < -Math.PI)
+            this.arcEndAngle = 2 * Math.PI - this.arcEndAngle;
+        this.radius = range;
         //Calculate which objects exist in pizza slice
         // First check if it is within the range
         // Check that angle between start ponit and target point are between the start angle and end angle
@@ -29,31 +56,74 @@ export default class ActiveSensors {
         // To find angle, find angle difference between the vector from ship to object & current ship heading
         // y coordinate is inverted due to the flipped board axis (greater y value indicates lower position)
         let readings = [];
-        for (const planet of __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").solarSystem.planets) {
-            let dist = __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos.distance(planet.pos);
-            // let angle = this.#parentShip.angle.angleTo(new Vector2(planet.pos.x - this.#parentShip.pos.x, this.#parentShip.pos.y - planet.pos.y))
-            // if (dist + planet.size.x <= range && angle <= arc) {
-            // 	let newReading = new EMSReading(angle, dist, new Vector2(0, 0), planet.size.x, planet.composition, null)
-            // 	readings.push(newReading)
-            // }
-        }
-        for (const warpgate of __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").solarSystem.warpGates) {
-            let dist = __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos.distance(warpgate.pos);
-            // let angle = this.#parentShip.angle.angleTo(new Vector2(warpgate.pos.x - this.#parentShip.pos.x, this.#parentShip.pos.y - warpgate.pos.y))
-            // if (dist + warpgate.size.x <= range && angle <= arc) {
-            // 	let newReading = new EMSReading(angle, dist, new Vector2(0, 0), warpgate.radius, {}, warpgate.destinationSolarSystem)
-            // 	readings.push(newReading)
-            // }
-        }
-        for (const asteroid of __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").solarSystem.asteroids) {
-            let dist = __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos.distance(asteroid.pos);
-            // let angle = this.#parentShip.angle.angleTo(new Vector2(asteroid.pos.x - this.#parentShip.pos.x, this.#parentShip.pos.y - asteroid.pos.y))
-            // if (dist + asteroid.size.x <= range && angle <= arc) {
-            // 	let newReading = new EMSReading(angle, dist, asteroid.speed, asteroid.radius, {}, null)
-            // 	readings.push(newReading)
-            // }
+        for (const spaceObject of [...__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").process.delObjects, ...__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").process.staticObjects]) {
+            if (__classPrivateFieldGet(this, _ActiveSensors_instances, "m", _ActiveSensors_pointInScanSlice).call(this, spaceObject.pos)) {
+                if (spaceObject instanceof Torpedo)
+                    break;
+                let angle = spaceObject.pos.subtract(__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos).angle();
+                // let angle = this.#parentShip.pos.angleTo(spaceObject.pos)
+                let distance = __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos.distance(spaceObject.pos);
+                let amplitude = spaceObject.mass / distance;
+                let scanSignature = spaceObject instanceof Planet ? spaceObject.composition : undefined;
+                readings.push(new EMSReading(angle, amplitude, Vector2.zero, spaceObject.radius, scanSignature));
+            }
         }
         return new APIResponse(200, [], readings, true);
     }
+    draw() {
+        if (!this.cooldown)
+            return;
+        // Set the context's translation.
+        let ctx = this.game.contexts[this.ctx];
+        ctx.setTransform(1, 0, 0, 1, ((this.pos.x / 10) * this.game.unit - this.game.camera.x) * this.game.zoom, ((this.pos.y / 10) * this.game.unit - this.game.camera.y) * this.game.zoom);
+        // Draw the image with a half-size offset, so that rotating works properly and the coordinate represent the center.
+        // ctx.drawImage(
+        // 	this.image,
+        // 	((-(this.size.x / 10) * this.game.unit) / 2) * this.game.zoom,
+        // 	((-(this.size.y / 10) * this.game.unit) / 2) * this.game.zoom,
+        // 	(this.size.x / 10) * this.game.unit * this.game.zoom,
+        // 	(this.size.y / 10) * this.game.unit * this.game.zoom
+        // )
+        ctx.fillStyle = `rgba(255, 0, 0, ${this.cooldown / 100})`;
+        ctx.lineWidth = 2;
+        if (Math.abs(Math.abs(this.arcStartAngle) - Math.abs(this.arcEndAngle)) > Math.PI) {
+            console.log('too big');
+        }
+        else {
+            ctx.beginPath();
+            ctx.arc(0, 0, (this.radius * this.game.unit * this.game.zoom) / 10, this.arcStartAngle, this.arcEndAngle);
+            ctx.closePath();
+            ctx.fill();
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            let startPoint = new Vector2(this.radius, 0).rotateTo(this.arcStartAngle).scale((this.game.unit * this.game.zoom) / 10);
+            let endPoint = new Vector2(this.radius, 0).rotateTo(this.arcEndAngle).scale((this.game.unit * this.game.zoom) / 10);
+            ctx.lineTo(startPoint.x, startPoint.y);
+            ctx.lineTo(endPoint.x, endPoint.y);
+            ctx.closePath();
+            ctx.fill();
+        }
+    }
+    update() {
+        if (this.cooldown > 0)
+            this.cooldown -= 1;
+        else
+            this.cooldown = 0;
+        this.pos = __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos;
+    }
 }
-_ActiveSensors_parentShip = new WeakMap();
+_ActiveSensors_parentShip = new WeakMap(), _ActiveSensors_instances = new WeakSet(), _ActiveSensors_pointInScanSlice = function _ActiveSensors_pointInScanSlice(point) {
+    let dist = __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos.distance(point);
+    if (dist > this.radius)
+        return false;
+    let angle = point.subtract(__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos).angle();
+    if (this.arcStartAngle > 0 && this.arcEndAngle < 0) {
+        if ((angle > this.arcEndAngle && angle < this.arcStartAngle) || (angle < this.arcStartAngle && angle > this.arcEndAngle))
+            return false;
+    }
+    else {
+        if (angle < this.arcStartAngle || angle > this.arcEndAngle)
+            return false;
+    }
+    return true;
+};

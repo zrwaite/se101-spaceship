@@ -1,5 +1,5 @@
-import Vector2 from "./helpers/Vector2.js";
-import ColonyShip from "./ship/colonyShip.js";
+import Vector2 from './helpers/Vector2.js';
+import ColonyShip from './ship/colonyShip.js';
 export default class Process {
     constructor(game, solarSystem, index) {
         /* Default Attributes */
@@ -29,14 +29,15 @@ export default class Process {
         this.ships = ships;
         this.watchShip = watchShip;
         let startPosition = new Vector2(30, 30); //start at centre for now
-        this.ships.forEach((ship) => ship.pos = startPosition);
+        this.ships.forEach((ship) => (ship.pos = startPosition));
         let objectsList = [...this.delObjects, ...this.drawnObjects, ...this.hiddenObjects];
         for (let i = 0; i < objectsList.length; i++)
             delete objectsList[i];
         this.delObjects = [...this.solarSystem.asteroids]; //Asteroids get deleted
         this.drawnObjects = [...this.ships]; //Ships get drawn
         this.staticObjects = [...this.solarSystem.warpGates, ...this.solarSystem.planets];
-        this.hiddenObjects = [...this.solarSystem.asteroidLaunchers]; //Launchers are hidden
+        this.hiddenObjects = [...this.solarSystem.asteroidLaunchers] //Launchers are hidden
+        ;
         [...this.delObjects, ...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.hiddenObjects].forEach((object) => {
             object.initialize(this);
         });
@@ -59,11 +60,11 @@ export default class Process {
         if (shipIndex !== -1)
             this.ships.splice(shipIndex, 1);
         else
-            throw Error("Ship not found");
+            throw Error('Ship not found');
         shipIndex = -1;
         for (let i = 0; i < this.drawnObjects.length; i++) {
             let drawnObj = this.drawnObjects[i];
-            if (drawnObj instanceof (ColonyShip)) {
+            if (drawnObj instanceof ColonyShip) {
                 if (drawnObj.name === ship.name) {
                     shipIndex = i;
                     break;
@@ -73,7 +74,7 @@ export default class Process {
         if (shipIndex !== -1)
             this.drawnObjects.splice(shipIndex, 1);
         else
-            throw Error("Ship not found");
+            throw Error('Ship not found');
     }
     spawnDeletableObject(obj) {
         this.delObjects.push(obj);
@@ -82,26 +83,28 @@ export default class Process {
         if (this.ships.length === 0)
             return;
         this.game.detectProcessCollisions(this);
-        this.delObjects = this.delObjects.filter(obj => !obj.delete); // Filter objects no longer needed
+        this.delObjects = this.delObjects.filter((obj) => !obj.delete) // Filter objects no longer needed
+        ;
         [...this.drawnObjects, ...this.delObjects, ...this.hiddenObjects].forEach((object) => object.update()); //Updates all objects
         this.frame++;
     }
     draw() {
         //Draws all drawn objects
-        [...this.drawnObjects, ...this.staticObjects, ...this.delObjects].forEach(object => object.draw());
+        ;
+        [...this.drawnObjects, ...this.staticObjects, ...this.delObjects].forEach((object) => object.draw());
     }
     rerenderStatic() {
-        let solarSystemNameElement = document.getElementById("SolarSystemName");
+        let solarSystemNameElement = document.getElementById('SolarSystemName');
         if (solarSystemNameElement) {
             solarSystemNameElement.innerHTML = this.solarSystem.name;
-            ["missiles", "planets", "objects", "thrusters", "ships", "items"].forEach((object) => {
+            ['missiles', 'planets', 'objects', 'thrusters', 'ships', 'items'].forEach((object) => {
                 this.contexts[object].setTransform(1, 0, 0, 1, 0, 0);
                 this.contexts[object].clearRect(0, 0, this.width * this.unit, this.height * this.unit);
             });
             [...this.drawnObjects, ...this.staticObjects, ...this.delObjects].forEach((object) => object.draw()); //Redraws all objects, including static
         }
         else
-            throw Error("Missing element SolarSystemName");
+            throw Error('Missing element SolarSystemName');
     }
     endProcess() {
         for (let i = 0; i < this.contexts.length; i++)

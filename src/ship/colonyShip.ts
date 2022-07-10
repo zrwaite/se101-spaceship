@@ -84,7 +84,7 @@ export default class ColonyShip extends Sprite {
 
 		this.turretControls = new TurretControls(this, this.pos, this.game)
 		this.passiveSensors = new PassiveSensors(this)
-		this.activeSensors = new ActiveSensors(this)
+		this.activeSensors = new ActiveSensors(this, this.game)
 		this.thrusterController = new ThrusterController(this)
 
 		this.image = this.game.images['ship']
@@ -126,6 +126,7 @@ export default class ColonyShip extends Sprite {
 		this.boundaries()
 		this.accel = this.accel.add(this.localAccel.rotate(this.angle))
 		this.turretControls.update()
+		this.activeSensors.update()
 		super.update() //parent update;
 	}
 	manualControls() {
@@ -143,13 +144,9 @@ export default class ColonyShip extends Sprite {
 			this.energyUsed += 0.04
 		} else if (this.game.inputs.pressed.down) {
 			this.accel.set(0, 0)
-			// this.accel = this.accel.add(this.angle.scale(-0.02))
 			this.accel = this.accel.add(Vector2.right.rotateTo(this.angle).scale(-0.02))
 			this.energyUsed += 0.04
 		} else this.accel.set(0, 0)
-
-		//react to the controller data
-		//Calls this.thrusterController
 	}
 	updateShipStatusInfo() {
 		this.shipStatusInfo.solarSystemName = this.process.solarSystem.name
@@ -160,7 +157,6 @@ export default class ColonyShip extends Sprite {
 		this.shipStatusInfo.angle = this.angle
 		this.shipStatusInfo.torpedoSpeed = this.turretControls.launchSpeed
 		this.shipStatusInfo.hasLanded = this.hasLanded
-		//see past function
 	}
 	boundaries() {
 		if (this.pos.y > this.game.height) {
@@ -241,6 +237,7 @@ export default class ColonyShip extends Sprite {
 	}
 
 	draw() {
+		this.activeSensors.draw()
 		super.draw()
 		this.turretControls.draw()
 	}

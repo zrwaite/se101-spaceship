@@ -1,3 +1,4 @@
+import { withinPiRange } from '../../src/helpers/Angles.js';
 import SensorsController from '../../src/subsystems/sensorsController.js';
 export default class YourSensorsController extends SensorsController {
     constructor() {
@@ -11,10 +12,15 @@ export default class YourSensorsController extends SensorsController {
         this.timer = 0;
     }
     sensorsUpdate(shipStatusInfo, activeScan, passiveScan) {
+        //Student code goes here
         this.timer++;
         if (this.timer % 100 == 0) {
-            console.log(passiveScan());
+            let startAngle = withinPiRange(shipStatusInfo.angle - Math.PI / 4);
+            let arc = Math.PI / 2;
+            // let startAngle = Math.PI / 2
+            // let arc = Math.PI
+            let res = activeScan(startAngle, arc, 200);
+            res.response.forEach((obj) => { });
         }
-        //Student code goes here
     }
 }
