@@ -1,0 +1,7 @@
+export { ShipStatus } from '../src/ship/shipStatus.js'
+export { aimTurretType, fireTorpedoType, getTubeCooldownType } from '../src/ship/turretControls.js'
+export { tryWarpType } from '../src/ship/colonyShip.js'
+export { MapData } from '../src/solarSystem.js'
+export { setThrustersType } from '../src/ship/thrusterController.js'
+export { activeScanType } from '../src/ship/activeSensors.js'
+export { passiveScanType } from '../src/ship/passiveSensors.js'

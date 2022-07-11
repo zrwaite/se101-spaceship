@@ -70,6 +70,9 @@ export default class Vector2 {
     angleTo(vector) {
         return vector.angle() - this.angle();
     }
+    angleToPoint(point) {
+        return this.subtract(point).angle();
+    }
     rotate(alpha) {
         let cos = Math.cos(alpha);
         let sin = Math.sin(alpha);

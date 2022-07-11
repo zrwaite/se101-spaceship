@@ -35,10 +35,10 @@ export default class ColonyShip extends Sprite {
         this.propulsionController = new PropulsionClass();
         this.sensorsController = new SensorsClass();
         //Initialize each subsystem to give them access to each other.
-        this.defenceController.initializeConnection(null, this.navigationController, this.propulsionController, this.sensorsController);
-        this.navigationController.initializeConnection(this.defenceController, null, this.propulsionController, this.sensorsController);
-        this.propulsionController.initializeConnection(this.defenceController, this.navigationController, null, this.sensorsController);
-        this.sensorsController.initializeConnection(this.defenceController, this.navigationController, this.propulsionController, null);
+        this.defenceController.initializeConnection(undefined, this.navigationController, this.propulsionController, this.sensorsController);
+        this.navigationController.initializeConnection(this.defenceController, undefined, this.propulsionController, this.sensorsController);
+        this.propulsionController.initializeConnection(this.defenceController, this.navigationController, undefined, this.sensorsController);
+        this.sensorsController.initializeConnection(this.defenceController, this.navigationController, this.propulsionController, undefined);
         this.turretControls = new TurretControls(this, this.pos, this.game);
         this.passiveSensors = new PassiveSensors(this);
         this.activeSensors = new ActiveSensors(this, this.game);
@@ -169,7 +169,7 @@ export default class ColonyShip extends Sprite {
             if (this.game.ifCollide(this, warpGate)) {
                 warpGate.warp(this);
                 this.receiveDamage(this.speed.magnitude());
-                return new APIResponse(200, [], 'warped', true);
+                return new APIResponse(200, [], undefined, true);
             }
         });
         return new APIResponse(400, ['No warp gates in range']);

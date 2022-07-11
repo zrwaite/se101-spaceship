@@ -1,26 +1,33 @@
-import { withinPiRange } from '../../src/helpers/Angles.js'
-import APIResponse from '../../src/helpers/response.js'
-import Vector2 from '../../src/helpers/Vector2.js'
-import { ShipStatus } from '../../src/ship/shipStatus.js'
+import { withinPiRange, Vector2 } from '../helpers.js'
 import SensorsController from '../../src/subsystems/sensorsController.js'
+import { ShipStatus, activeScanType, passiveScanType } from '../types.js'
+import YourDefenceController from './DefenseController.js'
+import YourNavigationController from './NavigationController.js'
+import YourPropulsionController from './PropulsionController.js'
 export default class YourSensorsController extends SensorsController {
-	/* To get other subsystem information, use the following functions:
-	this.defence
-	this.navigation
-	this.propulsion
-	see SandBox/Scripts/Ship/README.md for an explanation of return values. (maybe, haven't added it yet)
-	*/
+	// To get other subsystem information, use the attributes below.
+	defence?: YourDefenceController
+	navigation?: YourNavigationController
+	propulsion?: YourPropulsionController
+	asteroidAhead = false
+	asteroidDirection: number = 0
 	timer = 0
-	sensorsUpdate(shipStatusInfo: ShipStatus, activeScan: (heading: number, arc: number, range: number) => APIResponse, passiveScan: () => APIResponse) {
+	sensorsUpdate(shipStatusInfo: ShipStatus, activeScan: activeScanType, passiveScan: passiveScanType) {
 		//Student code goes here
 		this.timer++
 		if (this.timer % 100 == 0) {
+			this.asteroidAhead = false
 			let startAngle = withinPiRange(shipStatusInfo.angle - Math.PI / 4)
 			let arc = Math.PI / 2
-			// let startAngle = Math.PI / 2
-			// let arc = Math.PI
-			let res = activeScan(startAngle, arc, 200)
-			res.response.forEach((obj: any) => {})
+			let res = activeScan(startAngle, arc, 300)
+			res.response.forEach((obj) => {
+				console.log(obj.Velocity)
+				if (obj.Velocity.x !== 0 || obj.Velocity.y !== 0) {
+					console.log('asteroid ahead')
+					this.asteroidAhead = true
+					this.asteroidDirection = obj.Angle
+				}
+			})
 		}
 	}
 }

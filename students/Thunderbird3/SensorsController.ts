@@ -1,15 +1,17 @@
-import APIResponse from '../../src/helpers/response.js'
-import Vector2 from '../../src/helpers/Vector2.js'
-import { ShipStatus } from '../../src/ship/shipStatus.js'
 import SensorsController from '../../src/subsystems/sensorsController.js'
+import YourDefenceController from './DefenseController.js'
+import YourNavigationController from './NavigationController.js'
+import YourPropulsionController from './PropulsionController.js'
+import { ShipStatus, activeScanType, passiveScanType } from '../types.js'
+import { Vector2 } from '../helpers.js'
+
 export default class YourSensorsController extends SensorsController {
-	/* To get other subsystem information, use the following functions:
-	this.defence
-	this.navigation
-	this.propulsion
-	see SandBox/Scripts/Ship/README.md for an explanation of return values. (maybe, haven't added it yet)
-	*/
-	sensorsUpdate(shipStatusInfo: ShipStatus, activeScan: (heading: number, arc: number, range: number) => APIResponse, passiveScan: () => APIResponse) {
+	// To get other subsystem information, use the attributes below.
+	defence?: YourDefenceController
+	navigation?: YourNavigationController
+	propulsion?: YourPropulsionController
+	// Define additional attributes here
+	sensorsUpdate(shipStatusInfo: ShipStatus, activeScan: activeScanType, passiveScan: passiveScanType) {
 		//Student code goes here
 	}
 }

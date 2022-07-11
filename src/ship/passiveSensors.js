@@ -1,6 +1,5 @@
 import PassiveSensorReading from './passiveSensorReading.js';
 import APIResponse from '../helpers/response.js';
-import Vector2 from '../helpers/Vector2.js';
 export default class PassiveSensors {
     constructor(parentShip) {
         this.parentShip = parentShip;
@@ -14,14 +13,12 @@ export default class PassiveSensors {
         // y coordinate is inverted due to the flipped board axis (greater y value indicates lower position)
         let readings = [];
         for (const planet of this.parentShip.solarSystem.planets) {
-            let angle = Math.abs(this.parentShip.angle - new Vector2(planet.pos.x - this.parentShip.pos.x, this.parentShip.pos.y - planet.pos.y).angle());
-            let newReading = new PassiveSensorReading(angle, planet.mass);
-            readings.push(newReading);
+            let angle = this.parentShip.pos.angleToPoint(planet.pos);
+            readings.push(new PassiveSensorReading(angle, planet.mass));
         }
         for (const warpgate of this.parentShip.solarSystem.warpGates) {
-            let angle = Math.abs(this.parentShip.angle - new Vector2(warpgate.pos.x - this.parentShip.pos.x, this.parentShip.pos.y - warpgate.pos.y).angle());
-            let newReading = new PassiveSensorReading(angle, warpgate.gravitySignature);
-            readings.push(newReading);
+            let angle = this.parentShip.pos.angleToPoint(warpgate.pos);
+            readings.push(new PassiveSensorReading(angle, warpgate.gravitySignature));
         }
         return new APIResponse(200, [], readings, true);
     }

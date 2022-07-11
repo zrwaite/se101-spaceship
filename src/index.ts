@@ -328,8 +328,7 @@ let DOM: any = {
 			}, 900)
 		}
 		for (let i = 0; i < 4 /* 4 turrets! */; i++) {
-			entries[7].children[0].children[i].style.width =
-				100 - Math.floor((game.watchShip.turretControls.getTubeCooldown(i).response.tubeCooldown / game.watchShip.turretControls.cooldownFrames) * 100) + '%'
+			entries[7].children[0].children[i].style.width = 100 - Math.floor((game.watchShip.turretControls.getTubeCooldown(i).response / game.watchShip.turretControls.cooldownFrames) * 100) + '%'
 		}
 	},
 	fadeInOut: function (func: Function, params = [], middletime = 250) {
