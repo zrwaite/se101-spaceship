@@ -6,6 +6,13 @@ import RenderedObject from '../renderedObject.js'
 import Game from '../game.js'
 import Planet from '../spaceObjects/planet.js'
 import Torpedo from './torpedo.js'
+import WarpGate from '../spaceObjects/warpGate.js'
+
+interface activeScanResponse extends APIResponse {
+	response: EMSReading[]
+}
+
+export type activeScanType = (heading: number, arc: number, range: number) => activeScanResponse
 
 export default class ActiveSensors extends RenderedObject {
 	#parentShip: ColonyShip //Reference to the ColonyShip
@@ -30,7 +37,7 @@ export default class ActiveSensors extends RenderedObject {
 		}
 		return true
 	}
-	scan(heading: number, arc: number, range: number) {
+	scan(heading: number, arc: number, range: number): activeScanResponse {
 		// Ensure solar system is initialized before performing scan
 		if (!this.#parentShip.solarSystem) return new APIResponse(400, ['Cannot perform ActiveSensors scan until solar system initialized'], [])
 		if (arc > Math.PI) return new APIResponse(400, ['arc is too large. Max: Pi'], [])
@@ -55,12 +62,12 @@ export default class ActiveSensors extends RenderedObject {
 		for (const spaceObject of [...this.#parentShip.process.delObjects, ...this.#parentShip.process.staticObjects]) {
 			if (this.#pointInScanSlice(spaceObject.pos)) {
 				if (spaceObject instanceof Torpedo) break
-				let angle = spaceObject.pos.subtract(this.#parentShip.pos).angle()
-				// let angle = this.#parentShip.pos.angleTo(spaceObject.pos)
-				let distance = this.#parentShip.pos.distance(spaceObject.pos)
-				let amplitude = spaceObject.mass / distance
-				let scanSignature = spaceObject instanceof Planet ? spaceObject.composition : undefined
-				readings.push(new EMSReading(angle, amplitude, Vector2.zero, spaceObject.radius, scanSignature))
+				const angle = spaceObject.pos.subtract(this.#parentShip.pos).angle()
+				const distance = this.#parentShip.pos.distance(spaceObject.pos)
+				const amplitude = spaceObject.mass / distance
+				const scanSignature = spaceObject instanceof Planet ? spaceObject.composition : undefined
+				const velocity = spaceObject instanceof Planet || spaceObject instanceof WarpGate ? Vector2.zero : spaceObject.speed
+				readings.push(new EMSReading(angle, amplitude, velocity, spaceObject.radius, scanSignature))
 			}
 		}
 		return new APIResponse(200, [], readings, true)

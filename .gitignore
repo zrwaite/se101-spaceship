@@ -14,3 +14,6 @@ SpaceshipJavasript.wiki
 node_modules
 
 build
+
+#vscode
+.vscode

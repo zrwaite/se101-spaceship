@@ -4,7 +4,6 @@ import WarpGate from './spaceObjects/warpGate.js';
 import Planet from './spaceObjects/planet.js';
 import AsteroidLauncher from './spaceObjects/asteroidLauncher.js';
 import Composition from './spaceObjects/planetComposition.js';
-import APIResponse from './helpers/response.js';
 //The constructor is going to build the levels
 //Think of this as a sort of level builder
 export default class SolarSystem {
@@ -251,10 +250,9 @@ export default class SolarSystem {
     }
     getMapData(pos) {
         //Get map data about a position for users to get data
-        const mapData = {
+        return {
             galaxy: this.galaxyName,
             solarSystem: this.name,
         };
-        return new APIResponse(200, [], mapData, true);
     }
 }

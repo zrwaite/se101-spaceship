@@ -4,7 +4,7 @@ import PassiveSensors from './passiveSensors.js'
 import ActiveSensors from './activeSensors.js'
 import TurretControls from './turretControls.js'
 import ThrusterController from './thrusterController.js'
-import APIResponse from '../helpers/response.js'
+import APIResponse, { UndefinedAPIResponse } from '../helpers/response.js'
 import SubsystemController from '../subsystems/subsystemController.js'
 import DefenceController from '../subsystems/defenceController.js'
 import NavigationController from '../subsystems/navigationController.js'
@@ -77,10 +77,10 @@ export default class ColonyShip extends Sprite {
 		this.sensorsController = new SensorsClass()
 
 		//Initialize each subsystem to give them access to each other.
-		this.defenceController.initializeConnection(null, this.navigationController, this.propulsionController, this.sensorsController)
-		this.navigationController.initializeConnection(this.defenceController, null, this.propulsionController, this.sensorsController)
-		this.propulsionController.initializeConnection(this.defenceController, this.navigationController, null, this.sensorsController)
-		this.sensorsController.initializeConnection(this.defenceController, this.navigationController, this.propulsionController, null)
+		this.defenceController.initializeConnection(undefined, this.navigationController, this.propulsionController, this.sensorsController)
+		this.navigationController.initializeConnection(this.defenceController, undefined, this.propulsionController, this.sensorsController)
+		this.propulsionController.initializeConnection(this.defenceController, this.navigationController, undefined, this.sensorsController)
+		this.sensorsController.initializeConnection(this.defenceController, this.navigationController, this.propulsionController, undefined)
 
 		this.turretControls = new TurretControls(this, this.pos, this.game)
 		this.passiveSensors = new PassiveSensors(this)
@@ -203,13 +203,13 @@ export default class ColonyShip extends Sprite {
 		}
 	}
 
-	tryWarp() {
+	tryWarp(): UndefinedAPIResponse {
 		this.energyUsed += 50
 		this.process.solarSystem.warpGates.forEach((warpGate: WarpGate) => {
 			if (this.game.ifCollide(this, warpGate)) {
 				warpGate.warp(this)
 				this.receiveDamage(this.speed.magnitude())
-				return new APIResponse(200, [], 'warped', true)
+				return new APIResponse(200, [], undefined, true)
 			}
 		})
 		return new APIResponse(400, ['No warp gates in range'])
@@ -242,3 +242,5 @@ export default class ColonyShip extends Sprite {
 		this.turretControls.draw()
 	}
 }
+
+export type tryWarpType = () => UndefinedAPIResponse

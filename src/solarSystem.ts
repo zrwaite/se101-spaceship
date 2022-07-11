@@ -316,13 +316,12 @@ export default class SolarSystem {
 				break
 		}
 	}
-	getMapData(pos: Vector2) {
+	getMapData(pos: Vector2): MapData {
 		//Get map data about a position for users to get data
-		const mapData: MapData = {
+		return {
 			galaxy: this.galaxyName,
 			solarSystem: this.name,
 		}
-		return new APIResponse(200, [], mapData, true)
 	}
 }
 

@@ -1,26 +1,28 @@
-import { withinPiRange } from '../../src/helpers/Angles.js';
+import { withinPiRange } from '../helpers.js';
 import SensorsController from '../../src/subsystems/sensorsController.js';
 export default class YourSensorsController extends SensorsController {
     constructor() {
         super(...arguments);
-        /* To get other subsystem information, use the following functions:
-        this.defence
-        this.navigation
-        this.propulsion
-        see SandBox/Scripts/Ship/README.md for an explanation of return values. (maybe, haven't added it yet)
-        */
+        this.asteroidAhead = false;
+        this.asteroidDirection = 0;
         this.timer = 0;
     }
     sensorsUpdate(shipStatusInfo, activeScan, passiveScan) {
         //Student code goes here
         this.timer++;
         if (this.timer % 100 == 0) {
+            this.asteroidAhead = false;
             let startAngle = withinPiRange(shipStatusInfo.angle - Math.PI / 4);
             let arc = Math.PI / 2;
-            // let startAngle = Math.PI / 2
-            // let arc = Math.PI
-            let res = activeScan(startAngle, arc, 200);
-            res.response.forEach((obj) => { });
+            let res = activeScan(startAngle, arc, 300);
+            res.response.forEach((obj) => {
+                console.log(obj.Velocity);
+                if (obj.Velocity.x !== 0 || obj.Velocity.y !== 0) {
+                    console.log('asteroid ahead');
+                    this.asteroidAhead = true;
+                    this.asteroidDirection = obj.Angle;
+                }
+            });
         }
     }
 }

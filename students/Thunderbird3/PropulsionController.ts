@@ -1,16 +1,17 @@
-import APIResponse from "../../src/helpers/response.js";
-import Vector2 from "../../src/helpers/Vector2.js";
-import { ShipStatus } from "../../src/ship/shipStatus.js";
-import { ThrusterName } from "../../src/ship/thrusterController.js";
-import PropulsionController from "../../src/subsystems/propulsionController.js";
-export default class YourPropulsionController extends PropulsionController{
-	/* To get other subsystem information, use the following functions:
-	this.defence
-	this.navigation
-	this.sensors
-	see SandBox/Scripts/Ship/README.md for an explanation of return values.
-	*/
-	propulsionUpdate(shipStatusInfo:ShipStatus, setThrusters:(thrusterName: ThrusterName, power:number)=>APIResponse) {
+import PropulsionController from '../../src/subsystems/propulsionController.js'
+import YourDefenceController from './DefenseController.js'
+import YourNavigationController from './NavigationController.js'
+import YourSensorsController from './SensorsController.js'
+import { ShipStatus, setThrustersType } from '../types.js'
+import { Vector2 } from '../helpers.js'
+
+export default class YourPropulsionController extends PropulsionController {
+	// To get other subsystem information, use the attributes below.
+	defence?: YourDefenceController
+	sensors?: YourSensorsController
+	navigation?: YourNavigationController
+	// Define additional attributes here
+	propulsionUpdate(shipStatusInfo: ShipStatus, setThrusters: setThrustersType) {
 		//Student code goes here
 	}
 }

@@ -16,6 +16,7 @@ import Vector2 from '../helpers/Vector2.js';
 import RenderedObject from '../renderedObject.js';
 import Planet from '../spaceObjects/planet.js';
 import Torpedo from './torpedo.js';
+import WarpGate from '../spaceObjects/warpGate.js';
 export default class ActiveSensors extends RenderedObject {
     constructor(parentShip, game) {
         super(parentShip.pos, game);
@@ -60,12 +61,12 @@ export default class ActiveSensors extends RenderedObject {
             if (__classPrivateFieldGet(this, _ActiveSensors_instances, "m", _ActiveSensors_pointInScanSlice).call(this, spaceObject.pos)) {
                 if (spaceObject instanceof Torpedo)
                     break;
-                let angle = spaceObject.pos.subtract(__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos).angle();
-                // let angle = this.#parentShip.pos.angleTo(spaceObject.pos)
-                let distance = __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos.distance(spaceObject.pos);
-                let amplitude = spaceObject.mass / distance;
-                let scanSignature = spaceObject instanceof Planet ? spaceObject.composition : undefined;
-                readings.push(new EMSReading(angle, amplitude, Vector2.zero, spaceObject.radius, scanSignature));
+                const angle = spaceObject.pos.subtract(__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos).angle();
+                const distance = __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos.distance(spaceObject.pos);
+                const amplitude = spaceObject.mass / distance;
+                const scanSignature = spaceObject instanceof Planet ? spaceObject.composition : undefined;
+                const velocity = spaceObject instanceof Planet || spaceObject instanceof WarpGate ? Vector2.zero : spaceObject.speed;
+                readings.push(new EMSReading(angle, amplitude, velocity, spaceObject.radius, scanSignature));
             }
         }
         return new APIResponse(200, [], readings, true);
