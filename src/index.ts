@@ -194,7 +194,7 @@ let DOM: any = {
 			let galaxyElement: HTMLElement = document.querySelector('#' + name + '>.quit') as HTMLElement
 			galaxyElement.onclick = function (event: MouseEvent) {
 				DOM.resetGame()
-				galaxyElement.classList.add('hidden')
+				galaxyElement.classList.add('hidden') // used to be this.classList - was this a mistake?
 				event.stopPropagation()
 			}
 		})
