@@ -162,7 +162,8 @@ let DOM = {
     initialize() {
         // Event Listeners
         document.addEventListener('click', function (event) {
-            if (event.target.tagName !== 'FIGURE') {
+            let evTarget = event === null || event === void 0 ? void 0 : event.target;
+            if ((evTarget === null || evTarget === void 0 ? void 0 : evTarget.tagName) !== 'FIGURE') {
                 if (DOM.elements['ShipSelect'])
                     DOM.elements['ShipSelect'].classList.remove('open');
             }
@@ -195,7 +196,7 @@ let DOM = {
             let galaxyElement = document.querySelector('#' + name + '>.quit');
             galaxyElement.onclick = function (event) {
                 DOM.resetGame();
-                this.classList.add('hidden');
+                galaxyElement.classList.add('hidden'); // used to be this.classList - was this a mistake?
                 event.stopPropagation();
             };
         });
@@ -322,9 +323,7 @@ let DOM = {
         entries[1].innerHTML = 'Y: ' + Math.floor(game.watchShip.speed.y * 100) / 100;
         entries[2].innerHTML = 'X: ' + Math.floor(game.watchShip.pos.x * 10) / 10;
         entries[3].innerHTML = 'Y: ' + Math.floor(game.watchShip.pos.y * 10) / 10;
-        // let angle = Math.floor((game.watchShip.angle.angle() * 180) / Math.PI)
         let angle = Math.floor(game.watchShip.angle * 100) / 100;
-        // angle += game.watchShip.angle.x < 0 ? 180 : game.watchShip.angle.y <= 0 ? 0 : 360
         entries[4].innerHTML = '&theta;: ' + angle + '&deg;';
         entries[5].innerHTML = Math.floor(game.watchShip.energyUsed * 100) + ' J';
         if (this.previousDamage[0] != Math.floor(game.watchShip.totalDamage * 10)) {
