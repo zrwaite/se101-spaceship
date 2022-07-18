@@ -58,7 +58,7 @@ export default class TurretControls extends RenderedObject {
 		if (tubeIndex >= 0 && tubeIndex < NUMBER_OF_TUBES) {
 			const tubeCooldownResponse = this.getTubeCooldown(tubeIndex)
 			if (tubeCooldownResponse.response === 0) {
-				const relativeVelocity = new Vector2(0, this.launchSpeed).rotateTo(this.parentShip.angle)
+				const relativeVelocity = new Vector2(0, this.launchSpeed).rotateTo(this.angle)
 				const torpedoVelocity = relativeVelocity.add(this.parentShip.speed)
 				const newTorpedo = new Torpedo(FUSE_FRAME_DURATION, this.parentShip, torpedoVelocity, this.parentShip.pos, this.parentShip.game)
 				this.parentShip.process.spawnDeletableObject(newTorpedo)

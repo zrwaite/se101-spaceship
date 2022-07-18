@@ -1,6 +1,6 @@
 export default class PassiveSensorReading {
     constructor(angle, signature) {
-        this.Heading = angle; //number
-        this.Signature = signature; //GravitySignature;
+        this.heading = angle; //number
+        this.gravity = signature; //GravitySignature;
     }
 }

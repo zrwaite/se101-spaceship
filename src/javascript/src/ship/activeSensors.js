@@ -31,6 +31,7 @@ export default class ActiveSensors extends RenderedObject {
         this.pos = __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos;
     }
     scan(heading, arc, range) {
+        __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").energyUsed += Math.round((arc * range * range) / 500);
         // Ensure solar system is initialized before performing scan
         if (!__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").solarSystem)
             return new APIResponse(400, ['Cannot perform ActiveSensors scan until solar system initialized'], []);

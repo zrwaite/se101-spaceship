@@ -8,7 +8,7 @@ export default class WarpGate extends RenderedObject {
         this.size = new Vector2(50, 50);
         this.radius = 15;
         this.mass = 5;
-        this.gravitySignature = 1;
+        this.gravity = 100;
         /* Other attributes */
         this.process = null;
         this.image = this.game.images['warpgate'];

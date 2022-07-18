@@ -13,7 +13,7 @@ export default class WarpGate extends RenderedObject {
 	size = new Vector2(50, 50)
 	radius = 15
 	mass = 5
-	gravitySignature = 1
+	gravity = 100
 	/* Other attributes */
 	process: Process | null = null
 

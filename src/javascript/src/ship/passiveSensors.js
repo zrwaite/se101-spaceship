@@ -5,6 +5,7 @@ export default class PassiveSensors {
         this.parentShip = parentShip;
     }
     scan() {
+        this.parentShip.energyUsed += 100;
         // Ensure solar system is initialized before performing scan
         if (!this.parentShip.solarSystem)
             return new APIResponse(400, ['Cannot perform PassiveSensors scan until solar system initialized'], []);
@@ -18,7 +19,7 @@ export default class PassiveSensors {
         }
         for (const warpgate of this.parentShip.solarSystem.warpGates) {
             let angle = warpgate.pos.angleToPoint(this.parentShip.pos);
-            readings.push(new PassiveSensorReading(angle, warpgate.gravitySignature));
+            readings.push(new PassiveSensorReading(angle, warpgate.gravity));
         }
         return new APIResponse(200, [], readings, true);
     }

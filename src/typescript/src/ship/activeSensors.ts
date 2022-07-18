@@ -38,6 +38,7 @@ export default class ActiveSensors extends RenderedObject {
 		return true
 	}
 	scan(heading: number, arc: number, range: number): activeScanResponse {
+		this.#parentShip.energyUsed += Math.round((arc * range * range) / 500)
 		// Ensure solar system is initialized before performing scan
 		if (!this.#parentShip.solarSystem) return new APIResponse(400, ['Cannot perform ActiveSensors scan until solar system initialized'], [])
 		if (arc > Math.PI) return new APIResponse(400, ['arc is too large. Max: Pi'], [])
