@@ -47,15 +47,6 @@ export default class ColonyShip extends Sprite {
 	mass = 3
 	maxASpeed = 0.3
 	maxSpeed = 5
-
-	// used in manual mode to force tap shooting and prevent
-	// burst shots that cause torpedoes fired to hit each other and explode immediately
-
-	// stores the linear acceleration from the frame of reference of the ship (e.g. forward-backward, left-right)
-	// used to update accel by converting to global frame of reference
-	// useful for thrusterControls to only need to recompute accelerations once per thruster power update
-	// instead of every frame as the ship rotates
-	localAccel = Vector2.zero
 	energyTimeCount = 0
 
 	constructor(
@@ -111,8 +102,14 @@ export default class ColonyShip extends Sprite {
 			this.energyUsed += 0.06
 			this.energyTimeCount = 0
 		}
-		//Add special update code here if needed
-		if (this.primary) this.manualControls() //use the data from keyboard control for testing
+
+		let manualControlsUsed = false
+		if (this.primary) manualControlsUsed = this.manualControls() //use the data from keyboard control for testing
+		if (!manualControlsUsed) {
+			const automaticAccels = this.thrusterController.getAccel()
+			this.aAccel = automaticAccels.angular
+			this.accel = automaticAccels.linear
+		}
 
 		this.defenceController.defenceUpdate(
 			this.shipStatusInfo,
@@ -124,28 +121,33 @@ export default class ColonyShip extends Sprite {
 		this.navigationController.navigationUpdate(this.shipStatusInfo, this.tryWarp.bind(this), this.process.solarSystem.getMapData(this.pos))
 		this.propulsionController.propulsionUpdate(this.shipStatusInfo, this.thrusterController.setThruster.bind(this.thrusterController))
 		this.boundaries()
-		this.accel = this.accel.add(this.localAccel.rotate(this.angle))
 		this.turretControls.update()
 		this.activeSensors.update()
 		this.passiveSensors.update()
 		super.update() //parent update;
 	}
-	manualControls() {
+	manualControls(): boolean {
+		let used = false
 		if (!this.game.inputs) throw Error('Game inputs not defined')
 		if (this.game.inputs.pressed.left) {
-			this.aAccel = -0.004
+			used = true
+			this.aAccel = -0.001
 			this.energyUsed += 0.04
 		} else if (this.game.inputs.pressed.right) {
-			this.aAccel = 0.004
+			used = true
+			this.aAccel = 0.001
 			this.energyUsed += 0.04
 		} else this.aAccel = 0
 		if (this.game.inputs.pressed.up) {
+			used = true
 			this.accel = Vector2.right.rotateTo(this.angle).scale(0.01)
 			this.energyUsed += 0.04
 		} else if (this.game.inputs.pressed.down) {
+			used = true
 			this.accel = Vector2.right.rotateTo(this.angle).scale(-0.005)
 			this.energyUsed += 0.04
 		} else this.accel.set(0, 0)
+		return used
 	}
 	updateShipStatusInfo() {
 		this.shipStatusInfo.solarSystemName = this.process.solarSystem.name

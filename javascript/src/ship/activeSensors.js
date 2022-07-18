@@ -67,7 +67,7 @@ export default class ActiveSensors extends RenderedObject {
                 const amplitude = spaceObject.mass / distance;
                 const scanSignature = spaceObject instanceof Planet ? spaceObject.composition : undefined;
                 const velocity = spaceObject instanceof Planet || spaceObject instanceof WarpGate ? Vector2.zero : spaceObject.speed;
-                readings.push(new EMSReading(angle, amplitude, velocity, spaceObject.radius, scanSignature));
+                readings.push(new EMSReading(angle, amplitude, velocity, spaceObject.radius, distance, scanSignature));
             }
         }
         return new APIResponse(200, [], readings, true);

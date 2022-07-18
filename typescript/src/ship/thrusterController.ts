@@ -11,30 +11,17 @@ interface setThrustersResponse extends APIResponse {
 
 export default class ThrusterController {
 	parentShip: ColonyShip
-	thrusterData
 	thrusterPower = {
-		mainThruster: 0,
-		portRetroThruster: 0,
-		starboardRetroThruster: 0,
-		portForeThruster: 0,
-		portAftThruster: 0,
-		starboardForeThruster: 0,
-		starboardAftThruster: 0,
+		main: 0,
+		bow: 0,
+		clockwise: 0,
+		counterClockwise: 0,
 	}
 	constructor(parentShip: ColonyShip) {
 		this.parentShip = parentShip
 		const width = parentShip.size.x
 		const length = parentShip.size.y
 		// direction is direction of thrust
-		this.thrusterData = {
-			mainThruster: { offset: new Vector2(-length / 2, 0), direction: new Vector2(1, 0) },
-			portRetroThruster: { offset: new Vector2((length * 2) / 5, -width / 4), direction: new Vector2(-1, 0) },
-			starboardRetroThruster: { offset: new Vector2((length * 2) / 5, width / 4), direction: new Vector2(-1, 0) },
-			portForeThruster: { offset: new Vector2((length * 2) / 5, -width / 4), direction: new Vector2(0, 1) },
-			portAftThruster: { offset: new Vector2((-length * 2) / 5, -width / 4), direction: new Vector2(0, 1) },
-			starboardForeThruster: { offset: new Vector2((length * 2) / 5, width / 4), direction: new Vector2(0, -1) },
-			starboardAftThruster: { offset: new Vector2((-length * 2) / 5, width / 4), direction: new Vector2(0, -1) },
-		}
 	}
 	// Successful responses contains a numeric field `power` giving the actually power the thruster was set to (in case power was out of bounds)
 	// and a boolean field `powerLimited` indicating whether the power requested was greater than the MAX_POWER and thus reduced to equal MAX_POWER
@@ -43,21 +30,21 @@ export default class ThrusterController {
 		const usedPower = Math.min(power, 100)
 		switch (thrusterName) {
 			case 'main':
-				this.parentShip.accel = Vector2.right.rotateTo(this.parentShip.angle).scale(0.0001 * usedPower)
-				break
 			case 'bow':
-				this.parentShip.accel = Vector2.right.rotateTo(this.parentShip.angle).scale(-0.00005 * usedPower)
-				break
 			case 'clockwise':
-				this.parentShip.aAccel = 0.00004 * usedPower
+			case 'counterClockwise':
+				this.thrusterPower[thrusterName] = usedPower
 				break
-			case 'counterClockwise': 
-				this.parentShip.aAccel = -0.00004 * usedPower
-				break
-			default: 
-				return new APIResponse(400, [`Invalid thrusterName <${thrusterName}>`], {}, false) 
+			default:
+				return new APIResponse(400, [`Invalid thrusterName <${thrusterName}>`], {}, false)
 		}
 		return new APIResponse(200, [], { power: usedPower, powerLimited: power > 100 }, true)
+	}
+	getAccel() {
+		return {
+			linear: Vector2.right.rotateTo(this.parentShip.angle).scale(0.0001 * this.thrusterPower.main + -0.00005 * this.thrusterPower.bow),
+			angular: 0.00001 * this.thrusterPower.clockwise + -0.00001 * this.thrusterPower.counterClockwise,
+		}
 	}
 }
 
