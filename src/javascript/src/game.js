@@ -22,7 +22,7 @@ export default class Game {
         this.fpsInterval = 1000 / 50;
         this.processes = [];
         /* Other Attributes */
-        this.unit = 0; //Global Unit
+        this.unit = 0; // Global Unit. ALWAYS DIVIDE IT BY 10. (this is an issue that sort of persists everywhere. not sure why. should be fixable if you adjust the actual unit declaration in the src/index.html, then go through all uses of this.unit and compensate.)
         this.inputs = null; // Controller values
         this.allShips = false; // Stores the number of ships that are rendered
         this.galaxy = null; // Stores Galaxy Object
@@ -156,10 +156,10 @@ export default class Game {
             throw Error('Watch Ship Not Defined');
         this.processes.forEach((process) => process.update());
         //let camOffset = new Vector2(-this.watchShip.speed.x * this.unit * this.dragConst, -this.watchShip.speed.y * this.unit * this.dragConst);
-        let candidateX = (this.watchShip.pos.x - this.width / this.zoom / 2) * this.unit;
+        let candidateX = (this.watchShip.pos.x - this.width / this.zoom / 2) / 10 * this.unit;
         let candidateY = (this.watchShip.pos.y - this.height / this.zoom / 2) * this.unit;
-        candidateX = candidateX <= 0 ? 0 : candidateX / this.unit <= this.width - this.width / this.zoom ? candidateX : (this.width - this.width / this.zoom) * this.unit;
-        candidateY = candidateY <= 0 ? 0 : candidateY / this.unit <= this.height - this.height / this.zoom ? candidateY : (this.height - this.height / this.zoom) * this.unit;
+        candidateX = candidateX <= 0 ? 0 : candidateX / this.unit * 10 <= this.width - this.width / this.zoom ? candidateX : (this.width - this.width / this.zoom) / 10 * this.unit;
+        candidateY = candidateY <= 0 ? 0 : candidateY / this.unit * 10 <= this.height - this.height / this.zoom ? candidateY : (this.height - this.height / this.zoom) / 10 * this.unit;
         this.camera.x = candidateX;
         this.camera.y = candidateY;
         this.frame++;

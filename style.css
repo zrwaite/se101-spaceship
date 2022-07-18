@@ -1,29 +1,29 @@
 @font-face {
     font-family: NotoSans-Black;
-    src: url("Fonts/NotoSans-Black.ttf");
+    src: url("assets/fonts/NotoSans-Black.ttf");
 }
 @font-face {
     font-family: Montserrat;
-    src: url("Fonts/Montserrat-ExtraLight.ttf");
+    src: url("assets/fonts/Montserrat-ExtraLight.ttf");
     font-weight: 200;
 }
 @font-face {
     font-family: Montserrat;
-    src: url("Fonts/Montserrat-Light.ttf");
+    src: url("assets/fonts/Montserrat-Light.ttf");
     font-weight: 300;
 }
 @font-face {
     font-family: Montserrat;
-    src: url("Fonts/Montserrat-Regular.ttf");
+    src: url("assets/fonts/Montserrat-Regular.ttf");
 }
 @font-face {
     font-family: Montserrat;
-    src: url("Fonts/Montserrat-SemiBold.ttf");
+    src: url("assets/fonts/Montserrat-SemiBold.ttf");
     font-weight: 600;
 }
 @font-face {
     font-family: Montserrat;
-    src: url("Fonts/Montserrat-Bold.ttf");
+    src: url("assets/fonts/Montserrat-Bold.ttf");
     font-weight: bold;
 }
 
@@ -83,7 +83,7 @@ canvas {
 /* Initial Title Menu */
 #Title {
     border-radius: var(--radius);
-    background-image: url("Sprites/UIImages/TitleBackground.png");
+    background-image: url("assets/images/UIImages/TitleBackground.png");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -211,7 +211,7 @@ canvas {
 #Main {
     font-weight: 300;
     font-size: calc(var(--unit) * 1.3);
-    background-image: url("Sprites/SpaceObjects/Space.png");
+    background-image: url("assets/images/SpaceObjects/Space.png");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;

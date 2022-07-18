@@ -43,9 +43,9 @@ export default class ThrusterController {
             return new APIResponse(400, [errorMessage], {}, false);
         }
         const powerLimited = power > MAX_POWER;
-        power = Math.min(power, MAX_POWER);
+        power = Math.min(power, MAX_POWER) / 10;
         if (thrusterName === 'mainThruster')
-            power *= 10;
+            power *= 100;
         const deltaPower = power - this.thrusterPower[thrusterName];
         this.thrusterPower[thrusterName] = power;
         // update physics

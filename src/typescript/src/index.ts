@@ -19,7 +19,7 @@ document.body.style.setProperty('--border', windowSize.border + 'px')
 document.body.style.setProperty('--width', windowSize.x + '')
 document.body.style.setProperty('--height', windowSize.y + '')
 
-let spritePath = 'Sprites/'
+let spritePath = 'assets/images/'
 let imagesLoaded = 0 // Updates as the images load, until all are loaded.
 let images: { [key: string]: HTMLImageElement } = {} // image locations, by name
 let contexts: { [key: string]: CanvasRenderingContext2D } = {} // contexts, by name

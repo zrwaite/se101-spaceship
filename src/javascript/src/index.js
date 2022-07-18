@@ -14,7 +14,7 @@ document.body.style.setProperty('--unit', unit + 'px');
 document.body.style.setProperty('--border', windowSize.border + 'px');
 document.body.style.setProperty('--width', windowSize.x + '');
 document.body.style.setProperty('--height', windowSize.y + '');
-let spritePath = 'Sprites/';
+let spritePath = 'assets/images/';
 let imagesLoaded = 0; // Updates as the images load, until all are loaded.
 let images = {}; // image locations, by name
 let contexts = {}; // contexts, by name
@@ -324,7 +324,7 @@ let DOM = {
         entries[2].innerHTML = 'X: ' + Math.floor(game.watchShip.pos.x * 10) / 10;
         entries[3].innerHTML = 'Y: ' + Math.floor(game.watchShip.pos.y * 10) / 10;
         let angle = Math.floor(game.watchShip.angle * 100) / 100;
-        entries[4].innerHTML = '&theta;: ' + angle + '&deg;';
+        entries[4].innerHTML = '&theta;: ' + angle;
         entries[5].innerHTML = Math.floor(game.watchShip.energyUsed * 100) + ' J';
         if (this.previousDamage[0] != Math.floor(game.watchShip.totalDamage * 10)) {
             this.previousDamage[0] = Math.floor(game.watchShip.totalDamage * 10);
