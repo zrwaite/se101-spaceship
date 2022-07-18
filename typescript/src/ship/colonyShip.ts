@@ -83,7 +83,7 @@ export default class ColonyShip extends Sprite {
 		this.sensorsController.initializeConnection(this.defenceController, this.navigationController, this.propulsionController, undefined)
 
 		this.turretControls = new TurretControls(this, this.pos, this.game)
-		this.passiveSensors = new PassiveSensors(this)
+		this.passiveSensors = new PassiveSensors(this, this.game)
 		this.activeSensors = new ActiveSensors(this, this.game)
 		this.thrusterController = new ThrusterController(this)
 
@@ -127,24 +127,23 @@ export default class ColonyShip extends Sprite {
 		this.accel = this.accel.add(this.localAccel.rotate(this.angle))
 		this.turretControls.update()
 		this.activeSensors.update()
+		this.passiveSensors.update()
 		super.update() //parent update;
 	}
 	manualControls() {
 		if (!this.game.inputs) throw Error('Game inputs not defined')
 		if (this.game.inputs.pressed.left) {
-			this.aAccel = -0.005
+			this.aAccel = -0.004
 			this.energyUsed += 0.04
 		} else if (this.game.inputs.pressed.right) {
-			this.aAccel = 0.005
+			this.aAccel = 0.004
 			this.energyUsed += 0.04
 		} else this.aAccel = 0
 		if (this.game.inputs.pressed.up) {
-			this.accel.set(0, 0)
-			this.accel = this.accel.add(Vector2.right.rotateTo(this.angle).scale(0.02))
+			this.accel = Vector2.right.rotateTo(this.angle).scale(0.01)
 			this.energyUsed += 0.04
 		} else if (this.game.inputs.pressed.down) {
-			this.accel.set(0, 0)
-			this.accel = this.accel.add(Vector2.right.rotateTo(this.angle).scale(-0.02))
+			this.accel = Vector2.right.rotateTo(this.angle).scale(-0.005)
 			this.energyUsed += 0.04
 		} else this.accel.set(0, 0)
 	}
@@ -238,6 +237,7 @@ export default class ColonyShip extends Sprite {
 
 	draw() {
 		this.activeSensors.draw()
+		this.passiveSensors.draw()
 		super.draw()
 		this.turretControls.draw()
 	}

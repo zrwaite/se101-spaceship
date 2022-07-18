@@ -32,8 +32,9 @@ export default class YourSensorsController extends SensorsController {
 				console.log(shipStatusInfo.angle)
 			}
 		}
-		if (this.timer % 10 == 0) {
+		if (this.timer % 50 == 25) {
 			let res = passiveScan()
+			console.log(res.success)
 
 			this.idealHeading = res.response[0].heading
 

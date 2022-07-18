@@ -1,11 +1,6 @@
 import Vector2 from '../helpers/Vector2.js';
 import APIResponse from '../helpers/response.js';
-// port left
-// starboard right
-const MAX_POWER = 100;
-const LINEAR_SENSITIVITY = 2e-5;
-const ANGULAR_SENSITIVITY = 5e-4;
-const thrusterNames = ['mainThruster', 'portRetroThruster', 'starboardRetroThruster', 'portForeThruster', 'portAftThruster', 'starboardForeThruster', 'starboardAftThruster'];
+const thrusterNames = ['main', 'bow', 'clockwise', 'counterClockwise'];
 export default class ThrusterController {
     constructor(parentShip) {
         this.thrusterPower = {
@@ -34,28 +29,25 @@ export default class ThrusterController {
     // Successful responses contains a numeric field `power` giving the actually power the thruster was set to (in case power was out of bounds)
     // and a boolean field `powerLimited` indicating whether the power requested was greater than the MAX_POWER and thus reduced to equal MAX_POWER
     setThruster(thrusterName, power) {
-        if (!(power >= 0)) {
-            const errorMessage = 'igniteThrusters failed as requested power must be non-negative';
-            return new APIResponse(400, [errorMessage], {}, false);
+        if (power < 0)
+            return new APIResponse(400, ['power must be non-negative'], {}, false);
+        const usedPower = Math.min(power, 100);
+        switch (thrusterName) {
+            case 'main':
+                this.parentShip.accel = Vector2.right.rotateTo(this.parentShip.angle).scale(0.0001 * usedPower);
+                break;
+            case 'bow':
+                this.parentShip.accel = Vector2.right.rotateTo(this.parentShip.angle).scale(-0.00005 * usedPower);
+                break;
+            case 'clockwise':
+                this.parentShip.aAccel = 0.00004 * usedPower;
+                break;
+            case 'counterClockwise':
+                this.parentShip.aAccel = -0.00004 * usedPower;
+                break;
+            default:
+                return new APIResponse(400, [`Invalid thrusterName <${thrusterName}>`], {}, false);
         }
-        if (!(thrusterName in this.thrusterPower)) {
-            const errorMessage = 'igniteThrusters failed as thruster name was not valid; expected one of the following: ' + Object.keys(this.thrusterPower);
-            return new APIResponse(400, [errorMessage], {}, false);
-        }
-        const powerLimited = power > MAX_POWER;
-        power = Math.min(power, MAX_POWER) / 10;
-        if (thrusterName === 'mainThruster')
-            power *= 100;
-        const deltaPower = power - this.thrusterPower[thrusterName];
-        this.thrusterPower[thrusterName] = power;
-        // update physics
-        const thrusterDatum = this.thrusterData[thrusterName];
-        const offset = thrusterDatum.offset;
-        const direction = thrusterDatum.direction;
-        const deltaLinAccel = direction.scale(LINEAR_SENSITIVITY * deltaPower).scale(1 / this.parentShip.mass);
-        const deltaAngAccel = (ANGULAR_SENSITIVITY * deltaPower * offset.magnitude() * Math.sin(offset.angleTo(direction))) / this.parentShip.mass;
-        this.parentShip.localAccel = this.parentShip.localAccel.add(deltaLinAccel);
-        this.parentShip.aAccel = this.parentShip.aAccel += deltaAngAccel;
-        return new APIResponse(200, [], { power: power, powerLimited: powerLimited }, true);
+        return new APIResponse(200, [], { power: usedPower, powerLimited: power > 100 }, true);
     }
 }

@@ -139,7 +139,7 @@ export default class SolarSystem {
 						new Asteroid(new Vector2(0, 0), 0, new Vector2(110, 70), this.game),
 					]
 				)
-				this.asteroidLaunchers.push(...[new AsteroidLauncher(this.game, new Vector2(610, 510), 5, 10), new AsteroidLauncher(this.game, new Vector2(210, 20), 4, 12, Math.PI / 4)])
+				this.asteroidLaunchers.push(...[new AsteroidLauncher(this.game, new Vector2(610, 545), 5, 10), new AsteroidLauncher(this.game, new Vector2(210, -20), 4, 12, Math.PI / 4)])
 				this.warpGates.push(
 					...[
 						new WarpGate('Kruger System', new Vector2(410, 310), this.game),

@@ -1,5 +1,5 @@
-import Asteroid from "./asteroid.js";
-import Vector2 from "../helpers/Vector2.js";
+import Asteroid from './asteroid.js';
+import Vector2 from '../helpers/Vector2.js';
 const MAX_SPAWN_SPEED = 4;
 const FRAMES_PER_SECOND = 60;
 export default class AsteroidLauncher {
@@ -8,8 +8,9 @@ export default class AsteroidLauncher {
         this.currentDelay = 0;
         this.game = game;
         this.pos = pos;
-        if ((this.pos.x > 0 && this.pos.x < this.game.width) || (this.pos.y > 0 && this.pos.y < this.game.height)) {
-            throw Error("Can't build asteroid launcher within map, that is buggy, and instead of solving it I just say we don't allow the bug");
+        console.log(this.game.height, this.game.width);
+        if (this.pos.x > 0 && this.pos.x < this.game.width && this.pos.y > 0 && this.pos.y < this.game.height) {
+            throw Error(`Can't build asteroid launcher within map, that is buggy, and instead of solving it I just say we don't allow the bug. Pos: ${pos.x}, ${pos.y}`);
         }
         this.spawnPeriod = spawnPeriod * FRAMES_PER_SECOND;
         // Expects positive integer... -1 denotes infinite projectiles
@@ -33,7 +34,7 @@ export default class AsteroidLauncher {
             return;
         else if (this.spawnCount !== -1)
             this.spawnCount--;
-        const speed = Math.random() * MAX_SPAWN_SPEED; // random speed		
+        const speed = Math.random() * MAX_SPAWN_SPEED; // random speed
         const angle = this.getAngle();
         const velocity = Vector2.right.rotate(angle).scale(speed); // random direction
         let asteroid = new Asteroid(velocity, Math.random() - 0.5, this.pos, this.game);
@@ -42,7 +43,7 @@ export default class AsteroidLauncher {
             this.process.spawnDeletableObject(asteroid);
         }
         else
-            throw Error("This.process is not defined");
+            throw Error('This.process is not defined');
     }
     update() {
         if (this.spawnCount === 0)

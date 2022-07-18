@@ -30,7 +30,7 @@ export default class YourPropulsionController extends PropulsionController {
 		// 	}
 		// }
 		// console.log(this.postAftThrusterLevel + ", " + this.starboardAftThrusterLevel)
-		setThrusters('starboardAftThruster', 100)
+		// setThrusters('main', 100)
 
 		//Student code goes here
 	}

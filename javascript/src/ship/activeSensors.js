@@ -78,28 +78,21 @@ export default class ActiveSensors extends RenderedObject {
         // Set the context's translation.
         let ctx = this.game.contexts[this.ctx];
         ctx.setTransform(1, 0, 0, 1, ((this.pos.x / 10) * this.game.unit - this.game.camera.x) * this.game.zoom, ((this.pos.y / 10) * this.game.unit - this.game.camera.y) * this.game.zoom);
-        // Draw the image with a half-size offset, so that rotating works properly and the coordinate represent the center.
-        // ctx.drawImage(
-        // 	this.image,
-        // 	((-(this.size.x / 10) * this.game.unit) / 2) * this.game.zoom,
-        // 	((-(this.size.y / 10) * this.game.unit) / 2) * this.game.zoom,
-        // 	(this.size.x / 10) * this.game.unit * this.game.zoom,
-        // 	(this.size.y / 10) * this.game.unit * this.game.zoom
-        // )
         ctx.fillStyle = `rgba(255, 0, 0, ${this.cooldown / 100})`;
         ctx.lineWidth = 2;
+        const drawRadius = ((50 - this.cooldown) * this.radius) / 50;
         if (Math.abs(Math.abs(this.arcStartAngle) - Math.abs(this.arcEndAngle)) > Math.PI) {
             console.log('too big');
         }
         else {
             ctx.beginPath();
-            ctx.arc(0, 0, (this.radius * this.game.unit * this.game.zoom) / 10, this.arcStartAngle, this.arcEndAngle);
+            ctx.arc(0, 0, (drawRadius * this.game.unit * this.game.zoom) / 10, this.arcStartAngle, this.arcEndAngle);
             ctx.closePath();
             ctx.fill();
             ctx.beginPath();
             ctx.moveTo(0, 0);
-            let startPoint = new Vector2(this.radius, 0).rotateTo(this.arcStartAngle).scale((this.game.unit * this.game.zoom) / 10);
-            let endPoint = new Vector2(this.radius, 0).rotateTo(this.arcEndAngle).scale((this.game.unit * this.game.zoom) / 10);
+            let startPoint = new Vector2(drawRadius, 0).rotateTo(this.arcStartAngle).scale((this.game.unit * this.game.zoom) / 10);
+            let endPoint = new Vector2(drawRadius, 0).rotateTo(this.arcEndAngle).scale((this.game.unit * this.game.zoom) / 10);
             ctx.lineTo(startPoint.x, startPoint.y);
             ctx.lineTo(endPoint.x, endPoint.y);
             ctx.closePath();
