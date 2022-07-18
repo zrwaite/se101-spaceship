@@ -13,11 +13,11 @@ export default class PassiveSensors {
         // y coordinate is inverted due to the flipped board axis (greater y value indicates lower position)
         let readings = [];
         for (const planet of this.parentShip.solarSystem.planets) {
-            let angle = this.parentShip.pos.angleToPoint(planet.pos);
+            let angle = planet.pos.angleToPoint(this.parentShip.pos);
             readings.push(new PassiveSensorReading(angle, planet.mass));
         }
         for (const warpgate of this.parentShip.solarSystem.warpGates) {
-            let angle = this.parentShip.pos.angleToPoint(warpgate.pos);
+            let angle = warpgate.pos.angleToPoint(this.parentShip.pos);
             readings.push(new PassiveSensorReading(angle, warpgate.gravitySignature));
         }
         return new APIResponse(200, [], readings, true);

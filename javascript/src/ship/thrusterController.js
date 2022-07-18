@@ -2,7 +2,7 @@ import Vector2 from '../helpers/Vector2.js';
 import APIResponse from '../helpers/response.js';
 // port left
 // starboard right
-const MAX_POWER = 10;
+const MAX_POWER = 100;
 const LINEAR_SENSITIVITY = 2e-5;
 const ANGULAR_SENSITIVITY = 5e-4;
 const thrusterNames = ['mainThruster', 'portRetroThruster', 'starboardRetroThruster', 'portForeThruster', 'portAftThruster', 'starboardForeThruster', 'starboardAftThruster'];
@@ -44,6 +44,8 @@ export default class ThrusterController {
         }
         const powerLimited = power > MAX_POWER;
         power = Math.min(power, MAX_POWER);
+        if (thrusterName === 'mainThruster')
+            power *= 10;
         const deltaPower = power - this.thrusterPower[thrusterName];
         this.thrusterPower[thrusterName] = power;
         // update physics

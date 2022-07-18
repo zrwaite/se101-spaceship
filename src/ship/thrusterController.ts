@@ -5,7 +5,7 @@ import ColonyShip from './colonyShip.js'
 // port left
 // starboard right
 
-const MAX_POWER = 10
+const MAX_POWER = 100
 const LINEAR_SENSITIVITY = 2e-5
 const ANGULAR_SENSITIVITY = 5e-4
 
@@ -55,7 +55,8 @@ export default class ThrusterController {
 			return new APIResponse(400, [errorMessage], {}, false)
 		}
 		const powerLimited = power > MAX_POWER
-		power = Math.min(power, MAX_POWER)
+		power = Math.min(power, MAX_POWER)/10
+		if (thrusterName === 'mainThruster') power *=100
 		const deltaPower = power - this.thrusterPower[thrusterName]
 		this.thrusterPower[thrusterName] = power
 		// update physics

@@ -61,7 +61,7 @@ export default class ActiveSensors extends RenderedObject {
             if (__classPrivateFieldGet(this, _ActiveSensors_instances, "m", _ActiveSensors_pointInScanSlice).call(this, spaceObject.pos)) {
                 if (spaceObject instanceof Torpedo)
                     break;
-                const angle = spaceObject.pos.subtract(__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos).angle();
+                const angle = spaceObject.pos.angleToPoint(__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos);
                 const distance = __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos.distance(spaceObject.pos);
                 const amplitude = spaceObject.mass / distance;
                 const scanSignature = spaceObject instanceof Planet ? spaceObject.composition : undefined;

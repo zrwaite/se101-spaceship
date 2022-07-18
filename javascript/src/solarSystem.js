@@ -225,7 +225,7 @@ export default class SolarSystem {
                     new Asteroid(new Vector2(0, 0), 0, new Vector2(460, 130), this.game),
                     new Asteroid(new Vector2(0, 0), 0, new Vector2(460, 310), this.game),
                 ]);
-                this.warpGates.push(...[new WarpGate('Alpha Centauri System', new Vector2(43, 23), this.game)]);
+                this.warpGates.push(...[new WarpGate('Alpha Centauri System', new Vector2(243, 223), this.game)]);
                 break;
             case 'Wolf 359 System':
                 this.asteroids.push(...[

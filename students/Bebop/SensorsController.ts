@@ -12,22 +12,24 @@ export default class YourSensorsController extends SensorsController {
 	asteroidAhead = false
 	asteroidDirection: number = 0
 	timer = 0
+	idealHeading: number = 0
 	sensorsUpdate(shipStatusInfo: ShipStatus, activeScan: activeScanType, passiveScan: passiveScanType) {
 		//Student code goes here
 		this.timer++
-		if (this.timer % 100 == 0) {
+		if (this.timer % 50 == 0) {
 			this.asteroidAhead = false
 			let startAngle = withinPiRange(shipStatusInfo.angle - Math.PI / 4)
 			let arc = Math.PI / 2
 			let res = activeScan(startAngle, arc, 300)
-			res.response.forEach((obj) => {
-				console.log(obj.Velocity)
-				if (obj.Velocity.x !== 0 || obj.Velocity.y !== 0) {
-					console.log('asteroid ahead')
-					this.asteroidAhead = true
-					this.asteroidDirection = obj.Angle
-				}
-			})
+			if (res.response.length > 0) {
+				this.asteroidAhead = true
+				this.asteroidDirection = res.response[0].Angle
+				console.log(this.asteroidDirection)
+				console.log(shipStatusInfo.angle)
+			}
+		}
+		if (this.timer % 10 == 0) {
+			this.idealHeading = passiveScan().response[0].Heading
 		}
 	}
 }

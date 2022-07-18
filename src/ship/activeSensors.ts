@@ -62,7 +62,7 @@ export default class ActiveSensors extends RenderedObject {
 		for (const spaceObject of [...this.#parentShip.process.delObjects, ...this.#parentShip.process.staticObjects]) {
 			if (this.#pointInScanSlice(spaceObject.pos)) {
 				if (spaceObject instanceof Torpedo) break
-				const angle = spaceObject.pos.subtract(this.#parentShip.pos).angle()
+				const angle = spaceObject.pos.angleToPoint(this.#parentShip.pos)
 				const distance = this.#parentShip.pos.distance(spaceObject.pos)
 				const amplitude = spaceObject.mass / distance
 				const scanSignature = spaceObject instanceof Planet ? spaceObject.composition : undefined
