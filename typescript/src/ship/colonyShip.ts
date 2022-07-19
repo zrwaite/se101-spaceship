@@ -76,7 +76,7 @@ export default class ColonyShip extends Sprite {
 		this.turretControls = new TurretControls(this, this.pos, this.game)
 		this.passiveSensors = new PassiveSensors(this, this.game)
 		this.activeSensors = new ActiveSensors(this, this.game)
-		this.thrusterController = new ThrusterController(this)
+		this.thrusterController = new ThrusterController(this, this.game)
 
 		this.image = this.game.images['ship']
 		this.radius = (this.size.x + this.size.y) / 4 // we say the hurt box is avg of width and height
@@ -103,13 +103,10 @@ export default class ColonyShip extends Sprite {
 			this.energyTimeCount = 0
 		}
 
-		let manualControlsUsed = false
-		if (this.primary) manualControlsUsed = this.manualControls() //use the data from keyboard control for testing
-		if (!manualControlsUsed) {
-			const automaticAccels = this.thrusterController.getAccel()
-			this.aAccel = automaticAccels.angular
-			this.accel = automaticAccels.linear
-		}
+		if (this.primary && !this.thrusterController.manualControlDisabled) this.manualControls() //use the data from keyboard control for testing
+		const thusterAccels = this.thrusterController.getAccel()
+		this.aAccel = thusterAccels.angular
+		this.accel = thusterAccels.linear
 
 		this.defenceController.defenceUpdate(
 			this.shipStatusInfo,
@@ -121,33 +118,34 @@ export default class ColonyShip extends Sprite {
 		this.navigationController.navigationUpdate(this.shipStatusInfo, this.tryWarp.bind(this), this.process.solarSystem.getMapData(this.pos))
 		this.propulsionController.propulsionUpdate(this.shipStatusInfo, this.thrusterController.setThruster.bind(this.thrusterController))
 		this.boundaries()
-		this.turretControls.update()
 		this.activeSensors.update()
 		this.passiveSensors.update()
 		super.update() //parent update;
+		this.turretControls.update()
+		this.thrusterController.update()
 	}
-	manualControls(): boolean {
-		let used = false
+	manualControls() {
 		if (!this.game.inputs) throw Error('Game inputs not defined')
 		if (this.game.inputs.pressed.left) {
-			used = true
-			this.aAccel = -0.001
-			this.energyUsed += 0.04
+			this.thrusterController.thrusterPower.counterClockwise = 100
+			this.thrusterController.thrusterPower.clockwise = 0
 		} else if (this.game.inputs.pressed.right) {
-			used = true
-			this.aAccel = 0.001
-			this.energyUsed += 0.04
-		} else this.aAccel = 0
+			this.thrusterController.thrusterPower.clockwise = 100
+			this.thrusterController.thrusterPower.counterClockwise = 0
+		} else {
+			this.thrusterController.thrusterPower.clockwise = 0
+			this.thrusterController.thrusterPower.counterClockwise = 0
+		}
 		if (this.game.inputs.pressed.up) {
-			used = true
-			this.accel = Vector2.right.rotateTo(this.angle).scale(0.01)
-			this.energyUsed += 0.04
+			this.thrusterController.thrusterPower.main = 100
+			this.thrusterController.thrusterPower.bow = 0
 		} else if (this.game.inputs.pressed.down) {
-			used = true
-			this.accel = Vector2.right.rotateTo(this.angle).scale(-0.005)
-			this.energyUsed += 0.04
-		} else this.accel.set(0, 0)
-		return used
+			this.thrusterController.thrusterPower.bow = 100
+			this.thrusterController.thrusterPower.main = 0
+		} else {
+			this.thrusterController.thrusterPower.bow = 0
+			this.thrusterController.thrusterPower.main = 0
+		}
 	}
 	updateShipStatusInfo() {
 		this.shipStatusInfo.solarSystemName = this.process.solarSystem.name
@@ -242,6 +240,7 @@ export default class ColonyShip extends Sprite {
 		this.passiveSensors.draw()
 		super.draw()
 		this.turretControls.draw()
+		this.thrusterController.draw()
 	}
 }
 

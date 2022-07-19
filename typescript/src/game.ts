@@ -78,7 +78,7 @@ export default class Game {
 			this.watchShip = this.ships[0]
 		}
 		if (this.watchShip) this.watchShip.primary = true
-		else throw Error('Watch ship not found')
+		else throw Error(`Watch ship <${watchShipName}> not found`)
 
 		this.processes.forEach((process) => {
 			if (process.solarSystem.name === this.solarSystemName) process.start(this.ships, this.watchShip)
@@ -174,10 +174,10 @@ export default class Game {
 		if (!this.watchShip) throw Error('Watch Ship Not Defined')
 		this.processes.forEach((process) => process.update())
 		//let camOffset = new Vector2(-this.watchShip.speed.x * this.unit * this.dragConst, -this.watchShip.speed.y * this.unit * this.dragConst);
-		let candidateX = (this.watchShip.pos.x - this.width / this.zoom / 2) / 10 * this.unit
-		let candidateY = (this.watchShip.pos.y - this.height / this.zoom / 2) * this.unit
-		candidateX = candidateX <= 0 ? 0 : candidateX / this.unit * 10 <= this.width - this.width / this.zoom ? candidateX : (this.width - this.width / this.zoom) / 10 * this.unit
-		candidateY = candidateY <= 0 ? 0 : candidateY / this.unit * 10 <= this.height - this.height / this.zoom ? candidateY : (this.height - this.height / this.zoom) / 10 * this.unit
+		let candidateX = ((this.watchShip.pos.x - this.width / this.zoom / 2) / 10) * this.unit
+		let candidateY = ((this.watchShip.pos.y - this.height / this.zoom / 2) / 10) * this.unit
+		candidateX = candidateX <= 0 ? 0 : (candidateX / this.unit) * 10 <= this.width - this.width / this.zoom ? candidateX : ((this.width - this.width / this.zoom) / 10) * this.unit
+		candidateY = candidateY <= 0 ? 0 : (candidateY / this.unit) * 10 <= this.height - this.height / this.zoom ? candidateY : ((this.height - this.height / this.zoom) / 10) * this.unit
 		this.camera.x = candidateX
 		this.camera.y = candidateY
 		this.frame++

@@ -8,7 +8,6 @@ export default class AsteroidLauncher {
         this.currentDelay = 0;
         this.game = game;
         this.pos = pos;
-        console.log(this.game.height, this.game.width);
         if (this.pos.x > 0 && this.pos.x < this.game.width && this.pos.y > 0 && this.pos.y < this.game.height) {
             throw Error(`Can't build asteroid launcher within map, that is buggy, and instead of solving it I just say we don't allow the bug. Pos: ${pos.x}, ${pos.y}`);
         }

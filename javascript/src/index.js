@@ -364,7 +364,7 @@ let DOM = {
             this.previousDamage[0] = 0; // Stop the damage from blinking when you start!
             if (!game.galaxy)
                 throw Error('Game galaxy not defined');
-            this.gameMenuTitle(galaxies[galaxy], game.galaxy.startingSolarSystem);
+            this.gameMenuTitle(galaxies[galaxy], game.galaxy.startingSolarSystem.name);
             startAnimating();
             this.newMenu();
             this.gameInitialized = true;
@@ -384,7 +384,7 @@ let DOM = {
                 this.gameInitialized = true; // Cause this.resetGame(); sets it to false.
                 game.start(galaxies[galaxy], this.data['allShips'], this.data['defaultShip']);
                 this.previousDamage[0] = 0; // Stop the damage from blinking when you start!
-                this.gameMenuTitle(galaxies[galaxy], game.galaxy.startingSolarSystem);
+                this.gameMenuTitle(galaxies[galaxy], game.galaxy.startingSolarSystem.name);
             }
             game.paused = false;
             this.newMenu();
