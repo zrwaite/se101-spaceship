@@ -115,7 +115,7 @@ export default class ColonyShip extends Sprite {
 			this.turretControls.fireTorpedo.bind(this.turretControls)
 		)
 		this.sensorsController.sensorsUpdate(this.shipStatusInfo, this.activeSensors.scan.bind(this.activeSensors), this.passiveSensors.scan.bind(this.passiveSensors))
-		this.navigationController.navigationUpdate(this.shipStatusInfo, this.tryWarp.bind(this), this.process.solarSystem.getMapData(this.pos))
+		this.navigationController.navigationUpdate(this.shipStatusInfo, this.tryWarp.bind(this), this.tryLand.bind(this), this.process.solarSystem.getMapData(this.pos))
 		this.propulsionController.propulsionUpdate(this.shipStatusInfo, this.thrusterController.setThruster.bind(this.thrusterController))
 		this.boundaries()
 		this.activeSensors.update()
@@ -223,7 +223,7 @@ export default class ColonyShip extends Sprite {
 					return new APIResponse(400, ['Too fast!'])
 				} else {
 					this.land(planet)
-					return new APIResponse(200, [], 'landed', true)
+					return new APIResponse(200, [], undefined, true)
 				}
 			}
 		})
@@ -245,3 +245,4 @@ export default class ColonyShip extends Sprite {
 }
 
 export type tryWarpType = () => UndefinedAPIResponse
+export type tryLandType = () => UndefinedAPIResponse // Maybe give back planet data?

@@ -10,7 +10,7 @@ export default class PassiveSensors extends RenderedObject {
         this.game = game;
     }
     scan() {
-        this.parentShip.energyUsed += 100;
+        this.parentShip.energyUsed += 10;
         // Ensure solar system is initialized before performing scan
         if (!this.parentShip.solarSystem)
             return new APIResponse(400, ['Cannot perform PassiveSensors scan until solar system initialized'], []);

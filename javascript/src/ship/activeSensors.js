@@ -31,7 +31,7 @@ export default class ActiveSensors extends RenderedObject {
         this.pos = __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos;
     }
     scan(heading, arc, range) {
-        __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").energyUsed += Math.round((arc * range * range) / 500);
+        __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").energyUsed += Math.round((arc * range * range) / 4000);
         // Ensure solar system is initialized before performing scan
         if (!__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").solarSystem)
             return new APIResponse(400, ['Cannot perform ActiveSensors scan until solar system initialized'], []);
@@ -58,10 +58,10 @@ export default class ActiveSensors extends RenderedObject {
         // To find angle, find angle difference between the vector from ship to object & current ship heading
         // y coordinate is inverted due to the flipped board axis (greater y value indicates lower position)
         let readings = [];
-        for (const spaceObject of [...__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").process.delObjects, ...__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").process.staticObjects]) {
+        const allDetectableSpaceObjects = [...__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").process.delObjects, ...__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").process.staticObjects].filter((obj) => !(obj instanceof Torpedo));
+        console.log(allDetectableSpaceObjects.length);
+        for (const spaceObject of allDetectableSpaceObjects) {
             if (__classPrivateFieldGet(this, _ActiveSensors_instances, "m", _ActiveSensors_pointInScanSlice).call(this, spaceObject.pos)) {
-                if (spaceObject instanceof Torpedo)
-                    break;
                 const angle = spaceObject.pos.angleToPoint(__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos);
                 const distance = __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos.distance(spaceObject.pos);
                 const amplitude = spaceObject.mass / distance;
@@ -70,6 +70,8 @@ export default class ActiveSensors extends RenderedObject {
                 readings.push(new EMSReading(angle, amplitude, velocity, spaceObject.radius, distance, scanSignature));
             }
         }
+        if (readings.length == 0)
+            console.log('none');
         return new APIResponse(200, [], readings, true);
     }
     draw() {

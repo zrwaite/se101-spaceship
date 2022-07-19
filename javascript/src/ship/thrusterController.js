@@ -104,6 +104,10 @@ export default class ThrusterController extends RenderedObject {
         return new APIResponse(200, [], { power: usedPower, powerLimited: power > 100 }, true);
     }
     getAccel() {
+        this.parentShip.energyUsed += this.thrusterPower.main / 200;
+        this.parentShip.energyUsed += this.thrusterPower.bow / 400;
+        this.parentShip.energyUsed += this.thrusterPower.clockwise / 1000;
+        this.parentShip.energyUsed += this.thrusterPower.counterClockwise / 5000;
         return {
             linear: Vector2.right.rotateTo(this.parentShip.angle).scale(0.0001 * this.thrusterPower.main + -0.00005 * this.thrusterPower.bow),
             angular: 0.00001 * this.thrusterPower.clockwise + -0.00001 * this.thrusterPower.counterClockwise,

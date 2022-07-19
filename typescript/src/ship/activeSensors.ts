@@ -38,7 +38,7 @@ export default class ActiveSensors extends RenderedObject {
 		return true
 	}
 	scan(heading: number, arc: number, range: number): activeScanResponse {
-		this.#parentShip.energyUsed += Math.round((arc * range * range) / 500)
+		this.#parentShip.energyUsed += Math.round((arc * range * range) / 4000)
 		// Ensure solar system is initialized before performing scan
 		if (!this.#parentShip.solarSystem) return new APIResponse(400, ['Cannot perform ActiveSensors scan until solar system initialized'], [])
 		if (arc > Math.PI) return new APIResponse(400, ['arc is too large. Max: Pi'], [])
@@ -60,9 +60,10 @@ export default class ActiveSensors extends RenderedObject {
 		// To find angle, find angle difference between the vector from ship to object & current ship heading
 		// y coordinate is inverted due to the flipped board axis (greater y value indicates lower position)
 		let readings: EMSReading[] = []
-		for (const spaceObject of [...this.#parentShip.process.delObjects, ...this.#parentShip.process.staticObjects]) {
+		const allDetectableSpaceObjects = [...this.#parentShip.process.delObjects, ...this.#parentShip.process.staticObjects].filter((obj) => !(obj instanceof Torpedo))
+		console.log(allDetectableSpaceObjects.length)
+		for (const spaceObject of allDetectableSpaceObjects) {
 			if (this.#pointInScanSlice(spaceObject.pos)) {
-				if (spaceObject instanceof Torpedo) break
 				const angle = spaceObject.pos.angleToPoint(this.#parentShip.pos)
 				const distance = this.#parentShip.pos.distance(spaceObject.pos)
 				const amplitude = spaceObject.mass / distance
@@ -71,6 +72,7 @@ export default class ActiveSensors extends RenderedObject {
 				readings.push(new EMSReading(angle, amplitude, velocity, spaceObject.radius, distance, scanSignature))
 			}
 		}
+		if (readings.length == 0) console.log('none')
 		return new APIResponse(200, [], readings, true)
 	}
 	draw() {

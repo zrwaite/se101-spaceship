@@ -218,12 +218,12 @@ export default class SolarSystem {
             case 'Sol System':
                 this.asteroids.push(...[
                     new Asteroid(new Vector2(0, 0), 0, new Vector2(210, 200), this.game),
-                    new Asteroid(new Vector2(0, 0), 0, new Vector2(700, 40), this.game),
-                    new Asteroid(new Vector2(0, 0), 0, new Vector2(370, 480), this.game),
-                    new Asteroid(new Vector2(0, 0), 0, new Vector2(510, 50), this.game),
-                    new Asteroid(new Vector2(0, 0), 0, new Vector2(110, 70), this.game),
-                    new Asteroid(new Vector2(0, 0), 0, new Vector2(460, 130), this.game),
-                    new Asteroid(new Vector2(0, 0), 0, new Vector2(460, 310), this.game),
+                    new Asteroid(new Vector2(0.1, 0.1), 0, new Vector2(700, 40), this.game),
+                    new Asteroid(new Vector2(0, 0.1), 0, new Vector2(370, 480), this.game),
+                    new Asteroid(new Vector2(0.1, 0), 0, new Vector2(510, 50), this.game),
+                    new Asteroid(new Vector2(-0.1, -0.1), 0, new Vector2(110, 70), this.game),
+                    new Asteroid(new Vector2(-0.1, 0.1), 0, new Vector2(460, 130), this.game),
+                    new Asteroid(new Vector2(0.1, -0.1), 0, new Vector2(460, 310), this.game),
                 ]);
                 this.warpGates.push(...[new WarpGate('Alpha Centauri System', new Vector2(243, 223), this.game)]);
                 break;

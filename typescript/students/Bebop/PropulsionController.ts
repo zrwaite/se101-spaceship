@@ -1,4 +1,4 @@
-import { Vector2 } from '../helpers.js'
+import { Vector2, withinPiRange } from '../helpers.js'
 import PropulsionController from '../../src/subsystems/propulsionController.js'
 import { ShipStatus, setThrustersType } from '../types.js'
 import YourDefenceController from './DefenseController.js'
@@ -16,22 +16,30 @@ export default class YourPropulsionController extends PropulsionController {
 
 	propulsionUpdate(shipStatusInfo: ShipStatus, setThrusters: setThrustersType) {
 		if (this.sensors) {
-			console.log(shipStatusInfo.angle, this.sensors.idealHeading)
-			if (shipStatusInfo.angle < this.sensors.idealHeading) {
-				this.clockwise = 10
-				this.counterClockwise = 0
-			} else {
+			const angleDiff = withinPiRange(shipStatusInfo.angle - this.sensors.idealHeading)
+			if (shipStatusInfo.angularVelocity > 0.03) {
+				console.log('too fast')
 				this.clockwise = 0
-				this.counterClockwise = 10
+				this.counterClockwise = 100
+			} else if (shipStatusInfo.angularVelocity < -0.03) {
+				console.log('too fast')
+				this.clockwise = 100
+				this.counterClockwise = 0
+			} else if (Math.abs(shipStatusInfo.angularVelocity) < 0.02) {
+				if (angleDiff < 0) {
+					this.clockwise = Math.abs(shipStatusInfo.angularVelocity * 500 + angleDiff * 50)
+					this.counterClockwise = 0
+				} else {
+					this.clockwise = 0
+					this.counterClockwise = shipStatusInfo.angularVelocity * 500 + angleDiff * 50
+				}
+				if (this.sensors.planetAhead) {
+					setThrusters('main', this.sensors.planetDistance / 2)
+				} else setThrusters('main', 20)
 			}
 			setThrusters('clockwise', this.clockwise)
 			setThrusters('counterClockwise', this.counterClockwise)
-			if (shipStatusInfo.linearVelocity.magnitude() < 1) {
-				setThrusters('main', 20)
-			}
 		}
-		// console.log(this.clockwise + ', ' + this.counterClockwise)
-		// setThrusters('clockwise', 100)
 		//Student code goes here
 	}
 }
