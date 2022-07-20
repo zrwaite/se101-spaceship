@@ -12,35 +12,8 @@ export default class YourSensorsController extends SensorsController {
 	asteroidAhead = false
 	asteroidDirection: number = 0
 	timer = 0
-	idealHeading: number = 0
 	planetAhead = false
 	planetDistance = 0
 	planetDirection = 0
-	sensorsUpdate(shipStatusInfo: ShipStatus, activeScan: activeScanType, passiveScan: passiveScanType) {
-		//Student code goes here
-		this.timer++
-		if (this.timer % 50 == 0) {
-			this.asteroidAhead = false
-			this.planetAhead = false
-			let startAngle = withinPiRange(shipStatusInfo.angle - Math.PI / 4)
-			let arc = Math.PI / 2
-			let res = activeScan(startAngle, arc, 300)
-			if (res.response.length > 0) {
-				res.response.sort((a, b) => b.amplitude - a.amplitude)
-				const asteroidTarget = res.response[res.response.length - 1]
-				const planetTarget = res.response[0]
-				this.asteroidAhead = true
-				this.asteroidDirection = asteroidTarget.angle
-				this.planetDirection = planetTarget.angle
-				if (planetTarget.closeRange) {
-					this.planetAhead = true
-					this.planetDistance = planetTarget.closeRange.distance
-				}
-			}
-		}
-		if (this.timer % 50 == 25) {
-			let res = passiveScan()
-			this.idealHeading = res.response[0].heading
-		}
-	}
+	sensorsUpdate(shipStatusInfo: ShipStatus, activeScan: activeScanType, passiveScan: passiveScanType) {}
 }

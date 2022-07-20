@@ -3,6 +3,6 @@ export default class PassiveSensorReading {
 	gravity
 	constructor(angle: number, gravity: number) {
 		this.heading = angle //number
-		this.gravity = gravity //GravitySignature;
+		this.gravity = gravity // mass/distance;
 	}
 }

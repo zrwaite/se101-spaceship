@@ -11,19 +11,5 @@ export default class YourDefenceController extends DefenceController {
 	propulsion?: YourPropulsionController
 
 	torpedoDelay = 0
-	defenceUpdate(shipStatusInfo: ShipStatus, aimTurret: aimTurretType, getTubeCooldown: getTubeCooldownType, fireTorpedo: fireTorpedoType) {
-		if (this.sensors?.asteroidAhead) {
-			aimTurret(this.sensors.asteroidDirection)
-			if (this.torpedoDelay === 0) {
-				for (let i = 0; i < 4; i++) {
-					let tubeCooldown = getTubeCooldown(i)
-					if (tubeCooldown.response === 0) {
-						fireTorpedo(i)
-						this.torpedoDelay = 20
-						break
-					}
-				}
-			} else this.torpedoDelay--
-		}
-	}
+	defenceUpdate(shipStatusInfo: ShipStatus, aimTurret: aimTurretType, getTubeCooldown: getTubeCooldownType, fireTorpedo: fireTorpedoType) {}
 }

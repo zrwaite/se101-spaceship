@@ -65,10 +65,9 @@ export default class ActiveSensors extends RenderedObject {
 			if (this.#pointInScanSlice(spaceObject.pos)) {
 				const angle = spaceObject.pos.angleToPoint(this.#parentShip.pos)
 				const distance = this.#parentShip.pos.distance(spaceObject.pos)
-				const amplitude = spaceObject.mass / distance
 				const scanSignature = spaceObject instanceof Planet ? spaceObject.composition : undefined
 				const velocity = spaceObject instanceof Planet || spaceObject instanceof WarpGate ? Vector2.zero : spaceObject.speed
-				readings.push(new EMSReading(angle, amplitude, velocity, spaceObject.radius, distance, scanSignature))
+				readings.push(new EMSReading(angle, velocity, spaceObject.radius, distance, scanSignature))
 			}
 		}
 		return new APIResponse(200, [], readings, true)

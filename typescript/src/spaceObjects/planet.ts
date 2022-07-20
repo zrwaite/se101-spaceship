@@ -7,20 +7,21 @@ import Game from '../game.js'
 export default class Planet extends RenderedObject {
 	/* Default Params */
 	mass: number
-	size = new Vector2(50, 50)
-	radius = 15
 	ctx = 'planets'
 	name: string
+	radius: number
 
 	/* Other attributes */
 	process: Process | null = null
 	composition
-	constructor(planetName: string, mass: number, composition: PlanetComposition, ...args: [pos: Vector2, game: Game]) {
+	constructor(planetName: string, radius: number, composition: PlanetComposition, ...args: [pos: Vector2, game: Game]) {
 		super(...args)
 		this.image = this.game.images[planetName] || this.game.images['planet1']
 		this.name = planetName
 		this.composition = composition
-		this.mass = mass
+		this.mass = (Math.PI * radius * radius * radius) / 10
+		this.size = new Vector2(radius * 3, radius * 3)
+		this.radius = radius
 	}
 	initialize(process: Process) {
 		this.process = process

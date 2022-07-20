@@ -13,11 +13,5 @@ export default class YourNavigationController extends NavigationController {
 	propulsion?: YourPropulsionController
 
 	timer = 0
-	navigationUpdate(shipStatusInfo: ShipStatus, warp: tryWarpType, land: tryLandType, mapData: MapData) {
-		if (this.sensors?.planetAhead && this.sensors.planetDistance < 25) {
-			console.log(warp())
-			console.log(land())
-		}
-		//Student code goes here
-	}
+	navigationUpdate(shipStatusInfo: ShipStatus, warp: tryWarpType, land: tryLandType, mapData: MapData) {}
 }
