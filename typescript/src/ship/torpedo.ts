@@ -12,7 +12,7 @@ const EXPLOSION_MAX_SCALE = 10
 export default class Torpedo extends Sprite {
 	/* Constructor Params */
 	parentShip: ColonyShip
-	fuseFrameDuration
+	fuseFrameDuration = 0
 	frameCreated
 
 	/* Other attributes */
@@ -26,13 +26,12 @@ export default class Torpedo extends Sprite {
 	frameExploded = 0
 	process: Process | null = null
 
-	constructor(fuseFrameDuration = 0, parentShip: ColonyShip, velocity: Vector2, ...args: [pos: Vector2, game: Game]) {
+	constructor(parentShip: ColonyShip, velocity: Vector2, ...args: [pos: Vector2, game: Game]) {
 		super(...args)
 		this.speed = velocity
 		this.angle = velocity.angle() // torpedoes point in the direction they are moving
 		this.parentShip = parentShip
 		this.image = this.game.images['torpedo']
-		this.fuseFrameDuration = fuseFrameDuration
 		this.frameCreated = this.parentShip.game.frame
 	}
 	update() {

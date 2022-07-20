@@ -53,7 +53,7 @@ export default class TurretControls extends RenderedObject {
             if (tubeCooldownResponse.response === 0) {
                 const relativeVelocity = new Vector2(0, this.launchSpeed).rotateTo(this.angle);
                 const torpedoVelocity = relativeVelocity.add(this.parentShip.speed);
-                const newTorpedo = new Torpedo(FUSE_FRAME_DURATION, this.parentShip, torpedoVelocity, this.parentShip.pos, this.parentShip.game);
+                const newTorpedo = new Torpedo(this.parentShip, torpedoVelocity, this.parentShip.pos, this.parentShip.game);
                 this.parentShip.process.spawnDeletableObject(newTorpedo);
                 this.parentShip.torpedoesFired++;
                 this.parentShip.energyUsed += 8;

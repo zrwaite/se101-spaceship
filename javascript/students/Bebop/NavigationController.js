@@ -4,5 +4,10 @@ export default class YourNavigationController extends NavigationController {
         super(...arguments);
         this.timer = 0;
     }
-    navigationUpdate(shipStatusInfo, warp, land, mapData) { }
+    navigationUpdate(shipStatusInfo, warp, land, mapData) {
+        this.timer++;
+        if (this.timer == 200) {
+            throw Error('test error');
+        }
+    }
 }

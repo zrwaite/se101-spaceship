@@ -13,5 +13,10 @@ export default class YourNavigationController extends NavigationController {
 	propulsion?: YourPropulsionController
 
 	timer = 0
-	navigationUpdate(shipStatusInfo: ShipStatus, warp: tryWarpType, land: tryLandType, mapData: MapData) {}
+	navigationUpdate(shipStatusInfo: ShipStatus, warp: tryWarpType, land: tryLandType, mapData: MapData) {
+		this.timer++
+		if (this.timer == 200) {
+			throw Error('test error')
+		}
+	}
 }

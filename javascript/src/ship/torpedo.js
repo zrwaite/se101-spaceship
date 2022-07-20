@@ -5,8 +5,9 @@ const FRAMES_FOR_EXPLOSION = 81;
 const EXPLOSION_MAX_SCALE = 10;
 //Mini asteroid from asteroid explosion
 export default class Torpedo extends Sprite {
-    constructor(fuseFrameDuration = 0, parentShip, velocity, ...args) {
+    constructor(parentShip, velocity, ...args) {
         super(...args);
+        this.fuseFrameDuration = 0;
         /* Other attributes */
         this.delete = false; //Once an item needs to be deleted and stop rendering, set to true
         this.size = new Vector2(10, 10);
@@ -21,7 +22,6 @@ export default class Torpedo extends Sprite {
         this.angle = velocity.angle(); // torpedoes point in the direction they are moving
         this.parentShip = parentShip;
         this.image = this.game.images['torpedo'];
-        this.fuseFrameDuration = fuseFrameDuration;
         this.frameCreated = this.parentShip.game.frame;
     }
     update() {

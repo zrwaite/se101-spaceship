@@ -5,6 +5,7 @@ import ActiveSensors from './activeSensors.js';
 import TurretControls from './turretControls.js';
 import ThrusterController from './thrusterController.js';
 import APIResponse from '../helpers/response.js';
+import Torpedo from './torpedo.js';
 export default class ColonyShip extends Sprite {
     constructor(name, process, DefenceClass, NavigationClass, PropulsionClass, SensorsClass, ...args) {
         var _a;
@@ -21,6 +22,7 @@ export default class ColonyShip extends Sprite {
         this.maxASpeed = 0.3;
         this.maxSpeed = 5;
         this.energyTimeCount = 0;
+        this.destructed = false;
         this.name = name;
         this.process = process;
         this.defenceController = new DefenceClass();
@@ -55,6 +57,8 @@ export default class ColonyShip extends Sprite {
         this.solarSystem = this.process.solarSystem;
     }
     update() {
+        if (this.destructed)
+            return;
         this.updateShipStatusInfo();
         this.energyTimeCount++;
         if (this.energyTimeCount > 4) {
@@ -66,10 +70,16 @@ export default class ColonyShip extends Sprite {
         const thusterAccels = this.thrusterController.getAccel();
         this.aAccel = thusterAccels.angular;
         this.accel = thusterAccels.linear;
-        this.defenceController.defenceUpdate(this.shipStatusInfo, this.turretControls.aimTurret.bind(this.turretControls), this.turretControls.getTubeCooldown.bind(this.turretControls), this.turretControls.fireTorpedo.bind(this.turretControls));
-        this.sensorsController.sensorsUpdate(this.shipStatusInfo, this.activeSensors.scan.bind(this.activeSensors), this.passiveSensors.scan.bind(this.passiveSensors));
-        this.navigationController.navigationUpdate(this.shipStatusInfo, this.tryWarp.bind(this), this.tryLand.bind(this), this.process.solarSystem.getMapData(this.pos));
-        this.propulsionController.propulsionUpdate(this.shipStatusInfo, this.thrusterController.setThruster.bind(this.thrusterController));
+        try {
+            this.defenceController.defenceUpdate(this.shipStatusInfo, this.turretControls.aimTurret.bind(this.turretControls), this.turretControls.getTubeCooldown.bind(this.turretControls), this.turretControls.fireTorpedo.bind(this.turretControls));
+            this.sensorsController.sensorsUpdate(this.shipStatusInfo, this.activeSensors.scan.bind(this.activeSensors), this.passiveSensors.scan.bind(this.passiveSensors));
+            this.navigationController.navigationUpdate(this.shipStatusInfo, this.tryWarp.bind(this), this.tryLand.bind(this), this.process.solarSystem.getMapData(this.pos));
+            this.propulsionController.propulsionUpdate(this.shipStatusInfo, this.thrusterController.setThruster.bind(this.thrusterController));
+        }
+        catch (e) {
+            console.error(`Code malfunction on ship ${this.name}: ${e}. \n Self destructing.`);
+            this.selfDestruct();
+        }
         this.boundaries();
         this.activeSensors.update();
         this.passiveSensors.update();
@@ -192,10 +202,18 @@ export default class ColonyShip extends Sprite {
         console.log(planet);
     }
     draw() {
+        if (this.destructed)
+            return;
         this.activeSensors.draw();
         this.passiveSensors.draw();
         super.draw();
         this.turretControls.draw();
         this.thrusterController.draw();
+    }
+    selfDestruct() {
+        const explosion = new Torpedo(this, Vector2.zero, this.pos, this.game);
+        explosion.explode();
+        this.process.spawnDeletableObject(explosion);
+        this.destructed = true;
     }
 }
