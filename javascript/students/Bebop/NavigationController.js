@@ -6,9 +6,9 @@ export default class YourNavigationController extends NavigationController {
     }
     navigationUpdate(shipStatusInfo, warp, land, mapData) {
         var _a;
-        if (((_a = this.sensors) === null || _a === void 0 ? void 0 : _a.planetAhead) && this.sensors.planetDistance < 30) {
-            warp();
-            land();
+        if (((_a = this.sensors) === null || _a === void 0 ? void 0 : _a.planetAhead) && this.sensors.planetDistance < 25) {
+            console.log(warp());
+            console.log(land());
         }
         //Student code goes here
     }

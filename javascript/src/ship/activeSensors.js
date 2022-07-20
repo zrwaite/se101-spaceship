@@ -59,7 +59,6 @@ export default class ActiveSensors extends RenderedObject {
         // y coordinate is inverted due to the flipped board axis (greater y value indicates lower position)
         let readings = [];
         const allDetectableSpaceObjects = [...__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").process.delObjects, ...__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").process.staticObjects].filter((obj) => !(obj instanceof Torpedo));
-        console.log(allDetectableSpaceObjects.length);
         for (const spaceObject of allDetectableSpaceObjects) {
             if (__classPrivateFieldGet(this, _ActiveSensors_instances, "m", _ActiveSensors_pointInScanSlice).call(this, spaceObject.pos)) {
                 const angle = spaceObject.pos.angleToPoint(__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos);
@@ -70,8 +69,6 @@ export default class ActiveSensors extends RenderedObject {
                 readings.push(new EMSReading(angle, amplitude, velocity, spaceObject.radius, distance, scanSignature));
             }
         }
-        if (readings.length == 0)
-            console.log('none');
         return new APIResponse(200, [], readings, true);
     }
     draw() {

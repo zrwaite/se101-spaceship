@@ -174,7 +174,6 @@ export default class ColonyShip extends Sprite {
     }
     tryLand() {
         this.energyUsed += 20;
-        console.log(this.speed.magnitude());
         this.process.solarSystem.planets.forEach((planet) => {
             if (this.game.ifCollide(this, planet)) {
                 if (this.speed.magnitude() > 0.5) {

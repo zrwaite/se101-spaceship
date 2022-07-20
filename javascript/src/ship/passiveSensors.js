@@ -22,12 +22,14 @@ export default class PassiveSensors extends RenderedObject {
         // y coordinate is inverted due to the flipped board axis (greater y value indicates lower position)
         let readings = [];
         for (const planet of this.parentShip.solarSystem.planets) {
-            let angle = planet.pos.angleToPoint(this.parentShip.pos);
-            readings.push(new PassiveSensorReading(angle, planet.mass));
+            const angle = planet.pos.angleToPoint(this.parentShip.pos);
+            const distance = planet.pos.distance(this.parentShip.pos);
+            readings.push(new PassiveSensorReading(angle, planet.mass / distance));
         }
         for (const warpgate of this.parentShip.solarSystem.warpGates) {
-            let angle = warpgate.pos.angleToPoint(this.parentShip.pos);
-            readings.push(new PassiveSensorReading(angle, warpgate.gravity));
+            const angle = warpgate.pos.angleToPoint(this.parentShip.pos);
+            const distance = warpgate.pos.distance(this.parentShip.pos);
+            readings.push(new PassiveSensorReading(angle, warpgate.mass / distance));
         }
         return new APIResponse(200, [], readings, true);
     }
@@ -35,7 +37,7 @@ export default class PassiveSensors extends RenderedObject {
         if (!this.cooldown)
             return;
         // Set the context's translation.
-        let ctx = this.game.contexts[this.ctx];
+        const ctx = this.game.contexts[this.ctx];
         ctx.setTransform(1, 0, 0, 1, ((this.pos.x / 10) * this.game.unit - this.game.camera.x) * this.game.zoom, ((this.pos.y / 10) * this.game.unit - this.game.camera.y) * this.game.zoom);
         ctx.fillStyle = `rgba(0, 0, 255, ${this.cooldown / 100})`;
         ctx.lineWidth = 2;

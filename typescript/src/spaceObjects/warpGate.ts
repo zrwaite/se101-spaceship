@@ -12,8 +12,7 @@ export default class WarpGate extends RenderedObject {
 	ctx = 'planets'
 	size = new Vector2(50, 50)
 	radius = 15
-	mass = 5
-	gravity = 100
+	mass = 100
 	/* Other attributes */
 	process: Process | null = null
 

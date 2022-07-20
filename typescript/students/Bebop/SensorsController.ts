@@ -15,6 +15,7 @@ export default class YourSensorsController extends SensorsController {
 	idealHeading: number = 0
 	planetAhead = false
 	planetDistance = 0
+	planetDirection = 0
 	sensorsUpdate(shipStatusInfo: ShipStatus, activeScan: activeScanType, passiveScan: passiveScanType) {
 		//Student code goes here
 		this.timer++
@@ -25,13 +26,15 @@ export default class YourSensorsController extends SensorsController {
 			let arc = Math.PI / 2
 			let res = activeScan(startAngle, arc, 300)
 			if (res.response.length > 0) {
-				res.response.sort((a, b) => a.amplitude - b.amplitude)
-				const target = res.response[0]
+				res.response.sort((a, b) => b.amplitude - a.amplitude)
+				const asteroidTarget = res.response[res.response.length - 1]
+				const planetTarget = res.response[0]
 				this.asteroidAhead = true
-				this.asteroidDirection = target.angle
-				if (target.closeRange) {
+				this.asteroidDirection = asteroidTarget.angle
+				this.planetDirection = planetTarget.angle
+				if (planetTarget.closeRange) {
 					this.planetAhead = true
-					this.planetDistance = target.closeRange.distance
+					this.planetDistance = planetTarget.closeRange.distance
 				}
 			}
 		}

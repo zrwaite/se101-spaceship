@@ -58,20 +58,20 @@ export default class SolarSystem {
 				)
 				this.planets.push(
 					...[
-						new Planet('planet1', 20, new Composition(0, 0, 0, 0, 0, 0), new Vector2(500, 100), this.game),
-						new Planet('planet2', 20, new Composition(0, 0, 0, 0, 0, 0), new Vector2(100, 500), this.game),
-						new Planet('planet3', 20, new Composition(0, 0, 0, 0, 0, 0), new Vector2(600, 350), this.game),
-						new Planet('planet4', 20, new Composition(0, 0, 0, 0, 0, 0), new Vector2(240, 190), this.game),
-						new Planet('planet5', 20, new Composition(0, 0, 0, 0, 0, 0), new Vector2(330, 440), this.game),
-						new Planet('planet6', 20, new Composition(0, 0, 0, 0, 0, 0), new Vector2(40, 90), this.game),
-						new Planet('planet7', 20, new Composition(0, 0, 0, 0, 0, 0), new Vector2(110, 60), this.game),
-						new Planet('planet8', 20, new Composition(0, 0, 0, 0, 0, 0), new Vector2(140, 230), this.game),
-						new Planet('planet9', 20, new Composition(0, 0, 0, 0, 0, 0), new Vector2(190, 210), this.game),
-						new Planet('planet10', 20, new Composition(0, 0, 0, 0, 0, 0), new Vector2(260, 460), this.game),
-						new Planet('planet11', 20, new Composition(0, 0, 0, 0, 0, 0), new Vector2(370, 270), this.game),
-						new Planet('planet12', 20, new Composition(0, 0, 0, 0, 0, 0), new Vector2(340, 400), this.game),
-						new Planet('planet13', 20, new Composition(0, 0, 0, 0, 0, 0), new Vector2(680, 110), this.game),
-						new Planet('planet14', 20, new Composition(0, 0, 0, 0, 0, 0), new Vector2(630, 480), this.game),
+						new Planet('planet1', 25, new Composition(0, 0, 0, 0, 0, 0), new Vector2(500, 100), this.game),
+						new Planet('planet2', 24, new Composition(0, 0, 0, 0, 0, 0), new Vector2(100, 500), this.game),
+						new Planet('planet3', 30, new Composition(0, 0, 0, 0, 0, 0), new Vector2(600, 350), this.game),
+						new Planet('planet4', 35, new Composition(0, 0, 0, 0, 0, 0), new Vector2(240, 190), this.game),
+						new Planet('planet5', 15, new Composition(0, 0, 0, 0, 0, 0), new Vector2(330, 440), this.game),
+						new Planet('planet6', 40, new Composition(0, 0, 0, 0, 0, 0), new Vector2(40, 90), this.game),
+						new Planet('planet7', 28, new Composition(0, 0, 0, 0, 0, 0), new Vector2(110, 60), this.game),
+						new Planet('planet8', 18, new Composition(0, 0, 0, 0, 0, 0), new Vector2(140, 230), this.game),
+						new Planet('planet9', 22, new Composition(0, 0, 0, 0, 0, 0), new Vector2(190, 210), this.game),
+						new Planet('planet10', 21, new Composition(0, 0, 0, 0, 0, 0), new Vector2(260, 460), this.game),
+						new Planet('planet11', 22, new Composition(0, 0, 0, 0, 0, 0), new Vector2(370, 270), this.game),
+						new Planet('planet12', 23, new Composition(0, 0, 0, 0, 0, 0), new Vector2(340, 400), this.game),
+						new Planet('planet13', 24, new Composition(0, 0, 0, 0, 0, 0), new Vector2(680, 110), this.game),
+						new Planet('planet14', 25, new Composition(0, 0, 0, 0, 0, 0), new Vector2(630, 480), this.game),
 					]
 				)
 
@@ -185,7 +185,7 @@ export default class SolarSystem {
 				this.planets.push(
 					...[
 						new Planet('planet6', 20, new Composition(0, 0, 0, 0, 0, 0), new Vector2(690, 410), this.game),
-						new Planet('planet4', 20, new Composition(0, 0, 0, 0, 0, 0), new Vector2(80, 130), this.game),
+						new Planet('planet4', 25, new Composition(0, 0, 0, 0, 0, 0), new Vector2(80, 130), this.game),
 					]
 				)
 				this.warpGates.push(...[new WarpGate('Sol System', new Vector2(140, 370), this.game)])
@@ -235,7 +235,7 @@ export default class SolarSystem {
 				this.planets.push(
 					...[
 						new Planet('planet2', 20, new Composition(0, 0, 0, 0, 0, 0), new Vector2(450, 650), this.game),
-						new Planet('planet1', 20, new Composition(0, 0, 0, 0, 0, 0), new Vector2(80, 80), this.game),
+						new Planet('planet1', 25, new Composition(0, 0, 0, 0, 0, 0), new Vector2(80, 80), this.game),
 					]
 				)
 				break

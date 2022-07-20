@@ -50,6 +50,6 @@ export default class PlanetComposition {
         return Math.atan(0.1 * (num - 50)) + 1.5;
     }
     getDistribution2(num) {
-        return 20 / (((0.1 * (num - 15)) ** 2) + 5);
+        return 20 / ((0.1 * (num - 15)) ** 2 + 5);
     }
 }

@@ -1,15 +1,16 @@
 export default class Controller {
     constructor(game) {
         this.pressed = {
+            //Store if a key is pressed
             left: false,
             up: false,
             right: false,
             down: false,
             q: false,
-            e: false
+            e: false,
         };
         this.game = game;
-        document.addEventListener("keydown", (event) => {
+        document.addEventListener('keydown', (event) => {
             var _a, _b, _c;
             let pressCode = event.keyCode;
             if (pressCode === 37 || pressCode === 65) {
@@ -30,7 +31,8 @@ export default class Controller {
             else if (pressCode === 69) {
                 this.pressed.e = true;
             }
-            else if (pressCode === 32) { //Press space
+            else if (pressCode === 32) {
+                //Press space
                 (_a = this.game.watchShip) === null || _a === void 0 ? void 0 : _a.tryFire();
             }
             else if (pressCode === 77) {
@@ -40,7 +42,7 @@ export default class Controller {
                 (_c = this.game.watchShip) === null || _c === void 0 ? void 0 : _c.tryLand();
             }
         });
-        document.addEventListener("keyup", (event) => {
+        document.addEventListener('keyup', (event) => {
             let pressCode = event.keyCode;
             if (pressCode === 37 || pressCode === 65) {
                 this.pressed.left = false; // un-Press Left
