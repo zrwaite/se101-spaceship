@@ -1,25 +1,25 @@
 {
-  "name": "spaceshipjavascript",
-  "version": "1.0.0",
-  "description": "Replacement for the SE101 Godot Spaceship System",
-  "main": "src/index.js",
-  "scripts": {
-    "dev": "onchange '**/*.ts' -- npm run compile",
-    "compile": "tsc;"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zrwaite/SpaceshipJavascript.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "onchange": "^7.1.0",
-    "typescript": "^4.6.4"
-  },
-  "bugs": {
-    "url": "https://github.com/zrwaite/SpaceshipJavascript/issues"
-  },
-  "homepage": "https://github.com/zrwaite/SpaceshipJavascript#readme"
+	"name": "se101spaceship",
+	"version": "1.0.0",
+	"description": "Replacement for the SE101 Godot Spaceship System",
+	"main": "src/index.js",
+	"scripts": {
+		"dev": "onchange '**/*.ts' -- npm run compile",
+		"compile": "tsc;"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/zrwaite/SE101-Spaceship.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"onchange": "^7.1.0",
+		"typescript": "^4.6.4"
+	},
+	"bugs": {
+		"url": "https://github.com/zrwaite/SE101-Spaceship/issues"
+	},
+	"homepage": "https://github.com/zrwaite/SE101-Spaceship#readme"
 }
