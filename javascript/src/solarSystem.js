@@ -117,7 +117,16 @@ export default class SolarSystem {
                 ]);
                 break;
             case 'Groombridge System':
-                this.warpGates.push(...[new WarpGate('Kruger System', new Vector2(51, 11), this.game), new WarpGate('Aquarii System', new Vector2(14, 42), this.game)]);
+                this.warpGates.push(...[new WarpGate('Kruger System', new Vector2(51, 411), this.game), new WarpGate('Aquarii System', new Vector2(640, 80), this.game)]);
+                for (let i = 0; i < 12; i++) {
+                    const x = (i + 1) * 50;
+                    const y = Math.random() * 400 + 50;
+                    this.asteroids.push(new Asteroid(new Vector2(-x / 100, -y / 100), Math.random(), new Vector2(x, y), this.game));
+                    const xRatio = (720 / x) * 1;
+                    const yRatio = (540 / y) * 1;
+                    const ratio = Math.max(xRatio, yRatio);
+                    this.asteroidLaunchers.push(new AsteroidLauncher(this.game, new Vector2(x, y).scale(ratio), 2));
+                }
                 break;
             case 'Indi System':
                 this.asteroids.push(...[
@@ -193,7 +202,7 @@ export default class SolarSystem {
                 for (let i = 0; i < 5; i++) {
                     this.asteroids.push(new Asteroid(new Vector2(0, 0), 0, new Vector2(((51 + 41 * i) % 71) * 10, ((41 + 41 * i) % 53) * 10), this.game));
                 }
-                this.asteroidLaunchers.push(...[new AsteroidLauncher(this.game, new Vector2(80, 50), 4, 15), new AsteroidLauncher(this.game, new Vector2(260, 410), 7, 10)]);
+                this.asteroidLaunchers.push(...[new AsteroidLauncher(this.game, new Vector2(-80, 50), 4, 15), new AsteroidLauncher(this.game, new Vector2(-10, 410), 7, 10)]);
                 this.warpGates.push(...[
                     new WarpGate('Yennefer System', new Vector2(590, 190), this.game),
                     new WarpGate('Indi System', new Vector2(410, 410), this.game),
