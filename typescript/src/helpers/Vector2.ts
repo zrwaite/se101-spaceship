@@ -22,6 +22,9 @@ export default class Vector2 {
 	clone() {
 		return new Vector2(this.x, this.y)
 	}
+	equals(vector: Vector2) {
+		return this.x === vector.x && this.y === vector.y
+	}
 
 	add(vector: Vector2) {
 		return new Vector2(this.x + vector.x, this.y + vector.y)

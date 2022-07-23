@@ -9,5 +9,6 @@ export default class YourSensorsController extends SensorsController {
         this.planetDistance = 0;
         this.planetDirection = 0;
     }
-    sensorsUpdate(shipStatusInfo, activeScan, passiveScan) { }
+    sensorsUpdate(shipStatusInfo, activeScan, passiveScan) {
+    }
 }

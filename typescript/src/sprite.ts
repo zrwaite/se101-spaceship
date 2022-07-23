@@ -1,4 +1,5 @@
 import Game from './game.js'
+import { withinPiRange } from './helpers/Angles.js'
 import Vector2 from './helpers/Vector2.js'
 import RenderedObject from './renderedObject.js'
 export default class Sprite extends RenderedObject {
@@ -22,9 +23,7 @@ export default class Sprite extends RenderedObject {
 		this.aSpeed += this.aAccel
 		// Add speeds to positions
 		this.pos = this.pos.add(this.speed)
-		this.angle = this.angle + this.aSpeed
-		if (this.angle > Math.PI) this.angle = -2 * Math.PI + this.angle
-		if (this.angle < -Math.PI) this.angle = 2 * Math.PI - this.angle
+		this.angle = withinPiRange(this.angle + this.aSpeed)
 		this.boundsDetect() //Detect boundaries for position and speed
 		// delete sprites that are heavily oob
 		if (this.pos.x < -this.game.width || this.pos.x > 2 * this.game.width || this.pos.y < -this.game.height || this.pos.y > 2 * this.game.height) {
