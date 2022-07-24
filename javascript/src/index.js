@@ -403,6 +403,7 @@ let DOM = {
         for (let i = 0; i < 4 /* 4 turrets! */; i++) {
             entries[7].children[0].children[i].style.width = 100 - Math.floor((game.watchShip.turretControls.getTubeCooldown(i).response / game.watchShip.turretControls.cooldownFrames) * 100) + '%';
         }
+        this.gameMenuTitle((_a = game.galaxy) === null || _a === void 0 ? void 0 : _a.name, (_b = game.drawnProcess) === null || _b === void 0 ? void 0 : _b.solarSystem.name);
     },
     fadeInOut: function (func, params = [], middletime = 250) {
         let fade = this.elements['SolarFade'].classList;

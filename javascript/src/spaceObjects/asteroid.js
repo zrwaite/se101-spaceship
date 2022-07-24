@@ -24,7 +24,6 @@ export default class Asteroid extends Sprite {
     update() {
         //Add special update code here if needed
         super.update();
-        this.boundaries();
     }
     shatter() {
         // Create a bunch of meteors, somewhat randomly.
@@ -43,10 +42,6 @@ export default class Asteroid extends Sprite {
             else
                 throw Error('Process not defined');
         }
-    }
-    boundaries() {
-        if (this.pos.y > this.game.height + this.size.y || this.pos.y < -this.size.y || this.pos.x > this.game.width + this.size.x || this.pos.x < -this.size.x)
-            this.delete = true; // bounds detection for deletion
     }
     receiveDamage() {
         // asteroids have 1hp

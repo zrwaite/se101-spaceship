@@ -15,5 +15,6 @@ export default class YourSensorsController extends SensorsController {
 	planetAhead = false
 	planetDistance = 0
 	planetDirection = 0
-	sensorsUpdate(shipStatusInfo: ShipStatus, activeScan: activeScanType, passiveScan: passiveScanType) {}
+	sensorsUpdate(shipStatusInfo: ShipStatus, activeScan: activeScanType, passiveScan: passiveScanType) {
+	}
 }

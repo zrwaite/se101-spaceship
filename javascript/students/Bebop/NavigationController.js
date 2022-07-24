@@ -5,9 +5,5 @@ export default class YourNavigationController extends NavigationController {
         this.timer = 0;
     }
     navigationUpdate(shipStatusInfo, warp, land, mapData) {
-        this.timer++;
-        if (this.timer == 200) {
-            throw Error('test error');
-        }
     }
 }
