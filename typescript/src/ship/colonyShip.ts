@@ -238,8 +238,7 @@ export default class ColonyShip extends Sprite {
 	}
 
 	land(planet: Planet) {
-		alert('YOU WIN')
-		console.log(planet)
+    this.game.landSuccessful(planet)
 	}
 
 	draw() {

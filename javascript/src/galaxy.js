@@ -10,11 +10,11 @@ export default class Galaxy {
         this.name = galaxyName;
         this.game = game;
         switch (galaxyName) {
-            case 'Alpha':
-                this.solarSystemNames.push('Sol System', 'Alpha Centauri System', 'Kepler 438 System');
-                break;
             case 'test':
                 this.solarSystemNames.push('test');
+                break;
+            case 'Alpha':
+                this.solarSystemNames.push('Sol System', 'Alpha Centauri System', 'Kepler 438 System');
                 break;
             case 'Beta':
                 this.solarSystemNames.push("Barnard's Star System", 'Wolf 359 System', 'Sirius System', 'Luyten System');

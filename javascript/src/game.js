@@ -9,7 +9,7 @@ import Meteor from './spaceObjects/meteor.js';
 import Matrix2 from './helpers/Matrix2.js';
 const DMG_COEFFICIENT = 20;
 export default class Game {
-    constructor(width, height, images, contexts) {
+    constructor(width, height, images, contexts, landSuccessful) {
         /* Default Attributes */
         this.ships = []; // Array of ship objects
         // Animation Elements (UI uses these too)
@@ -34,6 +34,7 @@ export default class Game {
         this.height = height * 10; // in units
         this.images = images;
         this.contexts = contexts;
+        this.landSuccessful = landSuccessful;
     }
     start(galaxyName, allShips, watchShipName) {
         this.allShips = allShips;

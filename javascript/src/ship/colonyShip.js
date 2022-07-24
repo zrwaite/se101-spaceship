@@ -198,8 +198,7 @@ export default class ColonyShip extends Sprite {
         return new APIResponse(400, ['No planets in range']);
     }
     land(planet) {
-        alert('YOU WIN');
-        console.log(planet);
+        this.game.landSuccessful(planet);
     }
     draw() {
         if (this.destructed)
