@@ -44,12 +44,14 @@ export default class Game {
 	watchShipName: string = ''
 	solarSystemName: string = ''
 	drawnProcess: Process | null = null
+  landSuccessful: Function
 
-	constructor(width: number, height: number, images: object, contexts: object) {
+	constructor(width: number, height: number, images: object, contexts: object, landSuccessful: Function) {
 		this.width = width * 10 // in units
 		this.height = height * 10 // in units
 		this.images = images
 		this.contexts = contexts
+    this.landSuccessful = landSuccessful
 	}
 
 	start(galaxyName: string, allShips: boolean, watchShipName: string) {

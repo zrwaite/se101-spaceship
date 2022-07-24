@@ -1,4 +1,6 @@
 import Game from './game.js'
+import ColonyShip from './ship/colonyShip.js'
+import Planet from './spaceObjects/planet.js'
 
 let game: Game | null // Initialized properly in DOM.doneLoad().
 
@@ -19,12 +21,11 @@ document.body.style.setProperty('--border', windowSize.border + 'px')
 document.body.style.setProperty('--width', windowSize.x + '')
 document.body.style.setProperty('--height', windowSize.y + '')
 
-let spritePath = 'assets/images/'
-let imagesLoaded = 0 // Updates as the images load, until all are loaded.
-let images: { [key: string]: HTMLImageElement } = {} // image locations, by name
-let contexts: { [key: string]: CanvasRenderingContext2D } = {} // contexts, by name
-let galaxies = ['test', 'Alpha', 'Beta', 'Gamma']
-let ships = [
+const spritePath = 'assets/images/'
+const images: { [key: string]: HTMLImageElement } = {} // image locations, by name
+const contexts: { [key: string]: CanvasRenderingContext2D } = {} // contexts, by name
+const galaxies = ['test', 'Alpha', 'Beta', 'Gamma']
+const ships = [
 	'Bebop',
 	'Bismark',
 	'Enterprise',
@@ -43,6 +44,41 @@ let ships = [
 	'Thunderbird III',
 	'Yamato',
 ]
+const imageSrcs = [
+	//["titleBackground", "UIImages/TitleBackground.png"],
+	['background', 'SpaceObjects/Space.png'],
+	['ship', 'ShipSprites/ColonyShip.png'],
+	['thruster', 'ShipSprites/ThrusterNozzle.png'],
+	['thrusterFlame', 'ShipSprites/ThrusterFlame.png'],
+	['turret', 'ShipSprites/TurretSprite.png'],
+	['asteroid', 'SpaceObjects/SpaceMeteors001.png'],
+	['planet1', 'SpaceObjects/CreamVioletPlanet.png'],
+	['planet2', 'SpaceObjects/CyanPlanet.png'],
+	['planet3', 'SpaceObjects/CyanPlanet1.png'],
+	['planet4', 'SpaceObjects/DarkPlanet.png'],
+	['planet5', 'SpaceObjects/EarthLikePlanet.png'],
+	['planet6', 'SpaceObjects/FrostPlanet.png'],
+	['planet7', 'SpaceObjects/IcePlanet.png'],
+	['planet8', 'SpaceObjects/OrangePlanet.png'],
+	['planet9', 'SpaceObjects/PurplePlanet.png'],
+	['planet10', 'SpaceObjects/RedLinesPlanet.png'],
+	['planet11', 'SpaceObjects/RedPlanet1.png'],
+	['planet12', 'SpaceObjects/RedPlanetSputnik.png'],
+	['planet13', 'SpaceObjects/SandPlanet.png'],
+	['planet14', 'SpaceObjects/StormPlanet.png'],
+	['warpgate', 'SpaceObjects/WhiteDwarfStar.png'],
+	['torpedo', 'SpaceObjects/SpaceMissiles040.png'],
+	['explosion0', 'Explosions/regularExplosion00.png'],
+	['explosion1', 'Explosions/regularExplosion01.png'],
+	['explosion2', 'Explosions/regularExplosion02.png'],
+	['explosion3', 'Explosions/regularExplosion03.png'],
+	['explosion4', 'Explosions/regularExplosion04.png'],
+	['explosion5', 'Explosions/regularExplosion05.png'],
+	['explosion6', 'Explosions/regularExplosion06.png'],
+	['explosion7', 'Explosions/regularExplosion07.png'],
+	['explosion8', 'Explosions/regularExplosion08.png'],
+]
+let imagesLoaded = 0 // Updates as the images load, until all are loaded.
 
 function initializeImages(imageInfo: string[][]) {
 	/* Create the images with the given info: [imageName, src]. */
@@ -62,9 +98,8 @@ function initializeShipSelect(shipNames: string[], active: string) {
 		let ship = document.createElement('FIGURE')
 		ship.id = shipNames[i]
 		ship.innerHTML = shipNames[i]
-		ship.onclick = function () {
-			console.log(this)
-			DOM.shipActive(this)
+		ship.onclick = (event: any) => {
+			DOM.shipActive(event.target)
 		}
 		if (shipNames[i].length >= 12) ship.classList.add('small')
 		if (shipNames[i] === active) {
@@ -150,15 +185,19 @@ let DOM: any = {
 		DevTools: document.querySelector('#DevTools'),
 		ShipSelect: document.querySelector('#ShipSelect'), // Ship selection menu holder
 		SolarFade: document.querySelector('#SolarFade'), // `div` for fading between solar systems
-		galaxy1: document.querySelector('#galaxy1'), // First galaxy :)
+		galaxy1: document.querySelector('#galaxy1'), // First galaxy ... index 0 everywhere in the code
 		galaxy2: document.querySelector('#galaxy2'),
 		galaxy3: document.querySelector('#galaxy3'),
 		galaxy4: document.querySelector('#galaxy4'),
+    EndMainMenu: document.querySelector('#EndScreen button.top'), // EndScreen Main Menu button
+    EndRetry: document.querySelector('#EndScreen button.middle'), // EndScreen Retry button
+    EndNextGalaxy: document.querySelector('#EndScreen button.bottom'), // EndScreen Next Galaxy button
 	} as any,
 	menus: {
 		Title: document.querySelector('#Title'), // Very first title screen
 		Game: document.querySelector('#Game'), // Game menu; appears when in the game (dev tools, etc)
 		Main: document.querySelector('#Main'), // Main ship, galaxy, and preference selection page
+    EndScreen: document.querySelector('#EndScreen'), // On completion; acts like Level Complete menu
 	},
 	previousDamage: [0, 0], // [<previousDamage>, <number of layered animations>]
 	initialize() {
@@ -169,24 +208,44 @@ let DOM: any = {
 				if (DOM.elements['ShipSelect']) DOM.elements['ShipSelect'].classList.remove('open')
 			}
 		})
-		this.elements['TitleStart'].onclick = function () {
+
+    this.elements['EndMainMenu'].onclick = () => {
+      DOM.resetGame()
+      DOM.newMenu('Main')
+    }
+    this.elements['EndRetry'].onclick = () => {
+			if (game) {
+        let galaxyNumber = galaxies.indexOf(game.galaxy?.name ?? 'test')
+        DOM.resetGame()
+        DOM.startGame(galaxyNumber)
+      } else throw Error('Game not defined')
+    }
+    this.elements['EndNextGalaxy'].onclick = () => {
+      if (game) {
+        let nextGalaxyNumber = galaxies.indexOf(game.galaxy?.name ?? 'wontbeinthelist') + 1
+        if (nextGalaxyNumber > 3) nextGalaxyNumber = 3
+        DOM.resetGame()
+        DOM.startGame(nextGalaxyNumber)
+      } else throw Error('Game not defined')
+    }
+		this.elements['TitleStart'].onclick = () => {
 			DOM.newMenu('Main')
 		}
-		this.elements['PauseButton'].onclick = function () {
+		this.elements['PauseButton'].onclick = () => {
 			if (game) game.paused = true
 			else throw Error('Game not defined')
 			DOM.newMenu('Main')
 		}
-		this.elements['ShipSelect'].onclick = function () {
-			this.classList.toggle('open')
+		this.elements['ShipSelect'].onclick = (event: any) => {
+			DOM.elements['ShipSelect'].classList.toggle("open")
 		}
-		this.elements['Info'].onclick = function () {
-			this.classList.toggle('active')
-			if (this.classList.contains('active')) {
-				this.querySelector('button').innerHTML =
-					"<h3>&#x1F6C8; Info & Tips</h3>&emsp;&emsp;&emsp;Here we write a bit of information and tips the students could benefit from.<br><br>&emsp;&emsp;&emsp;To do with the UI, we'll mention stuff like how the local storage works, and for the game, we'll perhaps give some tips or troubleshooting advice."
+		this.elements['Info'].onclick = () => {
+			DOM.elements['Info'].classList.toggle("active")
+			if (DOM.elements['Info'].classList.contains("active")) {
+				DOM.elements['Info'].querySelector('button').innerHTML =
+					"<h3>&#x1F6C8; Info & Tips</h3>&emsp;&emsp;&emsp;Here we write a bit of information and tips the students could benefit from.<br>&emsp;&emsp;&emsp;To do with the UI, we'll mention stuff like how the local storage works, and for the game, we'll perhaps give some tips or troubleshooting advice.<br>&emsp;&emsp;&emsp;We'll link to the README.md and stuff, too."
 			} else {
-				this.querySelector('button').innerHTML = '&#x1F6C8; Info & Tips'
+				DOM.elements['Info'].querySelector('button').innerHTML = '&#x1F6C8; Info & Tips'
 			}
 		}
 		let galaxyNames = ['galaxy1', 'galaxy2', 'galaxy3', 'galaxy4']
@@ -199,23 +258,21 @@ let DOM: any = {
 			}
 		})
 
-		// Set Data
+		// Set Data    
 		for (let i = 0; i < 4; i++) {
-			this.elements['galaxy' + (i + 1)].onclick = function () {
+			this.elements['galaxy' + (i + 1)].onclick = () => {
 				if (DOM.data['defaultGalaxy'] !== i) {
 					DOM.data['defaultGalaxy'] = i
 					DOM.save()
 				}
 				DOM.startGame(i)
 
-				let galaxyNames = ['galaxy1', 'galaxy2', 'galaxy3', 'galaxy4']
-
 				let galaxyElement = document.querySelector('#galaxy' + (i + 1) + '>.quit')
 				if (galaxyElement) galaxyElement.classList.remove('hidden')
 				else throw Error('Element ' + '#galaxy' + (i + 1) + '>.quit' + ' not found')
 			}
 		}
-		setTimeout(function () {
+		setTimeout(() => {
 			document.querySelectorAll('.menu').forEach(function (menu: any): void {
 				menu.style['transition-duration'] = '0.3s'
 				menu.style['-o-transition-duration'] = '0.3s'
@@ -224,7 +281,7 @@ let DOM: any = {
 			})
 		}, 0)
 		for (let i = 0; i < this.elements['checkboxes'].length; i++) {
-			this.elements['checkboxes'][i].onclick = function () {
+			this.elements['checkboxes'][i].onclick = () => {
 				DOM.updatePreference(this.id, this.checked)
 			}
 		}
@@ -256,7 +313,7 @@ let DOM: any = {
 			}
 			console.log('This is your first time playing Intergalactic Adventures!')
 			this.newMenu('Title')
-			setTimeout(function () {
+			setTimeout(() => {
 				DOM.save()
 			}, 0)
 		} else {
@@ -286,27 +343,27 @@ let DOM: any = {
 		}
 		this.menus[menu].classList.add('on')
 	},
-	save: function () {
-		localStorage.setItem('data', JSON.stringify(this.data))
+	save: () => {
+		localStorage.setItem('data', JSON.stringify(DOM.data))
 	},
 	updatePreference: function (type: string, value: number) {
 		if (type === 'zoom') this.data[type] = value ? 2.5 : 1
 		else this.data[type] = value
 		this.save()
 	},
-	doneLoad: function () {
+	doneLoad: () => {
 		contexts['background'].drawImage(images['background'], 0, 0, windowSize.x * unit, windowSize.y * unit)
-		game = new Game(windowSize.x, windowSize.y, images, contexts)
+		game = new Game(windowSize.x, windowSize.y, images, contexts, DOM.landSuccessful)
 		game.unit = unit
-		this.loaded = true
+		DOM.loaded = true
 		DOM.initialize()
 	},
 	gameMenuTitle: function (galaxy: string, solarSystem: string) {
 		this.elements['GalaxyName'].innerHTML = galaxy
 		this.elements['SolarSystemName'].innerHTML = solarSystem
 	},
-	devToolsUpdate: function () {
-		let entries = this.elements['DevTools'].querySelectorAll('tr:not(.title)>td')
+	devToolsUpdate: () => {
+		let entries = DOM.elements['DevTools'].querySelectorAll('tr:not(.title)>td')
 		if (!game || !game.watchShip) throw Error('Game or game watchship undefined')
 		entries[0].innerHTML = 'X: ' + Math.floor(game.watchShip.speed.x * 100) / 100
 		entries[1].innerHTML = 'Y: ' + Math.floor(game.watchShip.speed.y * 100) / 100
@@ -315,12 +372,12 @@ let DOM: any = {
 		let angle = Math.floor(game.watchShip.angle * 100) / 100
 		entries[4].innerHTML = '&theta;: ' + angle
 		entries[5].innerHTML = Math.floor(game.watchShip.energyUsed * 100) + ' J'
-		if (this.previousDamage[0] != Math.floor(game.watchShip.totalDamage * 10)) {
-			this.previousDamage[0] = Math.floor(game.watchShip.totalDamage * 10)
-			entries[6].innerHTML = this.previousDamage[0] + ' Ns'
-			this.previousDamage[1]++
+		if (DOM.previousDamage[0] != Math.floor(game.watchShip.totalDamage * 10)) {
+			DOM.previousDamage[0] = Math.floor(game.watchShip.totalDamage * 10)
+			entries[6].innerHTML = DOM.previousDamage[0] + ' Ns'
+			DOM.previousDamage[1]++
 			entries[6].classList.add('blink')
-			setTimeout(function () {
+			setTimeout(() => {
 				DOM.previousDamage[1]--
 				if (!DOM.previousDamage[1]) {
 					entries[6].classList.remove('blink')
@@ -335,8 +392,8 @@ let DOM: any = {
 		let fade = this.elements['SolarFade'].classList
 		if (fade.contains('on')) return
 		fade.add('on')
-		setTimeout(function () {
-			setTimeout(function () {
+		setTimeout(() => {
+			setTimeout(() => {
 				func(...params)
 				fade.remove('on')
 			}, middletime)
@@ -366,7 +423,7 @@ let DOM: any = {
 
 				game.paused = false
 
-				// actually initializeing the game!
+				// actually initializing the game!
 				this.gameInitialized = true // Cause this.resetGame(); sets it to false.
 				game.start(galaxies[galaxy], this.data['allShips'], this.data['defaultShip'])
 				this.previousDamage[0] = 0 // Stop the damage from blinking when you start!
@@ -376,7 +433,7 @@ let DOM: any = {
 			this.newMenu()
 		}
 	},
-	resetGame: function () {
+	resetGame: () => {
 		if (!game) throw new Error('Game not defined')
 		console.log('Destroying the game object and remaking it!')
 		for (let i = 0; i < 4; i++) {
@@ -385,12 +442,27 @@ let DOM: any = {
 			else throw Error('Element ' + '#galaxy' + (i + 1) + '>.quit' + ' not found')
 		}
 		game.endGame()
-		game = new Game(windowSize.x, windowSize.y, images, contexts)
+		game = new Game(windowSize.x, windowSize.y, images, contexts, DOM.landSuccessful)
 		game.unit = unit
-		game.zoom = this.data['zoom']
+		game.zoom = DOM.data['zoom']
 		game.paused = true
-		this.gameInitialized = false
+		DOM.gameInitialized = false
 	},
+  landSuccessful: function (planet: Planet) {
+    console.log("You won! You landed on " + planet.name + "!")
+    if (DOM.menus["EndScreen"].classList.contains('on')) return; // We already landed
+    DOM.menus["EndScreen"].querySelector("#ESGalaxy").innerHTML = game?.galaxy?.name ?? '<em>unknown<em>'
+    DOM.menus["EndScreen"].querySelector("#ESShipName").innerHTML = game?.watchShipName ?? '<em>unknown<em>'
+    DOM.menus["EndScreen"].querySelector("#ESEnergy").innerHTML = game?.watchShip?.energyUsed ? Math.floor(game.watchShip.energyUsed * 100) : '<em>unknown<em>'
+    DOM.menus["EndScreen"].querySelector("#ESDamage").innerHTML = game?.watchShip?.totalDamage ? Math.floor(game.watchShip.totalDamage * 10) : '<em>unknown<em>'
+    // Composition has: land, metal, danger, survivabilityChance, air, water, temperature, which are all numbers. We could use them, eventually.
+    DOM.menus["EndScreen"].querySelector("#ESResources").innerHTML = Math.round(planet.composition.survivabilityChance)
+    DOM.menus["EndScreen"].querySelector("#ESScore").innerHTML = '69420'
+    const ourImageSrc = imageSrcs.filter((element) => {return element[0] === planet.name});
+    DOM.menus["EndScreen"].querySelector("#ESPlanetImage").src = spritePath + ourImageSrc[0][1] ?? 'SpaceObjects/RedLinesPlanet.png'
+    DOM.menus["EndScreen"].querySelector("#ESPlanetName").innerHTML = planet.name
+    DOM.newMenu("EndScreen")
+  },
 }
 
 ///////////////////////////////////////////////
@@ -407,40 +479,7 @@ initializeContexts([
 	'items',
 ])
 
-initializeImages([
-	//["titleBackground", "UIImages/TitleBackground.png"],
-	['background', 'SpaceObjects/Space.png'],
-	['ship', 'ShipSprites/ColonyShip.png'],
-	['thruster', 'ShipSprites/ThrusterNozzle.png'],
-	['thrusterFlame', 'ShipSprites/ThrusterFlame.png'],
-	['turret', 'ShipSprites/TurretSprite.png'],
-	['asteroid', 'SpaceObjects/SpaceMeteors001.png'],
-	['planet1', 'SpaceObjects/CreamVioletPlanet.png'],
-	['planet2', 'SpaceObjects/CyanPlanet.png'],
-	['planet3', 'SpaceObjects/CyanPlanet1.png'],
-	['planet4', 'SpaceObjects/DarkPlanet.png'],
-	['planet5', 'SpaceObjects/EarthLikePlanet.png'],
-	['planet6', 'SpaceObjects/FrostPlanet.png'],
-	['planet7', 'SpaceObjects/IcePlanet.png'],
-	['planet8', 'SpaceObjects/OrangePlanet.png'],
-	['planet9', 'SpaceObjects/PurplePlanet.png'],
-	['planet10', 'SpaceObjects/RedLinesPlanet.png'],
-	['planet11', 'SpaceObjects/RedPlanet1.png'],
-	['planet12', 'SpaceObjects/RedPlanetSputnik.png'],
-	['planet13', 'SpaceObjects/SandPlanet.png'],
-	['planet14', 'SpaceObjects/StormPlanet.png'],
-	['warpgate', 'SpaceObjects/WhiteDwarfStar.png'],
-	['torpedo', 'SpaceObjects/SpaceMissiles040.png'],
-	['explosion0', 'Explosions/regularExplosion00.png'],
-	['explosion1', 'Explosions/regularExplosion01.png'],
-	['explosion2', 'Explosions/regularExplosion02.png'],
-	['explosion3', 'Explosions/regularExplosion03.png'],
-	['explosion4', 'Explosions/regularExplosion04.png'],
-	['explosion5', 'Explosions/regularExplosion05.png'],
-	['explosion6', 'Explosions/regularExplosion06.png'],
-	['explosion7', 'Explosions/regularExplosion07.png'],
-	['explosion8', 'Explosions/regularExplosion08.png'],
-])
+initializeImages(imageSrcs)
 
 let startTime, now, then: number, elapsed
 
@@ -458,8 +497,8 @@ function animate() {
 	if (elapsed > game.fpsInterval) {
 		then = now - (elapsed % game.fpsInterval)
 		if (!game.paused) {
-			game.update()
-			;['missiles', 'planets', 'objects', 'thrusters', 'ships', 'items'].forEach((object) => {
+			game.update();
+			['missiles', 'planets', 'objects', 'thrusters', 'ships', 'items'].forEach((object) => {
 				//if (object !== "planets" || game.zoom !== 1 || game.initializing || game.drawnProcess.initializing) {
 				if (!game || !game.drawnProcess) throw new Error('Game drawnProcess not defined')
 				game.drawnProcess.contexts[object].setTransform(1, 0, 0, 1, 0, 0)

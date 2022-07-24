@@ -112,7 +112,7 @@
                 </table>
             </section>
             <section id="Info">
-                <button><span class="material-icons">outline-info</span>Info & Tips</button>
+                <button>&#x1F6C8; Info & Tips</button>
             </section>
         </div>
         <div id="Title" class="menu">
@@ -120,6 +120,22 @@
             <button class="start">Start</button>
             <p class="warning"><mark>Your browser doesn't support local storage, so your preferences will not be saved.</mark></p>
         </div>
+        <div id="EndScreen" class="menu">
+          <section id="EndScreenMain">
+            <h1><mark>You Win!</mark></h1>
+            <h3><mark>
+              Congratulations on completing the <span id="ESGalaxy">...</span> Galaxy, <span id="ESShipName">...</span> team!<br>
+              During your trip, you used <span id="ESEnergy">...</span> J of energy and survived damage of <span id="ESDamage">...</span> Nm.<br>
+              Your grade on this assignment is <span id="ESScore">...</span>%.</mark></h3>
+            <button class="top">Main Menu</button>
+            <button class="middle">Retry</button>
+            <button class="bottom">Next Galaxy</button>
+          </section>
+          <section id="PlanetFeature">
+            <img id="ESPlanetImage" src="assets/images/SpaceObjects/RedLinesPlanet.png">
+            <h3><mark>You discovered planet <span id="ESPlanetName">...</span>, which seems to be <span id="ESResources"></span>% survivable. It also has many other interesting statistics that don't fit here 😉.</mark></h3>
+          </section>
+      </div>
     </section>
     <section id="SolarFade" class="fullscreen"></section>
     <!-- Canvas initialization -->
