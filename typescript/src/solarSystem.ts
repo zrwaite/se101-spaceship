@@ -103,31 +103,31 @@ export default class SolarSystem {
 				this.asteroids.push(
 					new Asteroid(new Vector2(0.1, 0), 0, new Vector2(40, 100), this.game),
 					new Asteroid(new Vector2(0.4, 0.3), 0, new Vector2(60, 40), this.game),
-					new Asteroid(new Vector2(-0.3,0.1), 0, new Vector2(700, 160), this.game),
+					new Asteroid(new Vector2(-0.3, 0.1), 0, new Vector2(700, 160), this.game),
 					new Asteroid(new Vector2(-0.2, -0.2), 0, new Vector2(610, 370), this.game),
 					new Asteroid(new Vector2(0.3, 0.1), 0, new Vector2(370, 450), this.game),
 					new Asteroid(new Vector2(0.1, 0.2), 0, new Vector2(230, 340), this.game),
 					new Asteroid(new Vector2(0.2, -0.1), 0, new Vector2(480, 260), this.game),
 					new Asteroid(new Vector2(-0.5, 0.5), 0, new Vector2(510, 190), this.game),
-					new Asteroid(new Vector2(0.1, -0.1), 0, new Vector2(170, 140), this.game),
+					new Asteroid(new Vector2(0.1, -0.1), 0, new Vector2(170, 140), this.game)
 				)
 				this.warpGates.push(...[new WarpGate('Wolf 359 System', new Vector2(36, 52), this.game), new WarpGate('Sirius System', new Vector2(71, 11), this.game)])
 				this.asteroidLaunchers.push(
 					new AsteroidLauncher(this.game, new Vector2(350, 560), new Vector2(200, 300)),
 					new AsteroidLauncher(this.game, new Vector2(50, 560), new Vector2(100, 400)),
-					new AsteroidLauncher(this.game, new Vector2(740, 240), new Vector2(1, 300)),
+					new AsteroidLauncher(this.game, new Vector2(740, 240), new Vector2(1, 300))
 				)
 				break
 			case 'Cygni System':
 				this.asteroids.push(
-					new Asteroid(new Vector2(0, 0), 0, new Vector2(670, 400), this.game),
-					new Asteroid(new Vector2(0, 0), 0, new Vector2(610, 310), this.game),
-					new Asteroid(new Vector2(0, 0), 0, new Vector2(310, 40), this.game),
-					new Asteroid(new Vector2(0, 0), 0, new Vector2(250, 180), this.game),
-					new Asteroid(new Vector2(0, 0), 0, new Vector2(110, 70), this.game),
+					new Asteroid(new Vector2(0.1, 0), 0, new Vector2(670, 400), this.game),
+					new Asteroid(new Vector2(0, 0.2), 0, new Vector2(610, 310), this.game),
+					new Asteroid(new Vector2(0.1, 0.1), 0, new Vector2(310, 40), this.game),
+					new Asteroid(new Vector2(0.2, 0.1), 0, new Vector2(250, 180), this.game),
+					new Asteroid(new Vector2(0.3, 0.2), 0, new Vector2(110, 70), this.game)
 				)
 				this.asteroidLaunchers.push(
-					...[new AsteroidLauncher(this.game, new Vector2(610, 545), new Vector2(500, 350), true), new AsteroidLauncher(this.game, new Vector2(210, -20), new Vector2(230, 40), true, 5)]
+					...[new AsteroidLauncher(this.game, new Vector2(610, 565), new Vector2(500, 350), true), new AsteroidLauncher(this.game, new Vector2(210, -20), new Vector2(230, 40), true, 5)]
 				)
 				this.warpGates.push(
 					...[
@@ -143,11 +143,16 @@ export default class SolarSystem {
 				for (let i = 0; i < 12; i++) {
 					const x = (i + 1) * 50
 					const y = Math.random() * 400 + 50
-					this.asteroids.push(new Asteroid(new Vector2(-x / 100, -y / 100), Math.random(), new Vector2(x, y), this.game))
-					const xRatio = (720 / x) * 1
-					const yRatio = (540 / y) * 1
-					const ratio = Math.max(xRatio, yRatio)
-					this.asteroidLaunchers.push(new AsteroidLauncher(this.game, new Vector2(x, y).scale(ratio), new Vector2(80, 80), true))
+					this.asteroids.push(new Asteroid(new Vector2(-x / 500, -y / 500), Math.random(), new Vector2(x, y), this.game))
+					const xRatio = 720 / x
+					const yRatio = 540 / y
+					const ratio = Math.min(xRatio, yRatio)
+					try {
+						this.asteroidLaunchers.push(new AsteroidLauncher(this.game, new Vector2(x, y).scale(ratio).add(new Vector2(20, 20)), new Vector2(80, 80), true))
+					} catch (e) {
+						console.log(e)
+						console.log(x, y, ratio)
+					}
 				}
 				break
 			case 'Indi System':
@@ -242,7 +247,9 @@ export default class SolarSystem {
 				for (let i = 0; i < 5; i++) {
 					this.asteroids.push(new Asteroid(new Vector2(0, 0), 0, new Vector2(((51 + 41 * i) % 71) * 10, ((41 + 41 * i) % 53) * 10), this.game))
 				}
-				this.asteroidLaunchers.push(...[new AsteroidLauncher(this.game, new Vector2(-80, 50), new Vector2(300, 300)), new AsteroidLauncher(this.game, new Vector2(-10, 410), new Vector2(200, 200), true, 5)])
+				this.asteroidLaunchers.push(
+					...[new AsteroidLauncher(this.game, new Vector2(-80, 50), new Vector2(300, 300)), new AsteroidLauncher(this.game, new Vector2(-10, 410), new Vector2(200, 200), true, 5)]
+				)
 				this.warpGates.push(
 					...[
 						new WarpGate('Yennefer System', new Vector2(590, 190), this.game),

@@ -16,6 +16,7 @@ export default class Planet extends RenderedObject {
 	composition
 	constructor(planetName: string, radius: number, composition: PlanetComposition, ...args: [pos: Vector2, game: Game]) {
 		super(...args)
+		if (radius < 15) throw new Error('Planet radius must be at least 15')
 		this.image = this.game.images[planetName] || this.game.images['planet1']
 		this.name = planetName
 		this.composition = composition

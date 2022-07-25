@@ -109,10 +109,10 @@ export default class Game {
         const obj2SpeedNew = obj2SpeedComponents.matrixMultiply(basisMatrix);
         obj1.speed = obj1SpeedNew;
         obj2.speed = obj2SpeedNew;
-        const collisionAngle = obj1.pos.angleTo(obj2.pos);
-        const collisionOverlapMagnitude = obj1.pos.distance(obj2.pos) - obj1.radius - obj2.radius;
-        const collisionOverlap = new Vector2(0, 1).rotateTo(collisionAngle).scale(collisionOverlapMagnitude * 1.5);
-        obj1.pos = obj1.pos.add(collisionOverlap);
+        const AB = obj2.pos.subtract(obj1.pos);
+        const collisionOverlapMagnitude = -obj1.pos.distance(obj2.pos) + obj1.radius + obj2.radius;
+        const collisionOverlap = AB.scaleTo(collisionOverlapMagnitude / 2);
+        obj1.pos = obj1.pos.subtract(collisionOverlap);
         obj2.pos = obj2.pos.add(collisionOverlap);
         return headOnVelocityDiff;
     }

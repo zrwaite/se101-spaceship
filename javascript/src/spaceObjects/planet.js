@@ -6,6 +6,8 @@ export default class Planet extends RenderedObject {
         this.ctx = 'planets';
         /* Other attributes */
         this.process = null;
+        if (radius < 15)
+            throw new Error('Planet radius must be at least 15');
         this.image = this.game.images[planetName] || this.game.images['planet1'];
         this.name = planetName;
         this.composition = composition;

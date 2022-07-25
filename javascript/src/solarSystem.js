@@ -80,8 +80,8 @@ export default class SolarSystem {
                 this.asteroidLaunchers.push(new AsteroidLauncher(this.game, new Vector2(350, 560), new Vector2(200, 300)), new AsteroidLauncher(this.game, new Vector2(50, 560), new Vector2(100, 400)), new AsteroidLauncher(this.game, new Vector2(740, 240), new Vector2(1, 300)));
                 break;
             case 'Cygni System':
-                this.asteroids.push(new Asteroid(new Vector2(0, 0), 0, new Vector2(670, 400), this.game), new Asteroid(new Vector2(0, 0), 0, new Vector2(610, 310), this.game), new Asteroid(new Vector2(0, 0), 0, new Vector2(310, 40), this.game), new Asteroid(new Vector2(0, 0), 0, new Vector2(250, 180), this.game), new Asteroid(new Vector2(0, 0), 0, new Vector2(110, 70), this.game));
-                this.asteroidLaunchers.push(...[new AsteroidLauncher(this.game, new Vector2(610, 545), new Vector2(500, 350), true), new AsteroidLauncher(this.game, new Vector2(210, -20), new Vector2(230, 40), true, 5)]);
+                this.asteroids.push(new Asteroid(new Vector2(0.1, 0), 0, new Vector2(670, 400), this.game), new Asteroid(new Vector2(0, 0.2), 0, new Vector2(610, 310), this.game), new Asteroid(new Vector2(0.1, 0.1), 0, new Vector2(310, 40), this.game), new Asteroid(new Vector2(0.2, 0.1), 0, new Vector2(250, 180), this.game), new Asteroid(new Vector2(0.3, 0.2), 0, new Vector2(110, 70), this.game));
+                this.asteroidLaunchers.push(...[new AsteroidLauncher(this.game, new Vector2(610, 565), new Vector2(500, 350), true), new AsteroidLauncher(this.game, new Vector2(210, -20), new Vector2(230, 40), true, 5)]);
                 this.warpGates.push(...[
                     new WarpGate('Kruger System', new Vector2(410, 310), this.game),
                     new WarpGate('Aquarii System', new Vector2(510, 110), this.game),
@@ -94,11 +94,17 @@ export default class SolarSystem {
                 for (let i = 0; i < 12; i++) {
                     const x = (i + 1) * 50;
                     const y = Math.random() * 400 + 50;
-                    this.asteroids.push(new Asteroid(new Vector2(-x / 100, -y / 100), Math.random(), new Vector2(x, y), this.game));
-                    const xRatio = (720 / x) * 1;
-                    const yRatio = (540 / y) * 1;
-                    const ratio = Math.max(xRatio, yRatio);
-                    this.asteroidLaunchers.push(new AsteroidLauncher(this.game, new Vector2(x, y).scale(ratio), new Vector2(80, 80), true));
+                    this.asteroids.push(new Asteroid(new Vector2(-x / 500, -y / 500), Math.random(), new Vector2(x, y), this.game));
+                    const xRatio = 720 / x;
+                    const yRatio = 540 / y;
+                    const ratio = Math.min(xRatio, yRatio);
+                    try {
+                        this.asteroidLaunchers.push(new AsteroidLauncher(this.game, new Vector2(x, y).scale(ratio).add(new Vector2(20, 20)), new Vector2(80, 80), true));
+                    }
+                    catch (e) {
+                        console.log(e);
+                        console.log(x, y, ratio);
+                    }
                 }
                 break;
             case 'Indi System':
