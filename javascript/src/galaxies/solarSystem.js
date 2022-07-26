@@ -27,13 +27,15 @@ export default class SolarSystem {
         this.warpGates = (_b = objects.warpGates) !== null && _b !== void 0 ? _b : [];
         this.planets = (_c = objects.planets) !== null && _c !== void 0 ? _c : [];
         this.asteroidLaunchers = (_d = objects.asteroidLaunchers) !== null && _d !== void 0 ? _d : [];
+        this.planetNames = this.planets.map((planet) => planet.name);
+        this.warpGateNames = this.warpGates.map((warpGate) => warpGate.destinationSolarSystem);
     }
     getMapData() {
         return {
             galaxy: this.galaxyName,
             solarSystem: this.name,
-            planets: this.planets.map((planet) => planet.name),
-            warpGates: this.warpGates.map((warpGate) => warpGate.destinationSolarSystem),
+            planets: this.planetNames,
+            warpGates: this.warpGateNames
         };
     }
 }

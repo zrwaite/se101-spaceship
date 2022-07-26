@@ -40,6 +40,8 @@ export default class SolarSystem {
 	game: Game
 	name: SolarSystemName
 	galaxyName: string
+	planetNames: string[]
+	warpGateNames: string[]
 	constructor(solarSystemName: SolarSystemName, galaxyName: string, game: Game, objects: {
 		asteroids?: Asteroid[],
 		warpGates?: WarpGate[],
@@ -53,13 +55,15 @@ export default class SolarSystem {
 		this.warpGates = objects.warpGates ?? []
 		this.planets = objects.planets ?? []
 		this.asteroidLaunchers = objects.asteroidLaunchers ?? []
+		this.planetNames = this.planets.map((planet) => planet.name)
+		this.warpGateNames = this.warpGates.map((warpGate) => warpGate.destinationSolarSystem)
 	}
 	getMapData(): MapData {
 		return {
 			galaxy: this.galaxyName,
 			solarSystem: this.name,
-			planets: this.planets.map((planet) => planet.name),
-			warpGates: this.warpGates.map((warpGate) => warpGate.destinationSolarSystem),
+			planets: this.planetNames,
+			warpGates: this.warpGateNames
 		}
 	}
 }
