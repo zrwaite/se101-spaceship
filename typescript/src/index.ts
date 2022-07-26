@@ -175,27 +175,38 @@ let DOM: any = {
 				if (DOM.elements['ShipSelect']) DOM.elements['ShipSelect'].classList.remove('open')
 			}
 		})
-
-		this.elements['EndMainMenu'].onclick = () => {
-			DOM.resetGame()
-			DOM.newMenu('Main')
-		}
-		this.elements['EndRetry'].onclick = () => {
+    this.elements['EndMainMenu'].onclick = () => {
+      DOM.resetGame()
+      DOM.newMenu('Main')
+      ;(document.activeElement as HTMLElement).blur();
+    }
+    this.elements['EndRetry'].onclick = () => {
 			if (game) {
-				let galaxyNumber = galaxies.indexOf(game.galaxy?.name ?? 'Noob')
-				DOM.resetGame()
-				DOM.startGame(galaxyNumber)
-			} else throw Error('Game not defined')
-		}
-		this.elements['EndNextGalaxy'].onclick = () => {
-			if (game) {
-				if (!game.galaxy) throw Error('Game.galaxy not defined')
-				let nextGalaxyNumber = galaxies.indexOf(game.galaxy?.name) + 1
-				if (nextGalaxyNumber > 3) nextGalaxyNumber = 3
-				DOM.resetGame()
-				DOM.startGame(nextGalaxyNumber)
-			} else throw Error('Game not defined')
-		}
+        let galaxyNumber = galaxies.indexOf(game.galaxy?.name ?? 'test')
+        DOM.resetGame()
+        DOM.startGame(galaxyNumber)
+        ;(document.activeElement as HTMLElement).blur()
+        let galaxyElement = document.querySelector('#galaxy' + (galaxyNumber + 1) + '>.quit');
+        if (galaxyElement)
+            galaxyElement.classList.remove('hidden');
+        else 
+            throw Error('Element ' + '#galaxy' + (galaxyNumber + 1) + '>.quit' + ' not found');
+      } else throw Error('Game not defined')
+    }
+    this.elements['EndNextGalaxy'].onclick = () => {
+      if (game) {
+        let nextGalaxyNumber = galaxies.indexOf(game.galaxy?.name ?? 'wontbeinthelist') + 1
+        if (nextGalaxyNumber > 3) nextGalaxyNumber = 3
+        DOM.resetGame()
+        DOM.startGame(nextGalaxyNumber)
+        ;(document.activeElement as HTMLElement).blur()
+        let galaxyElement = document.querySelector('#galaxy' + (nextGalaxyNumber + 1) + '>.quit');
+        if (galaxyElement)
+            galaxyElement.classList.remove('hidden');
+        else 
+            throw Error('Element ' + '#galaxy' + (nextGalaxyNumber + 1) + '>.quit' + ' not found');
+      } else throw Error('Game not defined')
+    }
 		this.elements['TitleStart'].onclick = () => {
 			DOM.newMenu('Main')
 		}
@@ -221,7 +232,7 @@ let DOM: any = {
 			let galaxyElement: HTMLElement = document.querySelector('#' + name + '>.quit') as HTMLElement
 			galaxyElement.onclick = function (event: MouseEvent) {
 				DOM.resetGame()
-				galaxyElement.classList.add('hidden') // used to be this.classList - was this a mistake?
+				galaxyElement.classList.add('hidden')
 				event.stopPropagation()
 			}
 		})
@@ -340,7 +351,7 @@ let DOM: any = {
 		let angle = Math.floor(game.watchShip.angle * 100) / 100
 		entries[4].innerHTML = '&theta;: ' + angle
 		entries[5].innerHTML = Math.floor(game.watchShip.energyUsed * 100) + ' J'
-		if (DOM.previousDamage[0] != Math.floor(game.watchShip.totalDamage * 10)) {
+		if (DOM.previousDamage[0] !== Math.floor(game.watchShip.totalDamage * 10)) {
 			DOM.previousDamage[0] = Math.floor(game.watchShip.totalDamage * 10)
 			entries[6].innerHTML = DOM.previousDamage[0] + ' Ns'
 			DOM.previousDamage[1]++
@@ -351,7 +362,9 @@ let DOM: any = {
 					entries[6].classList.remove('blink')
 				}
 			}, 900)
-		}
+		} else if (game.watchShip.totalDamage === 0) {
+      entries[6].innerHTML = Math.floor(game.watchShip.totalDamage * 10) + ' Ns'
+    }
 		for (let i = 0; i < 4 /* 4 turrets! */; i++) {
 			entries[7].children[0].children[i].style.width = 100 - Math.floor((game.watchShip.turretControls.getTubeCooldown(i).response / game.watchShip.turretControls.cooldownFrames) * 100) + '%'
 		}
@@ -417,23 +430,21 @@ let DOM: any = {
 		game.paused = true
 		DOM.gameInitialized = false
 	},
-	landSuccessful: function (planet: Planet) {
-		console.log('You won! You landed on ' + planet.name + '!')
-		if (DOM.menus['EndScreen'].classList.contains('on')) return // We already landed
-		DOM.menus['EndScreen'].querySelector('#ESGalaxy').innerHTML = game?.galaxy?.name ?? '<em>unknown<em>'
-		DOM.menus['EndScreen'].querySelector('#ESShipName').innerHTML = game?.watchShipName ?? '<em>unknown<em>'
-		DOM.menus['EndScreen'].querySelector('#ESEnergy').innerHTML = game?.watchShip?.energyUsed ? Math.floor(game.watchShip.energyUsed * 100) : '<em>unknown<em>'
-		DOM.menus['EndScreen'].querySelector('#ESDamage').innerHTML = game?.watchShip?.totalDamage ? Math.floor(game.watchShip.totalDamage * 10) : '<em>unknown<em>'
-		// Composition has: land, metal, danger, survivabilityChance, air, water, temperature, which are all numbers. We could use them, eventually.
-		DOM.menus['EndScreen'].querySelector('#ESResources').innerHTML = Math.round(planet.composition.survivabilityChance)
-		DOM.menus['EndScreen'].querySelector('#ESScore').innerHTML = '69420'
-		const ourImageSrc = imageSrcs.filter((element) => {
-			return element[0] === planet.name
-		})
-		DOM.menus['EndScreen'].querySelector('#ESPlanetImage').src = spritePath + ourImageSrc[0][1] ?? 'SpaceObjects/RedLinesPlanet.png'
-		DOM.menus['EndScreen'].querySelector('#ESPlanetName').innerHTML = planet.name
-		DOM.newMenu('EndScreen')
-	},
+  landSuccessful: function (planet: Planet) {
+    console.log("You won! You landed on " + planet.name + "!")
+    if (DOM.menus["EndScreen"].classList.contains('on')) return; // We already landed
+    DOM.menus["EndScreen"].querySelector("#ESGalaxy").innerHTML = game?.galaxy?.name ?? '<em>unknown<em>'
+    DOM.menus["EndScreen"].querySelector("#ESShipName").innerHTML = game?.watchShipName ?? '<em>unknown<em>'
+    DOM.menus["EndScreen"].querySelector("#ESEnergy").innerHTML = game?.watchShip?.energyUsed !== undefined ? Math.floor(game.watchShip.energyUsed * 100) : '<em>unknown<em>'
+    DOM.menus["EndScreen"].querySelector("#ESDamage").innerHTML = game?.watchShip?.totalDamage !== undefined ? Math.floor(game.watchShip.totalDamage * 10) : '<em>unknown<em>'
+    // Composition has: land, metal, danger, survivabilityChance, air, water, temperature, which are all numbers. We could use them, eventually.
+    DOM.menus["EndScreen"].querySelector("#ESResources").innerHTML = Math.round(planet.composition.survivabilityChance)
+    DOM.menus["EndScreen"].querySelector("#ESScore").innerHTML = '69420'
+    const ourImageSrc = imageSrcs.filter((element) => {return element[0] === planet.name});
+    DOM.menus["EndScreen"].querySelector("#ESPlanetImage").src = spritePath + ourImageSrc[0][1] ?? 'SpaceObjects/RedLinesPlanet.png'
+    DOM.menus["EndScreen"].querySelector("#ESPlanetName").innerHTML = planet.name
+    DOM.newMenu("EndScreen")
+  },
 }
 
 ///////////////////////////////////////////////
