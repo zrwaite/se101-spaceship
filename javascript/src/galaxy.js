@@ -1,7 +1,4 @@
 import SolarSystem from './solarSystem.js';
-//Parent class for galaxies, use data from galaxy jsons and GalaxyMaps scripts
-//The constructor is going to build the galaxies
-//Think of this as creating all the links between solar system levels
 export default class Galaxy {
     constructor(galaxyName, game) {
         /* Default Attributes */
@@ -10,17 +7,17 @@ export default class Galaxy {
         this.name = galaxyName;
         this.game = game;
         switch (galaxyName) {
-            case 'test':
-                this.solarSystemNames.push('test');
+            case 'Noob':
+                this.solarSystemNames.push('Tutorial');
                 break;
-            case 'Alpha':
-                this.solarSystemNames.push('Sol System', 'Alpha Centauri System', 'Kepler 438 System');
+            case 'Compiles':
+                this.solarSystemNames.push('Goose', 'Waterloo', 'StackOverflow');
                 break;
-            case 'Beta':
-                this.solarSystemNames.push("Barnard's Star System", 'Wolf 359 System', 'Sirius System', 'Luyten System');
+            case 'Cracked':
+                this.solarSystemNames.push("Hargun", 'Olivia', 'Ali', 'Derek');
                 break;
-            case 'Gamma':
-                this.solarSystemNames.push('Groombridge System', 'Kruger System', 'Aquarii System', 'Cygni System', 'Indi System', 'Yennefer System', 'Quaid System');
+            case 'Joziac':
+                this.solarSystemNames.push('ECE105', 'Torvalds', 'Gates', 'Elon', 'Josiah', 'Zac', 'Turing');
                 break;
         }
         // Create solar systems with associated galaxy

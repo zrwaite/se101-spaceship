@@ -19,3 +19,47 @@ export default class Planet extends RenderedObject {
         this.process = process;
     }
 }
+const PlanetNames = [
+    'Big Bird',
+    'Johnny Cash',
+    'Steve-O',
+    'Notch',
+    "You're Mother",
+    'Dad Sugar',
+    'Watermelon',
+    'Melony',
+    'Esquimalt',
+    'Exceptional',
+    'Abysmal',
+    'Pluto',
+    'Fortran',
+    'Rust',
+    'Zig',
+    'COBOL',
+    'Planet Joziac',
+    'Planet Two',
+    'Planet Three (no Planet One)',
+];
+export const getPlanetImageName = (planetName) => {
+    switch (planetName) {
+        case 'Rust': return 'Saturn';
+        case 'Johnny Cash': return 'BlueStorm';
+        case 'Notch': return 'Cheese';
+        case "You're Mother": return 'DarkLava';
+        case 'Zig': return 'DarkNeptune';
+        case 'Pluto': return 'DeadGrey';
+        case 'Exceptional': return 'EarthLookinAss';
+        case 'Esquimalt': return 'GreyLines';
+        case 'Abysmal': return 'IceCube';
+        case 'Fortran': return 'IceWater';
+        case 'Planet Three (no Planet One)': return 'LavaRing';
+        case 'COBOL': return 'LightLava';
+        case 'Watermelon': return 'Mars';
+        case 'Big Bird': return 'Neptune';
+        case 'Steve-O': return 'PinkSaturn';
+        case 'Planet Joziac': return 'PurplePlanet';
+        case 'Melony': return 'PurpleStripes';
+        case 'Planet Two': return 'SandyCheeks';
+        default: throw Error('Unidentified planet name');
+    }
+};

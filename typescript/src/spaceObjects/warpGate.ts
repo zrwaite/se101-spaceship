@@ -4,7 +4,7 @@ import Vector2 from '../helpers/Vector2.js'
 
 import RenderedObject from '../renderedObject.js'
 import ColonyShip from '../ship/colonyShip.js'
-import SolarSystem from '../solarSystem.js'
+import SolarSystem, { SolarSystemName } from '../solarSystem.js'
 export default class WarpGate extends RenderedObject {
 	/* Constructor params */
 	destinationSolarSystem
@@ -16,7 +16,7 @@ export default class WarpGate extends RenderedObject {
 	/* Other attributes */
 	process: Process | null = null
 
-	constructor(destinationSolarystem: string, ...args: [pos: Vector2, game: Game]) {
+	constructor(destinationSolarystem: SolarSystemName, ...args: [pos: Vector2, game: Game]) {
 		super(...args)
 		this.image = this.game.images['warpgate']
 		this.destinationSolarSystem = destinationSolarystem
