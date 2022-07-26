@@ -73,7 +73,7 @@ export default class ColonyShip extends Sprite {
         try {
             this.defenceController.defenceUpdate(this.shipStatusInfo, this.turretControls.aimTurret.bind(this.turretControls), this.turretControls.getTubeCooldown.bind(this.turretControls), this.turretControls.fireTorpedo.bind(this.turretControls));
             this.sensorsController.sensorsUpdate(this.shipStatusInfo, this.activeSensors.scan.bind(this.activeSensors), this.passiveSensors.scan.bind(this.passiveSensors));
-            this.navigationController.navigationUpdate(this.shipStatusInfo, this.tryWarp.bind(this), this.tryLand.bind(this), this.process.solarSystem.getMapData(this.pos));
+            this.navigationController.navigationUpdate(this.shipStatusInfo, this.tryWarp.bind(this), this.tryLand.bind(this), this.process.solarSystem.getMapData());
             this.propulsionController.propulsionUpdate(this.shipStatusInfo, this.thrusterController.setThruster.bind(this.thrusterController));
         }
         catch (e) {

@@ -15,7 +15,7 @@ import Planet from '../spaceObjects/planet.js'
 import Process from '../gameProcess.js'
 import Game from '../game.js'
 import { ShipStatus } from './shipStatus.js'
-import SolarSystem from '../solarSystem.js'
+import SolarSystem from '../galaxies/solarSystem.js'
 import Torpedo from './torpedo.js'
 
 export default class ColonyShip extends Sprite {
@@ -119,7 +119,7 @@ export default class ColonyShip extends Sprite {
 				this.turretControls.fireTorpedo.bind(this.turretControls)
 			)
 			this.sensorsController.sensorsUpdate(this.shipStatusInfo, this.activeSensors.scan.bind(this.activeSensors), this.passiveSensors.scan.bind(this.passiveSensors))
-			this.navigationController.navigationUpdate(this.shipStatusInfo, this.tryWarp.bind(this), this.tryLand.bind(this), this.process.solarSystem.getMapData(this.pos))
+			this.navigationController.navigationUpdate(this.shipStatusInfo, this.tryWarp.bind(this), this.tryLand.bind(this), this.process.solarSystem.getMapData())
 			this.propulsionController.propulsionUpdate(this.shipStatusInfo, this.thrusterController.setThruster.bind(this.thrusterController))
 		} catch (e) {
 			console.error(`Code malfunction on ship ${this.name}: ${e}. \n Self destructing.`)

@@ -4,7 +4,7 @@ import Vector2 from '../helpers/Vector2.js'
 
 import RenderedObject from '../renderedObject.js'
 import ColonyShip from '../ship/colonyShip.js'
-import SolarSystem, { SolarSystemName } from '../solarSystem.js'
+import SolarSystem, { SolarSystemName } from '../galaxies/solarSystem.js'
 export default class WarpGate extends RenderedObject {
 	/* Constructor params */
 	destinationSolarSystem

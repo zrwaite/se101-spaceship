@@ -1,6 +1,6 @@
 import Vector2 from './helpers/Vector2.js'
 import Controller from './controller.js'
-import Galaxy, { GalaxyName } from './galaxy.js'
+import Galaxy, { BuildGalaxy, GalaxyName } from './galaxies/galaxy.js'
 import { buildAllShips, buildShip } from './ship/buildShip.js'
 import Process from './gameProcess.js'
 import Asteroid from './spaceObjects/asteroid.js'
@@ -57,7 +57,7 @@ export default class Game {
 	start(galaxyName: GalaxyName, allShips: boolean, watchShipName: string) {
 		this.allShips = allShips
 		this.watchShipName = watchShipName
-		this.galaxy = new Galaxy(galaxyName, this) //Create galaxy
+		this.galaxy = BuildGalaxy(galaxyName, this) //Create galaxy
 
 		this.inputs = new Controller(this) //controller created
 		this.solarSystemName = this.galaxy.startingSolarSystemName //Starting solar system from galaxy

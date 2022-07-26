@@ -1,4 +1,5 @@
 import Matrix2 from './Matrix2'
+export const V2 = (x: number, y: number): Vector2 => new Vector2(x, y)
 export default class Vector2 {
 	x: number
 	y: number

@@ -1,3 +1,4 @@
+export const V2 = (x, y) => new Vector2(x, y);
 export default class Vector2 {
     /*
     I rewrote the whole library to be a class so that
