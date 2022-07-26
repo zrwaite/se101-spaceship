@@ -212,12 +212,19 @@ let DOM: any = {
     this.elements['EndMainMenu'].onclick = () => {
       DOM.resetGame()
       DOM.newMenu('Main')
+      ;(document.activeElement as HTMLElement).blur();
     }
     this.elements['EndRetry'].onclick = () => {
 			if (game) {
         let galaxyNumber = galaxies.indexOf(game.galaxy?.name ?? 'test')
         DOM.resetGame()
         DOM.startGame(galaxyNumber)
+        ;(document.activeElement as HTMLElement).blur()
+        let galaxyElement = document.querySelector('#galaxy' + (galaxyNumber + 1) + '>.quit');
+        if (galaxyElement)
+            galaxyElement.classList.remove('hidden');
+        else 
+            throw Error('Element ' + '#galaxy' + (galaxyNumber + 1) + '>.quit' + ' not found');
       } else throw Error('Game not defined')
     }
     this.elements['EndNextGalaxy'].onclick = () => {
@@ -226,6 +233,12 @@ let DOM: any = {
         if (nextGalaxyNumber > 3) nextGalaxyNumber = 3
         DOM.resetGame()
         DOM.startGame(nextGalaxyNumber)
+        ;(document.activeElement as HTMLElement).blur()
+        let galaxyElement = document.querySelector('#galaxy' + (nextGalaxyNumber + 1) + '>.quit');
+        if (galaxyElement)
+            galaxyElement.classList.remove('hidden');
+        else 
+            throw Error('Element ' + '#galaxy' + (nextGalaxyNumber + 1) + '>.quit' + ' not found');
       } else throw Error('Game not defined')
     }
 		this.elements['TitleStart'].onclick = () => {
@@ -253,7 +266,7 @@ let DOM: any = {
 			let galaxyElement: HTMLElement = document.querySelector('#' + name + '>.quit') as HTMLElement
 			galaxyElement.onclick = function (event: MouseEvent) {
 				DOM.resetGame()
-				galaxyElement.classList.add('hidden') // used to be this.classList - was this a mistake?
+				galaxyElement.classList.add('hidden')
 				event.stopPropagation()
 			}
 		})
@@ -372,7 +385,7 @@ let DOM: any = {
 		let angle = Math.floor(game.watchShip.angle * 100) / 100
 		entries[4].innerHTML = '&theta;: ' + angle
 		entries[5].innerHTML = Math.floor(game.watchShip.energyUsed * 100) + ' J'
-		if (DOM.previousDamage[0] != Math.floor(game.watchShip.totalDamage * 10)) {
+		if (DOM.previousDamage[0] !== Math.floor(game.watchShip.totalDamage * 10)) {
 			DOM.previousDamage[0] = Math.floor(game.watchShip.totalDamage * 10)
 			entries[6].innerHTML = DOM.previousDamage[0] + ' Ns'
 			DOM.previousDamage[1]++
@@ -383,7 +396,9 @@ let DOM: any = {
 					entries[6].classList.remove('blink')
 				}
 			}, 900)
-		}
+		} else if (game.watchShip.totalDamage === 0) {
+      entries[6].innerHTML = Math.floor(game.watchShip.totalDamage * 10) + ' Ns'
+    }
 		for (let i = 0; i < 4 /* 4 turrets! */; i++) {
 			entries[7].children[0].children[i].style.width = 100 - Math.floor((game.watchShip.turretControls.getTubeCooldown(i).response / game.watchShip.turretControls.cooldownFrames) * 100) + '%'
 		}
@@ -454,8 +469,8 @@ let DOM: any = {
     if (DOM.menus["EndScreen"].classList.contains('on')) return; // We already landed
     DOM.menus["EndScreen"].querySelector("#ESGalaxy").innerHTML = game?.galaxy?.name ?? '<em>unknown<em>'
     DOM.menus["EndScreen"].querySelector("#ESShipName").innerHTML = game?.watchShipName ?? '<em>unknown<em>'
-    DOM.menus["EndScreen"].querySelector("#ESEnergy").innerHTML = game?.watchShip?.energyUsed ? Math.floor(game.watchShip.energyUsed * 100) : '<em>unknown<em>'
-    DOM.menus["EndScreen"].querySelector("#ESDamage").innerHTML = game?.watchShip?.totalDamage ? Math.floor(game.watchShip.totalDamage * 10) : '<em>unknown<em>'
+    DOM.menus["EndScreen"].querySelector("#ESEnergy").innerHTML = game?.watchShip?.energyUsed !== undefined ? Math.floor(game.watchShip.energyUsed * 100) : '<em>unknown<em>'
+    DOM.menus["EndScreen"].querySelector("#ESDamage").innerHTML = game?.watchShip?.totalDamage !== undefined ? Math.floor(game.watchShip.totalDamage * 10) : '<em>unknown<em>'
     // Composition has: land, metal, danger, survivabilityChance, air, water, temperature, which are all numbers. We could use them, eventually.
     DOM.menus["EndScreen"].querySelector("#ESResources").innerHTML = Math.round(planet.composition.survivabilityChance)
     DOM.menus["EndScreen"].querySelector("#ESScore").innerHTML = '69420'
