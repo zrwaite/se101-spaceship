@@ -182,7 +182,7 @@ let DOM: any = {
     }
     this.elements['EndRetry'].onclick = () => {
 			if (game) {
-        let galaxyNumber = galaxies.indexOf(game.galaxy?.name ?? 'test')
+        let galaxyNumber = galaxies.indexOf(game.galaxy?.name ?? 'Noob')
         DOM.resetGame()
         DOM.startGame(galaxyNumber)
         ;(document.activeElement as HTMLElement).blur()
@@ -195,8 +195,14 @@ let DOM: any = {
     }
     this.elements['EndNextGalaxy'].onclick = () => {
       if (game) {
-        let nextGalaxyNumber = galaxies.indexOf(game.galaxy?.name ?? 'wontbeinthelist') + 1
-        if (nextGalaxyNumber > 3) nextGalaxyNumber = 3
+        let galaxyName = game.galaxy?.name
+        
+        let nextGalaxyNumber = galaxyName !== undefined ? galaxies.indexOf(galaxyName) + 1 : 0
+        if (nextGalaxyNumber > 3) {
+          ;(document.querySelector("#EndScreenMain button.bottom") as HTMLElement).style.display = "none"
+        } else {
+          ;(document.querySelector("#EndScreenMain button.bottom") as HTMLElement).style.display = "block"
+        }
         DOM.resetGame()
         DOM.startGame(nextGalaxyNumber)
         ;(document.activeElement as HTMLElement).blur()
