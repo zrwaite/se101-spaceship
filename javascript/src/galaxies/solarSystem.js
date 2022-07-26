@@ -18,20 +18,22 @@ const SolarSystemNames = [
 ];
 export default class SolarSystem {
     constructor(solarSystemName, galaxyName, game, objects) {
+        var _a, _b, _c, _d;
         this.shipStartPosition = new Vector2(300, 300);
         this.game = game;
         this.galaxyName = galaxyName;
         this.name = solarSystemName;
-        this.asteroids = objects.asteroids || [];
-        this.warpGates = objects.warpGates || [];
-        this.planets = objects.planets || [];
-        this.asteroidLaunchers = objects.asteroidLaunchers || [];
+        this.asteroids = (_a = objects.asteroids) !== null && _a !== void 0 ? _a : [];
+        this.warpGates = (_b = objects.warpGates) !== null && _b !== void 0 ? _b : [];
+        this.planets = (_c = objects.planets) !== null && _c !== void 0 ? _c : [];
+        this.asteroidLaunchers = (_d = objects.asteroidLaunchers) !== null && _d !== void 0 ? _d : [];
     }
     getMapData() {
         return {
             galaxy: this.galaxyName,
             solarSystem: this.name,
-            planetNames: this.planets.map((planet) => planet.name),
+            planets: this.planets.map((planet) => planet.name),
+            warpGates: this.warpGates.map((warpGate) => warpGate.destinationSolarSystem),
         };
     }
 }

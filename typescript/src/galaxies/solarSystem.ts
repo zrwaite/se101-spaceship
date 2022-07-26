@@ -8,7 +8,8 @@ import Game from '../game.js'
 interface MapData {
 	galaxy: string
 	solarSystem: string
-	planetNames: string[]
+	planets: string[]
+	warpGates: string[]
 }
 
 const SolarSystemNames = [
@@ -48,16 +49,17 @@ export default class SolarSystem {
 		this.game = game
 		this.galaxyName = galaxyName
 		this.name = solarSystemName
-		this.asteroids = objects.asteroids || []
-		this.warpGates = objects.warpGates || []
-		this.planets = objects.planets || []
-		this.asteroidLaunchers = objects.asteroidLaunchers || []
+		this.asteroids = objects.asteroids ?? []
+		this.warpGates = objects.warpGates ?? []
+		this.planets = objects.planets ?? []
+		this.asteroidLaunchers = objects.asteroidLaunchers ?? []
 	}
 	getMapData(): MapData {
 		return {
 			galaxy: this.galaxyName,
 			solarSystem: this.name,
-			planetNames: this.planets.map((planet) => planet.name),
+			planets: this.planets.map((planet) => planet.name),
+			warpGates: this.warpGates.map((warpGate) => warpGate.destinationSolarSystem),
 		}
 	}
 }
