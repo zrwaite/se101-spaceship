@@ -38,10 +38,10 @@ export default class AsteroidLauncher {
 	}
 
 	launchAsteroid() {
-		const speed = Math.random() * MAX_SPAWN_SPEED // random speed
+		const speed = this.random ? Math.random() * MAX_SPAWN_SPEED : 0.8 // random speed
 		const angle = this.random ? withinPiRange(this.angle + Math.random() - 0.5) : this.angle
 		const velocity = Vector2.right.rotate(angle).scale(speed) // random direction
-		const aSpeed = this.random? Math.random() - 0.5 : 0
+		const aSpeed = this.random ? Math.random() - 0.5 : 0
 		let asteroid = new Asteroid(velocity, aSpeed, this.pos, this.game)
 		if (this.process) {
 			asteroid.initialize(this.process)

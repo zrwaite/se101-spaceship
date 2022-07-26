@@ -1,154 +1,177 @@
 <!--Based on Spaceship Collaboration Activity.csproj-->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 		<link rel="icon" type="image/x-icon" href="favicon.ico" />
-	<title>SpaceShip Collaboration Activity</title>
-</head>
-<body>
-    <section class="fullscreen">
-        <div id="Game" class="menu">
-            <h1><span id="GalaxyName">Test</span>&ensp;<strong>|</strong>&ensp;<span id="SolarSystemName">Tester Solar System</span></h1>
-            <button id="PauseButton">
-                <div class="bars"></div>
-            </button>
-            <section id="DevTools"><section class="darken">
-                <h1>Dev Tools</h1>
-                <table>
-                    <tr class="title">
-                        <td colspan="2">Ship Velocity:</td>
-                    </tr><tr>
-                        <td>X: 0</td>
-                        <td>Y: 0</td>
-                    </tr><tr class="title">
-                        <td colspan="2">Ship Position:</td>
-                    </tr><tr>
-                        <td>X: 32</td>
-                        <td>Y: 26</td>
-                        <td>&theta;: 0&deg;</td>
-                    </tr><tr class="title">
-                        <td colspan="2">Energy Used:</td>
-                    </tr><tr>
-                        <td colspan="2">0</td>
-                    </tr><tr class="title">
-                        <td colspan="2">Damage Taken:</td>
-                    </tr><tr>
-                        <td colspan="2">0</td>
-                    </tr><tr class="title">
-                        <td colspan="2">Turret Cooldown:</td>
-                    </tr><tr>
-                        <td colspan="2">
-                            <div id="TurretCooldown">
-                                <div class="tube" style="width: 100%;"></div>
-                                <div class="tube" style="width: 100%;"></div>
-                                <div class="tube" style="width: 100%;"></div>
-                                <div class="tube" style="width: 100%;"></div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </section></section>
-        </div>
-        <div id="Main" class="menu">
-            <section id="Settings">
-                <h1><mark>Settings</mark></h1>
-                <table>
-                    <tr>
-                        <td><input id="manualControls" type="checkbox"></td>
-                        <td><p>Manual controls</p></td>
-                    </tr><tr>
-                        <td><input id="zoom" type="checkbox"></td>
-                        <td><p>Zoomed-in view</p></td>
-                    </tr><tr>
-                        <td><input id="devDisplay" type="checkbox"></td>
-                        <td><p>Dev tools display</p></td>
-                    </tr><tr>
-                        <td><input id="skipMenu" type="checkbox"></td>
-                        <td><p>Skip past main menu</p></td>
-                    </tr><tr>
-                        <td><input id="allShips" type="checkbox"></td>
-                        <td><p>All ships are rendered</p></td>
-                    </tr>
-                </table>
-            </section>
-            <section id="Ship">
-                <h1><mark>Ship</mark></h1>
-                <div id="ShipSelect">
-                    <!--Dynamically added with Javascript; sample as follows: -->
-                    <!--
+		<title>SpaceShip Collaboration Activity</title>
+	</head>
+	<body>
+		<section class="fullscreen">
+			<div id="Game" class="menu">
+				<h1><span id="GalaxyName">Noob</span>&ensp;<strong>|</strong>&ensp;<span id="SolarSystemName">Tester Solar System</span></h1>
+				<button id="PauseButton">
+					<div class="bars"></div>
+				</button>
+				<section id="DevTools">
+					<section class="darken">
+						<h1>Dev Tools</h1>
+						<table>
+							<tr class="title">
+								<td colspan="2">Ship Velocity:</td>
+							</tr>
+							<tr>
+								<td>X: 0</td>
+								<td>Y: 0</td>
+							</tr>
+							<tr class="title">
+								<td colspan="2">Ship Position:</td>
+							</tr>
+							<tr>
+								<td>X: 32</td>
+								<td>Y: 26</td>
+								<td>&theta;: 0&deg;</td>
+							</tr>
+							<tr class="title">
+								<td colspan="2">Energy Used:</td>
+							</tr>
+							<tr>
+								<td colspan="2">0</td>
+							</tr>
+							<tr class="title">
+								<td colspan="2">Damage Taken:</td>
+							</tr>
+							<tr>
+								<td colspan="2">0</td>
+							</tr>
+							<tr class="title">
+								<td colspan="2">Turret Cooldown:</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<div id="TurretCooldown">
+										<div class="tube" style="width: 100%"></div>
+										<div class="tube" style="width: 100%"></div>
+										<div class="tube" style="width: 100%"></div>
+										<div class="tube" style="width: 100%"></div>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</section>
+				</section>
+			</div>
+			<div id="Main" class="menu">
+				<section id="Settings">
+					<h1><mark>Settings</mark></h1>
+					<table>
+						<tr>
+							<td><input id="manualControls" type="checkbox" /></td>
+							<td><p>Manual controls</p></td>
+						</tr>
+						<tr>
+							<td><input id="zoom" type="checkbox" /></td>
+							<td><p>Zoomed-in view</p></td>
+						</tr>
+						<tr>
+							<td><input id="devDisplay" type="checkbox" /></td>
+							<td><p>Dev tools display</p></td>
+						</tr>
+						<tr>
+							<td><input id="skipMenu" type="checkbox" /></td>
+							<td><p>Skip past main menu</p></td>
+						</tr>
+						<tr>
+							<td><input id="allShips" type="checkbox" /></td>
+							<td><p>All ships are rendered</p></td>
+						</tr>
+					</table>
+				</section>
+				<section id="Ship">
+					<h1><mark>Ship</mark></h1>
+					<div id="ShipSelect">
+						<!--Dynamically added with Javascript; sample as follows: -->
+						<!--
                         <figure id="ship10" class="small active">Planet Express</figure>
-                    -->
-                </div>
-            </section>
-            <section id="Divider"></section>
-            <section id="Galaxy">
-                <h1><mark>Galaxy</mark></h1>
-                <table>
-                    <tr>
-                        <td id="galaxy1">
-                            Test
-                            <div class="quit hidden" onclick="event.stopPropagation();">Quit</div>
-                        </td>
-                        <td id="galaxy2">
-                            Alpha
-                            <div class="quit hidden" onclick="event.stopPropagation();">Quit</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td id="galaxy3">
-                            Beta
-                            <div class="quit hidden" onclick="event.stopPropagation();">Quit</div>
-                        </td>
-                        <td id="galaxy4">
-                            Gamma
-                            <div class="quit hidden" onclick="event.stopPropagation();">Quit</div>
-                        </td>
-                    </tr>
-                </table>
-            </section>
-            <section id="Info">
-                <button>&#x1F6C8; Info & Tips</button>
-            </section>
-        </div>
-        <div id="Title" class="menu">
-            <h1><mark>Intergalactic<br>Adventures</mark></h1>
-            <button class="start">Start</button>
-            <p class="warning"><mark>Your browser doesn't support local storage, so your preferences will not be saved.</mark></p>
-        </div>
-        <div id="EndScreen" class="menu">
-          <section id="EndScreenMain">
-            <h1><mark>You Win!</mark></h1>
-            <h3><mark>
-              Congratulations on completing the <span id="ESGalaxy">...</span> Galaxy, <span id="ESShipName">...</span> team!<br>
-              During your trip, you used <span id="ESEnergy">...</span> J of energy and survived damage of <span id="ESDamage">...</span> Nm.<br>
-              Your grade on this assignment is <span id="ESScore">...</span>%.</mark></h3>
-            <button class="top">Main Menu</button>
-            <button class="middle">Retry</button>
-            <button class="bottom">Next Galaxy</button>
-          </section>
-          <section id="PlanetFeature">
-            <img id="ESPlanetImage" src="assets/images/SpaceObjects/RedLinesPlanet.png">
-            <h3><mark>You discovered planet <span id="ESPlanetName">...</span>, which seems to be <span id="ESResources"></span>% survivable. It also has many other interesting statistics that don't fit here 😉.</mark></h3>
-          </section>
-      </div>
-    </section>
-    <section id="SolarFade" class="fullscreen"></section>
-    <!-- Canvas initialization -->
-    <section class="canvasHolder">
-        <!-- These are created with JavaScript (src/index.js):
+                    --></div>
+				</section>
+				<section id="Divider"></section>
+				<section id="Galaxy">
+					<h1><mark>Galaxy</mark></h1>
+					<table>
+						<tr>
+							<td id="galaxy1">
+								Noob
+								<div class="quit hidden" onclick="event.stopPropagation();">Quit</div>
+							</td>
+							<td id="galaxy2">
+								Compiles
+								<div class="quit hidden" onclick="event.stopPropagation();">Quit</div>
+							</td>
+						</tr>
+						<tr>
+							<td id="galaxy3">
+								Cracked
+								<div class="quit hidden" onclick="event.stopPropagation();">Quit</div>
+							</td>
+							<td id="galaxy4">
+								Joziac
+								<div class="quit hidden" onclick="event.stopPropagation();">Quit</div>
+							</td>
+						</tr>
+					</table>
+				</section>
+				<section id="Info">
+					<button>&#x1F6C8; Info & Tips</button>
+				</section>
+			</div>
+			<div id="Title" class="menu">
+				<h1>
+					<mark>Intergalactic<br />Adventures</mark>
+				</h1>
+				<button class="start">Start</button>
+				<p class="warning"><mark>Your browser doesn't support local storage, so your preferences will not be saved.</mark></p>
+			</div>
+			<div id="EndScreen" class="menu">
+				<section id="EndScreenMain">
+					<h1><mark>You Win!</mark></h1>
+					<h3>
+						<mark>
+							Congratulations on completing the <span id="ESGalaxy">...</span> Galaxy, <span id="ESShipName">...</span> team!<br />
+							During your trip, you used <span id="ESEnergy">...</span> J of energy and survived damage of <span id="ESDamage">...</span> Nm.<br />
+							Your grade on this assignment is <span id="ESScore">...</span>%.</mark
+						>
+					</h3>
+					<button class="top">Main Menu</button>
+					<button class="middle">Retry</button>
+					<button class="bottom">Next Galaxy</button>
+				</section>
+				<section id="PlanetFeature">
+					<img id="ESPlanetImage" src="assets/images/SpaceObjects/RedLinesPlanet.png" />
+					<h3>
+						<mark
+							>You discovered planet <span id="ESPlanetName">...</span>, which seems to be <span id="ESResources"></span>% survivable. It also has many other interesting statistics that
+							don't fit here 😉.</mark
+						>
+					</h3>
+				</section>
+			</div>
+		</section>
+		<section id="SolarFade" class="fullscreen"></section>
+		<!-- Canvas initialization -->
+		<section class="canvasHolder">
+			<!-- These are created with JavaScript (src/index.js):
         <canvas id="background"></canvas>
         <canvas id="missiles"></canvas>
         <canvas id="objects"></canvas>
         <canvas id="thrusters"></canvas>
         <canvas id="ships"></canvas>
         <canvas id="items"></canvas>
-        -->
-    </section>
-    <script src="javascript/src/index.js" type="module"></script>
-</body>
+        --></section>
+		<script src="javascript/src/index.js" type="module"></script>
+	</body>
 </html>

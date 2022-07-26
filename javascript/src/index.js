@@ -1,4 +1,5 @@
 import Game from './game.js';
+import { imageSrcs } from './images.js';
 let game; // Initialized properly in DOM.doneLoad().
 const windowSize = {
     // Accessible through game.width and game.height.
@@ -17,7 +18,7 @@ document.body.style.setProperty('--height', windowSize.y + '');
 const spritePath = 'assets/images/';
 const images = {}; // image locations, by name
 const contexts = {}; // contexts, by name
-const galaxies = ['test', 'Alpha', 'Beta', 'Gamma'];
+const galaxies = ['Noob', 'Compiles', 'Cracked', 'Joziac'];
 const ships = [
     'Bebop',
     'Bismark',
@@ -36,40 +37,6 @@ const ships = [
     'ssAnne',
     'Thunderbird III',
     'Yamato',
-];
-const imageSrcs = [
-    //["titleBackground", "UIImages/TitleBackground.png"],
-    ['background', 'SpaceObjects/Space.png'],
-    ['ship', 'ShipSprites/ColonyShip.png'],
-    ['thruster', 'ShipSprites/ThrusterNozzle.png'],
-    ['thrusterFlame', 'ShipSprites/ThrusterFlame.png'],
-    ['turret', 'ShipSprites/TurretSprite.png'],
-    ['asteroid', 'SpaceObjects/SpaceMeteors001.png'],
-    ['planet1', 'SpaceObjects/CreamVioletPlanet.png'],
-    ['planet2', 'SpaceObjects/CyanPlanet.png'],
-    ['planet3', 'SpaceObjects/CyanPlanet1.png'],
-    ['planet4', 'SpaceObjects/DarkPlanet.png'],
-    ['planet5', 'SpaceObjects/EarthLikePlanet.png'],
-    ['planet6', 'SpaceObjects/FrostPlanet.png'],
-    ['planet7', 'SpaceObjects/IcePlanet.png'],
-    ['planet8', 'SpaceObjects/OrangePlanet.png'],
-    ['planet9', 'SpaceObjects/PurplePlanet.png'],
-    ['planet10', 'SpaceObjects/RedLinesPlanet.png'],
-    ['planet11', 'SpaceObjects/RedPlanet1.png'],
-    ['planet12', 'SpaceObjects/RedPlanetSputnik.png'],
-    ['planet13', 'SpaceObjects/SandPlanet.png'],
-    ['planet14', 'SpaceObjects/StormPlanet.png'],
-    ['warpgate', 'SpaceObjects/WhiteDwarfStar.png'],
-    ['torpedo', 'SpaceObjects/SpaceMissiles040.png'],
-    ['explosion0', 'Explosions/regularExplosion00.png'],
-    ['explosion1', 'Explosions/regularExplosion01.png'],
-    ['explosion2', 'Explosions/regularExplosion02.png'],
-    ['explosion3', 'Explosions/regularExplosion03.png'],
-    ['explosion4', 'Explosions/regularExplosion04.png'],
-    ['explosion5', 'Explosions/regularExplosion05.png'],
-    ['explosion6', 'Explosions/regularExplosion06.png'],
-    ['explosion7', 'Explosions/regularExplosion07.png'],
-    ['explosion8', 'Explosions/regularExplosion08.png'],
 ];
 let imagesLoaded = 0; // Updates as the images load, until all are loaded.
 function initializeImages(imageInfo) {
@@ -213,7 +180,7 @@ let DOM = {
         this.elements['EndRetry'].onclick = () => {
             var _a, _b;
             if (game) {
-                let galaxyNumber = galaxies.indexOf((_b = (_a = game.galaxy) === null || _a === void 0 ? void 0 : _a.name) !== null && _b !== void 0 ? _b : 'test');
+                let galaxyNumber = galaxies.indexOf((_b = (_a = game.galaxy) === null || _a === void 0 ? void 0 : _a.name) !== null && _b !== void 0 ? _b : 'Noob');
                 DOM.resetGame();
                 DOM.startGame(galaxyNumber);
                 document.activeElement.blur();
@@ -227,9 +194,11 @@ let DOM = {
                 throw Error('Game not defined');
         };
         this.elements['EndNextGalaxy'].onclick = () => {
-            var _a, _b;
+            var _a;
             if (game) {
-                let nextGalaxyNumber = galaxies.indexOf((_b = (_a = game.galaxy) === null || _a === void 0 ? void 0 : _a.name) !== null && _b !== void 0 ? _b : 'wontbeinthelist') + 1;
+                if (!game.galaxy)
+                    throw Error('Game.galaxy not defined');
+                let nextGalaxyNumber = galaxies.indexOf((_a = game.galaxy) === null || _a === void 0 ? void 0 : _a.name) + 1;
                 if (nextGalaxyNumber > 3)
                     nextGalaxyNumber = 3;
                 DOM.resetGame();
@@ -254,12 +223,12 @@ let DOM = {
                 throw Error('Game not defined');
             DOM.newMenu('Main');
         };
-        this.elements['ShipSelect'].onclick = (event) => {
-            DOM.elements['ShipSelect'].classList.toggle("open");
+        this.elements['ShipSelect'].onclick = () => {
+            DOM.elements['ShipSelect'].classList.toggle('open');
         };
         this.elements['Info'].onclick = () => {
-            DOM.elements['Info'].classList.toggle("active");
-            if (DOM.elements['Info'].classList.contains("active")) {
+            DOM.elements['Info'].classList.toggle('active');
+            if (DOM.elements['Info'].classList.contains('active')) {
                 DOM.elements['Info'].querySelector('button').innerHTML =
                     "<h3>&#x1F6C8; Info & Tips</h3>&emsp;&emsp;&emsp;Here we write a bit of information and tips the students could benefit from.<br>&emsp;&emsp;&emsp;To do with the UI, we'll mention stuff like how the local storage works, and for the game, we'll perhaps give some tips or troubleshooting advice.<br>&emsp;&emsp;&emsp;We'll link to the README.md and stuff, too.";
             }
@@ -276,7 +245,7 @@ let DOM = {
                 event.stopPropagation();
             };
         });
-        // Set Data    
+        // Set Data
         for (let i = 0; i < 4; i++) {
             this.elements['galaxy' + (i + 1)].onclick = () => {
                 if (DOM.data['defaultGalaxy'] !== i) {
@@ -490,20 +459,22 @@ let DOM = {
     },
     landSuccessful: function (planet) {
         var _a, _b, _c, _d, _e, _f;
-        console.log("You won! You landed on " + planet.name + "!");
-        if (DOM.menus["EndScreen"].classList.contains('on'))
+        console.log('You won! You landed on ' + planet.name + '!');
+        if (DOM.menus['EndScreen'].classList.contains('on'))
             return; // We already landed
         DOM.menus["EndScreen"].querySelector("#ESGalaxy").innerHTML = (_b = (_a = game === null || game === void 0 ? void 0 : game.galaxy) === null || _a === void 0 ? void 0 : _a.name) !== null && _b !== void 0 ? _b : '<em>unknown<em>';
         DOM.menus["EndScreen"].querySelector("#ESShipName").innerHTML = (_c = game === null || game === void 0 ? void 0 : game.watchShipName) !== null && _c !== void 0 ? _c : '<em>unknown<em>';
         DOM.menus["EndScreen"].querySelector("#ESEnergy").innerHTML = ((_d = game === null || game === void 0 ? void 0 : game.watchShip) === null || _d === void 0 ? void 0 : _d.energyUsed) !== undefined ? Math.floor(game.watchShip.energyUsed * 100) : '<em>unknown<em>';
         DOM.menus["EndScreen"].querySelector("#ESDamage").innerHTML = ((_e = game === null || game === void 0 ? void 0 : game.watchShip) === null || _e === void 0 ? void 0 : _e.totalDamage) !== undefined ? Math.floor(game.watchShip.totalDamage * 10) : '<em>unknown<em>';
         // Composition has: land, metal, danger, survivabilityChance, air, water, temperature, which are all numbers. We could use them, eventually.
-        DOM.menus["EndScreen"].querySelector("#ESResources").innerHTML = Math.round(planet.composition.survivabilityChance);
-        DOM.menus["EndScreen"].querySelector("#ESScore").innerHTML = '69420';
-        const ourImageSrc = imageSrcs.filter((element) => { return element[0] === planet.name; });
-        DOM.menus["EndScreen"].querySelector("#ESPlanetImage").src = (_f = spritePath + ourImageSrc[0][1]) !== null && _f !== void 0 ? _f : 'SpaceObjects/RedLinesPlanet.png';
-        DOM.menus["EndScreen"].querySelector("#ESPlanetName").innerHTML = planet.name;
-        DOM.newMenu("EndScreen");
+        DOM.menus['EndScreen'].querySelector('#ESResources').innerHTML = Math.round(planet.composition.survivabilityChance);
+        DOM.menus['EndScreen'].querySelector('#ESScore').innerHTML = '69420';
+        const ourImageSrc = imageSrcs.filter((element) => {
+            return element[0] === planet.name;
+        });
+        DOM.menus['EndScreen'].querySelector('#ESPlanetImage').src = (_f = spritePath + ourImageSrc[0][1]) !== null && _f !== void 0 ? _f : 'SpaceObjects/RedLinesPlanet.png';
+        DOM.menus['EndScreen'].querySelector('#ESPlanetName').innerHTML = planet.name;
+        DOM.newMenu('EndScreen');
     },
 };
 ///////////////////////////////////////////////

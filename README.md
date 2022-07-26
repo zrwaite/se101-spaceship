@@ -5,7 +5,7 @@
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="50rem" height="50rem" />
 <img src="manual/Zac.png" alt="zac" width="50rem" height="50rem" />
 <img src="manual/Josiah.png" alt="zac" width="50rem" height="50rem" />
-<img src="assets/images/ShipSprites/ColonyShip.png" alt="zac" width="65rem" height="50rem" />
+<img src="assets/images/ship/ColonyShip.png" alt="ship" width="65rem" height="50rem" />
 </div>
 
 ## University of Waterloo Ideas Clinic 💻
