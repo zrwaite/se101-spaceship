@@ -8,7 +8,8 @@ export default class Planet extends RenderedObject {
         this.process = null;
         if (radius < 15)
             throw new Error('Planet radius must be at least 15');
-        this.image = this.game.images[planetName] || this.game.images['planet1'];
+        const imageName = getPlanetImageName(planetName);
+        this.image = this.game.images[imageName];
         this.name = planetName;
         this.composition = composition;
         this.mass = (Math.PI * radius * radius * radius) / 10;
