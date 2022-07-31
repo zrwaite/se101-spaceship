@@ -3,12 +3,22 @@ import { V2 } from "../helpers/Vector2.js"
 import Asteroid from "../spaceObjects/asteroid.js"
 import AsteroidLauncher from "../spaceObjects/asteroidLauncher.js"
 import Planet from "../spaceObjects/planet.js"
-import PlanetComposition from "../spaceObjects/planetComposition.js"
 import WarpGate from "../spaceObjects/warpGate.js"
 import Galaxy from "./galaxy.js"
 import SolarSystem from "./solarSystem.js"
 
 export const BuildCracked = (game: Game): Galaxy => {
+	/*
+		 Hargun		<---
+	▲			▲		|
+	|			|		|
+	▼      		|		|
+	Olivia <--> Ali		|
+	▲			▲		|
+	|			|		|
+	|      		▼		|
+		Derek 	  -------
+	*/
 	const Hargun = new SolarSystem("Hargun", "Compiles", game, {
 		asteroids: [
 			new Asteroid(V2(0.1, 0), 0, V2(40, 100), game),
@@ -22,8 +32,7 @@ export const BuildCracked = (game: Game): Galaxy => {
 			new Asteroid(V2(0.1, -0.1), 0, V2(170, 140), game)
 		],
 		warpGates: [
-			new WarpGate('Olivia', V2(36, 52), game), 
-			new WarpGate('Ali', V2(71, 11), game)
+			new WarpGate('Olivia', V2(360, 500), game), 
 		],
 		asteroidLaunchers: [
 			new AsteroidLauncher(game, V2(350, 560), V2(200, 300)),
@@ -43,7 +52,6 @@ export const BuildCracked = (game: Game): Galaxy => {
 			new Asteroid(V2(0, 0), 0, V2(280, 270), game),
 		],
 		warpGates: [
-			new WarpGate('Derek', V2(180, 80), game),
 			new WarpGate('Ali', V2(670, 100), game),
 			new WarpGate("Hargun", V2(640, 300), game),
 		]
@@ -83,8 +91,8 @@ export const BuildCracked = (game: Game): Galaxy => {
 			new WarpGate('Olivia', V2(610, 390), game),
 		],
 		planets: [
-			new Planet('Abysmal', 20, new PlanetComposition(0, 0, 0, 0, 0, 0), V2(450, 650), game),
-			new Planet('Exceptional', 25, new PlanetComposition(0, 0, 0, 0, 0, 0), V2(80, 80), game),
+			new Planet('Abysmal', 20, V2(450, 650), game),
+			new Planet('Exceptional', 25, V2(80, 80), game),
 		]
 	})
 	return new Galaxy('Cracked', game, [Hargun, Olivia, Ali, Derek])

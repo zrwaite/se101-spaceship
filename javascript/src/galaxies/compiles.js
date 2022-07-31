@@ -1,11 +1,13 @@
 import { V2 } from "../helpers/Vector2.js";
 import Asteroid from "../spaceObjects/asteroid.js";
 import Planet from "../spaceObjects/planet.js";
-import PlanetComposition from "../spaceObjects/planetComposition.js";
 import WarpGate from "../spaceObjects/warpGate.js";
 import Galaxy from "./galaxy.js";
 import SolarSystem from "./solarSystem.js";
 export const BuildCompiles = (game) => {
+    /*
+    Goose --> Waterloo --> StackOverflow --> Goose
+    */
     const Goose = new SolarSystem("Goose", "Compiles", game, {
         asteroids: [
             new Asteroid(V2(0, 0), 0, V2(210, 200), game),
@@ -40,8 +42,8 @@ export const BuildCompiles = (game) => {
     const StackOverflow = new SolarSystem("StackOverflow", "Compiles", game, {
         asteroids: StackOverflowAsteroids,
         planets: [
-            new Planet('Steve-O', 20, new PlanetComposition(0, 0, 0, 0, 0, 0), V2(690, 410), game),
-            new Planet('Fortran', 25, new PlanetComposition(0, 0, 0, 0, 0, 0), V2(80, 130), game),
+            new Planet('Steve-O', 20, V2(690, 410), game),
+            new Planet('Fortran', 25, V2(80, 130), game),
         ],
         warpGates: [
             new WarpGate('Goose', V2(140, 370), game)

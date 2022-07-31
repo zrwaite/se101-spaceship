@@ -4,6 +4,7 @@ export default class RenderedObject {
         /* Default or Empty Attributes */
         this.size = new Vector2(10, 10);
         this.angle = 0;
+        this.radius = 10;
         this.ctx = '';
         this.image = null; // Actual DOM image
         this.game = game;

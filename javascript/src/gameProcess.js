@@ -6,7 +6,6 @@ export default class Process {
         this.initializing = 1;
         this.drawnObjects = []; //  Objects that always need to be drawn and updated
         this.hiddenObjects = []; // Objects that need to be updated only
-        this.staticObjects = [];
         this.delObjects = []; // Objects that need to be drawn and updated until deleted
         this.ships = []; // Array of ship objects
         // Animation Elements (UI uses these too)
@@ -34,8 +33,7 @@ export default class Process {
         for (let i = 0; i < objectsList.length; i++)
             delete objectsList[i];
         this.delObjects = [...this.solarSystem.asteroids]; //Asteroids get deleted
-        this.drawnObjects = [...this.ships]; //Ships get drawn
-        this.staticObjects = [...this.solarSystem.warpGates, ...this.solarSystem.planets];
+        this.drawnObjects = [...this.ships, ...this.solarSystem.warpGates, ...this.solarSystem.planets]; //Ships get drawn
         this.hiddenObjects = [...this.solarSystem.asteroidLaunchers] //Launchers are hidden
         ;
         [...this.delObjects, ...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.hiddenObjects].forEach((object) => {
@@ -91,7 +89,7 @@ export default class Process {
     draw() {
         //Draws all drawn objects
         ;
-        [...this.drawnObjects, ...this.staticObjects, ...this.delObjects].forEach((object) => object.draw());
+        [...this.drawnObjects, ...this.delObjects].forEach((object) => object.draw());
     }
     rerenderStatic() {
         let solarSystemNameElement = document.getElementById('SolarSystemName');
@@ -101,7 +99,7 @@ export default class Process {
                 this.contexts[object].setTransform(1, 0, 0, 1, 0, 0);
                 this.contexts[object].clearRect(0, 0, this.width * this.unit, this.height * this.unit);
             });
-            [...this.drawnObjects, ...this.staticObjects, ...this.delObjects].forEach((object) => object.draw()); //Redraws all objects, including static
+            [...this.drawnObjects, ...this.delObjects].forEach((object) => object.draw()); //Redraws all objects, including static
         }
         else
             throw Error('Missing element SolarSystemName');
@@ -111,8 +109,6 @@ export default class Process {
             delete this.contexts[i];
         for (let i = 0; i < this.drawnObjects.length; i++)
             delete this.drawnObjects[i];
-        for (let i = 0; i < this.staticObjects.length; i++)
-            delete this.staticObjects[i];
         for (let i = 0; i < this.hiddenObjects.length; i++)
             delete this.hiddenObjects[i];
         for (let i = 0; i < this.delObjects.length; i++)

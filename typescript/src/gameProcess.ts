@@ -1,14 +1,12 @@
 import Game from './game.js'
 import Vector2 from './helpers/Vector2.js'
-import RenderedObject from './renderedObject.js'
 import ColonyShip from './ship/colonyShip.js'
 import Torpedo from './ship/torpedo.js'
 import SolarSystem from './galaxies/solarSystem.js'
 import Asteroid from './spaceObjects/asteroid.js'
 import AsteroidLauncher from './spaceObjects/asteroidLauncher.js'
 import Meteor from './spaceObjects/meteor.js'
-import Planet from './spaceObjects/planet.js'
-import WarpGate from './spaceObjects/warpGate.js'
+import Sprite from './sprite.js'
 
 type DeletableObject = Asteroid | Meteor | Torpedo
 
@@ -24,9 +22,8 @@ export default class Process {
 
 	/* Default Attributes */
 	initializing = 1
-	drawnObjects: RenderedObject[] = [] //  Objects that always need to be drawn and updated
+	drawnObjects: Sprite[] = [] //  Objects that always need to be drawn and updated
 	hiddenObjects: AsteroidLauncher[] = [] // Objects that need to be updated only
-	staticObjects: (Planet | WarpGate)[] = []
 	delObjects: DeletableObject[] = [] // Objects that need to be drawn and updated until deleted
 	ships: ColonyShip[] = [] // Array of ship objects
 	// Animation Elements (UI uses these too)
@@ -56,8 +53,7 @@ export default class Process {
 		let objectsList = [...this.delObjects, ...this.drawnObjects, ...this.hiddenObjects]
 		for (let i = 0; i < objectsList.length; i++) delete objectsList[i]
 		this.delObjects = [...this.solarSystem.asteroids] //Asteroids get deleted
-		this.drawnObjects = [...this.ships] //Ships get drawn
-		this.staticObjects = [...this.solarSystem.warpGates, ...this.solarSystem.planets]
+		this.drawnObjects = [...this.ships, ...this.solarSystem.warpGates, ...this.solarSystem.planets] //Ships get drawn
 		this.hiddenObjects = [...this.solarSystem.asteroidLaunchers] //Launchers are hidden
 		;[...this.delObjects, ...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.hiddenObjects].forEach((object) => {
 			object.initialize(this)
@@ -106,7 +102,7 @@ export default class Process {
 	}
 	draw() {
 		//Draws all drawn objects
-		;[...this.drawnObjects, ...this.staticObjects, ...this.delObjects].forEach((object) => object.draw())
+		;[...this.drawnObjects, ...this.delObjects].forEach((object) => object.draw())
 	}
 	rerenderStatic() {
 		let solarSystemNameElement = document.getElementById('SolarSystemName')
@@ -116,13 +112,12 @@ export default class Process {
 				this.contexts[object].setTransform(1, 0, 0, 1, 0, 0)
 				this.contexts[object].clearRect(0, 0, this.width * this.unit, this.height * this.unit)
 			})
-			;[...this.drawnObjects, ...this.staticObjects, ...this.delObjects].forEach((object) => object.draw()) //Redraws all objects, including static
+			;[...this.drawnObjects, ...this.delObjects].forEach((object) => object.draw()) //Redraws all objects, including static
 		} else throw Error('Missing element SolarSystemName')
 	}
 	endProcess() {
 		for (let i = 0; i < this.contexts.length; i++) delete this.contexts[i]
 		for (let i = 0; i < this.drawnObjects.length; i++) delete this.drawnObjects[i]
-		for (let i = 0; i < this.staticObjects.length; i++) delete this.staticObjects[i]
 		for (let i = 0; i < this.hiddenObjects.length; i++) delete this.hiddenObjects[i]
 		for (let i = 0; i < this.delObjects.length; i++) delete this.delObjects[i]
 		for (let i = 0; i < this.ships.length; i++) delete this.ships[i]

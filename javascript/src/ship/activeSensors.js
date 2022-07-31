@@ -13,6 +13,7 @@ var _ActiveSensors_instances, _ActiveSensors_parentShip, _ActiveSensors_pointInS
 import EMSReading from './EMSReading.js';
 import APIResponse from '../helpers/response.js';
 import Vector2 from '../helpers/Vector2.js';
+import ColonyShip from './colonyShip.js';
 import RenderedObject from '../renderedObject.js';
 import Planet from '../spaceObjects/planet.js';
 import Torpedo from './torpedo.js';
@@ -58,7 +59,7 @@ export default class ActiveSensors extends RenderedObject {
         // To find angle, find angle difference between the vector from ship to object & current ship heading
         // y coordinate is inverted due to the flipped board axis (greater y value indicates lower position)
         let readings = [];
-        const allDetectableSpaceObjects = [...__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").process.delObjects, ...__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").process.staticObjects].filter((obj) => !(obj instanceof Torpedo));
+        const allDetectableSpaceObjects = [...__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").process.delObjects, ...__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").process.drawnObjects].filter((obj) => !(obj instanceof Torpedo) && !(obj instanceof ColonyShip));
         for (const spaceObject of allDetectableSpaceObjects) {
             if (__classPrivateFieldGet(this, _ActiveSensors_instances, "m", _ActiveSensors_pointInScanSlice).call(this, spaceObject.pos)) {
                 const angle = spaceObject.pos.angleToPoint(__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos);

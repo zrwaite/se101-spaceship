@@ -2,10 +2,12 @@ import Game from '../game.js'
 import Process from '../gameProcess.js'
 import Vector2 from '../helpers/Vector2.js'
 
-import RenderedObject from '../renderedObject.js'
 import ColonyShip from '../ship/colonyShip.js'
-import SolarSystem, { SolarSystemName } from '../galaxies/solarSystem.js'
-export default class WarpGate extends RenderedObject {
+import { SolarSystemName } from '../galaxies/solarSystem.js'
+import Sprite from '../sprite.js'
+import { keepInMap } from '../helpers/pos.js'
+import { withinPiRange } from '../helpers/Angles.js'
+export default class WarpGate extends Sprite {
 	/* Constructor params */
 	destinationSolarSystem
 	/* Default Attributes */
@@ -13,6 +15,7 @@ export default class WarpGate extends RenderedObject {
 	size = new Vector2(50, 50)
 	radius = 15
 	mass = 100
+	fourthDimension = false
 	/* Other attributes */
 	process: Process | null = null
 
@@ -36,5 +39,16 @@ export default class WarpGate extends RenderedObject {
 			}
 			ship.process = newProcess
 		} else throw Error('Process not found')
+	}
+	update() {
+		if (this.fourthDimension) {
+			this.angle += Math.random()
+			this.accel = Vector2.right.rotateTo(this.angle).scale(0.1)
+			if (keepInMap(this.pos)) {
+				this.angle = withinPiRange(new Vector2(360, 270).angleToPoint(this.pos))
+				this.speed = Vector2.zero
+			}	
+		}
+		super.update()
 	}
 }

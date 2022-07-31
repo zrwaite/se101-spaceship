@@ -9,6 +9,7 @@ export default abstract class RenderedObject {
 	/* Default or Empty Attributes */
 	size: Vector2 = new Vector2(10, 10)
 	angle: number = 0
+	radius: number = 10
 	ctx: string = ''
 	image: CanvasImageSource | null = null // Actual DOM image
 

@@ -60,7 +60,7 @@ export default class ActiveSensors extends RenderedObject {
 		// To find angle, find angle difference between the vector from ship to object & current ship heading
 		// y coordinate is inverted due to the flipped board axis (greater y value indicates lower position)
 		let readings: EMSReading[] = []
-		const allDetectableSpaceObjects = [...this.#parentShip.process.delObjects, ...this.#parentShip.process.staticObjects].filter((obj) => !(obj instanceof Torpedo))
+		const allDetectableSpaceObjects = [...this.#parentShip.process.delObjects, ...this.#parentShip.process.drawnObjects].filter((obj) => !(obj instanceof Torpedo) && !(obj instanceof ColonyShip))
 		for (const spaceObject of allDetectableSpaceObjects) {
 			if (this.#pointInScanSlice(spaceObject.pos)) {
 				const angle = spaceObject.pos.angleToPoint(this.#parentShip.pos)

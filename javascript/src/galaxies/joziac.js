@@ -5,44 +5,28 @@ import WarpGate from "../spaceObjects/warpGate.js";
 import Galaxy from "./galaxy.js";
 import SolarSystem from "./solarSystem.js";
 export const BuildJoziac = (game) => {
-    const Gates = new SolarSystem("Gates", "Joziac", game, {
-        asteroids: [
-            new Asteroid(V2(0, 0), 0, V2(230, 90), game),
-            new Asteroid(V2(0, 0), 0, V2(210, 130), game),
-            new Asteroid(V2(0, 0), 0, V2(160, 440), game),
-            new Asteroid(V2(0, 0), 0, V2(110, 280), game),
-            new Asteroid(V2(0, 0), 0, V2(30, 320), game),
-            new Asteroid(V2(0, 0), 0, V2(490, 230), game),
-            new Asteroid(V2(0, 0), 0, V2(700, 40), game),
-            new Asteroid(V2(0, 0), 0, V2(630, 240), game),
-            new Asteroid(V2(0, 0), 0, V2(520, 360), game),
-            new Asteroid(V2(0, 0), 0, V2(540, 490), game),
-        ],
-        warpGates: [
-            new WarpGate('ECE105', V2(3, 16), game),
-            new WarpGate('Torvalds', V2(30, 21), game),
-            new WarpGate('Elon', V2(60, 21), game),
-        ]
-    });
-    const Elon = new SolarSystem("Elon", "Joziac", game, {
-        asteroids: [
-            new Asteroid(V2(0.1, 0), 0, V2(670, 400), game),
-            new Asteroid(V2(0, 0.2), 0, V2(610, 310), game),
-            new Asteroid(V2(0.1, 0.1), 0, V2(310, 40), game),
-            new Asteroid(V2(0.2, 0.1), 0, V2(250, 180), game),
-            new Asteroid(V2(0.3, 0.2), 0, V2(110, 70), game)
-        ],
-        asteroidLaunchers: [
-            new AsteroidLauncher(game, V2(610, 565), V2(500, 350), true),
-            new AsteroidLauncher(game, V2(210, -20), V2(230, 40), true, 5)
-        ],
-        warpGates: [
-            new WarpGate('Torvalds', V2(410, 310), game),
-            new WarpGate('Gates', V2(510, 110), game),
-            new WarpGate('Josiah', V2(310, 410), game),
-            new WarpGate('Zac', V2(140, 420), game),
-        ],
-    });
+    /*
+                 ▲--▼
+                ECE105		  <---------
+          ▲					▲			|
+          |					|			|
+          ▼					▼			|
+    -->	Gates	<--->	Torvalds <--	|
+    |	  ▲					▲		|	|
+    |	  |					|		|	|
+    |	  ▼					▼		|	|
+    |			Elon				|	|
+    |	  ▲					▲		|	|
+    |	  |					|		|	|
+    |	  ▼					▼		|	|
+     --  Zac    <--->	 Josiah  ---	|
+          ▲					▲			|
+          |					|			|
+          ▼					▼			|
+                Turing            ------
+
+
+    */
     const ECE105Asteroids = [];
     const ECE105AsteroidLaunchers = [];
     for (let i = 0; i < 12; i++) {
@@ -65,8 +49,65 @@ export const BuildJoziac = (game) => {
         asteroidLaunchers: ECE105AsteroidLaunchers,
         warpGates: [
             new WarpGate('Torvalds', V2(51, 411), game),
-            new WarpGate('Gates', V2(640, 80), game)
+            new WarpGate('Gates', V2(500, 500), game),
+            new WarpGate('ECE105', V2(50, 80), game)
         ]
+    });
+    const Gates = new SolarSystem("Gates", "Joziac", game, {
+        asteroids: [
+            new Asteroid(V2(0, 0), 0, V2(230, 90), game),
+            new Asteroid(V2(0, 0), 0, V2(210, 130), game),
+            new Asteroid(V2(0, 0), 0, V2(160, 440), game),
+            new Asteroid(V2(0, 0), 0, V2(110, 280), game),
+            new Asteroid(V2(0, 0), 0, V2(30, 320), game),
+            new Asteroid(V2(0, 0), 0, V2(490, 230), game),
+            new Asteroid(V2(0, 0), 0, V2(700, 40), game),
+            new Asteroid(V2(0, 0), 0, V2(630, 240), game),
+            new Asteroid(V2(0, 0), 0, V2(520, 360), game),
+            new Asteroid(V2(0, 0), 0, V2(540, 490), game),
+        ],
+        warpGates: [
+            new WarpGate('ECE105', V2(3, 16), game),
+            new WarpGate('Torvalds', V2(30, 21), game),
+            new WarpGate('Elon', V2(60, 21), game),
+        ]
+    });
+    const Torvalds = new SolarSystem("Torvalds", "Joziac", game, {
+        asteroids: [
+            new Asteroid(V2(0, 0), 0, V2(90, 260), game),
+            new Asteroid(V2(0, 0), 0, V2(210, 240), game),
+            new Asteroid(V2(0, 0), 0, V2(250, 130), game),
+            new Asteroid(V2(0, 0), 0, V2(60, 50), game),
+            new Asteroid(V2(0, 0), 0, V2(20, 110), game),
+            new Asteroid(V2(0, 0), 0, V2(680, 210), game),
+            new Asteroid(V2(0, 0), 0, V2(360, 200), game),
+            new Asteroid(V2(0, 0), 0, V2(310, 230), game),
+            new Asteroid(V2(0, 0), 0, V2(290, 490), game),
+        ],
+        warpGates: [
+            new WarpGate('ECE105', V2(370, 90), game),
+            new WarpGate('Gates', V2(110, 400), game),
+            new WarpGate('Elon', V2(610, 390), game)
+        ]
+    });
+    const Elon = new SolarSystem("Elon", "Joziac", game, {
+        asteroids: [
+            new Asteroid(V2(0.1, 0), 0, V2(670, 400), game),
+            new Asteroid(V2(0, 0.2), 0, V2(610, 310), game),
+            new Asteroid(V2(0.1, 0.1), 0, V2(310, 40), game),
+            new Asteroid(V2(0.2, 0.1), 0, V2(250, 180), game),
+            new Asteroid(V2(0.3, 0.2), 0, V2(110, 70), game)
+        ],
+        asteroidLaunchers: [
+            new AsteroidLauncher(game, V2(610, 565), V2(500, 350), true),
+            new AsteroidLauncher(game, V2(210, -20), V2(230, 40), true, 5)
+        ],
+        warpGates: [
+            new WarpGate('Torvalds', V2(410, 310), game),
+            new WarpGate('Gates', V2(510, 110), game),
+            new WarpGate('Josiah', V2(310, 410), game),
+            new WarpGate('Zac', V2(140, 420), game),
+        ],
     });
     const Josiah = new SolarSystem("Josiah", "Joziac", game, {
         asteroids: [
@@ -89,22 +130,12 @@ export const BuildJoziac = (game) => {
             new WarpGate('Turing', V2(480, 350), game),
         ]
     });
-    const Torvalds = new SolarSystem("Torvalds", "Joziac", game, {
-        asteroids: [
-            new Asteroid(V2(0, 0), 0, V2(90, 260), game),
-            new Asteroid(V2(0, 0), 0, V2(210, 240), game),
-            new Asteroid(V2(0, 0), 0, V2(250, 130), game),
-            new Asteroid(V2(0, 0), 0, V2(60, 50), game),
-            new Asteroid(V2(0, 0), 0, V2(20, 110), game),
-            new Asteroid(V2(0, 0), 0, V2(680, 210), game),
-            new Asteroid(V2(0, 0), 0, V2(360, 200), game),
-            new Asteroid(V2(0, 0), 0, V2(310, 230), game),
-            new Asteroid(V2(0, 0), 0, V2(290, 490), game),
-        ],
+    const Zac = new SolarSystem("Zac", "Joziac", game, {
         warpGates: [
-            new WarpGate('ECE105', V2(370, 90), game),
-            new WarpGate('Gates', V2(110, 400), game),
-            new WarpGate('Elon', V2(610, 390), game)
+            new WarpGate('Gates', V2(160, 480), game),
+            new WarpGate('Elon', V2(480, 160), game),
+            new WarpGate('Josiah', V2(50, 160), game),
+            new WarpGate('Turing', V2(480, 350), game)
         ]
     });
     const TuringAsteroids = [];
@@ -120,17 +151,14 @@ export const BuildJoziac = (game) => {
         warpGates: [
             new WarpGate('Zac', V2(590, 190), game),
             new WarpGate('Josiah', V2(410, 410), game),
-            new WarpGate('Elon', V2(110, 280), game),
             new WarpGate('ECE105', V2(300, 160), game),
         ]
     });
-    const Zac = new SolarSystem("Zac", "Joziac", game, {
-        warpGates: [
-            new WarpGate('Gates', V2(160, 480), game),
-            new WarpGate('Elon', V2(480, 160), game),
-            new WarpGate('Josiah', V2(50, 160), game),
-            new WarpGate('Turing', V2(480, 350), game)
-        ]
+    [Elon, Zac, Josiah].forEach((galaxy) => {
+        galaxy.warpGates.forEach((warpGate) => {
+            if (Math.random() > 0.5)
+                warpGate.fourthDimension = true;
+        });
     });
     return new Galaxy('Joziac', game, [ECE105, Torvalds, Gates, Elon, Josiah, Zac, Turing]);
 };

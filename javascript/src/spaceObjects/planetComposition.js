@@ -1,38 +1,25 @@
 export default class PlanetComposition {
-    constructor(water, air, land, metal, danger, temperature) {
+    constructor(water, air, land, metal, safety, temperature) {
         this.water = water;
         this.air = air;
         this.land = land;
         this.metal = metal;
-        this.danger = danger;
+        this.safety = safety;
         this.temperature = temperature;
         this.maintainRange();
     }
     maintainRange() {
-        if (this.water > 100)
-            this.water = 100;
-        else if (this.water < 0)
-            this.water = 0;
-        if (this.air > 100)
-            this.air = 100;
-        else if (this.air < 0)
-            this.air = 0;
-        if (this.land > 100)
-            this.land = 100;
-        else if (this.land < 0)
-            this.land = 0;
-        if (this.metal > 100)
-            this.metal = 100;
-        else if (this.metal < 0)
-            this.metal = 0;
-        if (this.danger > 100)
-            this.danger = 100;
-        else if (this.danger < 0)
-            this.danger = 0;
+        ;
+        ['water', 'air', 'land', 'metal', 'safety'].forEach((key) => {
+            if (this[key] < 0)
+                throw Error(`Planet composition ${key} value must be greater than 0: ${this[key]}`);
+            if (this[key] > 100)
+                throw Error(`Planet composition ${key} value must be less than 100: ${this[key]}`);
+        });
         if (this.temperature > 100)
-            this.temperature = 100;
+            throw Error('Planet composition temperature must be less than 100: ' + this.temperature);
         else if (this.temperature < -100)
-            this.temperature = -100;
+            throw Error('Planet composition temperature must be greater than -100: ' + this.temperature);
     }
     get survivabilityChance() {
         let survivabilityChance = 0;
@@ -40,7 +27,7 @@ export default class PlanetComposition {
         survivabilityChance += 8 * this.getDistribution1(this.air);
         survivabilityChance += 5 * this.getDistribution1(this.land);
         survivabilityChance += 4 * this.getDistribution1(this.metal);
-        survivabilityChance += 6 * this.getDistribution1(100 - this.danger);
+        survivabilityChance += 6 * this.getDistribution1(this.safety);
         survivabilityChance += 6 * this.getDistribution2(this.temperature);
         if (survivabilityChance > 100)
             survivabilityChance = 100;

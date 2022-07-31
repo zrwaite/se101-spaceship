@@ -4,8 +4,9 @@ import PlanetComposition from './planetComposition.js'
 import Process from '../gameProcess.js'
 import Game from '../game.js'
 import { PlanetImageName } from '../images.js'
+import Sprite from '../sprite.js'
 
-export default class Planet extends RenderedObject {
+export default class Planet extends Sprite {
 	/* Default Params */
 	mass: number
 	ctx = 'planets'
@@ -15,13 +16,13 @@ export default class Planet extends RenderedObject {
 	/* Other attributes */
 	process: Process | null = null
 	composition
-	constructor(planetName: PlanetName, radius: number, composition: PlanetComposition, ...args: [pos: Vector2, game: Game]) {
+	constructor(planetName: PlanetName, radius: number, ...args: [pos: Vector2, game: Game]) {
 		super(...args)
 		if (radius < 15) throw new Error('Planet radius must be at least 15')
 		const imageName = getPlanetImageName(planetName)
+		this.composition = getPlanetComposition(planetName)
 		this.image = this.game.images[imageName]
 		this.name = planetName
-		this.composition = composition
 		this.mass = (Math.PI * radius * radius * radius) / 10
 		this.size = new Vector2(radius * 3, radius * 3)
 		this.radius = radius
@@ -57,6 +58,7 @@ export type PlanetName = typeof PlanetNames[number]
 
 export const getPlanetImageName = (planetName: PlanetName): PlanetImageName => {
 	switch (planetName) {
+		case 'Big Bird': return 'Neptune'
 		case 'Rust': return 'Saturn'
 		case 'Johnny Cash': return 'BlueStorm'
 		case 'Notch': return 'Cheese'
@@ -67,14 +69,37 @@ export const getPlanetImageName = (planetName: PlanetName): PlanetImageName => {
 		case 'Esquimalt': return 'GreyLines'
 		case 'Abysmal': return 'IceCube'
 		case 'Fortran': return 'IceWater'
-		case 'Planet Three (no Planet One)': return 'LavaRing'
 		case 'COBOL': return 'LightLava'
 		case 'Watermelon': return 'Mars'
-		case 'Big Bird': return 'Neptune'
 		case 'Steve-O': return 'PinkSaturn'
-		case 'Planet Joziac': return 'PurplePlanet'
 		case 'Melony': return 'PurpleStripes'
 		case 'Planet Two': return 'SandyCheeks'
+		case 'Planet Three (no Planet One)': return 'LavaRing'
+		case 'Planet Joziac': return 'PurplePlanet'
+		default: throw Error('Unidentified planet name')
+	}
+}
+
+export const getPlanetComposition = (planetName: PlanetName): PlanetComposition => {
+	switch (planetName) {
+		case 'Big Bird': return new PlanetComposition(80, 70, 20, 50, 80, 20)
+		case 'Rust': return new PlanetComposition(80, 70, 20, 50, 80, 20)
+		case 'Johnny Cash': return new PlanetComposition(80, 70, 20, 50, 80, 20)
+		case 'Notch': return new PlanetComposition(80, 70, 20, 50, 80, 20)
+		case "You're Mother": return new PlanetComposition(80, 70, 20, 50, 80, 20)
+		case 'Zig': return new PlanetComposition(80, 70, 20, 50, 80, 20)
+		case 'Pluto': return new PlanetComposition(80, 70, 20, 50, 80, 20)
+		case 'Exceptional': return new PlanetComposition(80, 70, 20, 50, 80, 20)
+		case 'Esquimalt': return new PlanetComposition(80, 70, 20, 50, 80, 20)
+		case 'Abysmal': return new PlanetComposition(80, 70, 20, 50, 80, 20)
+		case 'Fortran': return new PlanetComposition(80, 70, 20, 50, 80, 20)
+		case 'COBOL': return new PlanetComposition(80, 70, 20, 50, 80, 20)
+		case 'Watermelon': return new PlanetComposition(80, 70, 20, 50, 80, 20)
+		case 'Steve-O': return new PlanetComposition(80, 70, 20, 50, 80, 20)
+		case 'Melony': return new PlanetComposition(80, 70, 20, 50, 80, 20)
+		case 'Planet Joziac': return new PlanetComposition(80, 70, 20, 50, 80, 20)
+		case 'Planet Two': return new PlanetComposition(80, 70, 20, 50, 80, 20)
+		case 'Planet Three (no Planet One)': return new PlanetComposition(80, 70, 20, 50, 80, 20)
 		default: throw Error('Unidentified planet name')
 	}
 }
