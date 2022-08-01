@@ -1,6 +1,8 @@
 import { V2 } from "../helpers/Vector2.js";
 import Asteroid from "../spaceObjects/asteroid.js";
 import AsteroidLauncher from "../spaceObjects/asteroidLauncher.js";
+import Planet from "../spaceObjects/planet.js";
+import Star from "../spaceObjects/star.js";
 import WarpGate from "../spaceObjects/warpGate.js";
 import Galaxy from "./galaxy.js";
 import SolarSystem from "./solarSystem.js";
@@ -130,14 +132,26 @@ export const BuildJoziac = (game) => {
             new WarpGate('Turing', V2(480, 350), game),
         ]
     });
+    const ZacStar = new Star(V2(350, 300), game);
     const Zac = new SolarSystem("Zac", "Joziac", game, {
         warpGates: [
             new WarpGate('Gates', V2(160, 480), game),
             new WarpGate('Elon', V2(480, 160), game),
             new WarpGate('Josiah', V2(50, 160), game),
             new WarpGate('Turing', V2(480, 350), game)
-        ]
+        ],
+        planets: [
+            new Planet('Rust', 33, V2(280, 220), game),
+            new Planet('Watermelon', 23, V2(420, 380), game),
+            new Planet('Zig', 27, V2(520, 480), game),
+            new Planet("You're Mother", 18, V2(180, 120), game)
+        ],
+        star: ZacStar
     });
+    Zac.planets.forEach(planet => planet.setOrbit(ZacStar));
+    Zac.activate = () => {
+        ZacStar.collapse(500);
+    };
     const TuringAsteroids = [];
     for (let i = 0; i < 5; i++) {
         TuringAsteroids.push(new Asteroid(V2(0, 0), 0, V2(((51 + 41 * i) % 71) * 10, ((41 + 41 * i) % 53) * 10), game));

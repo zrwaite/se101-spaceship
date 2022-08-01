@@ -10,9 +10,10 @@ import Matrix2 from './helpers/Matrix2.js'
 import ColonyShip from './ship/colonyShip.js'
 import WarpGate from './spaceObjects/warpGate.js'
 import Planet from './spaceObjects/planet.js'
+import Star from './spaceObjects/star.js'
 
 type CollisionObject = ColonyShip | Asteroid | Meteor | Torpedo
-type IndirectCollisionObject = CollisionObject | Planet | WarpGate
+type IndirectCollisionObject = CollisionObject | Planet | WarpGate | Star
 
 const DMG_COEFFICIENT = 20
 
@@ -66,6 +67,7 @@ export default class Game {
 			this.processes.push(new Process(this, solarSystem, i))
 		})
 		this.drawnProcess = this.processes[0]
+		this.drawnProcess.activate()
 
 		if (this.allShips) {
 			this.ships.push(...buildAllShips(this.galaxy.startingSolarSystem.shipStartPosition, this, this.drawnProcess)) //Build all ships for now
@@ -158,10 +160,12 @@ export default class Game {
 			})
 		})
 
-		for (let i = 0; i < process.delObjects.length; i++) {
-			for (let j = i + 1; j < process.delObjects.length; j++) {
-				const a = process.delObjects[i]
-				const b = process.delObjects[j]
+		const explosionObjects = process.delObjects.filter(obj => !(obj instanceof Star)) as (Torpedo | Asteroid | Meteor)[]
+
+		for (let i = 0; i < explosionObjects.length; i++) {
+			for (let j = i + 1; j < explosionObjects.length; j++) {
+				const a = explosionObjects[i]
+				const b = explosionObjects[j]
 				if (this.ifCollide(a, b)) {
 					if (a instanceof Torpedo || b instanceof Torpedo) {
 						// XOR

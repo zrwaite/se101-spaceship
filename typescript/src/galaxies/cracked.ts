@@ -3,6 +3,7 @@ import { V2 } from "../helpers/Vector2.js"
 import Asteroid from "../spaceObjects/asteroid.js"
 import AsteroidLauncher from "../spaceObjects/asteroidLauncher.js"
 import Planet from "../spaceObjects/planet.js"
+import Star from "../spaceObjects/star.js"
 import WarpGate from "../spaceObjects/warpGate.js"
 import Galaxy from "./galaxy.js"
 import SolarSystem from "./solarSystem.js"
@@ -65,11 +66,12 @@ export const BuildCracked = (game: Game): Galaxy => {
 			new Asteroid(V2(0, 0), 0, V2(640, 230), game),
 		],
 		warpGates: [
-			new WarpGate('Derek', V2(21, 43), game),
-			new WarpGate("Hargun", V2(37, 25), game),
-			new WarpGate('Olivia', V2(3, 29), game),
+			new WarpGate('Derek', V2(400, 290), game),
+			new WarpGate("Hargun", V2(360, 250), game),
+			new WarpGate('Olivia', V2(320, 290), game),
 		]
 	})
+	const DerekStar = new Star(V2(360, 270), game)
 	const Derek = new SolarSystem("Derek", "Compiles", game, {
 		asteroids: [
 			new Asteroid(V2(0, 0), 0, V2(180, 250), game),
@@ -91,9 +93,14 @@ export const BuildCracked = (game: Game): Galaxy => {
 			new WarpGate('Olivia', V2(610, 390), game),
 		],
 		planets: [
-			new Planet('Abysmal', 20, V2(450, 650), game),
-			new Planet('Exceptional', 25, V2(80, 80), game),
-		]
+			new Planet('Abysmal', 20, V2(450, 450), game),
+			new Planet('Exceptional', 25, V2(380, 380), game),
+		],
+		star: DerekStar
 	})
+	Derek.planets.forEach(planet => planet.setOrbit(DerekStar))
+	// Derek.activate = () => {
+	// 	TutorialStar.collapse(500)
+	// }
 	return new Galaxy('Cracked', game, [Hargun, Olivia, Ali, Derek])
 }

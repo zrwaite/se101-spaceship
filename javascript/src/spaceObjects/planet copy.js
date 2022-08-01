@@ -13,8 +13,6 @@ export default class Planet extends Sprite {
         this.process = null;
         if (radius < 15)
             throw new Error('Planet radius must be at least 15');
-        if (radius > 35)
-            throw new Error('Planet radius must be less than 35');
         const imageName = getPlanetImageName(planetName);
         this.composition = getPlanetComposition(planetName);
         this.image = this.game.images[imageName];
@@ -22,21 +20,15 @@ export default class Planet extends Sprite {
         this.mass = (Math.PI * radius * radius * radius) / 10;
         this.size = new Vector2(radius * 3, radius * 3);
         this.radius = radius;
-        console.log(this.mass);
     }
     initialize(process) {
         this.process = process;
     }
-    setOrbit(star) {
-        star.addPlanet(this);
+    setOrbit(orbitCenter) {
         this.inOrbit = true;
-        this.orbitCenter = star.pos;
-        this.orbitRadius = this.pos.distance(star.pos);
-        this.orbitAngle = this.pos.angleToPoint(star.pos);
-    }
-    leaveOrbit() {
-        this.inOrbit = false;
-        this.speed = Vector2.right.rotateTo(this.orbitAngle + Math.PI / 2);
+        this.orbitCenter = orbitCenter;
+        this.orbitRadius = this.pos.distance(orbitCenter);
+        this.orbitAngle = this.pos.angleToPoint(orbitCenter);
     }
     update() {
         var _a;
@@ -44,9 +36,6 @@ export default class Planet extends Sprite {
             this.orbitAngle += 1 / this.orbitRadius;
             const vecToPlanet = Vector2.right.rotateTo(this.orbitAngle).scaleTo(this.orbitRadius);
             this.pos = (_a = this.orbitCenter) === null || _a === void 0 ? void 0 : _a.add(vecToPlanet);
-        }
-        else if (!this.inOrbit && this.orbitCenter) {
-            super.update();
         }
     }
 }

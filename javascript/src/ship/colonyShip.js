@@ -210,7 +210,7 @@ export default class ColonyShip extends Sprite {
         this.thrusterController.draw();
     }
     selfDestruct() {
-        const explosion = new Torpedo(this, Vector2.zero, this.pos, this.game);
+        const explosion = new Torpedo(Vector2.zero, this.pos, this.game);
         explosion.explode();
         this.process.spawnDeletableObject(explosion);
         this.destructed = true;

@@ -7,8 +7,9 @@ import Asteroid from './spaceObjects/asteroid.js'
 import AsteroidLauncher from './spaceObjects/asteroidLauncher.js'
 import Meteor from './spaceObjects/meteor.js'
 import Sprite from './sprite.js'
+import Star from './spaceObjects/star.js'
 
-type DeletableObject = Asteroid | Meteor | Torpedo
+type DeletableObject = Asteroid | Meteor | Torpedo | Star
 
 export default class Process {
 	/* Constructor Params */
@@ -54,6 +55,7 @@ export default class Process {
 		for (let i = 0; i < objectsList.length; i++) delete objectsList[i]
 		this.delObjects = [...this.solarSystem.asteroids] //Asteroids get deleted
 		this.drawnObjects = [...this.ships, ...this.solarSystem.warpGates, ...this.solarSystem.planets] //Ships get drawn
+		if (this.solarSystem.star) this.delObjects.push(this.solarSystem.star)
 		this.hiddenObjects = [...this.solarSystem.asteroidLaunchers] //Launchers are hidden
 		;[...this.delObjects, ...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.hiddenObjects].forEach((object) => {
 			object.initialize(this)
@@ -121,5 +123,8 @@ export default class Process {
 		for (let i = 0; i < this.hiddenObjects.length; i++) delete this.hiddenObjects[i]
 		for (let i = 0; i < this.delObjects.length; i++) delete this.delObjects[i]
 		for (let i = 0; i < this.ships.length; i++) delete this.ships[i]
+	}
+	activate() {
+		this.solarSystem.activate()
 	}
 }

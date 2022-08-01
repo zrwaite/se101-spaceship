@@ -1,10 +1,10 @@
-import RenderedObject from '../renderedObject.js'
 import Vector2 from '../helpers/Vector2.js'
 import PlanetComposition from './planetComposition.js'
 import Process from '../gameProcess.js'
 import Game from '../game.js'
 import { PlanetImageName } from '../images.js'
 import Sprite from '../sprite.js'
+import Star from './star.js'
 
 export default class Planet extends Sprite {
 	/* Default Params */
@@ -12,6 +12,10 @@ export default class Planet extends Sprite {
 	ctx = 'planets'
 	name: string
 	radius: number
+	inOrbit = false
+	orbitCenter: Vector2|null = null
+	orbitRadius = 0
+	orbitAngle = 0
 
 	/* Other attributes */
 	process: Process | null = null
@@ -19,6 +23,7 @@ export default class Planet extends Sprite {
 	constructor(planetName: PlanetName, radius: number, ...args: [pos: Vector2, game: Game]) {
 		super(...args)
 		if (radius < 15) throw new Error('Planet radius must be at least 15')
+		if (radius > 35) throw new Error('Planet radius must be less than 35')
 		const imageName = getPlanetImageName(planetName)
 		this.composition = getPlanetComposition(planetName)
 		this.image = this.game.images[imageName]
@@ -26,9 +31,30 @@ export default class Planet extends Sprite {
 		this.mass = (Math.PI * radius * radius * radius) / 10
 		this.size = new Vector2(radius * 3, radius * 3)
 		this.radius = radius
+		console.log(this.mass)
 	}
 	initialize(process: Process) {
 		this.process = process
+	}
+	setOrbit(star: Star) {
+		star.addPlanet(this)
+		this.inOrbit = true
+		this.orbitCenter = star.pos
+		this.orbitRadius = this.pos.distance(star.pos)
+		this.orbitAngle = this.pos.angleToPoint(star.pos)
+	}
+	leaveOrbit() {
+		this.inOrbit = false
+		this.speed = Vector2.right.rotateTo(this.orbitAngle + Math.PI/2)
+	}
+	update() {
+		if (this.inOrbit && this.orbitCenter) {
+			this.orbitAngle += 1 / this.orbitRadius
+			const vecToPlanet = Vector2.right.rotateTo(this.orbitAngle).scaleTo(this.orbitRadius)
+			this.pos = this.orbitCenter?.add(vecToPlanet)
+		} else if (!this.inOrbit && this.orbitCenter) {
+			super.update()
+		}
 	}
 }
 

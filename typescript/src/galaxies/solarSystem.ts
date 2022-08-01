@@ -4,6 +4,7 @@ import WarpGate from '../spaceObjects/warpGate.js'
 import Planet from '../spaceObjects/planet.js'
 import AsteroidLauncher from '../spaceObjects/asteroidLauncher.js'
 import Game from '../game.js'
+import Star from '../spaceObjects/star.js'
 
 interface MapData {
 	galaxy: string
@@ -36,6 +37,7 @@ export default class SolarSystem {
 	warpGates: WarpGate[]
 	planets: Planet[]
 	asteroids: Asteroid[]
+	star?: Star
 	asteroidLaunchers: AsteroidLauncher[]
 	game: Game
 	name: SolarSystemName
@@ -47,6 +49,7 @@ export default class SolarSystem {
 		warpGates?: WarpGate[],
 		planets?: Planet[],
 		asteroidLaunchers?: AsteroidLauncher[],
+		star?: Star
 	}) {
 		this.game = game
 		this.galaxyName = galaxyName
@@ -55,6 +58,7 @@ export default class SolarSystem {
 		this.warpGates = objects.warpGates ?? []
 		this.planets = objects.planets ?? []
 		this.asteroidLaunchers = objects.asteroidLaunchers ?? []
+		this.star = objects.star
 		this.planetNames = this.planets.map((planet) => planet.name)
 		this.warpGateNames = this.warpGates.map((warpGate) => warpGate.destinationSolarSystem)
 	}
@@ -66,6 +70,7 @@ export default class SolarSystem {
 			warpGates: this.warpGateNames
 		}
 	}
+	activate() {}
 }
 
 export type { MapData }

@@ -24,12 +24,12 @@ export const BuildCompiles = (game) => {
     });
     const Waterloo = new SolarSystem("Waterloo", "Compiles", game, {
         asteroids: [
-            new Asteroid(V2(0, 0), 0, V2(200, 420), game),
-            new Asteroid(V2(0, 0), 0, V2(130, 170), game),
-            new Asteroid(V2(0, 0), 0, V2(430, 110), game),
-            new Asteroid(V2(0, 0), 0, V2(680, 380), game),
-            new Asteroid(V2(0, 0), 0, V2(460, 310), game),
-            new Asteroid(V2(0, 0), 0, V2(40, 280), game),
+            new Asteroid(V2(0.1, 0), 0, V2(200, 420), game),
+            new Asteroid(V2(0, 0.1), 0, V2(130, 170), game),
+            new Asteroid(V2(0.2, 0.2), 0, V2(430, 110), game),
+            new Asteroid(V2(-0.3, -0.3), 0, V2(680, 380), game),
+            new Asteroid(V2(-0.4, 0.4), 0, V2(460, 310), game),
+            new Asteroid(V2(0.5, -0.5), 0, V2(40, 280), game),
         ],
         warpGates: [
             new WarpGate('StackOverflow', V2(32, 39), game)
@@ -37,16 +37,16 @@ export const BuildCompiles = (game) => {
     });
     const StackOverflowAsteroids = [];
     for (let i = 0; i < 10; i++) {
-        StackOverflowAsteroids.push(new Asteroid(V2(0, 0), 0, V2(((31 + 25 * i) % 71) * 10, ((17 + 29 * i) % 53) * 10), game));
+        StackOverflowAsteroids.push(new Asteroid(V2(Math.random() - 0.5, Math.random() - 0.5), 0, V2(((31 + 25 * i) % 71) * 10, ((17 + 29 * i) % 53) * 10), game));
     }
     const StackOverflow = new SolarSystem("StackOverflow", "Compiles", game, {
         asteroids: StackOverflowAsteroids,
         planets: [
             new Planet('Steve-O', 20, V2(690, 410), game),
-            new Planet('Fortran', 25, V2(80, 130), game),
+            new Planet('Fortran', 25, V2(80, 400), game),
         ],
         warpGates: [
-            new WarpGate('Goose', V2(140, 370), game)
+            new WarpGate('Goose', V2(140, 270), game)
         ]
     });
     return new Galaxy('Compiles', game, [Goose, Waterloo, StackOverflow]);

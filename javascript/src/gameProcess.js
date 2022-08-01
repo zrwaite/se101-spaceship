@@ -34,6 +34,8 @@ export default class Process {
             delete objectsList[i];
         this.delObjects = [...this.solarSystem.asteroids]; //Asteroids get deleted
         this.drawnObjects = [...this.ships, ...this.solarSystem.warpGates, ...this.solarSystem.planets]; //Ships get drawn
+        if (this.solarSystem.star)
+            this.delObjects.push(this.solarSystem.star);
         this.hiddenObjects = [...this.solarSystem.asteroidLaunchers] //Launchers are hidden
         ;
         [...this.delObjects, ...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.hiddenObjects].forEach((object) => {
@@ -115,5 +117,8 @@ export default class Process {
             delete this.delObjects[i];
         for (let i = 0; i < this.ships.length; i++)
             delete this.ships[i];
+    }
+    activate() {
+        this.solarSystem.activate();
     }
 }

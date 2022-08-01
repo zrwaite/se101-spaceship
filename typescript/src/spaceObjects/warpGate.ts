@@ -14,7 +14,7 @@ export default class WarpGate extends Sprite {
 	ctx = 'planets'
 	size = new Vector2(50, 50)
 	radius = 15
-	mass = 100
+	mass = -100
 	fourthDimension = false
 	/* Other attributes */
 	process: Process | null = null
@@ -34,6 +34,7 @@ export default class WarpGate extends Sprite {
 			newProcess.appendShip(ship)
 			ship.process.dealocateShip(ship)
 			if (ship.primary) {
+				newProcess.activate()
 				this.game.drawnProcess = newProcess
 				// newProcess.rerenderStatic();
 			}
@@ -48,7 +49,7 @@ export default class WarpGate extends Sprite {
 				this.angle = withinPiRange(new Vector2(360, 270).angleToPoint(this.pos))
 				this.speed = Vector2.zero
 			}	
+			super.update()
 		}
-		super.update()
 	}
 }

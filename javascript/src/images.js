@@ -18,7 +18,7 @@ const PlanetNames = [
     'PurpleStripes',
     'SandyCheeks',
 ];
-const OtherImageNames = ['background', 'ship', 'thruster', 'thrusterFlame', 'turret', 'asteroid', 'torpedo', 'warpgate'];
+const OtherImageNames = ['background', 'ship', 'thruster', 'thrusterFlame', 'turret', 'asteroid', 'torpedo', 'warpgate', 'star'];
 export const imageSrcs = [
     ['background', 'SpaceObjects/Space.png'],
     ['ship', 'ship/ColonyShip.png'],
@@ -46,6 +46,7 @@ export const imageSrcs = [
     ['SandyCheeks', 'planets/SandyCheeks.png'],
     ['warpgate', 'SpaceObjects/WarpGate.png'],
     ['torpedo', 'SpaceObjects/Torpedo.png'],
+    ['star', 'SpaceObjects/Star.png'],
     ['explosion0', 'explosions/0.png'],
     ['explosion1', 'explosions/1.png'],
     ['explosion2', 'explosions/2.png'],

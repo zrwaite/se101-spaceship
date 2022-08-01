@@ -27,6 +27,7 @@ export default class SolarSystem {
         this.warpGates = (_b = objects.warpGates) !== null && _b !== void 0 ? _b : [];
         this.planets = (_c = objects.planets) !== null && _c !== void 0 ? _c : [];
         this.asteroidLaunchers = (_d = objects.asteroidLaunchers) !== null && _d !== void 0 ? _d : [];
+        this.star = objects.star;
         this.planetNames = this.planets.map((planet) => planet.name);
         this.warpGateNames = this.warpGates.map((warpGate) => warpGate.destinationSolarSystem);
     }
@@ -38,4 +39,5 @@ export default class SolarSystem {
             warpGates: this.warpGateNames
         };
     }
+    activate() { }
 }

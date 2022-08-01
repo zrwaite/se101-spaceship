@@ -7,6 +7,7 @@ import Asteroid from './spaceObjects/asteroid.js';
 import Torpedo from './ship/torpedo.js';
 import Meteor from './spaceObjects/meteor.js';
 import Matrix2 from './helpers/Matrix2.js';
+import Star from './spaceObjects/star.js';
 const DMG_COEFFICIENT = 20;
 export default class Game {
     constructor(width, height, images, contexts, landSuccessful) {
@@ -46,6 +47,7 @@ export default class Game {
             this.processes.push(new Process(this, solarSystem, i));
         });
         this.drawnProcess = this.processes[0];
+        this.drawnProcess.activate();
         if (this.allShips) {
             this.ships.push(...buildAllShips(this.galaxy.startingSolarSystem.shipStartPosition, this, this.drawnProcess)); //Build all ships for now
             for (let i = 0; i < this.ships.length; i++) {
@@ -134,10 +136,11 @@ export default class Game {
                 }
             });
         });
-        for (let i = 0; i < process.delObjects.length; i++) {
-            for (let j = i + 1; j < process.delObjects.length; j++) {
-                const a = process.delObjects[i];
-                const b = process.delObjects[j];
+        const explosionObjects = process.delObjects.filter(obj => !(obj instanceof Star));
+        for (let i = 0; i < explosionObjects.length; i++) {
+            for (let j = i + 1; j < explosionObjects.length; j++) {
+                const a = explosionObjects[i];
+                const b = explosionObjects[j];
                 if (this.ifCollide(a, b)) {
                     if (a instanceof Torpedo || b instanceof Torpedo) {
                         // XOR

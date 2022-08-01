@@ -9,7 +9,7 @@ export default class WarpGate extends Sprite {
         this.ctx = 'planets';
         this.size = new Vector2(50, 50);
         this.radius = 15;
-        this.mass = 100;
+        this.mass = -100;
         this.fourthDimension = false;
         /* Other attributes */
         this.process = null;
@@ -26,6 +26,7 @@ export default class WarpGate extends Sprite {
             newProcess.appendShip(ship);
             ship.process.dealocateShip(ship);
             if (ship.primary) {
+                newProcess.activate();
                 this.game.drawnProcess = newProcess;
                 // newProcess.rerenderStatic();
             }
@@ -42,7 +43,7 @@ export default class WarpGate extends Sprite {
                 this.angle = withinPiRange(new Vector2(360, 270).angleToPoint(this.pos));
                 this.speed = Vector2.zero;
             }
+            super.update();
         }
-        super.update();
     }
 }
