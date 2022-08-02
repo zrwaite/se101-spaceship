@@ -18,9 +18,8 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 
 ### Credits:
 
--   Faculty & Staff: Derek Rayside, John Harris, Chris Rennick, Sanjeev Bedi.
+-   Faculty & Staff: Derek Rayside, John Harris
 -   Student Volunteers: Zac Waite, Josiah Plett.
--   Co-op Students : Taha Aziz, Mathew Del Rosso, Joanna Diao, Francisco Garcia-Gonzalez, Kaeun Kim, Margaret Malton, Nirosh Manohara, Zach Radford, Derrick Wang, Maggie Wong.
 
 ## Table of Contents
 
