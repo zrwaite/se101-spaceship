@@ -27,10 +27,16 @@ export const BuildCracked = (game) => {
             new Asteroid(V2(0.1, 0.2), 0, V2(230, 340), game),
             new Asteroid(V2(0.2, -0.1), 0, V2(480, 260), game),
             new Asteroid(V2(-0.5, 0.5), 0, V2(510, 190), game),
-            new Asteroid(V2(0.1, -0.1), 0, V2(170, 140), game),
+            new Asteroid(V2(0.1, -0.1), 0, V2(170, 140), game)
         ],
-        warpGates: [new WarpGate('Olivia', V2(360, 500), game)],
-        asteroidLaunchers: [new AsteroidLauncher(game, V2(350, 560), V2(200, 300)), new AsteroidLauncher(game, V2(50, 560), V2(100, 400)), new AsteroidLauncher(game, V2(740, 240), V2(1, 300))],
+        warpGates: [
+            new WarpGate('Olivia', V2(360, 500), game),
+        ],
+        asteroidLaunchers: [
+            new AsteroidLauncher(game, V2(350, 560), V2(200, 300)),
+            new AsteroidLauncher(game, V2(50, 560), V2(100, 400)),
+            new AsteroidLauncher(game, V2(740, 240), V2(1, 300))
+        ]
     });
     const Olivia = new SolarSystem('Olivia', 'Compiles', game, {
         asteroids: [
@@ -42,7 +48,10 @@ export const BuildCracked = (game) => {
             new Asteroid(V2(0, 0), 0, V2(390, 220), game),
             new Asteroid(V2(0, 0), 0, V2(280, 270), game),
         ],
-        warpGates: [new WarpGate('Ali', V2(670, 100), game), new WarpGate('Hargun', V2(640, 300), game)],
+        warpGates: [
+            new WarpGate('Ali', V2(670, 100), game),
+            new WarpGate('Hargun', V2(640, 300), game),
+        ]
     });
     const Ali = new SolarSystem('Ali', 'Compiles', game, {
         asteroids: [
@@ -52,7 +61,11 @@ export const BuildCracked = (game) => {
             new Asteroid(V2(0, 0), 0, V2(700, 340), game),
             new Asteroid(V2(0, 0), 0, V2(640, 230), game),
         ],
-        warpGates: [new WarpGate('Derek', V2(400, 290), game), new WarpGate('Hargun', V2(360, 250), game), new WarpGate('Olivia', V2(320, 290), game)],
+        warpGates: [
+            new WarpGate('Derek', V2(400, 290), game),
+            new WarpGate('Hargun', V2(360, 250), game),
+            new WarpGate('Olivia', V2(320, 290), game),
+        ]
     });
     const Derek = new SolarSystem('Derek', 'Compiles', game, {
         asteroids: [
@@ -66,9 +79,18 @@ export const BuildCracked = (game) => {
             new Asteroid(V2(0, 0), 0, V2(450, 310), game),
             new Asteroid(V2(0, 0), 0, V2(650, 200), game),
         ],
-        asteroidLaunchers: [new AsteroidLauncher(game, V2(-20, -20), V2(1, 1))],
-        warpGates: [new WarpGate('Hargun', V2(370, 90), game), new WarpGate('Ali', V2(110, 400), game), new WarpGate('Olivia', V2(610, 390), game)],
-        planets: [new Planet('Abysmal', 20, V2(450, 450), game), new Planet('Exceptional', 25, V2(380, 380), game)],
+        asteroidLaunchers: [
+            new AsteroidLauncher(game, V2(-20, -20), V2(1, 1))
+        ],
+        warpGates: [
+            new WarpGate('Hargun', V2(370, 90), game),
+            new WarpGate('Ali', V2(110, 400), game),
+            new WarpGate('Olivia', V2(610, 390), game),
+        ],
+        planets: [
+            new Planet('Abysmal', 20, V2(450, 450), game),
+            new Planet('Exceptional', 25, V2(380, 380), game),
+        ],
     });
     return new Galaxy('Cracked', game, [Hargun, Olivia, Ali, Derek]);
 };

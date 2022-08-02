@@ -3,6 +3,7 @@ import Meteor from './meteor.js'
 import Vector2 from '../helpers/Vector2.js'
 import Process from '../gameProcess.js'
 import Game from '../game.js'
+import { withinPiRange } from '../helpers/Angles.js'
 export default class Asteroid extends Sprite {
 	/* Constructor params */
 	process: Process | null = null
@@ -35,11 +36,13 @@ export default class Asteroid extends Sprite {
 		// randomly 2-5 meteors
 		const numMeteors = Math.floor(2 + Math.random() * 4)
 		const spawnLocationAngle = (Math.PI * 2) / numMeteors
+		const startAngle = Math.random() * Math.PI
 		for (let i = 0; i < numMeteors; i++) {
 			// space the meteors evenly around the perimeter of where the asteroid once was
-			const posFromCenter = Vector2.right.rotateTo(i * spawnLocationAngle).scale(this.radius * 0.7)
+			let angle = withinPiRange(i * spawnLocationAngle + startAngle + (Math.random() - 0.5) * 5 / numMeteors)
+			const posFromCenter = Vector2.right.rotateTo(angle).scale(this.radius * 0.7)
 			// generate a random direction and speed for meteor to go
-			const velocity = Vector2.right.rotateTo(spawnLocationAngle).scale(1 + 0.7 * Math.random())
+			const velocity = Vector2.right.rotateTo(angle).scale(1 + 0.7 * Math.random()).add(this.speed)
 
 			let meteor = new Meteor(velocity, posFromCenter.add(this.pos), this.game)
 			if (this.process) this.process.spawnDeletableObject(meteor)
