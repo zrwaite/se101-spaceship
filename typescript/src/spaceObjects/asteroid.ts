@@ -17,10 +17,10 @@ export default class Asteroid extends Sprite {
 	radius = 15
 	hasExploded = false
 
-	constructor(speed: Vector2, aSpeed: number, ...args: [pos: Vector2, game: Game]) {
+	constructor(speed: Vector2, ...args: [pos: Vector2, game: Game]) {
 		super(...args)
 		this.speed = speed
-		this.aSpeed = aSpeed
+		this.aSpeed = (Math.random() - 0.5) / 8
 		this.image = this.game.images['asteroid']
 	}
 	initialize(process: Process) {

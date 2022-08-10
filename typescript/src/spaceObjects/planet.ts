@@ -16,6 +16,7 @@ export default class Planet extends Sprite {
 	orbitCenter: Vector2|null = null
 	orbitRadius = 0
 	orbitAngle = 0
+	imageName: string
 
 	/* Other attributes */
 	process: Process | null = null
@@ -24,9 +25,9 @@ export default class Planet extends Sprite {
 		super(...args)
 		if (radius < 15) throw new Error('Planet radius must be at least 15')
 		if (radius > 35) throw new Error('Planet radius must be less than 35')
-		const imageName = getPlanetImageName(planetName)
+		this.imageName = getPlanetImageName(planetName)
 		this.composition = getPlanetComposition(planetName)
-		this.image = this.game.images[imageName]
+		this.image = this.game.images[this.imageName]
 		this.name = planetName
 		this.mass = (Math.PI * radius * radius * radius) / 10
 		this.size = new Vector2(radius * 3, radius * 3)

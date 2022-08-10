@@ -3,7 +3,7 @@ import Meteor from './meteor.js';
 import Vector2 from '../helpers/Vector2.js';
 import { withinPiRange } from '../helpers/Angles.js';
 export default class Asteroid extends Sprite {
-    constructor(speed, aSpeed, ...args) {
+    constructor(speed, ...args) {
         super(...args);
         /* Constructor params */
         this.process = null;
@@ -16,7 +16,7 @@ export default class Asteroid extends Sprite {
         this.radius = 15;
         this.hasExploded = false;
         this.speed = speed;
-        this.aSpeed = aSpeed;
+        this.aSpeed = (Math.random() - 0.5) / 8;
         this.image = this.game.images['asteroid'];
     }
     initialize(process) {
