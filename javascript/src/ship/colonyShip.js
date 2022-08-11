@@ -161,7 +161,6 @@ export default class ColonyShip extends Sprite {
     }
     // called when ship hits an asteroid
     receiveDamage(amount) {
-        console.log('SHIP TOOK ', amount, 'DMG');
         this.totalDamage += amount;
     }
     tryFire() {
@@ -186,10 +185,14 @@ export default class ColonyShip extends Sprite {
         this.energyUsed += 20;
         this.process.solarSystem.planets.forEach((planet) => {
             if (this.game.ifCollide(this, planet)) {
-                if (this.speed.magnitude() > 0.5) {
-                    return new APIResponse(400, ['Too fast!']);
+                const speedMag = this.speed.magnitude();
+                if (speedMag > 1) {
+                    return new APIResponse(400, ['Too fast! Your speed was: ' + speedMag]);
                 }
                 else {
+                    this.receiveDamage(speedMag * 10);
+                    if (speedMag > 0.5)
+                        console.log(`Ouch! You crash landed and took ${speedMag * 10} damage`);
                     this.land(planet);
                     return new APIResponse(200, [], undefined, true);
                 }

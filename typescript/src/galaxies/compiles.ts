@@ -48,8 +48,8 @@ export const BuildCompiles = (game: Game): Galaxy => {
 	const StackOverflow = new SolarSystem("StackOverflow", "Compiles", game, {
 		asteroids: StackOverflowAsteroids,
 		planets: [
-			new Planet('Steve-O', 20, V2(690, 410), game),
-			new Planet('Fortran', 25,  V2(80, 400), game),
+			new Planet('Steve-O', 30, V2(690, 410), game),
+			new Planet('COBOL', 25,  V2(80, 400), game),
 		],
 		warpGates: [
 			new WarpGate('Goose', V2(140, 270), game)
@@ -59,6 +59,8 @@ export const BuildCompiles = (game: Game): Galaxy => {
 			new AsteroidLauncher(game, V2(740, 300), V2(400, 400)),
 		]
 	})
-
+	console.log(`Welcome to your first real challenge.
+You will have to fly through warp gates until you find a planet.
+To improve your survival chance, make sure to land on a viable planet!`)
 	return new Galaxy('Compiles', game, [Goose, Waterloo, StackOverflow])
 }

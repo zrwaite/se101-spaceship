@@ -12,7 +12,10 @@ export const BuildNoob = (game: Game): Galaxy => {
 			new Asteroid(V2(-0.5, -0.15), V2(300, 90), game), 
 			new Asteroid(V2(0, 0), V2(526, 392), game)
 		],
-		planets: [new Planet('Big Bird', 25, V2(576, 432), game)],
+		planets: [new Planet('Big Bird', 35, V2(576, 432), game)],
 	})
+	console.log(`Welcome to the tutorial - your goal is to find the planet and land on it.
+Avoid any asteroids that get in the way if you can.
+Good luck!`)
 	return new Galaxy('Noob', game, [Tutorial])
 }

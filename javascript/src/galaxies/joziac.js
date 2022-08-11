@@ -139,10 +139,10 @@ export const BuildJoziac = (game) => {
             new WarpGate('Turing', V2(480, 350), game)
         ],
         planets: [
-            new Planet('Rust', 33, V2(280, 220), game),
-            new Planet('Watermelon', 23, V2(420, 380), game),
-            new Planet('Zig', 27, V2(520, 480), game),
-            new Planet("You're Mother", 18, V2(180, 120), game)
+            new Planet('Rust', 43, V2(280, 220), game),
+            new Planet('Watermelon', 33, V2(420, 380), game),
+            new Planet('Zig', 37, V2(520, 480), game),
+            new Planet("You're Mother", 50, V2(180, 120), game)
         ],
         star: ZacStar
     });

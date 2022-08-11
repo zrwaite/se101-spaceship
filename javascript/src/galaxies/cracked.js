@@ -83,6 +83,9 @@ export const BuildCracked = (game) => {
             new AsteroidLauncher(game, V2(400, -20), V2(400, 20), true, 4),
             new AsteroidLauncher(game, V2(500, -20), V2(500, 20), true, 4),
             new AsteroidLauncher(game, V2(600, -20), V2(600, 20), true, 4),
+        ],
+        planets: [
+            new Planet('Pluto', 30, V2(450, 450), game),
         ]
     });
     const Derek = new SolarSystem('Derek', 'Compiles', game, {
@@ -109,9 +112,13 @@ export const BuildCracked = (game) => {
             new WarpGate('Olivia', V2(610, 390), game),
         ],
         planets: [
-            new Planet('Abysmal', 20, V2(450, 450), game),
-            new Planet('Exceptional', 25, V2(380, 380), game),
+            new Planet('Abysmal', 30, V2(450, 450), game),
+            new Planet('Exceptional', 35, V2(380, 380), game),
         ],
     });
+    console.log(`Now this galaxy is tough.
+The warp gates create a maze - don't end up in a geographical while(true) loop.
+Make sure to find the best planet you can - even if it takes a while!
+`);
     return new Galaxy('Cracked', game, [Hargun, Olivia, Ali, Derek]);
 };
