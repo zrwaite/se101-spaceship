@@ -19,7 +19,7 @@ export default class AsteroidLauncher {
         if (!(aimTo.x > 0 && aimTo.x < this.game.width && aimTo.y > 0 && aimTo.y < this.game.height)) {
             throw Error(`Must aim within map. Current Aim: ${aimTo.x}, ${aimTo.y}`);
         }
-        this.spawnPeriod = spawnPeriod * FRAMES_PER_SECOND;
+        this.spawnPeriod = spawnPeriod * FRAMES_PER_SECOND + (this.random ? Math.random() - 0.5 : 0);
         // Expects positive radians values... rotation == -1 denotes random angle
         this.angle = aimTo.angleToPoint(this.pos);
     }
@@ -39,7 +39,7 @@ export default class AsteroidLauncher {
             throw Error('This.process is not defined');
     }
     update() {
-        if (this.currentDelay === this.spawnPeriod) {
+        if (this.currentDelay > this.spawnPeriod) {
             this.launchAsteroid();
             this.currentDelay = 0;
         }

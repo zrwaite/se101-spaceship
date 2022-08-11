@@ -26,8 +26,6 @@ export const BuildJoziac = (game) => {
           |					|			|
           ▼					▼			|
                 Turing            ------
-
-
     */
     const ECE105Asteroids = [];
     const ECE105AsteroidLaunchers = [];

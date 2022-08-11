@@ -28,8 +28,6 @@ export const BuildJoziac = (game: Game): Galaxy => {
 		  |					|			|
 		  ▼					▼			|
 				Turing            ------
-
-
 	*/
 
 	const ECE105Asteroids = []
