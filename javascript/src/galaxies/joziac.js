@@ -108,6 +108,10 @@ export const BuildJoziac = (game) => {
             new WarpGate('Josiah', V2(310, 410), game),
             new WarpGate('Zac', V2(140, 420), game),
         ],
+        planets: [
+            new Planet('Planet Three (no Planet One)', 40, V2(300, 300), game),
+            new Planet('Notch', 25, V2(600, 500), game),
+        ]
     });
     const Josiah = new SolarSystem("Josiah", "Joziac", game, {
         asteroids: [
@@ -128,7 +132,13 @@ export const BuildJoziac = (game) => {
             new WarpGate('Elon', V2(480, 160), game),
             new WarpGate('Zac', V2(50, 160), game),
             new WarpGate('Turing', V2(480, 350), game),
-        ]
+        ],
+        planets: [
+            new Planet('Planet Two', 43, V2(380, 510), game),
+            new Planet('Esquimalt', 33, V2(620, 380), game),
+            new Planet('Fortran', 37, V2(520, 480), game),
+            new Planet('Melony', 49, V2(20, 380), game),
+        ],
     });
     const ZacStar = new Star(V2(350, 300), game);
     const Zac = new SolarSystem("Zac", "Joziac", game, {
@@ -141,8 +151,8 @@ export const BuildJoziac = (game) => {
         planets: [
             new Planet('Rust', 43, V2(280, 220), game),
             new Planet('Watermelon', 33, V2(420, 380), game),
-            new Planet('Zig', 37, V2(520, 480), game),
-            new Planet("You're Mother", 50, V2(180, 120), game)
+            new Planet("Johnny Cash", 50, V2(180, 120), game),
+            new Planet("You're Mother", 40, V2(680, 220), game)
         ],
         star: ZacStar
     });
@@ -164,6 +174,10 @@ export const BuildJoziac = (game) => {
             new WarpGate('Zac', V2(590, 190), game),
             new WarpGate('Josiah', V2(410, 410), game),
             new WarpGate('ECE105', V2(300, 160), game),
+        ],
+        planets: [
+            new Planet('Planet Joziac', 43, V2(180, 420), game),
+            new Planet('Zig', 33, V2(520, 480), game),
         ]
     });
     [Elon, Zac, Josiah].forEach((galaxy) => {
