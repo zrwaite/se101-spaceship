@@ -4,7 +4,6 @@ import Process from '../gameProcess.js'
 import Game from '../game.js'
 import { withinPiRange } from '../helpers/Angles.js'
 
-const MAX_SPAWN_SPEED = 2
 const FRAMES_PER_SECOND = 60
 
 export default class AsteroidLauncher {
@@ -15,11 +14,13 @@ export default class AsteroidLauncher {
 	random: boolean
 	angle: number
 	currentDelay = 0
+	speed: number
 	pos: Vector2
-	constructor(game: Game, pos: Vector2, aimTo: Vector2, random = false, spawnPeriod = 4) {
+	constructor(game: Game, pos: Vector2, aimTo: Vector2, random = false, spawnPeriod = 4, speed: number = 0.75) {
 		this.game = game
 		this.pos = pos
 		this.random = random
+		this.speed = speed
 		if (this.pos.x > -10 && this.pos.x < this.game.width + 10 && this.pos.y > -10 && this.pos.y < this.game.height + 10) {
 			throw Error(`Can't build asteroid launcher within map, that is buggy, and instead of solving it I just say we don't allow the bug. Pos: ${pos.x}, ${pos.y}`)
 		}
@@ -38,7 +39,7 @@ export default class AsteroidLauncher {
 	}
 
 	launchAsteroid() {
-		const speed = this.random ? Math.random() * MAX_SPAWN_SPEED : 0.8 // random speed
+		const speed = this.random ? Math.random() * 2 * this.speed : this.speed // random speed
 		const angle = this.random ? withinPiRange(this.angle + Math.random() - 0.5) : this.angle
 		const velocity = Vector2.right.rotate(angle).scale(speed) // random direction
 		let asteroid = new Asteroid(velocity, this.pos, this.game)
