@@ -1,4 +1,4 @@
-import PassiveSensorReading from './passiveSensorReading.js'
+import { PassiveSensorReading } from './passiveSensorReading.js'
 import APIResponse from '../helpers/response.js'
 import Vector2 from '../helpers/Vector2.js'
 import ColonyShip from './colonyShip.js'

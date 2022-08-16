@@ -1,7 +1,7 @@
 import Vector2 from '../helpers/Vector2'
 import PlanetComposition from '../spaceObjects/planetComposition'
 
-export default class EMSReading {
+export class EMSReading {
 	angle: number
 	distance: number
 	velocity: Vector2

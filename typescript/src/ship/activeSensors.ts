@@ -1,4 +1,4 @@
-import EMSReading from './EMSReading.js'
+import { EMSReading } from './EMSReading.js'
 import APIResponse from '../helpers/response.js'
 import Vector2 from '../helpers/Vector2.js'
 import ColonyShip from './colonyShip.js'
@@ -45,7 +45,7 @@ export default class ActiveSensors extends RenderedObject {
 		if (arc < 0) return new APIResponse(400, ['arc must be larger than 0'], [])
 		if (heading > Math.PI || heading < -Math.PI) return new APIResponse(400, [`heading of ${heading} must be between Pi and -Pi `], [])
 		if (this.cooldown) return new APIResponse(400, ['ActiveSensors is still on cooldown'], [])
-		this.cooldown = 50
+		this.cooldown = 25
 		this.arcStartAngle = heading
 		this.arcEndAngle = this.arcStartAngle + arc
 		if (this.arcEndAngle > Math.PI) this.arcEndAngle = -2 * Math.PI + this.arcEndAngle

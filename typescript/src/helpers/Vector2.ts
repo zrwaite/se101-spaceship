@@ -44,7 +44,7 @@ export default class Vector2 {
 	}
 
 	dot(vector: Vector2) {
-		return this.x * vector.x + this.y + vector.y
+		return this.x * vector.x + this.y * vector.y
 	}
 
 	moveTowards(vector: Vector2, t: number) {

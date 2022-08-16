@@ -1,4 +1,4 @@
-import PassiveSensorReading from './passiveSensorReading.js';
+import { PassiveSensorReading } from './passiveSensorReading.js';
 import APIResponse from '../helpers/response.js';
 import RenderedObject from '../renderedObject.js';
 export default class PassiveSensors extends RenderedObject {

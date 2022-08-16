@@ -1,4 +1,4 @@
-export default class PassiveSensorReading {
+export class PassiveSensorReading {
     constructor(angle, gravity) {
         this.heading = angle; //number
         this.gravity = gravity; // mass/distance;

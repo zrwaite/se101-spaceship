@@ -10,7 +10,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
 var _ActiveSensors_instances, _ActiveSensors_parentShip, _ActiveSensors_pointInScanSlice;
-import EMSReading from './EMSReading.js';
+import { EMSReading } from './EMSReading.js';
 import APIResponse from '../helpers/response.js';
 import Vector2 from '../helpers/Vector2.js';
 import ColonyShip from './colonyShip.js';
@@ -44,7 +44,7 @@ export default class ActiveSensors extends RenderedObject {
             return new APIResponse(400, [`heading of ${heading} must be between Pi and -Pi `], []);
         if (this.cooldown)
             return new APIResponse(400, ['ActiveSensors is still on cooldown'], []);
-        this.cooldown = 50;
+        this.cooldown = 25;
         this.arcStartAngle = heading;
         this.arcEndAngle = this.arcStartAngle + arc;
         if (this.arcEndAngle > Math.PI)

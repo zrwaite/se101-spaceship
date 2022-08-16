@@ -32,7 +32,7 @@ export default class Vector2 {
         return this.scale(ratio);
     }
     dot(vector) {
-        return this.x * vector.x + this.y + vector.y;
+        return this.x * vector.x + this.y * vector.y;
     }
     moveTowards(vector, t) {
         // Linearly interpolates between vectors A and B by t.
