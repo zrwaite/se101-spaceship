@@ -90,13 +90,15 @@ export const BuildJoziac = (game) => {
         asteroids: [
             new Asteroid(V2(0.1, 0), V2(670, 400), game),
             new Asteroid(V2(0, 0.2), V2(610, 310), game),
-            new Asteroid(V2(0.1, 0.1), V2(310, 40), game),
-            new Asteroid(V2(0.2, 0.1), V2(250, 180), game),
-            new Asteroid(V2(0.3, 0.2), V2(110, 70), game)
+            new Asteroid(V2(0.2, 0.2), V2(510, 40), game),
+            new Asteroid(V2(0.1, -0.3), V2(150, 180), game),
+            new Asteroid(V2(-0.3, 0.2), V2(110, 70), game)
         ],
         asteroidLaunchers: [
-            new AsteroidLauncher(game, V2(610, 565), V2(500, 350), true),
-            new AsteroidLauncher(game, V2(210, -20), V2(230, 40), true, 5)
+            new AsteroidLauncher(game, V2(300, -15), V2(355, 270), false, 3),
+            new AsteroidLauncher(game, V2(390, 555), V2(365, 270), false, 3),
+            new AsteroidLauncher(game, V2(-15, 240), V2(360, 275), false, 3),
+            new AsteroidLauncher(game, V2(735, 300), V2(360, 265), false, 3)
         ],
         warpGates: [
             new WarpGate('Torvalds', V2(410, 310), game),
@@ -182,5 +184,5 @@ export const BuildJoziac = (game) => {
                 warpGate.fourthDimension = true;
         });
     });
-    return new Galaxy('Joziac', game, [ECE105, Gates, Torvalds, Elon, Josiah, Zac, Turing]);
+    return new Galaxy('Joziac', game, [Elon, ECE105, Gates, Torvalds, Josiah, Zac, Turing]);
 };
