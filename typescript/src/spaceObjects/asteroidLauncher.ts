@@ -32,7 +32,7 @@ export default class AsteroidLauncher {
 		}
 		this.spawnPeriod = spawnPeriod * FRAMES_PER_SECOND + (this.random ? Math.random() -0.5 : 0)
 		// Expects positive radians values... rotation == -1 denotes random angle
-		this.angle = aimTo.angleToPoint(this.pos)
+		this.angle = this.pos.angleToPoint(aimTo)
 	}
 	initialize(process: Process) {
 		this.process = process

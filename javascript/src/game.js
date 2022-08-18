@@ -20,6 +20,7 @@ export default class Game {
         this.camera = new Vector2(0, 0); // pixels from top-left
         this.frame = 0; // this increments every frame
         this.paused = false; // If the whole game is paused
+        // fpsInterval = 1000 / 50
         this.fpsInterval = 1000 / 50;
         this.processes = [];
         /* Other Attributes */

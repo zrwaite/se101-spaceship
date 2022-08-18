@@ -33,7 +33,6 @@ export default class Star extends Sprite {
         if (!this.process)
             return;
         if (this.collapsing) {
-            console.log(this.collapseCountdown);
             if (this.collapseCountdown <= 0) {
                 this.delete = true;
                 const explosion = new Torpedo(Vector2.zero, this.pos, this.game);

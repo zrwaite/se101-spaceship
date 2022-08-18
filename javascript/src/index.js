@@ -475,7 +475,7 @@ let DOM = {
         DOM.menus["EndScreen"].querySelector("#ESResources").innerHTML = Math.round(planet.composition.survivabilityChance);
         DOM.menus["EndScreen"].querySelector("#ESScore").innerHTML = '69420';
         const ourImageSrc = imageSrcs.filter((element) => { return element[0] === planet.imageName; });
-        DOM.menus["EndScreen"].querySelector("#ESPlanetImage").src = (_f = spritePath + ourImageSrc[0][1]) !== null && _f !== void 0 ? _f : 'SpaceObjects/RedLinesPlanet.png';
+        DOM.menus["EndScreen"].querySelector("#ESPlanetImage").src = (_f = spritePath + ourImageSrc[0][1]) !== null && _f !== void 0 ? _f : 'planets/Mars.png';
         DOM.menus["EndScreen"].querySelector("#ESPlanetName").innerHTML = planet.name;
         DOM.newMenu("EndScreen");
     },

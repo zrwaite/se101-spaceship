@@ -10,6 +10,12 @@ interface ShipStatus {
 	angle: number
 	torpedoSpeed: number
 	hasLanded: boolean
+	thrusterPower: {
+		main: number
+		bow: number
+		clockwise: number
+		counterClockwise: number
+	}
 }
 
 export type { ShipStatus }

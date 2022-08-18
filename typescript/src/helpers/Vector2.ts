@@ -94,7 +94,7 @@ export default class Vector2 {
 	}
 
 	angleToPoint(point: Vector2) {
-		return this.subtract(point).angle()
+		return point.subtract(this).angle()
 	}
 
 	rotate(alpha: number) {

@@ -46,7 +46,7 @@ export default class WarpGate extends Sprite {
 			this.angle += Math.random()
 			this.accel = Vector2.right.rotateTo(this.angle).scale(0.1)
 			if (keepInMap(this.pos)) {
-				this.angle = withinPiRange(new Vector2(360, 270).angleToPoint(this.pos))
+				this.angle = withinPiRange(this.pos.angleToPoint(new Vector2(360, 270)))
 				this.speed = Vector2.zero
 			}	
 			super.update()

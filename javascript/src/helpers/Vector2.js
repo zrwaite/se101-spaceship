@@ -75,7 +75,7 @@ export default class Vector2 {
         return vector.angle() - this.angle();
     }
     angleToPoint(point) {
-        return this.subtract(point).angle();
+        return point.subtract(this).angle();
     }
     rotate(alpha) {
         let cos = Math.cos(alpha);

@@ -36,13 +36,7 @@ export const BuildJoziac = (game) => {
         const xRatio = 720 / x;
         const yRatio = 540 / y;
         const ratio = Math.min(xRatio, yRatio);
-        try {
-            ECE105AsteroidLaunchers.push(new AsteroidLauncher(game, V2(x, y).scale(ratio).add(V2(20, 20)), V2(80, 80), true));
-        }
-        catch (e) {
-            console.log(e);
-            console.log(x, y, ratio);
-        }
+        ECE105AsteroidLaunchers.push(new AsteroidLauncher(game, V2(x, y).scale(ratio).add(V2(20, 20)), V2(80, 80), true));
     }
     const ECE105 = new SolarSystem("ECE105", "Joziac", game, {
         asteroids: ECE105Asteroids,

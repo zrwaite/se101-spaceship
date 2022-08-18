@@ -22,7 +22,6 @@ export default class Planet extends Sprite {
         this.mass = (Math.PI * radius * radius * radius) / 10;
         this.size = new Vector2(radius * 2, radius * 2);
         this.radius = radius;
-        console.log(this.mass);
     }
     initialize(process) {
         this.process = process;
@@ -32,7 +31,7 @@ export default class Planet extends Sprite {
         this.inOrbit = true;
         this.orbitCenter = star.pos;
         this.orbitRadius = this.pos.distance(star.pos);
-        this.orbitAngle = this.pos.angleToPoint(star.pos);
+        this.orbitAngle = star.pos.angleToPoint(this.pos);
     }
     leaveOrbit() {
         this.inOrbit = false;
@@ -117,10 +116,3 @@ export const getPlanetComposition = (planetName) => {
         default: throw Error('Unidentified planet name: ' + planetName);
     }
 };
-const planetOutput = PlanetNames.map(planet => ({
-    name: planet,
-    image: getPlanetImageName(planet),
-    score: getPlanetComposition(planet).survivabilityChance
-}));
-planetOutput.sort((a, b) => b.score - a.score);
-planetOutput.forEach(output => console.log(output.name, output.image, output.score));

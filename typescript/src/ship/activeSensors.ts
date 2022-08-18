@@ -63,7 +63,7 @@ export default class ActiveSensors extends RenderedObject {
 		const allDetectableSpaceObjects = [...this.#parentShip.process.delObjects, ...this.#parentShip.process.drawnObjects].filter((obj) => !(obj instanceof Torpedo) && !(obj instanceof ColonyShip))
 		for (const spaceObject of allDetectableSpaceObjects) {
 			if (this.#pointInScanSlice(spaceObject.pos)) {
-				const angle = spaceObject.pos.angleToPoint(this.#parentShip.pos)
+				const angle = this.#parentShip.pos.angleToPoint(spaceObject.pos)
 				const distance = this.#parentShip.pos.distance(spaceObject.pos)
 				const scanSignature = spaceObject instanceof Planet ? spaceObject.composition : undefined
 				const velocity = spaceObject instanceof Planet || spaceObject instanceof WarpGate ? Vector2.zero : spaceObject.speed

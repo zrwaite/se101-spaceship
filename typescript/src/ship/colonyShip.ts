@@ -93,6 +93,7 @@ export default class ColonyShip extends Sprite {
 				angle: this.angle,
 				torpedoSpeed: this.turretControls.launchSpeed,
 				hasLanded: this.hasLanded,
+				thrusterPower: this.thrusterController.thrusterPower
 			}
 		else throw Error('Galaxy not found')
 		this.solarSystem = this.process.solarSystem

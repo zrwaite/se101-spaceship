@@ -29,15 +29,15 @@ export default class PassiveSensors extends RenderedObject {
 		// y coordinate is inverted due to the flipped board axis (greater y value indicates lower position)
 		let readings: PassiveSensorReading[] = []
 		for (const planet of this.parentShip.solarSystem.planets) {
-			const angle = planet.pos.angleToPoint(this.parentShip.pos)
-			const distance = planet.pos.distance(this.parentShip.pos)
-			readings.push(new PassiveSensorReading(angle, planet.mass / distance))
+			const angle = this.parentShip.pos.angleToPoint(planet.pos)
+			const distance = this.parentShip.pos.distance(planet.pos)
+			readings.push(new PassiveSensorReading(angle, planet.mass / Math.pow(distance, 2)))
 		}
 
 		for (const warpgate of this.parentShip.solarSystem.warpGates) {
-			const angle = warpgate.pos.angleToPoint(this.parentShip.pos)
-			const distance = warpgate.pos.distance(this.parentShip.pos)
-			readings.push(new PassiveSensorReading(angle, warpgate.mass / distance))
+			const angle = this.parentShip.pos.angleToPoint(warpgate.pos)
+			const distance = this.parentShip.pos.distance(warpgate.pos)
+			readings.push(new PassiveSensorReading(angle, warpgate.mass / Math.pow(distance, 2)))
 		}
 
 		return new APIResponse(200, [], readings, true)
