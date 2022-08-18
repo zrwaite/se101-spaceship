@@ -178,5 +178,5 @@ export const BuildJoziac = (game) => {
                 warpGate.fourthDimension = true;
         });
     });
-    return new Galaxy('Joziac', game, [Elon, ECE105, Gates, Torvalds, Josiah, Zac, Turing]);
+    return new Galaxy('Joziac', game, [ECE105, Gates, Torvalds, Elon, Josiah, Zac, Turing]);
 };

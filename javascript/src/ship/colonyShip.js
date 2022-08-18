@@ -187,7 +187,7 @@ export default class ColonyShip extends Sprite {
         this.process.solarSystem.planets.forEach((planet) => {
             if (this.game.ifCollide(this, planet)) {
                 const speedMag = this.speed.magnitude();
-                if (speedMag > 1) {
+                if (speedMag > 2) {
                     return new APIResponse(400, ['Too fast! Your speed was: ' + speedMag]);
                 }
                 else {

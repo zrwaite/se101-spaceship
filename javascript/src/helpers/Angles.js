@@ -5,3 +5,10 @@ export const withinPiRange = (angle) => {
         angle += 2 * Math.PI;
     return angle;
 };
+export const angleDiff = (a, b) => {
+    a = withinPiRange(a);
+    b = withinPiRange(b);
+    if (a < b)
+        return withinPiRange(2 * Math.PI - (b - a));
+    return withinPiRange(a - b);
+};

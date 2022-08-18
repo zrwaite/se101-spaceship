@@ -18,6 +18,7 @@ import RenderedObject from '../renderedObject.js';
 import Planet from '../spaceObjects/planet.js';
 import Torpedo from './torpedo.js';
 import WarpGate from '../spaceObjects/warpGate.js';
+import { withinPiRange } from '../helpers/Angles.js';
 export default class ActiveSensors extends RenderedObject {
     constructor(parentShip, game) {
         super(parentShip.pos, game);
@@ -46,11 +47,7 @@ export default class ActiveSensors extends RenderedObject {
             return new APIResponse(400, ['ActiveSensors is still on cooldown'], []);
         this.cooldown = 25;
         this.arcStartAngle = heading;
-        this.arcEndAngle = this.arcStartAngle + arc;
-        if (this.arcEndAngle > Math.PI)
-            this.arcEndAngle = -2 * Math.PI + this.arcEndAngle;
-        if (this.arcEndAngle < -Math.PI)
-            this.arcEndAngle = 2 * Math.PI - this.arcEndAngle;
+        this.arcEndAngle = withinPiRange(this.arcStartAngle + arc);
         this.radius = range;
         //Calculate which objects exist in pizza slice
         // First check if it is within the range
