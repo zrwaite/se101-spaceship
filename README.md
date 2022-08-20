@@ -408,4 +408,8 @@ Not created by us and doesn't need to be imported, but the built in javascript m
 <h3 id='6.1'>6.1: Main Menu</h3>
 <img src="manual/MainMenu.png" alt="main menu" width="500rem"  />
 
--   On the main menu screen, there are
+-   On the main menu screen, there are several options/settings.
+
+#### Ship:
+
+-   Select

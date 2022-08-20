@@ -4,5 +4,5 @@ import { aimTurretType, fireTorpedoType, getTubeCooldownType } from '../ship/tur
 import SubsystemController from './subsystemController.js'
 
 export default class DefenceController extends SubsystemController {
-	defenceUpdate(shipStatusInfo: ShipStatus, aimTurret: aimTurretType, getTubeCooldown: getTubeCooldownType, fireTorpedo: fireTorpedoType) {}
+	defenceUpdate(aimTurret: aimTurretType, getTubeCooldown: getTubeCooldownType, fireTorpedo: fireTorpedoType) {}
 }

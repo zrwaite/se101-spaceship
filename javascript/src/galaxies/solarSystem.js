@@ -31,13 +31,5 @@ export default class SolarSystem {
         this.planetNames = this.planets.map((planet) => planet.name);
         this.warpGateNames = this.warpGates.map((warpGate) => warpGate.destinationSolarSystem);
     }
-    getMapData() {
-        return {
-            galaxy: this.galaxyName,
-            solarSystem: this.name,
-            planets: this.planetNames,
-            warpGates: this.warpGateNames
-        };
-    }
     activate() { }
 }

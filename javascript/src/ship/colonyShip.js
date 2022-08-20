@@ -6,9 +6,9 @@ import TurretControls from './turretControls.js';
 import ThrusterController from './thrusterController.js';
 import APIResponse from '../helpers/response.js';
 import Torpedo from './torpedo.js';
+import { getMapData } from './mapData.js';
 export default class ColonyShip extends Sprite {
     constructor(name, process, DefenceClass, NavigationClass, PropulsionClass, SensorsClass, ...args) {
-        var _a;
         super(...args); //parent constructor
         /* Other info */
         this.totalDamage = 0;
@@ -40,27 +40,13 @@ export default class ColonyShip extends Sprite {
         this.thrusterController = new ThrusterController(this, this.game);
         this.image = this.game.images['ship'];
         this.radius = (this.size.x + this.size.y) / 4; // we say the hurt box is avg of width and height
-        if (this.process.game.galaxy)
-            this.shipStatusInfo = {
-                galaxyName: (_a = this.process.game.galaxy) === null || _a === void 0 ? void 0 : _a.name,
-                solarSystemName: this.process.solarSystem.name,
-                position: this.pos.clone(),
-                radius: this.radius,
-                linearVelocity: this.speed.clone(),
-                angularVelocity: this.aSpeed,
-                angle: this.angle,
-                torpedoSpeed: this.turretControls.launchSpeed,
-                hasLanded: this.hasLanded,
-                thrusterPower: this.thrusterController.thrusterPower
-            };
-        else
+        if (!this.process.game.galaxy)
             throw Error('Galaxy not found');
         this.solarSystem = this.process.solarSystem;
     }
     update() {
         if (this.destructed)
             return;
-        this.updateShipStatusInfo();
         this.energyTimeCount++;
         if (this.energyTimeCount > 4) {
             this.energyUsed += 0.06;
@@ -72,10 +58,10 @@ export default class ColonyShip extends Sprite {
         this.aAccel = thusterAccels.angular;
         this.accel = thusterAccels.linear;
         try {
-            this.defenceController.defenceUpdate(this.shipStatusInfo, this.turretControls.aimTurret.bind(this.turretControls), this.turretControls.getTubeCooldown.bind(this.turretControls), this.turretControls.fireTorpedo.bind(this.turretControls));
-            this.sensorsController.sensorsUpdate(this.shipStatusInfo, this.activeSensors.scan.bind(this.activeSensors), this.passiveSensors.scan.bind(this.passiveSensors));
-            this.navigationController.navigationUpdate(this.shipStatusInfo, this.tryWarp.bind(this), this.tryLand.bind(this), this.process.solarSystem.getMapData());
-            this.propulsionController.propulsionUpdate(this.shipStatusInfo, this.thrusterController.setThruster.bind(this.thrusterController));
+            this.defenceController.defenceUpdate(this.turretControls.aimTurret.bind(this.turretControls), this.turretControls.getTubeCooldown.bind(this.turretControls), this.turretControls.fireTorpedo.bind(this.turretControls));
+            this.sensorsController.sensorsUpdate(this.activeSensors.scan.bind(this.activeSensors), this.passiveSensors.scan.bind(this.passiveSensors));
+            this.navigationController.navigationUpdate(this.getShipStatus.bind(this), this.tryWarp.bind(this), this.tryLand.bind(this), () => getMapData(this));
+            this.propulsionController.propulsionUpdate(this.thrusterController.setThruster.bind(this.thrusterController));
         }
         catch (e) {
             console.error(`Code malfunction on ship ${this.name}: ${e}. \n Self destructing.`);
@@ -87,6 +73,24 @@ export default class ColonyShip extends Sprite {
         super.update(); //parent update;
         this.turretControls.update();
         this.thrusterController.update();
+    }
+    getShipStatus(key) {
+        this.energyUsed += 1;
+        return {
+            positionX: this.pos.x,
+            positionY: this.pos.y,
+            radius: this.radius,
+            linearVelocityX: this.speed.x,
+            linearVelocityY: this.speed.y,
+            angularVelocity: this.aSpeed,
+            angle: this.angle,
+            torpedoSpeed: this.turretControls.launchSpeed,
+            hasLanded: this.hasLanded,
+            thrusterPowerMain: this.thrusterController.thrusterPower.main,
+            thrusterPowerBow: this.thrusterController.thrusterPower.bow,
+            thrusterPowerClockwise: this.thrusterController.thrusterPower.clockwise,
+            thrusterPowerCounterClockwise: this.thrusterController.thrusterPower.counterClockwise,
+        }[key];
     }
     manualControls() {
         if (!this.game.inputs)
@@ -115,16 +119,6 @@ export default class ColonyShip extends Sprite {
             this.thrusterController.thrusterPower.bow = 0;
             this.thrusterController.thrusterPower.main = 0;
         }
-    }
-    updateShipStatusInfo() {
-        this.shipStatusInfo.solarSystemName = this.process.solarSystem.name;
-        this.shipStatusInfo.position = this.pos.clone();
-        this.shipStatusInfo.radius = this.radius;
-        this.shipStatusInfo.linearVelocity = this.speed.clone();
-        this.shipStatusInfo.angularVelocity = this.aSpeed;
-        this.shipStatusInfo.angle = this.angle;
-        this.shipStatusInfo.torpedoSpeed = this.turretControls.launchSpeed;
-        this.shipStatusInfo.hasLanded = this.hasLanded;
     }
     boundaries() {
         if (this.pos.y > this.game.height) {

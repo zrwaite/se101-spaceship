@@ -1,6 +1,6 @@
 import DefenceController from '../../src/subsystems/defenceController.js'
-import { Vector2 } from '../helpers.js'
-import { ShipStatus, aimTurretType, getTubeCooldownType, fireTorpedoType } from '../types.js'
+import { Vector2, withinPiRange, angleDiff } from '../helpers.js'
+import { aimTurretType, getTubeCooldownType, fireTorpedoType } from '../types.js'
 import YourNavigationController from './NavigationController.js'
 import YourPropulsionController from './PropulsionController.js'
 import YourSensorsController from './SensorsController.js'
@@ -10,6 +10,9 @@ export default class YourDefenceController extends DefenceController {
 	sensors?: YourSensorsController
 	propulsion?: YourPropulsionController
 
-	torpedoDelay = 0
-	defenceUpdate(shipStatusInfo: ShipStatus, aimTurret: aimTurretType, getTubeCooldown: getTubeCooldownType, fireTorpedo: fireTorpedoType) {}
+	//Add additional attributes here
+	
+	defenceUpdate(aimTurret: aimTurretType, getTubeCooldown: getTubeCooldownType, fireTorpedo: fireTorpedoType) {
+		//Student code goes here
+	}
 }

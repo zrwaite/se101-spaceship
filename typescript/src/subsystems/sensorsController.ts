@@ -4,5 +4,5 @@ import { ShipStatus } from '../ship/shipStatus.js'
 import SubsystemController from './subsystemController.js'
 
 export default class SensorsController extends SubsystemController {
-	sensorsUpdate(shipStatusInfo: ShipStatus, activeScan: activeScanType, passiveScan: passiveScanType) {}
+	sensorsUpdate(activeScan: activeScanType, passiveScan: passiveScanType) {}
 }

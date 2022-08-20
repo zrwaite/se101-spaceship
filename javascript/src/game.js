@@ -28,6 +28,7 @@ export default class Game {
         this.inputs = null; // Controller values
         this.allShips = false; // Stores the number of ships that are rendered
         this.galaxy = null; // Stores Galaxy Object
+        this.mapData = null;
         this.watchShip = null; // Ship being watched
         this.watchShipName = '';
         this.solarSystemName = '';

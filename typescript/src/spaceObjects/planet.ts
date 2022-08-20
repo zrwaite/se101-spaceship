@@ -10,7 +10,7 @@ export default class Planet extends Sprite {
 	/* Default Params */
 	mass: number
 	ctx = 'planets'
-	name: string
+	name: PlanetName
 	radius: number
 	inOrbit = false
 	orbitCenter: Vector2|null = null

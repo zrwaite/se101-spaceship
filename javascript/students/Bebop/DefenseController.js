@@ -1,8 +1,7 @@
 import DefenceController from '../../src/subsystems/defenceController.js';
 export default class YourDefenceController extends DefenceController {
-    constructor() {
-        super(...arguments);
-        this.torpedoDelay = 0;
+    //Add additional attributes here
+    defenceUpdate(aimTurret, getTubeCooldown, fireTorpedo) {
+        //Student code goes here
     }
-    defenceUpdate(shipStatusInfo, aimTurret, getTubeCooldown, fireTorpedo) { }
 }

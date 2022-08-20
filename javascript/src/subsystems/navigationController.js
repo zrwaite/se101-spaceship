@@ -1,4 +1,4 @@
 import SubsystemController from './subsystemController.js';
 export default class NavigationController extends SubsystemController {
-    navigationUpdate(shipStatusInfo, warp, land, mapData) { }
+    navigationUpdate(getShipStatus, warp, land, getMapData) { }
 }

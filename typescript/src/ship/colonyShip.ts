@@ -17,12 +17,12 @@ import Game from '../game.js'
 import { ShipStatus } from './shipStatus.js'
 import SolarSystem from '../galaxies/solarSystem.js'
 import Torpedo from './torpedo.js'
+import { getMapData } from './mapData.js'
 
 export default class ColonyShip extends Sprite {
 	/* Constructor Params */
 	name: string //Ship name
 	process: Process //Process in which the ship is currently rendering
-	shipStatusInfo: ShipStatus //Stores information about the ship for subsystems
 	solarSystem: SolarSystem //Current solar system object
 
 	/* SubSystem Controllers */
@@ -82,25 +82,11 @@ export default class ColonyShip extends Sprite {
 
 		this.image = this.game.images['ship']
 		this.radius = (this.size.x + this.size.y) / 4 // we say the hurt box is avg of width and height
-		if (this.process.game.galaxy)
-			this.shipStatusInfo = {
-				galaxyName: this.process.game.galaxy?.name,
-				solarSystemName: this.process.solarSystem.name,
-				position: this.pos.clone(),
-				radius: this.radius,
-				linearVelocity: this.speed.clone(),
-				angularVelocity: this.aSpeed,
-				angle: this.angle,
-				torpedoSpeed: this.turretControls.launchSpeed,
-				hasLanded: this.hasLanded,
-				thrusterPower: this.thrusterController.thrusterPower
-			}
-		else throw Error('Galaxy not found')
+		if (!this.process.game.galaxy) throw Error('Galaxy not found')
 		this.solarSystem = this.process.solarSystem
 	}
 	update() {
 		if (this.destructed) return
-		this.updateShipStatusInfo()
 		this.energyTimeCount++
 		if (this.energyTimeCount > 4) {
 			this.energyUsed += 0.06
@@ -113,15 +99,10 @@ export default class ColonyShip extends Sprite {
 		this.accel = thusterAccels.linear
 
 		try {
-			this.defenceController.defenceUpdate(
-				this.shipStatusInfo,
-				this.turretControls.aimTurret.bind(this.turretControls),
-				this.turretControls.getTubeCooldown.bind(this.turretControls),
-				this.turretControls.fireTorpedo.bind(this.turretControls)
-			)
-			this.sensorsController.sensorsUpdate(this.shipStatusInfo, this.activeSensors.scan.bind(this.activeSensors), this.passiveSensors.scan.bind(this.passiveSensors))
-			this.navigationController.navigationUpdate(this.shipStatusInfo, this.tryWarp.bind(this), this.tryLand.bind(this), this.process.solarSystem.getMapData())
-			this.propulsionController.propulsionUpdate(this.shipStatusInfo, this.thrusterController.setThruster.bind(this.thrusterController))
+			this.defenceController.defenceUpdate(this.turretControls.aimTurret.bind(this.turretControls), this.turretControls.getTubeCooldown.bind(this.turretControls), this.turretControls.fireTorpedo.bind(this.turretControls))
+			this.sensorsController.sensorsUpdate(this.activeSensors.scan.bind(this.activeSensors), this.passiveSensors.scan.bind(this.passiveSensors))
+			this.navigationController.navigationUpdate(this.getShipStatus.bind(this), this.tryWarp.bind(this), this.tryLand.bind(this), () => getMapData(this))
+			this.propulsionController.propulsionUpdate(this.thrusterController.setThruster.bind(this.thrusterController))
 		} catch (e) {
 			console.error(`Code malfunction on ship ${this.name}: ${e}. \n Self destructing.`)
 			this.selfDestruct()
@@ -132,6 +113,24 @@ export default class ColonyShip extends Sprite {
 		super.update() //parent update;
 		this.turretControls.update()
 		this.thrusterController.update()
+	}
+	getShipStatus(key: keyof ShipStatus) {
+		this.energyUsed += 1
+		return {
+			positionX: this.pos.x,
+			positionY: this.pos.y,
+			radius: this.radius,
+			linearVelocityX: this.speed.x,
+			linearVelocityY: this.speed.y,
+			angularVelocity: this.aSpeed,
+			angle: this.angle,
+			torpedoSpeed: this.turretControls.launchSpeed,
+			hasLanded: this.hasLanded,
+			thrusterPowerMain: this.thrusterController.thrusterPower.main,
+			thrusterPowerBow: this.thrusterController.thrusterPower.bow,
+			thrusterPowerClockwise: this.thrusterController.thrusterPower.clockwise,
+			thrusterPowerCounterClockwise: this.thrusterController.thrusterPower.counterClockwise,
+		}[key]
 	}
 	manualControls() {
 		if (!this.game.inputs) throw Error('Game inputs not defined')
@@ -155,16 +154,6 @@ export default class ColonyShip extends Sprite {
 			this.thrusterController.thrusterPower.bow = 0
 			this.thrusterController.thrusterPower.main = 0
 		}
-	}
-	updateShipStatusInfo() {
-		this.shipStatusInfo.solarSystemName = this.process.solarSystem.name
-		this.shipStatusInfo.position = this.pos.clone()
-		this.shipStatusInfo.radius = this.radius
-		this.shipStatusInfo.linearVelocity = this.speed.clone()
-		this.shipStatusInfo.angularVelocity = this.aSpeed
-		this.shipStatusInfo.angle = this.angle
-		this.shipStatusInfo.torpedoSpeed = this.turretControls.launchSpeed
-		this.shipStatusInfo.hasLanded = this.hasLanded
 	}
 	boundaries() {
 		if (this.pos.y > this.game.height) {
@@ -262,4 +251,5 @@ export default class ColonyShip extends Sprite {
 }
 
 export type tryWarpType = () => UndefinedAPIResponse
+export type getShipStatusType = (key: keyof ShipStatus) => number
 export type tryLandType = () => UndefinedAPIResponse // Maybe give back planet data?

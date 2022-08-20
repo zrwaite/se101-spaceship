@@ -6,13 +6,6 @@ import AsteroidLauncher from '../spaceObjects/asteroidLauncher.js'
 import Game from '../game.js'
 import Star from '../spaceObjects/star.js'
 
-interface MapData {
-	galaxy: string
-	solarSystem: string
-	planets: string[]
-	warpGates: string[]
-}
-
 const SolarSystemNames = [
 	'Tutorial',
 	'Goose',
@@ -62,15 +55,5 @@ export default class SolarSystem {
 		this.planetNames = this.planets.map((planet) => planet.name)
 		this.warpGateNames = this.warpGates.map((warpGate) => warpGate.destinationSolarSystem)
 	}
-	getMapData(): MapData {
-		return {
-			galaxy: this.galaxyName,
-			solarSystem: this.name,
-			planets: this.planetNames,
-			warpGates: this.warpGateNames
-		}
-	}
 	activate() {}
 }
-
-export type { MapData }

@@ -11,6 +11,7 @@ import ColonyShip from './ship/colonyShip.js'
 import WarpGate from './spaceObjects/warpGate.js'
 import Planet from './spaceObjects/planet.js'
 import Star from './spaceObjects/star.js'
+import { MapData } from './ship/mapData.js'
 
 type CollisionObject = ColonyShip | Asteroid | Meteor | Torpedo
 type IndirectCollisionObject = CollisionObject | Planet | WarpGate | Star
@@ -42,6 +43,7 @@ export default class Game {
 	inputs: Controller | null = null // Controller values
 	allShips: boolean = false // Stores the number of ships that are rendered
 	galaxy: Galaxy | null = null // Stores Galaxy Object
+	mapData: MapData | null = null
 	watchShip: ColonyShip | null = null // Ship being watched
 	watchShipName: string = ''
 	solarSystemName: string = ''
