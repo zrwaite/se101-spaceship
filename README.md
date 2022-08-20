@@ -36,48 +36,91 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 
 ## Table of Contents
 
-### 1. [Objectives](#1)
+### 1: [Playing the Game](#1)
 
--   1.1. [Project Goal](#1.1)
--   1.2. [Learning Objectives: Teamwork](#1.2)
--   1.3 [Open-Ended Design](#1.3)
--   1.4: [Working Outside Your Comfort Zone](#1.4)
--   1.5: [How to Manage Feeling Lost or Overwhelmed](#1.5)
--   1.6: [Feelings Beyond This Activity](#1.6)
+### 2: [Installation](#2)
 
-### 2: [Team Design Methods](#2)
+-   2.1: [Download the source code](#2.1)
+-   2.2: [Install a server](#2.2)
+-   2.3: [Install TypeScript](#2.3)
 
--   2.1: [Traditional Design: Divide & Conquer](#2.1)
--   2.2: [Modern Design: Integrate & Iterate](#2.2)
+### 3. [Objectives](#3)
 
-### 3: [TypeScript/JavaScript Language](#3)
+-   3.1. [Project Goal](#3.1)
+-   3.2. [Learning Objectives: Teamwork](#3.2)
+-   3.3 [Open-Ended Design](#3.3)
+-   3.4: [Working Outside Your Comfort Zone](#3.4)
+-   3.5: [How to Manage Feeling Lost or Overwhelmed](3.5)
+-   3.6: [Feelings Beyond This Activity](#3.6)
 
--   3.1: [JavaScript Tips](#3.1)
--   3.2: [JavaScript Data Structures](#3.2)
--   3.3: [TypeScript Types](#3.3)
+### 4: [Team Design Methods](#4)
 
-### 4: [The Joziac Game Engine](#4)
+-   4.1: [Traditional Design: Divide & Conquer](#4.1)
+-   4.2: [Modern Design: Integrate & Iterate](#4.2)
 
--   4.1: [The Game Loop](#4.1)
--   4.2: [Coordinate System](#4.2)
--   4.3: [Helper Libraries](#4.3)
+### 5: [TypeScript/JavaScript Language](#5)
 
-### 5: [Installation](#5)
+-   5.1: [JavaScript Tips](#5.1)
+-   5.2: [JavaScript Data Structures](#5.2)
+-   5.3: [TypeScript Types](#3.3)
 
--   5.1: [Download the source code](#5.1)
--   5.2: [Install a server](#5.2)
--   5.3: [Install TypeScript](#5.3)
+### 6: [The Joziac Game Engine](#6)
 
-### 6: [Playing the Game](#6)
+-   6.1: [The Game Loop](#6.1)
+-   6.2: [Coordinate System](#6.2)
+-   6.3: [Helper Libraries](#6.3)
 
-<h2 id='1'>1: Objectives</h2>
+<h2 id='1'>1: Playing the Game!</h2>
+<h3 id='1.1'>1.1: Main Menu</h3>
+<img src="manual/MainMenu.png" alt="main menu" width="500rem"  />
 
-<h3 id='1.1'>1.1: Project Goal</h3>
+-   On the main menu screen, there are several options/settings.
+
+**Ship Select**:
+
+-               Select the ship you want to play as - this will change the code used from the students folder.
+
+<h2 id='2'>2: Installation</h2>
+
+<h3 id='2.1'>2.1: Download the source code</h3>
+
+-   Find it on Github at https://github.com/zrwaite/SE101-Spaceship
+-   Star the Repo ⭐ 👀
+    -   <img src='manual/Star.png' height='30px'/>
+-   Follow [Zac](https://github.com/zrwaite) and [Josiah](https://github.com/plettj) on Github 🙏 👀
+    -   <img src='manual/Follow.png' height='30px'/>
+-   Fork the Repo into your own repo
+    -   <img src='manual/Fork.png' height='30px'/>
+-   Clone your personal repo into your computer:
+    -   `git clone https://github.com/{your username}/SE101-Spaceship`
+
+<h3 id='2.2'>2.2: Install a server</h3>
+
+-   To run your JavaScript code, you will need an http server. \*_If you already have one, you can skip this step._
+-   The easiest server to install the Live Server extension on VSCode.
+-   Install VSCode: https://code.visualstudio.com/download <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg" alt="vscode" width="20rem" height="20rem" />
+-   Install the Live Server Extension:
+    -   <img src='manual/Extensions.png' width='300px'/>
+    -   <img src='manual/LiveServer.png' width='300px'/>
+-   To run the server, open the SE101-Spaceship folder in VS Code, and click the "Go Live" button at the bottom right.
+    -   <img src='manual/Open.png' width='300px'/>
+    -   <img src='manual/GoLive.png' width='300px'/>
+    -   You can now find the game at in your browser at http://localhost:5500/
+
+<h3 id='2.3'>2.3: Install TypeScript</h3>
+
+-   If you want to code in TypeScript, for type safety and better API documentation, you will need additional installations.
+-   First install Node.js. https://nodejs.org/en/download/
+-   Next, open the VSCode terminal and run `npm i`
+
+<h2 id='3'>3: Objectives</h2>
+
+<h3 id='3.1'>3.1: Project Goal</h3>
 
 Your goal is to engineer an _'AI'_ to fly your spaceship, to find your crew a habitable planet. While on your journey, each solar system acts like a level in a video game. Your goal is to navigate between solar systems using warp gates to find a planet ideal for your crew. This must be accomplished while avoiding the hazards of space like asteroids, to prevent ship damage. You should also try to reduce the amount of energy you use for the best chance of survival on the new planet.
 Your spaceship has four subsystems:
 
-<h3 id='1.2'>1.2: Learning Objectives - Teamwork</h3>
+<h3 id='3.2'>3.2: Learning Objectives - Teamwork</h3>
 
 Your spaceship has 4 subsystems:
 
@@ -124,11 +167,11 @@ The subsystems need to work together in order for the ship to reach a habitable 
 -   Division of Labour: How to organize the work to ensure that the subsystems integrate. A common way that software systems failed in the twentieth century is that all of the subsystems could perform their functionality independently, but couldn’t work together. Modern agile design techniques focus on integration and communication first, functionality second.f
     While there is a lot of teamwork needed, teams will need people to show their leadership skills. Teams will need leaders to guide them through the hard times and be able to help the group. They will need to be active listeners. Leaders will need to listen to the group and be able to communicate to the group effectively. They will need to be creative and be able to strategically plan on the spot. Leaders are seen everywhere in the world and progress did not happen with just one person, they happened with a team and leaders.
 
-<h3 id='1.3'>1.3: Open-ended Design</h3>
+<h3 id='3.3'>3.3: Open-ended Design</h3>
 
 Open-ended design means to allow users to make their own customizations for a software to meet their needs which is what this project is about. Just like this activity, you and your crewmates will have to make your own customizations for your own spaceship. Each crewmate will be given different tasks and each task will be for a subsystem given by the leader or whatever you choose. There are four different subsystems and each subsystem there will be different tasks that everyone will have to do in order to successfully complete the activity.
 
-<h3 id='1.4'>1.4: Working Outside Your Comfort Zone</h3>
+<h3 id='3.4'>3.4: Working Outside Your Comfort Zone</h3>
 This activity is designed to push you outside your comfort zone. By definition, that will feel uncomfortable. This activity is also designed to be fun. Welcome to the complex world of feelings! Being able to work outside your comfort zone is a skill — a skill that few people in the world have. You were admitted to Waterloo, in part, because you have the potential to develop this skill. This activity is designed to help you realize your potential — and to realize that you have this potential. Highschool was within your comfort zone. Maybe, at times, it enlarged your comfort zone — but it did that by pushing the boundary forwards from the inside. In this project, you will be using TypeScript/JavaScript and it will be easy to learn because there are many resources online and people you can talk to for help. Now we are going to take the warp gate to the other side. Hold on!
 
 Some ways in which this activity is outside your comfort zone:
@@ -140,7 +183,7 @@ Some ways in which this activity is outside your comfort zone:
 |Classmates|Not as talended as you|Very talented|
 |Team Size|2–4|∼ 16|
 
-<h3 id='1.5'>1.5: How to Manage Feeling Lost or Overwhelmed</h3>
+<h3 id='3.5'>3.5: How to Manage Feeling Lost or Overwhelmed</h3>
 You might feel uncomfortable during this activity. Don’t worry! These are normal feelings. This activity is a safe space for you to explore managing these feelings. These feelings are very common amongst high-achievers — even amongst high-achievers over thirty years old! The key is to learn positive strategies to manage these feelings so that they don’t ruin your fun and impede your progress.
 
 **We’re not ready to demo!** That’s a 20th century feeling. It’s time to let it go and embrace the century you were born in. The industry has learned from vast experience that this flavour of perfectionism does not produce the best software in most cases. There are two reasons people typically have this feeling: (1) the software is not integrated, and (2) the features are incomplete. A key insight of the late 20th century is that if we integrate first, then the system is always ready to demo — maybe some of the features still need to be improved, but the system does something. See section 2 to learn the right technical skills to work together this way. Integrate first, then your team will always be ready to demo.
@@ -166,16 +209,16 @@ You might feel uncomfortable during this activity. Don’t worry! These are norm
 -   [Harvard Business Review](https://hbr.org/2008/05/overcoming-imposter-syndrome).
 -   [Imposter Syndrome: Wikipedia](https://en.wikipedia.org/wiki/Impostor_syndrome)
 
-<h3 id='1.6'>1.6: Feelings Beyond This Activity</h3>
+<h3 id='3.6'>3.6: Feelings Beyond This Activity</h3>
 The previous discussion is about feelings you might have within this activity — feelings that this activity might provoke in you, by design. In that discussion, find someone to talk to means people doing the activity with you. You might also have these kinds of feelings outside of this activity. Some degree of these feelings is pretty common in first year generally. Going to university is a big adjustment. That’s normal. There are many resources to help you learn how to manage these kinds of feelings. Talking to friends, classmates, family, older students, etc., is always a good first step. The next step is to participate in UW Counselling Services’ workshops: https://uwaterloo.ca/campus-wellness/counselling-services/seminars-and-workshops/ coping-skills-seminars-online You can also speak with your academic advisor, in the First Year Engineering Office or in your home program. Here are some helpful links: 
 - https://www.engsoc.uwaterloo.ca/resources/mental-health/ 
 - https://uwaterloo.ca/engineering/current-undergraduate-students/engineering-counselling 
 - https://uwaterloo.ca/campus-wellness/
 
-<h2 id='2'>2: Team Design Methods</h2>
+<h2 id='4'>4: Team Design Methods</h2>
 There are different ways in which a team can be organized to work on an open-ended design task. Experience has shown that some techniques work better than others. Understanding how to best organize the team’s work and communication can improve your chances of success.
 
-<h2 id='2.1'>2.1: Traditional Design: Divide & Conquer</h2>
+<h2 id='4.1'>4.1: Traditional Design: Divide & Conquer</h2>
 Divide & Conquer was made popular by the Roman emperor Julius Cesaer over two thousand years ago. It worked for him as a military strategy. It is also a useful technique in algorithms. Here’s what it looks like: 
 1. Divide:
 	- Split the systems into subsystems.
@@ -187,7 +230,7 @@ Divide & Conquer was made popular by the Roman emperor Julius Cesaer over two th
 
 From a teamwork perspective, it can work well for tasks such as harvesting crops, where everyone is doing roughly the same thing and there is relatively little communication required between squads. But for teams designing complex systems, Divide & Conquer tends to fail at integration time: the subsystems end up being incompatible.
 
-<h2 id='2.2'>2.2: Modern Design: Integrate & Iterate</h2>
+<h2 id='4.2'>4.2: Modern Design: Integrate & Iterate</h2>
 The solution to the problem of Divide & Conquer is to integrate first, before the tasks are even built: first design the interfaces, then develop the algorithms. This approach is sometimes referred to agile design, and includes concepts such as test-driven development (tdd) and continuous integration (ci). 
 1. Integrate: The system as a whole should always be integrated. 
 	- Test-First: Agree on some tests before you write code. 
@@ -199,7 +242,7 @@ The solution to the problem of Divide & Conquer is to integrate first, before th
 	- Refine interfaces as necessary. 
 	- Sprint: a limited time period in which to implement improvements. – If you can’t do it within the sprint, defer it to a future sprint. – Always integrate and test on time.
 
-<h2 id='3'>3: TypeScript/JavaScript Language</h2>
+<h2 id='5'>5: TypeScript/JavaScript Language</h2>
 
 **This activity uses TypeScript \***or**\* JavaScript**
 
@@ -209,7 +252,7 @@ You can write your code in JavaScript or TypeScript. JavaScript is the simplest 
 
 TypeScript/JavaScript is an object-oriented language. Maybe you never learned object-oriented programming before. That’s okay. For most of this activity, you just need to use objects/classes that have already been defined, and you will be able to figure that out.
 
-<h3 id='3.1'>3.1: JavaScript Tips</h3>
+<h3 id='5.1'>5.1: JavaScript Tips</h3>
 Semicolons are usually optional at the end of lines of JavaScript, but there are certain situations where they are mandatory, so you are encouraged to use them.
 
 ```javascript
@@ -240,7 +283,7 @@ while (true) {
 }
 ```
 
-<h3 id='3.2'>3.2: JavaScript Data Structures</h3>
+<h3 id='5.2'>5.2: JavaScript Data Structures</h3>
 Below are some JavaScript data types and other things that you will likely encounter in this activity. It is not a comprehensive list, so do not be afraid to research online documentation as needed. www.w3schools.com/js/ is a great resource.
 
 **Objects:**
@@ -289,7 +332,7 @@ And access items like this:
 arr[2]
 ```
 
-<h3 id='3.3'>3.3: TypeScript Types</h3>
+<h3 id='5.3'>5.3: TypeScript Types</h3>
 
 When you create a variable, the type is inferred from the value.
 
@@ -322,10 +365,10 @@ const findSpaceObjects = (name: spaceObjectName): spaceObject {
 
 When in doubt, google it.
 
-<h2 id='4'>4: The Joziac Game Engine</h2>
+<h2 id='6'>6: The Joziac Game Engine</h2>
 This spaceship activity was built Josiah Plett and Zac Waite, with help from some other students. However, you don’t need to understand the underlying code to do this activity. Your instructor likely doesn’t understand every part of the system. This section describes the things that you will need to learn about the game.
 
-<h3 id='4.1'>4.1: The Game Loop</h3>
+<h3 id='6.1'>6.1: The Game Loop</h3>
 The game loop is the main loop of the game. It runs continuously, and is responsible for updating the game state and rendering the game to the screen.
 
 ```typescript
@@ -339,12 +382,12 @@ const gameLoop = () => {
 
 The code you create is called in the middle of that update function, and updates the rest of the logic of the game.
 
-<h3 id='4.2'>4.2: Coordinate System</h3>
+<h3 id='6.2'>6.2: Coordinate System</h3>
 The game is played on a 2D coordinate system. The origin is at the top left corner of the screen. The x-axis goes from left to right, and the y-axis goes from top to bottom. The bottom right coordinate is (720, 540).
 In polar coordinates, the origin is at the center of the screen. It goes from -π to π starting from the left side. The side with the lower y axis has negative angle. 
 <img src='manual/Coordinates.png' width='100%'/>
 
-<h3 id='4.3'>4.3: Helper Libraries</h3>
+<h3 id='6.3'>6.3: Helper Libraries</h3>
 We have provided you with some helper functions to help you integrate with our system.
 
 **Vector2:**
@@ -370,46 +413,3 @@ console.log(WithinPiRange(angle)) // prints -1.5708 (-π/2)
 
 **Math Library**
 Not created by us and doesn't need to be imported, but the built in javascript math library has numerous useful mathematical functions and constants such as pow, sqrt, min, max, sin, round, Pi, E, etc. For more information, go to: https://www.w3schools.com/js/js_math.asp
-
-<h2 id='5'>5: Installation</h2>
-
-<h3 id='5.1'>5.1: Download the source code</h3>
-
--   Find it on Github at https://github.com/zrwaite/SE101-Spaceship
--   Star the Repo ⭐ 👀
-    -   <img src='manual/Star.png' height='30px'/>
--   Follow [Zac](https://github.com/zrwaite) and [Josiah](https://github.com/plettj) on Github 🙏 👀
-    -   <img src='manual/Follow.png' height='30px'/>
--   Fork the Repo into your own repo
-    -   <img src='manual/Fork.png' height='30px'/>
--   Clone your personal repo into your computer:
-    -   `git clone https://github.com/{your username}/SE101-Spaceship`
-
-<h3 id='5.2'>5.2: Install a server</h3>
-
--   To run your JavaScript code, you will need an http server. \*_If you already have one, you can skip this step._
--   The easiest server to install the Live Server extension on VSCode.
--   Install VSCode: https://code.visualstudio.com/download <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg" alt="vscode" width="20rem" height="20rem" />
--   Install the Live Server Extension:
-    -   <img src='manual/Extensions.png' width='300px'/>
-    -   <img src='manual/LiveServer.png' width='300px'/>
--   To run the server, open the SE101-Spaceship folder in VS Code, and click the "Go Live" button at the bottom right.
-    -   <img src='manual/Open.png' width='300px'/>
-    -   <img src='manual/GoLive.png' width='300px'/>
-    -   You can now find the game at in your browser at http://localhost:5500/
-
-<h3 id='5.3'>5.3: Install TypeScript</h3>
-
--   If you want to code in TypeScript, for type safety and better API documentation, you will need additional installations.
--   First install Node.js. https://nodejs.org/en/download/
--   Next, open the VSCode terminal and run `npm i`
-
-<h2 id='6'>6: Playing the Game!</h2>
-<h3 id='6.1'>6.1: Main Menu</h3>
-<img src="manual/MainMenu.png" alt="main menu" width="500rem"  />
-
--   On the main menu screen, there are several options/settings.
-
-#### Ship:
-
--   Select
