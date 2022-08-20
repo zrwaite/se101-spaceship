@@ -106,6 +106,14 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
     -   A labyrinth of dynamic warp gates.
     -   To truly beat the game, you must land on **_Planet Joziac_**.
 
+<h3 id='1.2'>1.2: Manual Controls</h3>
+
+-   Arrow keys or WASD to move the ship.
+-   Space bar to fire weapons - when in manual control, the torpedoes fire out the front.
+-   M to warp through a warp gate.
+-   L to land on a planet.
+    _Manual controls are disabled on your ship if the `setThrusters` function is called_
+
 <h2 id='2'>2: Installation</h2>
 
 <h3 id='2.1'>2.1: Download the source code</h3>

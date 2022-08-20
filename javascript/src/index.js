@@ -237,7 +237,8 @@ let DOM = {
                     `<h3>Info & Tips</h3>
 					Use the ship select to choose which code from the students folder<br/>
 					Use the settings to adjust how the UI appears<br/>
-					Select your galaxy - they get progressively more difficult<br/>
+					Arrow keys or WASD to move<br/>
+					Spacebar to shoot, M to warp, L to land<br/>
 					For more information, see our <a target='_blank' href='https://github.com/zrwaite/SE101-Spaceship/blob/main/README.md'>Manual/Documentation</a><br/>`;
             }
             else {
