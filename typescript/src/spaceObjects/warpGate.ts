@@ -23,6 +23,7 @@ export default class WarpGate extends Sprite {
 		super(...args)
 		this.image = this.game.images['warpgate']
 		this.destinationSolarSystem = destinationSolarystem
+		this.mass += Math.random()
 	}
 	initialize(process: Process) {
 		this.process = process

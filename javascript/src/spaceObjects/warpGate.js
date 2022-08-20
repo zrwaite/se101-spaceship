@@ -15,6 +15,7 @@ export default class WarpGate extends Sprite {
         this.process = null;
         this.image = this.game.images['warpgate'];
         this.destinationSolarSystem = destinationSolarystem;
+        this.mass += Math.random();
     }
     initialize(process) {
         this.process = process;

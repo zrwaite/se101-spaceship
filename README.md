@@ -78,7 +78,33 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 
 **Ship Select**:
 
--               Select the ship you want to play as - this will change the code used from the students folder.
+-   Select the ship you want to play as - this will change the code used from the students folder.
+
+**Settings**:
+
+-   Toggle `Zoomed-in view` for a better view of the ship, or a better view of the map.
+-   Toggle `Dev tools display` to see ship stats like position, speed, energy used and damage taken on the left side of the screen.
+-   Toggle `Skip past main menu` to skip the loading screen when you start the game
+-   Toggle `All ships are rendered` to see all of the ships on the map, not just the ones you are in control of.
+
+**Galaxy**:
+
+-   These are the levels you can play on - they get progressively harder.
+-   Noob: Easy
+    -   1 Solar System, 1 planet. Just go to the planet.
+-   Compiles: Medium
+    -   3 Solar Systems, 2 planets.
+    -   Use warp gates to travel between solar systems.
+    -   Pick the most survivable planet
+-   Cracked: Hard
+    -   5 Solar Systems, several planets.
+    -   Navigate a looping maze of warp gates.
+    -   Pick the most survivable planet, even if that means leaving a solar system behind.
+-   Joziac: Impossible
+    -   7 Solar Systems, many planets.
+    -   Completely new challenges.
+    -   A labyrinth of dynamic warp gates.
+    -   To truly beat the game, you must land on **_Planet Joziac_**.
 
 <h2 id='2'>2: Installation</h2>
 
