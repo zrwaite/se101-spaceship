@@ -133,7 +133,6 @@ let DOM = {
         defaultShip: 'Bebop',
         devDisplay: true,
         defaultGalaxy: 0,
-        manualControls: true,
         allShips: false,
         zoom: 1, // zoom aspect ratio (1 vs 2.5)
     },
@@ -235,10 +234,14 @@ let DOM = {
             DOM.elements['Info'].classList.toggle('active');
             if (DOM.elements['Info'].classList.contains('active')) {
                 DOM.elements['Info'].querySelector('button').innerHTML =
-                    "<h3>&#x1F6C8; Info & Tips</h3>&emsp;&emsp;&emsp;Here we write a bit of information and tips the students could benefit from.<br>&emsp;&emsp;&emsp;To do with the UI, we'll mention stuff like how the local storage works, and for the game, we'll perhaps give some tips or troubleshooting advice.<br>&emsp;&emsp;&emsp;We'll link to the README.md and stuff, too.";
+                    `<h3>Info & Tips</h3>
+					Use the ship select to choose which code from the students folder<br/>
+					Use the settings to adjust how the UI appears<br/>
+					Select your galaxy - they get progressively more difficult<br/>
+					For more information, see our <a target='_blank' href='https://github.com/zrwaite/SE101-Spaceship/blob/main/README.md'>Manual/Documentation</a><br/>`;
             }
             else {
-                DOM.elements['Info'].querySelector('button').innerHTML = '&#x1F6C8; Info & Tips';
+                DOM.elements['Info'].querySelector('button').innerHTML = 'Info & Tips';
             }
         };
         let galaxyNames = ['galaxy1', 'galaxy2', 'galaxy3', 'galaxy4'];
@@ -414,6 +417,7 @@ let DOM = {
         if (this.loaded && !this.gameInitialized) {
             game.paused = false;
             game.zoom = this.data['zoom'];
+            console.log(this.data);
             game.start(galaxies[galaxy], this.data['allShips'], this.data['defaultShip']);
             this.previousDamage[0] = 0; // Stop the damage from blinking when you start!
             if (!game.galaxy)

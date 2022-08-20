@@ -8,6 +8,19 @@
 <img src="assets/images/ship/ColonyShip.png" alt="ship" width="65rem" height="50rem" />
 </div>
 
+<table>
+<tr>
+<td><img width="300" src="manual/Preview1.png"/></td>
+<td><img width="300" src="manual/Preview2.png"/></td>
+<td><img width="300" src="manual/Preview3.png"/></td>
+</tr>
+<tr>
+<td><img width="300" src="manual/Preview4.png"/></td>
+<td><img width="300" src="manual/Preview5.png"/></td>
+<td><img width="300" src="manual/Preview6.png"/></td>
+</tr>
+</table>
+
 ## University of Waterloo Ideas Clinic 💻
 
 _Adventure and glory await you!_ With the recent discovery of the galactic warp gate network, an international coalition of world governments has been hard at work design- ing and constructing humanity’s first interstellar colony ships. Bound for Kepler-438b, an exoplanet only 472.9 light-years away from Earth in the constellation Lyra, you and your colleagues have been tasked with developing the software control systems that will guide the ship through the hazards of deep space. The fate of thousands of pioneering souls rests on your collective ability to design, implement, and test your code and _work as a team!_
@@ -392,3 +405,7 @@ Not created by us and doesn't need to be imported, but the built in javascript m
 -   Next, open the VSCode terminal and run `npm i`
 
 <h2 id='6'>6: Playing the Game!</h2>
+<h3 id='6.1'>6.1: Main Menu</h3>
+<img src="manual/MainMenu.png" alt="main menu" width="500rem"  />
+
+-   On the main menu screen, there are
