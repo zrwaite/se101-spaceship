@@ -38,6 +38,10 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 
 ### 1: [Playing the Game](#1)
 
+-   1.1: [Main Menu](#1.1)
+-   1.2: [Manual Controls](#1.2)
+-   1.3: [Game Objectives](#1.3)
+
 ### 2: [Installation](#2)
 
 -   2.1: [Download the source code](#2.1)
@@ -112,7 +116,17 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 -   Space bar to fire weapons - when in manual control, the torpedoes fire out the front.
 -   M to warp through a warp gate.
 -   L to land on a planet.
+
     _Manual controls are disabled on your ship if the `setThrusters` function is called_
+
+<h3 id='1.3'>1.3: Game Objectives</h3>
+
+-   **The goal of the game is the land on the best planet you can, without taking too much damage, and without using too much energy**
+-   When in manual mode, you will have to make assumptions baaased on the look of the planet. When you are close to the planet, however, you can scan the planet to see its composition.
+-   Use warpgates to travel between solar systems. Warping has a high energy cost, to make sure you know where you are going.
+-   Avoid asteroids, or destroy them with torpedoes to avoid taking damage. When a large asteroid explodes, it will split into smaller asteroids.
+-   You have unlimited torpedoes, but they have a cooldown, and cost energy.
+-   Using your thrusters uses a lot of energy, but you also use some energy idling, so make sure to move quickly.
 
 <h2 id='2'>2: Installation</h2>
 
