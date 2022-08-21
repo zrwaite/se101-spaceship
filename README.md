@@ -74,6 +74,14 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 -   6.2: [Coordinate System](#6.2)
 -   6.3: [Helper Libraries](#6.3)
 
+### 7: [Student API](#7)
+
+-   7.1: [Your Ship](#7.1)
+-   7.2: [Navigation](#7.2)
+-   7.3: [Sensors](#7.3)
+-   7.4: [Defence](#7.4)
+-   7.5: [Propulsion](#7.5)
+
 <h2 id='1'>1: Playing the Game!</h2>
 <h3 id='1.1'>1.1: Main Menu</h3>
 <img src="manual/MainMenu.png" alt="main menu" width="500rem"  />
@@ -461,3 +469,34 @@ console.log(WithinPiRange(angle)) // prints -1.5708 (-π/2)
 
 **Math Library**
 Not created by us and doesn't need to be imported, but the built in javascript math library has numerous useful mathematical functions and constants such as pow, sqrt, min, max, sin, round, Pi, E, etc. For more information, go to: https://www.w3schools.com/js/js_math.asp
+
+<h2 id='7'>7: Student API!</h2>
+
+To complete the activity, you need to write code to connect to the Joziac API. Your code is run in every game loop (50 times a second), so you will likely want to keep track of the gameframe to avoid running things too quickly.
+
+<h3 id='7.1'>7.1: Your ship</h3>
+
+Your ship is made up of 4 subsystems that work together to allow your ship to navigate the galaxies. No system can work without the others.
+
+-   To find your code, open the folder `typescript/students`.
+-   Open find the folder with your ship's name. example: `Bebop`
+-   You have 4 files, representing each of the subsystems. This is where you write your code.
+
+<h3 id='7.2'>7.2: Navigation</h3>
+The navigation subsystem is used for collecting internal data and performing the automated functions for warping and landing.
+
+This subsystem's update function includes the following abilities:
+
+-   `getShipStatus: (key: shipStatusKey) => number`
+    -   `shipStatusKey: 'radius' | 'angularVelocity' | 'angle' | 'torpedoSpeed' | 'positionX' | 'positionY' | 'linearVelocityX' | 'linearVelocityY' | 'thrusterPowerMain' | 'thrusterPowerBow' | 'thrusterPowerClockwise' | 'thrusterPowerCounterClockwise'`
+    -   Returns the value of the specifed attribute of your ship. This is crucial for decision making.
+-   `warp: () => APIResponse<undefined>
+    -   Returns an API Response with information about the s
+-   land
+-   getMapData
+-   navigationUpdate(getShipStatus: getShipStatusType, warp: tryWarpType, land: tryLandType, getMapData: () => MapData) {
+
+-   7.2: [Navigation](#7.2)
+-   7.3: [Sensors](#7.3)
+-   7.4: [Defence](#7.4)
+-   7.5: [Propulsion](#7.5)

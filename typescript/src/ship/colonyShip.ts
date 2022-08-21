@@ -4,8 +4,6 @@ import PassiveSensors from './passiveSensors.js'
 import ActiveSensors from './activeSensors.js'
 import TurretControls from './turretControls.js'
 import ThrusterController from './thrusterController.js'
-import APIResponse, { UndefinedAPIResponse } from '../helpers/response.js'
-import SubsystemController from '../subsystems/subsystemController.js'
 import DefenceController from '../subsystems/defenceController.js'
 import NavigationController from '../subsystems/navigationController.js'
 import PropulsionController from '../subsystems/propulsionController.js'
@@ -195,38 +193,38 @@ export default class ColonyShip extends Sprite {
 	tryFire() {
 		this.turretControls.aimTurret(this.angle)
 		for (let i = 0; i < 4; i++) {
-			if (this.turretControls.fireTorpedo(i).success) break
+			if (!this.turretControls.fireTorpedo(i)) break
 		}
 	}
 
-	tryWarp(): UndefinedAPIResponse {
+	tryWarp(): Error | null {
 		this.energyUsed += 50
 		this.process.solarSystem.warpGates.forEach((warpGate: WarpGate) => {
 			if (this.game.ifCollide(this, warpGate)) {
 				warpGate.warp(this)
 				this.receiveDamage(this.speed.magnitude())
-				return new APIResponse(200, [], undefined, true)
+				return null
 			}
 		})
-		return new APIResponse(400, ['No warp gates in range'])
+		return new Error('No warp gates in range')
 	}
 
-	tryLand() {
+	tryLand(): Error | null {
 		this.energyUsed += 20
 		this.process.solarSystem.planets.forEach((planet: Planet) => {
 			if (this.game.ifCollide(this, planet)) {
 				const speedMag = this.speed.magnitude()
 				if (speedMag > 2) {
-					return new APIResponse(400, ['Too fast! Your speed was: ' + speedMag])
+					return new Error('Too fast! Your speed was: ' + speedMag)
 				} else {
 					this.receiveDamage(speedMag * 10)
 					if (speedMag > 0.5) console.log(`Ouch! You crash landed and took ${speedMag * 10} damage`)
 					this.land(planet)
-					return new APIResponse(200, [], undefined, true)
+					return null
 				}
 			}
 		})
-		return new APIResponse(400, ['No planets in range'])
+		return new Error('No planets in range')
 	}
 
 	land(planet: Planet) {
@@ -249,7 +247,3 @@ export default class ColonyShip extends Sprite {
 		this.destructed = true
 	}
 }
-
-export type tryWarpType = () => UndefinedAPIResponse
-export type getShipStatusType = (key: keyof ShipStatus) => number
-export type tryLandType = () => UndefinedAPIResponse // Maybe give back planet data?

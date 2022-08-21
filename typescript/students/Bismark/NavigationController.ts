@@ -1,5 +1,5 @@
 import { Vector2 } from '../helpers.js'
-import { getShipStatusType, tryWarpType, MapData, tryLandType} from '../types.js'
+import { MapData, ShipStatus} from '../types.js'
 
 import NavigationController from '../../src/subsystems/navigationController.js'
 import YourDefenceController from './DefenseController.js'
@@ -14,7 +14,8 @@ export default class YourNavigationController extends NavigationController {
 
 	//Add additional attributes here
 
-	navigationUpdate(getShipStatus: getShipStatusType, warp: tryWarpType, land: tryLandType, getMapData: () => MapData) {
+	// navigationUpdate(getShipStatus: getShipStatusType, warp: tryWarpType, land: tryLandType, getMapData: () => MapData) {
+	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		//Student code goes here
 	}
 }

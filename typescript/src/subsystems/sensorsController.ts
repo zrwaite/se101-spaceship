@@ -1,8 +1,9 @@
-import { activeScanType } from '../ship/activeSensors.js'
-import { passiveScanType } from '../ship/passiveSensors.js'
-import { ShipStatus } from '../ship/shipStatus.js'
+import { EMSReading } from '../ship/EMSReading.js'
+import { PassiveReading } from '../ship/passiveReading.js'
 import SubsystemController from './subsystemController.js'
 
 export default class SensorsController extends SubsystemController {
-	sensorsUpdate(activeScan: activeScanType, passiveScan: passiveScanType) {}
+	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {}
 }
+
+

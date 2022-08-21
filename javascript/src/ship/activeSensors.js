@@ -11,7 +11,6 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 };
 var _ActiveSensors_instances, _ActiveSensors_parentShip, _ActiveSensors_pointInScanSlice;
 import { EMSReading } from './EMSReading.js';
-import APIResponse from '../helpers/response.js';
 import Vector2 from '../helpers/Vector2.js';
 import ColonyShip from './colonyShip.js';
 import RenderedObject from '../renderedObject.js';
@@ -36,15 +35,15 @@ export default class ActiveSensors extends RenderedObject {
         __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").energyUsed += Math.round((arc * range * range) / 4000);
         // Ensure solar system is initialized before performing scan
         if (!__classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").solarSystem)
-            return new APIResponse(400, ['Cannot perform ActiveSensors scan until solar system initialized'], []);
+            return new Error('Cannot perform ActiveSensors scan until solar system initialized');
         if (arc > Math.PI)
-            return new APIResponse(400, ['arc is too large. Max: Pi'], []);
+            return new Error('arc is too large. Max: Pi');
         if (arc < 0)
-            return new APIResponse(400, ['arc must be larger than 0'], []);
+            return new Error('arc must be larger than 0');
         if (heading > Math.PI || heading < -Math.PI)
-            return new APIResponse(400, [`heading of ${heading} must be between Pi and -Pi `], []);
+            return new Error(`heading of ${heading} must be between Pi and -Pi `);
         if (this.cooldown)
-            return new APIResponse(400, ['ActiveSensors is still on cooldown'], []);
+            return new Error('ActiveSensors is still on cooldown');
         this.cooldown = 25;
         this.arcStartAngle = heading;
         this.arcEndAngle = withinPiRange(this.arcStartAngle + arc);
@@ -66,7 +65,7 @@ export default class ActiveSensors extends RenderedObject {
                 readings.push(new EMSReading(angle, velocity, spaceObject.radius, distance, scanSignature));
             }
         }
-        return new APIResponse(200, [], readings, true);
+        return readings;
     }
     draw() {
         if (!this.cooldown)

@@ -1,4 +1,4 @@
-export class PassiveSensorReading {
+export class PassiveReading {
 	heading
 	gravity
 	constructor(angle: number, gravity: number) {

@@ -4,7 +4,6 @@ import PassiveSensors from './passiveSensors.js';
 import ActiveSensors from './activeSensors.js';
 import TurretControls from './turretControls.js';
 import ThrusterController from './thrusterController.js';
-import APIResponse from '../helpers/response.js';
 import Torpedo from './torpedo.js';
 import { getMapData } from './mapData.js';
 export default class ColonyShip extends Sprite {
@@ -161,7 +160,7 @@ export default class ColonyShip extends Sprite {
     tryFire() {
         this.turretControls.aimTurret(this.angle);
         for (let i = 0; i < 4; i++) {
-            if (this.turretControls.fireTorpedo(i).success)
+            if (!this.turretControls.fireTorpedo(i))
                 break;
         }
     }
@@ -171,10 +170,10 @@ export default class ColonyShip extends Sprite {
             if (this.game.ifCollide(this, warpGate)) {
                 warpGate.warp(this);
                 this.receiveDamage(this.speed.magnitude());
-                return new APIResponse(200, [], undefined, true);
+                return null;
             }
         });
-        return new APIResponse(400, ['No warp gates in range']);
+        return new Error('No warp gates in range');
     }
     tryLand() {
         this.energyUsed += 20;
@@ -182,18 +181,18 @@ export default class ColonyShip extends Sprite {
             if (this.game.ifCollide(this, planet)) {
                 const speedMag = this.speed.magnitude();
                 if (speedMag > 2) {
-                    return new APIResponse(400, ['Too fast! Your speed was: ' + speedMag]);
+                    return new Error('Too fast! Your speed was: ' + speedMag);
                 }
                 else {
                     this.receiveDamage(speedMag * 10);
                     if (speedMag > 0.5)
                         console.log(`Ouch! You crash landed and took ${speedMag * 10} damage`);
                     this.land(planet);
-                    return new APIResponse(200, [], undefined, true);
+                    return null;
                 }
             }
         });
-        return new APIResponse(400, ['No planets in range']);
+        return new Error('No planets in range');
     }
     land(planet) {
         this.game.landSuccessful(planet);

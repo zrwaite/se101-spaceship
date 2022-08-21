@@ -1,13 +1,7 @@
-import { PassiveSensorReading } from './passiveSensorReading.js'
-import APIResponse from '../helpers/response.js'
-import Vector2 from '../helpers/Vector2.js'
+import { PassiveReading } from './passiveReading.js'
 import ColonyShip from './colonyShip.js'
 import RenderedObject from '../renderedObject.js'
 import Game from '../game.js'
-
-interface passiveScanResponse extends APIResponse {
-	response: PassiveSensorReading[]
-}
 
 export default class PassiveSensors extends RenderedObject {
 	parentShip: ColonyShip
@@ -18,29 +12,29 @@ export default class PassiveSensors extends RenderedObject {
 		this.parentShip = parentShip
 		this.game = game
 	}
-	scan(): passiveScanResponse {
+	scan(): PassiveReading[] | Error {
 		this.parentShip.energyUsed += 10
 		// Ensure solar system is initialized before performing scan
-		if (!this.parentShip.solarSystem) return new APIResponse(400, ['Cannot perform PassiveSensors scan until solar system initialized'], [])
-		if (this.cooldown) return new APIResponse(400, ['sensors are still on cooldown'], [])
+		if (!this.parentShip.solarSystem) throw Error('Cannot perform PassiveSensors scan until solar system initialized')
+		if (this.cooldown) return new Error('sensors are still on cooldown')
 		this.cooldown = 50
 		// Note: angle must account for relative position of object to ship (not global position on board)
 		// To find angle, find angle difference between the vector from ship to object & current ship heading
 		// y coordinate is inverted due to the flipped board axis (greater y value indicates lower position)
-		let readings: PassiveSensorReading[] = []
+		let readings: PassiveReading[] = []
 		for (const planet of this.parentShip.solarSystem.planets) {
 			const angle = this.parentShip.pos.angleToPoint(planet.pos)
 			const distance = this.parentShip.pos.distance(planet.pos)
-			readings.push(new PassiveSensorReading(angle, planet.mass / Math.pow(distance, 2)))
+			readings.push(new PassiveReading(angle, planet.mass / Math.pow(distance, 2)))
 		}
 
 		for (const warpgate of this.parentShip.solarSystem.warpGates) {
 			const angle = this.parentShip.pos.angleToPoint(warpgate.pos)
 			const distance = this.parentShip.pos.distance(warpgate.pos)
-			readings.push(new PassiveSensorReading(angle, warpgate.mass / Math.pow(distance, 2)))
+			readings.push(new PassiveReading(angle, warpgate.mass / Math.pow(distance, 2)))
 		}
 
-		return new APIResponse(200, [], readings, true)
+		return readings
 	}
 	draw() {
 		if (!this.cooldown) return
@@ -60,5 +54,3 @@ export default class PassiveSensors extends RenderedObject {
 		this.pos = this.parentShip.pos
 	}
 }
-
-export type passiveScanType = () => passiveScanResponse

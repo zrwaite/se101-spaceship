@@ -1,6 +1,6 @@
 import { Vector2, withinPiRange } from '../helpers.js'
+import { ThrusterName } from '../types.js'
 import PropulsionController from '../../src/subsystems/propulsionController.js'
-import { setThrustersType } from '../types.js'
 import YourDefenceController from './DefenseController.js'
 import YourNavigationController from './NavigationController.js'
 import YourSensorsController from './SensorsController.js'
@@ -12,7 +12,7 @@ export default class YourPropulsionController extends PropulsionController {
 
 	//Add additional attributes here
 
-	propulsionUpdate(setThrusters: setThrustersType) {
+	propulsionUpdate(setThruster: (thruster: ThrusterName, power: number) => Error | null) {
 		//Student code goes here
 	}
 }

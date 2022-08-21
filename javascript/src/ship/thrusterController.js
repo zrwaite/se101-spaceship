@@ -1,5 +1,4 @@
 import Vector2 from '../helpers/Vector2.js';
-import APIResponse from '../helpers/response.js';
 import RenderedObject from '../renderedObject.js';
 const thrusterNames = ['main', 'bow', 'clockwise', 'counterClockwise'];
 export default class ThrusterController extends RenderedObject {
@@ -89,19 +88,20 @@ export default class ThrusterController extends RenderedObject {
     setThruster(thrusterName, power) {
         this.manualControlDisabled = true;
         if (power < 0)
-            return new APIResponse(400, ['power must be non-negative'], {}, false);
-        const usedPower = Math.min(power, 100);
+            return new Error('power must be non-negative');
+        if (power > 100)
+            return new Error('Too much power! Anything over 100 fries the system, you used ' + power);
         switch (thrusterName) {
             case 'main':
             case 'bow':
             case 'clockwise':
             case 'counterClockwise':
-                this.thrusterPower[thrusterName] = usedPower;
+                this.thrusterPower[thrusterName] = power;
                 break;
             default:
-                return new APIResponse(400, [`Invalid thrusterName <${thrusterName}>`], {}, false);
+                return new Error(`Invalid thrusterName <${thrusterName}>`);
         }
-        return new APIResponse(200, [], { power: usedPower, powerLimited: power > 100 }, true);
+        return null;
     }
     getAccel() {
         this.parentShip.energyUsed += this.thrusterPower.main / 200;
