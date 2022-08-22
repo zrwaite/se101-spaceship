@@ -197,11 +197,6 @@ let DOM: any = {
         let galaxyName = game.galaxy?.name
         
         let nextGalaxyNumber = galaxyName !== undefined ? galaxies.indexOf(galaxyName) + 1 : 0
-        if (nextGalaxyNumber > 3) {
-          ;(document.querySelector("#EndScreenMain button.bottom") as HTMLElement).style.display = "none"
-        } else {
-          ;(document.querySelector("#EndScreenMain button.bottom") as HTMLElement).style.display = "block"
-        }
         DOM.resetGame()
         DOM.startGame(nextGalaxyNumber)
         ;(document.activeElement as HTMLElement).blur()
@@ -228,10 +223,10 @@ let DOM: any = {
 			if (DOM.elements['Info'].classList.contains('active')) {
 				DOM.elements['Info'].querySelector('button').innerHTML =
 					`<h3>Info & Tips</h3>
-					Use the ship select to choose which code from the students folder<br/>
-					Use the settings to adjust how the UI appears<br/>
-					Arrow keys or WASD to move<br/>
-					Spacebar to shoot, M to warp, L to land<br/>
+					Use the ship select to choose which code from the students folder.<br/>
+					Use the settings to adjust how the UI appears.<br/>
+					Arrow keys or WASD to move.<br/>
+					Spacebar to shoot, M to warp, L to land.<br/><br/>
 					For more information, see our <a target='_blank' href='https://github.com/zrwaite/SE101-Spaceship/blob/main/README.md'>Manual/Documentation</a><br/>`
 			} else {
 				DOM.elements['Info'].querySelector('button').innerHTML = 'Info & Tips'
@@ -261,21 +256,29 @@ let DOM: any = {
 				else throw Error('Element ' + '#galaxy' + (i + 1) + '>.quit' + ' not found')
 			}
 		}
-		setTimeout(() => {
+    setTimeout(() => {
 			document.querySelectorAll('.menu').forEach(function (menu: any): void {
 				menu.style['transition-duration'] = '0.3s'
 				menu.style['-o-transition-duration'] = '0.3s'
 				menu.style['-moz-transition-duration'] = '0.3s'
 				menu.style['-webkit-transition-duration'] = '0.3s'
 			})
+      if (DOM.data["skipMenu"] && !DOM.data["veryFirst"]) {
+        let galaxyName = game?.galaxy?.name
+        let galaxyNumber = galaxyName !== undefined ? galaxies.indexOf(galaxyName) : 0
+        let galaxyElement = document.querySelector('#galaxy' + (galaxyNumber + 1) + '>.quit')
+				if (galaxyElement) galaxyElement.classList.remove('hidden')
+				else throw Error('Element ' + '#galaxy' + (galaxyNumber + 1) + '>.quit' + ' not found')
+      }
 		}, 0)
-		for (let i = 0; i < this.elements['checkboxes'].length; i++) {
-			this.elements['checkboxes'][i].onclick = () => {
-				DOM.updatePreference(this.id, this.checked)
+		for (let i = 0; i < DOM.elements['checkboxes'].length; i++) {
+			DOM.elements['checkboxes'][i].onclick = () => {
+				DOM.updatePreference(DOM.elements['checkboxes'][i].id, DOM.elements['checkboxes'][i].checked)
 			}
 		}
 
 		if (storageAvailable('localStorage')) {
+      console.log("Your browser supports localStorage!")
 			this.canStore = true
 			let possibleData = localStorage.getItem('data')
 			if (possibleData) {
@@ -336,9 +339,9 @@ let DOM: any = {
 		localStorage.setItem('data', JSON.stringify(DOM.data))
 	},
 	updatePreference: function (type: string, value: number) {
-		if (type === 'zoom') this.data[type] = value ? 2.5 : 1
-		else this.data[type] = value
-		this.save()
+		if (type === 'zoom') DOM.data[type] = value ? 2.5 : 1
+		else DOM.data[type] = value
+		DOM.save()
 	},
 	doneLoad: () => {
 		contexts['background'].drawImage(images['background'], 0, 0, windowSize.x * unit, windowSize.y * unit)
@@ -396,7 +399,6 @@ let DOM: any = {
 		if (this.loaded && !this.gameInitialized) {
 			game.paused = false
 			game.zoom = this.data['zoom']
-			console.log(this.data)
 			game.start(galaxies[galaxy], this.data['allShips'], this.data['defaultShip'])
 			this.previousDamage[0] = 0 // Stop the damage from blinking when you start!
 			if (!game.galaxy) throw Error('Game galaxy not defined')
@@ -409,7 +411,7 @@ let DOM: any = {
 				this.save()
 			}
 		} else if (this.gameInitialized) {
-			console.log(game)
+			//console.log(game)
 			if (!game.galaxy) throw Error('Game galaxy not defined')
 			if (galaxies[galaxy] !== game.galaxy.name || game.watchShipName !== this.data['defaultShip']) {
 				this.resetGame()
@@ -428,7 +430,7 @@ let DOM: any = {
 	},
 	resetGame: () => {
 		if (!game) throw new Error('Game not defined')
-		console.log('Destroying the game object and remaking it!')
+		//console.log('Destroying the game object and remaking it...')
 		for (let i = 0; i < 4; i++) {
 			let galaxyElement = document.querySelector('#galaxy' + (i + 1) + '>.quit')
 			if (galaxyElement) galaxyElement.classList.add('hidden')
@@ -444,6 +446,14 @@ let DOM: any = {
   landSuccessful: function (planet: Planet) {
     console.log("You won! You landed on " + planet.name + "!")
     if (DOM.menus["EndScreen"].classList.contains('on')) return; // We already landed
+    let galaxyName = game?.galaxy?.name
+    let nextGalaxyNumber = galaxyName !== undefined ? galaxies.indexOf(galaxyName) + 1 : 0
+    if (nextGalaxyNumber > 3) {
+      DOM.elements["EndNextGalaxy"].style.display = "none"
+    } else {
+      DOM.elements["EndNextGalaxy"].style.display = "block"
+    }
+    DOM.elements["EndNextGalaxy"]
     DOM.menus["EndScreen"].querySelector("#ESGalaxy").innerHTML = game?.galaxy?.name ?? '<em>unknown<em>'
     DOM.menus["EndScreen"].querySelector("#ESShipName").innerHTML = game?.watchShipName ?? '<em>unknown<em>'
     DOM.menus["EndScreen"].querySelector("#ESEnergy").innerHTML = game?.watchShip?.energyUsed !== undefined ? Math.floor(game.watchShip.energyUsed * 100) : '<em>unknown<em>'

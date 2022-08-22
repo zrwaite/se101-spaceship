@@ -98,7 +98,7 @@ canvas {
     width: calc(var(--unit) * 18);
     height: calc(var(--unit) * 6);
     left: calc(var(--unit) * 27);
-    bottom: calc(var(--unit) * 8);
+    bottom: calc(var(--unit) * 11);
     font-size: calc(var(--unit) * 3.5);
     font-weight: 200;
 }
@@ -535,7 +535,7 @@ mark {
     position: absolute;
     width: 100%;
     text-align: center;
-    bottom: calc(var(--unit) * 2 + var(--border));
+    bottom: calc(var(--unit) * 1 + var(--border));
     font-size: calc(var(--unit) * 1);
     color: rgb(240, 80, 80);
     font-weight: 300;
@@ -543,6 +543,18 @@ mark {
 }
 .warning .on {
     display: block;
+}
+
+.subscript {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: calc(var(--unit) * 1 + var(--border));
+    font-size: calc(var(--unit) * 1);
+    font-weight: 300;
+}
+.subscript a {
+    color: #7a97f5;
 }
 
 button {

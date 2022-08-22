@@ -197,14 +197,6 @@ let DOM = {
             if (game) {
                 let galaxyName = (_a = game.galaxy) === null || _a === void 0 ? void 0 : _a.name;
                 let nextGalaxyNumber = galaxyName !== undefined ? galaxies.indexOf(galaxyName) + 1 : 0;
-                if (nextGalaxyNumber > 3) {
-                    ;
-                    document.querySelector("#EndScreenMain button.bottom").style.display = "none";
-                }
-                else {
-                    ;
-                    document.querySelector("#EndScreenMain button.bottom").style.display = "block";
-                }
                 DOM.resetGame();
                 DOM.startGame(nextGalaxyNumber);
                 document.activeElement.blur();
@@ -235,10 +227,10 @@ let DOM = {
             if (DOM.elements['Info'].classList.contains('active')) {
                 DOM.elements['Info'].querySelector('button').innerHTML =
                     `<h3>Info & Tips</h3>
-					Use the ship select to choose which code from the students folder<br/>
-					Use the settings to adjust how the UI appears<br/>
-					Arrow keys or WASD to move<br/>
-					Spacebar to shoot, M to warp, L to land<br/>
+					Use the ship select to choose which code from the students folder.<br/>
+					Use the settings to adjust how the UI appears.<br/>
+					Arrow keys or WASD to move.<br/>
+					Spacebar to shoot, M to warp, L to land.<br/><br/>
 					For more information, see our <a target='_blank' href='https://github.com/zrwaite/SE101-Spaceship/blob/main/README.md'>Manual/Documentation</a><br/>`;
             }
             else {
@@ -270,19 +262,30 @@ let DOM = {
             };
         }
         setTimeout(() => {
+            var _a;
             document.querySelectorAll('.menu').forEach(function (menu) {
                 menu.style['transition-duration'] = '0.3s';
                 menu.style['-o-transition-duration'] = '0.3s';
                 menu.style['-moz-transition-duration'] = '0.3s';
                 menu.style['-webkit-transition-duration'] = '0.3s';
             });
+            if (DOM.data["skipMenu"] && !DOM.data["veryFirst"]) {
+                let galaxyName = (_a = game === null || game === void 0 ? void 0 : game.galaxy) === null || _a === void 0 ? void 0 : _a.name;
+                let galaxyNumber = galaxyName !== undefined ? galaxies.indexOf(galaxyName) : 0;
+                let galaxyElement = document.querySelector('#galaxy' + (galaxyNumber + 1) + '>.quit');
+                if (galaxyElement)
+                    galaxyElement.classList.remove('hidden');
+                else
+                    throw Error('Element ' + '#galaxy' + (galaxyNumber + 1) + '>.quit' + ' not found');
+            }
         }, 0);
-        for (let i = 0; i < this.elements['checkboxes'].length; i++) {
-            this.elements['checkboxes'][i].onclick = () => {
-                DOM.updatePreference(this.id, this.checked);
+        for (let i = 0; i < DOM.elements['checkboxes'].length; i++) {
+            DOM.elements['checkboxes'][i].onclick = () => {
+                DOM.updatePreference(DOM.elements['checkboxes'][i].id, DOM.elements['checkboxes'][i].checked);
             };
         }
         if (storageAvailable('localStorage')) {
+            console.log("Your browser supports localStorage!");
             this.canStore = true;
             let possibleData = localStorage.getItem('data');
             if (possibleData) {
@@ -352,10 +355,10 @@ let DOM = {
     },
     updatePreference: function (type, value) {
         if (type === 'zoom')
-            this.data[type] = value ? 2.5 : 1;
+            DOM.data[type] = value ? 2.5 : 1;
         else
-            this.data[type] = value;
-        this.save();
+            DOM.data[type] = value;
+        DOM.save();
     },
     doneLoad: () => {
         contexts['background'].drawImage(images['background'], 0, 0, windowSize.x * unit, windowSize.y * unit);
@@ -418,7 +421,6 @@ let DOM = {
         if (this.loaded && !this.gameInitialized) {
             game.paused = false;
             game.zoom = this.data['zoom'];
-            console.log(this.data);
             game.start(galaxies[galaxy], this.data['allShips'], this.data['defaultShip']);
             this.previousDamage[0] = 0; // Stop the damage from blinking when you start!
             if (!game.galaxy)
@@ -433,7 +435,7 @@ let DOM = {
             }
         }
         else if (this.gameInitialized) {
-            console.log(game);
+            //console.log(game)
             if (!game.galaxy)
                 throw Error('Game galaxy not defined');
             if (galaxies[galaxy] !== game.galaxy.name || game.watchShipName !== this.data['defaultShip']) {
@@ -452,7 +454,7 @@ let DOM = {
     resetGame: () => {
         if (!game)
             throw new Error('Game not defined');
-        console.log('Destroying the game object and remaking it!');
+        //console.log('Destroying the game object and remaking it...')
         for (let i = 0; i < 4; i++) {
             let galaxyElement = document.querySelector('#galaxy' + (i + 1) + '>.quit');
             if (galaxyElement)
@@ -468,19 +470,28 @@ let DOM = {
         DOM.gameInitialized = false;
     },
     landSuccessful: function (planet) {
-        var _a, _b, _c, _d, _e, _f;
+        var _a, _b, _c, _d, _e, _f, _g;
         console.log("You won! You landed on " + planet.name + "!");
         if (DOM.menus["EndScreen"].classList.contains('on'))
             return; // We already landed
-        DOM.menus["EndScreen"].querySelector("#ESGalaxy").innerHTML = (_b = (_a = game === null || game === void 0 ? void 0 : game.galaxy) === null || _a === void 0 ? void 0 : _a.name) !== null && _b !== void 0 ? _b : '<em>unknown<em>';
-        DOM.menus["EndScreen"].querySelector("#ESShipName").innerHTML = (_c = game === null || game === void 0 ? void 0 : game.watchShipName) !== null && _c !== void 0 ? _c : '<em>unknown<em>';
-        DOM.menus["EndScreen"].querySelector("#ESEnergy").innerHTML = ((_d = game === null || game === void 0 ? void 0 : game.watchShip) === null || _d === void 0 ? void 0 : _d.energyUsed) !== undefined ? Math.floor(game.watchShip.energyUsed * 100) : '<em>unknown<em>';
-        DOM.menus["EndScreen"].querySelector("#ESDamage").innerHTML = ((_e = game === null || game === void 0 ? void 0 : game.watchShip) === null || _e === void 0 ? void 0 : _e.totalDamage) !== undefined ? Math.floor(game.watchShip.totalDamage * 10) : '<em>unknown<em>';
+        let galaxyName = (_a = game === null || game === void 0 ? void 0 : game.galaxy) === null || _a === void 0 ? void 0 : _a.name;
+        let nextGalaxyNumber = galaxyName !== undefined ? galaxies.indexOf(galaxyName) + 1 : 0;
+        if (nextGalaxyNumber > 3) {
+            DOM.elements["EndNextGalaxy"].style.display = "none";
+        }
+        else {
+            DOM.elements["EndNextGalaxy"].style.display = "block";
+        }
+        DOM.elements["EndNextGalaxy"];
+        DOM.menus["EndScreen"].querySelector("#ESGalaxy").innerHTML = (_c = (_b = game === null || game === void 0 ? void 0 : game.galaxy) === null || _b === void 0 ? void 0 : _b.name) !== null && _c !== void 0 ? _c : '<em>unknown<em>';
+        DOM.menus["EndScreen"].querySelector("#ESShipName").innerHTML = (_d = game === null || game === void 0 ? void 0 : game.watchShipName) !== null && _d !== void 0 ? _d : '<em>unknown<em>';
+        DOM.menus["EndScreen"].querySelector("#ESEnergy").innerHTML = ((_e = game === null || game === void 0 ? void 0 : game.watchShip) === null || _e === void 0 ? void 0 : _e.energyUsed) !== undefined ? Math.floor(game.watchShip.energyUsed * 100) : '<em>unknown<em>';
+        DOM.menus["EndScreen"].querySelector("#ESDamage").innerHTML = ((_f = game === null || game === void 0 ? void 0 : game.watchShip) === null || _f === void 0 ? void 0 : _f.totalDamage) !== undefined ? Math.floor(game.watchShip.totalDamage * 10) : '<em>unknown<em>';
         // Composition has: land, metal, danger, survivabilityChance, air, water, temperature, which are all numbers. We could use them, eventually.
         DOM.menus["EndScreen"].querySelector("#ESResources").innerHTML = Math.round(planet.composition.survivabilityChance);
         DOM.menus["EndScreen"].querySelector("#ESScore").innerHTML = '69420';
         const ourImageSrc = imageSrcs.filter((element) => { return element[0] === planet.imageName; });
-        DOM.menus["EndScreen"].querySelector("#ESPlanetImage").src = (_f = spritePath + ourImageSrc[0][1]) !== null && _f !== void 0 ? _f : 'planets/Mars.png';
+        DOM.menus["EndScreen"].querySelector("#ESPlanetImage").src = (_g = spritePath + ourImageSrc[0][1]) !== null && _g !== void 0 ? _g : 'planets/Mars.png';
         DOM.menus["EndScreen"].querySelector("#ESPlanetName").innerHTML = planet.name;
         DOM.newMenu("EndScreen");
     },
