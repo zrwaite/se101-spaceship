@@ -264,9 +264,9 @@ let DOM: any = {
 				menu.style['-webkit-transition-duration'] = '0.3s'
 			})
 		}, 0)
-		for (let i = 0; i < this.elements['checkboxes'].length; i++) {
-			this.elements['checkboxes'][i].onclick = () => {
-				DOM.updatePreference(this.id, this.checked)
+		for (let i = 0; i < DOM.elements['checkboxes'].length; i++) {
+			DOM.elements['checkboxes'][i].onclick = () => {
+				DOM.updatePreference(DOM.elements['checkboxes'][i].id, DOM.elements['checkboxes'][i].checked)
 			}
 		}
 
@@ -332,9 +332,9 @@ let DOM: any = {
 		localStorage.setItem('data', JSON.stringify(DOM.data))
 	},
 	updatePreference: function (type: string, value: number) {
-		if (type === 'zoom') this.data[type] = value ? 2.5 : 1
-		else this.data[type] = value
-		this.save()
+		if (type === 'zoom') DOM.data[type] = value ? 2.5 : 1
+		else DOM.data[type] = value
+		DOM.save()
 	},
 	doneLoad: () => {
 		contexts['background'].drawImage(images['background'], 0, 0, windowSize.x * unit, windowSize.y * unit)
