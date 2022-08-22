@@ -256,13 +256,20 @@ let DOM: any = {
 				else throw Error('Element ' + '#galaxy' + (i + 1) + '>.quit' + ' not found')
 			}
 		}
-		setTimeout(() => {
+    setTimeout(() => {
 			document.querySelectorAll('.menu').forEach(function (menu: any): void {
 				menu.style['transition-duration'] = '0.3s'
 				menu.style['-o-transition-duration'] = '0.3s'
 				menu.style['-moz-transition-duration'] = '0.3s'
 				menu.style['-webkit-transition-duration'] = '0.3s'
 			})
+      if (DOM.data["skipMenu"]) {
+        let galaxyName = game?.galaxy?.name
+        let galaxyNumber = galaxyName !== undefined ? galaxies.indexOf(galaxyName) : 0
+        let galaxyElement = document.querySelector('#galaxy' + (galaxyNumber + 1) + '>.quit')
+				if (galaxyElement) galaxyElement.classList.remove('hidden')
+				else throw Error('Element ' + '#galaxy' + (galaxyNumber + 1) + '>.quit' + ' not found')
+      }
 		}, 0)
 		for (let i = 0; i < DOM.elements['checkboxes'].length; i++) {
 			DOM.elements['checkboxes'][i].onclick = () => {
@@ -392,7 +399,6 @@ let DOM: any = {
 		if (this.loaded && !this.gameInitialized) {
 			game.paused = false
 			game.zoom = this.data['zoom']
-			console.log(this.data)
 			game.start(galaxies[galaxy], this.data['allShips'], this.data['defaultShip'])
 			this.previousDamage[0] = 0 // Stop the damage from blinking when you start!
 			if (!game.galaxy) throw Error('Game galaxy not defined')
@@ -405,7 +411,7 @@ let DOM: any = {
 				this.save()
 			}
 		} else if (this.gameInitialized) {
-			console.log(game)
+			//console.log(game)
 			if (!game.galaxy) throw Error('Game galaxy not defined')
 			if (galaxies[galaxy] !== game.galaxy.name || game.watchShipName !== this.data['defaultShip']) {
 				this.resetGame()
@@ -424,7 +430,7 @@ let DOM: any = {
 	},
 	resetGame: () => {
 		if (!game) throw new Error('Game not defined')
-		console.log('Destroying the game object and remaking it!')
+		//console.log('Destroying the game object and remaking it...')
 		for (let i = 0; i < 4; i++) {
 			let galaxyElement = document.querySelector('#galaxy' + (i + 1) + '>.quit')
 			if (galaxyElement) galaxyElement.classList.add('hidden')
