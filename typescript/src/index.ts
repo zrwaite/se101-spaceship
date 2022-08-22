@@ -263,7 +263,7 @@ let DOM: any = {
 				menu.style['-moz-transition-duration'] = '0.3s'
 				menu.style['-webkit-transition-duration'] = '0.3s'
 			})
-      if (DOM.data["skipMenu"]) {
+      if (DOM.data["skipMenu"] && !DOM.data["veryFirst"]) {
         let galaxyName = game?.galaxy?.name
         let galaxyNumber = galaxyName !== undefined ? galaxies.indexOf(galaxyName) : 0
         let galaxyElement = document.querySelector('#galaxy' + (galaxyNumber + 1) + '>.quit')
