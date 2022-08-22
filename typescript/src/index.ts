@@ -197,11 +197,6 @@ let DOM: any = {
         let galaxyName = game.galaxy?.name
         
         let nextGalaxyNumber = galaxyName !== undefined ? galaxies.indexOf(galaxyName) + 1 : 0
-        if (nextGalaxyNumber === 0) {
-          ;(document.querySelector("#EndScreenMain button.bottom") as HTMLElement).style.display = "none"
-        } else {
-          ;(document.querySelector("#EndScreenMain button.bottom") as HTMLElement).style.display = "block"
-        }
         DOM.resetGame()
         DOM.startGame(nextGalaxyNumber)
         ;(document.activeElement as HTMLElement).blur()
@@ -445,6 +440,14 @@ let DOM: any = {
   landSuccessful: function (planet: Planet) {
     console.log("You won! You landed on " + planet.name + "!")
     if (DOM.menus["EndScreen"].classList.contains('on')) return; // We already landed
+    let galaxyName = game?.galaxy?.name
+    let nextGalaxyNumber = galaxyName !== undefined ? galaxies.indexOf(galaxyName) + 1 : 0
+    if (nextGalaxyNumber > 3) {
+      DOM.elements["EndNextGalaxy"].style.display = "none"
+    } else {
+      DOM.elements["EndNextGalaxy"].style.display = "block"
+    }
+    DOM.elements["EndNextGalaxy"]
     DOM.menus["EndScreen"].querySelector("#ESGalaxy").innerHTML = game?.galaxy?.name ?? '<em>unknown<em>'
     DOM.menus["EndScreen"].querySelector("#ESShipName").innerHTML = game?.watchShipName ?? '<em>unknown<em>'
     DOM.menus["EndScreen"].querySelector("#ESEnergy").innerHTML = game?.watchShip?.energyUsed !== undefined ? Math.floor(game.watchShip.energyUsed * 100) : '<em>unknown<em>'
