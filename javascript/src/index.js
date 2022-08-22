@@ -197,7 +197,7 @@ let DOM = {
             if (game) {
                 let galaxyName = (_a = game.galaxy) === null || _a === void 0 ? void 0 : _a.name;
                 let nextGalaxyNumber = galaxyName !== undefined ? galaxies.indexOf(galaxyName) + 1 : 0;
-                if (nextGalaxyNumber > 3) {
+                if (nextGalaxyNumber === 0) {
                     ;
                     document.querySelector("#EndScreenMain button.bottom").style.display = "none";
                 }
@@ -235,10 +235,10 @@ let DOM = {
             if (DOM.elements['Info'].classList.contains('active')) {
                 DOM.elements['Info'].querySelector('button').innerHTML =
                     `<h3>Info & Tips</h3>
-					Use the ship select to choose which code from the students folder<br/>
-					Use the settings to adjust how the UI appears<br/>
-					Arrow keys or WASD to move<br/>
-					Spacebar to shoot, M to warp, L to land<br/>
+					Use the ship select to choose which code from the students folder.<br/>
+					Use the settings to adjust how the UI appears.<br/>
+					Arrow keys or WASD to move.<br/>
+					Spacebar to shoot, M to warp, L to land.<br/><br/>
 					For more information, see our <a target='_blank' href='https://github.com/zrwaite/SE101-Spaceship/blob/main/README.md'>Manual/Documentation</a><br/>`;
             }
             else {
@@ -283,6 +283,7 @@ let DOM = {
             };
         }
         if (storageAvailable('localStorage')) {
+            console.log("Your browser supports localStorage!");
             this.canStore = true;
             let possibleData = localStorage.getItem('data');
             if (possibleData) {
