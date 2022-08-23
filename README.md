@@ -66,7 +66,8 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 
 -   5.1: [JavaScript Tips](#5.1)
 -   5.2: [JavaScript Data Structures](#5.2)
--   5.3: [TypeScript Types](#3.3)
+-   5.3: [TypeScript Types](#5.3)
+-   5.4: [TypeScript Compilation](#5.4)
 
 ### 6: [The Joziac Game Engine](#6)
 
@@ -168,6 +169,8 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 -   If you want to code in TypeScript, for type safety and better API documentation, you will need additional installations.
 -   First install Node.js. https://nodejs.org/en/download/
 -   Next, open the VSCode terminal and run `npm i`
+-   You can test that typescript is installed by running `npm run compile` to compile the TypeScript code into JavaScript.
+-   To code in TypeScript, use `npm run dev` in the terminal. This will compile your code anytime you save a TypeScript file.
 
 <h2 id='3'>3: Objectives</h2>
 
@@ -421,6 +424,12 @@ const findSpaceObjects = (name: spaceObjectName): spaceObject {
 
 When in doubt, google it.
 
+<h3 id='5.4'>5.4: TypeScript Compilation</h3>
+
+-   TypeScript must be compiled to JavaScript before it can be used.
+-   To compile your TypeScript code into the JavaScript folder, run `npm run compile` in the terminal.
+-   To save time, run `npm run dev` in the terminal. This will compile your code anytime you save a TypeScript file.
+
 <h2 id='6'>6: The Joziac Game Engine</h2>
 This spaceship activity was built Josiah Plett and Zac Waite, with help from some other students. However, you don’t need to understand the underlying code to do this activity. Your instructor likely doesn’t understand every part of the system. This section describes the things that you will need to learn about the game.
 
@@ -584,3 +593,9 @@ This subsystem's update function includes just one ability. However, it is likel
         type ThrusterName = 'main' | 'bow' | 'clockwise' | 'counterClockwise'
         ```
     -   Energy cost: 0, but you will lose energy over time based on the power of the thrusters.
+
+<h3 id='7.6'>7.6: Using TypeScript</h3>
+
+-   TypeScript must be compiled to JavaScript before it can be used.
+-   To compile your TypeScript code into the JavaScript folder, run `npm run compile` in the terminal.
+-   To save time, run `npm run dev` in the terminal. This will compile your code anytime you save a TypeScript file.
