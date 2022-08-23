@@ -1,5 +1,6 @@
 import Game from './game.js';
 import { imageSrcs } from './images.js';
+import { generateSummary, getScore } from './score.js';
 let game; // Initialized properly in DOM.doneLoad().
 const windowSize = {
     // Accessible through game.width and game.height.
@@ -470,7 +471,7 @@ let DOM = {
         DOM.gameInitialized = false;
     },
     landSuccessful: function (planet) {
-        var _a, _b, _c, _d, _e, _f, _g;
+        var _a, _b, _c, _d, _e, _f, _g, _h;
         console.log("You won! You landed on " + planet.name + "!");
         if (DOM.menus["EndScreen"].classList.contains('on'))
             return; // We already landed
@@ -483,16 +484,23 @@ let DOM = {
             DOM.elements["EndNextGalaxy"].style.display = "block";
         }
         DOM.elements["EndNextGalaxy"];
-        DOM.menus["EndScreen"].querySelector("#ESGalaxy").innerHTML = (_c = (_b = game === null || game === void 0 ? void 0 : game.galaxy) === null || _b === void 0 ? void 0 : _b.name) !== null && _c !== void 0 ? _c : '<em>unknown<em>';
-        DOM.menus["EndScreen"].querySelector("#ESShipName").innerHTML = (_d = game === null || game === void 0 ? void 0 : game.watchShipName) !== null && _d !== void 0 ? _d : '<em>unknown<em>';
-        DOM.menus["EndScreen"].querySelector("#ESEnergy").innerHTML = ((_e = game === null || game === void 0 ? void 0 : game.watchShip) === null || _e === void 0 ? void 0 : _e.energyUsed) !== undefined ? Math.floor(game.watchShip.energyUsed * 100) : '<em>unknown<em>';
-        DOM.menus["EndScreen"].querySelector("#ESDamage").innerHTML = ((_f = game === null || game === void 0 ? void 0 : game.watchShip) === null || _f === void 0 ? void 0 : _f.totalDamage) !== undefined ? Math.floor(game.watchShip.totalDamage * 10) : '<em>unknown<em>';
+        if (!game)
+            throw Error('Game not defined');
+        if (!game.galaxy)
+            throw Error('Game galaxy not defined');
+        DOM.menus["EndScreen"].querySelector("#ESGalaxy").innerHTML = (_b = game.galaxy.name) !== null && _b !== void 0 ? _b : '<em>unknown<em>';
+        DOM.menus["EndScreen"].querySelector("#ESShipName").innerHTML = (_c = game.watchShipName) !== null && _c !== void 0 ? _c : '<em>unknown<em>';
+        DOM.menus["EndScreen"].querySelector("#ESEnergy").innerHTML = ((_d = game.watchShip) === null || _d === void 0 ? void 0 : _d.energyUsed) !== undefined ? Math.floor(game.watchShip.energyUsed * 100) : '<em>unknown<em>';
+        DOM.menus["EndScreen"].querySelector("#ESDamage").innerHTML = ((_e = game.watchShip) === null || _e === void 0 ? void 0 : _e.totalDamage) !== undefined ? Math.floor(game.watchShip.totalDamage * 10) : '<em>unknown<em>';
         // Composition has: land, metal, danger, survivabilityChance, air, water, temperature, which are all numbers. We could use them, eventually.
         DOM.menus["EndScreen"].querySelector("#ESResources").innerHTML = Math.round(planet.composition.survivabilityChance);
-        DOM.menus["EndScreen"].querySelector("#ESScore").innerHTML = '69420';
+        DOM.menus["EndScreen"].querySelector("#ESScore").innerHTML = getScore(planet.composition.survivabilityChance, ((_f = game.watchShip) === null || _f === void 0 ? void 0 : _f.energyUsed) || 0, ((_g = game.watchShip) === null || _g === void 0 ? void 0 : _g.totalDamage) || 0, game.galaxy);
         const ourImageSrc = imageSrcs.filter((element) => { return element[0] === planet.imageName; });
-        DOM.menus["EndScreen"].querySelector("#ESPlanetImage").src = (_g = spritePath + ourImageSrc[0][1]) !== null && _g !== void 0 ? _g : 'planets/Mars.png';
+        DOM.menus["EndScreen"].querySelector("#ESPlanetImage").src = (_h = spritePath + ourImageSrc[0][1]) !== null && _h !== void 0 ? _h : 'planets/Mars.png';
         DOM.menus["EndScreen"].querySelector("#ESPlanetName").innerHTML = planet.name;
+        const summary = generateSummary(planet.composition);
+        DOM.menus["EndScreen"].querySelector("#ESPlanetPositiveInfo").innerHTML = summary.positive;
+        DOM.menus["EndScreen"].querySelector("#ESPlanetNegativeInfo").innerHTML = summary.negative;
         DOM.newMenu("EndScreen");
     },
 };

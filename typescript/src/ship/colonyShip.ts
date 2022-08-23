@@ -87,7 +87,7 @@ export default class ColonyShip extends Sprite {
 		if (this.destructed) return
 		this.energyTimeCount++
 		if (this.energyTimeCount > 4) {
-			this.energyUsed += 0.06
+			this.energyUsed += 0.02
 			this.energyTimeCount = 0
 		}
 

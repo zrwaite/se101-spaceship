@@ -1,5 +1,6 @@
 import Game from './game.js'
 import { imageSrcs } from './images.js'
+import { generateSummary, getScore } from './score.js'
 import Planet from './spaceObjects/planet.js'
 
 let game: Game | null // Initialized properly in DOM.doneLoad().
@@ -454,16 +455,21 @@ let DOM: any = {
       DOM.elements["EndNextGalaxy"].style.display = "block"
     }
     DOM.elements["EndNextGalaxy"]
-    DOM.menus["EndScreen"].querySelector("#ESGalaxy").innerHTML = game?.galaxy?.name ?? '<em>unknown<em>'
-    DOM.menus["EndScreen"].querySelector("#ESShipName").innerHTML = game?.watchShipName ?? '<em>unknown<em>'
-    DOM.menus["EndScreen"].querySelector("#ESEnergy").innerHTML = game?.watchShip?.energyUsed !== undefined ? Math.floor(game.watchShip.energyUsed * 100) : '<em>unknown<em>'
-    DOM.menus["EndScreen"].querySelector("#ESDamage").innerHTML = game?.watchShip?.totalDamage !== undefined ? Math.floor(game.watchShip.totalDamage * 10) : '<em>unknown<em>'
+	if (!game) throw Error('Game not defined')
+	if (!game.galaxy) throw Error('Game galaxy not defined')
+    DOM.menus["EndScreen"].querySelector("#ESGalaxy").innerHTML = game.galaxy.name ?? '<em>unknown<em>'
+    DOM.menus["EndScreen"].querySelector("#ESShipName").innerHTML = game.watchShipName ?? '<em>unknown<em>'
+    DOM.menus["EndScreen"].querySelector("#ESEnergy").innerHTML = game.watchShip?.energyUsed !== undefined ? Math.floor(game.watchShip.energyUsed * 100) : '<em>unknown<em>'
+    DOM.menus["EndScreen"].querySelector("#ESDamage").innerHTML = game.watchShip?.totalDamage !== undefined ? Math.floor(game.watchShip.totalDamage * 10) : '<em>unknown<em>'
     // Composition has: land, metal, danger, survivabilityChance, air, water, temperature, which are all numbers. We could use them, eventually.
     DOM.menus["EndScreen"].querySelector("#ESResources").innerHTML = Math.round(planet.composition.survivabilityChance)
-    DOM.menus["EndScreen"].querySelector("#ESScore").innerHTML = '69420'
+    DOM.menus["EndScreen"].querySelector("#ESScore").innerHTML = getScore(planet.composition.survivabilityChance, game.watchShip?.energyUsed || 0, game.watchShip?.totalDamage || 0, game.galaxy)
     const ourImageSrc = imageSrcs.filter((element) => {return element[0] === planet.imageName});
     DOM.menus["EndScreen"].querySelector("#ESPlanetImage").src = spritePath + ourImageSrc[0][1] ?? 'planets/Mars.png'
     DOM.menus["EndScreen"].querySelector("#ESPlanetName").innerHTML = planet.name
+	const summary = generateSummary(planet.composition)
+    DOM.menus["EndScreen"].querySelector("#ESPlanetPositiveInfo").innerHTML = summary.positive
+    DOM.menus["EndScreen"].querySelector("#ESPlanetNegativeInfo").innerHTML = summary.negative
     DOM.newMenu("EndScreen")
   },
 }

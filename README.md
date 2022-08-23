@@ -312,7 +312,7 @@ You can write your code in JavaScript or TypeScript. JavaScript is the simplest 
 TypeScript/JavaScript is an object-oriented language. Maybe you never learned object-oriented programming before. That’s okay. For most of this activity, you just need to use objects/classes that have already been defined, and you will be able to figure that out.
 
 <h3 id='5.1'>5.1: JavaScript Tips</h3>
-Semicolons are usually optional at the end of lines of JavaScript, but there are certain situations where they are mandatory, so you are encouraged to use them.
+Semicolons are usually optional at the end of lines of JavaScript.
 
 ```javascript
 // Single line comments ignore everything after the double slash`
@@ -599,3 +599,5 @@ This subsystem's update function includes just one ability. However, it is likel
 -   TypeScript must be compiled to JavaScript before it can be used.
 -   To compile your TypeScript code into the JavaScript folder, run `npm run compile` in the terminal.
 -   To save time, run `npm run dev` in the terminal. This will compile your code anytime you save a TypeScript file.
+
+<h2 id='8'>8: Advanced Information</h2>

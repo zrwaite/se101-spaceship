@@ -459,13 +459,17 @@ input[type="checkbox"]:checked {
 }
 #EndScreen section#PlanetFeature {
   padding: 0;
+  margin: calc(var(--unit) * 2);
   position: absolute;
-  width: calc(var(--unit) * 48);
-  height: calc(var(--unit) * 8);
-  left: calc(var(--unit) * 12);
-  bottom: calc(var(--unit) * 3);
+  /* width: calc(var(--unit) * 60); */
+  width: 100%;
+  height: calc(var(--unit) * 18);
+  /* left: calc(var(--unit) * 12); */
+  left: 0;
+  /* bottom: calc(var(--unit) * 10); */
+  bottom: 0;
 }
-#EndScreen section#PlanetFeature h3 {
+#EndScreen section#PlanetFeature h3, #EndScreen section#PlanetFeature table {
   text-align: left;
   font-size: calc(var(--unit) * 1.3);
   font-weight: 400;
