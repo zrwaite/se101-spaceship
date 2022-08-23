@@ -461,12 +461,9 @@ input[type="checkbox"]:checked {
   padding: 0;
   margin: calc(var(--unit) * 2);
   position: absolute;
-  /* width: calc(var(--unit) * 60); */
-  width: 100%;
+  width: calc(var(--unit) * 68);
   height: calc(var(--unit) * 18);
-  /* left: calc(var(--unit) * 12); */
   left: 0;
-  /* bottom: calc(var(--unit) * 10); */
   bottom: 0;
 }
 #EndScreen section#PlanetFeature h3, #EndScreen section#PlanetFeature table {

@@ -21,6 +21,8 @@ export const generateSummary = (planet: PlanetComposition):{positive: string, ne
 	else if (planet.air < 30) negativeSummary.push('does not have a very breathable atmosphere.')
 	if (planet.safety > 70) positiveInfo.push('is very safe.')
 	else if (planet.safety < 30) negativeSummary.push('is very dangerous.')
+	if (planet.land > 70) positiveInfo.push("has a lot of good land.")
+	else if (planet.land < 30) positiveInfo.push("doesn't have a lot of good land.")
 	if (planet.metal > 70) positiveInfo.push('has a good amount of resources')
 	else if (planet.metal < 30) negativeSummary.push('has a limited amount of resources')
 	if (planet.temperature > 60) negativeSummary.push('is very hot.')
