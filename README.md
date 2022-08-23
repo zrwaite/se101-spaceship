@@ -223,7 +223,7 @@ The subsystems need to work together in order for the ship to reach a habitable 
 
 -   Interpersonal. Listen. Be nice. Many people want to show off their skills and knowledge. That’s ok. But do so in a way that does not denigrate your classmates: also find ways to celebrate their strengths. You are now in the big leagues: everyone here has skills and abilities, but those might not be immediately obvious to you. Pay attention and find something nice to say. You are all in this together, and you will be together for the next five years. You are here to collaborate with your classmates — not to compete with them.
 -   Version Control (Git). Version control is a foundational technology for teamwork in software.
--   Division of Labour: How to organize the work to ensure that the subsystems integrate. A common way that software systems failed in the twentieth century is that all of the subsystems could perform their functionality independently, but couldn’t work together. Modern agile design techniques focus on integration and communication first, functionality second.f
+-   Division of Labour: How to organize the work to ensure that the subsystems integrate. A common way that software systems failed in the twentieth century is that all of the subsystems could perform their functionality independently, but couldn’t work together. Modern agile design techniques focus on integration and communication first, functionality second.
     While there is a lot of teamwork needed, teams will need people to show their leadership skills. Teams will need leaders to guide them through the hard times and be able to help the group. They will need to be active listeners. Leaders will need to listen to the group and be able to communicate to the group effectively. They will need to be creative and be able to strategically plan on the spot. Leaders are seen everywhere in the world and progress did not happen with just one person, they happened with a team and leaders.
 
 <h3 id='3.3'>3.3: Open-ended Design</h3>
@@ -239,7 +239,7 @@ Some ways in which this activity is outside your comfort zone:
 |Pre-requisite knowledge|Carefully provided|Uses ideas from classes you haven’t taken yet|
 |Time|Just enough to do it perfectly|Not enough|
 |Programming Environment |Taught to you|Learn on your own|
-|Classmates|Not as talended as you|Very talented|
+|Classmates|Not as talented as you|Very talented|
 |Team Size|2–4|∼ 16|
 
 <h3 id='3.5'>3.5: How to Manage Feeling Lost or Overwhelmed</h3>
