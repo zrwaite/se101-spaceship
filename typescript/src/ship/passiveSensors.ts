@@ -13,7 +13,7 @@ export default class PassiveSensors extends RenderedObject {
 		this.game = game
 	}
 	scan(): PassiveReading[] | Error {
-		this.parentShip.energyUsed += 10
+		this.parentShip.energyUsed += 25
 		// Ensure solar system is initialized before performing scan
 		if (!this.parentShip.solarSystem) throw Error('Cannot perform PassiveSensors scan until solar system initialized')
 		if (this.cooldown) return new Error('sensors are still on cooldown')

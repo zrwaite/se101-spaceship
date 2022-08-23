@@ -113,7 +113,7 @@ export default class ColonyShip extends Sprite {
 		this.thrusterController.update()
 	}
 	getShipStatus(key: keyof ShipStatus) {
-		this.energyUsed += 1
+		this.energyUsed += 0.1
 		return {
 			positionX: this.pos.x,
 			positionY: this.pos.y,
@@ -122,8 +122,6 @@ export default class ColonyShip extends Sprite {
 			linearVelocityY: this.speed.y,
 			angularVelocity: this.aSpeed,
 			angle: this.angle,
-			torpedoSpeed: this.turretControls.launchSpeed,
-			hasLanded: this.hasLanded,
 			thrusterPowerMain: this.thrusterController.thrusterPower.main,
 			thrusterPowerBow: this.thrusterController.thrusterPower.bow,
 			thrusterPowerClockwise: this.thrusterController.thrusterPower.clockwise,

@@ -1,5 +1,5 @@
 export const getMapData = (ship) => {
-    ship.energyUsed += 20;
+    ship.energyUsed += 10;
     const galaxy = ship.game.galaxy;
     if (galaxy === null)
         throw Error("No galaxy loaded");

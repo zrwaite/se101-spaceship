@@ -14,13 +14,13 @@ interface GalaxyData {
 }
 
 export interface MapData {
-	solarSystemName: string
+	solarSystemName: SolarSystemName
 	galaxy: GalaxyData
 }
 
 
 export const getMapData = (ship: ColonyShip): MapData => {
-	ship.energyUsed += 20
+	ship.energyUsed += 10
 	const galaxy = ship.game.galaxy
 	if (galaxy === null) throw Error("No galaxy loaded")
 	return {

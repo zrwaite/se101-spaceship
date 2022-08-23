@@ -488,15 +488,99 @@ The navigation subsystem is used for collecting internal data and performing the
 This subsystem's update function includes the following abilities:
 
 -   `getShipStatus: (key: shipStatusKey) => number`
-    -   `shipStatusKey: 'radius' | 'angularVelocity' | 'angle' | 'torpedoSpeed' | 'positionX' | 'positionY' | 'linearVelocityX' | 'linearVelocityY' | 'thrusterPowerMain' | 'thrusterPowerBow' | 'thrusterPowerClockwise' | 'thrusterPowerCounterClockwise'`
+    -   ````typescript
+        type shipStatusKey: 'radius' | 'angularVelocity' | 'angle' | 'positionX' | 'positionY' | 'linearVelocityX' | 'linearVelocityY' | 'thrusterPowerMain' | 'thrusterPowerBow' | 'thrusterPowerClockwise' | 'thrusterPowerCounterClockwise'```
+        ````
     -   Returns the value of the specifed attribute of your ship. This is crucial for decision making.
--   `warp: () => APIResponse<undefined>
-    -   Returns an API Response with information about the s
--   land
--   getMapData
--   navigationUpdate(getShipStatus: getShipStatusType, warp: tryWarpType, land: tryLandType, getMapData: () => MapData) {
+    -   Energy Cost: 10
+-   `warp: () => Error|null`
+    -   Attempts to travel through a nearby warpgate.
+    -   Returns null if succesful.
+    -   Energy cost: 5000
+-   `land: () => Error|null`
+    -   Attempts to land on a nearby planet.
+    -   Returns null if succesful.
+    -   Energy cost: 2000
+-   `getMapData: () => MapData`
+    -   Returns the current map data
+    -   ```typescript
+        interface MapData: {
+        	solarSystemName: string
+        	galaxy: GalaxyData
+        }
+        interface GalaxyData {
+            name: string
+            solarSystems: SolarSystemData[]
+        }
+        interface SolarSystemData {
+            name: string
+            warpGates: string[]
+            planets: string[]
+        }
+        ```
+    -   Energy cost: 1000
 
--   7.2: [Navigation](#7.2)
--   7.3: [Sensors](#7.3)
--   7.4: [Defence](#7.4)
--   7.5: [Propulsion](#7.5)
+<h3 id='7.3'>7.3: Sensors</h3>
+The sensors subsystem is used for collecting external data about the solar system to help you navigate.
+
+This subsystem's update function includes the following abilities:
+
+-   ` activeScan: (heading: number, arc: number, range: number) => EMSReading | Error`
+    -   Scans the area within the 'pizza slice' arc you specify for any space objects, and returns precise data about them.
+    -   ```typescript
+        interface EMSReading {
+        	angle: number
+        	distance: number
+        	velocity: Vector2
+        	radius: number
+        	closeRange?: {
+        		scanSignature?: object
+        	}
+        }
+        ```
+    -   Energy cost: arc \* range^2 / 40
+-   `passiveScan: () => PassiveReading[] | Error`
+
+    -   Scans the entire map for any space objects, and returns imprecise data about them.
+    -   ```typescript
+        interface PassiveReading {
+        	heading: number
+        	gravity: number
+        }
+        ```
+    -   Energy cost: 2500
+
+<h3 id='7.4'>7.4: Defence</h3>
+
+The defence subsystem is used for defending the ship from asteroids by using the torpedo system.
+
+This subsystem's update function includes the following abilities:
+
+-   `aimTurret: (angle: number) => void`
+
+    -   Sets the turret to aim at the specified angle.
+    -   Energy cost: (current angle - new angle) \* 10
+
+-   `getTubeCooldown: (i: number) => number | Error`
+
+    -   Returns the cooldown time of the specified torpedo tube.
+    -   Energy cost: 5
+
+-   `fireTorpedo: (i: number) => Error | null`
+
+    -   Tries to fire the torpedo at the specified tube.
+    -   Returns null if successful.
+    -   Energy cost: 8 if successful, 2 if failed
+
+<h3 id='7.5'>7.5: Propulsion</h3>
+
+The propulsion subsystem is used for moving the ship.
+
+This subsystem's update function includes just one ability. However, it is likely the most difficult to use.
+
+-   setThruster: (thruster: ThrusterName, power: number) => Error | null
+    -   Sets the power of the specified thruster.
+    -   ```typescript
+        type ThrusterName = 'main' | 'bow' | 'clockwise' | 'counterClockwise'
+        ```
+    -   Energy cost: 0, but you will lose energy over time based on the power of the thrusters.
