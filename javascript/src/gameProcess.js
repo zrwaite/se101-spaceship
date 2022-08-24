@@ -36,6 +36,8 @@ export default class Process {
         this.drawnObjects = [...this.ships, ...this.solarSystem.warpGates, ...this.solarSystem.planets]; //Ships get drawn
         if (this.solarSystem.star)
             this.delObjects.push(this.solarSystem.star);
+        if (this.solarSystem.blackhole)
+            this.delObjects.push(this.solarSystem.blackhole);
         this.hiddenObjects = [...this.solarSystem.asteroidLaunchers] //Launchers are hidden
         ;
         [...this.delObjects, ...this.solarSystem.warpGates, ...this.solarSystem.planets, ...this.hiddenObjects].forEach((object) => {

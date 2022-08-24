@@ -95,7 +95,7 @@ export const getPlanetImageName = (planetName) => {
 };
 export const getPlanetComposition = (planetName) => {
     switch (planetName) {
-        case 'Planet Joziac': return new PlanetComposition(100, 100, 90, 50, 70, 20);
+        case 'Planet Joziac': return new PlanetComposition(100, 100, 95, 80, 80, 20);
         case 'Exceptional': return new PlanetComposition(70, 60, 70, 60, 60, 15);
         case 'Zig': return new PlanetComposition(90, 90, 30, 60, 80, 10);
         case 'Big Bird': return new PlanetComposition(90, 100, 50, 35, 60, 30);

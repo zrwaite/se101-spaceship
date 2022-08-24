@@ -8,6 +8,7 @@ import Torpedo from './ship/torpedo.js';
 import Meteor from './spaceObjects/meteor.js';
 import Matrix2 from './helpers/Matrix2.js';
 import Star from './spaceObjects/star.js';
+import BlackHole from './spaceObjects/blackhole.js';
 const DMG_COEFFICIENT = 20;
 export default class Game {
     constructor(width, height, images, contexts, landSuccessful) {
@@ -147,6 +148,10 @@ export default class Game {
                     if (a instanceof Torpedo || b instanceof Torpedo) {
                         // XOR
                         if (a instanceof Torpedo && b instanceof Torpedo)
+                            continue;
+                        if (a instanceof Star || b instanceof Star)
+                            continue;
+                        if (a instanceof BlackHole || b instanceof BlackHole)
                             continue;
                         if (a.hasExploded || b.hasExploded)
                             continue;

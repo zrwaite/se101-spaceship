@@ -2,6 +2,7 @@ import Game from "../game.js"
 import Vector2, { V2 } from "../helpers/Vector2.js"
 import Asteroid from "../spaceObjects/asteroid.js"
 import AsteroidLauncher from "../spaceObjects/asteroidLauncher.js"
+import BlackHole from "../spaceObjects/blackhole.js"
 import Planet from "../spaceObjects/planet.js"
 import Star from "../spaceObjects/star.js"
 import WarpGate from "../spaceObjects/warpGate.js"
@@ -11,23 +12,22 @@ import SolarSystem from "./solarSystem.js"
 export const BuildJoziac = (game: Game): Galaxy => {
 	/*
 				 ▲--▼
-				ECE105		  <---------
-		  ▲					▲			|
-		  |					|			|
-		  ▼					▼			|
-	-->	Gates	<--->	Torvalds <--	|
-	|	  ▲					▲		|	|	
-	|	  |					|		|	|	
-	|	  ▼					▼		|	|	
-	|			Elon				|	|	
-	|	  ▲					▲		|	|	
-	|	  |					|		|	|
-	|	  ▼					▼		|	|
-	 --  Zac    <--->	 Josiah  ---	|
-		  ▲					▲			|
-		  |					|			|
-		  ▼					▼			|
-				Turing            ------
+				ECE105
+		  ▲					▲		
+		  |					|		
+		  ▼					▼		
+	-->	Gates	<--->	Torvalds <--
+	|	  ▲					▲		|	
+	|	  |					|		|	
+	|	  ▼					▼		|	
+	|			Elon				|	
+	|	  ▲					▲		|	
+	|	  |					|		|
+	|	  ▼					▼		|
+	 --  Zac    <--->	 Josiah  ---
+		  |					|		
+		  ▼					▼		
+				Turing     
 	*/
 
 	const ECE105Asteroids = []
@@ -92,6 +92,7 @@ export const BuildJoziac = (game: Game): Galaxy => {
 		]
 	})
 
+	const ElonStar = new Star(V2(360, 270), game)
 	const Elon = new SolarSystem("Elon", "Joziac", game, {
 		asteroids: [
 			new Asteroid(V2(0.1, 0), V2(670, 400), game),
@@ -113,12 +114,14 @@ export const BuildJoziac = (game: Game): Galaxy => {
 			new WarpGate('Zac', V2(140, 420), game),
 		],
 		planets: [
-			new Planet('Planet Three (no Planet One)', 40, V2(300, 300), game),
-			new Planet('Notch', 25, V2(600, 500), game),
-		]
+			new Planet('Planet Three (no Planet One)', 40, V2(100, 300), game),
+			new Planet('Notch', 25, V2(300, 350), game),
+		],
+		star: ElonStar
 	})
+	Elon.planets.forEach(planet => planet.setOrbit(ElonStar))
 
-	
+	const JosiahStar = new Star(V2(330, 260), game)
 	const Josiah = new SolarSystem("Josiah", "Joziac", game, {
 		asteroids: [
 			new Asteroid(V2(0, 0), V2(100, 280), game),
@@ -145,7 +148,10 @@ export const BuildJoziac = (game: Game): Galaxy => {
 			new Planet('Fortran', 37, V2(520, 480), game),
 			new Planet('Melony', 49, V2(20, 380), game),
 		],
+		star: JosiahStar
 	})
+	Josiah.planets.forEach(planet => planet.setOrbit(JosiahStar))
+
 	const ZacStar = new Star(V2(350, 300), game)
 	const Zac = new SolarSystem("Zac", "Joziac", game, {
 		warpGates: [
@@ -171,22 +177,20 @@ export const BuildJoziac = (game: Game): Galaxy => {
 	for (let i = 0; i < 5; i++) {
 		TuringAsteroids.push(new Asteroid(V2(0, 0), V2(((51 + 41 * i) % 71) * 10, ((41 + 41 * i) % 53) * 10), game))
 	}
+	const TuringBlackHole = new BlackHole(V2(380, 350), game)
 	const Turing = new SolarSystem("Turing", "Joziac", game, {
 		asteroids: TuringAsteroids,
 		asteroidLaunchers: [
 			new AsteroidLauncher(game, V2(-80, 50), V2(300, 300)), 
 			new AsteroidLauncher(game, V2(-10, 410), V2(200, 200), true, 5)
 		],
-		warpGates: [
-			new WarpGate('Zac', V2(590, 190), game),
-			new WarpGate('Josiah', V2(410, 410), game),
-			new WarpGate('ECE105', V2(300, 160), game),
-		],
 		planets: [
-			new Planet('Planet Joziac', 43, V2(180, 420), game),
+			new Planet('Planet Joziac', 43, V2(380, 450), game),
 			new Planet('Zig', 33, V2(520, 480), game),
-		]
+		],
+		blackhole: TuringBlackHole
 	})
+	Turing.planets.forEach(planet => planet.setOrbit(TuringBlackHole))
 
 	;[Elon, Zac, Josiah].forEach((galaxy) => {
 		galaxy.warpGates.forEach((warpGate) => {
@@ -194,5 +198,5 @@ export const BuildJoziac = (game: Game): Galaxy => {
 		})
 	})
 
-	return new Galaxy('Joziac', game, [ ECE105, Gates, Torvalds, Elon, Josiah, Zac, Turing])
+	return new Galaxy('Joziac', game, [ECE105, Gates, Torvalds, Elon, Zac, Josiah, Turing])
 }

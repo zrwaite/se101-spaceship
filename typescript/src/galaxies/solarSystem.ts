@@ -5,6 +5,7 @@ import Planet from '../spaceObjects/planet.js'
 import AsteroidLauncher from '../spaceObjects/asteroidLauncher.js'
 import Game from '../game.js'
 import Star from '../spaceObjects/star.js'
+import BlackHole from '../spaceObjects/blackhole.js'
 
 const SolarSystemNames = [
 	'Tutorial',
@@ -31,6 +32,7 @@ export default class SolarSystem {
 	planets: Planet[]
 	asteroids: Asteroid[]
 	star?: Star
+	blackhole?: BlackHole
 	asteroidLaunchers: AsteroidLauncher[]
 	game: Game
 	name: SolarSystemName
@@ -42,7 +44,8 @@ export default class SolarSystem {
 		warpGates?: WarpGate[],
 		planets?: Planet[],
 		asteroidLaunchers?: AsteroidLauncher[],
-		star?: Star
+		star?: Star,
+		blackhole?: BlackHole
 	}) {
 		this.game = game
 		this.galaxyName = galaxyName
@@ -52,6 +55,7 @@ export default class SolarSystem {
 		this.planets = objects.planets ?? []
 		this.asteroidLaunchers = objects.asteroidLaunchers ?? []
 		this.star = objects.star
+		this.blackhole = objects.blackhole
 		this.planetNames = this.planets.map((planet) => planet.name)
 		this.warpGateNames = this.warpGates.map((warpGate) => warpGate.destinationSolarSystem)
 	}

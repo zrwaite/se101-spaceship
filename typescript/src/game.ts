@@ -12,9 +12,10 @@ import WarpGate from './spaceObjects/warpGate.js'
 import Planet from './spaceObjects/planet.js'
 import Star from './spaceObjects/star.js'
 import { MapData } from './ship/mapData.js'
+import BlackHole from './spaceObjects/blackhole.js'
 
 type CollisionObject = ColonyShip | Asteroid | Meteor | Torpedo
-type IndirectCollisionObject = CollisionObject | Planet | WarpGate | Star
+type IndirectCollisionObject = CollisionObject | Planet | WarpGate | Star | BlackHole
 
 const DMG_COEFFICIENT = 20
 
@@ -173,6 +174,8 @@ export default class Game {
 					if (a instanceof Torpedo || b instanceof Torpedo) {
 						// XOR
 						if (a instanceof Torpedo && b instanceof Torpedo) continue
+						if (a instanceof Star || b instanceof Star) continue
+						if (a instanceof BlackHole || b instanceof BlackHole) continue
 						if (a.hasExploded || b.hasExploded) continue
 						// torpedoes can hit each other for now but firing from multiple
 						// tubes at once instantly explodes all torpedoes fired at that time

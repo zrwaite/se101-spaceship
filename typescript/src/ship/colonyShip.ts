@@ -94,7 +94,18 @@ export default class ColonyShip extends Sprite {
 		if (this.primary && !this.thrusterController.manualControlDisabled) this.manualControls() //use the data from keyboard control for testing
 		const thusterAccels = this.thrusterController.getAccel()
 		this.aAccel = thusterAccels.angular
-		this.accel = thusterAccels.linear
+		if (this.process.solarSystem.blackhole) {
+			const blackhole = this.process.solarSystem.blackhole
+			const blackholeDistance = Math.min(blackhole.pos.distance(this.pos), 200)
+			let blackholeAccel = blackhole.pos.subtract(this.pos).scaleTo(400 / Math.pow(Math.max(blackholeDistance, 5), 2))
+			if (blackholeDistance < 5) {
+				this.receiveDamage(100)
+				this.pos = new Vector2(Math.random() * 720, Math.random() * 540)
+			}
+			this.accel = thusterAccels.linear.add(blackholeAccel)
+		} else {
+			this.accel = thusterAccels.linear
+		}
 
 		try {
 			this.defenceController.defenceUpdate(this.turretControls.aimTurret.bind(this.turretControls), this.turretControls.getTubeCooldown.bind(this.turretControls), this.turretControls.fireTorpedo.bind(this.turretControls))

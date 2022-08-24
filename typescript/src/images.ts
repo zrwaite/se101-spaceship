@@ -19,7 +19,7 @@ const PlanetNames = [
 	'SandyCheeks',
 ] as const
 
-const OtherImageNames = ['background', 'ship', 'thruster', 'thrusterFlame', 'turret', 'asteroid', 'torpedo', 'warpgate', 'star'] as const
+const OtherImageNames = ['background', 'ship', 'thruster', 'thrusterFlame', 'turret', 'asteroid', 'torpedo', 'warpgate', 'blackhole', 'star'] as const
 
 type imageFileName = `${string}.png`
 
@@ -55,6 +55,7 @@ export const imageSrcs: [ImageName, imageFileName][] = [
 	['PurpleStripes', 'planets/PurpleStripes.png'],
 	['SandyCheeks', 'planets/SandyCheeks.png'],
 	['warpgate', 'SpaceObjects/WarpGate.png'],
+	['blackhole', 'SpaceObjects/BlackHole.png'],
 	['torpedo', 'SpaceObjects/Torpedo.png'],
 	['star', 'SpaceObjects/Star.png'],
 	['explosion0', 'explosions/0.png'],

@@ -5,6 +5,7 @@ import Game from '../game.js'
 import { PlanetImageName } from '../images.js'
 import Sprite from '../sprite.js'
 import Star from './star.js'
+import BlackHole from './blackhole.js'
 
 export default class Planet extends Sprite {
 	/* Default Params */
@@ -36,7 +37,7 @@ export default class Planet extends Sprite {
 	initialize(process: Process) {
 		this.process = process
 	}
-	setOrbit(star: Star) {
+	setOrbit(star: Star | BlackHole) {
 		star.addPlanet(this)
 		this.inOrbit = true
 		this.orbitCenter = star.pos
@@ -108,7 +109,7 @@ export const getPlanetImageName = (planetName: PlanetName): PlanetImageName => {
 
 export const getPlanetComposition = (planetName: PlanetName): PlanetComposition => {
 	switch (planetName) {
-		case 'Planet Joziac': return new PlanetComposition(100, 100, 90, 50, 70, 20)
+		case 'Planet Joziac': return new PlanetComposition(100, 100, 95, 80, 80, 20)
 		case 'Exceptional': return new PlanetComposition(70, 60, 70, 60, 60, 15)
 		case 'Zig': return new PlanetComposition(90, 90, 30, 60, 80, 10)
 		case 'Big Bird': return new PlanetComposition(90, 100, 50, 35, 60, 30)
