@@ -2,51 +2,90 @@ export const getScore = (survivablityChance, energyUsed, damageTaken, galaxy) =>
     const score = (survivablityChance / getMaxSurvivablityChance(galaxy)) * 100 - Math.pow(energyUsed, 0.3) - 4 * Math.log10(damageTaken);
     return Math.round(score * 10) / 10;
 };
+function makeList(items) {
+    if (items.length === 1) {
+        return `<span>${items[0]}</span>`;
+    }
+    else if (items.length === 2) {
+        return `<span>${items[0]}</span> and <span>${items[1]}</span>`;
+    }
+    let listString = `<span>${items[0]}</span>`;
+    for (let i = 1; i < items.length - 1; i++) {
+        listString += `, <span>${items[i]}</span>`;
+    }
+    listString += `, and <span>${items[items.length - 1]}</span>`; // Don't dare to fight me about the oxford comma 👀
+    return listString;
+}
 export const generateSummary = (planet) => {
-    let positiveInfo = [];
-    let negativeSummary = [];
-    if (planet.water > 70)
-        positiveInfo.push('is water-rich.');
-    else if (planet.water < 30)
-        negativeSummary.push('does not have much potable water.');
-    if (planet.air > 70)
-        positiveInfo.push('has an ideal atmosphere.');
-    else if (planet.air < 30)
-        negativeSummary.push('does not have a very breathable atmosphere.');
-    if (planet.safety > 70)
-        positiveInfo.push('is very safe.');
-    else if (planet.safety < 30)
-        negativeSummary.push('is very dangerous.');
-    if (planet.land > 70)
-        positiveInfo.push("has a lot of good land.");
-    else if (planet.land < 30)
-        positiveInfo.push("doesn't have a lot of good land.");
-    if (planet.metal > 70)
-        positiveInfo.push('has a good amount of resources');
-    else if (planet.metal < 30)
-        negativeSummary.push('has a limited amount of resources');
-    if (planet.temperature > 60)
-        negativeSummary.push('is very hot.');
-    else if (planet.temperature < -30)
-        negativeSummary.push('is very cold. ');
-    else if (planet.temperature < 40 && planet.temperature > 0)
-        positiveInfo.push('is the ideal temperature.');
-    let positive = '';
+    /*let positiveInfo = []
+    let negativeSummary = []
+    if (planet.water > 70) positiveInfo.push('is water-rich.')
+    else if (planet.water < 30) negativeSummary.push('does not have much potable water.')
+    if (planet.air > 70) positiveInfo.push('has an ideal atmosphere.')
+    else if (planet.air < 30) negativeSummary.push('does not have a very breathable atmosphere.')
+    if (planet.safety > 70) positiveInfo.push('is very safe.')
+    else if (planet.safety < 30) negativeSummary.push('is very dangerous.')
+    if (planet.land > 70) positiveInfo.push("has a lot of good land.")
+    else if (planet.land < 30) positiveInfo.push("doesn't have a lot of good land.")
+    if (planet.metal > 70) positiveInfo.push('has a good amount of resources')
+    else if (planet.metal < 30) negativeSummary.push('has a limited amount of resources')
+    if (planet.temperature > 60) negativeSummary.push('is very hot.')
+    else if (planet.temperature < -30) negativeSummary.push('is very cold. ')
+    else if (planet.temperature < 40 && planet.temperature > 0) positiveInfo.push('is the ideal temperature.')
+    let positive = ''
     if (positiveInfo.length > 0) {
-        positive += 'Fortunately: <br/>';
+        positive += 'Fortunately: <br/>'
         positive += `<ul>${positiveInfo.map((value, i) => {
-            return `<li>${i ? 'It ' : 'Your new planet '}${value}</li>`;
-        })}</ul>`;
-        positive += '<br/>';
+            return `<li>${i?'It ': 'Your new planet '}${value}</li>`
+        })}</ul>`
+        positive += '<br/>'
     }
-    let negative = '';
+    let negative = ''
     if (negativeSummary.length > 0) {
-        negative += 'Unfortunately: <br/>';
+        negative += 'Unfortunately: <br/>'
         negative += `<ul>${negativeSummary.map((value, i) => {
-            return `<li>${i ? 'It ' : 'Your new planet '}${value}</li>`;
-        })}</ul>`;
+            return `<li>${i?'It ': 'Your new planet '}${value}</li>`
+        })}</ul>`
     }
-    return { positive, negative };
+    return {positive, negative}*/
+    let positiveInfo = [];
+    let negativeInfo = [];
+    if (planet.temperature > 60)
+        negativeInfo.push('very hot');
+    else if (planet.temperature < -30)
+        negativeInfo.push('very cold');
+    else if (planet.temperature < 40 && planet.temperature > 0)
+        positiveInfo.push('a great temperature');
+    if (planet.air > 70)
+        positiveInfo.push('atmospherically safe');
+    else if (planet.air < 30)
+        negativeInfo.push('not breathable for humans');
+    if (planet.water > 70)
+        positiveInfo.push('water-rich');
+    else if (planet.water < 30)
+        negativeInfo.push('low on water');
+    if (planet.safety > 70)
+        positiveInfo.push('very safe');
+    else if (planet.safety < 30)
+        negativeInfo.push('very dangerous');
+    if (planet.land > 70)
+        positiveInfo.push("full of good land");
+    else if (planet.land < 30)
+        positiveInfo.push("barren");
+    if (planet.metal > 70)
+        positiveInfo.push('abundant with metals');
+    else if (planet.metal < 30)
+        negativeInfo.push('void of resources');
+    if (positiveInfo.length === 0 && negativeInfo.length > 0) {
+        return `It's a darn bad planet. Seriously, it has no good things. It's just ${makeList(negativeInfo)}.`;
+    }
+    else if (negativeInfo.length === 0) {
+        return `It's quite a fantastic planet! No bad things. It's simply ${makeList(positiveInfo)}.`;
+    }
+    else if (positiveInfo.length > 0) {
+        return `It's ${makeList(positiveInfo)}. Unfortunately, it's also ${makeList(negativeInfo)}.`;
+    }
+    return `It's a very plain planet. So mediocre, in fact, that absolutely <em>none</em> of its features are worth noting.`;
 };
 export const getMaxSurvivablityChance = (galaxy) => {
     let maxSurvivablityChance = 0;

@@ -26,6 +26,8 @@ const spritePath = 'assets/images/'
 const images: { [key: string]: HTMLImageElement } = {} // image locations, by name
 const contexts: { [key: string]: CanvasRenderingContext2D } = {} // contexts, by name
 const galaxies = ['Noob', 'Compiles', 'Cracked', 'Joziac'] as const
+const currentDate = new Date(Date.now())
+const joziacConst = currentDate.getFullYear() > 2022 || currentDate.getMonth() > 8 || currentDate.getDate() > 80
 const ships = [
 	'Bebop',
 	'Bismark',
@@ -106,8 +108,7 @@ function initializeContexts(contextNames: string[]) {
 function iterateLoad(length: number) {
 	imagesLoaded++
 	if (imagesLoaded >= length) {
-		// **** This begins the whole system! *** //
-
+		// **** This begins the whole service! *** //
 		DOM.doneLoad()
 	}
 }
@@ -224,10 +225,14 @@ let DOM: any = {
 			if (DOM.elements['Info'].classList.contains('active')) {
 				DOM.elements['Info'].querySelector('button').innerHTML =
 					`<h3>Info & Tips</h3>
-					Use the ship select to choose which code from the students folder.<br/>
-					Use the settings to adjust how the UI appears.<br/>
-					Arrow keys or WASD to move.<br/>
-					Spacebar to shoot, M to warp, L to land.<br/><br/>
+					Use <span>WASD</span> or <span>←↑→↓</span> to move.
+          <br/>
+					<span>Spacebar</span> to shoot, <span>M</span> to warp, <span>L</span> to land.
+          <br/><br/>
+          Use the <span>Ship</span> selector to watch your ship.
+          <br/>
+					Use the <span>Settings</span> to adjust the interface.
+          <br/><br/>
 					For more information, see our <a target='_blank' href='https://github.com/zrwaite/SE101-Spaceship/blob/main/README.md'>Manual/Documentation</a><br/>`
 			} else {
 				DOM.elements['Info'].querySelector('button').innerHTML = 'Info & Tips'
@@ -235,27 +240,48 @@ let DOM: any = {
 		}
 		let galaxyNames = ['galaxy1', 'galaxy2', 'galaxy3', 'galaxy4']
 		galaxyNames.forEach(function (name) {
-			let galaxyElement: HTMLElement = document.querySelector('#' + name + '>.quit') as HTMLElement
-			galaxyElement.onclick = function (event: MouseEvent) {
-				DOM.resetGame()
-				galaxyElement.classList.add('hidden')
-				event.stopPropagation()
-			}
+      if (name !== 'galaxy4' || joziacConst) {
+        let galaxyElement = document.querySelector('#' + name + '>.quit') as HTMLElement
+        galaxyElement.onclick = function (event: MouseEvent) {
+          DOM.resetGame()
+          galaxyElement.classList.add('hidden')
+          event.stopPropagation()
+        }
+      }
 		})
 
 		// Set Data
 		for (let i = 0; i < 4; i++) {
-			this.elements['galaxy' + (i + 1)].onclick = () => {
-				if (DOM.data['defaultGalaxy'] !== i) {
-					DOM.data['defaultGalaxy'] = i
-					DOM.save()
-				}
-				DOM.startGame(i)
-
-				let galaxyElement = document.querySelector('#galaxy' + (i + 1) + '>.quit')
-				if (galaxyElement) galaxyElement.classList.remove('hidden')
-				else throw Error('Element ' + '#galaxy' + (i + 1) + '>.quit' + ' not found')
-			}
+      if (i !== 3 || joziacConst) {
+        this.elements['galaxy' + (i + 1)].onclick = () => {
+          if (DOM.data['defaultGalaxy'] !== i) {
+            DOM.data['defaultGalaxy'] = i
+            DOM.save()
+          }
+          DOM.startGame(i)
+  
+          let galaxyElement = document.querySelector('#galaxy' + (i + 1) + '>.quit')
+          if (galaxyElement) galaxyElement.classList.remove('hidden')
+          else throw Error('Element ' + '#galaxy' + (i + 1) + '>.quit' + ' not found')
+        }
+      } else {
+        const joziacPanel = DOM.elements["galaxy4"]
+        const contents = ["Coming<br>Soon", "Coming<br>Soon ", "Coming<br>Soon.", "Coming<br>Soon..", "Coming<br>Soon...", "Why do you keep clicking this?", "Hmmm.", "You won't stop, hey?", "Well,", "since", "you're", "curious,", "I'll", "make", "you", "work", "for", "this.", "this..", "this...", "Let's", "count", "to", "500,", "shall", "we?", "1", "2", "3", "4", "5", "50", "500", "500!", "Nice job!", "Of", "course", "I'm", "not", "that", "cruel.", "cruel. ", "cruel.  ", "JUST KIDDING", "JUST KIDDING!", "501", "502", "503", "504", "505", "506", "507", "508", "509", "510", "511", "512", "513", "514", "515", "516", "517", "518", "519", "520", "521", "522", "523", "ur mom", "524", "525", "526", "527", "528", "529", "530", "531", "532", "533", "534", "535", "Okay", "Okay, ", "Okay, e", "Okay, en", "Okay, eno", "Okay, enou", "Okay, enoug", "Okay, enough", "Okay, enough g", "Okay, enough ga", "Okay, enough gam", "Okay, enough game", "Okay, enough games", "Okay, enough games.", "Okay, enough games..", "Okay, enough games...", "Errrr", "Well, I guess", "I'll tell you", "I'll tell you:", "The real reason", "this button says", `"Coming<br>Soon"`, "is because", "another galaxy <em>actually</em> is!", "It will be available", "on your fourth day", "of this class.", "There, you satisfied", "There, you satisfied?", "...", "Hmf.", "Apparently not.", "Well, ", "I", "do", "hope", "this", "easter", "egg", "made", "you ", "all", "smile", "smile.", "... ", "..", ".", " ", "  ", "Sincerely,", "Josiah<br>Plett", "Josiah<br>Plett ", "Josiah<br>Plett  ", "Josiah<br>Plett   ", "Josiah<br>Plett    ", "Josiah<br>Plett     ", "Josiah<br>Plett      ", "Why are you still clicking? Look at the Javascript console, you silly willy.", " Josiah<br>Plett"]
+        joziacPanel.innerHTML = contents[0]
+        joziacPanel.style.backgroundColor = "rgba(0, 0, 0, 0)"
+        joziacPanel.onclick = () => {
+          const innerText = joziacPanel.innerHTML
+          for (let i = 0; i < contents.length; i++) {
+            if (innerText === contents[i]) {
+              joziacPanel.innerHTML = contents[i < contents.length - 1 ? i + 1 : i]
+              if (contents.length - i < 10) {
+                console.log("%cNo more text from the easter egg. I hope you enjoyed it!", 'font-weight: 600; font-size: 15px; color: white; background: rgb(0, 0, 0); text-align: center; font-family: sans-serif; display: inline-block; border-radius: 5px; padding: 10px; margin: 10px;')
+              }
+              break;
+            }
+          }
+        }
+      }
 		}
     setTimeout(() => {
 			document.querySelectorAll('.menu').forEach(function (menu: any): void {
@@ -467,9 +493,8 @@ let DOM: any = {
     const ourImageSrc = imageSrcs.filter((element) => {return element[0] === planet.imageName});
     DOM.menus["EndScreen"].querySelector("#ESPlanetImage").src = spritePath + ourImageSrc[0][1] ?? 'planets/Mars.png'
     DOM.menus["EndScreen"].querySelector("#ESPlanetName").innerHTML = planet.name
-	const summary = generateSummary(planet.composition)
-    DOM.menus["EndScreen"].querySelector("#ESPlanetPositiveInfo").innerHTML = summary.positive
-    DOM.menus["EndScreen"].querySelector("#ESPlanetNegativeInfo").innerHTML = summary.negative
+	  const summary = generateSummary(planet.composition)
+    DOM.menus["EndScreen"].querySelector("#ESPlanetInfo").innerHTML = summary
     DOM.newMenu("EndScreen")
   },
 }
