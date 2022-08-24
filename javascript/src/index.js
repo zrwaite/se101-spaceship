@@ -273,17 +273,18 @@ let DOM = {
             }
             else {
                 const joziacPanel = DOM.elements["galaxy4"];
-                const contents = ["Coming<br>Soon", "Coming<br>Soon.", "Coming<br>Soon..", "Coming<br>Soon...", "Why do you keep clicking this?", "Hmmm.", "You won't stop, hey?", "Well,", "since", "you're", "curious,", "I'll", "make", "you", "work", "for", "this.", "this..", "this...", "Let's", "count", "to", "500,", "shall", "we?", "1", "2", "3", "4", "5", "50", "500", "500!", "Nice job!", "Of", "course", "I'm", "not", "that", "cruel.", "cruel. ", "cruel.  ", "JUST KIDDING", "JUST KIDDING!", "501", "502", "503", "504", "505", "506", "507", "508", "509", "510", "511", "512", "513", "514", "515", "516", "517", "518", "519", "520", "521", "522", "523", "ur mom", "524", "525", "526", "527", "528", "529", "530", "531", "532", "533", "534", "535", "Okay", "Okay, ", "Okay, e", "Okay, en", "Okay, eno", "Okay, enou", "Okay, enoug", "Okay, enough", "Okay, enough g", "Okay, enough ga", "Okay, enough gam", "Okay, enough game", "Okay, enough games", "Okay, enough games.", "Okay, enough games..", "Okay, enough games...", "Errrr", "Well, I guess", "I'll tell you", "I'll tell you:", "The real reason", "this button says", `"Coming<br>Soon"`, "is because", "another galaxy <em>actually</em> is!", "It will be available", "on your fourth day", "of this class.", "There, you satisfied", "There, you satisfied?", "...", "Hmf.", "Apparently not.", "Well, ", "I", "do", "hope", "this", "easter", "egg", "made", "you ", "all", "smile.", "smile..", "smile...", "mile...", "ile...", "le...", "e...", "... ", "..", ".", " ", "  ", "   ", "Sincerely,", "Josiah<br>Plett"];
+                const contents = ["Coming<br>Soon", "Coming<br>Soon ", "Coming<br>Soon.", "Coming<br>Soon..", "Coming<br>Soon...", "Why do you keep clicking this?", "Hmmm.", "You won't stop, hey?", "Well,", "since", "you're", "curious,", "I'll", "make", "you", "work", "for", "this.", "this..", "this...", "Let's", "count", "to", "500,", "shall", "we?", "1", "2", "3", "4", "5", "50", "500", "500!", "Nice job!", "Of", "course", "I'm", "not", "that", "cruel.", "cruel. ", "cruel.  ", "JUST KIDDING", "JUST KIDDING!", "501", "502", "503", "504", "505", "506", "507", "508", "509", "510", "511", "512", "513", "514", "515", "516", "517", "518", "519", "520", "521", "522", "523", "ur mom", "524", "525", "526", "527", "528", "529", "530", "531", "532", "533", "534", "535", "Okay", "Okay, ", "Okay, e", "Okay, en", "Okay, eno", "Okay, enou", "Okay, enoug", "Okay, enough", "Okay, enough g", "Okay, enough ga", "Okay, enough gam", "Okay, enough game", "Okay, enough games", "Okay, enough games.", "Okay, enough games..", "Okay, enough games...", "Errrr", "Well, I guess", "I'll tell you", "I'll tell you:", "The real reason", "this button says", `"Coming<br>Soon"`, "is because", "another galaxy <em>actually</em> is!", "It will be available", "on your fourth day", "of this class.", "There, you satisfied", "There, you satisfied?", "...", "Hmf.", "Apparently not.", "Well, ", "I", "do", "hope", "this", "easter", "egg", "made", "you ", "all", "smile", "smile.", "... ", "..", ".", " ", "  ", "Sincerely,", "Josiah<br>Plett", "Josiah<br>Plett ", "Josiah<br>Plett  ", "Josiah<br>Plett   ", "Josiah<br>Plett    ", "Josiah<br>Plett     ", "Josiah<br>Plett      ", "Why are you still clicking? Look at the Javascript console, you silly willy.", " Josiah<br>Plett"];
                 joziacPanel.innerHTML = contents[0];
                 joziacPanel.style.backgroundColor = "rgba(0, 0, 0, 0)";
                 joziacPanel.onclick = () => {
                     const innerText = joziacPanel.innerHTML;
-                    if (innerText === contents[contents.length - 1]) {
-                        console.log("No more text from the easter egg. :/ I hope you enjoyed it!");
-                    }
-                    for (let i = 0; i < contents.length - 1; i++) {
+                    for (let i = 0; i < contents.length; i++) {
                         if (innerText === contents[i]) {
-                            joziacPanel.innerHTML = contents[i + 1];
+                            joziacPanel.innerHTML = contents[i < contents.length - 1 ? i + 1 : i];
+                            if (contents.length - i < 10) {
+                                console.log("%cNo more text from the easter egg. I hope you enjoyed it!", 'font-weight: 600; font-size: 15px; color: white; background: rgb(0, 0, 0); text-align: center; font-family: sans-serif; display: inline-block; border-radius: 5px; padding: 10px; margin: 10px;');
+                            }
+                            break;
                         }
                     }
                 };
