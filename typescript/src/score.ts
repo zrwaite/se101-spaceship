@@ -12,8 +12,22 @@ export const getScore = (
 	return Math.round(score * 10) / 10
 }
 
-export const generateSummary = (planet: PlanetComposition):{positive: string, negative: string} => {
-	let positiveInfo = []
+function makeList(items: string[]):string {
+  if (items.length === 1) {
+    return `<span>${items[0]}</span>`
+  } else if (items.length === 2) {
+    return `<span>${items[0]}</span> and <span>${items[1]}</span>`
+  }
+  let listString = `<span>${items[0]}</span>`
+  for (let i = 1; i < items.length - 1; i++) {
+    listString += `, <span>${items[i]}</span>`
+  }
+  listString += `, and <span>${items[items.length - 1]}</span>` // Don't dare to fight me about the oxford comma 👀
+  return listString
+}
+
+export const generateSummary = (planet: PlanetComposition):string => {
+	/*let positiveInfo = []
 	let negativeSummary = []
 	if (planet.water > 70) positiveInfo.push('is water-rich.')
 	else if (planet.water < 30) negativeSummary.push('does not have much potable water.')
@@ -43,7 +57,31 @@ export const generateSummary = (planet: PlanetComposition):{positive: string, ne
 			return `<li>${i?'It ': 'Your new planet '}${value}</li>`
 		})}</ul>`
 	}
-	return {positive, negative}
+	return {positive, negative}*/
+  let positiveInfo = []
+  let negativeInfo = []
+	if (planet.temperature > 60) negativeInfo.push('very hot')
+	else if (planet.temperature < -30) negativeInfo.push('very cold')
+	else if (planet.temperature < 40 && planet.temperature > 0) positiveInfo.push('a great temperature')
+	if (planet.air > 70) positiveInfo.push('atmospherically safe')
+	else if (planet.air < 30) negativeInfo.push('not breathable for humans')
+  if (planet.water > 70) positiveInfo.push('water-rich')
+	else if (planet.water < 30) negativeInfo.push('low on water')
+	if (planet.safety > 70) positiveInfo.push('very safe')
+	else if (planet.safety < 30) negativeInfo.push('very dangerous')
+	if (planet.land > 70) positiveInfo.push("full of good land")
+	else if (planet.land < 30) positiveInfo.push("barren")
+	if (planet.metal > 70) positiveInfo.push('abundant with metals')
+	else if (planet.metal < 30) negativeInfo.push('void of resources')
+
+  if (positiveInfo.length === 0 && negativeInfo.length > 0) {
+    return `It's a darn bad planet. Seriously, it has no good things. It's just ${makeList(negativeInfo)}.`
+  } else if (negativeInfo.length === 0) {
+    return `It's quite a fantastic planet! No bad things. It's simply ${makeList(positiveInfo)}.`
+  } else if (positiveInfo.length > 0) {
+    return `It's ${makeList(positiveInfo)}. Unfortunately, it's also ${makeList(negativeInfo)}.`
+  }
+  return `It's a very plain planet. So mediocre, in fact, that absolutely <em>none</em> of its features are worth noting.`
 }
 
 export const getMaxSurvivablityChance = (galaxy: Galaxy):number => {
