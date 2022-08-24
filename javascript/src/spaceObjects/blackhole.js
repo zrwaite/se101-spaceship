@@ -9,7 +9,7 @@ export default class BlackHole extends Sprite {
         /* Other attributes */
         this.process = null;
         this.image = this.game.images['blackhole'];
-        this.mass = (Math.PI * this.radius * this.radius * this.radius) / 10;
+        this.mass = Infinity;
         this.calcSize();
     }
     initialize(process) {

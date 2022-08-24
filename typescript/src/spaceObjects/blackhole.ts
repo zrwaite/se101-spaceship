@@ -17,7 +17,7 @@ export default class BlackHole extends Sprite {
 	constructor(...args: [pos: Vector2, game: Game]) {
 		super(...args)
 		this.image = this.game.images['blackhole']
-		this.mass = (Math.PI * this.radius * this.radius * this.radius) / 10
+		this.mass = Infinity
 		this.calcSize()
 	}
 	initialize(process: Process) {
