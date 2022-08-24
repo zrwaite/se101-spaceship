@@ -27,7 +27,7 @@ const images: { [key: string]: HTMLImageElement } = {} // image locations, by na
 const contexts: { [key: string]: CanvasRenderingContext2D } = {} // contexts, by name
 const galaxies = ['Noob', 'Compiles', 'Cracked', 'Joziac'] as const
 const currentDate = new Date(Date.now())
-const joziacConst = currentDate.getFullYear() > 2022 || currentDate.getMonth() > 8 || currentDate.getDate() > 80
+const joziacConst = currentDate.getFullYear() > 2022 || currentDate.getMonth() > 8 || currentDate.getDate() > 20
 const ships = [
 	'Bebop',
 	'Bismark',
