@@ -601,3 +601,13 @@ This subsystem's update function includes just one ability. However, it is likel
 -   To save time, run `npm run dev` in the terminal. This will compile your code anytime you save a TypeScript file.
 
 <h2 id='8'>8: Advanced Information</h2>
+
+| Object    | Mass           | Radius  |
+| --------- | -------------- | ------- |
+| Ship      | 3              | 25      |
+| Planet    | ~2500 - ~29000 | 20 - 45 |
+| WarpGate  | ~-100          | 15      |
+| Asteroid  | 5              | 15      |
+| Meteor    | 1              | 5       |
+| BlackHole | Infinity       | ~40     |
+| Star      | ~39000         | ~50     |

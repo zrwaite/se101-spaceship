@@ -146,7 +146,7 @@ export const BuildJoziac = (game: Game): Galaxy => {
 			new Planet('Planet Two', 43, V2(380, 510), game),
 			new Planet('Esquimalt', 33, V2(620, 380), game),
 			new Planet('Fortran', 37, V2(520, 480), game),
-			new Planet('Melony', 49, V2(20, 380), game),
+			new Planet('Melony', 44, V2(20, 380), game),
 		],
 		star: JosiahStar
 	})
@@ -163,7 +163,7 @@ export const BuildJoziac = (game: Game): Galaxy => {
 		planets: [
 			new Planet('Rust', 43, V2(280, 220), game),
 			new Planet('Watermelon', 33, V2(420, 380), game),
-			new Planet("Johnny Cash", 50, V2(180, 120), game),
+			new Planet("Johnny Cash", 45, V2(180, 120), game),
 			new Planet("You're Mother", 40, V2(680, 220), game)
 		],
 		star: ZacStar

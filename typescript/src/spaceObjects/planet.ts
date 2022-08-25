@@ -25,7 +25,7 @@ export default class Planet extends Sprite {
 	constructor(planetName: PlanetName, radius: number, ...args: [pos: Vector2, game: Game]) {
 		super(...args)
 		if (radius < 20) throw new Error('Planet radius must be at least 15')
-		if (radius > 50) throw new Error('Planet radius must be less than 35')
+		if (radius > 45) throw new Error('Planet radius must be less than 35')
 		this.imageName = getPlanetImageName(planetName)
 		this.composition = getPlanetComposition(planetName)
 		this.image = this.game.images[this.imageName]

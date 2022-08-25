@@ -6,7 +6,7 @@ export default class Star extends Sprite {
         super(...args);
         this.ctx = 'planets';
         this.initialRadius = 40;
-        this.radius = 40;
+        this.radius = 50 + (Math.random() - 0.5) * 5;
         this.orbitingPlanets = [];
         this.collapseCountdown = 0;
         this.collapsing = false;

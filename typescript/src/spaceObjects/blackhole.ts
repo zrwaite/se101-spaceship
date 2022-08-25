@@ -9,7 +9,7 @@ export default class BlackHole extends Sprite {
 	/* Default Params */
 	mass
 	ctx = 'planets'
-	radius = 40
+	radius = 40 + (Math.random() - 0.5) * 5
 	orbitingPlanets:Planet[] = []
 
 	/* Other attributes */

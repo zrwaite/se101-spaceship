@@ -13,7 +13,7 @@ export default class Planet extends Sprite {
         this.process = null;
         if (radius < 20)
             throw new Error('Planet radius must be at least 15');
-        if (radius > 50)
+        if (radius > 45)
             throw new Error('Planet radius must be less than 35');
         this.imageName = getPlanetImageName(planetName);
         this.composition = getPlanetComposition(planetName);

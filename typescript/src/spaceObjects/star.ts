@@ -10,7 +10,7 @@ export default class Star extends Sprite {
 	mass
 	ctx = 'planets'
 	initialRadius = 40
-	radius = 40
+	radius = 50 + (Math.random() - 0.5) * 5
 	orbitingPlanets:Planet[] = []
 	collapseCountdown = 0
 	collapsing = false

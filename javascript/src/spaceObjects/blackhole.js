@@ -4,7 +4,7 @@ export default class BlackHole extends Sprite {
     constructor(...args) {
         super(...args);
         this.ctx = 'planets';
-        this.radius = 40;
+        this.radius = 40 + (Math.random() - 0.5) * 5;
         this.orbitingPlanets = [];
         /* Other attributes */
         this.process = null;
