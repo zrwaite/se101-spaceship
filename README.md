@@ -162,15 +162,14 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 -   To run the server, open the SE101-Spaceship folder in VS Code, and click the "Go Live" button at the bottom right.
     -   <img src='manual/Open.png' width='300px'/>
     -   <img src='manual/GoLive.png' width='300px'/>
-    -   You can now find the game at in your browser at http://localhost:5500/
-
+    -   You can now find the game at in your browser at http://localhost:5500/.
 <h3 id='2.3'>2.3: Install TypeScript</h3>
 
 -   If you want to code in TypeScript, for type safety and better API documentation, you will need additional installations.
--   First install Node.js. https://nodejs.org/en/download/
--   Next, open the VSCode terminal and run `npm i`
+-   First install [Node.js](https://nodejs.org/en/download/).
+-   Next, open the VSCode terminal and run `npm i` in the terminal.
 -   You can test that typescript is installed by running `npm run compile` to compile the TypeScript code into JavaScript.
--   To code in TypeScript, use `npm run dev` in the terminal. This will compile your code anytime you save a TypeScript file.
+-   To code in TypeScript, use `npm run dev` (or `tsc --watch` if that works better). This will compile your code anytime you save a TypeScript file.
 
 <h2 id='3'>3: Objectives</h2>
 

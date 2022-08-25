@@ -412,7 +412,7 @@ input[type="checkbox"]:checked {
     bottom: calc(var(--unit) * 15);
     width: calc(var(--unit) * 32);
     height: calc(var(--unit) * 24);
-    padding: 0 calc(var(--unit) * 2) 0 calc(var(--unit) * 2);
+    padding: calc(var(--unit) * 1.5) calc(var(--unit) * 2) 0 calc(var(--unit) * 2);
     font-size: calc(var(--unit) * 1.3);
 }
 #Info h3 {
@@ -420,6 +420,9 @@ input[type="checkbox"]:checked {
     margin-top: calc(var(--unit) * -3);
     font-weight: 300;
     font-size: calc(var(--unit) * 2.5);
+}
+#Info span {
+  font-weight: 600;
 }
 
 /* End Screen Menu */
@@ -459,19 +462,21 @@ input[type="checkbox"]:checked {
 }
 #EndScreen section#PlanetFeature {
   padding: 0;
+  padding-top: -30px;
   margin: calc(var(--unit) * 2);
   position: absolute;
-  width: calc(var(--unit) * 68);
-  height: calc(var(--unit) * 18);
-  left: 0;
+  width: calc(var(--unit) * 48);
+  height: calc(var(--unit) * 8);
+  left: calc(var(--unit) * 10);
   bottom: 0;
 }
-#EndScreen section#PlanetFeature h3, #EndScreen section#PlanetFeature table {
+#EndScreen section#PlanetFeature h3 {
   text-align: left;
   font-size: calc(var(--unit) * 1.3);
   font-weight: 400;
   line-height: calc(var(--unit) * 1.8);
   margin-left: calc(var(--unit) * 10);
+  margin-top: calc(var(--unit) * 0.4);
 }
 #EndScreen #ESPlanetImage {
   position: absolute;
@@ -486,6 +491,8 @@ input[type="checkbox"]:checked {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.3);
 }
+
+/* Dev Tools Menu */
 #DevTools table {
   width: 100%;
   border-spacing: calc(var(--unit) * 2);
@@ -554,8 +561,9 @@ mark {
     font-size: calc(var(--unit) * 1);
     font-weight: 300;
 }
-.subscript a {
-    color: #7a97f5;
+
+a {
+  color: #7a97f5;
 }
 
 button {
