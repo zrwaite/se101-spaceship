@@ -144,19 +144,18 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 
 <h3 id='2.1'>2.1: Set up Git</h2>
 
--   Follow this link (if there's no link here, yell at Josiah to put the link here... at the time of writing he's on a plane, so no wifi :/).
--   This document of instructions is describing an essential technology to software engineering: Git.
--   Expect to spend five or fifteen minutes working through this material.
+-   After prompting by your professor, expect to spend 5 or 15 minutes working through [this task](https://uwaterloo.atlassian.net/wiki/spaces/EIC/pages/31752064908/Git+Basics+of+Source+and+Version+Control).
+-   It teaches an essential technology to software engineering: Git.
 
 <h3 id='2.2'>2.2: Download the source code</h3>
 
--   Get yourself a [Github account](https://github.com).
--   Find it on Github [here](https://github.com/zrwaite/SE101-Spaceship).
+-   Get yourself a [new Github account](https://github.com/signup).
+-   Find our Repository on Github [here](https://github.com/zrwaite/SE101-Spaceship).
 -   Star the Repo ⭐ 👀
     -   <img src='manual/Star.png' height='30px'/>
 -   Follow [Zac](https://github.com/zrwaite) and [Josiah](https://github.com/plettj) on Github 🙏 👀
     -   <img src='manual/Follow.png' height='30px'/>
--   Fork the Repo into your own repo
+-   Fork the Repo into your own account:
     -   <img src='manual/Fork.png' height='30px'/>
 -   Clone your personal repo into your computer:
     -   `git clone https://github.com/{your username}/SE101-Spaceship`
