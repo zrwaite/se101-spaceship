@@ -23,7 +23,7 @@
 
 ## University of Waterloo Ideas Clinic 💻
 
-_Adventure and glory await you!_ With the recent discovery of the galactic warp gate network, an international coalition of world governments has been hard at work design- ing and constructing humanity’s first interstellar colony ships. Bound for Kepler-438b, an exoplanet only 472.9 light-years away from Earth in the constellation Lyra, you and your colleagues have been tasked with developing the software control systems that will guide the ship through the hazards of deep space. The fate of thousands of pioneering souls rests on your collective ability to design, implement, and test your code and _work as a team!_
+_Adventure and glory await you!_ With the recent discovery of the galactic warp gate network, an international coalition of world governments has been hard at work designing and constructing humanity’s first interstellar colony ships. Bound for Kepler-438b, an exoplanet only 472.9 light-years away from Earth, in the constellation Lyra, you and your colleagues have been tasked with developing the software control systems that will guide the ship through the hazards of deep space. The fate of thousands of pioneering souls, and in turn that of all of humanity, rests on your collective ability to design, implement, test your code, and _work as a team!_
 
 <img src="manual/CoverImage.png" alt="https://exoplanets.nasa.gov/alien-worlds/exoplanet-travel-bureau/" width="100%">
 
@@ -32,7 +32,7 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 ### Credits:
 
 -   Faculty & Staff: Derek Rayside, John Harris
--   Student Volunteers: Zac Waite, Josiah Plett.
+-   Student Volunteers: Zac Waite, Josiah Plett
 
 ## Table of Contents
 
@@ -44,15 +44,16 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 
 ### 2: [Installation](#2)
 
--   2.1: [Download the source code](#2.1)
--   2.2: [Install a server](#2.2)
--   2.3: [Install TypeScript](#2.3)
+-   2.1: [Set up Git](#2.1)
+-   2.2: [Download the source code](#2.2)
+-   2.3: [Install a server](#2.3)
+-   2.4: [Install TypeScript](#2.4)
 
 ### 3. [Objectives](#3)
 
--   3.1. [Project Goal](#3.1)
--   3.2. [Learning Objectives: Teamwork](#3.2)
--   3.3 [Open-Ended Design](#3.3)
+-   3.1: [Project Goal](#3.1)
+-   3.2: [Learning Objectives: Teamwork](#3.2)
+-   3.3: [Open-Ended Design](#3.3)
 -   3.4: [Working Outside Your Comfort Zone](#3.4)
 -   3.5: [How to Manage Feeling Lost or Overwhelmed](3.5)
 -   3.6: [Feelings Beyond This Activity](#3.6)
@@ -83,6 +84,8 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 -   7.4: [Defence](#7.4)
 -   7.5: [Propulsion](#7.5)
 
+### 8: [Advanced Information](#8)
+
 <h2 id='1'>1: Playing the Game!</h2>
 <h3 id='1.1'>1.1: Main Menu</h3>
 <img src="manual/MainMenu.png" alt="main menu" width="500rem"  />
@@ -91,29 +94,29 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 
 **Ship Select**:
 
--   Select the ship you want to play as - this will change the code used from the students folder.
+-   Select the ship you want to play as - this will change which code is used from the `students` folder.
 
 **Settings**:
 
 -   Toggle `Zoomed-in view` for a better view of the ship, or a better view of the map.
 -   Toggle `Dev tools display` to see ship stats like position, speed, energy used and damage taken on the left side of the screen.
--   Toggle `Skip past main menu` to skip the loading screen when you start the game
+-   Toggle `Skip past main menu` to skip the galaxy select when you open the browser, for smoother testing.
 -   Toggle `All ships are rendered` to see all of the ships on the map, not just the ones you are in control of.
 
 **Galaxy**:
 
 -   These are the levels you can play on - they get progressively harder.
--   Noob: Easy
+-   `Noob`: Easy
     -   1 Solar System, 1 planet. Just go to the planet.
--   Compiles: Medium
+-   `Compiles`: Medium
     -   3 Solar Systems, 2 planets.
     -   Use warp gates to travel between solar systems.
-    -   Pick the most survivable planet
--   Cracked: Hard
+    -   Pick the most survivable planet.
+-   `Cracked`: Hard
     -   5 Solar Systems, several planets.
     -   Navigate a looping maze of warp gates.
     -   Pick the most survivable planet, even if that means leaving a solar system behind.
--   Joziac: Impossible
+-   `Joziac`: Impossible
     -   7 Solar Systems, many planets.
     -   Completely new challenges.
     -   A labyrinth of dynamic warp gates.
@@ -121,66 +124,72 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 
 <h3 id='1.2'>1.2: Manual Controls</h3>
 
--   Arrow keys or WASD to move the ship.
--   Space bar to fire weapons - when in manual control, the torpedoes fire out the front.
--   M to warp through a warp gate.
--   L to land on a planet.
+-   `🠔🠕🠖🠗` or `WASD` to move the ship.
+-   `[space]` to fire weapons; when in manual control, torpedoes will fire forward.
+-   `M` to warp through a warp gate.
+-   `L` to land on a planet.
 
     _Manual controls are disabled on your ship if the `setThrusters` function is called_
 
 <h3 id='1.3'>1.3: Game Objectives</h3>
 
 -   **The goal of the game is the land on the best planet you can, without taking too much damage, and without using too much energy**
--   When in manual mode, you will have to make assumptions baaased on the look of the planet. When you are close to the planet, however, you can scan the planet to see its composition.
--   Use warpgates to travel between solar systems. Warping has a high energy cost, to make sure you know where you are going.
--   Avoid asteroids, or destroy them with torpedoes to avoid taking damage. When a large asteroid explodes, it will split into smaller asteroids.
--   You have unlimited torpedoes, but they have a cooldown, and cost energy.
--   Using your thrusters uses a lot of energy, but you also use some energy idling, so make sure to move quickly.
+-   When in manual mode, you will have to make assumptions based on the look of the planet. When you are close to the planet during automatic mode, however, you can scan the planet to see its composition.
+-   Use warp gates to travel between solar systems. Warping has a high energy cost, though.
+-   Avoid asteroids, or destroy them with torpedoes to escape taking damage. When a large asteroid explodes, it will split into smaller asteroids.
+-   You have unlimited torpedoes, but they're on a cooldown timer, and require some energy to fire.
+-   Your thrusters use a lot of energy, but you also use some energy at rest, so don't be too idle.
 
 <h2 id='2'>2: Installation</h2>
 
-<h3 id='2.1'>2.1: Download the source code</h3>
+<h3 id='2.1'>2.1: Set up Git</h2>
 
--   Find it on Github at https://github.com/zrwaite/SE101-Spaceship
+-   After prompting by your professor, expect to spend 5 or 15 minutes working through [this task](https://uwaterloo.atlassian.net/wiki/spaces/EIC/pages/31752064908/Git+Basics+of+Source+and+Version+Control).
+-   It teaches an essential technology to software engineering: Git.
+
+<h3 id='2.2'>2.2: Download the source code</h3>
+
+-   Get yourself a [new Github account](https://github.com/signup).
+-   Find our Repository on Github [here](https://github.com/zrwaite/SE101-Spaceship).
 -   Star the Repo ⭐ 👀
     -   <img src='manual/Star.png' height='30px'/>
 -   Follow [Zac](https://github.com/zrwaite) and [Josiah](https://github.com/plettj) on Github 🙏 👀
     -   <img src='manual/Follow.png' height='30px'/>
--   Fork the Repo into your own repo
+-   Fork the Repo into your own account:
     -   <img src='manual/Fork.png' height='30px'/>
 -   Clone your personal repo into your computer:
     -   `git clone https://github.com/{your username}/SE101-Spaceship`
 
-<h3 id='2.2'>2.2: Install a server</h3>
+<h3 id='2.3'>2.3: Install a server</h3>
 
 -   To run your JavaScript code, you will need an http server. \*_If you already have one, you can skip this step._
 -   The easiest server to install the Live Server extension on VSCode.
--   Install VSCode: https://code.visualstudio.com/download <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg" alt="vscode" width="20rem" height="20rem" />
--   Install the Live Server Extension:
+-   Install [VSCode](https://code.visualstudio.com/download). <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg" alt="vscode" width="20rem" height="20rem" />
+-   Install the "Live Server" extension:
     -   <img src='manual/Extensions.png' width='300px'/>
     -   <img src='manual/LiveServer.png' width='300px'/>
--   To run the server, open the SE101-Spaceship folder in VS Code, and click the "Go Live" button at the bottom right.
+-   To run your server, open your local `SE101-Spaceship` folder (that you just cloned) in VS Code, and click the "Go Live" button at the bottom right:
     -   <img src='manual/Open.png' width='300px'/>
     -   <img src='manual/GoLive.png' width='300px'/>
     -   You can now find the game at in your browser at http://localhost:5500/.
-<h3 id='2.3'>2.3: Install TypeScript</h3>
+
+<h3 id='2.4'>2.4: Install TypeScript</h3>
 
 -   If you want to code in TypeScript, for type safety and better API documentation, you will need additional installations.
 -   First install [Node.js](https://nodejs.org/en/download/).
 -   Next, open the VSCode terminal and run `npm i` in the terminal.
--   You can test that typescript is installed by running `npm run compile` to compile the TypeScript code into JavaScript.
--   To code in TypeScript, use `npm run dev` (or `tsc --watch` if that works better). This will compile your code anytime you save a TypeScript file.
+-   You can test whether Typescript is installed by running `npm run compile` to compile the TypeScript code into JavaScript.
+-   To code in TypeScript, use `npm run dev` to compile your code whenever you save a Typescript file, or `tsc --watch`, for live updating.
 
 <h2 id='3'>3: Objectives</h2>
 
 <h3 id='3.1'>3.1: Project Goal</h3>
 
-Your goal is to engineer an _'AI'_ to fly your spaceship, to find your crew a habitable planet. While on your journey, each solar system acts like a level in a video game. Your goal is to navigate between solar systems using warp gates to find a planet ideal for your crew. This must be accomplished while avoiding the hazards of space like asteroids, to prevent ship damage. You should also try to reduce the amount of energy you use for the best chance of survival on the new planet.
-Your spaceship has four subsystems:
+Your goal is to engineer an _'AI'_ to fly your spaceship that can reliably find your crew a habitable planet. While on your journey, each solar system acts like a level in a video game. Your goal is to navigate between solar systems using warp gates to find a planet ideal for your crew. This must be accomplished while avoiding the hazards of space like asteroids, to prevent ship damage. You should also optimize the amount of energy you use for the best chance of survival on the new planet.
 
 <h3 id='3.2'>3.2: Learning Objectives - Teamwork</h3>
 
-Your spaceship has 4 subsystems:
+Your spaceship's control system has 4 subsystems:
 
 <table>
 <tr>
@@ -191,135 +200,156 @@ Your spaceship has 4 subsystems:
 <td>Defence</td>
 <td><ul>
 <li>aimTurret: Aim the ship's torpedo turret</li>
-<li>getTubeCooldown: Get the time until one of the 4 turret tubes can be fired again</li>
+<li>getTubeCooldown: Get the time until one of your 4 turret tubes can be fired again</li>
 <li>fireTorpedo: Attempt to fire a torpedo out of one of the 4 turret tubes</li>
 </ul></td>
 </tr>
 <tr>
 <td>Navigation</td>
 <td><ul>
-<li>warp: Attempt to use the quantum fluxtuator to travel through a nearby warp gate</li>
+<li>warp: Attempt to use the quantum fluxtinator to travel through a nearby warp gate</li>
 <li>land: Attempt to land on a nearby planet</li>
-<li>mapData: Get data about your current solar system</li>
+<li>mapData: Get the data about your current solar system</li>
 </ul></td>
 </tr>
 <tr>
 <td>Propulsion</td>
 <td><ul>
-<li>setThrusters: Set the level of one of the ship's thrusters</li>
+<li>setThrusters: Set the thrust level of each of the ship's thrusters</li>
 </ul></td>
 </tr>
 <tr>
 <td>Sensors</td>
 <td><ul>
-<li>activeScan: Use a precise sensor to read data about all space objects in the range you define</li>
-<li>passiveScan: Use an imprecise sensors to read data about all space objects in the solar system</li>
+<li>activeScan: Use an expensive, precise sensor to read data about all space objects in the range you define</li>
+<li>passiveScan: Use low-cost, imprecise sensors to read data about some space objects in the solar system</li>
 </ul></td>
 </tr>
 </table>
 
-The subsystems need to work together in order for the ship to reach a habitable planet. Making this happen will require teamwork in several dimensions:
+The subsystems need to work together in order for the ship to reach a habitable planet. Making this happen will require teamwork along several axes:
 
--   Interpersonal. Listen. Be nice. Many people want to show off their skills and knowledge. That’s ok. But do so in a way that does not denigrate your classmates: also find ways to celebrate their strengths. You are now in the big leagues: everyone here has skills and abilities, but those might not be immediately obvious to you. Pay attention and find something nice to say. You are all in this together, and you will be together for the next five years. You are here to collaborate with your classmates — not to compete with them.
--   Version Control (Git). Version control is a foundational technology for teamwork in software.
--   Division of Labour: How to organize the work to ensure that the subsystems integrate. A common way that software systems failed in the twentieth century is that all of the subsystems could perform their functionality independently, but couldn’t work together. Modern agile design techniques focus on integration and communication first, functionality second.
-    While there is a lot of teamwork needed, teams will need people to show their leadership skills. Teams will need leaders to guide them through the hard times and be able to help the group. They will need to be active listeners. Leaders will need to listen to the group and be able to communicate to the group effectively. They will need to be creative and be able to strategically plan on the spot. Leaders are seen everywhere in the world and progress did not happen with just one person, they happened with a team and leaders.
+-   **Interpersonal**: Listen. Consider. Reciprocate. Most of you will assume you have something to contribute, and this may impare your ability to act as a team. That’s ok. But now, you get to learn to share in a way that does not denigrate your classmates; indeed, actively look for ways to celebrate their strengths. You are now in the big leagues, and hypothetically on your own. Everyone here has skills and abilities, even if you can't see them yet. Pay attention, and find something nice to say... support each other, because that is what life is. You are all in this together, and you will be together for the next five years. You're here to collaborate with your classmates — not to compete with them.
+-   **Version Control (Git)**: Version control is a foundational technology for teamwork in software.
+-   **Division of Labour**: How to organize the work to ensure that the subsystems integrate is a tricky problem. A common way that software systems failed in the 20th century is that all of the subsystems could perform their functionality independently, but couldn’t work together. Modern agile design techniques focus on integration and communication first, and individual functionality second.
+    
+While there is a lot of teamwork needed, teams will need people to show their leadership skills. Teams will need leaders to guide them through the hard times and be able to help the group. Leaders are essential, because there's no such thing as "we all contribute as equals;" leaders are the byproduct of the essentiality of a communicative hierarchy. So, to lead effectively, they will need to be active listeners, and to communicate effectively. They will need to be creative and be able to strategically plan on the spot. Leaders are our glue, holding together the high-functioning individual parts of our world.
 
 <h3 id='3.3'>3.3: Open-ended Design</h3>
 
-Open-ended design means to allow users to make their own customizations for a software to meet their needs which is what this project is about. Just like this activity, you and your crewmates will have to make your own customizations for your own spaceship. Each crewmate will be given different tasks and each task will be for a subsystem given by the leader or whatever you choose. There are four different subsystems and each subsystem there will be different tasks that everyone will have to do in order to successfully complete the activity.
+Open-ended design means to allow users to make their own customizations for a software to meet their needs, and that's what this project is about. You and your crewmates will have to make your own customizations for your own spaceship. Each crewmate will be given different tasks and each task will be for a subsystem given by the group, by your democratic method of choice. There are four different subsystems, and within each subsystem there will be different tasks that everyone will have to do in order to successfully complete the activity.
 
 <h3 id='3.4'>3.4: Working Outside Your Comfort Zone</h3>
-This activity is designed to push you outside your comfort zone. By definition, that will feel uncomfortable. This activity is also designed to be fun. Welcome to the complex world of feelings! Being able to work outside your comfort zone is a skill — a skill that few people in the world have. You were admitted to Waterloo, in part, because you have the potential to develop this skill. This activity is designed to help you realize your potential — and to realize that you have this potential. Highschool was within your comfort zone. Maybe, at times, it enlarged your comfort zone — but it did that by pushing the boundary forwards from the inside. In this project, you will be using TypeScript/JavaScript and it will be easy to learn because there are many resources online and people you can talk to for help. Now we are going to take the warp gate to the other side. Hold on!
 
-Some ways in which this activity is outside your comfort zone:
+This activity is designed to push you outside your comfort zone. By definition, that will be uncomfortable. But this activity is _also_ designed to be fun. We hope Zac and Josiah's Typescript version helps streamline that fun.
+
+Let's take a moment to explore the complex world of feelings. Being able to work outside your comfort zone is a skill — a skill that few people in the world have. You were admitted to Waterloo in part because you have the potential to develop this skill. This activity is designed to help you realize your potential — and to realize that you have this potential. Highschool was within your comfort zone; at least, near the end. Maybe, at times, it expanded your comfort zone — but it did that by pushing the boundary forwards from the inside. Now, only you have the power to push that boundary; and now, you are responsible for doing so. In this project, you'll be using TypeScript/JavaScript. It'll be comparatively easy to learn because there are many resources online, and your peers will be of great help. But you climb a mountain one step at a time, and it's likely this learning experience is your first step up the mountain of professional technical competency.
+
+Now let's warp from the world you came from to the world you're in now. Hold on! (hehe)
+
+Some ways this activity is outside your comfort zone:
+
 ||Highschool|Spaceship Collaboration|
 |-------|-------|-------|
 |Pre-requisite knowledge|Carefully provided|Uses ideas from classes you haven’t taken yet|
-|Time|Just enough to do it perfectly|Not enough|
-|Programming Environment |Taught to you|Learn on your own|
+|Time|Just enough to do it perfectly|Not enough to make any part perfect|
+|Programming Environment |Taught to you|Learned of your own accord|
 |Classmates|Not as talented as you|Very talented|
-|Team Size|2–4|∼ 16|
+|Team Size|2–6|~16|
 
 <h3 id='3.5'>3.5: How to Manage Feeling Lost or Overwhelmed</h3>
-You might feel uncomfortable during this activity. Don’t worry! These are normal feelings. This activity is a safe space for you to explore managing these feelings. These feelings are very common amongst high-achievers — even amongst high-achievers over thirty years old! The key is to learn positive strategies to manage these feelings so that they don’t ruin your fun and impede your progress.
 
-**We’re not ready to demo!** That’s a 20th century feeling. It’s time to let it go and embrace the century you were born in. The industry has learned from vast experience that this flavour of perfectionism does not produce the best software in most cases. There are two reasons people typically have this feeling: (1) the software is not integrated, and (2) the features are incomplete. A key insight of the late 20th century is that if we integrate first, then the system is always ready to demo — maybe some of the features still need to be improved, but the system does something. See section 2 to learn the right technical skills to work together this way. Integrate first, then your team will always be ready to demo.
+You might feel uncomfortable during this activity. Don’t worry! These are normal feelings. This activity is a safe space for you to explore managing these feelings. These feelings are very common among high-achievers — even among high-achievers over thirty years old! If you don't like the word "common" and you think it doesn't apply to you, think again: you're in a world of people at least _very much_ like you now. The key is to learn positive strategies to manage these feelings so that they don’t ruin your fun, impede your progress, or degenerate your life by relentless attrition.
 
-**Lost...** Have no idea what to do? You’re feeling lost. How are you going to manage this feeling? You have choices.
+**We’re not ready to demo!** Just imagine this feeling for a moment. That’s a 20th century feeling. It’s time to let it go and embrace the new age. The industry has learned, from vast experience, that this particular flavour of perfectionism does not produce the best software overall. There are two reasons people typically have this feeling. One, the software is not integrated and connected properly; and two, the features are incomplete. A key insight of the late 20th century is that if we integrate first, then the system is always ready to demo — maybe some of the features still need to be improved, but the system does something. The value here isn't in the "doing something," but in such an attitude's ability to ensure effective and scalable software. See Section 2 to learn the right technical skills for working together this way. Integrate first; then your team will always be ready to demo functional code.
+
+**Lost...** Have no idea what to do? Is there something you don't seem to understand? You’re feeling lost. How are you going to manage this feeling? You have choices.
 
 **Negative:**
 
 -   Run away! Start fiddling with your phone/computer.
--   Attack others. Maybe if you can make them feel vulnerable by attacking them then they won’t notice that you feel vulnerable.
--   Attack yourself. See Imposter Syndrome below.
+-   Attack others. Uf you can show them they're vulnerable maybe they won't notice you are. Or maybe putting them down helps you keep yourself afloat.
+-   Attack yourself... See Imposter Syndrome below.
 
-**Positive:** Find someone to talk to. Perhaps a teammate. Perhaps a classmate on another team. Perhaps a TA or instructor. They can help get you started. We all feel lost sometimes.
+**Positive:**
 
-**Overwhelmed!** Too many things! What to do next?!?! You’re feeling overwhelmed. You could choose a negative behaviour described above, or you could choose a positive strategy, such as:
+-   Find someone to talk to. Perhaps a teammate. Perhaps a classmate on another team. Perhaps a TA or instructor. We all feel lost sometimes.
+-   Take a moment to step outside yourself. What is the best course of action in your environment? It's certainly not berating yourself.
 
--   Start with something small and achievable.
+**Overwhelmed!** Too many things! What to do next?!?! You’re feeling overwhelmed. You could let yourself, through cognitive inaction, into the easy rut of a negative behaviour. Or, you could choose a positive strategy, such as:
+
+-   Start with something small and achievable that you're already aware of; or look for such information.
 -   Reflect on your role on the team, and use that to focus your efforts.
 -   Ask someone who depends on your work what they want to prioritize.
 
-**Imposter Syndrome?** Do you really belong here? If you have doubts, then you are probably feeling imposter syndrome. (If you really wanted to study Economics or English but your uncle convinced you to come here instead, that’s a different issue — chat with your academic advisor.) Imposter syndrome is a thing that high-achieving people often suffer from: a feeling that you aren’t good enough or don’t belong — despite objective evidence to the contrary. You belong here. We admitted you. Our admissions processes are finely tuned by decades of experience. You can read more about how to manage these normal feelings.
+**Imposter Syndrome?** Do you really belong here? If you have doubts, then you are probably feeling imposter syndrome. (If you really wanted to study Economics or English but your uncle convinced you to come here instead, that’s a different issue — find your academic advisor for a chat.) Imposter syndrome is a thing that high-achieving people often suffer from: a feeling that you aren’t good enough or don’t belong — despite objective evidence to the contrary. You belong here. We admitted you. Our admissions processes are finely tuned by decades of experience. You can read more about how to manage these normal feelings.
 
--   [Harvard Business Review](https://hbr.org/2008/05/overcoming-imposter-syndrome).
--   [Imposter Syndrome: Wikipedia](https://en.wikipedia.org/wiki/Impostor_syndrome)
+-   [Harvard Business Review on Imposter Syndrome](https://hbr.org/2008/05/overcoming-imposter-syndrome).
+-   [Imposter Syndrome: Wikipedia](https://en.wikipedia.org/wiki/Impostor_syndrome).
+
+And a quick, worthwhile note: if you _do_ feel like you belong here, that's ok. Some of us feel that way. But sometime in the next couple weeks or months, it's likely you'll encounter at least one element of life — whether intellectual or social or skill- or experience-based — that you seem to fall short in. When that happens, don't let yourself slip into the vice of thinking you're alone. There's people like you, you just have to have the courage to make finding them an explicit goal.
 
 <h3 id='3.6'>3.6: Feelings Beyond This Activity</h3>
-The previous discussion is about feelings you might have within this activity — feelings that this activity might provoke in you, by design. In that discussion, find someone to talk to means people doing the activity with you. You might also have these kinds of feelings outside of this activity. Some degree of these feelings is pretty common in first year generally. Going to university is a big adjustment. That’s normal. There are many resources to help you learn how to manage these kinds of feelings. Talking to friends, classmates, family, older students, etc., is always a good first step. The next step is to participate in UW Counselling Services’ workshops: https://uwaterloo.ca/campus-wellness/counselling-services/seminars-and-workshops/ coping-skills-seminars-online You can also speak with your academic advisor, in the First Year Engineering Office or in your home program. Here are some helpful links: 
+
+The previous discussion is about feelings you might have within this activity — feelings that this activity might provoke in you... by design. In that discussion, find someone to talk to means people doing the activity with you. You will very likely continue to have these kinds of feelings outside of this activity. You'll be surprised how many of your feelings and actions are actually common tropes of first-year university. Going to university is a big adjustment. That’s normal. There are many resources to help you learn how to manage these kinds of feelings. Talking to friends, classmates, family, older students, etc., is always a good first step. If that starting place starts to feel insufficient, the next step is to investigate UW Counselling Services’ workshops: https://uwaterloo.ca/campus-wellness/counselling-services/seminars-and-workshops/ coping-skills-seminars-online You can also speak with your academic advisor, in the First Year Engineering Office or in your home program. Here are some helpful links: 
 - https://www.engsoc.uwaterloo.ca/resources/mental-health/ 
 - https://uwaterloo.ca/engineering/current-undergraduate-students/engineering-counselling 
 - https://uwaterloo.ca/campus-wellness/
 
 <h2 id='4'>4: Team Design Methods</h2>
+
 There are different ways in which a team can be organized to work on an open-ended design task. Experience has shown that some techniques work better than others. Understanding how to best organize the team’s work and communication can improve your chances of success.
 
 <h2 id='4.1'>4.1: Traditional Design: Divide & Conquer</h2>
-Divide & Conquer was made popular by the Roman emperor Julius Cesaer over two thousand years ago. It worked for him as a military strategy. It is also a useful technique in algorithms. Here’s what it looks like: 
+
+Divide & Conquer was shown to be wildly effective by the Roman emperor Julius Cesaer over two thousand years ago. It worked for him as a military strategy. It is also a useful technique in algorithms. Here’s what it looks like: 
 1. Divide:
 	- Split the systems into subsystems.
  	- Develop each subsystem independently. 
-	- Test each subsystem in isolation. 
+	- Test each subsystem in isolation.
 2. Conquer: 
 	- Integrate the subsystems together. 
 	- Test the system as an integrated whole.
 
-From a teamwork perspective, it can work well for tasks such as harvesting crops, where everyone is doing roughly the same thing and there is relatively little communication required between squads. But for teams designing complex systems, Divide & Conquer tends to fail at integration time: the subsystems end up being incompatible.
+From a teamwork perspective, it can work well for tasks such as harvesting crops, where everyone is doing roughly the same thing and there is relatively little communication required between squads. But for teams designing complex systems, Divide & Conquer tends to fail once you reach integration time: the subsystems end up incompatible.
 
 <h2 id='4.2'>4.2: Modern Design: Integrate & Iterate</h2>
-The solution to the problem of Divide & Conquer is to integrate first, before the tasks are even built: first design the interfaces, then develop the algorithms. This approach is sometimes referred to agile design, and includes concepts such as test-driven development (tdd) and continuous integration (ci). 
-1. Integrate: The system as a whole should always be integrated. 
-	- Test-First: Agree on some tests before you write code. 
-	- Interfaces: Collaboratively design the subsystem interfaces (api). 
-	- Mock Data: Demonstrate system integration with mock data.
- 2. Iterate: 
+
+The solution to the problem of Divide & Conquer is to integrate first, before the tasks are even built: first design the interfaces, then develop the algorithms. This approach is sometimes referred to as "agile" design, and includes concepts such as test-driven development (TDD) and continuous integration (CI). At its core, Integrate & Iterate understands that conceptualization should always precede implementation.
+
+1. Integrate: The system should always be integrated. 
+	- Test First: Agree on some tests before you write code (that's the Galaxies, for you).
+	- Interfaces: Collaboratively design the subsystem interfaces; how they communicate with each other (API). 
+	- Mock Data: Confirm system integration using Mock Data in tandem with your tests.
+2. Iterate: 
 	- Generalize to more test inputs. 
 	- Improve performance. 
-	- Refine interfaces as necessary. 
-	- Sprint: a limited time period in which to implement improvements. – If you can’t do it within the sprint, defer it to a future sprint. – Always integrate and test on time.
+	- Refine interfaces as necessary.
+
+- **Sprint**: a limited time period in which to implement improvements.
+- If you can’t do it within the sprint, defer it to a future sprint.
+- Always integrate and test on time.
 
 <h2 id='5'>5: TypeScript/JavaScript Language</h2>
 
-**This activity uses TypeScript \***or**\* JavaScript**
+**This activity uses TypeScript or JavaScript**
 
 Some of you may have experience with TypeScript/JavaScript, but if not, that is okay! Whether you know them or not, this activity gives you an opportunity to go outside of your comfort zone.
 
-You can write your code in JavaScript or TypeScript. JavaScript is the simplest to set up, since it is instantly available in the browser. However, if you want type safety and better API documentation, you should use TypeScript, which will compile into the JavaScript folder. Whatever you choose, your team must all agree, to avoid overriding JavaScript code when TypeScript is compiled.
+You can write your code in JavaScript _or_ TypeScript. JavaScript is the simplest to set up, since it is instantly available in the browser. However, if you want type safety and better API documentation, you should use TypeScript, which will compile into the JavaScript folder. Whatever you choose, your team must all agree, to avoid overriding JavaScript code when TypeScript is compiled.
 
-TypeScript/JavaScript is an object-oriented language. Maybe you never learned object-oriented programming before. That’s okay. For most of this activity, you just need to use objects/classes that have already been defined, and you will be able to figure that out.
+TypeScript/JavaScript is an object-oriented language. Maybe you never learned object-oriented programming before. That’s okay. For most of this activity, you just need to use objects/classes that have already been defined, and you will certainly be able to figure that out as a team.
 
 <h3 id='5.1'>5.1: JavaScript Tips</h3>
 Semicolons are usually optional at the end of lines of JavaScript.
 
 ```javascript
-// Single line comments ignore everything after the double slash`
+// Single-line comments ignore everything after the double slash`
 
-/* Multi line comments
+/* Multi-line comments
 ignore everything
 between the asterisks
-including this */
+including this \* /* // */
 
 const explanation = 'Constant declarations look like this'
 
@@ -330,18 +360,21 @@ var explanation3 = 'This created a non-scoped variable that can be redeclared'
 if (true) {
 	console.log('This is an if statement')
 } else {
-	console.log('And this is an else statement')
+	console.log('And this is its else statement')
 }
+
 for (let i = 0; i < 5; i++) {
-	console.log('This is a for loop')
+	console.log('This for loop will execute 5 times')
 }
+
 while (true) {
-	console.log('This is a while loop with a break statement')
+	console.log('This is a while loop that will break out after 1 execution')
 	break
 }
 ```
 
 <h3 id='5.2'>5.2: JavaScript Data Structures</h3>
+
 Below are some JavaScript data types and other things that you will likely encounter in this activity. It is not a comprehensive list, so do not be afraid to research online documentation as needed. www.w3schools.com/js/ is a great resource.
 
 **Objects:**
@@ -352,7 +385,7 @@ Can be declared like this:
 let obj = {}
 ```
 
-You can declare the object with attributes:
+You can declare the object with attributes (properties):
 
 ```javascript
 let obj = { name: 'Asteroid', distance: 5 }
@@ -378,7 +411,7 @@ You can declare the array with items:
 let arr = [obj, obj2, 'Dave', 5]
 ```
 
-You can add items like this:
+You can add items (to the end) like this:
 
 ```javascript
 arr.push(obj3)
@@ -387,7 +420,7 @@ arr.push(obj3)
 And access items like this:
 
 ```javascript
-arr[2]
+arr[2] // would represent 'Dave', in this case
 ```
 
 <h3 id='5.3'>5.3: TypeScript Types</h3>
@@ -398,8 +431,8 @@ When you create a variable, the type is inferred from the value.
 const str = 'Hello' // The type is a string
 const num = 5 // The type is a number
 const bool = true // The type is a boolean
-const arr = [1, 2, 3] // The type is an number[]
-const arr2 = [1, 'a', true] // the type is (string | number | boolean)[]
+const array = [1, 2, 3] // The type is an number[]
+const array2 = [1, 'a', true] // the type is (string | number | boolean)[]
 const obj = { name: 'Asteroid', distance: 5 }
 /* The type is: {
     name: string
@@ -407,7 +440,7 @@ const obj = { name: 'Asteroid', distance: 5 }
 }*/
 ```
 
-You can also create types explicitly, for example to make sure function parameters are valid, or to make sure that the return value is valid.
+You can also create types explicitly; for example, to make sure function parameters are valid, or to make sure that the return value is valid.
 
 ```typescript
 type spaceObjectName = 'Planet' | 'Asteroid' | 'WarpGate'
@@ -421,37 +454,44 @@ const findSpaceObjects = (name: spaceObjectName): spaceObject {
 }
 ```
 
-When in doubt, google it.
+When in doubt, google it!
+And remember not to forget to be in doubt.
 
 <h3 id='5.4'>5.4: TypeScript Compilation</h3>
 
 -   TypeScript must be compiled to JavaScript before it can be used.
--   To compile your TypeScript code into the JavaScript folder, run `npm run compile` in the terminal.
--   To save time, run `npm run dev` in the terminal. This will compile your code anytime you save a TypeScript file.
+-   To compile your TypeScript code into the JavaScript folder, you can run `npm run compile` in the terminal...
+-   To save time though, run `npm run dev` in the terminal (or use `tsc --watch`, as mentioned in Section 2.4) to make the compilation automatic.
 
 <h2 id='6'>6: The Joziac Game Engine</h2>
-This spaceship activity was built Josiah Plett and Zac Waite, with help from some other students. However, you don’t need to understand the underlying code to do this activity. Your instructor likely doesn’t understand every part of the system. This section describes the things that you will need to learn about the game.
+
+This spaceship activity was built Josiah Plett and Zac Waite, with help from some other students. However, you don’t need to understand the underlying code to do this activity well. Your instructor likely doesn’t understand every part of the system, either. This section describes the things that you will need to learn about the game code.
 
 <h3 id='6.1'>6.1: The Game Loop</h3>
-The game loop is the main loop of the game. It runs continuously, and is responsible for updating the game state and rendering the game to the screen.
+
+The game loop is the main loop of the game. It runs continuously (that is, ~60 times/second), and is responsible for updating the game state and rendering the game to the screen.
 
 ```typescript
-// Behind the scenes, Joziac runs through a loop
-// like this about 60 times per second
+// Behind the scenes, Joziac runs through a
+// loop like this about 60 times per second
 const gameLoop = () => {
 	update() // Read the state of the game and make decisions
 	draw() // Show that consequence on screen
 }
 ```
 
-The code you create is called in the middle of that update function, and updates the rest of the logic of the game.
+The code you create is called in the middle of that update function, and can affect the rest of the logic of the game.
 
 <h3 id='6.2'>6.2: Coordinate System</h3>
+
 The game is played on a 2D coordinate system. The origin is at the top left corner of the screen. The x-axis goes from left to right, and the y-axis goes from top to bottom. The bottom right coordinate is (720, 540).
-In polar coordinates, the origin is at the center of the screen. It goes from -π to π starting from the left side. The side with the lower y axis has negative angle. 
+
+In polar coordinates, the origin is at the center of the screen. It goes counterclockwise from -π to π starting from the left side; so the bottom semicircle has negative angle. 
+
 <img src='manual/Coordinates.png' width='100%'/>
 
 <h3 id='6.3'>6.3: Helper Libraries</h3>
+
 We have provided you with some helper functions to help you integrate with our system.
 
 **Vector2:**
@@ -467,7 +507,7 @@ console.log(direction.magnitude(), direction.angle())
 ```
 
 **WithinPiRange**
-A function that takes an angle and returns it within the range -π to π.
+A function that takes any angle (number) and returns it within the range -π to π.
 This is very useful, since most of the API parameters expect angles in this range, but angles can still be stored and returned to you outside of this range.
 
 ```typescript
@@ -476,21 +516,22 @@ console.log(WithinPiRange(angle)) // prints -1.5708 (-π/2)
 ```
 
 **Math Library**
-Not created by us and doesn't need to be imported, but the built in javascript math library has numerous useful mathematical functions and constants such as pow, sqrt, min, max, sin, round, Pi, E, etc. For more information, go to: https://www.w3schools.com/js/js_math.asp
+Not created by us and doesn't need to be imported, but the built in Javascript Math library has numerous useful mathematical functions and constants such as `pow`, `sqrt`, `min`, `max`, `sin`, `round`, `floor`, `ceil`, `Pi`, `E`, etc. For more information, go to: https://www.w3schools.com/js/js_math.asp
 
 <h2 id='7'>7: Student API!</h2>
 
-To complete the activity, you need to write code to connect to the Joziac API. Your code is run in every game loop (50 times a second), so you will likely want to keep track of the gameframe to avoid running things too quickly.
+To complete the activity, you need to write code to connect to the Joziac API. Your code is run in every game loop, repeatedly, so you will likely want to keep track of the game "frame" to avoid running things too quickly. For example, you could store a number that you count up every time your function is run, and only run a certain function if your number is divisible by 10.
 
 <h3 id='7.1'>7.1: Your ship</h3>
 
 Your ship is made up of 4 subsystems that work together to allow your ship to navigate the galaxies. No system can work without the others.
 
--   To find your code, open the folder `typescript/students`.
--   Open find the folder with your ship's name. example: `Bebop`
+-   To find your code, open the folder `{root}/typescript/students`.
+-   Open find the folder with your ship's name. example: `../Bebop`
 -   You have 4 files, representing each of the subsystems. This is where you write your code.
 
 <h3 id='7.2'>7.2: Navigation</h3>
+
 The navigation subsystem is used for collecting internal data and performing the automated functions for warping and landing.
 
 This subsystem's update function includes the following abilities:
@@ -510,7 +551,7 @@ This subsystem's update function includes the following abilities:
     -   Returns null if succesful.
     -   Energy cost: 2000
 -   `getMapData: () => MapData`
-    -   Returns the current map data
+    -   Returns the current map data.
     -   ```typescript
         interface MapData: {
         	solarSystemName: string
@@ -529,7 +570,8 @@ This subsystem's update function includes the following abilities:
     -   Energy cost: 1000
 
 <h3 id='7.3'>7.3: Sensors</h3>
-The sensors subsystem is used for collecting external data about the solar system to help you navigate.
+
+The Sensors subsystem is used for collecting external data about the solar system to help you navigate.
 
 This subsystem's update function includes the following abilities:
 
@@ -548,7 +590,6 @@ This subsystem's update function includes the following abilities:
         ```
     -   Energy cost: arc \* range^2 / 40
 -   `passiveScan: () => PassiveReading[] | Error`
-
     -   Scans the entire map for any space objects, and returns imprecise data about them.
     -   ```typescript
         interface PassiveReading {
@@ -565,20 +606,17 @@ The defence subsystem is used for defending the ship from asteroids by using the
 This subsystem's update function includes the following abilities:
 
 -   `aimTurret: (angle: number) => void`
-
     -   Sets the turret to aim at the specified angle.
-    -   Energy cost: (current angle - new angle) \* 10
+    -   Energy cost: (current angle - new angle) \* 10.
 
 -   `getTubeCooldown: (i: number) => number | Error`
-
     -   Returns the cooldown time of the specified torpedo tube.
-    -   Energy cost: 5
+    -   Energy cost: 5.
 
 -   `fireTorpedo: (i: number) => Error | null`
-
     -   Tries to fire the torpedo at the specified tube.
     -   Returns null if successful.
-    -   Energy cost: 8 if successful, 2 if failed
+    -   Energy cost: 8 if successful, 2 if failed.
 
 <h3 id='7.5'>7.5: Propulsion</h3>
 
