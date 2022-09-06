@@ -124,7 +124,7 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 
 <h3 id='1.2'>1.2: Manual Controls</h3>
 
--   `🠔🠕🠖🠗` or `WASD` to move the ship.
+-   `🠔🠕🠖🠗 [arrows]` or `WASD` to move the ship.
 -   `[space]` to fire weapons; when in manual control, torpedoes will fire forward.
 -   `M` to warp through a warp gate.
 -   `L` to land on a planet.
