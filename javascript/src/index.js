@@ -21,7 +21,7 @@ const images = {}; // image locations, by name
 const contexts = {}; // contexts, by name
 const galaxies = ['Noob', 'Compiles', 'Cracked', 'Joziac'];
 const currentDate = new Date(Date.now());
-const joziacConst = currentDate.getFullYear() > 2022 || currentDate.getMonth() > 8 || currentDate.getDate() > 80;
+const joziacConst = currentDate.getFullYear() > 2022 || currentDate.getMonth() > 8 || currentDate.getDate() > 20;
 const ships = [
     'Bebop',
     'Bismark',
@@ -197,6 +197,7 @@ let DOM = {
         };
         this.elements['EndNextGalaxy'].onclick = () => {
             var _a;
+            console.log("next-galaxy oof");
             if (game) {
                 let galaxyName = (_a = game.galaxy) === null || _a === void 0 ? void 0 : _a.name;
                 let nextGalaxyNumber = galaxyName !== undefined ? galaxies.indexOf(galaxyName) + 1 : 0;
@@ -273,7 +274,7 @@ let DOM = {
             }
             else {
                 const joziacPanel = DOM.elements["galaxy4"];
-                const contents = ["Coming<br>Soon", "Coming<br>Soon ", "Coming<br>Soon.", "Coming<br>Soon..", "Coming<br>Soon...", "Why do you keep clicking this?", "Hmmm.", "You won't stop, hey?", "Well,", "since", "you're", "curious,", "I'll", "make", "you", "work", "for", "this.", "this..", "this...", "Let's", "count", "to", "500,", "shall", "we?", "1", "2", "3", "4", "5", "50", "500", "500!", "Nice job!", "Of", "course", "I'm", "not", "that", "cruel.", "cruel. ", "cruel.  ", "JUST KIDDING", "JUST KIDDING!", "501", "502", "503", "504", "505", "506", "507", "508", "509", "510", "511", "512", "513", "514", "515", "516", "517", "518", "519", "520", "521", "522", "523", "ur mom", "524", "525", "526", "527", "528", "529", "530", "531", "532", "533", "534", "535", "Okay", "Okay, ", "Okay, e", "Okay, en", "Okay, eno", "Okay, enou", "Okay, enoug", "Okay, enough", "Okay, enough g", "Okay, enough ga", "Okay, enough gam", "Okay, enough game", "Okay, enough games", "Okay, enough games.", "Okay, enough games..", "Okay, enough games...", "Errrr", "Well, I guess", "I'll tell you", "I'll tell you:", "The real reason", "this button says", `"Coming<br>Soon"`, "is because", "another galaxy <em>actually</em> is!", "It will be available", "on your fourth day", "of this class.", "There, you satisfied", "There, you satisfied?", "...", "Hmf.", "Apparently not.", "Well, ", "I", "do", "hope", "this", "easter", "egg", "made", "you ", "all", "smile", "smile.", "... ", "..", ".", " ", "  ", "Sincerely,", "Josiah<br>Plett", "Josiah<br>Plett ", "Josiah<br>Plett  ", "Josiah<br>Plett   ", "Josiah<br>Plett    ", "Josiah<br>Plett     ", "Josiah<br>Plett      ", "Why are you still clicking? Look at the Javascript console, you silly willy.", " Josiah<br>Plett"];
+                const contents = ["Coming<br>Soon", "Coming<br>Soon.", "Coming<br>Soon..", "Coming<br>Soon...", "Why do you keep clicking this?", "Hmmm.", "You won't stop, hey?", "Well,", "since", "you're", "curious,", "I'll", "make", "you", "work", "for", "this.", "this..", "this...", "Let's", "count", "to", "500,", "shall", "we?", "1", "2", "3", "4", "5", "50", "500", "500!", "Nice job!", "Of", "course", "I'm", "not", "that", "cruel.", "cruel. ", "cruel.  ", "JUST KIDDING", "JUST KIDDING!", "501", "502", "503", "504", "505", "506", "507", "508", "509", "510", "511", "512", "513", "514", "515", "516", "517", "518", "519", "520", "521", "522", "523", "ur mom", "524", "525", "526", "527", "528", "529", "530", "531", "532", "533", "534", "535", "Okay", "Okay, ", "Okay, e", "Okay, en", "Okay, eno", "Okay, enou", "Okay, enoug", "Okay, enough", "Okay, enough g", "Okay, enough ga", "Okay, enough gam", "Okay, enough game", "Okay, enough games", "Okay, enough games.", "Okay, enough games..", "Okay, enough games...", "Errrr", "Well, I guess", "I'll tell you", "I'll tell you:", "The real reason", "this button says", `"Coming<br>Soon"`, "is because", "another galaxy <em>actually</em> is!", "It will be available", "on your fourth day", "of this class.", "There, you satisfied", "There, you satisfied?", "...", "Hmf.", "Apparently not.", "Well, ", "I", "do", "hope", "this", "easter", "egg", "made", "you ", "all", "smile", "smile.", "... ", "..", ".", " ", "  ", "Sincerely,", "Josiah<br>Plett", "Josiah<br>Plett ", "Josiah<br>Plett  ", "Josiah<br>Plett   ", "Josiah<br>Plett    ", "Josiah<br>Plett     ", "Josiah<br>Plett      ", "Why are you still clicking? Look at the Javascript console, you silly willy.", " Josiah<br>Plett"];
                 joziacPanel.innerHTML = contents[0];
                 joziacPanel.style.backgroundColor = "rgba(0, 0, 0, 0)";
                 joziacPanel.onclick = () => {
@@ -485,11 +486,13 @@ let DOM = {
             throw new Error('Game not defined');
         //console.log('Destroying the game object and remaking it...')
         for (let i = 0; i < 4; i++) {
-            let galaxyElement = document.querySelector('#galaxy' + (i + 1) + '>.quit');
-            if (galaxyElement)
-                galaxyElement.classList.add('hidden');
-            else
-                throw Error('Element ' + '#galaxy' + (i + 1) + '>.quit' + ' not found');
+            if (i !== 3 || joziacConst) {
+                let galaxyElement = document.querySelector('#galaxy' + (i + 1) + '>.quit');
+                if (galaxyElement)
+                    galaxyElement.classList.add('hidden');
+                else
+                    throw Error('Element ' + '#galaxy' + (i + 1) + '>.quit' + ' not found');
+            }
         }
         game.endGame();
         game = new Game(windowSize.x, windowSize.y, images, contexts, DOM.landSuccessful);
