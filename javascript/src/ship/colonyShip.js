@@ -29,10 +29,10 @@ export default class ColonyShip extends Sprite {
         this.propulsionController = new PropulsionClass();
         this.sensorsController = new SensorsClass();
         //Initialize each subsystem to give them access to each other.
-        this.defenceController.initializeConnection(undefined, this.navigationController, this.propulsionController, this.sensorsController);
-        this.navigationController.initializeConnection(this.defenceController, undefined, this.propulsionController, this.sensorsController);
-        this.propulsionController.initializeConnection(this.defenceController, this.navigationController, undefined, this.sensorsController);
-        this.sensorsController.initializeConnection(this.defenceController, this.navigationController, this.propulsionController, undefined);
+        this.defenceController.initializeConnection(this.navigationController, this.propulsionController, this.sensorsController);
+        this.navigationController.initializeConnection(this.defenceController, this.propulsionController, this.sensorsController);
+        this.propulsionController.initializeConnection(this.defenceController, this.navigationController, this.sensorsController);
+        this.sensorsController.initializeConnection(this.defenceController, this.navigationController, this.propulsionController);
         this.turretControls = new TurretControls(this, this.pos, this.game);
         this.passiveSensors = new PassiveSensors(this, this.game);
         this.activeSensors = new ActiveSensors(this, this.game);

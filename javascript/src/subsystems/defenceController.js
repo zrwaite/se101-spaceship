@@ -1,4 +1,16 @@
-import SubsystemController from './subsystemController.js';
-export default class DefenceController extends SubsystemController {
+export default class DefenceController {
+    constructor() {
+        this.initializeConnection = (navigation, propulsion, sensors) => {
+            this.navigation = navigation;
+            this.propulsion = propulsion;
+            this.sensors = sensors;
+        };
+        // @ts-ignore
+        this.navigation = null;
+        // @ts-ignore
+        this.propulsion = null;
+        // @ts-ignore
+        this.sensors = null;
+    }
     defenceUpdate(aimTurret, getTubeCooldown, fireTorpedo) { }
 }

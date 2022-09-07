@@ -8,9 +8,10 @@ import YourSensorsController from './SensorsController.js'
 
 export default class YourNavigationController extends NavigationController {
 	// To get other subsystem information, use the attributes below.
-	defence?: YourDefenceController
-	sensors?: YourSensorsController
-	propulsion?: YourPropulsionController
+	// @ts-ignore
+	defence: YourDefenceController // @ts-ignore
+	sensors: YourSensorsController // @ts-ignore
+	propulsion: YourPropulsionController
 
 	//Add additional attributes here
 

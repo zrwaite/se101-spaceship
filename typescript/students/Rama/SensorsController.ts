@@ -6,9 +6,10 @@ import YourPropulsionController from './PropulsionController.js'
 import { EMSReading, PassiveReading } from '../types.js'
 export default class YourSensorsController extends SensorsController {
 	// To get other subsystem information, use the attributes below.
-	defence?: YourDefenceController
-	navigation?: YourNavigationController
-	propulsion?: YourPropulsionController
+	// @ts-ignore
+	defence: YourDefenceController // @ts-ignore
+	navigation: YourNavigationController // @ts-ignore
+	propulsion: YourPropulsionController
 
 	//Add additional attributes here
 	
