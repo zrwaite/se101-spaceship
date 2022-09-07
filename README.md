@@ -232,7 +232,7 @@ The subsystems need to work together in order for the ship to reach a habitable 
 -   **Interpersonal**: Listen. Consider. Reciprocate. Most of you will assume you have something to contribute, and this may impare your ability to act as a team. That’s ok. But now, you get to learn to share in a way that does not denigrate your classmates; indeed, actively look for ways to celebrate their strengths. You are now in the big leagues, and hypothetically on your own. Everyone here has skills and abilities, even if you can't see them yet. Pay attention, and find something nice to say... support each other, because that is what life is. You are all in this together, and you will be together for the next five years. You're here to collaborate with your classmates — not to compete with them.
 -   **Version Control (Git)**: Version control is a foundational technology for teamwork in software.
 -   **Division of Labour**: How to organize the work to ensure that the subsystems integrate is a tricky problem. A common way that software systems failed in the 20th century is that all of the subsystems could perform their functionality independently, but couldn’t work together. Modern agile design techniques focus on integration and communication first, and individual functionality second.
-    
+
 While there is a lot of teamwork needed, teams will need people to show their leadership skills. Teams will need leaders to guide them through the hard times and be able to help the group. Leaders are essential, because there's no such thing as "we all contribute as equals;" leaders are the byproduct of the essentiality of a communicative hierarchy. So, to lead effectively, they will need to be active listeners, and to communicate effectively. They will need to be creative and be able to strategically plan on the spot. Leaders are our glue, holding together the high-functioning individual parts of our world.
 
 <h3 id='3.3'>3.3: Open-ended Design</h3>
@@ -291,10 +291,11 @@ And a quick, worthwhile note: if you _do_ feel like you belong here, that's ok. 
 
 <h3 id='3.6'>3.6: Feelings Beyond This Activity</h3>
 
-The previous discussion is about feelings you might have within this activity — feelings that this activity might provoke in you... by design. In that discussion, find someone to talk to means people doing the activity with you. You will very likely continue to have these kinds of feelings outside of this activity. You'll be surprised how many of your feelings and actions are actually common tropes of first-year university. Going to university is a big adjustment. That’s normal. There are many resources to help you learn how to manage these kinds of feelings. Talking to friends, classmates, family, older students, etc., is always a good first step. If that starting place starts to feel insufficient, the next step is to investigate UW Counselling Services’ workshops: https://uwaterloo.ca/campus-wellness/counselling-services/seminars-and-workshops/ coping-skills-seminars-online You can also speak with your academic advisor, in the First Year Engineering Office or in your home program. Here are some helpful links: 
-- https://www.engsoc.uwaterloo.ca/resources/mental-health/ 
-- https://uwaterloo.ca/engineering/current-undergraduate-students/engineering-counselling 
-- https://uwaterloo.ca/campus-wellness/
+The previous discussion is about feelings you might have within this activity — feelings that this activity might provoke in you... by design. In that discussion, find someone to talk to means people doing the activity with you. You will very likely continue to have these kinds of feelings outside of this activity. You'll be surprised how many of your feelings and actions are actually common tropes of first-year university. Going to university is a big adjustment. That’s normal. There are many resources to help you learn how to manage these kinds of feelings. Talking to friends, classmates, family, older students, etc., is always a good first step. If that starting place starts to feel insufficient, the next step is to investigate UW Counselling Services’ workshops: https://uwaterloo.ca/campus-wellness/counselling-services/seminars-and-workshops/ coping-skills-seminars-online You can also speak with your academic advisor, in the First Year Engineering Office or in your home program. Here are some helpful links:
+
+-   https://www.engsoc.uwaterloo.ca/resources/mental-health/
+-   https://uwaterloo.ca/engineering/current-undergraduate-students/engineering-counselling
+-   https://uwaterloo.ca/campus-wellness/
 
 <h2 id='4'>4: Team Design Methods</h2>
 
@@ -302,14 +303,15 @@ There are different ways in which a team can be organized to work on an open-end
 
 <h2 id='4.1'>4.1: Traditional Design: Divide & Conquer</h2>
 
-Divide & Conquer was shown to be wildly effective by the Roman emperor Julius Cesaer over two thousand years ago. It worked for him as a military strategy. It is also a useful technique in algorithms. Here’s what it looks like: 
+Divide & Conquer was shown to be wildly effective by the Roman emperor Julius Cesaer over two thousand years ago. It worked for him as a military strategy. It is also a useful technique in algorithms. Here’s what it looks like:
+
 1. Divide:
-	- Split the systems into subsystems.
- 	- Develop each subsystem independently. 
-	- Test each subsystem in isolation.
-2. Conquer: 
-	- Integrate the subsystems together. 
-	- Test the system as an integrated whole.
+    - Split the systems into subsystems.
+    - Develop each subsystem independently.
+    - Test each subsystem in isolation.
+2. Conquer:
+    - Integrate the subsystems together.
+    - Test the system as an integrated whole.
 
 From a teamwork perspective, it can work well for tasks such as harvesting crops, where everyone is doing roughly the same thing and there is relatively little communication required between squads. But for teams designing complex systems, Divide & Conquer tends to fail once you reach integration time: the subsystems end up incompatible.
 
@@ -317,18 +319,18 @@ From a teamwork perspective, it can work well for tasks such as harvesting crops
 
 The solution to the problem of Divide & Conquer is to integrate first, before the tasks are even built: first design the interfaces, then develop the algorithms. This approach is sometimes referred to as "agile" design, and includes concepts such as test-driven development (TDD) and continuous integration (CI). At its core, Integrate & Iterate understands that conceptualization should always precede implementation.
 
-1. Integrate: The system should always be integrated. 
-	- Test First: Agree on some tests before you write code (that's the Galaxies, for you).
-	- Interfaces: Collaboratively design the subsystem interfaces; how they communicate with each other (API). 
-	- Mock Data: Confirm system integration using Mock Data in tandem with your tests.
-2. Iterate: 
-	- Generalize to more test inputs. 
-	- Improve performance. 
-	- Refine interfaces as necessary.
+1. Integrate: The system should always be integrated.
+    - Test First: Agree on some tests before you write code (that's the Galaxies, for you).
+    - Interfaces: Collaboratively design the subsystem interfaces; how they communicate with each other (API).
+    - Mock Data: Confirm system integration using Mock Data in tandem with your tests.
+2. Iterate:
+    - Generalize to more test inputs.
+    - Improve performance.
+    - Refine interfaces as necessary.
 
-- **Sprint**: a limited time period in which to implement improvements.
-- If you can’t do it within the sprint, defer it to a future sprint.
-- Always integrate and test on time.
+-   **Sprint**: a limited time period in which to implement improvements.
+-   If you can’t do it within the sprint, defer it to a future sprint.
+-   Always integrate and test on time.
 
 <h2 id='5'>5: TypeScript/JavaScript Language</h2>
 
@@ -486,7 +488,7 @@ The code you create is called in the middle of that update function, and can aff
 
 The game is played on a 2D coordinate system. The origin is at the top left corner of the screen. The x-axis goes from left to right, and the y-axis goes from top to bottom. The bottom right coordinate is (720, 540).
 
-In polar coordinates, the origin is at the center of the screen. It goes counterclockwise from -π to π starting from the left side; so the bottom semicircle has negative angle. 
+In polar coordinates, the origin is at the center of the screen. It goes counterclockwise from -π to π starting from the left side; so the bottom semicircle has negative angle.
 
 <img src='manual/Coordinates.png' width='100%'/>
 
@@ -583,8 +585,19 @@ This subsystem's update function includes the following abilities:
         	distance: number
         	velocity: Vector2
         	radius: number
-        	closeRange?: {
-        		scanSignature?: object
+        	closeRange?: CloseRangeData
+        }
+        ```
+    -   ```typescript
+        interface CloseRangeData {
+        	type: 'Planet' | 'Meteor' | 'Asteroid' | 'WarpGate' | 'Other'
+        	planetComposition?: {
+        		water: number
+        		air: number
+        		land: number
+        		metal: number
+        		safety: number
+        		temperature: number
         	}
         }
         ```
@@ -606,10 +619,12 @@ The defence subsystem is used for defending the ship from asteroids by using the
 This subsystem's update function includes the following abilities:
 
 -   `aimTurret: (angle: number) => void`
+
     -   Sets the turret to aim at the specified angle.
     -   Energy cost: (current angle - new angle) \* 10.
 
 -   `getTubeCooldown: (i: number) => number | Error`
+
     -   Returns the cooldown time of the specified torpedo tube.
     -   Energy cost: 5.
 
@@ -634,10 +649,13 @@ This subsystem's update function includes just one ability. However, it is likel
 <h3 id='7.6'>7.6: Using TypeScript</h3>
 
 -   TypeScript must be compiled to JavaScript before it can be used.
+-   Find your code files in the `typescript/students` folder.
 -   To compile your TypeScript code into the JavaScript folder, run `npm run compile` in the terminal.
 -   To save time, run `npm run dev` in the terminal. This will compile your code anytime you save a TypeScript file.
 
 <h2 id='8'>8: Advanced Information</h2>
+
+This information is useful for identifying what type of object different scanned objects are.
 
 | Object    | Mass           | Radius  |
 | --------- | -------------- | ------- |

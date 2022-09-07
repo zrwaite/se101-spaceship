@@ -1,4 +1,4 @@
-import { EMSReading } from './EMSReading.js'
+import { CloseRangeData, EMSReading } from './EMSReading.js'
 import Vector2 from '../helpers/Vector2.js'
 import ColonyShip from './colonyShip.js'
 import RenderedObject from '../renderedObject.js'
@@ -7,6 +7,8 @@ import Planet from '../spaceObjects/planet.js'
 import Torpedo from './torpedo.js'
 import WarpGate from '../spaceObjects/warpGate.js'
 import { withinPiRange } from '../helpers/Angles.js'
+import Meteor from '../spaceObjects/meteor.js'
+import Asteroid from '../spaceObjects/asteroid.js'
 
 
 export default class ActiveSensors extends RenderedObject {
@@ -58,9 +60,22 @@ export default class ActiveSensors extends RenderedObject {
 			if (this.#pointInScanSlice(spaceObject.pos)) {
 				const angle = this.#parentShip.pos.angleToPoint(spaceObject.pos)
 				const distance = this.#parentShip.pos.distance(spaceObject.pos)
-				const scanSignature = spaceObject instanceof Planet ? spaceObject.composition : undefined
+				let closeRangeData: CloseRangeData
+				if (spaceObject instanceof Planet) {
+					closeRangeData = {
+						type:  'Planet',
+						planetComposition: spaceObject.composition
+					}
+				} else {
+					let objectType: 'Meteor' | 'Asteroid' | 'WarpGate' | 'Other'
+					if (spaceObject instanceof Meteor) objectType = 'Meteor'
+					else if (spaceObject instanceof Asteroid) objectType = 'Asteroid'
+					else if (spaceObject instanceof WarpGate) objectType = 'WarpGate'
+					else objectType = 'Other'
+					closeRangeData = {type:  objectType}
+				} 		 
 				const velocity = spaceObject instanceof Planet || spaceObject instanceof WarpGate ? Vector2.zero : spaceObject.speed
-				readings.push(new EMSReading(angle, velocity, spaceObject.radius, distance, scanSignature))
+				readings.push(new EMSReading(angle, velocity, spaceObject.radius, distance, closeRangeData))
 			}
 		}
 		return readings
