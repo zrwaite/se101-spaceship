@@ -48,6 +48,7 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 -   2.2: [Download the source code](#2.2)
 -   2.3: [Install a server](#2.3)
 -   2.4: [Install TypeScript](#2.4)
+-   2.5: [Understand the Console](#2.5)
 
 ### 3. [Objectives](#3)
 
@@ -181,6 +182,17 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 -   You can test whether Typescript is installed by running `npm run compile` to compile the TypeScript code into JavaScript.
 -   To code in TypeScript, use `npm run dev` to compile your code whenever you save a Typescript file, or `tsc --watch`, for live updating.
 
+<h3 id='2.5'>2.5: Understand the Console</h3>
+
+(Skip this if you know about the console)
+
+For the purposes of this project, the Javascript console is where you do your debugging.
+First you need to know how to open the console, which is part of your browser. In Google Chrome (or Edge or Firefox), if you're on Mac, `CMD+ALT+J` should open it, and on Windows `CTRL+SHIFT+J` should do the trick. Otherwise, google how :).
+
+There are two main ways to use the console, both for the purpose of debugging:
+-   _Logging._ If you type `console.log("some text")` anywhere in your code, you will see the message in the console exactly when that code executes. It's most commonly used as in `console.log(variable_you_want_to_know)` or `console.log("does this execute before the error?")`.
+-   _Breakpoints._ Type `debugger` anywhere in your code, and run it. Whenever that line is run, your browser (at least, Chrome) will pause and let you step slowly through its execution. This is considered a better debugging method, but we recommend starting with `console.log()` if you are new.
+
 <h2 id='3'>3: Objectives</h2>
 
 <h3 id='3.1'>3.1: Project Goal</h3>
@@ -189,7 +201,7 @@ Your goal is to engineer an _'AI'_ to fly your spaceship that can reliably find 
 
 <h3 id='3.2'>3.2: Learning Objectives - Teamwork</h3>
 
-Your spaceship's control system has 4 subsystems:
+Your spaceship's control system has 4 subsystems. Following is a general summary; for a more technical description, see Section 7, the [Student API](#7)
 
 <table>
 <tr>
@@ -340,8 +352,14 @@ You can write your code in JavaScript _or_ TypeScript. JavaScript is the simples
 
 TypeScript/JavaScript is an object-oriented language. Maybe you never learned object-oriented programming before. That’s okay. For most of this activity, you just need to use objects/classes that have already been defined, and you will certainly be able to figure that out as a team.
 
+**Notes applying to both languages**
+
+-   It is standard to name things using `camelCase` (as opposed to `snake_case` or `kebab-case`) for most things, and `PascalCase` for classes.
+-   In our API, many objects can be of type `Error`. Use `if (this.valueToCheck !instanceOf Error) { ... }` to check that.
+
 <h3 id='5.1'>5.1: JavaScript Tips</h3>
-Semicolons are usually optional at the end of lines of JavaScript.
+
+Semicolons are common in JavaScript; they're like a period. Sometimes they're optional, but sometimes not.
 
 ```javascript
 // Single-line comments ignore everything after the double slash`
@@ -357,10 +375,13 @@ let explanation2 = "This creates a scoped variable that can't be redeclared"
 
 var explanation3 = 'This created a non-scoped variable that can be redeclared'
 
-if (true) {
+console.log('This logs to the Javascript console. You can use it for debugging!')
+
+if (true === "") {
 	console.log('This is an if statement')
-} else {
-	console.log('And this is its else statement')
+} else if (17 <= 17) console.log('This will execute. You need a semicolon here');
+else {
+  console.log('And this is its else statement')
 }
 
 for (let i = 0; i < 5; i++) {
@@ -446,7 +467,11 @@ You can also create types explicitly; for example, to make sure function paramet
 type spaceObjectName = 'Planet' | 'Asteroid' | 'WarpGate'
 type spaceObject = {
 	name: spaceObjectName,
-	distance: number
+	distance: number,
+  fictionalAttributes: {
+    childrenList: spaceObject[],
+    color: string
+  }
 }
 
 const findSpaceObjects = (name: spaceObjectName): spaceObject {
@@ -454,7 +479,7 @@ const findSpaceObjects = (name: spaceObjectName): spaceObject {
 }
 ```
 
-When in doubt, google it!
+When in doubt, google it. Just google it.
 And remember not to forget to be in doubt.
 
 <h3 id='5.4'>5.4: TypeScript Compilation</h3>
@@ -590,7 +615,7 @@ This subsystem's update function includes the following abilities:
         ```
     -   Energy cost: arc \* range^2 / 40
 -   `passiveScan: () => PassiveReading[] | Error`
-    -   Scans the entire map for any space objects, and returns imprecise data about them.
+    -   Scans the entire map for any space objects, and returns imprecise data about them. The list order is **essentially random**.
     -   ```typescript
         interface PassiveReading {
         	heading: number
@@ -625,7 +650,7 @@ The propulsion subsystem is used for moving the ship.
 This subsystem's update function includes just one ability. However, it is likely the most difficult to use.
 
 -   setThruster: (thruster: ThrusterName, power: number) => Error | null
-    -   Sets the power of the specified thruster.
+    -   Sets the power of the specified thruster. _This only needs to be done once_ to turn them on. Then once to turn them off. Not repeatedly every frame. 
     -   ```typescript
         type ThrusterName = 'main' | 'bow' | 'clockwise' | 'counterClockwise'
         ```
