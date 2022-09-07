@@ -18,6 +18,8 @@ import Planet from '../spaceObjects/planet.js';
 import Torpedo from './torpedo.js';
 import WarpGate from '../spaceObjects/warpGate.js';
 import { withinPiRange } from '../helpers/Angles.js';
+import Meteor from '../spaceObjects/meteor.js';
+import Asteroid from '../spaceObjects/asteroid.js';
 export default class ActiveSensors extends RenderedObject {
     constructor(parentShip, game) {
         super(parentShip.pos, game);
@@ -60,9 +62,27 @@ export default class ActiveSensors extends RenderedObject {
             if (__classPrivateFieldGet(this, _ActiveSensors_instances, "m", _ActiveSensors_pointInScanSlice).call(this, spaceObject.pos)) {
                 const angle = __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos.angleToPoint(spaceObject.pos);
                 const distance = __classPrivateFieldGet(this, _ActiveSensors_parentShip, "f").pos.distance(spaceObject.pos);
-                const scanSignature = spaceObject instanceof Planet ? spaceObject.composition : undefined;
+                let closeRangeData;
+                if (spaceObject instanceof Planet) {
+                    closeRangeData = {
+                        type: 'Planet',
+                        planetComposition: spaceObject.composition
+                    };
+                }
+                else {
+                    let objectType;
+                    if (spaceObject instanceof Meteor)
+                        objectType = 'Meteor';
+                    else if (spaceObject instanceof Asteroid)
+                        objectType = 'Asteroid';
+                    else if (spaceObject instanceof WarpGate)
+                        objectType = 'WarpGate';
+                    else
+                        objectType = 'Other';
+                    closeRangeData = { type: objectType };
+                }
                 const velocity = spaceObject instanceof Planet || spaceObject instanceof WarpGate ? Vector2.zero : spaceObject.speed;
-                readings.push(new EMSReading(angle, velocity, spaceObject.radius, distance, scanSignature));
+                readings.push(new EMSReading(angle, velocity, spaceObject.radius, distance, closeRangeData));
             }
         }
         return readings;
