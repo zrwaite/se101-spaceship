@@ -84,6 +84,8 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 -   7.3: [Sensors](#7.3)
 -   7.4: [Defence](#7.4)
 -   7.5: [Propulsion](#7.5)
+-   7.6: [Using TypeScript](#7.6)
+-   7.7: [Integration](#7.6)
 
 ### 8: [Advanced Information](#8)
 
@@ -673,10 +675,51 @@ This subsystem's update function includes just one ability. However, it is likel
 
 <h3 id='7.6'>7.6: Using TypeScript</h3>
 
--   TypeScript must be compiled to JavaScript before it can be used.
+-   TypeScript must be compiled into JavaScript before it can be used.
 -   Find your code files in the `typescript/students` folder.
 -   To compile your TypeScript code into the JavaScript folder, run `npm run compile` in the terminal.
 -   To save time, run `npm run dev` in the terminal. This will compile your code anytime you save a TypeScript file.
+
+**When parsing an API value that could be an Error, here is a useful code segment:**
+```typescript
+//passiveScan: () => PassiveReading[] | Error
+const scanRes = passiveScan()
+if (!(scanRes instanceof Error)) {
+    scanRes.forEach((reading) => {
+        // do something, no type errors
+    })
+} else {
+    // Something went wrong, you should probably log this and make sure it doesn't happen again
+}
+```
+
+<h3 id='7.7'>7.7: Integration</h3>
+
+- To pass data to other solar systems, add additional attributes to your subsystem class.
+- For example, you can create an attribute `myNumber`, and increment it each frame
+```typescript
+export default class YourController {
+    myNumber:number = 0
+	controllerUpdate() {
+		//Student code goes here
+        this.myNumber++
+	}
+}
+```
+
+- This can then be accessed in your other subsystem classes:
+```typescript
+export default class YourOtherController {
+    controller: YourController
+    otherControllerUpdate() {
+		//Student code goes here
+        console.log(this.controller.myNumber)
+	}
+}
+```
+
+- From your other subsystem, you are now able to print out the value that exists on your first subsystem!
+
 
 <h2 id='8'>8: Advanced Information</h2>
 
@@ -691,3 +734,7 @@ This information is useful for identifying what type of object different scanned
 | Meteor    | 1              | 5       |
 | BlackHole | Infinity       | ~40     |
 | Star      | ~39000         | ~50     |
+
+**Newton's Gravity Equation**:
+- F = ( G * m1 * m2 ) / (r^2)
+- In our Universe, G = 1/3, and Gravity is measured in force
