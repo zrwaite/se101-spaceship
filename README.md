@@ -700,10 +700,10 @@ if (!(scanRes instanceof Error)) {
 ```typescript
 export default class YourController {
     myNumber:number = 0
-	controllerUpdate() {
-		//Student code goes here
+    controllerUpdate() {
+        //Student code goes here
         this.myNumber++
-	}
+    }
 }
 ```
 
@@ -712,9 +712,9 @@ export default class YourController {
 export default class YourOtherController {
     controller: YourController
     otherControllerUpdate() {
-		//Student code goes here
+	//Student code goes here
         console.log(this.controller.myNumber)
-	}
+    }
 }
 ```
 
