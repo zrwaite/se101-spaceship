@@ -84,8 +84,9 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 -   7.3: [Sensors](#7.3)
 -   7.4: [Defence](#7.4)
 -   7.5: [Propulsion](#7.5)
--   7.6: [Using TypeScript](#7.6)
--   7.7: [Integration](#7.6)
+-   7.6: [Integration](#7.6)
+-   7.7: [Using TypeScript](#7.7)
+-   7.8: [Using JavaScript](#7.8)
 
 ### 8: [Advanced Information](#8)
 
@@ -673,27 +674,8 @@ This subsystem's update function includes just one ability. However, it is likel
         ```
     -   Energy cost: 0, but you will lose energy over time based on the power of the thrusters.
 
-<h3 id='7.6'>7.6: Using TypeScript</h3>
 
--   TypeScript must be compiled into JavaScript before it can be used.
--   Find your code files in the `typescript/students` folder.
--   To compile your TypeScript code into the JavaScript folder, run `npm run compile` in the terminal.
--   To save time, run `npm run dev` in the terminal. This will compile your code anytime you save a TypeScript file.
-
-**When parsing an API value that could be an Error, here is a useful code segment:**
-```typescript
-//passiveScan: () => PassiveReading[] | Error
-const scanRes = passiveScan()
-if (!(scanRes instanceof Error)) {
-    scanRes.forEach((reading) => {
-        // do something, no type errors
-    })
-} else {
-    // Something went wrong, you should probably log this and make sure it doesn't happen again
-}
-```
-
-<h3 id='7.7'>7.7: Integration</h3>
+<h3 id='7.6'>7.6: Integration</h3>
 
 - To pass data to other solar systems, add additional attributes to your subsystem class.
 - For example, you can create an attribute `myNumber`, and increment it each frame
@@ -719,6 +701,38 @@ export default class YourOtherController {
 ```
 
 - From your other subsystem, you are now able to print out the value that exists on your first subsystem!
+
+<h3 id='7.7'>7.7: Using TypeScript</h3>
+
+-   TypeScript must be compiled into JavaScript before it can be used.
+-   Find your code files in the `typescript/students` folder.
+-   To compile your TypeScript code into the JavaScript folder, run `npm run compile` in the terminal.
+-   To save time, run `npm run dev` in the terminal. This will compile your code anytime you save a TypeScript file.
+
+**When parsing an API value that could be an Error, here is a useful code segment:**
+```typescript
+//passiveScan: () => PassiveReading[] | Error
+const scanRes = passiveScan()
+if (!(scanRes instanceof Error)) {
+    scanRes.forEach((reading) => {
+        // do something, no type errors
+    })
+} else {
+    // Something went wrong, you should probably log this and make sure it doesn't happen again
+}
+```
+
+<h3 id='7.8'>7.8: Using JavaScript (Don't)</h3>
+
+- If your team decides not to use TypeScript, you will have to re-enable JavaScript in VSCode.
+- We recommend you use TypeScript
+- TypeScript is a superior language
+- Don't use JavaScript
+- But if you really decide to use JavaScript:
+    - Open `.vscode/settings.json`
+    - Change `"**/*.js": true` to `"**/*.ts": true`
+- Again, don't do that ^. Just use TypeScript instead.
+
 
 
 <h2 id='8'>8: Advanced Information</h2>
