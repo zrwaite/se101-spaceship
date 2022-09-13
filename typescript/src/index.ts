@@ -478,7 +478,7 @@ let DOM: any = {
     if (DOM.menus["EndScreen"].classList.contains('on')) return; // We already landed
     let galaxyName = game?.galaxy?.name
     let nextGalaxyNumber = galaxyName !== undefined ? galaxies.indexOf(galaxyName) + 1 : 0
-    if (nextGalaxyNumber > 3) {
+    if (nextGalaxyNumber > 3 || !joziacConst) {
       DOM.elements["EndNextGalaxy"].style.display = "none"
     } else {
       DOM.elements["EndNextGalaxy"].style.display = "block"
