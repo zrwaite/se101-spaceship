@@ -41,7 +41,7 @@ export default class Game {
 
 	/* Other Attributes */
 	unit: number = 0 // Global Unit. ALWAYS DIVIDE IT BY 10. (this is an issue that sort of persists everywhere. not sure why. should be fixable if you adjust the actual unit declaration in the src/index.html, then go through all uses of this.unit and compensate.)
-	inputs: Controller | null = null // Controller values
+	inputs?: Controller = undefined // Controller values
 	allShips: boolean = false // Stores the number of ships that are rendered
 	galaxy: Galaxy | null = null // Stores Galaxy Object
 	mapData: MapData | null = null
@@ -49,6 +49,7 @@ export default class Game {
 	watchShipName: string = ''
 	solarSystemName: string = ''
 	drawnProcess: Process | null = null
+	running = true
 	landSuccessful: Function
 
 	constructor(width: number, height: number, images: object, contexts: object, landSuccessful: Function) {
@@ -190,6 +191,7 @@ export default class Game {
 	}
 
 	update() {
+		if (!this.running) return;
 		if (!this.watchShip) throw Error('Watch Ship Not Defined')
 		this.processes.forEach((process) => process.update())
 		//let camOffset = new Vector2(-this.watchShip.speed.x * this.unit * this.dragConst, -this.watchShip.speed.y * this.unit * this.dragConst);
@@ -202,6 +204,7 @@ export default class Game {
 		this.frame++
 	}
 	draw() {
+		if (!this.running) return;
 		if (this.drawnProcess) this.drawnProcess.draw()
 		else throw Error('this.drawnProcess not defined')
 	}
@@ -211,6 +214,11 @@ export default class Game {
 			game.contexts[object].setTransform(1, 0, 0, 1, 0, 0)
 			game.contexts[object].clearRect(0, 0, game.width * game.unit, game.height * game.unit)
 		})
+		if (this.inputs) {
+			document.removeEventListener('keydown', this.inputs.keydown)
+			document.removeEventListener('keyup', this.inputs.keyup)
+			delete this.inputs
+		}
 		for (let i = 0; i < game.contexts.length; i++) delete game.contexts[i]
 		for (let i = 0; i < game.ships.length; i++) delete game.ships[i]
 		game.processes.forEach((process) => process.endProcess())

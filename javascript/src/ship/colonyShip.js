@@ -175,6 +175,8 @@ export default class ColonyShip extends Sprite {
         }
     }
     tryWarp() {
+        if (!this.game.running)
+            return new Error("Game not running");
         this.energyUsed += 50;
         this.process.solarSystem.warpGates.forEach((warpGate) => {
             if (this.game.ifCollide(this, warpGate)) {
@@ -186,6 +188,8 @@ export default class ColonyShip extends Sprite {
         return new Error('No warp gates in range');
     }
     tryLand() {
+        if (!this.game.running)
+            return new Error("Already landed, or maybe this is broken");
         this.energyUsed += 20;
         this.process.solarSystem.planets.forEach((planet) => {
             if (this.game.ifCollide(this, planet)) {
@@ -206,6 +210,7 @@ export default class ColonyShip extends Sprite {
     }
     land(planet) {
         this.game.landSuccessful(planet);
+        this.game.running = false;
     }
     draw() {
         if (this.destructed)
