@@ -508,7 +508,7 @@ let DOM = {
             return; // We already landed
         let galaxyName = (_a = game === null || game === void 0 ? void 0 : game.galaxy) === null || _a === void 0 ? void 0 : _a.name;
         let nextGalaxyNumber = galaxyName !== undefined ? galaxies.indexOf(galaxyName) + 1 : 0;
-        if (nextGalaxyNumber > 3) {
+        if (nextGalaxyNumber > 3 || !joziacConst) {
             DOM.elements["EndNextGalaxy"].style.display = "none";
         }
         else {
