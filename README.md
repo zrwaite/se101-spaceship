@@ -605,7 +605,7 @@ The Sensors subsystem is used for collecting external data about the solar syste
 
 This subsystem's update function includes the following abilities:
 
--   ` activeScan: (heading: number, arc: number, range: number) => EMSReading | Error`
+-   ` activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error`
     -   Scans the area within the 'pizza slice' arc you specify for any space objects, and returns precise data about them.
     -   ```typescript
         interface EMSReading {
