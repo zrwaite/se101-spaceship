@@ -152,16 +152,16 @@ _Adventure and glory await you!_ With the recent discovery of the galactic warp 
 
 <h3 id='2.2'>2.2: Download the source code</h3>
 
--   Get yourself a [new Github account](https://github.com/signup).
+-   Get yourself a [GitHub account](https://github.com/signup) if you don't already have one.
 -   Find our Repository on Github [here](https://github.com/zrwaite/SE101-Spaceship).
--   Star the Repo ⭐ 👀
+-   Star the Repo!
     -   <img src='manual/Star.png' height='30px'/>
--   Follow [Zac](https://github.com/zrwaite) and [Josiah](https://github.com/plettj) on Github 🙏 👀
+-   Follow [Zac](https://github.com/zrwaite) and [Josiah](https://github.com/plettj) on GitHub!
     -   <img src='manual/Follow.png' height='30px'/>
--   Fork the Repo into your own account:
+-   Have one team member fork the repo into their account.
     -   <img src='manual/Fork.png' height='30px'/>
--   Clone your personal repo into your computer:
-    -   `git clone https://github.com/{your username}/SE101-Spaceship`
+-   Clone the forked repo onto your computer:
+    -   `git clone https://github.com/{team member username}/SE101-Spaceship`
 
 <h3 id='2.3'>2.3: Install a server</h3>
 
