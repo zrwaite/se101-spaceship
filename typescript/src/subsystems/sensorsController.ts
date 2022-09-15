@@ -19,7 +19,7 @@ export default class SensorsController {
 		// @ts-ignore
 		this.propulsion = null
 	}
-	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {}
+	
 	initializeConnection = (
 		defence: DefenceController,
 		navigation: NavigationController,
@@ -28,6 +28,14 @@ export default class SensorsController {
 		this.defence = defence
 		this.propulsion = propulsion
 		this.navigation = navigation
+	}
+	
+	// @ts-ignore
+	target: PassiveReading = null;
+
+	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
+		const scanResult = passiveScan();
+		if (!(scanResult instanceof Error)) this.target = scanResult[0];
 	}
 }
 
