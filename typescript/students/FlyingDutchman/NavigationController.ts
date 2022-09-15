@@ -12,6 +12,7 @@ export default class YourNavigationController extends NavigationController {
 	defence: YourDefenceController // @ts-ignore
 	sensors: YourSensorsController // @ts-ignore
 	propulsion: YourPropulsionController
+	angle: number = 0
 
 	//Add additional attributes here
 
