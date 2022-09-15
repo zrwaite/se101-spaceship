@@ -48,7 +48,7 @@ export default class ColonyShip extends Sprite {
             return;
         this.energyTimeCount++;
         if (this.energyTimeCount > 4) {
-            this.energyUsed += 0.02;
+            this.energyUsed += 0.005;
             this.energyTimeCount = 0;
         }
         if (this.primary && !this.thrusterController.manualControlDisabled)
