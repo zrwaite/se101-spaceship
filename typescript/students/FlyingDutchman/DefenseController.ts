@@ -14,5 +14,8 @@ export default class YourDefenceController extends DefenceController {
 	defenceUpdate(aimTurret: (angle: number) => void, getTubeCooldown: (i: number) => number | Error, fireTorpedo: (i: number) => Error | null) {
 
 		//Student code goes here
+
+
+		//test
 	}
 }
