@@ -9,11 +9,22 @@ export default class YourPropulsionController extends PropulsionController {
 	// @ts-ignore
 	defence: YourDefenceController // @ts-ignore
 	sensors: YourSensorsController // @ts-ignore
-	navigation: YourNavigationController
 
 	//Add additional attributes here
+	//hi
 
 	propulsionUpdate(setThruster: (thruster: ThrusterName, power: number) => Error | null) {
-		//Student code goes here
+		if (!this.sensors.target) return
+	const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading)
+	const force = Math.min(Math.abs(500 * headingDiff), 100)
+	if (headingDiff < 0) {
+		setThruster('clockwise', force)
+		setThruster('counterClockwise', 0)
+	} else {
+		setThruster('counterClockwise', force)
+		setThruster('clockwise', 0)
 	}
+	setThruster('main', Math.abs(headingDiff) < 0.2 ? 30 : 0)
+	}
+	
 }
