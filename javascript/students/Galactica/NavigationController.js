@@ -1,7 +1,13 @@
 import NavigationController from '../../src/subsystems/navigationController.js';
 export default class YourNavigationController extends NavigationController {
-    //Add additional attributes here
+    constructor() {
+        super(...arguments);
+        //Add additional attributes here
+        this.angle = 0;
+    }
     navigationUpdate(getShipStatus, warp, land, getMapData) {
-        //Student code goes here
+        this.angle = getShipStatus('angle');
+        console.log(this.angle);
+        land();
     }
 }
