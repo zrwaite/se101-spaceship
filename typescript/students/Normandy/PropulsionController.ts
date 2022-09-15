@@ -1,4 +1,4 @@
-import { Vector2, withinPiRange } from '../helpers.js'
+import { angleDiff, Vector2, withinPiRange } from '../helpers.js'
 import { ThrusterName } from '../types.js'
 import PropulsionController from '../../src/subsystems/propulsionController.js'
 import YourDefenceController from './DefenseController.js'
@@ -12,7 +12,6 @@ export default class YourPropulsionController extends PropulsionController {
 	navigation: YourNavigationController
 
 	//Add additional attributes here
-
 	propulsionUpdate(setThruster: (thruster: ThrusterName, power: number) => Error | null) {
         if(!this.sensors.target) return
         const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading)
