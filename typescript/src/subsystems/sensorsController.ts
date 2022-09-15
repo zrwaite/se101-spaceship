@@ -30,8 +30,7 @@ export default class SensorsController {
 		this.navigation = navigation
 	}
 	
-	// @ts-ignore
-	target: PassiveReading = null;
+	target: PassiveReading | null = null;
 
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
 		const scanResult = passiveScan();
