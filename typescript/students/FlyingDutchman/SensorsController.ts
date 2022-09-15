@@ -10,7 +10,7 @@ export default class YourSensorsController extends SensorsController {
 	defence: YourDefenceController // @ts-ignore
 	navigation: YourNavigationController // @ts-ignore
 	propulsion: YourPropulsionController //@ts-ignore
-	target: PassiveReading
+	target: PassiveReading | null = null 
 
 	//Add additional attributes here
 
