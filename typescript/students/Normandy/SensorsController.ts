@@ -10,9 +10,9 @@ export default class YourSensorsController extends SensorsController {
 	defence: YourDefenceController // @ts-ignore
 	navigation: YourNavigationController // @ts-ignore
 	propulsion: YourPropulsionController
-	target: PassiveReading | null = null
 
 	//Add additional attributes here
+	target: PassiveReading | null = null
 	
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
 		const scanResult = passiveScan()
