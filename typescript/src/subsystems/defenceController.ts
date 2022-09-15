@@ -24,8 +24,6 @@ export default class DefenceController {
 		this.propulsion = null
 		// @ts-ignore
 		this.sensors = null
-		this.ang
-
 		
 	}
 	initializeConnection = (
