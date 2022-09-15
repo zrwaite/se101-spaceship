@@ -8,8 +8,24 @@ export const getScore = (
 	damageTaken: number,
 	galaxy: Galaxy,
 ):number => {
-	const score = (survivablityChance / getMaxSurvivablityChance(galaxy)) * 100 - Math.pow(energyUsed, 0.3) - 4 * Math.log10(damageTaken)
-	return Math.round(score * 10) / 10
+	let score = (survivablityChance / getMaxSurvivablityChance(galaxy)) * 100
+	console.log(energyUsed)
+	let energyScorer = 0//Math.pow(energyUsed, 0.8)
+	if (energyUsed < 100) {
+		energyScorer = 0.00001 * Math.pow(energyUsed, 2)
+	} else if (energyUsed < 1000) {
+		energyScorer = 0.02 * energyUsed + 8
+	} else if (energyUsed < 5000) {
+		energyScorer = 0.002 * energyUsed + 26
+	} else if (energyUsed < 200000) {
+		energyScorer = 0.00005 * energyUsed + 35.7
+	} else {
+		energyScorer = 0.000001 * energyUsed + 45.5
+	}
+	console.log(energyScorer)
+	let damageScorer = 5 * Math.log2(damageTaken)
+	score -= (energyScorer + damageScorer)
+	return Math.max(Math.round(score * 10) / 10, 0)
 }
 
 function makeList(items: string[]):string {
