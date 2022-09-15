@@ -16,4 +16,5 @@ export default class YourPropulsionController extends PropulsionController {
 	propulsionUpdate(setThruster: (thruster: ThrusterName, power: number) => Error | null) {
 		//Student code goes here
 	}
+	//Hello
 }
