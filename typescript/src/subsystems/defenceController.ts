@@ -3,13 +3,20 @@ import PropulsionController from './propulsionController.js'
 import SensorsController from './sensorsController.js'
 
 export default class DefenceController {
+
+	
 	// @ts-ignore
 	navigation: NavigationController
 	// @ts-ignore
 	propulsion: PropulsionController
 	// @ts-ignore
 	sensors: SensorsController
-	defenceUpdate(aimTurret: (angle: number) => void, getTubeCooldown: (i: number) => number | Error, fireTorpedo: (i: number) => Error | null) {}
+
+	defenceUpdate(aimTurret: (angle: number) => void, getTubeCooldown: (i: number) => number | Error, fireTorpedo: (i: number) => Error | null) {
+		if (!this.sensors.target) return 
+		aimTurret (this.sensors.target.heading)
+		fireTorpedo(0)
+	}
 	constructor() {
 		// @ts-ignore
 		this.navigation = null
@@ -17,6 +24,7 @@ export default class DefenceController {
 		this.propulsion = null
 		// @ts-ignore
 		this.sensors = null
+		
 	}
 	initializeConnection = (
 		navigation: NavigationController,
@@ -27,4 +35,5 @@ export default class DefenceController {
 		this.propulsion = propulsion
 		this.sensors = sensors
 	}
+
 }
