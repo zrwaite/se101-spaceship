@@ -23,7 +23,8 @@ export default class YourNavigationController extends NavigationController {
 	possibleObjects: SpaceObject[] = []
 
 	scanned: boolean = false
-	target: Vector2 = new Vector2(0, 0) // [angle, magnitude]
+	position: Vector2 | null = null
+	target: Vector2 | null = null
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		//Student code goes here
@@ -32,12 +33,10 @@ export default class YourNavigationController extends NavigationController {
 			this.scanned = true;
 			
 		}
-
-		// update list of possible targets
-		this.possibleObjects = this.sensors.warpgatesOrPlanets
 		
-		this.updateTarget()
 
+		// Constantly update position
+		this.position = new Vector2(getShipStatus('positionX'), getShipStatus('positionY'))
 		this.angle = getShipStatus('angle')
 		land()
 	}
@@ -73,5 +72,11 @@ export default class YourNavigationController extends NavigationController {
 		else {
 			// dont update otherwise
 		}
+	}
+
+
+	// Public get function to get x and y coordinates of ship
+	public get getPosition() {
+		return this.position
 	}
 }
