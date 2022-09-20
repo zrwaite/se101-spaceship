@@ -1,6 +1,7 @@
 import NavigationController from "../../src/subsystems/navigationController.js";
 export default class YourNavigationController extends NavigationController {
     navigationUpdate(getShipStatus, warp, land, getMapData) {
+        var _a, _b, _c, _d, _e, _f;
         this.angle = getShipStatus("angle");
         this.angularVelocity = getShipStatus("angularVelocity");
         this.linearVelocityX = getShipStatus("linearVelocityX");
@@ -21,7 +22,13 @@ export default class YourNavigationController extends NavigationController {
         /*
         
         */
-        warp();
-        land();
+        if (((_a = this.sensors.targetDetails) === null || _a === void 0 ? void 0 : _a.distance) !== undefined && ((_b = this.sensors.targetDetails) === null || _b === void 0 ? void 0 : _b.distance) <= 60) { // May be able to be deleted later.
+            if (((_d = (_c = this.sensors.targetDetails) === null || _c === void 0 ? void 0 : _c.closeRange) === null || _d === void 0 ? void 0 : _d.type) === 'Planet') {
+                land();
+            }
+            else if (((_f = (_e = this.sensors.targetDetails) === null || _e === void 0 ? void 0 : _e.closeRange) === null || _f === void 0 ? void 0 : _f.type) === 'WarpGate') {
+                warp();
+            }
+        }
     }
 }
