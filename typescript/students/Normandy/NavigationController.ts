@@ -25,16 +25,17 @@ export default class YourNavigationController extends NavigationController {
 
 		this.shipVelocity = new Vector2(getShipStatus('linearVelocityX'), getShipStatus('linearVelocityY'))
 		this.shipPosition = new Vector2(getShipStatus('positionX'), getShipStatus('positionY'))
-		var landDest = this.sensors.landTarget
+		var landDest = this.sensors.landTarget		//absolute coordinates 
 
-		//var absDestCoord = new Vector2()
 
 		if (landDest != null) {
-			this.angle = withinPiRange(landDest.angle())
+			this.angle = withinPiRange((landDest.subtract(this.shipPosition)).angle())
 		}
 		
-		if (getShipStatus('positionX')) {
+		// if (getShipStatus('positionX')) {
+			
+		// }
 
-		}
+		//land();
 	}
 }
