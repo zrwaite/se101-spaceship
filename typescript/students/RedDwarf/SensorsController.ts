@@ -5,43 +5,35 @@ import YourNavigationController from "./NavigationController.js";
 import YourPropulsionController from "./PropulsionController.js";
 import { EMSReading, PassiveReading } from "../types.js";
 
-let allObjects: object[] = [];
+let allObjects: object[] = []; // array of all objects in galaxy
 
 export default class YourSensorsController extends SensorsController {
-  // To get other subsystem information, use the attributes below.
-  // @ts-ignore
-  defence: YourDefenceController; // @ts-ignore
-  navigation: YourNavigationController; // @ts-ignore
-  propulsion: YourPropulsionController;
-  target: PassiveReading | null = null;
+	// To get other subsystem information, use the attributes below.
+	// @ts-ignore
+	defence: YourDefenceController // @ts-ignore
+	navigation: YourNavigationController // @ts-ignore
+	propulsion: YourPropulsionController
+	target: PassiveReading | null=null
 
-  //Add additional attributes here
+	//Add additional attributes here
 
-  sensorsUpdate(
-    activeScan: (
-      heading: number,
-      arc: number,
-      range: number
-    ) => EMSReading[] | Error,
-    passiveScan: () => PassiveReading[] | Error
-  ) {
-    const scanResult = passiveScan();
+	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
+		const scanResult = passiveScan()
 
-    if (!(scanResult instanceof Error)) {
-      console.log("here is passive scan", scanResult);
+		if (!(scanResult instanceof Error)) {
 
-      console.log("all objects");
-      console.log(allObjects);
+      if (!this.target){
+        // checks if scan object already exists in allObjects
+        // if it does, that object is the planet
+        allObjects.forEach(planet => {
+          if(JSON.stringify(planet) == JSON.stringify(scanResult)){
+            console.log("found the planet", scanResult[0])					
+            this.target = scanResult[0] // sets target to planet
+          }
+        });
 
-      allObjects.forEach((v) => {
-        if (JSON.stringify(v) == JSON.stringify(scanResult)) {
-          console.log("found the planet");
-          console.log(scanResult);
-          this.target = scanResult[0];
-        }
-      });
-
-      allObjects.push(scanResult);
-    }
-  }
+        allObjects.push(scanResult) // adds object to array
+      }
+		}
+	}
 }

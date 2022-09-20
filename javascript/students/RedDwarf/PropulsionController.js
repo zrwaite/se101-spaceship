@@ -10,8 +10,7 @@ export default class YourPropulsionController extends PropulsionController {
         this.dForceConst = -10;
     }
     propulsionUpdate(setThruster) {
-        if (!this.sensors.target)
-            return;
+        // if (!this.sensors.target) return;
         if (!this.sensors.target)
             return; //WTF is this
         const currError = angleDiff(//calculate heading angle
