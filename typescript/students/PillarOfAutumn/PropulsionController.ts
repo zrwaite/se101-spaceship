@@ -4,6 +4,8 @@ import PropulsionController from '../../src/subsystems/propulsionController.js'
 import YourDefenceController from './DefenseController.js'
 import YourNavigationController from './NavigationController.js'
 import YourSensorsController from './SensorsController.js'
+import { angleDiff } from '../helpers.js'
+
 export default class YourPropulsionController extends PropulsionController {
 	// To get other subsystem information, use the attributes below.
 	// @ts-ignore
