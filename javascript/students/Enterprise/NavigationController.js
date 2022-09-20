@@ -7,12 +7,14 @@ export default class YourNavigationController extends NavigationController {
     navigationUpdate(getShipStatus, warp, land, getMapData) {
         const closeRangeObject = this.sensors.closeRangeObject;
         // Landing if the distance between the spaceship and A planet is less than 20
-        if ((closeRangeObject === null || closeRangeObject === void 0 ? void 0 : closeRangeObject.closeRange) && closeRangeObject.closeRange.type === "Planet" && closeRangeObject.distance < 20) {
-            land();
-        }
-        if ((closeRangeObject === null || closeRangeObject === void 0 ? void 0 : closeRangeObject.closeRange) && closeRangeObject.closeRange.type === "WarpGate" && closeRangeObject.distance < 20) {
-            warp();
-        }
+        closeRangeObject && closeRangeObject.forEach(object => {
+            if (object === null || object === void 0 ? void 0 : object.closeRange) {
+                if (object.closeRange.type === 'Planet' && object.distance < 20)
+                    land();
+                else if (object.closeRange.type === 'WarpGate' && object.distance < 20)
+                    warp();
+            }
+        });
         this.angle = getShipStatus("angle");
     }
 }

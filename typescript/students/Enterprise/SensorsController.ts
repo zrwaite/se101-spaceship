@@ -21,6 +21,5 @@ export default class YourSensorsController extends SensorsController {
     if(!(activeResult instanceof Error)) {
       this.closeRangeObject = activeResult;
     }
-    this.closeRangeObject && console.log(this.closeRangeObject);
   }
 }
