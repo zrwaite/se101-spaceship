@@ -5,7 +5,7 @@ import YourNavigationController from './NavigationController.js'
 import YourPropulsionController from './PropulsionController.js'
 import { EMSReading, PassiveReading } from '../types.js'
 
-let allObjects: object[] = [];
+let allObjects: object[] = []; // array of all objects in galaxy
 
 export default class YourSensorsController extends SensorsController {
 	// To get other subsystem information, use the attributes below.
@@ -21,21 +21,16 @@ export default class YourSensorsController extends SensorsController {
 		const scanResult = passiveScan()
 
 		if (!(scanResult instanceof Error)) {
-			console.log("here is passive scan",scanResult)
-			
-			console.log('all objects')
-			console.log(allObjects)
-
-			
-			allObjects.forEach(v => {
-				if(JSON.stringify(v) == JSON.stringify(scanResult)){
-					console.log("found the planet")					
-					console.log(scanResult)
-					this.target = scanResult[0]
+			// checks if scan object already exists in allObjects
+			// if it does, that object is the planet
+			allObjects.forEach(planet => {
+				if(JSON.stringify(planet) == JSON.stringify(scanResult)){
+					console.log("found the planet", scanResult[0])					
+					this.target = scanResult[0] // sets target to planet
 				}
 			});
 
-			allObjects.push(scanResult)
+			allObjects.push(scanResult) // adds object to array
 		}
 		//this is a test
 	}
