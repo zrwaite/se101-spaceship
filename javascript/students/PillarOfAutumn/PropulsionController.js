@@ -6,21 +6,18 @@ export default class YourPropulsionController extends PropulsionController {
         if (!this.sensors.target)
             return;
         const headingDiff = withinPiRange(angleDiff(this.navigation.angle, this.sensors.target.heading));
-        const force = 100;
+        const force = 1;
         console.log(headingDiff);
-        setThruster('main', force);
-        if (headingDiff < 0 && Math.abs(headingDiff) >= 0.2) {
-            setThruster('clockwise', force);
-            setThruster('counterClockwise', 0);
+        if (headingDiff != 0) {
+            if (headingDiff < -0.3) {
+                setThruster('clockwise', force);
+                console.log("accelerating");
+            }
+            else if (headingDiff >= -0.3) {
+                setThruster('counterClockwise', force);
+                console.log("decelerating");
+            }
         }
-        else if (headingDiff > 0 && Math.abs(headingDiff) >= 0.2) {
-            setThruster('counterClockwise', force);
-            setThruster('clockwise', 0);
-        }
-        else {
-            setThruster('counterClockwise', 0);
-            setThruster('clockwise', 0);
-        }
-        setThruster('main', Math.abs(headingDiff) < 0.5 ? 200 : 0);
+        setThruster('main', Math.abs(headingDiff) < 0.2 ? 100 : 0);
     }
 }
