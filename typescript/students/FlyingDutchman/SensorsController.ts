@@ -9,11 +9,21 @@ export default class YourSensorsController extends SensorsController {
 	// @ts-ignore
 	defence: YourDefenceController // @ts-ignore
 	navigation: YourNavigationController // @ts-ignore
-	propulsion: YourPropulsionController
+	propulsion: YourPropulsionController //@ts-ignore
+	target: PassiveReading | null = null 
 
 	//Add additional attributes here
-	
+
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
-		//Student code goes here
+		const scanResult = passiveScan()
+		if (!(scanResult instanceof Error)) this.target = scanResult[0]
 	}
 }
+
+
+// accurate vector coordinates (angle, distance) of warpgates and planets - navigation
+// angle (from velocity), heading, velocity, distance of asteroids - defense
+
+// passive scan - heading, mass/distance - warpgates accurate position, list of objects of certain planets + list of objects of uncertain planets 
+// active scan - angle(heading), distance, velocity, radius
+				// close range - type, habitability
