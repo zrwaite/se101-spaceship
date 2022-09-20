@@ -18,9 +18,12 @@ export default class YourNavigationController extends NavigationController {
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		this.angle = getShipStatus('angle')
-		//figure out how to read mapdata
+			//figure out how to read mapdata
+		land();
+		warp();
 		getMapData();
-		if(planet){
+		if (planet) {
+			console.log("PLEASE")
 			land();
 			planet = false;
 		}
