@@ -1,5 +1,7 @@
 export default class SensorsController {
     constructor() {
+        // @ts-ignore
+        this.target = null;
         this.initializeConnection = (defence, navigation, propulsion) => {
             this.defence = defence;
             this.propulsion = propulsion;

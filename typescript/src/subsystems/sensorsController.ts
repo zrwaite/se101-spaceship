@@ -12,7 +12,8 @@ export default class SensorsController {
 	defence: DefenceController
 	// @ts-ignore
 	propulsion: PropulsionController
-	target: PassiveReading
+	// @ts-ignore
+	target: PassiveReading | null = null;
 
 	constructor() {
 		// @ts-ignore

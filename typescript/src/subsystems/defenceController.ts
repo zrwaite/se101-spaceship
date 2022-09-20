@@ -12,8 +12,6 @@ export default class DefenceController {
 	propulsion: PropulsionController
 	// @ts-ignore
 	sensors: SensorsController
-	// @ts-ignore
-	target: PassiveReading
 
 	defenceUpdate(aimTurret: (angle: number) => void, getTubeCooldown: (i: number) => number | Error, fireTorpedo: (i: number) => Error | null) {
 		if (!this.sensors.target) return 
