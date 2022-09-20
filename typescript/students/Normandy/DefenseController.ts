@@ -9,12 +9,18 @@ export default class YourDefenceController extends DefenceController {
 	navigation: YourNavigationController // @ts-ignore
 	sensors: YourSensorsController // @ts-ignore
 	propulsion: YourPropulsionController
+
 	//Add additional attributes here
-	
+	torpedoNum: number = 0;
+
+	nextTorpedo() {
+		return this.torpedoNum = (this.torpedoNum + 1) % 4;
+	}
+
 	defenceUpdate(aimTurret: (angle: number) => void, getTubeCooldown: (i: number) => number | Error, fireTorpedo: (i: number) => Error | null) {
 		//Student code goes here
-        if (!this.sensors.target) return;
-        aimTurret(this.sensors.target.heading);
-        fireTorpedo(0);
+		if (!this.sensors.target) return;
+		aimTurret(this.sensors.target.heading);
+        fireTorpedo(this.nextTorpedo());
 	}
 }
