@@ -5,7 +5,6 @@ export default class SensorsController {
             this.propulsion = propulsion;
             this.navigation = navigation;
         };
-        this.target = null;
         // @ts-ignore
         this.navigation = null;
         // @ts-ignore
@@ -13,9 +12,5 @@ export default class SensorsController {
         // @ts-ignore
         this.propulsion = null;
     }
-    sensorsUpdate(activeScan, passiveScan) {
-        const scanResult = passiveScan();
-        if (!(scanResult instanceof Error))
-            this.target = scanResult[0];
-    }
+    sensorsUpdate(activeScan, passiveScan) { }
 }
