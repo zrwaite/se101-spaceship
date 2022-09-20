@@ -13,7 +13,7 @@ export default class YourNavigationController extends NavigationController {
   sensors: YourSensorsController; // @ts-ignore
   propulsion: YourPropulsionController;
   angle = 0;
-  angularVelocty = 0;
+  angularVelocity = 0;
 
   //Add additional attributes here
 
@@ -24,6 +24,10 @@ export default class YourNavigationController extends NavigationController {
     getMapData: () => MapData
   ) {
     this.angle = getShipStatus("angle");
-    this.angularVelocty = getShipStatus("angularVelocity");
+    this.angularVelocity = getShipStatus("angularVelocity");
+
+    if (YourSensorsController.onPlanet) {
+      land();
+    }
   }
 }
