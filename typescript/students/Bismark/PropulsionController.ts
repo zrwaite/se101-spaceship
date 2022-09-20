@@ -13,6 +13,7 @@ export default class YourPropulsionController extends PropulsionController {
 
   //Add additional attributes here
   private prevHeadingDiff: number | undefined;
+  private prevSpeed: number | undefined;
 
   propulsionUpdate(
     setThruster: (thruster: ThrusterName, power: number) => Error | null
@@ -20,6 +21,13 @@ export default class YourPropulsionController extends PropulsionController {
     //Student code goes here
     if (!this.sensors.target) return;
     if (this.navigation.angle === undefined) return;
+
+    // Speed by getting magnitude
+    const speed = Math.pow(
+      (this.navigation.linearVelocityX ?? 0) ** 2 +
+        (this.navigation.linearVelocityY ?? 0) ** 2,
+      1 / 2
+    );
 
     const correctionalForce = 250;
 
@@ -60,8 +68,10 @@ export default class YourPropulsionController extends PropulsionController {
       setThruster("counterClockwise", 0);
       setThruster("clockwise", 0);
     }
-    setThruster("main", Math.abs(headingDiff) < 0.2 ? 30 : 0);
+
+    setThruster("main", Math.abs(headingDiff) < 0.2 && speed < 0.75 ? 30 : 0);
 
     this.prevHeadingDiff = headingDiff;
+    this.prevSpeed = speed;
   }
 }
