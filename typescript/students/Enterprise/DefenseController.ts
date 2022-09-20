@@ -3,6 +3,10 @@ import { Vector2, withinPiRange, angleDiff } from '../helpers.js'
 import YourNavigationController from './NavigationController.js'
 import YourPropulsionController from './PropulsionController.js'
 import YourSensorsController from './SensorsController.js'
+import { MapData, ShipStatus} from '../types.js'
+import NavigationController from '../../src/subsystems/navigationController.js'
+
+
 export default class YourDefenceController extends DefenceController {
 	// To get other subsystem information, use the attributes below. 
 	// @ts-ignore
@@ -21,7 +25,9 @@ export default class YourDefenceController extends DefenceController {
 		fireTorpedo(0);
 		//auto shoot when cooldown is done
 		if(getTubeCooldown(0)==0){
+			aimTurret(this.sensors.target.heading)
 			fireTorpedo(0);
 		}
 	}
 }
+
