@@ -28,6 +28,12 @@ export default class YourNavigationController extends NavigationController {
         // this.thrusterPowerBow = getShipStatus('thrusterPowerBow');
         // this.thrusterPowerClockwise = getShipStatus('thrusterPowerClockwise');
         // this.thrusterPowerCounterClockwise = getShipStatus('thrusterPowerCounterClockwise');
+        /*plan: sense for objects, if there is an object:
+         if the object is a planet, land,
+         if it is a warp, warp
+         otherwise, do nothing (for now)
+         */
         land();
+        warp();
     }
 }
