@@ -10,9 +10,16 @@ export default class YourDefenceController extends DefenceController {
         let angle = 10;
         let distance = 10;
         let heading = (-3 * 3.14 / 4);
+        let asteroidList = [];
+        let asteroid;
+        let shipPos;
         const aestroid_velocity = new Vector2(5, 7);
         if (!this.sensors.target)
             return;
-        aimTurret(this.sensors.target.heading);
+        asteroidList = this.sensors.asteroids;
+        asteroid = this.sensors.asteroids[0];
+        console.log(asteroid.angle);
+        //aimTurret(asteroid.angle)
+        //fireTorpedo(1)
     }
 }

@@ -2,7 +2,7 @@ import DefenceController from '../../src/subsystems/defenceController.js'
 import { Vector2, withinPiRange, angleDiff } from '../helpers.js'
 import YourNavigationController from './NavigationController.js'
 import YourPropulsionController from './PropulsionController.js'
-import YourSensorsController from './SensorsController.js'
+import YourSensorsController, { SpaceObject } from './SensorsController.js'
 export default class YourDefenceController extends DefenceController {
 	// To get other subsystem information, use the attributes below. 
 	// @ts-ignore
@@ -10,6 +10,7 @@ export default class YourDefenceController extends DefenceController {
 	sensors: YourSensorsController // @ts-ignore
 	propulsion: YourPropulsionController
 	//Add additional attributes here
+
 	
 	defenceUpdate(aimTurret: (angle: number) => void, getTubeCooldown: (i: number) => number | Error, fireTorpedo: (i: number) => Error | null) {
 
@@ -19,15 +20,27 @@ export default class YourDefenceController extends DefenceController {
 		// pseudocode
 		// if an asteroid is within x distance from our heading, aim and fire at it
 
-		//defence push
-
 		let angle: number = 10;
 		let distance: number = 10;
 		let heading: number = (-3*3.14/4)
+		let asteroidList: SpaceObject[] = []
+		let asteroid: SpaceObject;
+		let shipPos: Vector2
 		const aestroid_velocity = new Vector2(5,7);
 		
 		if (!this.sensors.target) return
-		aimTurret(this.sensors.target.heading)
+		
+		
+		asteroidList = this.sensors.asteroids;
+		asteroid = this.sensors.asteroids[0];
+
+		console.log(asteroid.angle)
+
+		
+
+		//aimTurret(asteroid.angle)
+		//fireTorpedo(1)
+
 
 	}
 }

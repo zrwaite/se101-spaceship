@@ -36,7 +36,7 @@ export default class YourNavigationController extends NavigationController {
 
 		this.angle = getShipStatus('angle')
 		land()
-	}
+	}	
 
 	//getter for mapData
 	public get getMapData() {
