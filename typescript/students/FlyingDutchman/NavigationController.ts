@@ -18,11 +18,27 @@ export default class YourNavigationController extends NavigationController {
 
 	//Add additional attributes here
 	exploredSystems: string[] = []
-	
+	mapData: MapData|null = null
+
+	possibleObjects: SpaceObject[] = []
+
+	scanned: boolean = false
+
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		//Student code goes here
+		if (!this.scanned) {
+			this.mapData = getMapData()
+			this.scanned = true;
+		}
+		
+
+
 		this.angle = getShipStatus('angle')
 		land()
+	}
+
+	public getMapData() {
+		return this.mapData
 	}
 }
