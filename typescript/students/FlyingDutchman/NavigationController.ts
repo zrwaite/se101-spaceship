@@ -23,8 +23,8 @@ export default class YourNavigationController extends NavigationController {
 	possibleObjects: SpaceObject[] = []
 
 	scanned: boolean = false
-	position: Vector2 | null = null
-	target: Vector2 | null = null
+	position: Vector2 = new Vector2(0,0)
+	target: Vector2 = new Vector2(0,0)
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		//Student code goes here
