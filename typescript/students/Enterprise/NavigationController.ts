@@ -22,6 +22,9 @@ export default class YourNavigationController extends NavigationController {
 		if (closeRangeObject?.closeRange && closeRangeObject.closeRange.type === 'Planet' && closeRangeObject.distance < 20) {
 			land();
 		}
+		if (closeRangeObject?.closeRange && closeRangeObject.closeRange.type === 'WarpGate' && closeRangeObject.distance < 20) {
+			warp();
+		}
 		
 		this.angle = getShipStatus("angle");
 	}
