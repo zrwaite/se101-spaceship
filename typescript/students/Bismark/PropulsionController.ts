@@ -22,6 +22,7 @@ export default class YourPropulsionController extends PropulsionController {
       this.navigation.angle,
       this.sensors.target.heading
     );
+
     const force = Math.min(Math.abs(500 * headingDiff), 100);
     if (headingDiff < 0) {
       setThruster("clockwise", force);

@@ -2,6 +2,9 @@ import NavigationController from "../../src/subsystems/navigationController.js";
 export default class YourNavigationController extends NavigationController {
     navigationUpdate(getShipStatus, warp, land, getMapData) {
         this.angle = getShipStatus("angle");
+        this.angularVelocity = getShipStatus("angularVelocity");
+        this.linearVelocityX = getShipStatus("linearVelocityX");
+        this.linearVelocityY = getShipStatus("linearVelocityY");
         /* instead of landing all the time:
           - pull data from an EMS scan
           - pull current x/y position

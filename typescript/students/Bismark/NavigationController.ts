@@ -15,6 +15,12 @@ export default class YourNavigationController extends NavigationController {
 
   // @ts-ignore
   angle: number;
+  // @ts-ignore
+  angularVelocity: number;
+  // @ts-ignore
+  linearVelocityX: number;
+  // @ts-ignore
+  linearVelocityY: number;
 
   navigationUpdate(
     getShipStatus: (key: keyof ShipStatus) => number,
@@ -23,7 +29,10 @@ export default class YourNavigationController extends NavigationController {
     getMapData: () => MapData
   ) {
     this.angle = getShipStatus("angle");
-    
+    this.angularVelocity = getShipStatus("angularVelocity");
+    this.linearVelocityX = getShipStatus("linearVelocityX");
+    this.linearVelocityY = getShipStatus("linearVelocityY");
+
     /* instead of landing all the time:
       - pull data from an EMS scan
       - pull current x/y position
@@ -41,5 +50,5 @@ export default class YourNavigationController extends NavigationController {
     
     */
     land();
-  } 
+  }
 }
