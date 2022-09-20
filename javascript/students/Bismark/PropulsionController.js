@@ -5,6 +5,9 @@ export default class YourPropulsionController extends PropulsionController {
         //Student code goes here
         if (!this.sensors.target)
             return;
+        // Speed by getting magnitude
+        const speed = Math.pow(this.navigation.linearVelocityX ** 2 +
+            this.navigation.linearVelocityX ** 2, 1 / 2);
         const correctionalForce = 250;
         const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading);
         const force = Math.min(Math.abs(100 * headingDiff), 50);
@@ -39,7 +42,8 @@ export default class YourPropulsionController extends PropulsionController {
             setThruster("counterClockwise", 0);
             setThruster("clockwise", 0);
         }
-        setThruster("main", Math.abs(headingDiff) < 0.2 ? 30 : 0);
+        setThruster("main", Math.abs(headingDiff) < 0.2 && speed < 0.75 ? 30 : 0);
         this.prevHeadingDiff = headingDiff;
+        this.prevSpeed = speed;
     }
 }
