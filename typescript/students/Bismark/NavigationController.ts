@@ -13,18 +13,10 @@ export default class YourNavigationController extends NavigationController {
   sensors: YourSensorsController; // @ts-ignore
   propulsion: YourPropulsionController;
 
-  // @ts-ignore
-  angle: number;
-  // @ts-ignore
-  angularVelocity: number;
-  // @ts-ignore
-  linearVelocityX: number;
-  // @ts-ignore
-  linearVelocityY: number;
-  // @ts-ignore
-  posX: number;
-  // @ts-ignore
-  posY: number;
+  angle?: number;
+  angularVelocity?: number;
+  linearVelocityX?: number;
+  linearVelocityY?: number;
 
   navigationUpdate(
     getShipStatus: (key: keyof ShipStatus) => number,
@@ -54,6 +46,7 @@ export default class YourNavigationController extends NavigationController {
     /* 
     
     */
+    warp();
     land();
   }
 }

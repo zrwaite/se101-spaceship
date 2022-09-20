@@ -21,6 +21,7 @@ export default class YourNavigationController extends NavigationController {
         /*
         
         */
+        warp();
         land();
     }
 }
