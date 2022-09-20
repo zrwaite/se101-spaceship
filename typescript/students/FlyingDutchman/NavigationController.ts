@@ -49,13 +49,13 @@ export default class YourNavigationController extends NavigationController {
 	}
 
 
-	// updates target
+	// tries to update target
 	updateTarget() {
 		if (this.target == null) {
 			//update if null
 		}
 		else if (true){
-			//update if target was succesfully scanned
+			//update if target was succesfully scanned, based on habitibility etc.
 		}
 		else {
 			// dont update otherwise
