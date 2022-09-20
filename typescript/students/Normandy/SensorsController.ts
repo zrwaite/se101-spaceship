@@ -16,18 +16,23 @@ export default class YourSensorsController extends SensorsController {
 	target: PassiveReading | null = null
 	passiveScans: (PassiveReading[] | Error)[] = []
 	activeScans: (EMSReading[] | Error)[] = []
-	
+	passiveCooldown: number = 0
+	activeCooldown: number = 0
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
-		const scanResult = passiveScan()
-		if(!(scanResult instanceof Error ))  {
-			this.target = scanResult[0]	
-			this.passiveScans.push(scanResult)
-			console.log(this.passiveScans)
+		if (this.passiveCooldown <= 0) {
+			const scanResult = passiveScan()
+			if(!(scanResult instanceof Error ))  {
+				this.target = scanResult[0]	
+				this.passiveScans.push(scanResult)
+				console.log(this.passiveScans)
+			}
 		}
-		const activeResult = activeScan(0, Math.PI, 1000)
-		if(!(activeResult instanceof Error ))  {	
-			this.activeScans.push(activeResult)
-			console.log(activeResult)
+		if (this.activeCooldown <= 0) {
+			const activeResult = activeScan(0, Math.PI, 1000)
+			if(!(activeResult instanceof Error ))  {	
+				this.activeScans.push(activeResult)
+				console.log(activeResult)
+			}
 		}
 		//console.log(activeResult)
 	}	
