@@ -19,9 +19,8 @@ export default class YourNavigationController extends NavigationController {
 	angle: number = 0;
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
-
-		
-		
+		this.angle = getShipStatus('angle')
+		land();
 		//what the DUCK is a planet
 		interface Planet {
 			x: number
