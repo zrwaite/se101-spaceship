@@ -1,4 +1,5 @@
 import NavigationController from '../../src/subsystems/navigationController.js';
+//import { NumberLiteralType } from '../../../node_modules/typescript/lib/typescript.js'
 export default class YourNavigationController extends NavigationController {
     constructor() {
         super(...arguments);
@@ -6,8 +7,5 @@ export default class YourNavigationController extends NavigationController {
         this.angle = 0;
     }
     navigationUpdate(getShipStatus, warp, land, getMapData) {
-        //Student code goes here
-        this.angle = getShipStatus('angle');
-        land();
     }
 }
