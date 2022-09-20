@@ -14,7 +14,6 @@ export default class YourSensorsController extends SensorsController {
 
   // @ts-ignore
   target: PassiveReading;
-  //Add additional attributes here
 
   sensorsUpdate(
     activeScan: (
@@ -47,4 +46,5 @@ export default class YourSensorsController extends SensorsController {
       }
     }
   }
+
 }
