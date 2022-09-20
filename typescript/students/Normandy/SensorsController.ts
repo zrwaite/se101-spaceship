@@ -15,6 +15,7 @@ export default class YourSensorsController extends SensorsController {
 	//Add additional attributes here
 	target: PassiveReading | null=null;
 	landTarget: Vector2 | null=null;
+	warpTarget: Vector2 | null=null;
 
   	collisionCheck(target: Vector2, selfVelocity: Vector2, targetVelocity: Vector2): number {
 		//given target, selfvelocity, and target velocity; return time to impact; negative means wont impact
@@ -49,12 +50,23 @@ export default class YourSensorsController extends SensorsController {
 			var astroid_heading = []
 			
 			for(let i=0; i<scanResult.length; i++){
-				const ems = activeScan(scanResult[i].heading,0.1,680)
+				if(scanResult[i].gravity<0){
+					const ems = activeScan(scanResult[i].heading,5,680)
+					if(!(ems instanceof Error)) {
+						for(let j=0; i<ems.length; i++){
+							if(ems[j].radius==15){
+								this.warpTarget = this.cartesian(ems[j].angle, ems[j].distance).add(this.navigation.shipPosition)
+							}
+						}
+					}
+					continue;
+				}
+				const ems = activeScan(scanResult[i].heading,5,680)
 				if(!(ems instanceof Error)) {
 					for(let j=0; i<ems.length; i++){
 						if(ems[j].distance>0 && ems[j].radius<=45 && ems[j].radius>=25){
 							this.landTarget = this.cartesian(ems[j].angle, ems[j].distance).add(this.navigation.shipPosition)
-						}else if(ems[j].radius>0 && ems[j].radius<=5){
+						}else if(ems[j].radius>0 && (ems[j].radius==5 || ems[j].radius==15) ){
 							astroid_heading.push(ems[j].angle)
 							//tti is time to impact
 							var tti = this.collisionCheck(this.cartesian(ems[j].angle, ems[j].distance),this.navigation.shipVelocity,ems[j].velocity)
