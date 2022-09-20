@@ -1,12 +1,18 @@
 import DefenceController from '../../src/subsystems/defenceController.js';
+import { Vector2 } from '../helpers.js';
 export default class YourDefenceController extends DefenceController {
     //Add additional attributes here
     defenceUpdate(aimTurret, getTubeCooldown, fireTorpedo) {
-        //Student code goes here
+        // we have four torpedos that can be shot at one time
+        // we get angle, distance, heading and velocity of the aseteroids from the sensors
+        // pseudocode
+        // if an asteroid is within x distance from our heading, aim and fire at it
+        let angle = 10;
+        let distance = 10;
+        let heading = (-3 * 3.14 / 4);
+        const aestroid_velocity = new Vector2(5, 7);
         if (!this.sensors.target)
             return;
         aimTurret(this.sensors.target.heading);
-        fireTorpedo(0);
-        //test
     }
 }
