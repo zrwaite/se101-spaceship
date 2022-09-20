@@ -21,15 +21,18 @@ export default class YourSensorsController extends SensorsController {
 	}
 
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
-		// const passiveScanResult = passiveScan()
-		// if (!(passiveScanResult instanceof Error)) console.log(passiveScanResult)
-		// if (!(passiveScanResult instanceof Error)) this.target = passiveScanResult[0]
+		const passiveScanResult = passiveScan()
+		if (!(passiveScanResult instanceof Error)) console.log(passiveScanResult)
+		if (!(passiveScanResult instanceof Error)) this.target = passiveScanResult[0]
 
-		const activeScanResult = activeScan(this.navigation.angle-this.rad(10), this.rad(20), 500); // Lower range for more fuel efficiency
+		const activeScanResult = activeScan(this.navigation.angle-this.rad(10), this.rad(20), 200) // Lower range for more fuel efficiency
 		if (!(activeScanResult instanceof Error)) console.log(activeScanResult)
 		if (!(activeScanResult instanceof Error)){ 
-			this.targetDistance = activeScanResult[0].distance
+			if (activeScanResult.length > 0){
+				this.targetDistance = activeScanResult[0].distance
+			}
 		}
+		// console.log(this.targetDistance)
 	}
 
 }
