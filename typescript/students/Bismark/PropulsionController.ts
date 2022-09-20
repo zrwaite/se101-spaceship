@@ -20,11 +20,12 @@ export default class YourPropulsionController extends PropulsionController {
   ) {
     //Student code goes here
     if (!this.sensors.target) return;
+    if (this.navigation.angle === undefined) return;
 
     // Speed by getting magnitude
     const speed = Math.pow(
-      this.navigation.linearVelocityX ** 2 +
-        this.navigation.linearVelocityX ** 2,
+      (this.navigation.linearVelocityX ?? 0) ** 2 +
+        (this.navigation.linearVelocityY ?? 0) ** 2,
       1 / 2
     );
 
