@@ -28,6 +28,6 @@ export default class YourPropulsionController extends PropulsionController {
 			setThruster('counterClockwise', force)
 			setThruster('clockwise', 0)
 		}
-		setThruster('main', Math.abs(headingDiff) < 0.2 ? 30 : 0)
+		setThruster('main', Math.abs(headingDiff) < 0.7 ? 30 : 0)
 	}
 }
