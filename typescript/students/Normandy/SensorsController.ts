@@ -19,6 +19,7 @@ export default class YourSensorsController extends SensorsController {
 	passiveCooldown: number = 0
 	activeCooldown: number = 0
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
+		
 		if (this.passiveCooldown <= 0) {
 			const scanResult = passiveScan()
 			if(!(scanResult instanceof Error ))  {

@@ -16,20 +16,47 @@ export default class YourPropulsionController extends PropulsionController {
         if(!this.sensors.target) return
         const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading)
         const force = Math.min(Math.abs(1000 * headingDiff), 100)
-        if(Math.abs(headingDiff) < 0.05) {
-            setThruster('clockwise', 0);
+        const absHeadingDiff = Math.abs(headingDiff);
+        if(Math.abs(headingDiff) < 0.03) {
+            setThruster('clockwise', 0)
             setThruster('counterClockwise', 0);
         }
-        if(headingDiff < 0) {
-            setThruster('clockwise', 2);
+        else if(headingDiff < 0) {
             setThruster('counterClockwise', 0);
+            if(absHeadingDiff > 0.5) {
+                setThruster('clockwise', 30);
+            }
+            if(absHeadingDiff <= 0.5 && absHeadingDiff > 0.25) {
+                setThruster('clockwise', 10);
+            }
+            if(absHeadingDiff <= 0.25) {
+                setThruster('clockwise', 5);
+                setThruster('counterClockwise', 2)
+            }
+            if(absHeadingDiff <= 0.10) {
+                setThruster('clockwise', 0);
+                setThruster('counterClockwise', -5);
+            }
         }
-        else if(headingDiff > 0){
+        else if(headingDiff > 0) {
             setThruster('clockwise', 0);
-            setThruster('counterClockwise', 2);
+            if(absHeadingDiff > 0.5) {
+                setThruster('counterClockwise', 30);
+            }
+            if(absHeadingDiff <= 0.5 && absHeadingDiff > 0.25) {
+                setThruster('counterClockwise', 10);
+            }
+            if(absHeadingDiff <= 0.25) {
+                setThruster('counterClockwise', 5);
+                setThruster('clockwise', 2)
+            }
+            if(absHeadingDiff <= 0.10) {
+                setThruster('counterClockwise', 0);
+                setThruster('clockwise', -5);
+            }
         }
 
-        if(Math.abs(headingDiff) < 0.05) {
+        if(Math.abs(headingDiff) < 0.25) {
             setThruster('main', 100);
         } else {
             setThruster('main', 0);
