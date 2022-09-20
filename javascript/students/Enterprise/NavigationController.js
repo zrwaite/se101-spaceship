@@ -1,7 +1,7 @@
 import NavigationController from '../../src/subsystems/navigationController.js';
 export default class YourNavigationController extends NavigationController {
     constructor() {
-        super(...arguments); // these are the arguments
+        super(...arguments);
         this.angle = 0;
     }
     //Add additional attributes here
