@@ -16,6 +16,7 @@ export default class YourPropulsionController extends PropulsionController {
   //Add additional attributes here
 
   prevError:number = 0;
+  maxOutput:number = 0;
 
   kForceConst:number = 20;
   dForceConst:number = -10;
@@ -38,7 +39,10 @@ export default class YourPropulsionController extends PropulsionController {
 
     console.log("angle" + currError)
 
-    if(Math.abs(currError) > Math.PI/180 * 15) {
+   
+  
+
+    if(Math.abs(currError) > Math.PI/180 * 5) {
       if(currError > 0) {
         output = 30;
         console.log("POS")
@@ -69,6 +73,9 @@ export default class YourPropulsionController extends PropulsionController {
     // console.log("force " + force);
 
     
+    this.maxOutput = Math.max(this.maxOutput, Math.abs(output))
+    console.log("MAXOUTPUT: " + this.maxOutput)
+
     if (output < 0) {
       setThruster('clockwise', Math.abs(output))
       setThruster('counterClockwise', 0)
