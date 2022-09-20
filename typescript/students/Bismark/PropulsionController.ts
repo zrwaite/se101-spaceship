@@ -29,7 +29,7 @@ export default class YourPropulsionController extends PropulsionController {
       1 / 2
     );
 
-    const correctionalForce = 250;
+    const correctionalForce = 250; //to compensate power on one side
 
     const headingDiff = angleDiff(
       this.navigation.angle,
@@ -43,7 +43,7 @@ export default class YourPropulsionController extends PropulsionController {
       if (
         this.prevHeadingDiff &&
         this.prevHeadingDiff - headingDiff < -0.001 && // If the spaceship is turning "fast"
-        headingDiff >= -0.5 // If almost pointing at the right direction
+        headingDiff >= -0.5 // If almost pointing at the right direction 
       ) {
         // Thrust other way
         setThruster("counterClockwise", correctionalForce);
