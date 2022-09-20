@@ -24,5 +24,7 @@ export default class YourNavigationController extends NavigationController {
         this.positionY = getShipStatus('positionY');
         this.linearVelocityX = getShipStatus('linearVelocityX');
         this.linearVelocityY = getShipStatus('linearVelocityY');
+        land();
+        warp();
     }
 }

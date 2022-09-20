@@ -30,7 +30,13 @@ export default class YourNavigationController extends NavigationController {
 
 	//MAIN => runs multiple times a second
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
+<<<<<<< HEAD
+		this.angle = getShipStatus('angle')
+		land()
+		warp()
+=======
 		
+>>>>>>> d90a6388e20f3a3086f8cf8f55316b629fa96109
 		//galaxy MAP
 		//let map = new Map<Galaxy, SolarSystem[]>();
 
