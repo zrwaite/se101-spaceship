@@ -26,7 +26,7 @@ export default class YourSensorsController extends SensorsController {
 		if (!(passiveScanResult instanceof Error)) console.log(passiveScanResult)
 		if (!(passiveScanResult instanceof Error)) this.target = passiveScanResult[0] //reading first object that passiveScan scans
 
-		const activeScanResult = activeScan(this.navigation.angle-this.rad(10), this.rad(20), 200) // Lower range for energy efficiency
+		const activeScanResult = activeScan(this.navigation.angle-this.rad(10), this.rad(20), 400) // Lower range for energy efficiency
 		if (!(activeScanResult instanceof Error)) console.log(activeScanResult)
 		if (!(activeScanResult instanceof Error)){ 
 			if (activeScanResult.length > 0){
