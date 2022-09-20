@@ -12,24 +12,55 @@ export default class YourPropulsionController extends PropulsionController {
   navigation: YourNavigationController;
 
   //Add additional attributes here
+  private prevHeadingDiff: number | undefined;
 
   propulsionUpdate(
     setThruster: (thruster: ThrusterName, power: number) => Error | null
   ) {
     //Student code goes here
     if (!this.sensors.target) return;
+
+    const correctionalForce = 250;
+
     const headingDiff = angleDiff(
       this.navigation.angle,
       this.sensors.target.heading
     );
-    const force = Math.min(Math.abs(500 * headingDiff), 100);
-    if (headingDiff < 0) {
-      setThruster("clockwise", force);
-      setThruster("counterClockwise", 0);
+    const force = Math.min(Math.abs(100 * headingDiff), 50);
+
+    const headingDiffBuffer = 0;
+
+    if (headingDiff < -headingDiffBuffer) {
+      if (
+        this.prevHeadingDiff &&
+        this.prevHeadingDiff - headingDiff < -0.001 && // If the spaceship is turning "fast"
+        headingDiff >= -0.5 // If almost pointing at the right direction
+      ) {
+        // Thrust other way
+        setThruster("counterClockwise", correctionalForce);
+        setThruster("clockwise", 0);
+      } else {
+        setThruster("clockwise", force);
+        setThruster("counterClockwise", 0);
+      }
+    } else if (headingDiff > headingDiffBuffer) {
+      if (
+        this.prevHeadingDiff &&
+        this.prevHeadingDiff - headingDiff > 0.001 &&
+        headingDiff <= 0.5
+      ) {
+        setThruster("clockwise", correctionalForce);
+        setThruster("counterClockwise", 0);
+      } else {
+        setThruster("counterClockwise", force);
+        setThruster("clockwise", 0);
+      }
     } else {
-      setThruster("counterClockwise", force);
+      setThruster("counterClockwise", 0);
       setThruster("clockwise", 0);
     }
     setThruster("main", Math.abs(headingDiff) < 0.2 ? 30 : 0);
+
+    this.prevHeadingDiff = headingDiff;
   }
 }
