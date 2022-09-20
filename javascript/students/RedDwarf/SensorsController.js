@@ -16,10 +16,10 @@ export default class YourSensorsController extends SensorsController {
                 if (JSON.stringify(v) == JSON.stringify(scanResult)) {
                     console.log("found the planet");
                     console.log(scanResult);
+                    this.target = scanResult[0];
                 }
             });
             allObjects.push(scanResult);
-            this.target = scanResult[0];
         }
         //this is a test
     }
