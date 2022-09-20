@@ -21,6 +21,10 @@ export default class YourNavigationController extends NavigationController {
   linearVelocityX: number;
   // @ts-ignore
   linearVelocityY: number;
+  // @ts-ignore
+  posX: number;
+  // @ts-ignore
+  posY: number;
 
   navigationUpdate(
     getShipStatus: (key: keyof ShipStatus) => number,
@@ -29,6 +33,7 @@ export default class YourNavigationController extends NavigationController {
     getMapData: () => MapData
   ) {
     this.angle = getShipStatus("angle");
+    console.log(this.angle);
     this.angularVelocity = getShipStatus("angularVelocity");
     this.linearVelocityX = getShipStatus("linearVelocityX");
     this.linearVelocityY = getShipStatus("linearVelocityY");
