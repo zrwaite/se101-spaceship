@@ -30,7 +30,7 @@ export default class YourNavigationController extends NavigationController {
 		if (!this.scanned) {
 			this.mapData = getMapData()
 			this.scanned = true;
-			this.possibleObjects = this.sensors.warpgatesOrPlanets
+			
 		}
 		
 
@@ -45,7 +45,7 @@ export default class YourNavigationController extends NavigationController {
 		return this.mapData
 	}
 
-	//getter for target, returns vector 2 or null
+	//getter for target, returns target or null
 	public get getTarget() {
 		return this.target
 	}
