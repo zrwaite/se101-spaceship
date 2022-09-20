@@ -26,11 +26,6 @@ export default class YourSensorsController extends SensorsController {
 
 	} 
 
-	polar(x: number, y: number): number[]{
-		// Given x,y coords assuming ship pos is 0,0, return [angle (in radians), distance]
-		return [Math.sqrt(x*x + y*y), Math.atan(y/x)]
-	}
-
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
 		//Student code goes here
 		const scanResult = passiveScan();
