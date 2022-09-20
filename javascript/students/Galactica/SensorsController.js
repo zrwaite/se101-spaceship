@@ -7,6 +7,7 @@ export default class YourSensorsController extends SensorsController {
         this.spaceObjects = null;
         this.targetDistance = 0;
     }
+    // helper function to convert degrees to radians
     rad(angleDeg) {
         return angleDeg * Math.PI / 180;
     }
@@ -15,13 +16,14 @@ export default class YourSensorsController extends SensorsController {
         if (!(passiveScanResult instanceof Error))
             console.log(passiveScanResult);
         if (!(passiveScanResult instanceof Error))
-            this.target = passiveScanResult[0];
-        const activeScanResult = activeScan(this.navigation.angle - this.rad(10), this.rad(20), 200); // Lower range for more fuel efficiency
+            this.target = passiveScanResult[0]; //reading first object that passiveScan scans
+        const activeScanResult = activeScan(this.navigation.angle - this.rad(10), this.rad(20), 200); // Lower range for energy efficiency
         if (!(activeScanResult instanceof Error))
             console.log(activeScanResult);
         if (!(activeScanResult instanceof Error)) {
             if (activeScanResult.length > 0) {
-                this.targetDistance = activeScanResult[0].distance;
+                //
+                this.targetDistance = activeScanResult[0].distance; //finding distance to first object activeScan scans
             }
         }
         // console.log(this.targetDistance)
