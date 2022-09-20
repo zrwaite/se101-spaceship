@@ -20,7 +20,7 @@ export default class YourSensorsController extends SensorsController {
 	//Add additional attributes here
 	target: PassiveReading | null = null	
 	spaceObjects: EMSReading | null = null
-	spaceObjectsDetailed: spaceObjectDetailed[] | null = null
+	spaceObjectsDetailed: SpaceObjectDetailed[] | null = null
 	targetDistance = 0
 	activeArray = new Array<EMSReading>(4);
 	facing = ""
