@@ -16,7 +16,7 @@ export default class YourSensorsController extends SensorsController {
   closeRangeObject: string | null = null;
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
 		const scanResult = passiveScan();
-    const activeResult = this.target ? activeScan(this.target.heading - 3.14/6, 3.14/3, 200) : new Error("not ready");
+    const activeResult = this.target ? activeScan(this.target.heading - 3.14/2, 3.14, 200) : new Error("not ready");
     if(!(scanResult instanceof Error)) this.target = scanResult[0];
     if(!(activeResult instanceof Error) && activeResult[0]?.closeRange) {
       this.closeRangeObject = activeResult[0].closeRange.type;

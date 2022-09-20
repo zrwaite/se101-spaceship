@@ -9,7 +9,7 @@ export default class YourSensorsController extends SensorsController {
     sensorsUpdate(activeScan, passiveScan) {
         var _a;
         const scanResult = passiveScan();
-        const activeResult = this.target ? activeScan(this.target.heading - 3.14 / 6, 3.14 / 3, 200) : new Error("not ready");
+        const activeResult = this.target ? activeScan(this.target.heading - 3.14 / 2, 3.14, 200) : new Error("not ready");
         if (!(scanResult instanceof Error))
             this.target = scanResult[0];
         if (!(activeResult instanceof Error) && ((_a = activeResult[0]) === null || _a === void 0 ? void 0 : _a.closeRange)) {
