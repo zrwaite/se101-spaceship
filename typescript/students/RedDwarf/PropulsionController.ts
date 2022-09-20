@@ -36,21 +36,28 @@ export default class YourPropulsionController extends PropulsionController {
 
     var output = 0;
 
+
+    const errorDiff = currError-this.prevError;
+    const K = currError * 500;
+    const D = errorDiff * 5000;
+    output = K + D;
+    
+
     console.log("angle" + currError)
 
-    if(Math.abs(currError) > Math.PI/180 * 15) {
-      if(currError > 0) {
-        output = 30;
-        console.log("POS")
-      }else{
-        output = -30;
-        console.log("NEG")
-      }
-    }else{
-      const errorDiff = currError-this.prevError;
-      console.log(errorDiff);
-      output = errorDiff * 5000;
-    }
+    // if(Math.abs(currError) > Math.PI/180 * 15) {
+    //   if(currError > 0) {
+    //     output = 30;
+    //     console.log("POS")
+    //   }else{
+    //     output = -30;
+    //     console.log("NEG")
+    //   }
+    // }else{
+    //   const errorDiff = currError-this.prevError;
+    //   console.log(errorDiff);
+    //   output = errorDiff * 5000;
+    // }
 
     console.log("OUTPUT: " + output);
 
@@ -70,10 +77,10 @@ export default class YourPropulsionController extends PropulsionController {
 
     
     if (output < 0) {
-      setThruster('clockwise', Math.abs(output))
+      setThruster('clockwise', Math.min(Math.abs(output), 100))
       setThruster('counterClockwise', 0)
     } else {
-      setThruster('counterClockwise', Math.abs(output))
+      setThruster('counterClockwise', Math.min(Math.abs(output), 100))
       setThruster('clockwise', 0)
     }
     setThruster("main", Math.abs(currError) < 0.2 ? 30 : 0);
