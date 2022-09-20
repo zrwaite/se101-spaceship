@@ -20,4 +20,9 @@ export default class YourSensorsController extends SensorsController {
 		//this is a test
 	}
 }
+<<<<<<< HEAD
 // veronika is testing the commit
+=======
+
+// saaniya
+>>>>>>> 00e801fb1b0f01bd24680dee68c7a360620d88ab
