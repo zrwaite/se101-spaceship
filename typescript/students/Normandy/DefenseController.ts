@@ -14,6 +14,20 @@ export default class YourDefenceController extends DefenceController {
 	defenceUpdate(aimTurret: (angle: number) => void, getTubeCooldown: (i: number) => number | Error, fireTorpedo: (i: number) => Error | null) {
 
 		//Student code goes here
+		/*
+		aimTurret: (angle: number) => void
+		Sets the turret to aim at the specified angle.
+		Energy cost: (current angle - new angle) * 10.
+
+		getTubeCooldown: (i: number) => number | Error
+		Returns the cooldown time of the specified torpedo tube.
+		Energy cost: 5.
+
+		fireTorpedo: (i: number) => Error | null
+		Tries to fire the torpedo at the specified tube.
+		Returns null if successful.
+		Energy cost: 8 if successful, 2 if failed.
+		*/
 		if(!this.sensors.target) return
 		aimTurret(this.sensors.target.heading)
 		fireTorpedo(0)
