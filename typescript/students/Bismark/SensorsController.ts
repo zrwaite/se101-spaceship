@@ -23,6 +23,12 @@ export default class YourSensorsController extends SensorsController {
     passiveScan: () => PassiveReading[] | Error
   ) {
     const scanResult = passiveScan();
+    
+    interface PassiveReading {
+      heading: number
+      gravity: number
+    }
+
     if (!(scanResult instanceof Error)) this.target = scanResult[0];
   }
 }
