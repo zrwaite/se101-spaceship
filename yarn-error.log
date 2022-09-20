@@ -1,0 +1,53 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\Ethan\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
+
+PATH: 
+  C:\Users\Ethan\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Ethan\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\Intel\WiFi\bin;C:\Program Files\Common Files\Intel\WirelessCommon;C:\Program Files\nodejs;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Intel\Intel(R) Memory and Storage Tool;C:\Program Files\Solidigm\Solidigm(TM) Storage Tool;C:\Program Files\dotnet;C:\Users\Ethan\anaconda3;C:\Users\Ethan\anaconda3\Library\mingw-w64\bin;C:\Users\Ethan\anaconda3\Library\usr\bin;C:\Users\Ethan\anaconda3\Library\bin;C:\Users\Ethan\anaconda3\Scripts;C:\Users\Ethan\AppData\Local\Programs\Python\Python310\Scripts;C:\Users\Ethan\AppData\Local\Programs\Python\Python310;C:\Users\Ethan\AppData\Local\Microsoft\WindowsApps;C:\Users\Ethan\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Intel\WiFi\bin;C:\Program Files\Common Files\Intel\WirelessCommon;C:\Users\Ethan\AppData\Roaming\npm;C:\Users\Ethan\Documents\processing-3.5.4;C:\Users\Ethan\Downloads\w64devkit-1.16.1\w64devkit;C:\Users\Ethan\Downloads\w64devkit-1.16.1\w64devkit\w64devkit.exe;C:\msys64\mingw64.exe;C:\msys64\mingw64\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  14.18.1
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: connect ETIMEDOUT 104.16.25.35:443
+      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1159:16)
+
+npm manifest: 
+  {
+  	"name": "se101spaceship",
+  	"version": "1.0.0",
+  	"description": "Replacement for the SE101 Godot Spaceship System",
+  	"main": "src/index.js",
+  	"scripts": {
+  		"dev": "tsc --watch",
+  		"compile": "tsc;"
+  	},
+  	"repository": {
+  		"type": "git",
+  		"url": "git+https://github.com/zrwaite/SE101-Spaceship.git"
+  	},
+  	"keywords": [],
+  	"author": "Zac Waite, Josiah Plett",
+  	"license": "ISC",
+  	"dependencies": {
+  		"typescript": "^4.6.4"
+  	},
+  	"bugs": {
+  		"url": "https://github.com/zrwaite/SE101-Spaceship/issues"
+  	},
+  	"homepage": "https://github.com/zrwaite/SE101-Spaceship#readme",
+  	"exclude": [
+  		"node_modules"
+  	]
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
