@@ -9,16 +9,17 @@ export default class YourSensorsController extends SensorsController {
     sensorsUpdate(activeScan, passiveScan) {
         const scanResult = passiveScan();
         if (!(scanResult instanceof Error)) {
-            // checks if scan object already exists in allObjects
-            // if it does, that object is the planet
-            allObjects.forEach(planet => {
-                if (JSON.stringify(planet) == JSON.stringify(scanResult)) {
-                    console.log("found the planet", scanResult[0]);
-                    this.target = scanResult[0]; // sets target to planet
-                }
-            });
-            allObjects.push(scanResult); // adds object to array
+            if (!this.target) {
+                // checks if scan object already exists in allObjects
+                // if it does, that object is the planet
+                allObjects.forEach(planet => {
+                    if (JSON.stringify(planet) == JSON.stringify(scanResult)) {
+                        console.log("found the planet", scanResult[0]);
+                        this.target = scanResult[0]; // sets target to planet
+                    }
+                });
+                allObjects.push(scanResult); // adds object to array
+            }
         }
-        //this is a test
     }
 }
