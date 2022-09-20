@@ -14,14 +14,40 @@ export default class YourNavigationController extends NavigationController {
 	propulsion: YourPropulsionController
 
 	//Add additional attributes here
-	angle = 0;
+	radius = 0;
 	angularVelocity = 0;
+	angle = 0;
+	positionX = 0;
+	positionY = 0;
+	linearVelocityX = 0;
+	linearVelocityY = 0;
+	thrusterPowerMain = 0;
+	thrusterPowerBow = 0;
+	thrusterPowerClockwise = 0;
+	thrusterPowerCounterClockwise = 0;
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
-		//Student code goes here
+		// Update attributes (currently don't know which ones are needed by other subsystems)
+		
+		// this.radius = getShipStatus('radius');
+		this.angularVelocity = getShipStatus('angularVelocity');
 		this.angle = getShipStatus('angle');
-		this.angularVelocity = getShipStatus("angularVelocity");
+		// this.positionX = getShipStatus('positionX');
+		// this.positionY = getShipStatus('positionY');
+		// this.linearVelocityX = getShipStatus('linearVelocityX');
+		// this.linearVelocityY = getShipStatus('linearVelocityY');
+		// this.thrusterPowerMain = getShipStatus('thrusterPowerMain');
+		// this.thrusterPowerBow = getShipStatus('thrusterPowerBow');
+		// this.thrusterPowerClockwise = getShipStatus('thrusterPowerClockwise');
+		// this.thrusterPowerCounterClockwise = getShipStatus('thrusterPowerCounterClockwise');
 
-		land()
+
+		/*plan: sense for objects, if there is an object:
+		 if the object is a planet, land, 
+		 if it is a warp, warp
+		 otherwise, do nothing (for now)
+		 */
+		land();
+		warp();
 	}
 }
