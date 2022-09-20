@@ -13,9 +13,20 @@ export default class YourSensorsController extends SensorsController {
 
 	//Add additional attributes here
 	target: PassiveReading | null = null;
+	closeRange: EMSReading[] | null = null;
 
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
 		const scanResult = passiveScan();
-		if (!(scanResult instanceof Error)) this.target = scanResult[0];
+		if (!(scanResult instanceof Error)) {
+			this.target = scanResult[0];
+			const activeScanData = activeScan(this.target.heading - 1, 2, 300);
+
+			if(!(activeScanData instanceof Error)) {
+
+				this.closeRange = activeScanData
+				console.log(this.closeRange)
+			}
+		}
+
 	}
 }
