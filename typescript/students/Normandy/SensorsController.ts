@@ -4,6 +4,7 @@ import YourDefenceController from './DefenseController.js'
 import YourNavigationController from './NavigationController.js'
 import YourPropulsionController from './PropulsionController.js'
 import { EMSReading, PassiveReading } from '../types.js'
+import { isPrivateIdentifier } from '../../../node_modules/typescript/lib/typescript.js'
 export default class YourSensorsController extends SensorsController {
 	// To get other subsystem information, use the attributes below.
 	// @ts-ignore
@@ -16,6 +17,34 @@ export default class YourSensorsController extends SensorsController {
 	
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
 		const scanResult = passiveScan()
-		if(!(scanResult instanceof Error )) this.target = scanResult[0]	
-	}	
+		if(!(scanResult instanceof Error )) this.target = scanResult[0]
+		
+		console.log(activeScan(0, Math.PI, 150));
+		/*var angle = EMSReading[1];
+		var distance = EMSReading[2];
+		var radius = EMSReading[3];
+		
+
+		if (radius >= 20 && radius <= 45) {
+			console.log("PLANET SCANNED")
+		} */
+
+
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
