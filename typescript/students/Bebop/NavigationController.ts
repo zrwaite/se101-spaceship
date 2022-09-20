@@ -42,5 +42,6 @@ export default class YourNavigationController extends NavigationController {
 		// this.thrusterPowerCounterClockwise = getShipStatus('thrusterPowerCounterClockwise');
 
 		land();
+		warp();
 	}
 }
