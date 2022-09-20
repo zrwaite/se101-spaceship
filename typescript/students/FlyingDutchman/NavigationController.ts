@@ -20,7 +20,7 @@ export default class YourNavigationController extends NavigationController {
 	exploredSystems: string[] = []
 	mapData: MapData|null = null
 
-	possibleObjects: SpaceObject[] = []
+	//possibleObjects: SpaceObject[] = []
 
 	scanned: boolean = false
 
