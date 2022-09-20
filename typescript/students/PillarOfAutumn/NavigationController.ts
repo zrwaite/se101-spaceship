@@ -14,13 +14,6 @@ export default class YourNavigationController extends NavigationController {
 	propulsion: YourPropulsionController
 	angle: number = 0
 
-<<<<<<< HEAD
-	//Add additional attributes here
-	angle: number = 0
-=======
-	//Add additional attributes here asd
->>>>>>> 44217053c0cb5909c0b2dbd0608726fea55a898f
-
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		this.angle = getShipStatus('angle')
 		land()
