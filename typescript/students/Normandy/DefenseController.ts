@@ -15,6 +15,7 @@ export default class YourDefenceController extends DefenceController {
 
 		//Student code goes here
 		/*
+		function usable: 
 		aimTurret: (angle: number) => void
 		Sets the turret to aim at the specified angle.
 		Energy cost: (current angle - new angle) * 10.
@@ -27,6 +28,22 @@ export default class YourDefenceController extends DefenceController {
 		Tries to fire the torpedo at the specified tube.
 		Returns null if successful.
 		Energy cost: 8 if successful, 2 if failed.
+		*/
+
+		/*
+		pseudocode: 
+			get angle of target, coordinate of spaceship from sensor
+			set up variables: energy cost = 0
+
+			if target close enough and
+			target type need to be shooted and 
+			the energy used is less when shoot than turn around object
+
+				aim turret
+				shoot
+				record energy cost
+
+			send energy cost to propulsion control
 		*/
 		if(!this.sensors.target) return
 		aimTurret(this.sensors.target.heading)
