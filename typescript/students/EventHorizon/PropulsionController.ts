@@ -28,3 +28,7 @@ export default class YourPropulsionController extends PropulsionController {
 		setThruster('main', Math.abs(headingDiff) < 0.2 ? 30 : 0)
 	}
 }
+
+const angleDiff = (angle1: number, angle2: number) => {
+	return Math.abs(angle1 - angle2);
+}
