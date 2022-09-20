@@ -19,6 +19,8 @@ export default class YourDefenceController extends DefenceController {
 		// pseudocode
 		// if an asteroid is within x distance from our heading, aim and fire at it
 
+		//defence push
+
 		let angle: number = 10;
 		let distance: number = 10;
 		let heading: number = (-3*3.14/4)
