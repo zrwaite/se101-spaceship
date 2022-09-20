@@ -26,9 +26,7 @@ export default class YourPropulsionController extends PropulsionController {
   propulsionUpdate(
     setThruster: (thruster: ThrusterName, power: number) => Error | null
   ) {
-    // if (!this.sensors.target) return;
-
-    if (!this.sensors.target) return; //WTF is this
+    if (!this.sensors.target) return;
 
     const currError = angleDiff( //calculate heading angle
       this.navigation.angle,
