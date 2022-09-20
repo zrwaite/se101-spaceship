@@ -19,7 +19,7 @@ export default class YourPropulsionController extends PropulsionController {
   ) {
     //Student code goes here
     if (!this.sensors.target) return;
-    if (!this.navigation.angle) return;
+    if (this.navigation.angle === undefined) return;
 
     const correctionalForce = 250;
 

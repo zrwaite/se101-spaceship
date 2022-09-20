@@ -23,31 +23,31 @@ export default class YourSensorsController extends SensorsController {
     passiveScan: () => PassiveReading[] | Error
   ) {
     const scanResult = passiveScan();
-    
+
     interface PassiveReading {
-      heading: number
-      gravity: number
+      heading: number;
+      gravity: number;
     }
 
     if (!(scanResult instanceof Error)) this.target = scanResult[0];
     interface EMSReading {
-      angle: number
-      distance: number
-      velocity: Vector2
-      radius: number
-      closeRange?: CloseRangeData
+      angle: number;
+      distance: number;
+      velocity: Vector2;
+      radius: number;
+      closeRange?: CloseRangeData;
     }
 
     interface CloseRangeData {
-      type: 'Planet' | 'Meteor' | 'Asteroid' | 'WarpGate' | 'Other' 
+      type: "Planet" | "Meteor" | "Asteroid" | "WarpGate" | "Other";
       planetComposition?: {
-        water:number
-        air:number
-        land:number
-        metal:number
-        safety:number
-        temperature:number
-      }
+        water: number;
+        air: number;
+        land: number;
+        metal: number;
+        safety: number;
+        temperature: number;
+      };
     }
   }
 }
