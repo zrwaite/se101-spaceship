@@ -22,9 +22,7 @@ export default class YourNavigationController extends NavigationController {
 	possibleObjects: SpaceObject[] = []
 
 	scanned: boolean = false
-	target: Vector2 | null = null // coordinates to target
-
-	targetData: null = null // CHANGE LATER type/habitability of target
+	target: number[] | null = null // [angle, magnitude]
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		//Student code goes here
@@ -48,13 +46,13 @@ export default class YourNavigationController extends NavigationController {
 		return this.mapData
 	}
 
-	//getter for target, returns vector 2 or null
+	//getter for target, returns target or null
 	public get getTarget() {
 		return this.target
 	}
 
 
-	// updates target
+	// tries to update target
 	updateTarget() {
 		if (this.target == null) {
 			for (var val of this.possibleObjects) {
@@ -65,7 +63,7 @@ export default class YourNavigationController extends NavigationController {
 			}
 		}
 		else if (true){
-			//update if target was succesfully scanned
+			//update if target was succesfully scanned, based on habitibility etc.
 		}
 		else {
 			// dont update otherwise
