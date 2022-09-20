@@ -3,6 +3,9 @@ import { Vector2, withinPiRange, angleDiff } from '../helpers.js'
 import YourNavigationController from './NavigationController.js'
 import YourPropulsionController from './PropulsionController.js'
 import YourSensorsController from './SensorsController.js'
+
+const NUMBER_OF_TUBES = 4;
+
 export default class YourDefenceController extends DefenceController {
 	// To get other subsystem information, use the attributes below. 
 	// @ts-ignore
@@ -14,7 +17,7 @@ export default class YourDefenceController extends DefenceController {
 	torpedoNum: number = 0;
 
 	nextTorpedo() {
-		return this.torpedoNum = (this.torpedoNum + 1) % 4;
+		return this.torpedoNum = (this.torpedoNum + 1) % NUMBER_OF_TUBES;
 	}
 
 	defenceUpdate(aimTurret: (angle: number) => void, getTubeCooldown: (i: number) => number | Error, fireTorpedo: (i: number) => Error | null) {
