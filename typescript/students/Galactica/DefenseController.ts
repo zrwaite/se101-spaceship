@@ -14,7 +14,15 @@ export default class YourDefenceController extends DefenceController {
 	defenceUpdate(aimTurret: (angle: number) => void, getTubeCooldown: (i: number) => number | Error, fireTorpedo: (i: number) => Error | null) {
 		//Student code goes here
 		if (!this.sensors.target) return
-		aimTurret(this.sensors.target.heading)
-		fireTorpedo(0)
+		if (this.sensors.activeArray.length>0){
+			for (let i =0; i<this.sensors.activeArray.length; i++ ){
+					if(!(this.sensors.activeArray[i])) continue
+					aimTurret(this.sensors.activeArray[i].angle)
+					fireTorpedo(i%4)
+			}
+		}
+		
+		
 	}
 }
+8
