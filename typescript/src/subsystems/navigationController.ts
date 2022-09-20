@@ -3,7 +3,6 @@ import { ShipStatus } from '../ship/shipStatus.js'
 import DefenceController from './defenceController.js'
 import PropulsionController from './propulsionController.js'
 import SensorsController from './sensorsController.js'
-//hello
 export default class NavigationController {
 	// @ts-ignore
 	defence: DefenceController
