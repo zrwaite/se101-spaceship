@@ -21,5 +21,6 @@ export default class YourSensorsController extends SensorsController {
         // kieran added this line
         // kieran also added this line
 		// not kieran - Hamza
+		// Daniel added to this line 
 	}
 }
