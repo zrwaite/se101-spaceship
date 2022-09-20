@@ -4,7 +4,7 @@ import YourDefenceController from './DefenseController.js'
 import YourNavigationController from './NavigationController.js'
 import YourPropulsionController from './PropulsionController.js'
 import { EMSReading, PassiveReading } from '../types.js'
-import { couldStartTrivia } from '../../../node_modules/typescript/lib/typescript.js'
+
 export default class YourSensorsController extends SensorsController {
 	// To get other subsystem information, use the attributes below.
 	// @ts-ignore
@@ -17,6 +17,7 @@ export default class YourSensorsController extends SensorsController {
 	landTarget: Vector2 | null=null;
 
   	collisionCheck(targetX: number, targetY: number, selfVelocity: Vector2, targetVelocity: Vector2): boolean {
+
 		return false;
 	}
 	cartesian(angle: number, distance: number): Vector2 {
