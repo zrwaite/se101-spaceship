@@ -14,11 +14,51 @@ export default class YourNavigationController extends NavigationController {
 	propulsion: YourPropulsionController
 	angle: number = 0
 
-	//Add additional attributes here
 	
+
+	//Add additional attributes here
+	exploredSystems: string[] = []
+	mapData: MapData|null = null
+
+	//possibleObjects: SpaceObject[] = []
+
+	scanned: boolean = false
+	target: Vector2 | null = null
+
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		//Student code goes here
+		if (!this.scanned) {
+			this.mapData = getMapData()
+			this.scanned = true;
+		}
+		
+
+
 		this.angle = getShipStatus('angle')
 		land()
+	}
+
+	//getter for mapData
+	public get getMapData() {
+		return this.mapData
+	}
+
+	//getter for target, returns vector 2 or null
+	public get getTarget() {
+		return this.target
+	}
+
+
+	// updates target
+	updateTarget() {
+		if (this.target == null) {
+			//update if null
+		}
+		else if (true){
+			//update if target was succesfully scanned
+		}
+		else {
+			// dont update otherwise
+		}
 	}
 }
