@@ -69,6 +69,7 @@ export default class YourPropulsionController extends PropulsionController {
       setThruster("clockwise", 0);
     }
 
+    setThruster("bow", Math.abs(headingDiff) > 0.2 && Math.abs(speed) > 0 ? 30 : 0)
     setThruster("main", Math.abs(headingDiff) < 0.2 && speed < 0.75 ? 30 : 0);
 
     this.prevHeadingDiff = headingDiff;
