@@ -4,8 +4,8 @@ export default class YourDefenceController extends DefenceController {
     defenceUpdate(aimTurret, getTubeCooldown, fireTorpedo) {
         if (!this.sensors.target)
             return;
-        if (getTubeCooldown(0) == 0) {
-            aimTurret(this.sensors.target.heading);
+        if (this.sensors.closeRange != null && this.sensors.closeRange[0] != null && getTubeCooldown(0) == 0) {
+            aimTurret(this.sensors.closeRange[0].angle);
             fireTorpedo(0);
         }
     }
