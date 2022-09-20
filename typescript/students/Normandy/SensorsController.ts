@@ -53,7 +53,7 @@ export default class YourSensorsController extends SensorsController {
 				if(!(ems instanceof Error)) {
 					for(let j=0; i<ems.length; i++){
 						if(ems[j].distance>0 && ems[j].radius<=45 && ems[j].radius>=25){
-							this.landTarget = this.cartesian(ems[j].angle, ems[j].distance)
+							this.landTarget = this.cartesian(ems[j].angle, ems[j].distance).add(this.navigation.)
 						}else if(ems[j].radius>0 && ems[j].radius<=5){
 							astroid_heading.push(ems[j].angle)
 							//tti is time to impact
