@@ -5,6 +5,7 @@ import NavigationController from '../../src/subsystems/navigationController.js'
 import YourDefenceController from './DefenseController.js'
 import YourPropulsionController from './PropulsionController.js'
 import YourSensorsController, { SpaceObject } from './SensorsController.js'
+import ColonyShip from '../../src/ship/colonyShip.js'
 
 export default class YourNavigationController extends NavigationController {
 	// To get other subsystem information, use the attributes below.
@@ -22,7 +23,7 @@ export default class YourNavigationController extends NavigationController {
 	possibleObjects: SpaceObject[] = []
 
 	scanned: boolean = false
-	target: number[] | null = null // [angle, magnitude]
+	target: Vector2 = new Vector2(0, 0) // [angle, magnitude]
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		//Student code goes here
@@ -54,11 +55,15 @@ export default class YourNavigationController extends NavigationController {
 
 	// tries to update target
 	updateTarget() {
-		if (this.target == null) {
+		let d = 100000 // distance to target, used in x and y calculation
+		if (this.target.magnitude() === 0) {
 			for (var val of this.possibleObjects) {
 				if (val.type === 'Other') {
 					// add to list of explored objects?
-					 
+					if (!(val.distance === undefined)) {
+						d = val.distance
+					}
+					this.target.set(d * Math.cos(val.angle), d * Math.sin(val.angle))
 				}
 			}
 		}
