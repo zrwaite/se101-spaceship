@@ -4,6 +4,7 @@ import YourDefenceController from './DefenseController.js'
 import YourNavigationController from './NavigationController.js'
 import YourPropulsionController from './PropulsionController.js'
 import { EMSReading, PassiveReading } from '../types.js'
+import { isPrivateIdentifier } from '../../../node_modules/typescript/lib/typescript.js'
 export default class YourSensorsController extends SensorsController {
 	// To get other subsystem information, use the attributes below.
 	// @ts-ignore
@@ -31,3 +32,19 @@ export default class YourSensorsController extends SensorsController {
 		//console.log(activeResult)
 	}	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
