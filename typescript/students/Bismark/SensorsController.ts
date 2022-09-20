@@ -22,8 +22,9 @@ export default class YourSensorsController extends SensorsController {
     ) => EMSReading[] | Error,
     passiveScan: () => PassiveReading[] | Error
   ) {
+    if(this.navigation.angle === undefined) return;
     const scanResult = passiveScan();
-
+    //const scanResult2 = activeScan(this.navigation.angle - (Math.PI)/2, Math.PI, 100);
     interface PassiveReading {
       heading: number;
       gravity: number;
