@@ -5,6 +5,8 @@ export default class YourNavigationController extends NavigationController {
         this.angularVelocity = getShipStatus("angularVelocity");
         this.linearVelocityX = getShipStatus("linearVelocityX");
         this.linearVelocityY = getShipStatus("linearVelocityY");
+        this.posX = getShipStatus("positionX");
+        this.posY = getShipStatus("positionX");
         /* instead of landing all the time:
           - pull data from an EMS scan
           - pull current x/y position
