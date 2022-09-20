@@ -13,9 +13,25 @@ export default class YourSensorsController extends SensorsController {
 
 	//Add additional attributes here
 	target: PassiveReading | null = null	
+    
+    findMeteors(scanResults: EMSReading[] | Error) {
+        var meteors: EMSReading[] = []
+        if (scanResults instanceof Error) return
+        for (var scanResult of scanResults) {
+            if (!(scanResult.closeRange)) {
+                return
+            }
+            if (scanResult.closeRange.type == 'Meteor') {
+                meteors.push(scanResult)
+            }
+        }
+        return meteors
+    }
 
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
 		const scanResult = passiveScan()
 		if (!(scanResult instanceof Error)) this.target = scanResult[0]
 	}
+
+    
 }
