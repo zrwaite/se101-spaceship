@@ -5,6 +5,8 @@ import NavigationController from '../../src/subsystems/navigationController.js'
 import YourDefenceController from './DefenseController.js'
 import YourPropulsionController from './PropulsionController.js'
 import YourSensorsController from './SensorsController.js'
+let planet = false;
+let portal = false;
 
 export default class YourNavigationController extends NavigationController {
 	// To get other subsystem information, use the attributes below.
@@ -16,6 +18,15 @@ export default class YourNavigationController extends NavigationController {
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		this.angle = getShipStatus('angle')
-		land()
+		//figure out how to read mapdata
+		getMapData();
+		if(planet){
+			land();
+			planet = false;
+		}
+		if (portal){
+			warp();
+			portal = false;
+		}
 	}
 }
