@@ -13,6 +13,19 @@ export default class YourDefenceController extends DefenceController {
 	
 	defenceUpdate(aimTurret: (angle: number) => void, getTubeCooldown: (i: number) => number | Error, fireTorpedo: (i: number) => Error | null) {
 
-		//Student code goes here
+		// we have four torpedos that can be shot at one time
+		// we get angle, distance, heading and velocity of the aseteroids from the sensors
+
+		// pseudocode
+		// if an asteroid is within x distance from our heading, aim and fire at it
+
+		let angle: number = 10;
+		let distance: number = 10;
+		let heading: number = (-3*3.14/4)
+		const aestroid_velocity = new Vector2(5,7);
+		
+		if (!this.sensors.target) return
+		aimTurret(this.sensors.target.heading)
+
 	}
 }
