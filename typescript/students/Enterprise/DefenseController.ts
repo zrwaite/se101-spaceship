@@ -19,9 +19,9 @@ export default class YourDefenceController extends DefenceController {
 
 		aimTurret(this.sensors.target.heading)
 		fireTorpedo(0);
+		//auto shoot when cooldown is done
 		if(getTubeCooldown(0)==0){
 			fireTorpedo(0);
 		}
-		
 	}
 }
