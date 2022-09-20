@@ -16,7 +16,7 @@ export default class YourDefenceController extends DefenceController {
 		//Student code goes here
 		if(!this.sensors.target) 
 			return;
-		
+		//try to make sensor shoot faster?
 		aimTurret(this.sensors.target.heading)
 		fireTorpedo(0);
 	}

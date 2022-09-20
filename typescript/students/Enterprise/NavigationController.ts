@@ -12,7 +12,7 @@ export default class YourNavigationController extends NavigationController {
 	defence: YourDefenceController // @ts-ignore
 	sensors: YourSensorsController // @ts-ignore
 	propulsion: YourPropulsionController
-	angle: number = 0 //angle updates every frame towards planet
+	angle: number = 0
 	
 	//Add additional attributes here
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
