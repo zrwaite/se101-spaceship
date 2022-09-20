@@ -12,3 +12,6 @@ SpaceshipJavasript.wiki
 
 #Node modules
 node_modules
+
+# TS build files
+javascript
