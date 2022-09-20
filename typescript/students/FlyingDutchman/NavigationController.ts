@@ -38,11 +38,27 @@ export default class YourNavigationController extends NavigationController {
 		land()
 	}
 
+	//getter for mapData
 	public get getMapData() {
 		return this.mapData
 	}
 
+	//getter for target, returns vector 2 or null
 	public get getTarget() {
 		return this.target
+	}
+
+
+	// updates target
+	updateTarget() {
+		if (this.target == null) {
+			//update if null
+		}
+		else if (true){
+			//update if target was succesfully scanned
+		}
+		else {
+			// dont update otherwise
+		}
 	}
 }
