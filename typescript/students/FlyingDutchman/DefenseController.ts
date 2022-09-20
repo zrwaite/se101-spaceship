@@ -54,6 +54,27 @@ export default class YourDefenceController extends DefenceController {
 		// console.log(theta2)
 
 		
+		let Adx = 1
+		let Ady = 1
+		let Avx = 1
+		let Avy = 1
+		let Sdx = 1
+		let Tv = 1
+		let placeholder = (Ady + Avy) * (Adx - Sdx) + Avx * Sdx
+		let coefficientA = Tv**2 * (Sdx**2 + (Adx - Sdx)**2)
+		let coefficientB = 2 * placeholder * (Adx - Sdx) * Tv
+		let coefficientC = placeholder**2 - (Sdx * Tv)**2
+		let discriminant = coefficientB**2 - 4 * coefficientA * coefficientC
+		let theta;
+
+		try{
+			theta = Math.asin((coefficientB + Math.sqrt(discriminant)) / (2 * coefficientA))
+		} catch(e){
+			theta = Math.asin((coefficientB - Math.sqrt(discriminant)) / (2 * coefficientA))
+		}
+
+		console.log(theta)
+		
 		if (!this.sensors.target) return
 		aimTurret(this.sensors.target.heading)
 
