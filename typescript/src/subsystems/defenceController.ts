@@ -1,3 +1,4 @@
+import { PassiveReading } from '../ship/passiveReading.js'
 import NavigationController from './navigationController.js'
 import PropulsionController from './propulsionController.js'
 import SensorsController from './sensorsController.js'
