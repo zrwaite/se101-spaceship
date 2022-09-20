@@ -22,17 +22,22 @@ export default class YourNavigationController extends NavigationController {
 	possibleObjects: SpaceObject[] = []
 
 	scanned: boolean = false
-	target: Vector2 | null = null
+	target: Vector2 | null = null // coordinates to target
+
+	targetData: null = null // CHANGE LATER type/habitability of target
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		//Student code goes here
 		if (!this.scanned) {
 			this.mapData = getMapData()
 			this.scanned = true;
-			this.possibleObjects = this.sensors.warpgatesOrPlanets
+			
 		}
-		
 
+		// update list of possible targets
+		this.possibleObjects = this.sensors.warpgatesOrPlanets
+		
+		this.updateTarget()
 
 		this.angle = getShipStatus('angle')
 		land()
@@ -52,7 +57,12 @@ export default class YourNavigationController extends NavigationController {
 	// updates target
 	updateTarget() {
 		if (this.target == null) {
-			//update if null
+			for (var val of this.possibleObjects) {
+				if (val.type === 'Other') {
+					// add to list of explored objects?
+					 
+				}
+			}
 		}
 		else if (true){
 			//update if target was succesfully scanned
