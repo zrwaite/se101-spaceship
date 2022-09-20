@@ -30,5 +30,4 @@ export default class YourPropulsionController extends PropulsionController {
 		}
 		setThruster('main', Math.abs(headingDiff) < 0.2 ? 30 : 0)
 	}
-	//Hello
 }
