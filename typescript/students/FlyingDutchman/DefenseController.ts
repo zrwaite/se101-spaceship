@@ -13,11 +13,14 @@ export default class YourDefenceController extends DefenceController {
 	
 	defenceUpdate(aimTurret: (angle: number) => void, getTubeCooldown: (i: number) => number | Error, fireTorpedo: (i: number) => Error | null) {
 
-		//Student code goes here
+
+		let angle: number = 10;
+		let distance: number = 10;
+		let heading: number = (-3*3.14/4)
+		const aestroid_velocity = new Vector2(5,7);
+		
 		if (!this.sensors.target) return
 		aimTurret(this.sensors.target.heading)
-		fireTorpedo(0)
 
-		//test
 	}
 }
