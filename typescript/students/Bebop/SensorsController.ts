@@ -13,11 +13,16 @@ export default class YourSensorsController extends SensorsController {
 
 	//Add additional attributes here
 	target: PassiveReading | null = null;
+<<<<<<< HEAD
 	closeRange :EMSReading[] | null=null
+=======
+	closeRange: EMSReading[] | null = null;
+>>>>>>> 89bca9a108f37393d60dc8aaeb5c3dc15fc48409
 
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
 		
 		const scanResult = passiveScan();
+<<<<<<< HEAD
 		
 		if (!(scanResult instanceof Error)){
 			this.target = scanResult[0];
@@ -36,5 +41,18 @@ export default class YourSensorsController extends SensorsController {
 		
 		
 		
+=======
+		if (!(scanResult instanceof Error)) {
+			this.target = scanResult[0];
+			const activeScanData = activeScan(this.target.heading - 1, 2, 300);
+
+			if(!(activeScanData instanceof Error)) {
+
+				this.closeRange = activeScanData
+				console.log(this.closeRange)
+			}
+		}
+
+>>>>>>> 89bca9a108f37393d60dc8aaeb5c3dc15fc48409
 	}
 }
