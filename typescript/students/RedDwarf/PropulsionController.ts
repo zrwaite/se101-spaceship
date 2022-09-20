@@ -4,7 +4,7 @@ import PropulsionController from "../../src/subsystems/propulsionController.js";
 import YourDefenceController from "./DefenseController.js";
 import YourNavigationController from "./NavigationController.js";
 import YourSensorsController from "./SensorsController.js";
-import { angleDiff } from "../../src/helpers/Angles.js"
+import { angleDiff } from "../../src/helpers/Angles.js";
 
 export default class YourPropulsionController extends PropulsionController {
   // To get other subsystem information, use the attributes below.
@@ -25,6 +25,7 @@ export default class YourPropulsionController extends PropulsionController {
   propulsionUpdate(
     setThruster: (thruster: ThrusterName, power: number) => Error | null
   ) {
+    if (!this.sensors.target) return;
 
     if (!this.sensors.target) return; //WTF is this
 
