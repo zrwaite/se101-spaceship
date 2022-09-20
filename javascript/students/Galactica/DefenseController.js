@@ -13,6 +13,17 @@ export default class YourDefenceController extends DefenceController {
                 fireTorpedo(i % 4);
             }
         }
+        /**
+        if (this.sensors.activeArray.length>0){
+            for (let i =0; i<this.sensors.activeArray.length; i++ ){
+                    if(!(this.sensors.activeArray[i])) continue
+                    let a = (3*this.sensors.activeArray[i].distance) * Math.cos(this.sensors.activeArray[i].angle)
+                    let b = (3*this.sensors.activeArray[i].distance) * Math.sin(this.sensors.activeArray[i].angle)
+                    let c = (this.sensors.activeArray[i].distance) * Math.sin(this.sensors.activeArray[i].angle)*()
+                    fireTorpedo(i%4)
+            }
+        }
+        **/
     }
 }
 8;
