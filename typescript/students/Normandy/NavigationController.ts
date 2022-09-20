@@ -6,7 +6,7 @@ import YourDefenceController from './DefenseController.js'
 import YourPropulsionController from './PropulsionController.js'
 import YourSensorsController from './SensorsController.js'
 import WarpGate from '../../src/spaceObjects/warpGate.js'
-import { NumberLiteralType } from '../../../node_modules/typescript/lib/typescript.js'
+//import { NumberLiteralType } from '../../../node_modules/typescript/lib/typescript.js'
 
 export default class YourNavigationController extends NavigationController {
 	// To get other subsystem information, use the attributes below.
