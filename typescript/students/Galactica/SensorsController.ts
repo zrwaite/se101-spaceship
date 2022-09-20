@@ -4,6 +4,12 @@ import YourDefenceController from './DefenseController.js'
 import YourNavigationController from './NavigationController.js'
 import YourPropulsionController from './PropulsionController.js'
 import { EMSReading, PassiveReading } from '../types.js'
+
+interface SpaceObjectDetailed {
+	type: string
+	angle: number
+}
+
 export default class YourSensorsController extends SensorsController {
 	// To get other subsystem information, use the attributes below.
 	// @ts-ignore
@@ -14,9 +20,10 @@ export default class YourSensorsController extends SensorsController {
 	//Add additional attributes here
 	target: PassiveReading | null = null	
 	spaceObjects: EMSReading | null = null
-	spaceObjectsDetailed: (string|number)[] = []
+	spaceObjectsDetailed: SpaceObjectDetailed[] | null = null
 	targetDistance = 0
 	activeArray = new Array<EMSReading>(4);
+	facing = ""
 
 	// helper function to convert degrees to radians
 	rad(angleDeg: number){
@@ -67,13 +74,17 @@ export default class YourSensorsController extends SensorsController {
 						//Not bothering with Blackhole
 						
 						// Each detailed space object will have the information of type and angle
-						this.spaceObjectsDetailed.push(spaceObjectType, activeSpaceObject.angle)
+						this.spaceObjectsDetailed.push(<SpaceObjectDetailed> { type: spaceObjectType, angle: activeSpaceObject.angle })
 					}
 				}
 			}
 		}
 		console.log("Details")
 		console.log(this.spaceObjectsDetailed)
+
+		if (this.spaceObjectsDetailed != null && this.spaceObjectsDetailed.length > 0){
+			this.facing = this.spaceObjectsDetailed[0].type;
+		}
 
 		// console.log(this.targetDistance)
 	}
