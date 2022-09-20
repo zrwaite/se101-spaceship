@@ -12,7 +12,7 @@ export default class YourSensorsController extends SensorsController {
         if (!(scanResult instanceof Error))
             this.target = scanResult[0];
         if (!(activeResult instanceof Error)) {
-            this.closeRangeObject = activeResult[0];
+            this.closeRangeObject = activeResult;
         }
         this.closeRangeObject && console.log(this.closeRangeObject);
     }
