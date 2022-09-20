@@ -27,6 +27,9 @@ export default class YourPropulsionController extends PropulsionController {
         }
         console.log(headingDiff);
     }
+    calculateAccelAngle(currentAngVelo, currentAngle, targetAngle) {
+        return -Math.pow(currentAngVelo, 2) / (2 * angleDiff(currentAngle, targetAngle));
+    }
 }
 // var kD=0.5, kP=0.7, kI=0.4, E=0, prevE=0, I=0, D=0, P, Pwr=0, Dst=headingDiff;
 // if (headingDiff < 0){

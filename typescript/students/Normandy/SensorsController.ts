@@ -1,4 +1,4 @@
-import { withinPiRange, Vector2 } from '../helpers.js'
+import { withinPiRange, Vector2, angleDiff } from '../helpers.js'
 import SensorsController from '../../src/subsystems/sensorsController.js'
 import YourDefenceController from './DefenseController.js'
 import YourNavigationController from './NavigationController.js'

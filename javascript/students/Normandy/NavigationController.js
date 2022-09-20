@@ -9,16 +9,20 @@ export default class YourNavigationController extends NavigationController {
         this.angle = 0; //direction ship is facing
         this.positionX = 0;
         this.positionY = 0;
+        this.targetPositionX = 0; //PROPULSION: GET US TO THESE COORDINATES
+        this.targetPositionY = 0;
         this.linearVelocityX = 0;
         this.linearVelocityY = 0;
-        this.thrusterPowerMain = 0;
-        this.thrusterPowerBow = 0;
-        this.thrusterPowerClockwise = 0;
-        this.thrusterPowerCounterClockwise = 0;
     }
-    //runs multiple times a second
+    //MAIN => runs multiple times a second
     navigationUpdate(getShipStatus, warp, land, getMapData) {
+        //galaxy MAP
+        //let map = new Map<Galaxy, SolarSystem[]>();
+        //position updates
         this.angle = getShipStatus('angle');
-        land();
+        this.positionX = getShipStatus('positionX');
+        this.positionY = getShipStatus('positionY');
+        this.linearVelocityX = getShipStatus('linearVelocityX');
+        this.linearVelocityY = getShipStatus('linearVelocityY');
     }
 }
