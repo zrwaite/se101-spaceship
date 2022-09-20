@@ -15,7 +15,8 @@ export default class YourSensorsController extends SensorsController {
 	target: PassiveReading | null = null	
 	spaceObjects: EMSReading | null = null
 	targetDistance = 0
-	
+	activeArray = new Array<EMSReading>(4);
+
 	// helper function to convert degrees to radians
 	rad(angleDeg: number){
 		return angleDeg * Math.PI / 180;
@@ -30,7 +31,7 @@ export default class YourSensorsController extends SensorsController {
 		if (!(activeScanResult instanceof Error)) console.log(activeScanResult)
 		if (!(activeScanResult instanceof Error)){ 
 			if (activeScanResult.length > 0){
-				//
+				this.activeArray = activeScanResult;
 				this.targetDistance = activeScanResult[0].distance //finding distance to first object activeScan scans
 			}
 		}
