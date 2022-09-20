@@ -38,6 +38,10 @@ export default class YourSensorsController extends SensorsController {
 		return this.scannedObjects.filter((so) => ['Other', "WarpGate"].includes(so.type));
 	}
 
+  public get asteroids() {
+    return this.scannedObjects.filter((so) => "Asteroid" == so.type);
+  }
+
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
 		const scanResult = passiveScan()
 		if ((scanResult instanceof Error)) return;
