@@ -48,7 +48,9 @@ export default class YourNavigationController extends NavigationController {
     /* 
     
     */
-    warp();
-    land();
+   if(this.sensors.targetDetails?.distance !== undefined && this.sensors.targetDetails?.distance <= 50) { 
+      if (this.sensors.targetDetails?.closeRange?.type === 'Planet'){land();}
+      else if (this.sensors.targetDetails?.closeRange?.type === 'WarpGate'){warp();}
+   }
   }
 }
