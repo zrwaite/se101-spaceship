@@ -19,8 +19,6 @@ export default class YourSensorsController extends SensorsController {
 		const scanResult = passiveScan();
 		if(!(scanResult instanceof Error)) this.target = scanResult[0];
 
-        setTimeout(2000) // test
-		const activeScanInfo = activeScan(90,12,100) //test 
-		console.log(activeScanInfo) // test
+    
 	}
 }

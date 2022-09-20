@@ -11,6 +11,8 @@ export default class NavigationController {
         this.propulsion = null;
         // @ts-ignore
         this.sensors = null;
+        // @ts-ignore
+        this.angle = 0;
     }
     navigationUpdate(getShipStatus, warp, land, getMapData) { }
 }
