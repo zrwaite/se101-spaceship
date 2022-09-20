@@ -16,8 +16,12 @@ export default class YourNavigationController extends NavigationController {
 	
 	
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
-		
+		const closeRangeObject = this.sensors.closeRangeObject;
 
+		if (closeRangeObject == "Planet") {
+			land();
+		}
+		
 		this.angle = getShipStatus("angle");
 	}
 }
