@@ -70,8 +70,8 @@ export default class YourDefenceController extends DefenceController {
 
 		
 
-		//aimTurret(asteroid.angle)
-		//fireTorpedo(1)
+		aimTurret(asteroid.angle)
+		fireTorpedo(1)
 
 
 	}
