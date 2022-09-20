@@ -63,7 +63,7 @@ export default class YourSensorsController extends SensorsController {
         }
         console.log("Details");
         console.log(this.spaceObjectsDetailed);
-        if (this.spaceObjectsDetailed != null) {
+        if (this.spaceObjectsDetailed != null && this.spaceObjectsDetailed.length > 0) {
             this.facing = this.spaceObjectsDetailed[0].type;
         }
         // console.log(this.targetDistance)
