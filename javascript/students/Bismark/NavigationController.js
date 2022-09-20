@@ -22,7 +22,7 @@ export default class YourNavigationController extends NavigationController {
         /*
         
         */
-        if (((_a = this.sensors.targetDetails) === null || _a === void 0 ? void 0 : _a.distance) !== undefined && ((_b = this.sensors.targetDetails) === null || _b === void 0 ? void 0 : _b.distance) <= 50) { // May be able to be deleted later.
+        if (((_a = this.sensors.targetDetails) === null || _a === void 0 ? void 0 : _a.distance) !== undefined && ((_b = this.sensors.targetDetails) === null || _b === void 0 ? void 0 : _b.distance) <= 60) { // May be able to be deleted later.
             if (((_d = (_c = this.sensors.targetDetails) === null || _c === void 0 ? void 0 : _c.closeRange) === null || _d === void 0 ? void 0 : _d.type) === 'Planet') {
                 land();
             }
