@@ -11,9 +11,6 @@ export default class YourDefenceController extends DefenceController {
   propulsion: YourPropulsionController;
   //Add additional attributes here
 
-  // @ts-ignore
-  target: number;
-
   defenceUpdate(
     aimTurret: (angle: number) => void,
     getTubeCooldown: (i: number) => number | Error,
