@@ -1,4 +1,4 @@
-import { angleDiff, Vector2, withinPiRange } from '../helpers.js'
+import { Vector2, angleDiff, withinPiRange } from '../helpers.js'
 import { ThrusterName } from '../types.js'
 import PropulsionController from '../../src/subsystems/propulsionController.js'
 import YourDefenceController from './DefenseController.js'
