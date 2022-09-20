@@ -9,6 +9,7 @@ export default class YourPropulsionController extends PropulsionController {
 	// @ts-ignore
 	defence: YourDefenceController // @ts-ignore
 	sensors: YourSensorsController // @ts-ignore
+	navigation: YourNavigationController
 
 	//Add additional attributes here
 	//hi
