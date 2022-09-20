@@ -6,6 +6,7 @@ import YourDefenceController from './DefenseController.js'
 import YourPropulsionController from './PropulsionController.js'
 import YourSensorsController from './SensorsController.js'
 
+//Testing 
 export default class YourNavigationController extends NavigationController {
 	// To get other subsystem information, use the attributes below.
 	// @ts-ignore
