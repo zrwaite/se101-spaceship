@@ -72,8 +72,6 @@ export default class YourSensorsController extends SensorsController {
 				}
 			}
 		}
-		console.log("Details")
-		console.log(this.spaceObjectsDetailed)
 
 		// console.log(this.targetDistance)
 	}

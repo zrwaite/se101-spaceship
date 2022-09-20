@@ -25,8 +25,7 @@ export default class YourPropulsionController extends PropulsionController {
 		let bowForce = 0;
 		if (this.sensors.targetDistance != 0 
 			&& this.sensors.targetDistance < 250 
-			/*&& this.sensors.targetType == "Planet" */) {
-			console.log("hey");
+			&& this.sensors.targetType == "Planet") {
 			mainForce = 0
 			bowForce = 100;
 		}

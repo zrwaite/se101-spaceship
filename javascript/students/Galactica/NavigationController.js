@@ -7,7 +7,6 @@ export default class YourNavigationController extends NavigationController {
     }
     navigationUpdate(getShipStatus, warp, land, getMapData) {
         this.angle = getShipStatus('angle');
-        console.log(this.angle);
         land();
         warp();
     }
