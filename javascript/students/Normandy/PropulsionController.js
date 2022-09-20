@@ -5,25 +5,20 @@ export default class YourPropulsionController extends PropulsionController {
     propulsionUpdate(setThruster) {
         if (!this.sensors.target)
             return;
-        // angleDiff (current, desired) --> returns difference between current heading and desired heading
-        const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading);
-        // force (heading difff) --> returns the heading diff or 100 if the difference in heading is higher
-        /*
-            update function (set on a straight path)
-        */
-        const force = Math.min(Math.abs(1000 * headingDiff), 500);
-        // while(Math.abs(headingDiff) >= 0.005) {
-        if (Math.abs(headingDiff) < 0.005) {
+        const targetHeading = this.sensors.target.heading;
+        const headingDiff = angleDiff(this.navigation.angle, targetHeading);
+        const force = Math.min(Math.abs(1000 * headingDiff), 100);
+        if (Math.abs(headingDiff) < 0.05) {
             setThruster('clockwise', 0);
             setThruster('counterClockwise', 0);
         }
         if (headingDiff < 0) {
-            setThruster('clockwise', 1 * headingDiff);
+            setThruster('clockwise', 2);
             setThruster('counterClockwise', 0);
         }
         else if (headingDiff > 0) {
             setThruster('clockwise', 0);
-            setThruster('counterClockwise', 1 * headingDiff);
+            setThruster('counterClockwise', 2);
         }
         if (Math.abs(headingDiff) < 0.05) {
             setThruster('main', 100);
@@ -32,7 +27,6 @@ export default class YourPropulsionController extends PropulsionController {
             setThruster('main', 0);
         }
         console.log(headingDiff);
-        // }
     }
 }
 // var kD=0.5, kP=0.7, kI=0.4, E=0, prevE=0, I=0, D=0, P, Pwr=0, Dst=headingDiff;
