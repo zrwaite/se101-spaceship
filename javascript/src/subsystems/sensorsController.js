@@ -11,6 +11,8 @@ export default class SensorsController {
         this.defence = null;
         // @ts-ignore
         this.propulsion = null;
+        // @ts-ignore
+        this.target = null;
     }
     sensorsUpdate(activeScan, passiveScan) { }
 }
