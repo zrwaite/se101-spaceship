@@ -1,4 +1,5 @@
 import SensorsController from '../../src/subsystems/sensorsController.js';
+//import { isPrivateIdentifier } from '../../../node_modules/typescript/lib/typescript.js'
 export default class YourSensorsController extends SensorsController {
     constructor() {
         super(...arguments);
