@@ -23,7 +23,7 @@ export default class YourNavigationController extends NavigationController {
 	//possibleObjects: SpaceObject[] = []
 
 	scanned: boolean = false
-	
+	target: Vector2 | null = null
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		//Student code goes here
@@ -40,5 +40,9 @@ export default class YourNavigationController extends NavigationController {
 
 	public get getMapData() {
 		return this.mapData
+	}
+
+	public get getTarget() {
+		return this.target
 	}
 }
