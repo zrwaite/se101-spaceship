@@ -21,11 +21,21 @@ export default class YourPropulsionController extends PropulsionController {
 		console.log(headingDiff)
 
 
-		if(Math.abs(headingDiff) != 0)
+		if(headingDiff < -0.3)
 		{
 			setThruster('clockwise', force)
 		}
+		else if(headingDiff > -0.3 && headingDiff < 0)
+		{
+			setThruster('clockwise', 0)
+			setThruster('counterClockwise', force)
+		}
+		else if(headingDiff >= 0)
+		{
+			setThruster('counterClockwise', 0)
+		}
 
-		setThruster('main', Math.abs(headingDiff) < 0.2 ? 100 : 0)
+
+		setThruster('main', Math.abs(headingDiff) < 0.08 ? 40 : 0)
 	}
 }
