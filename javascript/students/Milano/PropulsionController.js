@@ -13,8 +13,13 @@ export default class YourPropulsionController extends PropulsionController {
             setThruster('counterClockwise', 0);
         }
         else {
+<<<<<<< HEAD
             setThruster('counterClockwise', force); //head
             setThruster('clockwise', 0); //another commment
+=======
+            setThruster('counterClockwise', force);
+            setThruster('clockwise', 0);
+>>>>>>> 2394104272e8ecb39d0e4c9e35064c4dd6a1adad
         }
         setThruster('main', Math.abs(headingDiff) < 0.2 ? 30 : 0);
     }
