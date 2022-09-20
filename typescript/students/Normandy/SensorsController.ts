@@ -13,6 +13,7 @@ export default class YourSensorsController extends SensorsController {
 	
 	//Add additional attributes here
 	target: PassiveReading | null=null;
+	landTarget: PassiveReading | null=null;
 
   	collisionCheck(): boolean {
 		return false;
