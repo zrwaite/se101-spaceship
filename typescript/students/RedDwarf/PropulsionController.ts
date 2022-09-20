@@ -15,26 +15,68 @@ export default class YourPropulsionController extends PropulsionController {
 
   //Add additional attributes here
 
+  prevError:number = 0;
+
+  kForceConst:number = 20;
+  dForceConst:number = -10;
+
+
+
   propulsionUpdate(
     setThruster: (thruster: ThrusterName, power: number) => Error | null
   ) {
 
     if (!this.sensors.target) return; //WTF is this
 
-    const headingDiff = angleDiff( //calculate heading angle
+    const currError = angleDiff( //calculate heading angle
       this.navigation.angle,
       this.sensors.target.heading
     );
 
-    const force = Math.min(Math.abs(500 * headingDiff), 100); //force is some number
+    var output = 0;
+
+    console.log("angle" + currError)
+
+    if(Math.abs(currError) > Math.PI/180 * 15) {
+      if(currError > 0) {
+        output = 30;
+        console.log("POS")
+      }else{
+        output = -30;
+        console.log("NEG")
+      }
+    }else{
+      const errorDiff = currError-this.prevError;
+      console.log(errorDiff);
+      output = errorDiff * 5000;
+    }
+
+    console.log("OUTPUT: " + output);
+
+
+
+    // console.log((currError-this.prevError)*100);
+
+    // const errorDiff = currError-this.prevError;
     
-    if (headingDiff < 0) {
-      setThruster('clockwise', force)
+    // const kForce = this.kForceConst * currError; 
+
+    // const dForce = this.dForceConst * errorDiff;
+    
+    // const force = kForce + dForce;
+
+    // console.log("force " + force);
+
+    
+    if (output < 0) {
+      setThruster('clockwise', Math.abs(output))
       setThruster('counterClockwise', 0)
     } else {
-      setThruster('counterClockwise', force)
+      setThruster('counterClockwise', Math.abs(output))
       setThruster('clockwise', 0)
     }
-    setThruster("main", Math.abs(headingDiff) < 0.2 ? 30 : 0);
+    setThruster("main", Math.abs(currError) < 0.2 ? 30 : 0);
+
+    this.prevError = currError;
   }
 }
