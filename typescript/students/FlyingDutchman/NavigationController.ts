@@ -4,7 +4,7 @@ import { MapData, ShipStatus} from '../types.js'
 import NavigationController from '../../src/subsystems/navigationController.js'
 import YourDefenceController from './DefenseController.js'
 import YourPropulsionController from './PropulsionController.js'
-import YourSensorsController from './SensorsController.js'
+import YourSensorsController, { SpaceObject } from './SensorsController.js'
 
 export default class YourNavigationController extends NavigationController {
 	// To get other subsystem information, use the attributes below.
@@ -13,14 +13,13 @@ export default class YourNavigationController extends NavigationController {
 	sensors: YourSensorsController // @ts-ignore
 	propulsion: YourPropulsionController
 	angle: number = 0
-
 	
 
 	//Add additional attributes here
 	exploredSystems: string[] = []
 	mapData: MapData|null = null
 
-	//possibleObjects: SpaceObject[] = []
+	possibleObjects: SpaceObject[] = []
 
 	scanned: boolean = false
 	target: Vector2 | null = null
@@ -30,6 +29,7 @@ export default class YourNavigationController extends NavigationController {
 		if (!this.scanned) {
 			this.mapData = getMapData()
 			this.scanned = true;
+			this.possibleObjects = this.sensors.warpgatesOrPlanets
 		}
 		
 
