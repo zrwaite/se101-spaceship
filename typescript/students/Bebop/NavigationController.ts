@@ -48,5 +48,6 @@ export default class YourNavigationController extends NavigationController {
 		 otherwise, do nothing (for now)
 		 */
 		land();
+		warp();
 	}
 }
