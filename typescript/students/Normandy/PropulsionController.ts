@@ -24,7 +24,7 @@ export default class YourPropulsionController extends PropulsionController {
         else if(headingDiff < 0) {
             setThruster('counterClockwise', 0);
             if(absHeadingDiff > 1.5) {
-                setThruster('clockwise', 75);
+                setThruster('clockwise', 80);
             }
             if(absHeadingDiff > 0.5) {
                 setThruster('clockwise', 30);
@@ -44,7 +44,7 @@ export default class YourPropulsionController extends PropulsionController {
         else if(headingDiff > 0) {
             setThruster('clockwise', 0);
             if(absHeadingDiff > 1.5) {
-                setThruster('counterClockwise', 75);
+                setThruster('counterClockwise', 80);
             }
             if(absHeadingDiff > 0.5) {
                 setThruster('counterClockwise', 30);

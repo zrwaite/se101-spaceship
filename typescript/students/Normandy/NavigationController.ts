@@ -45,6 +45,7 @@ export default class YourNavigationController extends NavigationController {
 
 		UpdatePosition();
 
+		/* uncomment this later
 
 		//galaxy MAP
 		let galaxyMap = new Map<string, SolarSystem[]>();
@@ -69,7 +70,8 @@ export default class YourNavigationController extends NavigationController {
 			this.warp = false;
 
 		}
-
+		*/
+		
 		//galaxy
 		interface GalaxyData {
 			name: string
