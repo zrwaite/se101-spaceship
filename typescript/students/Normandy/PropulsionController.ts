@@ -1,9 +1,9 @@
-import { angleDiff, Vector2, withinPiRange } from '../helpers.js'
-import { ThrusterName } from '../types.js'
-import PropulsionController from '../../src/subsystems/propulsionController.js'
-import YourDefenceController from './DefenseController.js'
-import YourNavigationController from './NavigationController.js'
-import YourSensorsController from './SensorsController.js'
+import { angleDiff, Vector2, withinPiRange } from "../helpers.js";
+import { ThrusterName } from "../types.js";
+import PropulsionController from "../../src/subsystems/propulsionController.js";
+import YourDefenceController from "./DefenseController.js";
+import YourNavigationController from "./NavigationController.js";
+import YourSensorsController from "./SensorsController.js";
 export default class YourPropulsionController extends PropulsionController {
   // To get other subsystem information, use the attributes below.
   // @ts-ignore
@@ -21,14 +21,20 @@ export default class YourPropulsionController extends PropulsionController {
       this.navigation.angle,
       this.sensors.target.heading
     );
-    const force = Math.min(Math.abs(500 * headingDiff), 100);
+    const force = Math.min(Math.abs(400 * headingDiff), 100);
     if (headingDiff < 0) {
       setThruster("clockwise", force);
-      setThruster("counterClockwise", 0);
+
+      //Adding countersteer.
+      setThruster("counterClockwise", force / 3);
     } else {
       setThruster("counterClockwise", force);
-      setThruster("clockwise", 0);
+
+      //Adding countersteer.
+      setThruster("clockwise", force / 3);
     }
-    setThruster("main", Math.abs(headingDiff) < 0.2 ? 30 : 0);
+
+    //Rocket thrusts towards target within a greater range.
+    setThruster("main", Math.abs(headingDiff) < 1 ? 40 : 0);
   }
 }
