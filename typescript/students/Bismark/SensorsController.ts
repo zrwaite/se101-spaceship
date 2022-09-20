@@ -4,9 +4,7 @@ import YourDefenceController from "./DefenseController.js";
 import YourNavigationController from "./NavigationController.js";
 import YourPropulsionController from "./PropulsionController.js";
 import { EMSReading, PassiveReading } from "../types.js";
-import Asteroid from "../../src/spaceObjects/asteroid.js";
-import Planet from "../../src/spaceObjects/planet.js";
-
+import { CloseRangeData } from "../../src/ship/EMSReading.js";
 export default class YourSensorsController extends SensorsController {
   // To get other subsystem information, use the attributes below.
   // @ts-ignore
@@ -26,8 +24,27 @@ export default class YourSensorsController extends SensorsController {
     passiveScan: () => PassiveReading[] | Error
   ) {
     const scanResult = passiveScan();
-    const activeScanResult = activeScan(40, 40, 40);
-    if (!(scanResult instanceof Error)) this.target = scanResult[0]; 
+    if (!(scanResult instanceof Error)) this.target = scanResult[0];
+    
+    interface EMSReading {
+      angle: number
+      distance: number
+      velocity: Vector2
+      radius: number
+      closeRange?: CloseRangeData
+    }
+
+    interface CloseRangeData {
+      type: 'Planet' | 'Meteor' | 'Asteroid' | 'WarpGate' | 'Other' 
+      planetComposition?: {
+        water:number
+        air:number
+        land:number
+        metal:number
+        safety:number
+        temperature:number
+      }
+    }
   }
 
 }
