@@ -25,30 +25,6 @@ export default class YourSensorsController extends SensorsController {
     if(this.navigation.angle === undefined) return;
     const scanResult = passiveScan();
     //const scanResult2 = activeScan(this.navigation.angle - (Math.PI)/2, Math.PI, 100);
-    interface PassiveReading {
-      heading: number;
-      gravity: number;
-    }
-
     if (!(scanResult instanceof Error)) this.target = scanResult[0];
-    interface EMSReading {
-      angle: number;
-      distance: number;
-      velocity: Vector2;
-      radius: number;
-      closeRange?: CloseRangeData;
-    }
-
-    interface CloseRangeData {
-      type: "Planet" | "Meteor" | "Asteroid" | "WarpGate" | "Other";
-      planetComposition?: {
-        water: number;
-        air: number;
-        land: number;
-        metal: number;
-        safety: number;
-        temperature: number;
-      };
-    }
   }
 }
