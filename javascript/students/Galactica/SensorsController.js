@@ -5,9 +5,10 @@ export default class YourSensorsController extends SensorsController {
         //Add additional attributes here
         this.target = null;
         this.spaceObjects = null;
-        this.spaceObjectsDetailed = [];
+        this.spaceObjectsDetailed = null;
         this.targetDistance = 0;
         this.activeArray = new Array(4);
+        this.facing = "";
     }
     // helper function to convert degrees to radians
     rad(angleDeg) {
@@ -55,10 +56,15 @@ export default class YourSensorsController extends SensorsController {
                         }
                         //Not bothering with Blackhole
                         // Each detailed space object will have the information of type and angle
-                        this.spaceObjectsDetailed.push(spaceObjectType, activeSpaceObject.angle);
+                        this.spaceObjectsDetailed.push({ type: spaceObjectType, angle: activeSpaceObject.angle });
                     }
                 }
             }
+        }
+        console.log("Details");
+        console.log(this.spaceObjectsDetailed);
+        if (this.spaceObjectsDetailed != null) {
+            this.facing = this.spaceObjectsDetailed[0].type;
         }
         // console.log(this.targetDistance)
     }
