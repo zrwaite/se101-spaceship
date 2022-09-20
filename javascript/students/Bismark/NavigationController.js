@@ -21,6 +21,7 @@ export default class YourNavigationController extends NavigationController {
         /*
         
         */
+       // if distance < 68 units, check for map data and try to warp/land.
         warp();
         land();
     }
