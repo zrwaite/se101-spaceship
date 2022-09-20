@@ -19,13 +19,13 @@ export default class YourPropulsionController extends PropulsionController {
 
 		if (!this.sensors.target) return
 		const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading)
-		const turnForce = Math.min(Math.abs(50 * headingDiff), 20)
+		const turnForce = Math.min(Math.abs(100 * headingDiff), 20)
 
 		let mainForce = 80;
 		let bowForce = 0;
 		if (this.sensors.targetDistance != 0 
-			&& this.sensors.targetDistance < 200 
-			&& this.sensors.targetType == "Planet") {
+			&& this.sensors.targetDistance < 250 
+			/*&& this.sensors.targetType == "Planet" */) {
 			console.log("hey");
 			mainForce = 0
 			bowForce = 100;
