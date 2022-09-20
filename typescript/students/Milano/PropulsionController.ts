@@ -44,7 +44,10 @@ export default class YourPropulsionController extends PropulsionController {
 		
 		
 		if (!this.sensors.target) return
-		
+
+
+		//Note: the board is setup like a grid where (0,0) is the coordinates of the top left corner
+			//Angles work 
 		const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading)
 		const force = Math.min(Math.abs(100 * headingDiff), 100) 
 		if (headingDiff < 0) {
