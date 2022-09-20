@@ -20,7 +20,7 @@ export default class YourSensorsController extends SensorsController {
 	}
 	cartesian(angle: number, distance: number): number[] {
 		// Given angle and distance of an object, return x,y cords assuming ship pos is 0,0
-		//The angle returns
+		//The angle returns.
 		return [distance*Math.cos(angle), distance*Math.sin(angle)]
 
  	} 
