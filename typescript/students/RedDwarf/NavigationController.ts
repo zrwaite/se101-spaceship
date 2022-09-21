@@ -9,7 +9,7 @@ import YourSensorsController from "./SensorsController.js";
 export default class YourNavigationController extends NavigationController {
   // To get other subsystem information, use the attributes below.
   // @ts-ignore
-  defence: YourDefenceController; // @ts-iore
+  defence: YourDefenceController; // @ts-ignore
   sensors: YourSensorsController; // @ts-ignore
   propulsion: YourPropulsionController;
   angle = 0;
