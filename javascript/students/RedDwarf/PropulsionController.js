@@ -6,43 +6,24 @@ export default class YourPropulsionController extends PropulsionController {
         //Add additional attributes here
         this.prevError = 0;
         this.maxOutput = 0;
-        this.kForceConst = 20;
-        this.dForceConst = -10;
+        this.kWeight = 300;
+        this.dWeight = 5000;
     }
     propulsionUpdate(setThruster) {
-        // if (!this.sensors.target) return;
         if (!this.sensors.target)
             return; //WTF is this
         const currError = angleDiff(//calculate heading angle
         this.navigation.angle, this.sensors.target.heading);
         var output = 0;
-        const errorDiff = currError - this.prevError;
-        const K = currError * 500;
-        const D = errorDiff * 5000;
+        const errorDiff = currError - this.prevError; //Find "derivative" of error
+        const K = currError * this.kWeight; //Calculate terms
+        const D = errorDiff * this.dWeight;
         output = K + D;
-        console.log("angle" + currError);
-        // if(Math.abs(currError) > Math.PI/180 * 15) {
-        //   if(currError > 0) {
-        //     output = 30;
-        //     console.log("POS")
-        //   }else{
-        //     output = -30;
-        //     console.log("NEG")
-        //   }
-        // }else{
-        //   const errorDiff = currError-this.prevError;
-        //   console.log(errorDiff);
-        //   output = errorDiff * 5000;
-        // }
+        // console.log("ANGLE: " + currError)
         console.log("OUTPUT: " + output);
-        // console.log((currError-this.prevError)*100);
-        // const errorDiff = currError-this.prevError;
-        // const kForce = this.kForceConst * currError; 
-        // const dForce = this.dForceConst * errorDiff;
-        // const force = kForce + dForce;
-        // console.log("force " + force);
+        //Calculate maxoutput
         this.maxOutput = Math.max(this.maxOutput, Math.abs(output));
-        console.log("MAXOUTPUT: " + this.maxOutput);
+        // console.log("MAXOUTPUT: " + this.maxOutput)
         if (output < 0) {
             setThruster('clockwise', Math.min(Math.abs(output), 100));
             setThruster('counterClockwise', 0);

@@ -18,15 +18,16 @@ export default class YourPropulsionController extends PropulsionController {
   prevError:number = 0;
   maxOutput:number = 0;
 
-  kForceConst:number = 20;
-  dForceConst:number = -10;
+  kWeight:number = 300;
+  dWeight:number = 5000;
 
 
 
   propulsionUpdate(
     setThruster: (thruster: ThrusterName, power: number) => Error | null
   ) {
-    if (!this.sensors.target) return;
+
+    if (!this.sensors.target) return; //WTF is this
 
     const currError = angleDiff( //calculate heading angle
       this.navigation.angle,
@@ -35,48 +36,19 @@ export default class YourPropulsionController extends PropulsionController {
 
     var output = 0;
 
+    const errorDiff = currError-this.prevError; //Find "derivative" of error
 
-    const errorDiff = currError-this.prevError;
-    const K = currError * 500;
-    const D = errorDiff * 5000;
+    const K = currError * this.kWeight; //Calculate terms
+    const D = errorDiff * this.dWeight;
     output = K + D;
     
-
-    console.log("angle" + currError)
-
-    // if(Math.abs(currError) > Math.PI/180 * 15) {
-    //   if(currError > 0) {
-    //     output = 30;
-    //     console.log("POS")
-    //   }else{
-    //     output = -30;
-    //     console.log("NEG")
-    //   }
-    // }else{
-    //   const errorDiff = currError-this.prevError;
-    //   console.log(errorDiff);
-    //   output = errorDiff * 5000;
-    // }
+    // console.log("ANGLE: " + currError)
 
     console.log("OUTPUT: " + output);
 
-
-
-    // console.log((currError-this.prevError)*100);
-
-    // const errorDiff = currError-this.prevError;
-    
-    // const kForce = this.kForceConst * currError; 
-
-    // const dForce = this.dForceConst * errorDiff;
-    
-    // const force = kForce + dForce;
-
-    // console.log("force " + force);
-
-    
+    //Calculate maxoutput
     this.maxOutput = Math.max(this.maxOutput, Math.abs(output))
-    console.log("MAXOUTPUT: " + this.maxOutput)
+    // console.log("MAXOUTPUT: " + this.maxOutput)
 
     if (output < 0) {
       setThruster('clockwise', Math.min(Math.abs(output), 100))
