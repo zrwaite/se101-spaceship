@@ -1,7 +1,11 @@
 figure#Red\ Dwarf {
-    background-color: dodgerblue !important;
-    color: red !important;
+    background-color: dodgerblue;
+    color: red;
     font-weight: bold;
+    transition: all .6s;
+}
+figure#Red\ Dwarf:hover {
+    background-color: #1366eb !important;
 }
 figure#Red\ Dwarf:before {
     background-image: url(RedDwarf.jpg);
@@ -13,4 +17,15 @@ figure#Red\ Dwarf:before {
     margin-right: 2px;
     margin-left: -5px;
     border-radius: 50%;
+}
+figure#Red\ Dwarf:hover:before {
+    animation: rotate 1s;
+}
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
