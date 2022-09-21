@@ -16,6 +16,8 @@ export default class YourSensorsController extends SensorsController {
 	target: PassiveReading | null=null;
 	landTarget: Vector2 | null=null;
 	warpTarget: Vector2 | null=null;
+	
+	donePassive = false
 
   	collisionCheck(target: Vector2, selfVelocity: Vector2, targetVelocity: Vector2): number {
 		//given target, selfvelocity, and target velocity; return time to impact; negative means wont impact
@@ -29,56 +31,88 @@ export default class YourSensorsController extends SensorsController {
 	}
 	cartesian(angle: number, distance: number): Vector2 {
 		// Given angle and distance of an object, return x,y cords assuming ship pos is 0,0
+		angle = 0-angle
+		if(angle<0) angle+=2*Math.PI
 		return new Vector2(distance*Math.cos(angle), distance*Math.sin(angle))
-
  	} 
 
- 	polar(x: number, y: number): Vector2{
+ 	polar(xy: Vector2): Vector2{
  		// Given x,y coords assuming ship pos is 0,0, return [angle (in radians), distance]
- 		return new Vector2(Math.sqrt(x*x + y*y), Math.atan(y/x))
+		if(xy.x==0){
+			if(xy.y<0) return new Vector2(Math.sqrt(xy.x*xy.x + xy.y*xy.y), 0-Math.PI/2)
+			else return new Vector2(Math.sqrt(xy.x*xy.x + xy.y*xy.y), 0+Math.PI/2)
+		}
+		var ret = new Vector2(Math.sqrt(xy.x*xy.x + xy.y*xy.y), Math.atan(xy.y/xy.x))
+		if(xy.x<0){
+			ret.y= Math.PI - ret.y
+			if(ret.y>Math.PI) ret.y -= Math.PI;
+		}else{
+			ret.y-=Math.PI/2
+		}
+ 		return ret
  	}
+
+	
 
  	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
  		//Student code goes here
- 		const scanResult = passiveScan();
-		
-		this.landTarget = new Vector2(360,270)
-
-		if(!(scanResult instanceof Error)) {
-			var prev_min = 9999999999999;
-			var min_index =0;
-			var astroid_heading = []
+		if(!this.donePassive){
+			this.donePassive = true
+			const scanResult = passiveScan()
 			
-			for(let i=0; i<scanResult.length; i++){
-				if(scanResult[i].gravity<0){
-					const ems = activeScan(scanResult[i].heading,5,680)
-					if(!(ems instanceof Error)) {
-						for(let j=0; i<ems.length; i++){
-							if(ems[j].radius==15){
-								this.warpTarget = this.cartesian(ems[j].angle, ems[j].distance).add(this.navigation.shipPosition)
+			if(!(scanResult instanceof Error)) {
+				for(let i=0; i<scanResult.length; i++){
+					if(scanResult[i].gravity<0){
+						const ems = activeScan(scanResult[i].heading,0.1,720)
+						if(!(ems instanceof Error)) {
+							for(let j=0; j<ems.length; j++){
+								if(ems[j].radius==15){
+									this.warpTarget = this.cartesian(ems[j].angle, ems[j].distance).add(this.navigation.shipPosition)
+								}
 							}
 						}
+						continue;
 					}
-					continue;
-				}
-				const ems = activeScan(scanResult[i].heading,5,680)
-				if(!(ems instanceof Error)) {
-					for(let j=0; i<ems.length; i++){
-						if(ems[j].distance>0 && ems[j].radius<=45 && ems[j].radius>=25){
-							this.landTarget = this.cartesian(ems[j].angle, ems[j].distance).add(this.navigation.shipPosition)
-						}else if(ems[j].radius>0 && (ems[j].radius==5 || ems[j].radius==15) ){
-							astroid_heading.push(ems[j].angle)
-							//tti is time to impact
-							var tti = this.collisionCheck(this.cartesian(ems[j].angle, ems[j].distance),this.navigation.shipVelocity,ems[j].velocity)
-							if(tti>0 && tti<prev_min){
-								prev_min=tti
-								min_index=astroid_heading.length-1
+					const ems = activeScan(scanResult[i].heading,0.1,720)
+					console.log(ems)
+					if(!(ems instanceof Error)) {
+						console.log(ems.length)
+						for(let j=0; j<ems.length; j++){
+							console.log(ems[j].angle)
+							if(ems[j].distance>0 && ems[j].radius<=45 && ems[j].radius>=25){
+								this.landTarget = this.cartesian(ems[j].angle, ems[j].distance).add(this.navigation.shipPosition)
 							}
 						}
 					}
 				}
 			}
-			if(prev_min!=9999999999999) this.target = scanResult[min_index];
+
+		}else{
+			var scanAngle = this.polar(this.navigation.shipVelocity).y
+			const ems = activeScan(scanAngle, Math.PI, 300)
+			console.log(ems)
+			if(!(ems instanceof Error)) {
+				var prev_min = 9999999999999;
+				var min_index =0;
+				var astroid_heading = []
+				for(let j=0; j<ems.length; j++){
+					if(ems[j].radius>0 && (ems[j].radius==5 || ems[j].radius==15) ){
+						astroid_heading.push(ems[j].angle)
+						//tti is time to impact
+						var tti = this.collisionCheck(this.cartesian(ems[j].angle, ems[j].distance),this.navigation.shipVelocity,ems[j].velocity)
+						if(tti>0 && tti<prev_min){
+							if(this.warpTarget && ems[j].velocity.x == 0 && ems[j].velocity.y == 0) continue;
+							prev_min=tti
+							min_index=astroid_heading.length-1
+						}
+					}
+				}
+				if(prev_min!=9999999999999){
+					this.target = new PassiveReading(ems[min_index].angle,0)
+				}else{
+					this.target = null
+				}
+			}
 		}
 	}
 }
