@@ -15,9 +15,14 @@ export default class YourNavigationController extends NavigationController {
 
 	//Add additional attributes here
 	angle = 0
+	xVelocity=0
+	yVelocity=0
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		this.angle = getShipStatus ('angle')
+		this.xVelocity = getShipStatus ('linearVelocityX')
+		this.yVelocity = getShipStatus ('linearVelocityY')
+		// console.log(this.angle)
 		land()
 		warp()
 	}
