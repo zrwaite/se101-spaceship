@@ -33,7 +33,13 @@ export default class YourNavigationController extends NavigationController {
          if it is a warp, warp
          otherwise, do nothing (for now)
          */
-        land();
-        warp();
+        if (this.sensors && this.sensors.closeRange && this.sensors.closeRange[0] && this.sensors.closeRange[0].closeRange) {
+            if (this.sensors.closeRange[0].closeRange.type === "Planet") {
+                land();
+            }
+            else if (this.sensors.closeRange[0].closeRange.type === "WarpGate") {
+                warp();
+            }
+        }
     }
 }
