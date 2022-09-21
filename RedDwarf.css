@@ -1,6 +1,6 @@
 figure#Red\ Dwarf {
-    background-color: dodgerblue;
-    color: red;
+    background-color: dodgerblue !important;
+    color: red !important;
     font-weight: bold;
     transition: all .6s;
 }
