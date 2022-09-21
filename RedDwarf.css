@@ -1,0 +1,16 @@
+figure#Red\ Dwarf {
+    background-color: dodgerblue !important;
+    color: red !important;
+    font-weight: bold;
+}
+figure#Red\ Dwarf:before {
+    background-image: url(RedDwarf.jpg);
+    content: '';
+    display: inline-block;
+    height: 21px;
+    width: 21px;
+    vertical-align: middle;
+    margin-right: 2px;
+    margin-left: -5px;
+    border-radius: 50%;
+}
