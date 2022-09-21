@@ -34,8 +34,8 @@ export default class YourNavigationController extends NavigationController {
 		this.angle = getShipStatus('angle');
 		// this.positionX = getShipStatus('positionX');
 		// this.positionY = getShipStatus('positionY');
-		// this.linearVelocityX = getShipStatus('linearVelocityX');
-		// this.linearVelocityY = getShipStatus('linearVelocityY');
+		this.linearVelocityX = getShipStatus('linearVelocityX');
+		this.linearVelocityY = getShipStatus('linearVelocityY');
 		// this.thrusterPowerMain = getShipStatus('thrusterPowerMain');
 		// this.thrusterPowerBow = getShipStatus('thrusterPowerBow');
 		// this.thrusterPowerClockwise = getShipStatus('thrusterPowerClockwise');
