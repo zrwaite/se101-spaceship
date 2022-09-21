@@ -21,6 +21,8 @@ export default class YourSensorsController extends SensorsController {
   EMSRad: EMSReading[] | undefined;
   EMSCLD: EMSReading[] | undefined;
 
+  onTarget = false;
+
   sensorsUpdate(
     activeScan: (
       heading: number,
@@ -30,6 +32,14 @@ export default class YourSensorsController extends SensorsController {
     passiveScan: () => PassiveReading[] | Error
   ) {
     if (this.navigation.angle === undefined) return;
+    if (this.navigation.linearVelocityY === undefined) return;
+    if (this.navigation.linearVelocityX === undefined) return;
+    
+     //check if ships velocity is moving towards the target
+     var VAngle = Math.atan(this.navigation.linearVelocityY / this.navigation.linearVelocityX);
+     if(this.target != undefined && (VAngle < this.target.heading - 0.5 || VAngle > this.target.heading + 0.5)){
+     this.onTarget = true;
+     }
 
     const scanResult = passiveScan();
     if (!(scanResult instanceof Error)) this.target = scanResult[0];
