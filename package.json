@@ -5,7 +5,7 @@
 	"main": "src/index.js",
 	"scripts": {
 		"dev": "tsc --watch",
-		"compile": "tsc;"
+		"compile": "tsc"
 	},
 	"repository": {
 		"type": "git",
