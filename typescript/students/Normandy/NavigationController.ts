@@ -26,6 +26,8 @@ export default class YourNavigationController extends NavigationController {
 		this.shipVelocity = new Vector2(getShipStatus('linearVelocityX'), getShipStatus('linearVelocityY'))
 		this.shipPosition = new Vector2(getShipStatus('positionX'), getShipStatus('positionY'))
 		var landDest = this.sensors.landTarget		//absolute coordinates 
+		var warpDest = this.sensors.warpTarget
+
 
 
 		var visited: boolean[][] = []
@@ -33,7 +35,11 @@ export default class YourNavigationController extends NavigationController {
 
 		if (landDest != null) {
 			this.targetAngle = withinPiRange((landDest.subtract(this.shipPosition)).angle())	//target angle
-			console.log("angle" + this.angle)
+			//console.log("angle" + this.angle)
+		}
+		else if (warpDest != null) {
+			this.targetAngle = withinPiRange((warpDest.subtract(this.shipPosition)).angle())
+
 		}
 		
 

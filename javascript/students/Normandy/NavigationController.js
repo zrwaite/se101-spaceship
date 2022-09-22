@@ -7,18 +7,22 @@ export default class YourNavigationController extends NavigationController {
         this.angle = 0;
         this.shipVelocity = new Vector2(0, 0);
         this.shipPosition = new Vector2(0, 0);
+        this.targetAngle = 0;
     }
     navigationUpdate(getShipStatus, warp, land, getMapData) {
         //Student code goes here
-        //this.angle = getShipStatus('angle')
-        //this.sensors.cartesian()
+        this.angle = getShipStatus('angle'); //ship's current angle
         this.shipVelocity = new Vector2(getShipStatus('linearVelocityX'), getShipStatus('linearVelocityY'));
         this.shipPosition = new Vector2(getShipStatus('positionX'), getShipStatus('positionY'));
         var landDest = this.sensors.landTarget; //absolute coordinates 
+        var warpDest = this.sensors.warpTarget;
         var visited = [];
         if (landDest != null) {
-            this.angle = withinPiRange((landDest.subtract(this.shipPosition)).angle());
-            console.log("angle" + this.angle);
+            this.targetAngle = withinPiRange((landDest.subtract(this.shipPosition)).angle()); //target angle
+            //console.log("angle" + this.angle)
+        }
+        else if (warpDest != null) {
+            this.targetAngle = withinPiRange((warpDest.subtract(this.shipPosition)).angle());
         }
         // if (getShipStatus('positionX')) {
         // }
