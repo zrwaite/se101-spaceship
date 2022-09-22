@@ -5,6 +5,9 @@ import YourNavigationController from "./NavigationController.js";
 import YourPropulsionController from "./PropulsionController.js";
 import { EMSReading, PassiveReading } from "../types.js";
 import { CloseRangeData } from "../../src/ship/EMSReading.js";
+import { buildShip } from "../../src/ship/buildShip.js";
+import ColonyShip from "../../src/ship/colonyShip.js";
+import ActiveSensors from "../../src/ship/activeSensors.js";
 export default class YourSensorsController extends SensorsController {
   // To get other subsystem information, use the attributes below.
   // @ts-ignore
@@ -34,11 +37,8 @@ export default class YourSensorsController extends SensorsController {
     const scanResult = passiveScan();
     if (!(scanResult instanceof Error)) this.target = scanResult[0];
 
-    const activeScanResult = activeScan(
-      this.navigation.angle - Math.PI / 2,
-      Math.PI,
-      100
-    );
+    const activeScanResult = activeScan(this.navigation.angle - Math.PI / 8, Math.PI, 100);
+
     if (!(activeScanResult instanceof Error)) {
       this.targetDetails = activeScanResult.find(
         (r) => r.angle === this.target?.heading
@@ -50,5 +50,7 @@ export default class YourSensorsController extends SensorsController {
         (r1, r2) => r1.distance - r2.distance
       );
     }
+
+    const CloseRangeData = ActiveSensors.arguments.scan;
   }
 }
