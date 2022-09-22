@@ -42,12 +42,19 @@ export default class YourNavigationController extends NavigationController {
 		this.position = new Vector2(getShipStatus('positionX'), getShipStatus('positionY'))
 		this.angle = getShipStatus('angle')
 
+		// If target has been set
 		if (this.targetIsPlanet !== null) {
+
+			// If the target is a planet
 			if (this.targetIsPlanet === true) {
+
+				// If we're close enough, attempt to land
 				if (this.target.magnitude() !== 0 && this.target.magnitude() <= this.landingDistance) {
 					land()
 				}
 			} else {
+
+				// If instead the target is a warp gate, attempt to warp
 				if (this.target.magnitude() !== 0 && this.target.magnitude() <= this.landingDistance) {
 					warp()
 				}
@@ -74,19 +81,27 @@ export default class YourNavigationController extends NavigationController {
 		// if target is not set - condition isnt necessary????
 		if (this.targetIsPlanet === null) {	
 			for (var val of this.possibleObjects) {
+
+				// If the target is a planet
 				if (val.type === 'Other') {
 					// add to list of explored objects?
 					if (!(val.distance === undefined)) {
 						d = val.distance
 					}
+
+					// Calculate target vector
 					this.target.set(d * Math.cos(val.angle), d * Math.sin(val.angle))
 					this.targetIsPlanet = true;
 					break;
-				} else {
+				} else {		// If target is not a planet
+
+					
 					this.targetIsPlanet = false;
 					if (!(val.distance === undefined)) {
 						d = val.distance
 					}
+
+					// Calculate target vector
 					this.target.set(d * Math.cos(val.angle), d * Math.sin(val.angle))
 				}
 			} 
