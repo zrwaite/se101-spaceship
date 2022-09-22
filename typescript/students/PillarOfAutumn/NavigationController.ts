@@ -5,8 +5,8 @@ import NavigationController from '../../src/subsystems/navigationController.js'
 import YourDefenceController from './DefenseController.js'
 import YourPropulsionController from './PropulsionController.js'
 import YourSensorsController from './SensorsController.js'
-let planet = false;
-let portal = false;
+let planet = true;
+let portal = true;
 
 export default class YourNavigationController extends NavigationController {
 	// To get other subsystem information, use the attributes below.

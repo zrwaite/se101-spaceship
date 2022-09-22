@@ -1,6 +1,6 @@
 import NavigationController from '../../src/subsystems/navigationController.js';
-let planet = false;
-let portal = false;
+let planet = true;
+let portal = true;
 export default class YourNavigationController extends NavigationController {
     constructor() {
         super(...arguments);
