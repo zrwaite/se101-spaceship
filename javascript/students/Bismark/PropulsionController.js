@@ -1,5 +1,5 @@
-import { angleDiff } from '../helpers.js';
-import PropulsionController from '../../src/subsystems/propulsionController.js';
+import { angleDiff } from "../helpers.js";
+import PropulsionController from "../../src/subsystems/propulsionController.js";
 export default class YourPropulsionController extends PropulsionController {
     //Add additional attributes here
     propulsionUpdate(setThruster) {
@@ -9,13 +9,13 @@ export default class YourPropulsionController extends PropulsionController {
         const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading);
         const force = Math.min(Math.abs(500 * headingDiff), 100);
         if (headingDiff < 0) {
-            setThruster('clockwise', force);
-            setThruster('counterClockwise', 0);
+            setThruster("clockwise", force - this.navigation.angVel * 15000);
+            setThruster("counterClockwise", this.navigation.angVel);
         }
         else {
-            setThruster('counterClockwise', force);
-            setThruster('clockwise', 0);
+            setThruster("counterClockwise", this.navigation.angVel * 15000);
+            setThruster("clockwise", this.navigation.angVel);
         }
-        setThruster('main', Math.abs(headingDiff) < 0.2 ? 30 : 0);
+        setThruster("main", Math.abs(headingDiff) < 0.2 ? 30 : 0);
     }
 }
