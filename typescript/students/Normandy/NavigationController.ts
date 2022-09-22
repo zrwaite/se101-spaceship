@@ -68,7 +68,7 @@ export default class YourNavigationController extends NavigationController {
 				this.heading = 0;
 
 				//search for the object with highest gravity and go to it
-				for (let i = 0; i < passiveScan.length; i++) {
+				for (let i = 0; i < passiveScan?.length; i++) {
 					if (highestGravity < passiveScan[i].gravity) {
 						highestGravity = passiveScan[i].gravity;
 						this.heading = passiveScan[i].heading;

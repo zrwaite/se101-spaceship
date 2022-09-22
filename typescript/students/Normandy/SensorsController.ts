@@ -41,6 +41,7 @@ export default class YourSensorsController extends SensorsController {
             return;
 		}
 
+
         const activeScanResult = activeScan(0, Math.PI, 1000);
         if(!(activeScanResult instanceof Error) && activeScanResult?.length > 0)  {	
             this.activeScans.push(activeScanResult)
