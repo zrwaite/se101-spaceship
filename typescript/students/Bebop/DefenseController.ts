@@ -11,25 +11,31 @@ export default class YourDefenceController extends DefenceController {
 	propulsion: YourPropulsionController
 	//Add additional attributes here
 
-	torpedoTargets: number[] = [];
-
 	defenceUpdate(aimTurret: (angle: number) => void, getTubeCooldown: (i: number) => number | Error, fireTorpedo: (i: number) => Error | null) {
 		if (!this.sensors.target) return
-		if (this.sensors.activeScanData != null && this.sensors.activeScanData[0] != null) {
-			for (let i = 0; i < this.sensors.activeScanData.length; i++) {
-				this.torpedoTargets.push(this.sensors.activeScanData[i].angle);
+
+		let array: number[] = [];
+
+		aimTurret(array[0]);
+
+		if(this.sensors.activeScanData != null){
+			for(let i = 0; i < this.sensors.activeScanData.length; i++){
+				if(this.sensors.activeScanData[i].closeRange){
+					if(getTubeCooldown(0) == 0){
+						aimTurret(this.sensors.activeScanData[0].angle)
+						fireTorpedo(0)
+					}else if(getTubeCooldown(1) == 0){
+						aimTurret(this.sensors.activeScanData[0].angle)
+						fireTorpedo(1)
+					}else if(getTubeCooldown(2) == 0){
+						aimTurret(this.sensors.activeScanData[0].angle)
+						fireTorpedo(2)
+					}else if(getTubeCooldown(3) == 0){
+						aimTurret(this.sensors.activeScanData[0].angle)
+						fireTorpedo(3)
+					}
+				}
 			}
 		}
-
-		for (let i = 0; i < 4; i++) {
-			const target = this.torpedoTargets[0];
-			if (getTubeCooldown(i) == 0) {
-				fireTorpedo(i);
-				this.torpedoTargets.shift();
-			}
-		}
-
-		this.torpedoTargets = [];
-
 	}
 }

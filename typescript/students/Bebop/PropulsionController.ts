@@ -12,7 +12,7 @@ export default class YourPropulsionController extends PropulsionController {
     navigation: YourNavigationController
 
     //Add additional attributes here
-
+   
     propulsionUpdate(setThruster: (thruster: ThrusterName, power: number) => Error | null) {
         const target = this.sensors.target;
         if (!target) return
@@ -88,7 +88,7 @@ export default class YourPropulsionController extends PropulsionController {
                     setThruster('bow', Math.abs(heading) < 0.2 ? Math.min(object.distance, 100) : 0);
                     setThruster("main", 0);
                 }
-
+                
             }
 
         }

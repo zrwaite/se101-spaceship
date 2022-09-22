@@ -57,7 +57,6 @@ export default class YourPropulsionController extends PropulsionController {
         setThruster('main', Math.abs(heading) < 0.2 ? 100 : 0);
         setThruster("bow", 0);
         const objects = this.sensors.activeScanData;
-        console.log(objects === null || objects === void 0 ? void 0 : objects.length);
         if (objects) {
             for (let i = 0; i < (objects.length); i++) {
                 const object = objects[i];
