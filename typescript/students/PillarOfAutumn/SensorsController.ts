@@ -19,12 +19,13 @@ export default class YourSensorsController extends SensorsController {
 	
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
 		
-		if(this.timeCounter % 120 == 0){
+		if(this.timeCounter % 30 == 0){
 			const passScanRes = passiveScan()
 			if (!(passScanRes instanceof Error)) {
 				passScanRes.forEach((reading) => {
-					if(reading.gravity > 20000){
+					if(reading.gravity > 200){
 						this.target = reading;
+						console.log(this.target)
 					}
 				})
 			} else {
