@@ -13,9 +13,16 @@ export default class YourNavigationController extends NavigationController {
 	sensors: YourSensorsController // @ts-ignore
 	propulsion: YourPropulsionController
 
+  //@ts-ignore
+  angle: number;
+
+
+
 	//Add additional attributes here
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		//Student code goes here
+    this.angle = getShipStatus("angle");
+    land();
 	}
 }

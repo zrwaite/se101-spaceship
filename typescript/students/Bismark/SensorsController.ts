@@ -11,9 +11,13 @@ export default class YourSensorsController extends SensorsController {
 	navigation: YourNavigationController // @ts-ignore
 	propulsion: YourPropulsionController
 
+  target : PassiveReading | undefined; 
+
 	//Add additional attributes here
 	
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
 		//Student code goes here
+    const scanResult = passiveScan()
+    if(! (scanResult instanceof Error)) this.target = scanResult[0]
 	}
 }
