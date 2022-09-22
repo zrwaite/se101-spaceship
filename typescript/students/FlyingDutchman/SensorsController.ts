@@ -21,7 +21,7 @@ export type SpaceObject = {
    * Value between 0 and 1 which indicates how certain we are this object is [type]
    */
   certainty: number;
-  type: 'Meteor' | 'Asteroid' | 'WarpGate' | 'Other'
+  type: 'Planet' | 'Meteor' | 'Asteroid' | 'WarpGate' | 'Other' 
 }
 export default class YourSensorsController extends SensorsController {
 	// To get other subsystem information, use the attributes below.
@@ -32,23 +32,41 @@ export default class YourSensorsController extends SensorsController {
 	target: PassiveReading | null = null 
 
 	//Add additional attributes here
-    scannedObjects: SpaceObject[] = [];
+    passiveScannedObjects: SpaceObject[] = [];
+	activeScannedObjects: SpaceObject[] = [];
+
+	activeHeading: number = 0;
+	activeArc: number = Math.PI/4;
+	activeRange: number = 150;
+
 
 	public get warpgatesOrPlanets() {
-		return this.scannedObjects.filter((so) => ['Other', "WarpGate"].includes(so.type));
+		return this.passiveScannedObjects.filter((so) => ['Other', "WarpGate"].includes(so.type));
 	}
 
-  public get asteroids() {
-    return this.scannedObjects.filter((so) => "Asteroid" == so.type);
-  }
+	public get asteroids() {
+		return this.activeScannedObjects.filter((so) => "Asteroid" == so.type);
+	}
+
+	public setActiveParam(heading: number, arc: number, range: number){
+		this.activeHeading = heading
+		this.activeArc = arc
+		this.activeRange = range
+	}
+
+	public get activeResults() {
+		return this.activeScannedObjects;
+	}
+
 
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
-		const scanResult = passiveScan()
-		if ((scanResult instanceof Error)) return;
-		
-		this.scannedObjects = scanResult.map((reading) => {
+		const passiveScanResult = passiveScan()
 
-			let type: 'Meteor' | 'Asteroid' | 'WarpGate' | 'Other' = 'Other'
+		if ((passiveScanResult instanceof Error)) return;
+		
+		this.passiveScannedObjects = passiveScanResult.map((reading) => {
+
+			let type: 'Planet' | 'Meteor' | 'Asteroid' | 'WarpGate' | 'Other' = 'Other'
 			let certainty = 0.5
 			let distance: number | undefined = undefined;
 			let mass: number | undefined = undefined;
@@ -62,6 +80,10 @@ export default class YourSensorsController extends SensorsController {
 				type = 'Asteroid'
 				mass = 5
 				distance = reading.gravity / mass
+			} else{
+				type = 'Planet'
+				mass = 37.5
+				distance = reading.gravity / mass
 			}
 			
 			return {
@@ -72,9 +94,33 @@ export default class YourSensorsController extends SensorsController {
 				distance,
 			}
 		})
+		
 
-		this.target = scanResult[0]
+		const activeScanResult = activeScan(this.activeHeading, this.activeArc, this.activeRange)
 
+		if ((activeScanResult instanceof Error)) return;
+
+		this.activeScannedObjects = activeScanResult.map((reading) => {
+
+			const distance = reading.distance
+
+			let certainty = 0.5
+			let type: 'Planet' | 'Meteor' | 'Asteroid' | 'WarpGate' | 'Other' = 'Other'
+			
+			if (distance < 100) {
+				certainty = 1
+				type = reading.closeRange?.type ?? 'Other'
+			}
+
+			return{
+				angle: reading.angle,
+				distance,
+				velocity: reading.velocity,
+				radius: reading.radius,
+				type,
+				certainty,
+			}
+		})
 	}
 }
 
