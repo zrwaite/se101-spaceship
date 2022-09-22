@@ -1,7 +1,7 @@
-import Vector2 from '../helpers/Vector2.js';
-import Torpedo from './torpedo.js';
-import RenderedObject from '../renderedObject.js';
-import { angleDiff } from '../helpers/Angles.js';
+import Vector2 from "../helpers/Vector2.js";
+import Torpedo from "./torpedo.js";
+import RenderedObject from "../renderedObject.js";
+import { angleDiff } from "../helpers/Angles.js";
 const TUBE_COOLDOWN_FRAMES = 100;
 const NUMBER_OF_TUBES = 4;
 const TORPEDO_VELOCITY = 3;
@@ -14,8 +14,8 @@ export default class TurretControls extends RenderedObject {
         this.numberOfTubes = NUMBER_OF_TUBES;
         this.lastFrameFiredByTube = Array(NUMBER_OF_TUBES).fill(-Infinity);
         this.launchSpeed = TORPEDO_VELOCITY;
-        this.ctx = 'ships';
-        this.image = this.game.images['turret'];
+        this.ctx = "ships";
+        this.image = this.game.images["turret"];
         this.parentShip = parentShip;
         this.pos = this.parentShip.pos;
     }
@@ -42,7 +42,10 @@ export default class TurretControls extends RenderedObject {
         }
         else {
             // Invalid tubeIndex
-            return new Error('getTubeCooldownFailed due to invalid tube index; expected tubeIndex from 0 (inclusive) up to ' + NUMBER_OF_TUBES + ' (exclusive) but received ' + tubeIndex);
+            return new Error("getTubeCooldownFailed due to invalid tube index; expected tubeIndex from 0 (inclusive) up to " +
+                NUMBER_OF_TUBES +
+                " (exclusive) but received " +
+                tubeIndex);
         }
     }
     fireTorpedo(tubeIndex) {
@@ -64,11 +67,15 @@ export default class TurretControls extends RenderedObject {
                 return null;
             }
             else {
-                return new Error('fireTorpedo failed due to internal call to getTubeCooldown not returning zero tubeCooldown response for tubeIndex ' + tubeIndex);
+                return new Error("fireTorpedo failed due to internal call to getTubeCooldown not returning zero tubeCooldown response for tubeIndex " +
+                    tubeIndex);
             }
         }
         else {
-            return new Error('fireTorpedo due to invalid tube index; expected tubeIndex from 0 (inclusive) up to ' + NUMBER_OF_TUBES + ' (exclusive) but received ' + tubeIndex);
+            return new Error("fireTorpedo due to invalid tube index; expected tubeIndex from 0 (inclusive) up to " +
+                NUMBER_OF_TUBES +
+                " (exclusive) but received " +
+                tubeIndex);
         }
     }
 }
