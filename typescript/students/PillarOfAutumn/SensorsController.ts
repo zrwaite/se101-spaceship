@@ -13,17 +13,31 @@ export default class YourSensorsController extends SensorsController {
 
 	//Add additional attributes here
 	target:PassiveReading|null=null
+	timeCounter: number = 0
 	
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
 		
-		
-			const scanResult = passiveScan()
-			if(!(scanResult instanceof Error)) this.target = scanResult[0];
+		if(this.timeCounter % 120 == 0){
+			const passScanRes = passiveScan()
+			if (!(passScanRes instanceof Error)) {
+				passScanRes.forEach((reading) => {
+					if(reading.gravity > 20000){
+						this.target = reading;
+					}
+				})
+			} else {
+				// Something went wrong, you should probably log this and make sure it doesn't happen again
+			}
+		}
 
-		/*
-			const activeScanResult = activeScan(0, 3.1, 500)
-			console.log(activeScanResult)
-		*/
+		if(this.timeCounter % 180 == 0){
+			const activeScanResult = activeScan(this.navigation.angle, 0.3, 400)
+		}
+		
+		
+		this.timeCounter++;
+			
+		
 		}
 	}
 
