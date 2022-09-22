@@ -31,11 +31,15 @@ export default class YourSensorsController extends SensorsController {
 		if(xf>720 || yf>540) return -1
 		return xf/selfVelocity.x 
 	}
-	
+
 	cartesian(angle: number, distance: number): Vector2 {
 		// Given angle and distance of an object, return x,y cords assuming ship pos is 0,0
-
-		return new Vector2(distance*Math.cos(angle), distance*Math.sin(angle))
+		angle = 0-angle
+ 		if(angle<0) angle+=2*Math.PI
+		var ret = new Vector2(distance*Math.cos(angle), distance*Math.sin(angle))
+		if(ret.x<0) ret.x= 0-ret.x
+		if(ret.y<0) ret.y= 0-ret.y
+		return ret
  	} 
 
  	polar(xy: Vector2): Vector2{
