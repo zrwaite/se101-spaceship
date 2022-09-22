@@ -5,6 +5,7 @@ import YourNavigationController from "./NavigationController.js";
 import YourPropulsionController from "./PropulsionController.js";
 import { EMSReading, PassiveReading } from "../types.js";
 import { CloseRangeData } from "../../src/ship/EMSReading.js";
+import Planet from "../../src/spaceObjects/planet.js";
 export default class YourSensorsController extends SensorsController {
   // To get other subsystem information, use the attributes below.
   // @ts-ignore
@@ -13,6 +14,7 @@ export default class YourSensorsController extends SensorsController {
   propulsion: YourPropulsionController;
 
   target: PassiveReading | undefined;
+  shootingTarget?: number;
   targetDetails: EMSReading | undefined;
   activeScan: EMSReading[] | undefined;
   EMSAngle: EMSReading[] | undefined;
@@ -47,18 +49,23 @@ export default class YourSensorsController extends SensorsController {
     const activeScanResult = activeScan(
       this.navigation.angle - Math.PI / 2,
       Math.PI,
-      100
+      300
     );
     if (!(activeScanResult instanceof Error)) {
       this.targetDetails = activeScanResult.find(
         (r) => r.angle === this.target?.heading
+        
       );
-
-      console.log(this.targetDetails);
+      
+      console.log(this.targetDetails)
 
       this.activeScan = activeScanResult.sort(
         (r1, r2) => r1.distance - r2.distance
       );
+
+      if(activeScanResult.length > 0)this.shootingTarget = activeScanResult[0].angle;
+      
+
     }
   }
 }
