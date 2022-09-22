@@ -9,7 +9,7 @@ export default class YourDefenceController extends DefenceController {
     // Dy*Vx - 3*Dy*cos(O) = Dx*Vy + 3*Dx*sin(O)
     defenceUpdate(aimTurret, getTubeCooldown, fireTorpedo) {
         var _a;
-        let objects = (_a = this.sensors.activeScan) === null || _a === void 0 ? void 0 : _a.filter((r) => { var _a, _b; return ((_a = r.closeRange) === null || _a === void 0 ? void 0 : _a.type) == "Asteroid" || ((_b = r.closeRange) === null || _b === void 0 ? void 0 : _b.type) == "Meteor"; });
+        let objects = (_a = this.sensors.activeScan) === null || _a === void 0 ? void 0 : _a.filter((r) => r.distance < 200 && (r.radius === 5 || r.radius === 15));
         if (!objects)
             return;
         for (let i = 0; i < 4; i++) {

@@ -24,8 +24,6 @@ export default class YourNavigationController extends NavigationController {
         */
         const distanceToTarget = (_a = this.sensors.targetDetails) === null || _a === void 0 ? void 0 : _a.distance;
         if (distanceToTarget && distanceToTarget <= 60) {
-            console.log("HERE");
-            // May be able to be deleted later.
             if (((_c = (_b = this.sensors.targetDetails) === null || _b === void 0 ? void 0 : _b.closeRange) === null || _c === void 0 ? void 0 : _c.type) === "Planet") {
                 land();
             }
