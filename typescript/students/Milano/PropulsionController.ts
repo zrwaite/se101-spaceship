@@ -22,6 +22,7 @@ export default class YourPropulsionController extends PropulsionController {
 
 		if(this.currDirection.equals(new Vector2(0, 0))) {	
 			this.currDirection.add(new Vector2(force, headingDiff));
+			setThruster("main", Math.abs(this.currDirection.angle()) < 0.1 ? 15000 : 100);
 		} else {
 			if(this.currDirection.angle() > headingDiff) {
 				this.currDirection.angleTo(new Vector2(force, headingDiff));
@@ -36,7 +37,6 @@ export default class YourPropulsionController extends PropulsionController {
 			setThruster('clockwise', force / 2)
 		}
 
-		setThruster("main", Math.abs(this.currDirection.angle()) < 0.1 ? 15000 : 100);
 	}
 	
 }
