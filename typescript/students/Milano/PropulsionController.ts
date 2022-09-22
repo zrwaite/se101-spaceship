@@ -16,23 +16,27 @@ export default class YourPropulsionController extends PropulsionController {
 
 	propulsionUpdate(setThruster: (thruster: ThrusterName, power: number) => Error | null) {
 		if (!this.sensors.target) return
+		
+		const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading);
+		const force = Math.min(Math.abs(100 * headingDiff), 100);
 
 		if(this.currDirection.equals(new Vector2(0, 0))) {	
-			const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading);
-			const force = Math.min(Math.abs(100 * headingDiff), 100) * 100;
 			this.currDirection.add(new Vector2(force, headingDiff));
-	
-			if (this.currDirection.angle() < 0) {
-				setThruster('clockwise', force)
-				setThruster('counterClockwise', 0)
-			} else {
-				setThruster('counterClockwise', force)
-				setThruster('clockwise', 0)
+		} else {
+			if(this.currDirection.angle() > headingDiff) {
+				this.currDirection.angleTo(new Vector2(force, headingDiff));
 			}
-			setThruster('main', Math.abs(headingDiff) < 0.2 ? 30 : 0)
-			return;
 		}
-		setThruster("main", this.currDirection.magnitude() * 1000);
+
+		if (this.currDirection.angle() < 0) {
+			setThruster('clockwise', force)
+			setThruster('counterClockwise', force / 2)
+		} else {
+			setThruster('counterClockwise', force)
+			setThruster('clockwise', force / 2)
+		}
+
+		setThruster("main", Math.abs(this.currDirection.angle()) < 0.1 ? 15000 : 100);
 	}
 	
 }
