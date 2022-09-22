@@ -13,6 +13,9 @@ export default class YourPropulsionController extends PropulsionController {
 	navigation: YourNavigationController
 
 	//Add additional attributes here
+	if (slowDown: true){
+		slowDown;
+	}
 
 	propulsionUpdate(setThruster: (thruster: ThrusterName, power: number) => Error | null) {
 		if (!this.sensors.target) return
