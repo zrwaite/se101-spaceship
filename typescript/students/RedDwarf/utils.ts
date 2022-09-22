@@ -1,10 +1,10 @@
-import ColonyShip from "../../src/ship/colonyShip";
-import Planet from "../../src/spaceObjects/planet";
-import WarpGate from "../../src/spaceObjects/warpGate";
-import { ShipStatus } from "../types";
-import Torpedo from "../../src/ship/torpedo";
-import Asteroid from "../../src/spaceObjects/asteroid";
-import Sprite from "../../src/sprite";
+import ColonyShip from "../../src/ship/colonyShip.js";
+import Planet from "../../src/spaceObjects/planet.js";
+import WarpGate from "../../src/spaceObjects/warpGate.js";
+import { ShipStatus } from "../types.js";
+import Torpedo from "../../src/ship/torpedo.js";
+import Asteroid from "../../src/spaceObjects/asteroid.js";
+import Sprite from "../../src/sprite.js";
 
 /**
  * Get the entire ship instance.
