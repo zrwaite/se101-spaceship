@@ -4,9 +4,10 @@ import YourDefenceController from "./DefenseController.js";
 import YourNavigationController from "./NavigationController.js";
 import YourPropulsionController from "./PropulsionController.js";
 import { EMSReading, PassiveReading } from "../types.js";
+import Sprite from "../../src/sprite.js";
 
 let allObjects: object[] = []; // array of all objects in galaxy
-let activeScanObjects: object[] = [];
+let activeScanObjects: EMSReading[][] = [];
 
 function isNumber(n: any) { return !isNaN(parseFloat(n)) && !isNaN(n - 0) }
 
@@ -17,6 +18,8 @@ export default class YourSensorsController extends SensorsController {
 	navigation: YourNavigationController // @ts-ignore
 	propulsion: YourPropulsionController
 	target: PassiveReading | null=null
+	// @ts-ignore
+	activeScanResult: EMSReading[] | Error
 
 	//Add additional attributes here
 
@@ -26,8 +29,11 @@ export default class YourSensorsController extends SensorsController {
 		if (!(scanResult instanceof Error)) {
 
       if (!this.target){
-        // checks if scan object already exists in allObjects
-        // if it does, that object is the planet
+        // checks if scan object already exists in all Objects
+		// Two passive scans are started, so the positions of moving objects are
+		// different in each of the passsive scans.
+		// If a position recorded in both passive scans is the same,
+        // that object is the planet
         allObjects.forEach(planet => {
           if(JSON.stringify(planet) == JSON.stringify(scanResult)){
             console.log("found the planet", scanResult[0])					
@@ -42,6 +48,7 @@ export default class YourSensorsController extends SensorsController {
 	//else if found target
 	else{
 		const activeScanResult = activeScan(this.target!.heading, 0.6, 5)
+		this.activeScanResult = activeScanResult;
 		if(!(activeScanResult instanceof Error)){
 			activeScanObjects.push(activeScanResult);
 		}

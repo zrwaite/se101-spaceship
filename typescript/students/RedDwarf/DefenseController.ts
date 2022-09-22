@@ -9,8 +9,8 @@ export default class YourDefenceController extends DefenceController {
   navigation: YourNavigationController; // @ts-ignore
   sensors: YourSensorsController; // @ts-ignore
   propulsion: YourPropulsionController;
-  //Add additional attributes here
 
+  // pulls defence data from sensors
   defenceUpdate(
     aimTurret: (angle: number) => void,
     getTubeCooldown: (i: number) => number | Error,

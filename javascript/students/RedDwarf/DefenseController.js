@@ -1,6 +1,6 @@
 import DefenceController from "../../src/subsystems/defenceController.js";
 export default class YourDefenceController extends DefenceController {
-    //Add additional attributes here
+    // pulls defence data from sensors
     defenceUpdate(aimTurret, getTubeCooldown, fireTorpedo) {
         //Student code goes here
         if (!this.sensors.target)

@@ -11,6 +11,7 @@ export default class YourPropulsionController extends PropulsionController {
         this.KdWHeading = 5000;
         this.prevDist = 0;
     }
+    //propulsion update pulls data about the ship and its trajectory
     propulsionUpdate(setThruster) {
         if (!this.sensors.target)
             return;

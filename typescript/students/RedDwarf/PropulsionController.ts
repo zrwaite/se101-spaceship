@@ -25,8 +25,7 @@ export default class YourPropulsionController extends PropulsionController {
 
   prevDist: number = 0;
 
-
-
+  //propulsion update pulls data about the ship and its trajectory
   propulsionUpdate(
     setThruster: (thruster: ThrusterName, power: number) => Error | null
   ) {
