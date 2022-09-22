@@ -16,9 +16,9 @@ export default class YourNavigationController extends NavigationController {
 	propulsion: YourPropulsionController
 
 	//PUBLIC VARIABLES :)
-	radius: number = 0; //how big the ship is
+	radius: number = 0;
 	angularVelocity: number = 0;
-	angle: number = 0; //direction ship is facing
+	angle: number = 0;
 	positionX: number = 0;
 	positionY: number = 0;
 
@@ -28,30 +28,76 @@ export default class YourNavigationController extends NavigationController {
 	linearVelocityX: number = 0;
 	linearVelocityY: number = 0;
 
-	//MAIN => runs multiple times a second
-	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
-		this.angle = getShipStatus('angle')
-		land()
-		warp()
-		//galaxy MAP
-		//let map = new Map<Galaxy, SolarSystem[]>();
 
-		//position updates
-		this.angle = getShipStatus('angle');
-		this.positionX = getShipStatus('positionX');
-		this.positionY = getShipStatus('positionY');
-		this.angularVelocity = getShipStatus('angularVelocity');
+	//did we warp to another solar system?
+	warp: boolean = true;
+
+	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
+
+		//update position function
+		const UpdatePosition = () => {
+			this.angle = getShipStatus('angle');
+			this.positionX = getShipStatus('positionX');
+			this.positionY = getShipStatus('positionY');
+			this.angularVelocity = getShipStatus('angularVelocity');
+			this.linearVelocityX = getShipStatus('linearVelocityX');
+			this.linearVelocityY = getShipStatus('linearVelocityY');
+		}
+
+		UpdatePosition();
+
+		/*uncomment this later
+
+		//galaxy MAP
+		let galaxyMap = new Map<string, SolarSystem[]>();
+
+		//update position function
+		const UpdatePosition = () => {
+			this.angle = getShipStatus('angle');
+			this.positionX = getShipStatus('positionX');
+			this.positionY = getShipStatus('positionY');
+			this.angularVelocity = getShipStatus('angularVelocity');
 		this.linearVelocityX = getShipStatus('linearVelocityX');
-		this.linearVelocityY = getShipStatus('linearVelocityY');
-		console.log(this.angularVelocity);
+			this.linearVelocityY = getShipStatus('linearVelocityY');
+		}
+
+		UpdatePosition();
+
+		/* uncomment this later
+
+		//galaxy MAP
+		let galaxyMap = new Map<string, SolarSystem[]>();
+
+		//did we warp to another solar system? (called once we enter the map)
+		if (this.warp) {
+			
+			UpdatePosition();
+
+			let mapData = getMapData();
+			
+			//does this galaxy exist in the galaxy map?
+			if (galaxyMap.has(mapData.GalaxyData.name)) {
+
+			}
+
+			//else this galaxy DOES NOT exist in the map
+			else {
+				galaxyMap.set(mapData.GalaxyData.name, mapData.GalaxyData.solarSystems);
+			}
+			
+			this.warp = false;
+
+		}
+		*/
+				console.log(this.angularVelocity);
 		//galaxy
-		interface Galaxy {
+		interface GalaxyData {
 			name: string
-			solarSystems: SolarSystem[]
+			solarSystems: SolarSystemData[]
 		}
 
 		//solarsystem
-		interface SolarSystem {
+		interface SolarSystemData {
 			name: string
 			planets: Planet[]
 			warpGates: WarpGate[]
@@ -78,7 +124,6 @@ export default class YourNavigationController extends NavigationController {
 			x: number
 			y: number
 		}
-
 	}
 
 }
