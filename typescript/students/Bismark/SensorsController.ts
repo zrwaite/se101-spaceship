@@ -39,7 +39,7 @@ export default class YourSensorsController extends SensorsController {
     );
     if (
       this.target != undefined &&
-      (VAngle < this.target.heading - 0.5 || VAngle > this.target.heading + 0.5)
+      (VAngle < this.target.heading - 0.2 || VAngle > this.target.heading + 0.2)
     ) {
       this.onTarget = true;
     }
