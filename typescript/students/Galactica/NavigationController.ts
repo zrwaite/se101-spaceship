@@ -31,6 +31,7 @@ export default class YourNavigationController extends NavigationController {
 	thirdGate=''
 	fourthGate=''
 	fifthGate=''
+	list
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		this.angle = getShipStatus ('angle')
@@ -45,10 +46,11 @@ export default class YourNavigationController extends NavigationController {
 		this.thrusterPowerClockwise = getShipStatus('thrusterPowerClockwise')
 		this.thrusterPowerCounterClockwise = getShipStatus('thrusterPowerCounterClockwise')
 
-		if(getMapData(getGalaxyData('galaxyName'))=='noob'){
+		//good paths
+		if(getMapData(getGalaxyData(getGalaxyName('galaxyName'))=='noob'){
 			this.firstGate='Big Bird';
 		}
-		else if(getMapData(getGalaxyData('galaxyName'))=='Compiles'){
+		else if(getMapData.getGalaxyData('galaxyName')=='Compiles'){
 			this.firstGate='Waterloo'
 			this.secondGate='StackOverFlow'
 			this.thirdGate='Steve-O'
@@ -67,3 +69,7 @@ export default class YourNavigationController extends NavigationController {
 		warp()
 	}
 }
+function getGalaxyData(arg0: string): any {
+	throw new Error('Function not implemented.')
+}
+
