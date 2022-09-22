@@ -17,11 +17,11 @@ export default class YourNavigationController extends NavigationController {
 	angle = 0;
 	shipVelocity = new Vector2(0, 0);
 	shipPosition = new Vector2(0, 0);
+	targetAngle = 0
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		//Student code goes here
-		//this.angle = getShipStatus('angle')
-		//this.sensors.cartesian()
+		this.angle = getShipStatus('angle')		//ship's current angle
 
 		this.shipVelocity = new Vector2(getShipStatus('linearVelocityX'), getShipStatus('linearVelocityY'))
 		this.shipPosition = new Vector2(getShipStatus('positionX'), getShipStatus('positionY'))
@@ -32,7 +32,7 @@ export default class YourNavigationController extends NavigationController {
 		
 
 		if (landDest != null) {
-			this.angle = withinPiRange((landDest.subtract(this.shipPosition)).angle())
+			this.targetAngle = withinPiRange((landDest.subtract(this.shipPosition)).angle())	//target angle
 			console.log("angle" + this.angle)
 		}
 		
