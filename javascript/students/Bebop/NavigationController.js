@@ -3,6 +3,9 @@ export default class YourNavigationController extends NavigationController {
     constructor() {
         super(...arguments);
         //Add additional attributes here
+        this.startLanding = false;
+        this.startWarping = false;
+        this.landWarpDelayCounter = 0;
         this.radius = 0;
         this.angularVelocity = 0;
         this.angle = 0;
@@ -28,17 +31,29 @@ export default class YourNavigationController extends NavigationController {
         // this.thrusterPowerBow = getShipStatus('thrusterPowerBow');
         // this.thrusterPowerClockwise = getShipStatus('thrusterPowerClockwise');
         // this.thrusterPowerCounterClockwise = getShipStatus('thrusterPowerCounterClockwise');
-        /*plan: sense for objects, if there is an object:
-         if the object is a planet, land,
-         if it is a warp, warp
-         otherwise, do nothing (for now)
+        /*plan: repeatedly call land or warp once per half second if a planet or warphole is detected and
+        within a certain distance of the spaceship.
          */
-        if (this.sensors && this.sensors.activeScanData && this.sensors.activeScanData[0] && this.sensors.activeScanData[0].closeRange) {
-            if (this.sensors.activeScanData[0].closeRange.type === "Planet" && this.linearVelocityX < 2 && this.linearVelocityY < 2) {
-                land();
-            }
-            else if (this.sensors.activeScanData[0].closeRange.type === "WarpGate") {
-                warp();
+        this.landWarpDelayCounter++;
+        if (this.startLanding && this.landWarpDelayCounter % 30 === 0) {
+            land();
+            console.log("land");
+        }
+        if (this.startWarping && this.landWarpDelayCounter % 30 === 0) {
+            warp();
+            console.log("warp");
+        }
+        if (this.sensors.activeScanData) {
+            for (let i = 0; i < this.sensors.activeScanData.length; i++) {
+                const obj = this.sensors.activeScanData[i];
+                if (obj.closeRange && obj.distance <= 100) {
+                    if (obj.closeRange.type === 'Planet') {
+                        this.startLanding = true;
+                    }
+                    else if (obj.closeRange.type === 'WarpGate') {
+                        this.startWarping = true;
+                    }
+                }
             }
         }
     }
