@@ -11,7 +11,11 @@ export default class YourDefenceController extends DefenceController {
 	propulsion: YourPropulsionController
 	
 	//Add additional attributes here
+
+	// the number of asteroids that have been targeted already
 	hitAsteroid: number = 0;
+
+	//will be incremented as to use up all of the tubes then go back to 0
 	curTube: number = 0;
 	
 	
@@ -23,8 +27,6 @@ export default class YourDefenceController extends DefenceController {
 		// pseudocode
 		// if an asteroid is within x distance from our heading, aim and fire at it
 
-		//defence push
-
 		
 		if (!this.sensors.target) return
 		
@@ -34,9 +36,10 @@ export default class YourDefenceController extends DefenceController {
 		
 		asteroidList = this.sensors.asteroids;
 
-		console.log(this.sensors.asteroids);
-		console.log(getTubeCooldown(0), getTubeCooldown(1), getTubeCooldown(2), getTubeCooldown(3));
+		// console.log(this.sensors.asteroids);
+		// console.log(getTubeCooldown(0), getTubeCooldown(1), getTubeCooldown(2), getTubeCooldown(3));
 
+		// for loop that constantly checks the distance of all of the asteroids
 
 
 		if(this.hitAsteroid < this.sensors.asteroids.length) {
@@ -44,11 +47,16 @@ export default class YourDefenceController extends DefenceController {
 			asteroid = this.sensors.asteroids[this.hitAsteroid];
 			
 			if(getTubeCooldown(this.hitAsteroid) == 0) {
-				aimTurret(asteroid.angle);
-				fireTorpedo(this.hitAsteroid);
+				console.log(asteroid.distance)
+				if (asteroid.distance != undefined && asteroid.distance < 1) {
+					aimTurret(asteroid.angle);
+					fireTorpedo(this.curTube);
+	
+					this.curTube = (this.curTube+1)%4;
+					//will have to fix this -> premature update of the hitAsteroid variable
+					this.hitAsteroid++
+				}
 
-				this.hitAsteroid = (this.hitAsteroid+1)%4;
-				this.hitAsteroid++;
 			}
 
 		}
