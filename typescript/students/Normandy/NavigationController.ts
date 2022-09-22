@@ -5,6 +5,7 @@ import NavigationController from '../../src/subsystems/navigationController.js'
 import YourDefenceController from './DefenseController.js'
 import YourPropulsionController from './PropulsionController.js'
 import YourSensorsController from './SensorsController.js'
+import WarpGate from '../../src/spaceObjects/warpGate.js'
 
 export default class YourNavigationController extends NavigationController {
 	// To get other subsystem information, use the attributes below.
@@ -19,6 +20,7 @@ export default class YourNavigationController extends NavigationController {
 	shipPosition = new Vector2(0, 0);
 	targetAngle = 0
 	shipPlanetDistance = 0
+	shipWarpDistance = 0
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		//Student code goes here
@@ -49,9 +51,16 @@ export default class YourNavigationController extends NavigationController {
             this.shipPlanetDistance = (landDest.subtract(this.shipPosition)).magnitude();
 			//Math.sqrt((this.shipPosition.x-landDest.x)^2+(this.shipPosition.y-landDest.y)^2);
             if (this.shipPlanetDistance<=5){
-                land();
+                land()
             }
         }
+
+		if(warpDest){
+			this.shipWarpDistance = (warpDest.subtract(this.shipPosition)).magnitude();
+				if(this.shipWarpDistance<=5){
+					warp() 
+				}
+		}
 
 		// if (getShipStatus('positionX')) {
 			
