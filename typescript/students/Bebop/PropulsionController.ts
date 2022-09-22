@@ -101,7 +101,7 @@ export default class YourPropulsionController extends PropulsionController {
                     setThruster('bow', Math.abs(heading) < 0.2 ? Math.min(speed * speed / object.distance * 10000, 100) : 0);
                     setThruster("main", 0);
                 }
-
+                
             }
 
         }
