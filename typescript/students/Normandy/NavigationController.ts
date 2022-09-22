@@ -22,14 +22,13 @@ export default class YourNavigationController extends NavigationController {
 	positionX: number = 0;
 	positionY: number = 0;
 
-	objectAngle: number = 0;
+	heading: number = 0; //PROP: USE THIS
 
 	linearVelocityX: number = 0;
 	linearVelocityY: number = 0;
 
 
-	//did we warp to another solar system?
-	warp: boolean = true;
+	start: boolean = true;
 	//galaxy MAP
 	galaxyMap = new Map<String, GalaxyData>(); 
 
@@ -44,7 +43,7 @@ export default class YourNavigationController extends NavigationController {
 
 		const FindBigRadius = () => {
 
-			if (!(activeScan instanceof Error )) {
+/*			if (!(activeScan instanceof Error )) {
 				for (let i = 0; i < activeScan.length; i++) {
 
 					let radius = activeScan[i].radius;
@@ -54,6 +53,25 @@ export default class YourNavigationController extends NavigationController {
 					if (velocity == new Vector2(0, 0) && radius >= 15) {
 						this.objectAngle = activeScan[i].angle;
 						return;
+					}
+				}
+			}
+
+			//else there is no active scan or no big object was found
+			//then look at passive scan
+
+			*/
+
+			if (!(passiveScan instanceof Error)) {
+
+				let highestGravity = -1;
+				this.heading = 0;
+
+				//search for the object with highest gravity and go to it
+				for (let i = 0; i < passiveScan.length; i++) {
+					if (highestGravity < passiveScan[i].gravity) {
+						highestGravity = passiveScan[i].gravity;
+						this.heading = passiveScan[i].heading;
 					}
 				}
 			}
@@ -71,7 +89,10 @@ export default class YourNavigationController extends NavigationController {
 
 		//go into wormhole
 		const Warp = () => {
-			warp();
+			//warp was successful
+			if (warp() == null) {
+				FindBigRadius();
+			}
 		}
 
 		//land on planet when below certain speed
@@ -80,15 +101,12 @@ export default class YourNavigationController extends NavigationController {
 		}
 
 
-		//did we warp to another solar system? (called once we enter the map)
-		if (this.warp) {
-			
-		}
-
-
 		//call functions
 		UpdatePosition();
 		FindBigRadius();
+
+		if (this.start)
+			FindBigRadius();
 
 		if (this.linearVelocityX < 100 && this.linearVelocityY < 100) {
 			Warp();
