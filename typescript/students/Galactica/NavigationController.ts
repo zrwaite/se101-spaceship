@@ -31,7 +31,6 @@ export default class YourNavigationController extends NavigationController {
 	thirdGate=''
 	fourthGate=''
 	fifthGate=''
-	list
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		this.angle = getShipStatus ('angle')
