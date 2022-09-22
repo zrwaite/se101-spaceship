@@ -5,7 +5,6 @@ import YourDefenceController from "./DefenseController.js";
 import YourNavigationController from "./NavigationController.js";
 import YourSensorsController from "./SensorsController.js";
 import { angleDiff } from "../../src/helpers/Angles.js";
-
 export default class YourPropulsionController extends PropulsionController {
   // To get other subsystem information, use the attributes below.
   // @ts-ignore
@@ -15,7 +14,7 @@ export default class YourPropulsionController extends PropulsionController {
 
   //Add additional attributes here
 
-  prevError:number = 0;
+  prevHeadingDiff:number = 0;
   maxOutput:number = 0;
 
   kWeight:number = 300;
@@ -29,36 +28,36 @@ export default class YourPropulsionController extends PropulsionController {
 
     if (!this.sensors.target) return; //WTF is this
 
-    const currError = angleDiff( //calculate heading angle
+    const currHeadingDiff = angleDiff( //calculate heading angle
       this.navigation.angle,
       this.sensors.target.heading
     );
 
-    var output = 0;
+    var headingOutput = 0;
 
-    const errorDiff = currError-this.prevError; //Find "derivative" of error
+    const headingDiffRate = currHeadingDiff-this.prevHeadingDiff; //Find "derivative" of error
 
-    const K = currError * this.kWeight; //Calculate terms
-    const D = errorDiff * this.dWeight;
-    output = K + D;
+    const KpHeadingOutput = currHeadingDiff * this.kWeight; //Calculate terms
+    const KdHeadingOutput = headingDiffRate * this.dWeight;
+    headingOutput = KpHeadingOutput + KdHeadingOutput;
     
-    // console.log("ANGLE: " + currError)
 
-    console.log("OUTPUT: " + output);
+    console.log("OUTPUT: " + headingOutput);
 
-    //Calculate maxoutput
-    this.maxOutput = Math.max(this.maxOutput, Math.abs(output))
-    // console.log("MAXOUTPUT: " + this.maxOutput)
+    headingOutput = Math.min(Math.max(headingOutput, -100), 100);
 
-    if (output < 0) {
-      setThruster('clockwise', Math.min(Math.abs(output), 100))
+
+    this.maxOutput = Math.max(this.maxOutput, Math.abs(headingOutput))
+
+    if (headingOutput < 0) {
+      setThruster('clockwise', Math.abs(headingOutput))
       setThruster('counterClockwise', 0)
     } else {
-      setThruster('counterClockwise', Math.min(Math.abs(output), 100))
+      setThruster('counterClockwise', Math.abs(headingOutput))
       setThruster('clockwise', 0)
     }
-    setThruster("main", Math.abs(currError) < 0.2 ? 30 : 0);
+    setThruster("main", Math.abs(currHeadingDiff) < 0.2 ? 30 : 0);
 
-    this.prevError = currError;
+    this.prevHeadingDiff = currHeadingDiff;
   }
 }
