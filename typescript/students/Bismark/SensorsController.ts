@@ -68,7 +68,5 @@ export default class YourSensorsController extends SensorsController {
         (r1, r2) => r1.distance - r2.distance
       );
     }
-
-    const CloseRangeData = ActiveSensors.arguments.scan;
   }
 }
