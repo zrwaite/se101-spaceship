@@ -33,7 +33,8 @@ export default class YourNavigationController extends NavigationController {
 	warp: boolean = true;
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
-
+		warp();
+		land();
 		//update position function
 		const UpdatePosition = () => {
 			this.angle = getShipStatus('angle');

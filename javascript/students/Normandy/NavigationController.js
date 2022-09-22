@@ -17,6 +17,8 @@ export default class YourNavigationController extends NavigationController {
         this.warp = true;
     }
     navigationUpdate(getShipStatus, warp, land, getMapData) {
+        warp();
+        land();
         //update position function
         const UpdatePosition = () => {
             this.angle = getShipStatus('angle');

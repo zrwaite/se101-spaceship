@@ -17,7 +17,7 @@ export default class YourPropulsionController extends PropulsionController {
             setThruster('clockwise', 0);
             setThruster('counterClockwise', 0);
         }
-        else if (Math.abs(headingDiff) < 0.2) {
+        else if (Math.abs(headingDiff) < 0.2 || Math.abs(this.navigation.angularVelocity) > 0.02) {
             if (this.navigation.angularVelocity < 0) {
                 setThruster('clockwise', this.calculateAccelAngle(this.navigation.angularVelocity, this.navigation.angle, this.sensors.target.heading));
                 setThruster('counterClockwise', 0);
