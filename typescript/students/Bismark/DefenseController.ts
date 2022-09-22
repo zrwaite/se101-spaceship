@@ -22,7 +22,7 @@ export default class YourDefenceController extends DefenceController {
     fireTorpedo: (i: number) => Error | null
   ) {
     let objects = this.sensors.activeScan?.filter(
-      (r) => r.closeRange?.type == "Asteroid" || r.closeRange?.type == "Meteor"
+      (r) => r.distance < 200 && (r.radius === 5 || r.radius === 15)
     );
     if (!objects) return;
 
