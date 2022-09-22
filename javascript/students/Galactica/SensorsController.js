@@ -17,11 +17,11 @@ export default class YourSensorsController extends SensorsController {
     }
     sensorsUpdate(activeScan, passiveScan) {
         const passiveScanResult = passiveScan();
-        if (!(passiveScanResult instanceof Error)) //console.log(passiveScanResult)
+        if (!(passiveScanResult instanceof Error))
             if (!(passiveScanResult instanceof Error))
                 this.target = passiveScanResult[0]; //reading first object that passiveScan scans
         const activeScanResult = activeScan(this.navigation.angle - this.rad(45), this.rad(90), 200); // Lower range for energy efficiency
-        if (!(activeScanResult instanceof Error)) //console.log(activeScanResult)
+        if (!(activeScanResult instanceof Error)) // LOL I've never seen a nested if checking for the same thing
             if (!(activeScanResult instanceof Error)) {
                 if (activeScanResult.length > 0) {
                     this.activeArray = activeScanResult;
@@ -67,8 +67,6 @@ export default class YourSensorsController extends SensorsController {
                 }
             }
         }
-        //console.log("Details")
-        // console.log(this.spaceObjectsDetailed)
         if (this.spaceObjectsDetailed != null && this.spaceObjectsDetailed.length > 0) {
             for (var spaceObjectDetailed of this.spaceObjectsDetailed) {
                 if (spaceObjectDetailed.type == "Planet" || spaceObjectDetailed.type == "WarpGate") {
@@ -76,7 +74,6 @@ export default class YourSensorsController extends SensorsController {
                 }
             }
         }
-        // console.log(this.targetDistance)
     }
     findMeteors(scanResults) {
         var meteors = [];
