@@ -23,7 +23,7 @@ export default class YourSensorsController extends SensorsController {
   EMSRad: EMSReading[] | undefined;
   EMSCLD: EMSReading[] | undefined;
 
-  onTarget = false;
+  onTarget: Boolean | undefined;
 
   sensorsUpdate(
     activeScan: (
@@ -49,7 +49,7 @@ export default class YourSensorsController extends SensorsController {
     const activeScanResult = activeScan(
       this.navigation.angle - Math.PI / 2,
       Math.PI,
-      300
+      250
     );
     if (!(activeScanResult instanceof Error)) {
       this.targetDetails = activeScanResult.find(

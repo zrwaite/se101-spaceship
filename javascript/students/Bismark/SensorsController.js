@@ -1,9 +1,5 @@
 import SensorsController from "../../src/subsystems/sensorsController.js";
 export default class YourSensorsController extends SensorsController {
-    constructor() {
-        super(...arguments);
-        this.onTarget = false;
-    }
     sensorsUpdate(activeScan, passiveScan) {
         if (this.navigation.angle === undefined)
             return;
@@ -19,7 +15,7 @@ export default class YourSensorsController extends SensorsController {
         const scanResult = passiveScan();
         if (!(scanResult instanceof Error))
             this.target = scanResult[0];
-        const activeScanResult = activeScan(this.navigation.angle - Math.PI / 2, Math.PI, 300);
+        const activeScanResult = activeScan(this.navigation.angle - Math.PI / 2, Math.PI, 250);
         if (!(activeScanResult instanceof Error)) {
             this.targetDetails = activeScanResult.find((r) => { var _a; return r.angle === ((_a = this.target) === null || _a === void 0 ? void 0 : _a.heading); });
             console.log(this.targetDetails);
