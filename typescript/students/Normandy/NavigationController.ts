@@ -57,7 +57,7 @@ export default class YourNavigationController extends NavigationController {
 
 		if(warpDest){
 			this.shipWarpDistance = (warpDest.subtract(this.shipPosition)).magnitude();
-				if(this.shipWarpDistance<=5){
+				if(this.shipWarpDistance<=30){
 					warp() 
 				}
 		}
