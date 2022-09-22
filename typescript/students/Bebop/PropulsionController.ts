@@ -12,7 +12,7 @@ export default class YourPropulsionController extends PropulsionController {
     navigation: YourNavigationController
 
     //Add additional attributes here
-
+   
     propulsionUpdate(setThruster: (thruster: ThrusterName, power: number) => Error | null) {
         const target = this.sensors.target;
         if (!target) return
