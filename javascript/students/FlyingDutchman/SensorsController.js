@@ -19,6 +19,8 @@ export default class YourSensorsController extends SensorsController {
             if (reading.gravity < 0) {
                 type = 'WarpGate';
                 certainty = 1;
+                mass = -100;
+                distance = reading.gravity / mass;
             }
             else if (reading.gravity < 1) {
                 type = 'Asteroid';
