@@ -16,6 +16,9 @@ export default class YourNavigationController extends NavigationController {
   //@ts-ignore
   angle: number;
 
+  //@ts-ignore
+  angVel: number;
+
 
 
 	//Add additional attributes here
@@ -23,6 +26,7 @@ export default class YourNavigationController extends NavigationController {
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		//Student code goes here
     this.angle = getShipStatus("angle");
+	this.angVel = getShipStatus("angularVelocity");
     land();
 	}
 }

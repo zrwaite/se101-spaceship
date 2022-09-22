@@ -4,6 +4,7 @@ export default class YourNavigationController extends NavigationController {
     navigationUpdate(getShipStatus, warp, land, getMapData) {
         //Student code goes here
         this.angle = getShipStatus("angle");
+        this.angVel = getShipStatus("angularVelocity");
         land();
     }
 }
