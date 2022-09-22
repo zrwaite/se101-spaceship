@@ -1,6 +1,5 @@
 import PropulsionController from "../../src/subsystems/propulsionController.js";
 import { angleDiff } from "../../src/helpers/Angles.js";
-// import { getShipStatus } from "./utils.js";
 export default class YourPropulsionController extends PropulsionController {
     constructor() {
         super(...arguments);
@@ -12,16 +11,15 @@ export default class YourPropulsionController extends PropulsionController {
     }
     propulsionUpdate(setThruster) {
         if (!this.sensors.target)
-            return; //WTF is this
+            return;
         const currHeadingDiff = angleDiff(//calculate heading angle
         this.navigation.angle, this.sensors.target.heading);
-        const angularVelocity = getShipStatus("angularVelocity");
         var headingOutput = 0;
         const headingDiffRate = currHeadingDiff - this.prevHeadingDiff; //Find "derivative" of error
         const KpHeadingOutput = currHeadingDiff * this.kWeight; //Calculate terms
         const KdHeadingOutput = headingDiffRate * this.dWeight;
         headingOutput = KpHeadingOutput + KdHeadingOutput;
-        console.log("OUTPUT: " + headingOutput);
+        // console.log("OUTPUT: " + headingOutput);
         headingOutput = Math.min(Math.max(headingOutput, -100), 100);
         this.maxOutput = Math.max(this.maxOutput, Math.abs(headingOutput));
         if (headingOutput < 0) {

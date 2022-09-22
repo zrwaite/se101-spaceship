@@ -5,7 +5,6 @@ import YourDefenceController from "./DefenseController.js";
 import YourNavigationController from "./NavigationController.js";
 import YourSensorsController from "./SensorsController.js";
 import { angleDiff } from "../../src/helpers/Angles.js";
-// import { getShipStatus } from "./utils.js";
 
 export default class YourPropulsionController extends PropulsionController {
   // To get other subsystem information, use the attributes below.
@@ -28,15 +27,15 @@ export default class YourPropulsionController extends PropulsionController {
     setThruster: (thruster: ThrusterName, power: number) => Error | null
   ) {
 
-    if (!this.sensors.target) return; //WTF is this
+    if (!this.sensors.target) return; 
 
     const currHeadingDiff = angleDiff( //calculate heading angle
       this.navigation.angle,
       this.sensors.target.heading
     );
 
-    const angularVelocity = getShipStatus("angularVelocity");
     
+
 
     var headingOutput = 0;
 
@@ -47,7 +46,7 @@ export default class YourPropulsionController extends PropulsionController {
     headingOutput = KpHeadingOutput + KdHeadingOutput;
     
 
-    console.log("OUTPUT: " + headingOutput);
+    // console.log("OUTPUT: " + headingOutput);
 
     headingOutput = Math.min(Math.max(headingOutput, -100), 100);
 
