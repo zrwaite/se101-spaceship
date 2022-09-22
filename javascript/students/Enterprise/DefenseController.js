@@ -10,32 +10,26 @@ export default class YourDefenceController extends DefenceController {
         closeRangeObject && closeRangeObject.forEach(object => {
             if (object === null || object === void 0 ? void 0 : object.closeRange) {
                 if (object.closeRange.type === "Asteroid") {
-                    if (getTubeCooldown(0) == 0) {
-                        if (object.angle != null) {
-                            aimTurret(object.angle);
-                            fireTorpedo(0);
-                        }
-                    }
-                    if (getTubeCooldown(1) == 0) {
-                        if (object.angle != null) {
-                            aimTurret(object.angle);
-                            fireTorpedo(1);
-                        }
-                    }
-                    if (getTubeCooldown(2) == 0) {
-                        if (object.angle != null) {
-                            aimTurret(object.angle);
-                            fireTorpedo(2);
-                        }
-                    }
-                    if (getTubeCooldown(3) == 0) {
-                        if (object.angle != null) {
-                            aimTurret(object.angle);
-                            fireTorpedo(3);
-                        }
-                    }
+                    fireTorpedoFunc(object=object, 0);
+                    fireTorpedoFunc(object=object, 1);
+                    fireTorpedoFunc(object=object, 2);
+                    fireTorpedoFunc(object=object, 3);
+                    fireTorpedoFunc(object=object, 4);
+                    fireTorpedoFunc(object=object, 5);
                 }
             }
         });
+
+        // function for firing torpedo
+        function fireTorpedoFunc(object, val) {
+            console.log(val)
+            if (getTubeCooldown(val) == 0) {
+                if (object.angle != null) {
+                    aimTurret(object.angle);
+                    fireTorpedo(val);
+                }
+            }
+        }
+
     }
 }
