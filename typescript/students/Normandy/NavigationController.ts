@@ -89,7 +89,6 @@ export default class YourNavigationController extends NavigationController {
 
 		}
 		*/
-				console.log(this.angularVelocity);
 		//galaxy
 		interface GalaxyData {
 			name: string
