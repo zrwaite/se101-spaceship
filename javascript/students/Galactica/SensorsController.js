@@ -9,6 +9,7 @@ export default class YourSensorsController extends SensorsController {
         this.targetDistance = 0;
         this.activeArray = new Array(4);
         this.facing = "";
+        this.notScannedCount = 0;
     }
     // helper function to convert degrees to radians
     rad(angleDeg) {
@@ -19,7 +20,7 @@ export default class YourSensorsController extends SensorsController {
         if (!(passiveScanResult instanceof Error)) //console.log(passiveScanResult)
             if (!(passiveScanResult instanceof Error))
                 this.target = passiveScanResult[0]; //reading first object that passiveScan scans
-        const activeScanResult = activeScan(this.navigation.angle - this.rad(10), this.rad(20), 400); // Lower range for energy efficiency
+        const activeScanResult = activeScan(this.navigation.angle - this.rad(45), this.rad(90), 200); // Lower range for energy efficiency
         if (!(activeScanResult instanceof Error)) //console.log(activeScanResult)
             if (!(activeScanResult instanceof Error)) {
                 if (activeScanResult.length > 0) {
@@ -27,9 +28,16 @@ export default class YourSensorsController extends SensorsController {
                     this.targetDistance = activeScanResult[0].distance; //finding distance to first object activeScan scans
                 }
             }
+        this.notScannedCount++;
+        if (this.notScannedCount > 20) {
+            this.spaceObjectsDetailed = [];
+            this.facing = "";
+        }
         //Update Space Info, not 100% reliable, if there headings are very similar
         if (!(passiveScanResult instanceof Error) && !(activeScanResult instanceof Error)) {
             this.spaceObjectsDetailed = [];
+            this.notScannedCount = 0;
+            this.facing = "";
             for (var passiveSpaceObject of passiveScanResult) {
                 for (var activeSpaceObject of activeScanResult) {
                     if ((passiveSpaceObject.heading - activeSpaceObject.angle) < 1) {
@@ -37,7 +45,7 @@ export default class YourSensorsController extends SensorsController {
                         var radius = activeSpaceObject.radius;
                         var mass = gravity * radius * radius;
                         var spaceObjectType = "Unknown";
-                        if (mass < 0) {
+                        if (mass < -5) {
                             spaceObjectType = "WarpGate";
                         }
                         if (0 <= mass && mass <= 2) {
@@ -46,7 +54,7 @@ export default class YourSensorsController extends SensorsController {
                         if (3 <= mass && mass <= 7) {
                             spaceObjectType = "Asteroid";
                         }
-                        if (2300 <= mass && mass <= 30000) {
+                        if (800 <= mass && mass <= 30000) {
                             spaceObjectType = "Planet";
                         }
                         if (31000 <= mass && mass <= 44000) {
@@ -54,15 +62,19 @@ export default class YourSensorsController extends SensorsController {
                         }
                         //Not bothering with Blackhole
                         // Each detailed space object will have the information of type and angle
-                        this.spaceObjectsDetailed.push({ type: spaceObjectType, angle: activeSpaceObject.angle });
+                        this.spaceObjectsDetailed.push({ type: spaceObjectType, angle: activeSpaceObject.angle, objectMass: mass });
                     }
                 }
             }
         }
         //console.log("Details")
-        //console.log(this.spaceObjectsDetailed)
+        // console.log(this.spaceObjectsDetailed)
         if (this.spaceObjectsDetailed != null && this.spaceObjectsDetailed.length > 0) {
-            this.facing = this.spaceObjectsDetailed[0].type;
+            for (var spaceObjectDetailed of this.spaceObjectsDetailed) {
+                if (spaceObjectDetailed.type == "Planet" || spaceObjectDetailed.type == "WarpGate") {
+                    this.facing = spaceObjectDetailed.type;
+                }
+            }
         }
         // console.log(this.targetDistance)
     }

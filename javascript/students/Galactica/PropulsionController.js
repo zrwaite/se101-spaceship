@@ -13,12 +13,16 @@ export default class YourPropulsionController extends PropulsionController {
         const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading);
         const turnVelocity = Math.abs(this.prevHeadingDiff - headingDiff); // How fast turning
         let turnForce = Math.min(Math.abs(8000 * headingDiff * (1 + turnVelocity)), 100);
-        let mainForce = 80;
+        let mainForce = 60;
         let bowForce = 0;
+        let velocityMagnitude = Math.sqrt(Math.pow(this.navigation.xVelocity, 2) + Math.pow(this.navigation.yVelocity, 2));
+        if (velocityMagnitude > 2) {
+            mainForce = 30;
+        }
         // Slows down near planet to prevent taking damage
         if (this.sensors.targetDistance != 0
             && this.sensors.targetDistance < 250
-            && this.sensors.facing == "Planet") {
+            && (this.sensors.facing == "Planet" || this.sensors.facing == "WarpGate")) {
             mainForce = 0;
             bowForce = 100;
         }
