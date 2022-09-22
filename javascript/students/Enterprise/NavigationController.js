@@ -3,6 +3,7 @@ export default class YourNavigationController extends NavigationController {
     constructor() {
         super(...arguments);
         this.angle = 0; //initializes angle
+        this.angularVelocity = 0; // initing angularvelocity
     }
     navigationUpdate(getShipStatus, warp, land, getMapData) {
         const closeRangeObject = this.sensors.closeRangeObject;
@@ -16,5 +17,6 @@ export default class YourNavigationController extends NavigationController {
             }
         });
         this.angle = getShipStatus("angle");
+        this.angularVelocity = getShipStatus('angularVelocity');
     }
 }

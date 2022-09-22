@@ -5,16 +5,37 @@ export default class YourPropulsionController extends PropulsionController {
     propulsionUpdate(setThruster) {
         if (!this.sensors.target)
             return;
+        const angularVelocity = this.navigation.angularVelocity;
         const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading);
-        const force = Math.min(Math.abs(500 * headingDiff), 100);
+        console.log("Heading Diff", headingDiff);
+        console.log("Angular Velocity", angularVelocity);
+        console.log("Force of heading diff", Math.abs(1500 * headingDiff));
+        const force = Math.min(Math.abs(100 * headingDiff), 100);
+        // Reaching headingDiff
+        // set angle to the planet
         if (headingDiff < 0) {
-            setThruster('clockwise', force);
-            setThruster('counterClockwise', 0);
+            if (angularVelocity > 12) {
+                setThruster('clockwise', force);
+            }
+            else {
+                setThruster('counterClockwise', 120);
+            }
         }
-        else {
-            setThruster('counterClockwise', force);
-            setThruster('clockwise', 0);
+        else if (headingDiff > 0) {
+            if (angularVelocity > 12) {
+                setThruster('counterClockwise', force);
+            }
+            else {
+                setThruster('clockwise', 120);
+            }
         }
-        setThruster('main', Math.abs(headingDiff) < 0.7 ? 30 : 0);
+        // if (headingDiff < 0) {
+        // 	setThruster('clockwise', force)
+        // 	setThruster('counterClockwise', 0)
+        // } else {
+        // 	setThruster('counterClockwise', force)
+        // 	setThruster('clockwise', 0)
+        // }
+        // setThruster('main', Math.abs(headingDiff) < 0.7 ? 30 : 0)
     }
 }

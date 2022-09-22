@@ -31,10 +31,17 @@ export default class YourPropulsionController extends PropulsionController {
 		// set angle to the planet
 
 		if (headingDiff < 0) {
+			if(angularVelocity>12){
 			setThruster('clockwise', force);
-
+			}else{
+				setThruster('counterClockwise', 120)
+			}
 		} else if (headingDiff > 0) {
+			if(angularVelocity>12){
 			setThruster('counterClockwise', force);
+				}else{
+					setThruster('clockwise', 120)
+				}
 		}
 
 		// if (headingDiff < 0) {
@@ -44,6 +51,6 @@ export default class YourPropulsionController extends PropulsionController {
 		// 	setThruster('counterClockwise', force)
 		// 	setThruster('clockwise', 0)
 		// }
-		setThruster('main', Math.abs(headingDiff) < 0.7 ? 30 : 0)
+		// setThruster('main', Math.abs(headingDiff) < 0.7 ? 30 : 0)
 	}
 }
