@@ -5,6 +5,8 @@ import YourDefenceController from "./DefenseController.js";
 import YourNavigationController from "./NavigationController.js";
 import YourSensorsController from "./SensorsController.js";
 import { angleDiff } from "../../src/helpers/Angles.js";
+// import { getShipStatus } from "./utils.js";
+
 export default class YourPropulsionController extends PropulsionController {
   // To get other subsystem information, use the attributes below.
   // @ts-ignore
@@ -32,6 +34,9 @@ export default class YourPropulsionController extends PropulsionController {
       this.navigation.angle,
       this.sensors.target.heading
     );
+
+    const angularVelocity = getShipStatus("angularVelocity");
+    
 
     var headingOutput = 0;
 
