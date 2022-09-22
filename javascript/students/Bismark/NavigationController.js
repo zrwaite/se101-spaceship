@@ -9,5 +9,6 @@ export default class YourNavigationController extends NavigationController {
         this.velY = getShipStatus("linearVelocityY");
         this.speed = Math.pow(this.velX ** 2 + this.velY ** 2, 1 / 2);
         land();
+        warp();
     }
 }
