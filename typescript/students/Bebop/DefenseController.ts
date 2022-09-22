@@ -10,8 +10,14 @@ export default class YourDefenceController extends DefenceController {
 	sensors: YourSensorsController // @ts-ignore
 	propulsion: YourPropulsionController
 	//Add additional attributes here
+
 	defenceUpdate(aimTurret: (angle: number) => void, getTubeCooldown: (i: number) => number | Error, fireTorpedo: (i: number) => Error | null) {
 		if (!this.sensors.target) return
+
+		let array: number[] = [];
+
+		aimTurret(array[0]);
+
 		if(this.sensors.activeScanData != null){
 			for(let i = 0; i < this.sensors.activeScanData.length; i++){
 				if(this.sensors.activeScanData[i].closeRange){
