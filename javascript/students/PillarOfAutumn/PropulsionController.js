@@ -28,7 +28,7 @@ export default class YourPropulsionController extends PropulsionController {
             setThruster('clockwise', 0);
             setThruster('counterClockwise', 0);
         }
-        setThruster('main', Math.abs(headingDiff) < 0.5 ? 20 : 0);
-        setThruster('bow', Math.abs(headingDiff) > 3 ? 20 : 0);
+        setThruster('main', Math.abs(headingDiff) < 0.5 ? 30 : 0);
+        setThruster('bow', Math.abs(headingDiff) > 3 ? 30 : 0);
     }
 }

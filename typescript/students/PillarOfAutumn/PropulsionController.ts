@@ -26,8 +26,7 @@ export default class YourPropulsionController extends PropulsionController {
 		} else if (headingDiff < 0) { 
 			setThruster('clockwise', force / 3)
 			setThruster('counterClockwise', 0)
-		}
-		else if (headingDiff > 0 && Math.abs(headingDiff) >= 0.5) {
+		} else if (headingDiff > 0 && Math.abs(headingDiff) >= 0.5) {
 			setThruster('counterClockwise', force)
 			setThruster('clockwise', 0)
 		} else if (headingDiff > 0) {
@@ -38,8 +37,8 @@ export default class YourPropulsionController extends PropulsionController {
 			setThruster('counterClockwise', 0)
 		}
 
-		setThruster('main', Math.abs(headingDiff) < 0.5 ? 20 : 0)
+		setThruster('main', Math.abs(headingDiff) < 0.5 ? 30 : 0)
 
-		setThruster('bow', Math.abs(headingDiff) > 3 ? 20 : 0)
+		setThruster('bow', Math.abs(headingDiff) > 3 ? 30 : 0)
 	}
 }
