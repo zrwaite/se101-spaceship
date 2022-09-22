@@ -23,15 +23,40 @@ export default class YourDefenceController extends DefenceController {
 
 		//auto shoot when cooldown is done
 		
+
 		closeRangeObject && closeRangeObject.forEach(object => {
 			if(object?.closeRange) {
-				if (object.closeRange.type === "Asteroid") {
-					fireTorpedoFunc(object=object, 0);
-                    fireTorpedoFunc(object=object, 1);
-                    fireTorpedoFunc(object=object, 2);
-                    fireTorpedoFunc(object=object, 3);
-                    fireTorpedoFunc(object=object, 4);
-                    fireTorpedoFunc(object=object, 5);
+				if (object.closeRange.type === "Asteroid" ||object.closeRange.type === "Meteor") {
+					if (getTubeCooldown(0) == 0) {
+                        if (object.angle != null) {
+                            aimTurret(object.angle);
+                            fireTorpedo(0);
+                        }
+                    }
+				if (object.closeRange.type === "Asteroid" ||object.closeRange.type === "Meteor"){
+					if (getTubeCooldown(1) == 0) {
+						if (object.angle != null) {
+								aimTurret(object.angle);
+								fireTorpedo(1);
+							}
+						}
+					}
+                if (object.closeRange.type === "Asteroid" ||object.closeRange.type === "Meteor"){
+					if (getTubeCooldown(2) == 0) {
+						if (object.angle != null) {
+								aimTurret(object.angle);
+								fireTorpedo(2);
+							}
+						}
+					}
+				if (object.closeRange.type === "Asteroid" ||object.closeRange.type === "Meteor"){
+					if (getTubeCooldown(3) == 0) {
+						if (object.angle != null) {
+								aimTurret(object.angle);
+								fireTorpedo(3);
+							}
+						}
+					}
 				}
 				
 			}
