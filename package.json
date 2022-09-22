@@ -15,7 +15,6 @@
 	"author": "Zac Waite, Josiah Plett",
 	"license": "ISC",
 	"dependencies": {
-		"node-pid-controller": "^1.0.1",
 		"typescript": "^4.6.4"
 	},
 	"bugs": {
