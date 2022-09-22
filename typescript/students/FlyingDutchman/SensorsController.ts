@@ -41,7 +41,7 @@ export default class YourSensorsController extends SensorsController {
 
 
 	public get warpgatesOrPlanets() {
-		return [...this.passiveScannedObjects, ...this.activeScannedObjects].filter((so) => ['Other', "WarpGate"].includes(so.type));
+		return [...this.passiveScannedObjects, ...this.activeScannedObjects.filter((so) => ["WarpGate", "Planet"].includes(so.type))];
 	}
 
 	public get asteroids() {
@@ -76,10 +76,11 @@ export default class YourSensorsController extends SensorsController {
 				certainty = 1
 				mass = -100
 				distance = reading.gravity / mass
-			} else if (reading.gravity < 1){
+			} else if (reading.gravity < 0.01){
 				type = 'Asteroid'
 				mass = 5
 				distance = reading.gravity / mass
+        // console.log({distance, gravity: reading.gravity, mass})
 			} else{
 				type = 'Planet'
 				mass = 37.5
