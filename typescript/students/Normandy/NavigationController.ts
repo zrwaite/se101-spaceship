@@ -28,10 +28,16 @@ export default class YourNavigationController extends NavigationController {
 		var landDest = this.sensors.landTarget		//absolute coordinates 
 
 
+		var visited: boolean[][] = []
+		
+
 		if (landDest != null) {
 			this.angle = withinPiRange((landDest.subtract(this.shipPosition)).angle())
+			console.log("angle" + this.angle)
 		}
 		
+
+
 		// if (getShipStatus('positionX')) {
 			
 		// }
