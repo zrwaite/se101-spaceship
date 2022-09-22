@@ -21,13 +21,19 @@ export default class YourDefenceController extends DefenceController {
     getTubeCooldown: (i: number) => number | Error,
     fireTorpedo: (i: number) => Error | null
   ) {
+    let objects = this.sensors.activeScan?.filter(
+      (r) => r.closeRange?.type == "Asteroid" || r.closeRange?.type == "Meteor"
+    );
+    if (!objects) return;
 
-    if (!this.sensors.target) return;
-      aimTurret(this.sensors.target.heading); 
-      fireTorpedo(0);
-    if (!this.sensors.shootingTarget) return;
-    aimTurret(this.sensors.shootingTarget);
-    fireTorpedo(0);
+    for (let i = 0; i < 4; i++) {
+      const target = objects?.[i];
+      if (target) {
+        aimTurret(target.angle);
+        if (getTubeCooldown(i) === 0) {
+          fireTorpedo(i);
+        }
+      }
+    }
   }
-
 }
