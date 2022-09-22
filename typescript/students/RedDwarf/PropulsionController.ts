@@ -6,6 +6,8 @@ import YourNavigationController from "./NavigationController.js";
 import YourSensorsController from "./SensorsController.js";
 import { angleDiff } from "../../src/helpers/Angles.js";
 
+import { getPlanets, getShip } from "./utils.js";
+
 export default class YourPropulsionController extends PropulsionController {
   // To get other subsystem information, use the attributes below.
   // @ts-ignore
@@ -36,7 +38,10 @@ export default class YourPropulsionController extends PropulsionController {
       this.sensors.target.heading
     );
 
-    const dist = 0; //Replace with given distance value
+    const planetArr = getPlanets(); //function to make the ship slow down
+    
+    
+    const dist = Math.sqrt(Math.pow(getShip().pos.x -planetArr[0].pos.x, 2) + Math.pow(getShip().pos.y - planetArr[0].pos.y, 2)); //Replace with given distance value
 
     const distRate = dist - this.prevDist;
 
