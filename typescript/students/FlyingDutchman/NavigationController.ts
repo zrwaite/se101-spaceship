@@ -39,6 +39,7 @@ export default class YourNavigationController extends NavigationController {
 			
 		}
 		this.possibleObjects = this.sensors.warpgatesOrPlanets
+		console.log(this.possibleObjects)
 		this.updateTarget()
 
 		// Constantly update position
