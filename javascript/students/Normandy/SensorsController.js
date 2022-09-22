@@ -30,7 +30,7 @@ export default class YourSensorsController extends SensorsController {
             return;
         }
         const activeScanResult = activeScan(0, Math.PI, 1000);
-        if (!(activeScanResult instanceof Error) && activeScanResult.length > 0) {
+        if (!(activeScanResult instanceof Error) && (activeScanResult === null || activeScanResult === void 0 ? void 0 : activeScanResult.length) > 0) {
             this.activeScans.push(activeScanResult);
             const badTargets = activeScanResult.filter((object) => object.closeRange && (object.closeRange.type === 'Asteroid' || object.closeRange.type === 'Meteor'));
             badTargets.sort((objectA, objectB) => objectA.distance - objectB.distance);
