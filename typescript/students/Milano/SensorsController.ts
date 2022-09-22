@@ -17,8 +17,8 @@ export default class YourSensorsController extends SensorsController {
 		const scanResult = passiveScan();
 		if(!(scanResult instanceof Error)) this.target = scanResult[0];
 		
-		//this.emsReading = activeScan(0, Math.PI, 500);
-		//console.log(this.emsReading);
+		this.emsReading = activeScan(0, Math.PI, 500);
+		console.log(this.emsReading);
 
 		/**
 		 * Scanning Algorithm:
