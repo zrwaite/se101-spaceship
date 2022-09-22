@@ -21,7 +21,7 @@ export default class YourPropulsionController extends PropulsionController {
 			//Don't push to left if you are already heading in that direction
 			//Scale by 15000 and then you'll end going straight
 
-		const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading)
+		const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading) / 15;
 		const force = Math.min(Math.abs(100 * headingDiff), 100) * 100;
 		if (headingDiff < 0) {
 			setThruster('clockwise', force)
