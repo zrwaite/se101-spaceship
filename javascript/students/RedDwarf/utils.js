@@ -1,3 +1,6 @@
+/**
+ * You have to think outside the box
+ */
 import ColonyShip from "../../src/ship/colonyShip.js";
 import Torpedo from "../../src/ship/torpedo.js";
 import Asteroid from "../../src/spaceObjects/asteroid.js";
