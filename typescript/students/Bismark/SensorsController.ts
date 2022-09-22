@@ -39,7 +39,7 @@ export default class YourSensorsController extends SensorsController {
     );
     if (
       this.target != undefined &&
-      (VAngle < this.target.heading - 0.2 || VAngle > this.target.heading + 0.2)
+      (VAngle < this.target.heading - 0.7 || VAngle > this.target.heading + 0.7)
     ) {
       this.onTarget = true;
     }
@@ -48,9 +48,9 @@ export default class YourSensorsController extends SensorsController {
     if (!(scanResult instanceof Error)) this.target = scanResult[0];
 
     const activeScanResult = activeScan(
-      this.navigation.angle -  Math.PI / 4,
-      Math.PI/2,
-      100
+      this.navigation.angle - Math.PI / 2,
+      Math.PI,
+      250
     );
 
     if (!(activeScanResult instanceof Error)) {
