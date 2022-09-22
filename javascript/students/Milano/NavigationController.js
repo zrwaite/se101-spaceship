@@ -7,8 +7,12 @@ export default class YourNavigationController extends NavigationController {
         this.angle = 0;
     }
     navigationUpdate(getShipStatus, warp, land, getMapData) {
-        this.angle = getShipStatus('angle');
-        land();
         //hello
+        while (true) {
+            this.angle = getShipStatus('angle');
+            land();
+            warp();
+            getMapData();
+        }
     }
 }
