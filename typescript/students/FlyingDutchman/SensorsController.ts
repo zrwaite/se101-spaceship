@@ -6,22 +6,22 @@ import YourPropulsionController from './PropulsionController.js'
 import { EMSReading, PassiveReading } from '../types.js'
 
 export type SpaceObject = {
-  /**
-   * Angle of the object relative to the space ship
-   */
-  angle: number;
-  /**
-   * Direction the object is facing
-   */
-  heading?: number;
-  distance?: number;
-  velocity?: Vector2;
-  mass?: number;
-  /**
-   * Value between 0 and 1 which indicates how certain we are this object is [type]
-   */
-  certainty: number;
-  type: 'Planet' | 'Meteor' | 'Asteroid' | 'WarpGate' | 'Other' 
+	/**
+	 * Angle of the object relative to the space ship
+	 */
+	angle: number;
+	/**
+	 * Direction the object is facing
+	 */
+	heading?: number;
+	distance?: number;
+	velocity?: Vector2;
+	mass?: number;
+	/**
+	 * Value between 0 and 1 which indicates how certain we are this object is [type]
+	 */
+	certainty: number;
+	type: 'Planet' | 'Meteor' | 'Asteroid' | 'WarpGate' | 'Other'
 }
 export default class YourSensorsController extends SensorsController {
 	// To get other subsystem information, use the attributes below.
@@ -29,14 +29,14 @@ export default class YourSensorsController extends SensorsController {
 	defence: YourDefenceController // @ts-ignore
 	navigation: YourNavigationController // @ts-ignore
 	propulsion: YourPropulsionController //@ts-ignore
-	target: PassiveReading | null = null 
+	target: PassiveReading | null = null
 
 	//Add additional attributes here
-    passiveScannedObjects: SpaceObject[] = [];
+	passiveScannedObjects: SpaceObject[] = [];
 	activeScannedObjects: SpaceObject[] = [];
 
 	activeHeading: number = 0;
-	activeArc: number = Math.PI/4;
+	activeArc: number = Math.PI / 4;
 	activeRange: number = 150;
 
 
@@ -48,7 +48,7 @@ export default class YourSensorsController extends SensorsController {
 		return this.activeScannedObjects.filter((so) => "Asteroid" == so.type);
 	}
 
-	public setActiveParam(heading: number, arc: number, range: number){
+	public setActiveParam(heading: number, arc: number, range: number) {
 		this.activeHeading = heading
 		this.activeArc = arc
 		this.activeRange = range
@@ -63,7 +63,7 @@ export default class YourSensorsController extends SensorsController {
 		const passiveScanResult = passiveScan()
 
 		if ((passiveScanResult instanceof Error)) return;
-		
+
 		this.passiveScannedObjects = passiveScanResult.map((reading) => {
 
 			let type: 'Planet' | 'Meteor' | 'Asteroid' | 'WarpGate' | 'Other' = 'Other'
@@ -71,31 +71,28 @@ export default class YourSensorsController extends SensorsController {
 			let distance: number | undefined = undefined;
 			let mass: number | undefined = undefined;
 
-			if (reading.gravity < 0){
+			if (reading.gravity < 0) {
 				type = 'WarpGate'
 				certainty = 1
 				mass = -100
 				distance = reading.gravity / mass
-			} else if (reading.gravity < 0.01){
-				type = 'Asteroid'
-				mass = 5
-				distance = reading.gravity / mass
-        // console.log({distance, gravity: reading.gravity, mass})
-			} else{
+			} else {
 				type = 'Planet'
 				mass = 10000
 				distance = reading.gravity / mass
 			}
-			
+
+			console.log({ distance, gravity: reading.gravity, mass })
+
 			return {
-				angle: reading.heading, 
+				angle: reading.heading,
 				type,
 				certainty,
 				mass,
 				distance,
 			}
 		})
-		
+
 
 		const activeScanResult = activeScan(this.activeHeading, this.activeArc, this.activeRange)
 
@@ -107,13 +104,13 @@ export default class YourSensorsController extends SensorsController {
 
 			let certainty = 0.5
 			let type: 'Planet' | 'Meteor' | 'Asteroid' | 'WarpGate' | 'Other' = 'Other'
-			
+
 			if (distance < 100) {
 				certainty = 1
 				type = reading.closeRange?.type ?? 'Other'
 			}
 
-			return{
+			return {
 				angle: reading.angle,
 				distance,
 				velocity: reading.velocity,
@@ -129,7 +126,7 @@ export default class YourSensorsController extends SensorsController {
 // accurate vector coordinates (angle, distance) of warpgates and planets - navigation
 // angle (from velocity), heading, velocity, distance of asteroids - defense
 
-// passive scan - heading, mass/distance - warpgates accurate position, list of objects of certain planets + list of objects of uncertain planets 
+// passive scan - heading, mass/distance - warpgates accurate position, list of objects of certain planets + list of objects of uncertain planets
 	// meteor - mass = 1, radius = 5
 	// asteroid - mass = 5, radius = 15
 	// warpgate - mass = -100, radius = 15
