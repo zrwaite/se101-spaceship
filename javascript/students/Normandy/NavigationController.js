@@ -16,15 +16,18 @@ export default class YourNavigationController extends NavigationController {
     }
     //MAIN => runs multiple times a second
     navigationUpdate(getShipStatus, warp, land, getMapData) {
+        this.angle = getShipStatus('angle');
+        land();
+        warp();
         //galaxy MAP
         //let map = new Map<Galaxy, SolarSystem[]>();
         //position updates
         this.angle = getShipStatus('angle');
         this.positionX = getShipStatus('positionX');
         this.positionY = getShipStatus('positionY');
+        this.angularVelocity = getShipStatus('angularVelocity');
         this.linearVelocityX = getShipStatus('linearVelocityX');
         this.linearVelocityY = getShipStatus('linearVelocityY');
-        land();
-        warp();
+        console.log(this.angularVelocity);
     }
 }

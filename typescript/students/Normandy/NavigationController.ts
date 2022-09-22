@@ -40,9 +40,10 @@ export default class YourNavigationController extends NavigationController {
 		this.angle = getShipStatus('angle');
 		this.positionX = getShipStatus('positionX');
 		this.positionY = getShipStatus('positionY');
+		this.angularVelocity = getShipStatus('angularVelocity');
 		this.linearVelocityX = getShipStatus('linearVelocityX');
 		this.linearVelocityY = getShipStatus('linearVelocityY');
-
+		console.log(this.angularVelocity);
 		//galaxy
 		interface Galaxy {
 			name: string
