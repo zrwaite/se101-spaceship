@@ -13,13 +13,16 @@ export default class YourPropulsionController extends PropulsionController {
 	navigation: YourNavigationController
 
 	//Add additional attributes here
+	if (slowDown: true){
+		slowDown;
+	}
 
 	propulsionUpdate(setThruster: (thruster: ThrusterName, power: number) => Error | null) {
 		if (!this.sensors.target) return
 		const headingDiff = withinPiRange(angleDiff(this.navigation.angle, this.sensors.target.heading))
 		const force = 1.5
 		console.log(headingDiff)
-
+		
 
 		if(headingDiff < -0.30)
 		{
