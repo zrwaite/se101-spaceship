@@ -19,7 +19,7 @@ export default class YourSensorsController extends SensorsController {
 
 	//Add additional attributes here
 	target: PassiveReading | null = null;
-  	closeRangeObject: EMSReading | null = null;
+  closeRangeObject: EMSReading[] | null = null;
 	ready: boolean = false;
 	destinations: Destination[] | null = null;
 
@@ -46,7 +46,7 @@ export default class YourSensorsController extends SensorsController {
 			else	this.target = scanResult[0];
 		}
 		if(!(activeResult instanceof Error)) {
-		this.closeRangeObject = activeResult[0];
+		  this.closeRangeObject = activeResult;
 		}
 		this.closeRangeObject && console.log(this.closeRangeObject);
   }
