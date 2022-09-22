@@ -2,6 +2,7 @@ import ColonyShip from "../../src/ship/colonyShip";
 import Planet from "../../src/spaceObjects/planet";
 import WarpGate from "../../src/spaceObjects/warpGate";
 import { ShipStatus } from "../types";
+import Torpedo from "../../src/ship/torpedo";
 
 /**
  * Get the entire ship instance.
@@ -48,4 +49,13 @@ export function getPlanets() : Planet[] {
  */
 export function getWarpGates() : WarpGate[] {
     return getShip().solarSystem.warpGates;
+}
+
+/**
+ * Get all objects in the current solar system except for torpedoes and ships.
+ * @returns All objects in the current solar system
+ */
+export function getAllObjects() {
+    const ship = getShip();
+    return [...ship.process.delObjects, ...ship.process.drawnObjects].filter((obj) => !(obj instanceof Torpedo) && !(obj instanceof ColonyShip));
 }
