@@ -34,7 +34,7 @@ export default class YourNavigationController extends NavigationController {
          otherwise, do nothing (for now)
          */
         if (this.sensors && this.sensors.activeScanData && this.sensors.activeScanData[0] && this.sensors.activeScanData[0].closeRange) {
-            if (this.sensors.activeScanData[0].closeRange.type === "Planet" && this.linearVelocityX < 5 && this.linearVelocityY < 5) {
+            if (this.sensors.activeScanData[0].closeRange.type === "Planet" && this.linearVelocityX < 2 && this.linearVelocityY < 2) {
                 land();
             }
             else if (this.sensors.activeScanData[0].closeRange.type === "WarpGate") {
