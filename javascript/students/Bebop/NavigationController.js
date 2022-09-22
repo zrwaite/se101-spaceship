@@ -3,6 +3,8 @@ export default class YourNavigationController extends NavigationController {
     constructor() {
         super(...arguments);
         //Add additional attributes here
+        this.startWarping = false;
+        this.startLanding = false;
         this.radius = 0;
         this.angularVelocity = 0;
         this.angle = 0;
@@ -33,12 +35,25 @@ export default class YourNavigationController extends NavigationController {
          if it is a warp, warp
          otherwise, do nothing (for now)
          */
-        if (this.sensors && this.sensors.activeScanData && this.sensors.activeScanData[0] && this.sensors.activeScanData[0].closeRange) {
-            if (this.sensors.activeScanData[0].closeRange.type === "Planet" && this.linearVelocityX < 5 && this.linearVelocityY < 5) {
-                land();
-            }
-            else if (this.sensors.activeScanData[0].closeRange.type === "WarpGate") {
-                warp();
+        if (this.startLanding) {
+            land();
+            console.log("land");
+        }
+        if (this.startWarping) {
+            warp();
+            console.log("warp");
+        }
+        if (this.sensors.activeScanData) {
+            for (let i = 0; i < this.sensors.activeScanData.length; i++) {
+                const obj = this.sensors.activeScanData[i];
+                if (obj.closeRange && obj.distance <= 100) {
+                    if (obj.closeRange.type === 'Planet') {
+                        this.startLanding = true;
+                    }
+                    else if (obj.closeRange.type === 'WarpGate') {
+                        this.startWarping = true;
+                    }
+                }
             }
         }
     }
