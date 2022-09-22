@@ -16,11 +16,10 @@ export default class YourSensorsController extends SensorsController {
 	activeScanData: EMSReading[] | null = null;
 
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
-		
 		const scanResult = passiveScan();
 		if (!(scanResult instanceof Error)) {
 			this.target = scanResult[0];
-			const activeScanData = activeScan(this.target.heading - 0.5, 1, 250);
+			const activeScanData = activeScan(this.target.heading - 0.5, 1, 200);
 
 			if(!(activeScanData instanceof Error)) {
 				this.activeScanData = activeScanData;
