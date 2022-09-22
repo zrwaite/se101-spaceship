@@ -10,7 +10,7 @@ export default class YourPropulsionController extends PropulsionController {
 	defence: YourDefenceController // @ts-ignore
 	sensors: YourSensorsController // @ts-ignore
 	navigation: YourNavigationController
-	currDirection: Vector2 = new Vector2(0, 0)
+	currDirection: Vector2 = new Vector2(0, 0) // @ts-ignore
 
 	//Add additional attributes here
 
