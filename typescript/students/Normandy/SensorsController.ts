@@ -42,12 +42,14 @@ export default class YourSensorsController extends SensorsController {
 		}
 
 
-        const activeScanResult = activeScan(0, Math.PI, 1000);
+        const activeScanResult = activeScan(this.navigation.heading-Math.PI/2, Math.PI, 1000);
         if(!(activeScanResult instanceof Error) && activeScanResult?.length > 0)  {	
             this.activeScans.unshift(activeScanResult)
 
-            const badTargets = activeScanResult.filter((object) => object.closeRange && (object.closeRange.type === 'Asteroid' || object.closeRange.type === 'Meteor'));
-            badTargets.sort((objectA, objectB) => objectA.distance - objectB.distance);
+            // const badTargets = activeScanResult.filter((object) => object.closeRange && (object.closeRange.type === 'Asteroid' || object.closeRange.type === 'Meteor'));
+            const badTargets = activeScanResult.filter((object) => object.distance < 500);
+
+			badTargets.sort((objectA, objectB) => objectA.distance - objectB.distance);
 
             this.defenseTarget = badTargets[0];
         }

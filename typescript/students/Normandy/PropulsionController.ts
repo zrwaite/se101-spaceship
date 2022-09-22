@@ -20,9 +20,7 @@ export default class YourPropulsionController extends PropulsionController {
         const force = Math.min(Math.abs(1000 * headingDiff), 100)
         const absHeadingDiff = Math.abs(headingDiff);
 
-        console.log(headingDiff);
-
-        if (Math.abs(headingDiff) < 0.001) {
+        if (Math.abs(headingDiff) < 0.0001) {
             setThruster('clockwise', 0)
             setThruster('counterClockwise', 0);
         }
@@ -76,28 +74,30 @@ export default class YourPropulsionController extends PropulsionController {
         const heading = this.sensors.target.heading;
         if(!(EMS instanceof Error ) && (EMS != null))  {
             EMS.forEach( (element) => {
-                if(Math.abs(element.angle - heading) <= 0.001) {
+                if(Math.abs(element.angle - heading) <= 0.01) {
                     dist = element.distance;
                 }
             });
         }
-        if(Math.abs(headingDiff) < 0.25 && dist >= 400) {
+        var accel = this.calculateVelocity(Math.sqrt(this.navigation.linearVelocityX*this.navigation.linearVelocityX  + this.navigation.linearVelocityY*this.navigation.linearVelocityY), dist)
+        var speed = Math.sqrt(this.navigation.linearVelocityX*this.navigation.linearVelocityX  + this.navigation.linearVelocityY*this.navigation.linearVelocityY)
+        console.log(speed)
+        if(Math.abs(headingDiff) < 0.25 && dist < 400 && speed > 0.01) {
+            setThruster('main', 0)
+            setThruster('bow', Math.min(100, Math.abs(accel)))
+            console.log(dist)
+        }
+        else if(Math.abs(headingDiff) < 0.25) {
             setThruster('bow', 0);
             setThruster('main', 100);
-        }
-        if(Math.abs(headingDiff) < 0.25 && dist < 400) {
-            var sped = this.calculateVelocity(Math.sqrt(this.navigation.linearVelocityX*this.navigation.linearVelocityX  + this.navigation.linearVelocityY*this.navigation.linearVelocityY), dist)
-            setThruster('main', 0)
-            setThruster('bow', sped)
-            console.log(sped)
-
+            console.log(dist)
         }
 
 
         //console.log(headingDiff);
     }
     calculateVelocity (currentVelocity: number, distance: number) {
-        var val = currentVelocity*currentVelocity/(2*distance);
+        var val = 99999*currentVelocity*currentVelocity/(2*distance);
         console.log(val);
         return val;
     }
