@@ -12,14 +12,9 @@ export default class YourDefenceController extends DefenceController {
 	//Add additional attributes here
 
 	defenceUpdate(aimTurret: (angle: number) => void, getTubeCooldown: (i: number) => number | Error, fireTorpedo: (i: number) => Error | null) {
-		console.log("console test");
-		console.log(this.sensors.target !== null ? this.sensors.target.gravity : "");
-
 		if(!this.sensors.target) return;
-		
-		console.log(this.sensors.target.gravity); 
 
-		aimTurret(this.sensors.target.heading)
-		fireTorpedo(0)
+		aimTurret(this.sensors.target.heading);
+		fireTorpedo(0);
 	}
 }
