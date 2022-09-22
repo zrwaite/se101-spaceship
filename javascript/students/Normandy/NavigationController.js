@@ -4,27 +4,30 @@ export default class YourNavigationController extends NavigationController {
     constructor() {
         super(...arguments);
         //PUBLIC VARIABLES :)
-        this.radius = 0; //how big the ship is
+        this.radius = 0;
         this.angularVelocity = 0;
-        this.angle = 0; //direction ship is facing
+        this.angle = 0;
         this.positionX = 0;
         this.positionY = 0;
         this.targetPositionX = 0; //PROPULSION: GET US TO THESE COORDINATES
         this.targetPositionY = 0;
         this.linearVelocityX = 0;
         this.linearVelocityY = 0;
+        //did we warp to another solar system?
+        this.warp = true;
     }
-    //MAIN => runs multiple times a second
     navigationUpdate(getShipStatus, warp, land, getMapData) {
-        //galaxy MAP
-        //let map = new Map<Galaxy, SolarSystem[]>();
-        //position updates
-        this.angle = getShipStatus('angle');
-        this.positionX = getShipStatus('positionX');
-        this.positionY = getShipStatus('positionY');
-        this.linearVelocityX = getShipStatus('linearVelocityX');
-        this.linearVelocityY = getShipStatus('linearVelocityY');
-        land();
         warp();
+        land();
+        //update position function
+        const UpdatePosition = () => {
+            this.angle = getShipStatus('angle');
+            this.positionX = getShipStatus('positionX');
+            this.positionY = getShipStatus('positionY');
+            this.angularVelocity = getShipStatus('angularVelocity');
+            this.linearVelocityX = getShipStatus('linearVelocityX');
+            this.linearVelocityY = getShipStatus('linearVelocityY');
+        };
+        UpdatePosition();
     }
 }

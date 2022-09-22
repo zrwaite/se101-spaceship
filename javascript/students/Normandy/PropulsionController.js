@@ -1,6 +1,10 @@
 import { angleDiff } from '../helpers.js';
 import PropulsionController from '../../src/subsystems/propulsionController.js';
 export default class YourPropulsionController extends PropulsionController {
+    constructor() {
+        super(...arguments);
+        this.didsetThruster = false;
+    }
     //Add additional attributes here
     propulsionUpdate(setThruster) {
         if (!this.sensors.target)
@@ -8,9 +12,20 @@ export default class YourPropulsionController extends PropulsionController {
         const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading);
         const force = Math.min(Math.abs(1000 * headingDiff), 100);
         const absHeadingDiff = Math.abs(headingDiff);
-        if (Math.abs(headingDiff) < 0.03) {
+        console.log(headingDiff);
+        if (Math.abs(headingDiff) < 0.001) {
             setThruster('clockwise', 0);
             setThruster('counterClockwise', 0);
+        }
+        else if (Math.abs(headingDiff) < 0.2 || Math.abs(this.navigation.angularVelocity) > 0.02) {
+            if (this.navigation.angularVelocity < 0) {
+                setThruster('clockwise', this.calculateAccelAngle(this.navigation.angularVelocity, this.navigation.angle, this.sensors.target.heading));
+                setThruster('counterClockwise', 0);
+            }
+            else {
+                setThruster('counterClockwise', this.calculateAccelAngle(this.navigation.angularVelocity, this.navigation.angle, this.sensors.target.heading));
+                setThruster('clockwise', 0);
+            }
         }
         else if (headingDiff < 0) {
             setThruster('counterClockwise', 0);
@@ -52,10 +67,13 @@ export default class YourPropulsionController extends PropulsionController {
         else {
             setThruster('main', 0);
         }
-        console.log(headingDiff);
+        //console.log(headingDiff);
     }
     calculateAccelAngle(currentAngVelo, currentAngle, targetAngle) {
-        return -Math.pow(currentAngVelo, 2) / (2 * angleDiff(currentAngle, targetAngle));
+        //console.log(currentAngVelo + " " + currentAngle + " " + targetAngle)
+        var val = 99999 * Math.abs((currentAngVelo * currentAngVelo) / (2 * angleDiff(currentAngle, targetAngle)));
+        console.log(val + " " + currentAngVelo + " " + angleDiff(currentAngle, targetAngle));
+        return val;
     }
 }
 // var kD=0.5, kP=0.7, kI=0.4, E=0, prevE=0, I=0, D=0, P, Pwr=0, Dst=headingDiff;

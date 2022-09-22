@@ -10,22 +10,33 @@ export default class YourPropulsionController extends PropulsionController {
 	defence: YourDefenceController // @ts-ignore
 	sensors: YourSensorsController // @ts-ignore
 	navigation: YourNavigationController
-
+    didsetThruster: boolean = false
 	//Add additional attributes here
 	propulsionUpdate(setThruster: (thruster: ThrusterName, power: number) => Error | null) {
         if(!this.sensors.target) return
+        
         const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading)
         const force = Math.min(Math.abs(1000 * headingDiff), 100)
         const absHeadingDiff = Math.abs(headingDiff);
-        if(Math.abs(headingDiff) < 0.03) {
+
+        console.log(headingDiff);
+
+        if (Math.abs(headingDiff) < 0.001) {
             setThruster('clockwise', 0)
             setThruster('counterClockwise', 0);
         }
+        else if (Math.abs(headingDiff) < 0.2 || Math.abs(this.navigation.angularVelocity) > 0.02) {
+            if (this.navigation.angularVelocity < 0) {
+                setThruster('clockwise', this.calculateAccelAngle(this.navigation.angularVelocity, this.navigation.angle, this.sensors.target.heading))
+                setThruster('counterClockwise', 0)
+            }
+            else {
+                setThruster('counterClockwise', this.calculateAccelAngle(this.navigation.angularVelocity, this.navigation.angle, this.sensors.target.heading))
+                setThruster('clockwise', 0)
+            }
+        }
         else if(headingDiff < 0) {
             setThruster('counterClockwise', 0);
-            if(absHeadingDiff > 1.5) {
-                setThruster('clockwise', 80);
-            }
             if(absHeadingDiff > 0.5) {
                 setThruster('clockwise', 30);
             }
@@ -43,9 +54,6 @@ export default class YourPropulsionController extends PropulsionController {
         }
         else if(headingDiff > 0) {
             setThruster('clockwise', 0);
-            if(absHeadingDiff > 1.5) {
-                setThruster('counterClockwise', 80);
-            }
             if(absHeadingDiff > 0.5) {
                 setThruster('counterClockwise', 30);
             }
@@ -67,11 +75,15 @@ export default class YourPropulsionController extends PropulsionController {
         } else {
             setThruster('main', 0);
         }
-        console.log(headingDiff);
+
+        //console.log(headingDiff);
     }
 
     calculateAccelAngle(currentAngVelo: number, currentAngle: number, targetAngle: number) {
-		return -Math.pow(currentAngVelo,2)/(2*angleDiff(currentAngle,targetAngle))
+        //console.log(currentAngVelo + " " + currentAngle + " " + targetAngle)
+        var val = 99999*Math.abs((currentAngVelo*currentAngVelo)/(2*angleDiff(currentAngle,targetAngle)))
+        console.log(val + " " + currentAngVelo + " " + angleDiff(currentAngle,targetAngle))
+		return val
 	}
 }
 
