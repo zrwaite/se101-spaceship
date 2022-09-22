@@ -16,9 +16,8 @@ export default class YourPropulsionController extends PropulsionController {
   propulsionUpdate(
     setThruster: (thruster: ThrusterName, power: number) => Error | null
   ) {
-    if (!this.sensors.target) return;
     const angle = this.navigation.angle;
-    const heading = this.sensors.target.heading;
+    const heading = this.navigation.targetAngle;
     const headingDiff = angleDiff(
       angle,
       heading
@@ -37,6 +36,6 @@ export default class YourPropulsionController extends PropulsionController {
     }
 
     //Rocket thrusts towards target within a greater range.
-    setThruster("main", Math.abs(headingDiff) < 1 ? 40 : 0);
+    setThruster("main", Math.abs(headingDiff) < 1 ? 20 : 0);
   }
 }
