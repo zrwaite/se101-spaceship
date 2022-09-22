@@ -48,6 +48,12 @@ export default class YourPropulsionController extends PropulsionController {
 
 		//Note: the board is setup like a grid where (0,0) is the coordinates of the top left corner
 			//Angles work 
+
+		//One line to aim where it needs to aim
+			//Need to account for angular velocity from navigation
+			//Don't push to left if you are already heading in that direction
+			//Scale by 15000 and then you'll end going straight
+			
 		const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading)
 		const force = Math.min(Math.abs(100 * headingDiff), 100) 
 		if (headingDiff < 0) {
