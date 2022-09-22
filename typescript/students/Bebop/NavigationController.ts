@@ -14,8 +14,10 @@ export default class YourNavigationController extends NavigationController {
 	propulsion: YourPropulsionController
 
 	//Add additional attributes here
-	startWarping = false
-	startLanding = false
+	startLanding = false;
+	startWarping = false;
+	landWarpDelayCounter = 0;
+
 	radius = 0;
 	angularVelocity = 0;
 	angle = 0;
@@ -31,7 +33,6 @@ export default class YourNavigationController extends NavigationController {
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		// Update attributes (currently don't know which ones are needed by other subsystems)
 		
-		
 		// this.radius = getShipStatus('radius');
 		this.angularVelocity = getShipStatus('angularVelocity');
 		this.angle = getShipStatus('angle');
@@ -45,18 +46,16 @@ export default class YourNavigationController extends NavigationController {
 		// this.thrusterPowerCounterClockwise = getShipStatus('thrusterPowerCounterClockwise');
 
 
-		/*plan: sense for objects, if there is an object:
-		 if the object is a planet, land, 
-		 if it is a warp, warp
-		 otherwise, do nothing (for now)
+		/*plan: repeatedly call land or warp once per half second if a planet or warphole is detected and
+		within a certain distance of the spaceship. 
 		 */
-
-		if (this.startLanding) {
+		this.landWarpDelayCounter++; 
+		if (this.startLanding && this.landWarpDelayCounter % 30 === 0) {
             land();
             console.log("land");
         }
 
-        if (this.startWarping) {
+        if (this.startWarping && this.landWarpDelayCounter % 30 === 0) {
             warp();
             console.log("warp");
         }
@@ -70,8 +69,8 @@ export default class YourNavigationController extends NavigationController {
                     } else if (obj.closeRange.type === 'WarpGate') {
                         this.startWarping = true; 
                     }
-                }
+				}
 			}
+		}
 	}
-}
 }

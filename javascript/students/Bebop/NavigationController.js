@@ -3,8 +3,9 @@ export default class YourNavigationController extends NavigationController {
     constructor() {
         super(...arguments);
         //Add additional attributes here
-        this.startWarping = false;
         this.startLanding = false;
+        this.startWarping = false;
+        this.landWarpDelayCounter = 0;
         this.radius = 0;
         this.angularVelocity = 0;
         this.angle = 0;
@@ -30,16 +31,15 @@ export default class YourNavigationController extends NavigationController {
         // this.thrusterPowerBow = getShipStatus('thrusterPowerBow');
         // this.thrusterPowerClockwise = getShipStatus('thrusterPowerClockwise');
         // this.thrusterPowerCounterClockwise = getShipStatus('thrusterPowerCounterClockwise');
-        /*plan: sense for objects, if there is an object:
-         if the object is a planet, land,
-         if it is a warp, warp
-         otherwise, do nothing (for now)
+        /*plan: repeatedly call land or warp once per half second if a planet or warphole is detected and
+        within a certain distance of the spaceship.
          */
-        if (this.startLanding) {
+        this.landWarpDelayCounter++;
+        if (this.startLanding && this.landWarpDelayCounter % 30 === 0) {
             land();
             console.log("land");
         }
-        if (this.startWarping) {
+        if (this.startWarping && this.landWarpDelayCounter % 30 === 0) {
             warp();
             console.log("warp");
         }
