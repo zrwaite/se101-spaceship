@@ -128,5 +128,13 @@ export default class YourNavigationController extends NavigationController {
 	public get getAngularVelocity() {
 		return this.angularVelocity
 	}
-	
+	public get getTargetAngle() {
+		return this.target.angle()
+	}
+
+	public get getTargetMagnitude() {
+		return this.target.magnitude()
+	}
+
+
 }
