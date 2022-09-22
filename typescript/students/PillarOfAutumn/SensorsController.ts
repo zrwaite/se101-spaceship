@@ -14,6 +14,8 @@ export default class YourSensorsController extends SensorsController {
 	//Add additional attributes here
 	target:PassiveReading|null=null
 	timeCounter: number = 0
+	asteroidHeading: Array<EMSReading> = []
+	slowDown: boolean = false;
 	
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
 		
@@ -32,6 +34,18 @@ export default class YourSensorsController extends SensorsController {
 
 		if(this.timeCounter % 180 == 0){
 			const activeScanResult = activeScan(this.navigation.angle, 0.3, 400)
+			if(!(activeScanResult instanceof Error)) {
+				activeScanResult.forEach((reading) => {
+					
+					if(reading.closeRange?.type == "Asteroid"){
+						this.asteroidHeading.push(reading)
+						console.log(reading.closeRange.type)
+					}
+					if(reading.closeRange?.type == "Planet"){
+						this.slowDown == true
+					}
+				})
+			}
 		}
 		
 		
