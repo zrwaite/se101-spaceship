@@ -5,6 +5,7 @@ import NavigationController from '../../src/subsystems/navigationController.js'
 import YourDefenceController from './DefenseController.js'
 import YourPropulsionController from './PropulsionController.js'
 import YourSensorsController from './SensorsController.js'
+import { getMapData } from '../../src/ship/mapData.js'
 
 //Testing 
 export default class YourNavigationController extends NavigationController {
@@ -16,10 +17,17 @@ export default class YourNavigationController extends NavigationController {
 
 	//Add additional attributes here
 	angle: number = 0
+	
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
-		this.angle = getShipStatus('angle')
-		land()
+		
 		//hello
+		while (true){
+			this.angle = getShipStatus('angle')
+			land()
+			warp()
+			getMapData()
+			
+		}
 	}
 }
