@@ -18,15 +18,15 @@ export default class YourSensorsController extends SensorsController {
                 this.passiveScans.push(scanResult);
                 console.log(this.passiveScans);
             }
-            this.passiveCooldown = 50;
+            this.passiveCooldown = 100;
         }
         if (this.activeCooldown <= 0) {
-            const activeResult = activeScan(0, Math.PI, 1000);
+            const activeResult = activeScan(0, 0.5, 50);
             if (!(activeResult instanceof Error)) {
                 this.activeScans.push(activeResult);
                 console.log(activeResult);
             }
-            this.activeCooldown = 25;
+            this.activeCooldown = 50;
         }
         this.activeCooldown--;
         this.passiveCooldown--;
