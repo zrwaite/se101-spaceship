@@ -3,11 +3,10 @@ import PropulsionController from '../../src/subsystems/propulsionController.js';
 export default class YourPropulsionController extends PropulsionController {
     //Add additional attributes here
     propulsionUpdate(setThruster) {
-        // if (!this.sensors.target) return
-        // const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading)
-        const headingDiff = angleDiff(this.navigation.angle, this.navigation.targetAngle);
-        console.log(headingDiff);
-        console.log('hi');
+        var _a, _b;
+        if (!this.sensors.target)
+            return;
+        const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading);
         //const force = Math.abs(200*headingDiff)
         const force = Math.min(Math.abs(500 * headingDiff), 10);
         if (headingDiff < 0) {

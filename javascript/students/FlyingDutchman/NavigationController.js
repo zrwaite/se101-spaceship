@@ -14,6 +14,7 @@ export default class YourNavigationController extends NavigationController {
         this.target = new Vector2(0, 0);
         this.targetAngle = 0;
         this.targetIsPlanet = null;
+        this.distanceIsSet = false;
         this.landingDistance = 50; // change if needed
     }
     navigationUpdate(getShipStatus, warp, land, getMapData) {
@@ -21,6 +22,8 @@ export default class YourNavigationController extends NavigationController {
         if (!this.scanned) {
             this.mapData = getMapData();
             this.scanned = true;
+            this.distanceIsSet = false;
+            this.targetIsPlanet = null;
         }
         this.possibleObjects = this.sensors.warpgatesOrPlanets;
         this.updateTarget();
@@ -61,8 +64,12 @@ export default class YourNavigationController extends NavigationController {
             // If the target is a planet
             console.log(val.angle);
             if (val.type === 'Planet') {
+                if (this.distanceIsSet && val.distance === undefined) {
+                    continue;
+                }
                 if (!(val.distance === undefined)) {
                     d = val.distance;
+                    this.distanceIsSet = true;
                 }
                 // save target angle
                 this.targetAngle = val.angle;
