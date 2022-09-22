@@ -26,8 +26,11 @@ export default class YourSensorsController extends SensorsController {
 		if (!(scanResult instanceof Error)) {
 
       if (!this.target){
-        // checks if scan object already exists in allObjects
-        // if it does, that object is the planet
+        // checks if scan object already exists in all Objects
+		// Two passive scans are started, so the positions of moving objects are
+		// different in each of the passsive scans.
+		// If a position recorded in both passive scans is the same,
+        // that object is the planet
         allObjects.forEach(planet => {
           if(JSON.stringify(planet) == JSON.stringify(scanResult)){
             console.log("found the planet", scanResult[0])					
