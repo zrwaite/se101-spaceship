@@ -9,9 +9,9 @@ export default class YourNavigationController extends NavigationController {
         // Landing if the distance between the spaceship and A planet is less than 20
         closeRangeObject && closeRangeObject.forEach(object => {
             if (object === null || object === void 0 ? void 0 : object.closeRange) {
-                if (object.closeRange.type === 'Planet' && object.distance < 20)
+                if (object.closeRange.type === 'Planet' && object.distance < 50)
                     land();
-                else if (object.closeRange.type === 'WarpGate' && object.distance < 20)
+                else if (object.closeRange.type === 'WarpGate' && object.distance < 50)
                     warp();
             }
         });
