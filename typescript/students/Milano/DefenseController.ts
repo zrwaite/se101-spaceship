@@ -1,5 +1,6 @@
 import DefenceController from '../../src/subsystems/defenceController.js'
 import { Vector2, withinPiRange, angleDiff } from '../helpers.js'
+import { PassiveReading } from '../types.js'
 import YourNavigationController from './NavigationController.js'
 import YourPropulsionController from './PropulsionController.js'
 import YourSensorsController from './SensorsController.js'
@@ -11,10 +12,26 @@ export default class YourDefenceController extends DefenceController {
 	propulsion: YourPropulsionController
 	//Add additional attributes here
 
+	readonly G: number = 1.0 / 3;
+	readonly SHIP_MASS: number = 3;
+	readonly ASTEROID_MASS: number = 5;
+
 	defenceUpdate(aimTurret: (angle: number) => void, getTubeCooldown: (i: number) => number | Error, fireTorpedo: (i: number) => Error | null) {
 		if(!this.sensors.target) return;
+		if(this.shouldShoot(this.sensors.target)){
+			aimTurret(this.sensors.target.heading);
+			fireTorpedo(0);
+		}
+	}
 
-		aimTurret(this.sensors.target.heading);
-		fireTorpedo(0);
+	//determine whether or not ship should shoot
+	shouldShoot(target: PassiveReading | null){
+		if(target === null || target.gravity < 0){
+			return false;
+		}
+
+		let estimatedRadius: number = Math.sqrt(this.G * this.SHIP_MASS * this.ASTEROID_MASS / target.gravity);
+
+		return estimatedRadius < 5;
 	}
 }
