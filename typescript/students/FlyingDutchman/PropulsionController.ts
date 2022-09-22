@@ -30,5 +30,6 @@ export default class YourPropulsionController extends PropulsionController {
 
 		// setThruster('main', Math.abs(headingDiff) < 0.2 ? 50 : 10)
 		setThruster('main', Math.abs(headingDiff) < 0.2 ? 10 * (this.navigation.target?.magnitude() ?? 0) : 0)
+		//Thruster Speed
 	}
 }
