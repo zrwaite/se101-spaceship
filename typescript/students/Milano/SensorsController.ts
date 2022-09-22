@@ -11,10 +11,16 @@ export default class YourSensorsController extends SensorsController {
 	navigation: YourNavigationController // @ts-ignore
 	propulsion: YourPropulsionController
 	target: PassiveReading | null = null;
+	emsReading: EMSReading[] | Error = []
 
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
 		const scanResult = passiveScan();
 		if(!(scanResult instanceof Error)) this.target = scanResult[0];
+		
+		this.emsReading = activeScan(0, Math.PI, 500);
+		console.log(this.emsReading);
+		
+
 		/**
 		 * Scanning Algorithm:
 		 * First, split the map into smaller regions
