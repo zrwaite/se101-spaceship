@@ -32,8 +32,16 @@ export default class YourSensorsController extends SensorsController {
           }
         });
 
-        allObjects.push(scanResult) // adds object to array
+		allObjects.push(scanResult) // adds object to array
       }
+	}
+
+	//else if found target
+	else{
+		const activeScanResult = activeScan(1,3,5)
+		if(!(activeScanResult instanceof Error)){
+			console.log(activeScanResult)
 		}
+	}
 	}
 }
