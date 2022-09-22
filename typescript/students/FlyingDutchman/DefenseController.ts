@@ -30,15 +30,16 @@ export default class YourDefenceController extends DefenceController {
 		// if an asteroid is within x distance from our heading, aim and fire at it
 
 		
-		if (!this.sensors.target) return
+		if (!this.navigation.target) return
 		
 		let asteroidList: SpaceObject[] = []
 		let asteroid: SpaceObject;
 		let shipPos: Vector2
 		
+		
 		asteroidList = this.sensors.asteroids;
 
-		// console.log(this.sensors.asteroids);
+		console.log(asteroidList);
 		// console.log(getTubeCooldown(0), getTubeCooldown(1), getTubeCooldown(2), getTubeCooldown(3));
 
 		// for loop that constantly checks the distance of all of the asteroids
