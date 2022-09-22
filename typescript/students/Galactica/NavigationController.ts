@@ -38,7 +38,7 @@ export default class YourNavigationController extends NavigationController {
 		this.thrusterPowerBow = getShipStatus('thrusterPowerBow')
 		this.thrusterPowerClockwise = getShipStatus('thrusterPowerClockwise')
 		this.thrusterPowerCounterClockwise = getShipStatus('thrusterPowerCounterClockwise')
-		// console.log(this.angle)
+		
 		//if good planet:
 		land()
 		//if good warpgate:
