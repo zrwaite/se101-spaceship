@@ -1,5 +1,6 @@
 import ColonyShip from "../../src/ship/colonyShip";
 import Planet from "../../src/spaceObjects/planet";
+import WarpGate from "../../src/spaceObjects/warpGate";
 import { ShipStatus } from "../types";
 
 /**
@@ -39,4 +40,12 @@ export function getShipStatus(key?: keyof ShipStatus) : ShipStatus | ShipStatus[
  */
 export function getPlanets() : Planet[] {
     return getShip().solarSystem.planets;
+}
+
+/**
+ * Get warp gates in current solar system
+ * @returns Array of warp gates in current solar system
+ */
+export function getWarpGates() : WarpGate[] {
+    return getShip().solarSystem.warpGates;
 }
