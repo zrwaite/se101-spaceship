@@ -15,10 +15,10 @@ export default class YourDefenceController extends DefenceController {
 	defenceUpdate(aimTurret: (angle: number) => void, getTubeCooldown: (i: number) => number | Error, fireTorpedo: (i: number) => Error | null) {
 
 		console.log("defense: " + this.sensors.asteroidHeading)
-		if(this.sensors.asteroidHeading.length > 0){
+		if(this.sensors.asteroidHeading){
 			let i = 0
 			this.sensors.asteroidHeading.forEach((ast) => {
-				if(i > 3){
+				if(i < 3){
 				aimTurret(ast.angle)
 				fireTorpedo(i)
 				console.log(ast)

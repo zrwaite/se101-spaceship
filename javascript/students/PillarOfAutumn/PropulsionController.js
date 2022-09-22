@@ -2,6 +2,9 @@ import { angleDiff, withinPiRange } from '../helpers.js';
 import PropulsionController from '../../src/subsystems/propulsionController.js';
 export default class YourPropulsionController extends PropulsionController {
     //Add additional attributes here
+    if(slowDown) {
+        slowDown;
+    }
     propulsionUpdate(setThruster) {
         if (!this.sensors.target)
             return;
