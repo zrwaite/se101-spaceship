@@ -19,12 +19,6 @@ export default class YourSensorsController extends SensorsController {
   target: PassiveReading | undefined;
   targetDetails: EMSReading | undefined;
   activeScan: EMSReading[] | undefined;
-  EMSAngle: EMSReading[] | undefined;
-  EMSDist: EMSReading[] | undefined;
-  EMSVel: EMSReading[] | undefined;
-  EMSRad: EMSReading[] | undefined;
-  EMSCLD: EMSReading[] | undefined;
-
   onTarget: Boolean | undefined;
 
   sensorsUpdate(
