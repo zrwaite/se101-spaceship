@@ -24,7 +24,6 @@ export default class YourDefenceController extends DefenceController {
 		for (let i = 0; i < 4; i++) {
 			const target = this.torpedoTargets[0];
 			if (getTubeCooldown(i) == 0) {
-				aimTurret(target);
 				fireTorpedo(i);
 				this.torpedoTargets.shift();
 			}

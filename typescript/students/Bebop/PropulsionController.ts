@@ -33,8 +33,8 @@ export default class YourPropulsionController extends PropulsionController {
         // else {
         //     heading = angleDiff(this.navigation.angle, target.heading);     
         // }
-        const heading = angleDiff(this.navigation.angle, target.heading);  
-        
+        const heading = angleDiff(this.navigation.angle, target.heading);
+
         const direction = angularVelocity == 0 ? "away" : heading / angularVelocity < 0 ? "towards" : "away";
 
         let force = 0;
@@ -73,12 +73,11 @@ export default class YourPropulsionController extends PropulsionController {
                 setThruster('counterClockwise', 0)
             }
         }
-        
+
         setThruster('main', Math.abs(heading) < 0.2 ? 100 : 0);
         setThruster("bow", 0);
 
         const objects = this.sensors.activeScanData;
-        console.log(objects?.length)
         if (objects) {
             for (let i = 0; i < (objects.length); i++) {
                 const object = objects![i];
