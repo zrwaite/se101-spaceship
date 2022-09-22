@@ -23,8 +23,9 @@ export default class YourNavigationController extends NavigationController {
 		this.xVelocity = getShipStatus ('linearVelocityX')
 		this.yVelocity = getShipStatus ('linearVelocityY')
 		// console.log(this.angle)
+		//if good planet:
 		land()
+		//if good warpgate:
 		warp()
 	}
-	
 }
