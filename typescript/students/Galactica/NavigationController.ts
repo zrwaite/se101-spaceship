@@ -26,6 +26,12 @@ export default class YourNavigationController extends NavigationController {
 	thrusterPowerClockwise=0
 	thrusterPowerCounterClockwise=0
 
+	firstGate=''
+	secondGate=''
+	thirdGate=''
+	fourthGate=''
+	fifthGate=''
+
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		this.angle = getShipStatus ('angle')
 		this.xVelocity = getShipStatus ('linearVelocityX')
@@ -38,6 +44,22 @@ export default class YourNavigationController extends NavigationController {
 		this.thrusterPowerBow = getShipStatus('thrusterPowerBow')
 		this.thrusterPowerClockwise = getShipStatus('thrusterPowerClockwise')
 		this.thrusterPowerCounterClockwise = getShipStatus('thrusterPowerCounterClockwise')
+
+		if(getMapData(getGalaxyData('galaxyName'))=='noob'){
+			this.firstGate='Big Bird';
+		}
+		else if(getMapData(getGalaxyData('galaxyName'))=='Compiles'){
+			this.firstGate='Waterloo'
+			this.secondGate='StackOverFlow'
+			this.thirdGate='Steve-O'
+		}
+		else if(getMapData(getGalaxyData('galaxyName'))=='Cracked'){
+			this.firstGate='Hargun'
+			this.secondGate='Olivia'
+			this.thirdGate='Ali'
+			this.fourthGate='Derek'
+			this.fifthGate='Exceptional'
+		}
 		
 		//if good planet:
 		land()
