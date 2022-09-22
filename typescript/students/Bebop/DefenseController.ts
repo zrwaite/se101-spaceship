@@ -20,7 +20,9 @@ export default class YourDefenceController extends DefenceController {
 		if (!this.sensors.target) return
 		if (this.sensors.activeScanData != null && this.sensors.activeScanData[0] != null) {
 			for (let i = 0; i < this.sensors.activeScanData.length; i++) {
-				this.torpedoTargets.push(this.sensors.activeScanData[i].angle);
+				if(this.sensors.activeScanData[i].distance < 200){
+					this.torpedoTargets.push(this.sensors.activeScanData[i].angle);
+				}
 			}
 		}
 
