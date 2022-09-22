@@ -6,6 +6,9 @@ import YourPropulsionController from "./PropulsionController.js";
 import { EMSReading, PassiveReading } from "../types.js";
 
 let allObjects: object[] = []; // array of all objects in galaxy
+let activeScanObjects: object[] = [];
+
+function isNumber(n: any) { return !isNaN(parseFloat(n)) && !isNaN(n - 0) }
 
 export default class YourSensorsController extends SensorsController {
 	// To get other subsystem information, use the attributes below.
@@ -38,9 +41,9 @@ export default class YourSensorsController extends SensorsController {
 
 	//else if found target
 	else{
-		const activeScanResult = activeScan(1,3,5)
+		const activeScanResult = activeScan(this.target!.heading, 0.6, 5)
 		if(!(activeScanResult instanceof Error)){
-			console.log(activeScanResult)
+			activeScanObjects.push(activeScanResult);
 		}
 	}
 	}
