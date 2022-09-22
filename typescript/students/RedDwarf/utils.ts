@@ -1,4 +1,5 @@
 import ColonyShip from "../../src/ship/colonyShip";
+import Planet from "../../src/spaceObjects/planet";
 import { ShipStatus } from "../types";
 
 /**
@@ -30,4 +31,12 @@ export function getShipStatus(key?: keyof ShipStatus) : ShipStatus | ShipStatus[
         thrusterPowerCounterClockwise: ship.thrusterController.thrusterPower.counterClockwise,
     };
     return key && key in status ? status[key] : status;
+}
+
+/**
+ * Get planets in current solar system.
+ * @returns Array of planets in current solar system.
+ */
+export function getPlanets() : Planet[] {
+    return getShip().solarSystem.planets;
 }
