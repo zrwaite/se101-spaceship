@@ -28,6 +28,7 @@ export default class YourNavigationController extends NavigationController {
 
     // run land function  
     land();
+    warp();
     // if (YourSensorsController.onPlanet) {
     // }
   }

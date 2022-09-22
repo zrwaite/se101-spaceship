@@ -9,7 +9,9 @@ export default class YourNavigationController extends NavigationController {
     navigationUpdate(getShipStatus, warp, land, getMapData) {
         this.angle = getShipStatus("angle");
         this.angularVelocity = getShipStatus("angularVelocity");
+        // run land function  
         land();
+        warp();
         // if (YourSensorsController.onPlanet) {
         // }
     }
