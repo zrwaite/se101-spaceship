@@ -34,4 +34,10 @@ export default class YourSensorsController extends SensorsController {
 		 * Repeat this algorithm until a warp gate or a planet is found
 		 */
 	}
+
+	// use passive scan
+	// use active scan for asteroids
+	// can identify objects based on gravity signature (planets have a higher gravity signature than asteroids)
+
+
 }

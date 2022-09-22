@@ -28,4 +28,5 @@ export default class PropulsionController {
 		this.navigation = navigation
 		this.sensors = sensors
 	}
+
 }
