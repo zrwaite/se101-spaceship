@@ -15,18 +15,16 @@ export default class YourPropulsionController extends PropulsionController {
   sensors: YourSensorsController; // @ts-ignore
   navigation: YourNavigationController;
 
-  //Add additional attributes here
-
   prevHeadingDiff:number = 0;
   maxOutput:number = 0;
 
+  //Heading stored
   KpWHeading:number = 300;
   KdWHeading:number = 5000;
 
   prevDist:number = 0;
 
-
-
+  //propulsion update pulls data about the ship and its trajectory
   propulsionUpdate(
     setThruster: (thruster: ThrusterName, power: number) => Error | null
   ) {
