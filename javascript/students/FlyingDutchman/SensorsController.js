@@ -11,7 +11,7 @@ export default class YourSensorsController extends SensorsController {
         this.activeRange = 150;
     }
     get warpgatesOrPlanets() {
-        return [...this.passiveScannedObjects, ...this.activeScannedObjects].filter((so) => ['Other', "WarpGate"].includes(so.type));
+        return [...this.passiveScannedObjects, ...this.activeScannedObjects.filter((so) => ["WarpGate", "Planet"].includes(so.type))];
     }
     get asteroids() {
         return this.activeScannedObjects.filter((so) => "Asteroid" == so.type);
@@ -39,10 +39,11 @@ export default class YourSensorsController extends SensorsController {
                 mass = -100;
                 distance = reading.gravity / mass;
             }
-            else if (reading.gravity < 1) {
+            else if (reading.gravity < 0.01) {
                 type = 'Asteroid';
                 mass = 5;
                 distance = reading.gravity / mass;
+                // console.log({distance, gravity: reading.gravity, mass})
             }
             else {
                 type = 'Planet';

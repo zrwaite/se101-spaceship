@@ -23,7 +23,6 @@ export default class YourNavigationController extends NavigationController {
             this.scanned = true;
         }
         this.possibleObjects = this.sensors.warpgatesOrPlanets;
-        console.log(this.possibleObjects);
         this.updateTarget();
         // Constantly update position
         this.position = new Vector2(getShipStatus('positionX'), getShipStatus('positionY'));
@@ -58,11 +57,10 @@ export default class YourNavigationController extends NavigationController {
     // tries to update target
     updateTarget() {
         let d = 100000; // distance to target, used in x and y calculation
-        console.log(this.possibleObjects);
         for (var val of this.possibleObjects) {
             // If the target is a planet
             console.log(val.angle);
-            if (val.type === 'Other') {
+            if (val.type === 'Planet') {
                 if (!(val.distance === undefined)) {
                     d = val.distance;
                 }
