@@ -6,5 +6,9 @@ export default class YourDefenceController extends DefenceController {
             return;
         aimTurret(this.sensors.target.heading);
         fireTorpedo(0);
+        if (!this.sensors.shootingTarget)
+            return;
+        aimTurret(this.sensors.shootingTarget);
+        fireTorpedo(0);
     }
 }

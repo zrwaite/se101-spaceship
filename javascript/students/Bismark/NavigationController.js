@@ -3,11 +3,15 @@ export default class YourNavigationController extends NavigationController {
     navigationUpdate(getShipStatus, warp, land, getMapData) {
         var _a, _b, _c, _d, _e, _f;
         this.angle = getShipStatus("angle");
+        console.log(this.angle);
         this.angularVelocity = getShipStatus("angularVelocity");
         this.linearVelocityX = getShipStatus("linearVelocityX");
         this.linearVelocityY = getShipStatus("linearVelocityY");
+<<<<<<< Updated upstream
         this.posX = getShipStatus("positionX");
-        this.posY = getShipStatus("positionX");
+        this.posY = getShipStatus("positionY");
+=======
+>>>>>>> Stashed changes
         /* instead of landing all the time:
           - pull data from an EMS scan
           - pull current x/y position
