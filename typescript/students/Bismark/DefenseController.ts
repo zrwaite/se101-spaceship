@@ -21,8 +21,13 @@ export default class YourDefenceController extends DefenceController {
     getTubeCooldown: (i: number) => number | Error,
     fireTorpedo: (i: number) => Error | null
   ) {
+
     if (!this.sensors.target) return;
-    aimTurret(this.sensors.target.heading);
+      aimTurret(this.sensors.target.heading); 
+      fireTorpedo(0);
+    if (!this.sensors.shootingTarget) return;
+    aimTurret(this.sensors.shootingTarget);
     fireTorpedo(0);
   }
+
 }

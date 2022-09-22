@@ -31,7 +31,6 @@ export default class YourNavigationController extends NavigationController {
                 land();
             }
             else if (((_f = (_e = this.sensors.targetDetails) === null || _e === void 0 ? void 0 : _e.closeRange) === null || _f === void 0 ? void 0 : _f.type) === 'WarpGate') {
-                console.log('warp attempt');
                 warp();
             }
         }
