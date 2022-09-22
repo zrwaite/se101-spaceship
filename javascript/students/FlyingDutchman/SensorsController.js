@@ -4,19 +4,31 @@ export default class YourSensorsController extends SensorsController {
         super(...arguments);
         this.target = null;
         //Add additional attributes here
-        this.scannedObjects = [];
+        this.passiveScannedObjects = [];
+        this.activeScannedObjects = [];
+        this.activeHeading = 0;
+        this.activeArc = Math.PI / 4;
+        this.activeRange = 150;
     }
     get warpgatesOrPlanets() {
-        return this.scannedObjects.filter((so) => ['Other', "WarpGate"].includes(so.type));
+        return [...this.passiveScannedObjects, ...this.activeScannedObjects].filter((so) => ['Other', "WarpGate"].includes(so.type));
     }
     get asteroids() {
-        return this.scannedObjects.filter((so) => "Asteroid" == so.type);
+        return this.activeScannedObjects.filter((so) => "Asteroid" == so.type);
+    }
+    setActiveParam(heading, arc, range) {
+        this.activeHeading = heading;
+        this.activeArc = arc;
+        this.activeRange = range;
+    }
+    get activeResults() {
+        return this.activeScannedObjects;
     }
     sensorsUpdate(activeScan, passiveScan) {
-        const scanResult = passiveScan();
-        if ((scanResult instanceof Error))
+        const passiveScanResult = passiveScan();
+        if ((passiveScanResult instanceof Error))
             return;
-        this.scannedObjects = scanResult.map((reading) => {
+        this.passiveScannedObjects = passiveScanResult.map((reading) => {
             let type = 'Other';
             let certainty = 0.5;
             let distance = undefined;
@@ -32,6 +44,11 @@ export default class YourSensorsController extends SensorsController {
                 mass = 5;
                 distance = reading.gravity / mass;
             }
+            else {
+                type = 'Planet';
+                mass = 37.5;
+                distance = reading.gravity / mass;
+            }
             return {
                 angle: reading.heading,
                 type,
@@ -40,7 +57,27 @@ export default class YourSensorsController extends SensorsController {
                 distance,
             };
         });
-        this.target = scanResult[0];
+        const activeScanResult = activeScan(this.activeHeading, this.activeArc, this.activeRange);
+        if ((activeScanResult instanceof Error))
+            return;
+        this.activeScannedObjects = activeScanResult.map((reading) => {
+            var _a, _b;
+            const distance = reading.distance;
+            let certainty = 0.5;
+            let type = 'Other';
+            if (distance < 100) {
+                certainty = 1;
+                type = (_b = (_a = reading.closeRange) === null || _a === void 0 ? void 0 : _a.type) !== null && _b !== void 0 ? _b : 'Other';
+            }
+            return {
+                angle: reading.angle,
+                distance,
+                velocity: reading.velocity,
+                radius: reading.radius,
+                type,
+                certainty,
+            };
+        });
     }
 }
 // accurate vector coordinates (angle, distance) of warpgates and planets - navigation
