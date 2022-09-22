@@ -4,6 +4,7 @@ export default class YourDefenceController extends DefenceController {
     defenceUpdate(aimTurret, getTubeCooldown, fireTorpedo) {
         if (!this.sensors.target)
             return;
+        console.log(this.sensors.target.gravity);
         aimTurret(this.sensors.target.heading);
         fireTorpedo(0);
     }
