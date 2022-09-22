@@ -4,6 +4,7 @@ import WarpGate from "../../src/spaceObjects/warpGate";
 import { ShipStatus } from "../types";
 import Torpedo from "../../src/ship/torpedo";
 import Asteroid from "../../src/spaceObjects/asteroid";
+import Sprite from "../../src/sprite";
 
 /**
  * Get the entire ship instance.
@@ -34,6 +35,25 @@ export function getShipStatus(key?: keyof ShipStatus) : ShipStatus | ShipStatus[
         thrusterPowerCounterClockwise: ship.thrusterController.thrusterPower.counterClockwise,
     };
     return key && key in status ? status[key] : status;
+}
+
+interface PolarPos {
+    angle: number
+    distance: number
+}
+export type { PolarPos };
+
+/**
+ * Get the position and angle to an object relative to the ship.
+ * @param obj The space object
+ * @returns The relative polar coordinates to the object.
+ */
+export function getRelativePos(obj: Sprite) : PolarPos {
+    const ship = getShip();
+    return {
+        angle: ship.pos.angleToPoint(obj.pos),
+        distance: ship.pos.distance(obj.pos)
+    };
 }
 
 /**
