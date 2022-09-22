@@ -41,7 +41,7 @@ export default class YourSensorsController extends SensorsController {
 
 
 	public get warpgatesOrPlanets() {
-		return this.passiveScannedObjects.filter((so) => ['Other', "WarpGate"].includes(so.type));
+		return [...this.passiveScannedObjects, ...this.activeScannedObjects].filter((so) => ['Other', "WarpGate"].includes(so.type));
 	}
 
 	public get asteroids() {
