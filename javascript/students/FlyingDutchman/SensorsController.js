@@ -8,9 +8,11 @@ export default class YourSensorsController extends SensorsController {
     }
     get warpgatesOrPlanets() {
         return this.scannedObjects.filter((so) => ['Other', "WarpGate"].includes(so.type));
+
     }
     get asteroids() {
         return this.scannedObjects.filter((so) => "Asteroid" == so.type);
+
     }
     sensorsUpdate(activeScan, passiveScan) {
         const scanResult = passiveScan();
@@ -34,6 +36,7 @@ export default class YourSensorsController extends SensorsController {
                 angle: reading.heading,
                 type,
                 certainty,
+
                 mass,
                 distance,
             };
