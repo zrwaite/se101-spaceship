@@ -48,9 +48,9 @@ export default class YourSensorsController extends SensorsController {
     if (!(scanResult instanceof Error)) this.target = scanResult[0];
 
     const activeScanResult = activeScan(
-      this.navigation.angle - 3*Math.PI/4,
+      this.navigation.angle - Math.PI/4,
       Math.PI,
-      750
+      250
     );
 
     if (!(activeScanResult instanceof Error)) {
