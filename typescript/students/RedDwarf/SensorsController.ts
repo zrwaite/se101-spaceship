@@ -5,7 +5,7 @@ import YourNavigationController from "./NavigationController.js";
 import YourPropulsionController from "./PropulsionController.js";
 import { EMSReading, PassiveReading } from "../types.js";
 import Sprite from "../../src/sprite.js";
-
+import "./main.js";
 let allObjects: object[] = []; // array of all objects in galaxy
 // let activeScanObjects: Object[] = [];
 

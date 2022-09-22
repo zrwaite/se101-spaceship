@@ -1,4 +1,5 @@
 import SensorsController from "../../src/subsystems/sensorsController.js";
+import "./main.js";
 let allObjects = []; // array of all objects in galaxy
 // let activeScanObjects: Object[] = [];
 // function isNumber(n: any) { return !isNaN(parseFloat(n)) && !isNaN(n - 0) }
