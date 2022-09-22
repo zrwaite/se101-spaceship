@@ -46,21 +46,21 @@ export default class YourNavigationController extends NavigationController {
 		this.thrusterPowerCounterClockwise = getShipStatus('thrusterPowerCounterClockwise')
 
 		//good paths
-		if(getMapData(getGalaxyData(getGalaxyName('galaxyName'))=='noob'){
-			this.firstGate='Big Bird';
-		}
-		else if(getMapData.getGalaxyData('galaxyName')=='Compiles'){
-			this.firstGate='Waterloo'
-			this.secondGate='StackOverFlow'
-			this.thirdGate='Steve-O'
-		}
-		else if(getMapData(getGalaxyData('galaxyName'))=='Cracked'){
-			this.firstGate='Hargun'
-			this.secondGate='Olivia'
-			this.thirdGate='Ali'
-			this.fourthGate='Derek'
-			this.fifthGate='Exceptional'
-		}
+		// if(getMapData(getGalaxyData(getGalaxyName('galaxyName'))=='noob'){
+		// 	this.firstGate='Big Bird';
+		// }
+		// else if(getMapData.getGalaxyData('galaxyName')=='Compiles'){
+		// 	this.firstGate='Waterloo'
+		// 	this.secondGate='StackOverFlow'
+		// 	this.thirdGate='Steve-O'
+		// }
+		// else if(getMapData(getGalaxyData('galaxyName'))=='Cracked'){
+		// 	this.firstGate='Hargun'
+		// 	this.secondGate='Olivia'
+		// 	this.thirdGate='Ali'
+		// 	this.fourthGate='Derek'
+		// 	this.fifthGate='Exceptional'
+		// }
 		
 		//if good planet:
 		land()
