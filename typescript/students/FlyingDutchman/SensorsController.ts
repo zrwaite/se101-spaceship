@@ -83,7 +83,7 @@ export default class YourSensorsController extends SensorsController {
         // console.log({distance, gravity: reading.gravity, mass})
 			} else{
 				type = 'Planet'
-				mass = 37.5
+				mass = 10000
 				distance = reading.gravity / mass
 			}
 			
