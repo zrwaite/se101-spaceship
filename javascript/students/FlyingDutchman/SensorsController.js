@@ -8,9 +8,11 @@ export default class YourSensorsController extends SensorsController {
     }
     get warpgatesOrPlanets() {
         return this.scannedObjects.filter((so) => ['Other', "WarpGate"].includes(so.type));
+
     }
     get asteroids() {
         return this.scannedObjects.filter((so) => "Asteroid" == so.type);
+
     }
     sensorsUpdate(activeScan, passiveScan) {
         const scanResult = passiveScan();
@@ -24,8 +26,6 @@ export default class YourSensorsController extends SensorsController {
             if (reading.gravity < 0) {
                 type = 'WarpGate';
                 certainty = 1;
-                mass = -100;
-                distance = reading.gravity / mass;
             }
             else if (reading.gravity < 1) {
                 type = 'Asteroid';

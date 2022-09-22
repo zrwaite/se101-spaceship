@@ -4,7 +4,8 @@ import { MapData, ShipStatus} from '../types.js'
 import NavigationController from '../../src/subsystems/navigationController.js'
 import YourDefenceController from './DefenseController.js'
 import YourPropulsionController from './PropulsionController.js'
-import YourSensorsController from './SensorsController.js'
+import YourSensorsController, { SpaceObject } from './SensorsController.js'
+import ColonyShip from '../../src/ship/colonyShip.js'
 
 export default class YourNavigationController extends NavigationController {
 	// To get other subsystem information, use the attributes below.
@@ -13,29 +14,54 @@ export default class YourNavigationController extends NavigationController {
 	sensors: YourSensorsController // @ts-ignore
 	propulsion: YourPropulsionController
 	angle: number = 0
-
 	
 
 	//Add additional attributes here
 	exploredSystems: string[] = []
 	mapData: MapData|null = null
 
-	//possibleObjects: SpaceObject[] = []
+	possibleObjects: SpaceObject[] = []
 
 	scanned: boolean = false
-	target: Vector2 | null = null
+	position: Vector2 = new Vector2(0,0)
+	target: Vector2 = new Vector2(0,0)
+	targetIsPlanet: boolean | null = null
+
+	landingDistance: number = 50; // change if needed
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		//Student code goes here
 		if (!this.scanned) {
 			this.mapData = getMapData()
 			this.scanned = true;
+			
 		}
 		
 
-
+		// Constantly update position
+		this.position = new Vector2(getShipStatus('positionX'), getShipStatus('positionY'))
 		this.angle = getShipStatus('angle')
-		land()
+
+		// If target has been set
+		if (this.targetIsPlanet !== null) {
+
+			// If the target is a planet
+			if (this.targetIsPlanet === true) {
+
+				// If we're close enough, attempt to land
+				if (this.target.magnitude() !== 0 && this.target.magnitude() <= this.landingDistance) {
+					land()
+				}
+			} else {
+
+				// If instead the target is a warp gate, attempt to warp
+				if (this.target.magnitude() !== 0 && this.target.magnitude() <= this.landingDistance) {
+					warp()
+				}
+			}
+		}
+		
+		
 	}
 
 	//getter for mapData
@@ -43,22 +69,58 @@ export default class YourNavigationController extends NavigationController {
 		return this.mapData
 	}
 
-	//getter for target, returns vector 2 or null
+	//getter for target, returns target or null
 	public get getTarget() {
 		return this.target
 	}
 
 
-	// updates target
+	// tries to update target
 	updateTarget() {
-		if (this.target == null) {
-			//update if null
+		let d = 100000 // distance to target, used in x and y calculation
+		// if target is not set - condition isnt necessary????
+		if (this.targetIsPlanet === null) {	
+			for (var val of this.possibleObjects) {
+
+				// If the target is a planet
+				if (val.type === 'Other') {
+					// add to list of explored objects?
+					if (!(val.distance === undefined)) {
+						d = val.distance
+					}
+
+					// Calculate target vector
+					this.target.set(d * Math.cos(val.angle), d * Math.sin(val.angle))
+					this.targetIsPlanet = true;
+					break;
+				} else {		// If target is not a planet
+
+					
+					this.targetIsPlanet = false;
+					if (!(val.distance === undefined)) {
+						d = val.distance
+					}
+
+					// Calculate target vector
+					this.target.set(d * Math.cos(val.angle), d * Math.sin(val.angle))
+				}
+			} 
 		}
 		else if (true){
-			//update if target was succesfully scanned
+			//update if target was succesfully scanned, based on habitibility etc. 
+			//TODO: get sensors to add uid to objects, which will let us set distance to target
+			//without risk of changing target
 		}
 		else {
 			// dont update otherwise
 		}
 	}
+
+
+	// Public get function to get x and y coordinates of ship
+	public get getPosition() {
+		return this.position
+	}
+
+	
 }
