@@ -22,8 +22,7 @@ export default class YourNavigationController extends NavigationController {
 	positionX: number = 0;
 	positionY: number = 0;
 
-	targetPositionX: number = 0; //PROPULSION: GET US TO THESE COORDINATES
-	targetPositionY: number = 0;
+	objectAngle: number = 0;
 
 	linearVelocityX: number = 0;
 	linearVelocityY: number = 0;
@@ -31,8 +30,35 @@ export default class YourNavigationController extends NavigationController {
 
 	//did we warp to another solar system?
 	warp: boolean = true;
+	//galaxy MAP
+	galaxyMap = new Map<String, GalaxyData>(); 
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
+
+		//get data from sensors
+		let passiveScan = this.sensors.passiveScans[0];
+		let activeScan = this.sensors.activeScans[0];
+
+		//go to big radius object
+		//if ()
+
+		const FindBigRadius = () => {
+
+			if (!(activeScan instanceof Error )) {
+				for (let i = 0; i < activeScan.length; i++) {
+
+					let radius = activeScan[i].radius;
+					let velocity = activeScan[i].velocity
+
+					//if object is stationary and big enough
+					if (velocity == new Vector2(0, 0) && radius >= 15) {
+						this.objectAngle = activeScan[i].angle;
+						return;
+					}
+				}
+			}
+
+		}
 
 		//update position function
 		const UpdatePosition = () => {
@@ -43,70 +69,128 @@ export default class YourNavigationController extends NavigationController {
 			this.linearVelocityY = getShipStatus('linearVelocityY');
 		}
 
-		UpdatePosition();
+		//go into wormhole
+		const Warp = () => {
 
-		/* uncomment this later
+		}
 
-		//galaxy MAP
-		let galaxyMap = new Map<string, SolarSystem[]>();
+		//land on planet when below certain speed
+		const Land = () => {
+
+		}
+
 
 		//did we warp to another solar system? (called once we enter the map)
 		if (this.warp) {
 			
+
+
+		}
+
+
+		//call functions
+		UpdatePosition();
+		FindBigRadius();
+
+	}
+
+}
+
+		//call this when entering a new map
+		/*const UpdateMapData = () => {
+
 			UpdatePosition();
 
+			//get mapData from API
 			let mapData = getMapData();
+			let currentSolarSystem = mapData.galaxy.solarSystems[mapData.galaxy.solarSystems.indexOf(mapData.galaxy.name)]
 			
 			//does this galaxy exist in the galaxy map?
-			if (galaxyMap.has(mapData.GalaxyData.name)) {
+			if (this.galaxyMap.has(mapData.galaxy.name)) {
 
 			}
 
 			//else this galaxy DOES NOT exist in the map
 			else {
-				galaxyMap.set(mapData.GalaxyData.name, mapData.GalaxyData.solarSystems);
+
+				//planets struct
+				let planets: Planet = {
+					name: mapData.galaxy.solarSystems.name;
+					x: number
+					y: number
+					planetComposition: {
+						water: number
+						air: number
+						land: number
+						metal: number
+						safety: number
+						temperature: number
+					}
+				}
+
+				//warpGates struct
+				let warpGates: WarpGateData = {
+
+				}
+
+				//solar system struct
+				let solarSystem: SolarSystemData = {
+					name: mapData.solarSystemName
+					planets: 
+					warpGates: 
+				}
+
+				//constructing the galaxy struct
+				let galaxyStruct: GalaxyData = {
+					name: mapData.galaxy.name;
+					galaxy: {
+
+					}
+				};
+
+				this.galaxyMap.set(mapData.galaxy.name, mapData.galaxy);
 			}
 			
 			this.warp = false;
 
-		}
-		*/
-		
-		//galaxy
-		interface GalaxyData {
-			name: string
-			solarSystems: SolarSystemData[]
-		}
+		} */
 
-		//solarsystem
-		interface SolarSystemData {
-			name: string
-			planets: Planet[]
-			warpGates: WarpGate[]
-		}
+/* export interface MapData {
+	solarSystemName: string;
+	galaxy: GalaxyData;
+} */
 
-		//planet
-		interface Planet {
-			name: string
-			x: number
-			y: number
-			planetComposition: {
-				water: number
-				air: number
-				land: number
-				metal: number
-				safety: number
-				temperature: number
-			}
-		}
+//galaxy
+export interface GalaxyData {
+    name: string;
+    solarSystems: SolarSystemData[];
+}
 
-		//warpgate
-		interface WarpGate {
-			name: string
-			x: number
-			y: number
-		}
+//solarsystem
+export interface SolarSystemData {
+	name: string
+	planets: Planet[]
+	warpGates: WarpGate[]
+}
 
+//planet
+export interface Planet {
+	name: string
+	x: number
+	y: number
+	planetComposition: {
+		water: number
+		air: number
+		land: number
+		metal: number
+		safety: number
+		temperature: number
 	}
+}
 
+//warpgate
+export interface WarpGateData {
+	name: string
+	x: number
+	y: number
 }
