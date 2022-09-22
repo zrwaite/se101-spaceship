@@ -48,9 +48,14 @@ export default class YourNavigationController extends NavigationController {
     /* 
     
     */
-   if(this.sensors.targetDetails?.distance !== undefined && this.sensors.targetDetails?.distance <= 60) { // May be able to be deleted later.
-      if (this.sensors.targetDetails?.closeRange?.type === 'Planet'){land();}
-      else if (this.sensors.targetDetails?.closeRange?.type === 'WarpGate'){warp();}
-   }
+
+    const distanceToTarget = this.sensors.targetDetails?.distance;
+    if (distanceToTarget && distanceToTarget <= 60) {
+      if (this.sensors.targetDetails?.closeRange?.type === "Planet") {
+        land();
+      } else if (this.sensors.targetDetails?.closeRange?.type === "WarpGate") {
+        warp();
+      }
+    }
   }
 }
