@@ -75,11 +75,11 @@ export default class YourSensorsController extends SensorsController {
 				type = 'WarpGate'
 				certainty = 1
 				mass = -100
-				distance = reading.gravity / mass
+				distance = Math.pow(mass/reading.gravity, 0.5)
 			} else {
 				type = 'Planet'
-				mass = 10000
-				distance = reading.gravity / mass
+				mass = 10000 // approximation
+				distance = Math.pow(mass/reading.gravity, 0.5)
 			}
 
 			console.log({ distance, gravity: reading.gravity, mass })

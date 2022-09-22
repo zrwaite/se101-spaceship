@@ -37,19 +37,14 @@ export default class YourSensorsController extends SensorsController {
                 type = 'WarpGate';
                 certainty = 1;
                 mass = -100;
-                distance = reading.gravity / mass;
-            }
-            else if (reading.gravity < 0.01) {
-                type = 'Asteroid';
-                mass = 5;
-                distance = reading.gravity / mass;
-                // console.log({distance, gravity: reading.gravity, mass})
+                distance = Math.pow(mass / reading.gravity, 0.5);
             }
             else {
                 type = 'Planet';
-                mass = 10000;
-                distance = reading.gravity / mass;
+                mass = 10000; // approximation
+                distance = Math.pow(mass / reading.gravity, 0.5);
             }
+            console.log({ distance, gravity: reading.gravity, mass });
             return {
                 angle: reading.heading,
                 type,
@@ -83,7 +78,7 @@ export default class YourSensorsController extends SensorsController {
 }
 // accurate vector coordinates (angle, distance) of warpgates and planets - navigation
 // angle (from velocity), heading, velocity, distance of asteroids - defense
-// passive scan - heading, mass/distance - warpgates accurate position, list of objects of certain planets + list of objects of uncertain planets 
+// passive scan - heading, mass/distance - warpgates accurate position, list of objects of certain planets + list of objects of uncertain planets
 // meteor - mass = 1, radius = 5
 // asteroid - mass = 5, radius = 15
 // warpgate - mass = -100, radius = 15
