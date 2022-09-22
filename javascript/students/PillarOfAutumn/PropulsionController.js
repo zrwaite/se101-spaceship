@@ -2,9 +2,6 @@ import { angleDiff, withinPiRange } from '../helpers.js';
 import PropulsionController from '../../src/subsystems/propulsionController.js';
 export default class YourPropulsionController extends PropulsionController {
     //Add additional attributes here
-    if(slowDown) {
-        slowDown;
-    }
     propulsionUpdate(setThruster) {
         if (!this.sensors.target)
             return;
@@ -32,19 +29,19 @@ export default class YourPropulsionController extends PropulsionController {
         }
         else {
             // console.log(headingDiff)
-            if (headingDiff < 0 && Math.abs(headingDiff) >= 0.5) {
+            if (headingDiff < -0.5 && Math.abs(headingDiff) >= 0.5) {
                 setThruster('clockwise', force);
                 setThruster('counterClockwise', 0);
             }
-            else if (headingDiff < 0) {
+            else if (headingDiff < -0.1) {
                 setThruster('clockwise', force / 3);
                 setThruster('counterClockwise', 0);
             }
-            else if (headingDiff > 0 && Math.abs(headingDiff) >= 0.5) {
+            else if (headingDiff > 0.5 && Math.abs(headingDiff) >= 0.5) {
                 setThruster('counterClockwise', force);
                 setThruster('clockwise', 0);
             }
-            else if (headingDiff > 0) {
+            else if (headingDiff > 0.5) {
                 setThruster('counterClockwise', force / 3);
                 setThruster('clockwise', 0);
             }
@@ -63,7 +60,14 @@ export default class YourPropulsionController extends PropulsionController {
                 }
             }
         }
-        setThruster('main', Math.abs(headingDiff) < 0.5 ? 50 : 0);
-        setThruster('bow', Math.abs(headingDiff) > 3 ? 50 : 0);
+        if (this.sensors.slowDown) {
+            setThruster('bow', 100);
+            setThruster('main', 0);
+            this.sensors.slowDown = false;
+        }
+        else {
+            setThruster('main', 30);
+            setThruster('bow', 0);
+        }
     }
 }
