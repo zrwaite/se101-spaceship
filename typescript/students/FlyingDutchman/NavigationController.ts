@@ -25,6 +25,9 @@ export default class YourNavigationController extends NavigationController {
 	scanned: boolean = false
 	position: Vector2 = new Vector2(0,0)
 	target: Vector2 = new Vector2(0,0)
+	targetIsPlanet: boolean | null = null
+
+	landingDistance: number = 50; // change if needed
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		//Student code goes here
@@ -38,7 +41,20 @@ export default class YourNavigationController extends NavigationController {
 		// Constantly update position
 		this.position = new Vector2(getShipStatus('positionX'), getShipStatus('positionY'))
 		this.angle = getShipStatus('angle')
-		land()
+
+		if (this.targetIsPlanet !== null) {
+			if (this.targetIsPlanet === true) {
+				if (this.target.magnitude() !== 0 && this.target.magnitude() <= this.landingDistance) {
+					land()
+				}
+			} else {
+				if (this.target.magnitude() !== 0 && this.target.magnitude() <= this.landingDistance) {
+					warp()
+				}
+			}
+		}
+		
+		
 	}
 
 	//getter for mapData
@@ -55,7 +71,8 @@ export default class YourNavigationController extends NavigationController {
 	// tries to update target
 	updateTarget() {
 		let d = 100000 // distance to target, used in x and y calculation
-		if (this.target.magnitude() === 0) {
+		// if target is not set - condition isnt necessary????
+		if (this.targetIsPlanet === null) {	
 			for (var val of this.possibleObjects) {
 				if (val.type === 'Other') {
 					// add to list of explored objects?
@@ -63,11 +80,21 @@ export default class YourNavigationController extends NavigationController {
 						d = val.distance
 					}
 					this.target.set(d * Math.cos(val.angle), d * Math.sin(val.angle))
+					this.targetIsPlanet = true;
+					break;
+				} else {
+					this.targetIsPlanet = false;
+					if (!(val.distance === undefined)) {
+						d = val.distance
+					}
+					this.target.set(d * Math.cos(val.angle), d * Math.sin(val.angle))
 				}
-			}
+			} 
 		}
 		else if (true){
-			//update if target was succesfully scanned, based on habitibility etc.
+			//update if target was succesfully scanned, based on habitibility etc. 
+			//TODO: get sensors to add uid to objects, which will let us set distance to target
+			//without risk of changing target
 		}
 		else {
 			// dont update otherwise
@@ -79,4 +106,6 @@ export default class YourNavigationController extends NavigationController {
 	public get getPosition() {
 		return this.position
 	}
+
+	
 }
