@@ -39,15 +39,7 @@ export default class YourPropulsionController extends PropulsionController {
 
         let force = 0;
 
-        if (angularVelocity > 0.03) {
-            setThruster('counterClockwise', 100)
-            setThruster('clockwise', 0)
-        }
-        else if (angularVelocity < -0.03) {
-            setThruster('clockwise', 100)
-            setThruster('counterClockwise', 0)
-        }
-        else if (direction == "away" || direction == "towards" && Math.abs(heading) > 15 * angularVelocity) {
+        if (direction == "away" || direction == "towards" && Math.abs(heading) > 15 * angularVelocity) {
             // implement algorithm to go back
             force = Math.min(Math.abs(500 * heading * Math.sqrt(Math.abs(heading))), 100);
 
@@ -84,8 +76,10 @@ export default class YourPropulsionController extends PropulsionController {
 
                 const speed = Math.sqrt(this.navigation.linearVelocityX * this.navigation.linearVelocityX + this.navigation.linearVelocityY + this.navigation.linearVelocityY)
 
-                if (object.distance < 500 && heading < 0.2 && speed > object.distance / 200) {
-                    setThruster('bow', Math.abs(heading) < 0.2 ? Math.min(object.distance, 100) : 0);
+
+                if (object.distance < 400 && object.velocity.magnitude() <= 0.01) {
+                    const acceleration = speed * speed / 2 / object.distance;
+                    setThruster('bow', Math.abs(heading) < 0.2 ? Math.min(acceleration * 10000, 100) : 0);
                     setThruster("main", 0);
                 }
                 

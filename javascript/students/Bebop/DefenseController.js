@@ -6,6 +6,7 @@ export default class YourDefenceController extends DefenceController {
         this.torpedoTargets = [];
     }
     defenceUpdate(aimTurret, getTubeCooldown, fireTorpedo) {
+        aimTurret(this.torpedoTargets[0]);
         if (!this.sensors.target)
             return;
         if (this.sensors.activeScanData != null && this.sensors.activeScanData[0] != null) {
