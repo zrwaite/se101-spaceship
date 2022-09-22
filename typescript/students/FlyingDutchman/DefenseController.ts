@@ -17,6 +17,8 @@ export default class YourDefenceController extends DefenceController {
 
 	//will be incremented as to use up all of the tubes then go back to 0
 	curTube: number = 0;
+
+	firing: boolean = false;
 	
 	
 	defenceUpdate(aimTurret: (angle: number) => void, getTubeCooldown: (i: number) => number | Error, fireTorpedo: (i: number) => Error | null) {
@@ -40,9 +42,18 @@ export default class YourDefenceController extends DefenceController {
 		// console.log(getTubeCooldown(0), getTubeCooldown(1), getTubeCooldown(2), getTubeCooldown(3));
 
 		// for loop that constantly checks the distance of all of the asteroids
+		
+		if(this.firing) {
 
+			fireTorpedo(this.curTube);
+			this.curTube++;
 
-		if(this.hitAsteroid < this.sensors.asteroids.length) {
+			if(this.curTube == 4) {
+				this.firing = false;
+				this.curTube = 0;
+			}
+
+		} else if(this.hitAsteroid < this.sensors.asteroids.length) {
 			
 			asteroid = this.sensors.asteroids[this.hitAsteroid];
 			
@@ -55,11 +66,15 @@ export default class YourDefenceController extends DefenceController {
 					this.curTube = (this.curTube+1)%4;
 					//will have to fix this -> premature update of the hitAsteroid variable
 					this.hitAsteroid++
+
+					this.firing = true;
 				}
 
 			}
 
 		}
+
+		
 
 		
 
