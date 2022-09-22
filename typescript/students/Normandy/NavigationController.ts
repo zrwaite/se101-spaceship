@@ -43,6 +43,14 @@ export default class YourNavigationController extends NavigationController {
 		}
 		
 
+		
+       if(landDest) {
+            var shipPlanetDistance = (landDest.subtract(this.shipPosition)).magnitude();
+			//Math.sqrt((this.shipPosition.x-landDest.x)^2+(this.shipPosition.y-landDest.y)^2);
+            if (shipPlanetDistance<=5){
+                land();
+            }
+        }
 
 		// if (getShipStatus('positionX')) {
 			
