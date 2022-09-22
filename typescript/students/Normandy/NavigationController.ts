@@ -71,26 +71,29 @@ export default class YourNavigationController extends NavigationController {
 
 		//go into wormhole
 		const Warp = () => {
-
+			warp();
 		}
 
 		//land on planet when below certain speed
 		const Land = () => {
-
+			land();
 		}
 
 
 		//did we warp to another solar system? (called once we enter the map)
 		if (this.warp) {
 			
-
-
 		}
 
 
 		//call functions
 		UpdatePosition();
 		FindBigRadius();
+
+		if (this.linearVelocityX < 100 && this.linearVelocityY < 100) {
+			Warp();
+			Land();
+		}
 
 	}
 
