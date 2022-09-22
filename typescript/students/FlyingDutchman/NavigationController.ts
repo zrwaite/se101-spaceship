@@ -81,7 +81,7 @@ export default class YourNavigationController extends NavigationController {
 	updateTarget() {
 		let d = 100000 // distance to target, used in x and y calculation
 		// if target is not set - condition isnt necessary????
-		if (this.targetIsPlanet === null) {	
+		if ((this.targetIsPlanet === null)) {	
 			for (var val of this.possibleObjects) {
 
 				// If the target is a planet
@@ -111,6 +111,9 @@ export default class YourNavigationController extends NavigationController {
 		
 		else {
 			// dont update otherwise
+			if (this.targetIsPlanet) {
+				// something
+			}
 		}
 	}
 
