@@ -19,7 +19,7 @@ export default class YourSensorsController extends SensorsController {
 		
 		this.emsReading = activeScan(0, Math.PI, 500);
 		console.log(this.emsReading);
-		
+		// we're trying our best
 
 		/**
 		 * Scanning Algorithm:
