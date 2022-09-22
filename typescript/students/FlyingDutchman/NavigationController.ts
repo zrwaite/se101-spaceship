@@ -28,6 +28,7 @@ export default class YourNavigationController extends NavigationController {
 	target: Vector2 = new Vector2(0,0)
 	targetAngle: number = 0
 	targetIsPlanet: boolean | null = null
+	distanceIsSet: boolean = false
 
 	landingDistance: number = 50; // change if needed
 
@@ -36,6 +37,8 @@ export default class YourNavigationController extends NavigationController {
 		if (!this.scanned) {
 			this.mapData = getMapData()
 			this.scanned = true;
+			this.distanceIsSet = false;
+			this.targetIsPlanet = null;
 			
 		}
 		this.possibleObjects = this.sensors.warpgatesOrPlanets
@@ -87,8 +90,12 @@ export default class YourNavigationController extends NavigationController {
 			console.log(val.angle)
 			if (val.type === 'Planet') {
 
+				if (this.distanceIsSet && val.distance === undefined) {
+					continue;
+				}
 				if (!(val.distance === undefined)) {
 					d = val.distance
+					this.distanceIsSet = true;
 				}
 
 				// save target angle
