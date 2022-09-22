@@ -50,12 +50,12 @@ export default class YourNavigationController extends NavigationController {
 		within a certain distance of the spaceship. 
 		 */
 		this.landWarpDelayCounter++; 
-		if (this.startLanding && this.landWarpDelayCounter % 30 === 0) {
+		if (this.startLanding && this.landWarpDelayCounter % 15 === 0) {
             land();
             console.log("land");
         }
 
-        if (this.startWarping && this.landWarpDelayCounter % 30 === 0) {
+        if (this.startWarping && this.landWarpDelayCounter % 15 === 0) {
             warp();
             console.log("warp");
         }
@@ -69,6 +69,9 @@ export default class YourNavigationController extends NavigationController {
                     } else if (obj.closeRange.type === 'WarpGate') {
                         this.startWarping = true; 
                     }
+				} else {
+					this.startLanding = false; 
+					this.startWarping = false;
 				}
 			}
 		}
