@@ -7,10 +7,12 @@ export default class YourNavigationController extends NavigationController {
         //Add additional attributes here
         this.exploredSystems = [];
         this.mapData = null;
+
         this.possibleObjects = [];
         this.scanned = false;
         this.position = new Vector2(0, 0);
         this.target = new Vector2(0, 0);
+
     }
     navigationUpdate(getShipStatus, warp, land, getMapData) {
         //Student code goes here
@@ -18,8 +20,10 @@ export default class YourNavigationController extends NavigationController {
             this.mapData = getMapData();
             this.scanned = true;
         }
+
         // Constantly update position
         this.position = new Vector2(getShipStatus('positionX'), getShipStatus('positionY'));
+
         this.angle = getShipStatus('angle');
         land();
     }
@@ -27,6 +31,7 @@ export default class YourNavigationController extends NavigationController {
     get getMapData() {
         return this.mapData;
     }
+
     //getter for target, returns target or null
     get getTarget() {
         return this.target;
@@ -52,8 +57,10 @@ export default class YourNavigationController extends NavigationController {
             // dont update otherwise
         }
     }
+
     // Public get function to get x and y coordinates of ship
     get getPosition() {
         return this.position;
     }
+
 }
