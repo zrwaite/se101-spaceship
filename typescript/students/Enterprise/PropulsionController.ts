@@ -24,33 +24,20 @@ export default class YourPropulsionController extends PropulsionController {
 		console.log("Heading Diff", headingDiff);
 		console.log("Angular Velocity", angularVelocity);
 		console.log("Force of heading diff", Math.abs(1500 * headingDiff))
-		const force = Math.min(Math.abs(100 * headingDiff), 100);
+		const force = Math.min(Math.abs(500 * headingDiff), 100);
 
 		// Reaching headingDiff
 
 		// set angle to the planet
 
 		if (headingDiff < 0) {
-			if(angularVelocity>12){
-			setThruster('clockwise', force);
-			}else{
-				setThruster('counterClockwise', 120)
-			}
+			setThruster('clockwise', force - angularVelocity*15000);
+			setThruster('counterClockwise', angularVelocity);
 		} else if (headingDiff > 0) {
-			if(angularVelocity>12){
-			setThruster('counterClockwise', force);
-				}else{
-					setThruster('clockwise', 120)
-				}
+			setThruster('counterClockwise', angularVelocity*15000);
+			setThruster('clockwise', angularVelocity);
 		}
 
-		// if (headingDiff < 0) {
-		// 	setThruster('clockwise', force)
-		// 	setThruster('counterClockwise', 0)
-		// } else {
-		// 	setThruster('counterClockwise', force)
-		// 	setThruster('clockwise', 0)
-		// }
-		// setThruster('main', Math.abs(headingDiff) < 0.7 ? 30 : 0)
+		setThruster('main', Math.abs(headingDiff) < 0.7 ? 30 : 0)
 	}
 }
