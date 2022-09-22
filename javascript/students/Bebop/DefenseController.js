@@ -4,6 +4,8 @@ export default class YourDefenceController extends DefenceController {
     defenceUpdate(aimTurret, getTubeCooldown, fireTorpedo) {
         if (!this.sensors.target)
             return;
+        let array = [];
+        aimTurret(array[0]);
         if (this.sensors.activeScanData != null) {
             for (let i = 0; i < this.sensors.activeScanData.length; i++) {
                 if (this.sensors.activeScanData[i].closeRange) {

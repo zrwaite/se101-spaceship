@@ -4,6 +4,7 @@ export default class YourSensorsController extends SensorsController {
         super(...arguments);
         //Add additional attributes here
         this.target = null;
+        this.passiveScanData = null;
         this.activeScanData = null;
     }
     sensorsUpdate(activeScan, passiveScan) {
