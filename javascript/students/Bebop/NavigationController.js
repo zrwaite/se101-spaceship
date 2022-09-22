@@ -22,8 +22,8 @@ export default class YourNavigationController extends NavigationController {
         this.angle = getShipStatus('angle');
         // this.positionX = getShipStatus('positionX');
         // this.positionY = getShipStatus('positionY');
-        // this.linearVelocityX = getShipStatus('linearVelocityX');
-        // this.linearVelocityY = getShipStatus('linearVelocityY');
+        this.linearVelocityX = getShipStatus('linearVelocityX');
+        this.linearVelocityY = getShipStatus('linearVelocityY');
         // this.thrusterPowerMain = getShipStatus('thrusterPowerMain');
         // this.thrusterPowerBow = getShipStatus('thrusterPowerBow');
         // this.thrusterPowerClockwise = getShipStatus('thrusterPowerClockwise');
@@ -33,11 +33,11 @@ export default class YourNavigationController extends NavigationController {
          if it is a warp, warp
          otherwise, do nothing (for now)
          */
-        if (this.sensors && this.sensors.closeRange && this.sensors.closeRange[0] && this.sensors.closeRange[0].closeRange) {
-            if (this.sensors.closeRange[0].closeRange.type === "Planet") {
+        if (this.sensors && this.sensors.activeScanData && this.sensors.activeScanData[0] && this.sensors.activeScanData[0].closeRange) {
+            if (this.sensors.activeScanData[0].closeRange.type === "Planet") {
                 land();
             }
-            else if (this.sensors.closeRange[0].closeRange.type === "WarpGate") {
+            else if (this.sensors.activeScanData[0].closeRange.type === "WarpGate") {
                 warp();
             }
         }
