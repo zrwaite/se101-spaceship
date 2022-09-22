@@ -19,7 +19,13 @@ export default class YourNavigationController extends NavigationController {
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		this.angle = getShipStatus('angle')
-		land()
-		//hello 😘
+<<<<<<< HEAD
+=======
+		//hello
+		while (true){
+			land()
+			warp()
+		}
+>>>>>>> aea43ba (land and warp mechanism)
 	}
 }
