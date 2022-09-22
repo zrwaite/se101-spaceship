@@ -4,11 +4,6 @@ import YourDefenceController from "./DefenseController.js";
 import YourNavigationController from "./NavigationController.js";
 import YourPropulsionController from "./PropulsionController.js";
 import { EMSReading, PassiveReading } from "../types.js";
-import { CloseRangeData } from "../../src/ship/EMSReading.js";
-import { buildShip } from "../../src/ship/buildShip.js";
-import ColonyShip from "../../src/ship/colonyShip.js";
-import ActiveSensors from "../../src/ship/activeSensors.js";
-import Planet from "../../src/spaceObjects/planet.js";
 export default class YourSensorsController extends SensorsController {
   // To get other subsystem information, use the attributes below.
   // @ts-ignore
@@ -18,8 +13,12 @@ export default class YourSensorsController extends SensorsController {
 
   target: PassiveReading | undefined;
   targetDetails: EMSReading | undefined;
-  activeScan: EMSReading[] | undefined;
-  onTarget: Boolean | undefined;
+
+  activeScan: EMSReading[] = [];
+
+  //Add additional attributes here
+
+  counter = 0;
 
   sensorsUpdate(
     activeScan: (
@@ -29,38 +28,28 @@ export default class YourSensorsController extends SensorsController {
     ) => EMSReading[] | Error,
     passiveScan: () => PassiveReading[] | Error
   ) {
-    if (this.navigation.angle === undefined) return;
-    if (this.navigation.linearVelocityY === undefined) return;
-    if (this.navigation.linearVelocityX === undefined) return;
-
-    //check if ships velocity is moving towards the target
-    var VAngle = Math.atan(
-      this.navigation.linearVelocityY / this.navigation.linearVelocityX
-    );
-    if (
-      this.target != undefined &&
-      (VAngle < this.target.heading - 0.5 || VAngle > this.target.heading + 0.5)
-    ) {
-      this.onTarget = true;
-    }
-
+    //Student code goes here
     const scanResult = passiveScan();
     if (!(scanResult instanceof Error)) this.target = scanResult[0];
 
-    const activeScanResult = activeScan(
-      this.navigation.angle - Math.PI/2,
-      Math.PI,
-      500
-    );
-
-    if (!(activeScanResult instanceof Error)) {
-      this.targetDetails = activeScanResult.find(
-        (r) => r.angle === this.target?.heading
+    if (this.counter % 10 === 0) {
+      const activeScanResult = activeScan(
+        this.navigation.angle - Math.PI / 4,
+        Math.PI / 2,
+        500
       );
 
-      this.activeScan = activeScanResult.sort(
-        (r1, r2) => r1.distance - r2.distance
-      );
+      if (!(activeScanResult instanceof Error)) {
+        this.targetDetails = activeScanResult.find(
+          (r) => Math.abs(r.angle - (this.target?.heading ?? 0)) <= 0.01
+        );
+
+        this.activeScan = activeScanResult.sort(
+          (r1, r2) => r1.distance - r2.distance
+        );
+      }
     }
+
+    this.counter++;
   }
 }

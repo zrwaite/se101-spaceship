@@ -1,25 +1,23 @@
 import SensorsController from "../../src/subsystems/sensorsController.js";
 export default class YourSensorsController extends SensorsController {
+    constructor() {
+        super(...arguments);
+        this.activeScan = [];
+        //Add additional attributes here
+        this.counter = 0;
+    }
     sensorsUpdate(activeScan, passiveScan) {
-        if (this.navigation.angle === undefined)
-            return;
-        if (this.navigation.linearVelocityY === undefined)
-            return;
-        if (this.navigation.linearVelocityX === undefined)
-            return;
-        //check if ships velocity is moving towards the target
-        var VAngle = Math.atan(this.navigation.linearVelocityY / this.navigation.linearVelocityX);
-        if (this.target != undefined &&
-            (VAngle < this.target.heading - 0.5 || VAngle > this.target.heading + 0.5)) {
-            this.onTarget = true;
-        }
+        //Student code goes here
         const scanResult = passiveScan();
         if (!(scanResult instanceof Error))
             this.target = scanResult[0];
-        const activeScanResult = activeScan(this.navigation.angle - Math.PI / 2, Math.PI, 500);
-        if (!(activeScanResult instanceof Error)) {
-            this.targetDetails = activeScanResult.find((r) => { var _a; return r.angle === ((_a = this.target) === null || _a === void 0 ? void 0 : _a.heading); });
-            this.activeScan = activeScanResult.sort((r1, r2) => r1.distance - r2.distance);
+        if (this.counter % 10 === 0) {
+            const activeScanResult = activeScan(this.navigation.angle - Math.PI / 4, Math.PI / 2, 500);
+            if (!(activeScanResult instanceof Error)) {
+                this.targetDetails = activeScanResult.find((r) => { var _a, _b; return Math.abs(r.angle - ((_b = (_a = this.target) === null || _a === void 0 ? void 0 : _a.heading) !== null && _b !== void 0 ? _b : 0)) <= 0.01; });
+                this.activeScan = activeScanResult.sort((r1, r2) => r1.distance - r2.distance);
+            }
         }
+        this.counter++;
     }
 }
