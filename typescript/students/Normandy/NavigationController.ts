@@ -18,6 +18,7 @@ export default class YourNavigationController extends NavigationController {
 	shipVelocity = new Vector2(0, 0);
 	shipPosition = new Vector2(0, 0);
 	targetAngle = 0
+	shipPlanetDistance = 0
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		//Student code goes here
@@ -45,9 +46,9 @@ export default class YourNavigationController extends NavigationController {
 
 		
        if(landDest) {
-            var shipPlanetDistance = (landDest.subtract(this.shipPosition)).magnitude();
+            this.shipPlanetDistance = (landDest.subtract(this.shipPosition)).magnitude();
 			//Math.sqrt((this.shipPosition.x-landDest.x)^2+(this.shipPosition.y-landDest.y)^2);
-            if (shipPlanetDistance<=5){
+            if (this.shipPlanetDistance<=5){
                 land();
             }
         }
