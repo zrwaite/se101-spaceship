@@ -15,7 +15,8 @@ export default class YourPropulsionController extends PropulsionController {
 
 	propulsionUpdate(setThruster: (thruster: ThrusterName, power: number) => Error | null) {
 		if (!this.sensors.target) return
-		const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading)
+		// const headingDiff = angleDiff(this.navigation.angle, this.sensors.target.heading)
+		const headingDiff = this.navigation.targetAngle
 		//const force = Math.abs(200*headingDiff)
 		const force = Math.min(Math.abs(500 * headingDiff), 10)
 		if (headingDiff < 0) {

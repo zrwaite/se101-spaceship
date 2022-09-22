@@ -11,7 +11,11 @@ export default class YourSensorsController extends SensorsController {
         this.activeRange = 150;
     }
     get warpgatesOrPlanets() {
+<<<<<<< Updated upstream
         return [...this.passiveScannedObjects, ...this.activeScannedObjects].filter((so) => ['Other', "WarpGate"].includes(so.type));
+=======
+        return this.passiveScannedObjects.filter((so) => ['Other', "WarpGate"].includes(so.type));
+>>>>>>> Stashed changes
     }
     get asteroids() {
         return this.activeScannedObjects.filter((so) => "Asteroid" == so.type);
