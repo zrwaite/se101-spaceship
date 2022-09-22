@@ -19,7 +19,7 @@ export default class YourSensorsController extends SensorsController {
     activeScan: (
       heading: number,
       arc: number,
-      range: number
+      range: number,
     ) => EMSReading[] | Error,
     passiveScan: () => PassiveReading[] | Error
   ) {
