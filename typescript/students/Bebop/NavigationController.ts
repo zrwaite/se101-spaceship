@@ -31,6 +31,7 @@ export default class YourNavigationController extends NavigationController {
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
 		// Update attributes (currently don't know which ones are needed by other subsystems)
 		
+		
 		// this.radius = getShipStatus('radius');
 		this.angularVelocity = getShipStatus('angularVelocity');
 		this.angle = getShipStatus('angle');
