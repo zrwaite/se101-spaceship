@@ -18,7 +18,7 @@ export default class YourDefenceController extends DefenceController {
 	defenceUpdate(aimTurret: (angle: number) => void, getTubeCooldown: (i: number) => number | Error, fireTorpedo: (i: number) => Error | null) {
 		const closeRangeObject = this.sensors.closeRangeObject;
 		//Student code goes here
-		if(!this.sensors.target) 
+		if(!this.sensors.targets) 
 			return;
 
 		//auto shoot when cooldown is done

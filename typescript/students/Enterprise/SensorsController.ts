@@ -18,7 +18,7 @@ export default class YourSensorsController extends SensorsController {
 
 
 	//Add additional attributes here
-	target: PassiveReading | null = null;
+	targets: Array<{heading: number, guess: string}> = [];
   closeRangeObject: EMSReading[] | null = null;
 	ready: boolean = false;
 	destinations: Destination[] | null = null;
@@ -29,7 +29,7 @@ export default class YourSensorsController extends SensorsController {
 	
 		const scanResult = passiveScan();
 
-		const activeResult = this.target ? activeScan(this.target.heading - 3.14/2, 3.14, 200) : new Error("not ready");
+		const activeResult = activeScan(this.navigation.angle - 3.14/2, 3.14, 200);
 		if(!(scanResult instanceof Error)) {		
 			// if(!this.ready) {
 			// 	for (const item of scanResult) {
@@ -44,10 +44,14 @@ export default class YourSensorsController extends SensorsController {
 			// 	}
 			// }
 			// else	
-				console.log(scanResult)
-				this.target = scanResult[0];
 		}
-    if(!(scanResult instanceof Error)) this.target = scanResult[0];
+    if(!(scanResult instanceof Error)) {
+      scanResult.forEach((target, idx) => {
+        const heading = target.heading;
+        const guess = target.gravity < 0 ? "WarpGate" : "Planet";
+        this.targets[idx] = {heading: heading, guess: guess};
+      })
+    }
 		if(!(activeResult instanceof Error)) {
 		  this.closeRangeObject = activeResult;
 		}
