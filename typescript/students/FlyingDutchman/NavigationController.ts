@@ -37,7 +37,7 @@ export default class YourNavigationController extends NavigationController {
 			this.scanned = true;
 			
 		}
-		
+		this.updateTarget()
 
 		// Constantly update position
 		this.position = new Vector2(getShipStatus('positionX'), getShipStatus('positionY'))
@@ -108,11 +108,7 @@ export default class YourNavigationController extends NavigationController {
 				}
 			} 
 		}
-		else if (true){
-			//update if target was succesfully scanned, based on habitibility etc. 
-			//TODO: get sensors to add uid to objects, which will let us set distance to target
-			//without risk of changing target
-		}
+		
 		else {
 			// dont update otherwise
 		}
