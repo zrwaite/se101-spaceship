@@ -4,9 +4,10 @@ import YourDefenceController from "./DefenseController.js";
 import YourNavigationController from "./NavigationController.js";
 import YourPropulsionController from "./PropulsionController.js";
 import { EMSReading, PassiveReading } from "../types.js";
+import Sprite from "../../src/sprite.js";
 
 let allObjects: object[] = []; // array of all objects in galaxy
-let activeScanObjects: object[] = [];
+let activeScanObjects: EMSReading[][] = [];
 
 function isNumber(n: any) { return !isNaN(parseFloat(n)) && !isNaN(n - 0) }
 
@@ -17,6 +18,8 @@ export default class YourSensorsController extends SensorsController {
 	navigation: YourNavigationController // @ts-ignore
 	propulsion: YourPropulsionController
 	target: PassiveReading | null=null
+	// @ts-ignore
+	activeScanResult: EMSReading[] | Error
 
 	//Add additional attributes here
 
@@ -45,6 +48,7 @@ export default class YourSensorsController extends SensorsController {
 	//else if found target
 	else{
 		const activeScanResult = activeScan(this.target!.heading, 0.6, 5)
+		this.activeScanResult = activeScanResult;
 		if(!(activeScanResult instanceof Error)){
 			activeScanObjects.push(activeScanResult);
 		}
