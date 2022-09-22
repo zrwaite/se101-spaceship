@@ -44,7 +44,8 @@ export default class YourSensorsController extends SensorsController {
 			// 	}
 			// }
 			// else	
-			this.target = scanResult[0];
+				console.log(scanResult)
+				this.target = scanResult[0];
 		}
     if(!(scanResult instanceof Error)) this.target = scanResult[0];
 		if(!(activeResult instanceof Error)) {
