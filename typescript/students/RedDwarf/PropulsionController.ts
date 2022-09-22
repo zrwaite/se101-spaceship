@@ -40,7 +40,7 @@ export default class YourPropulsionController extends PropulsionController {
 
     const planetArr = getPlanets(); //function to make the ship slow down
     
-    
+    // gets the distance of the ship and the planet
     const dist = Math.sqrt(Math.pow(getShip().pos.x -planetArr[0].pos.x, 2) + Math.pow(getShip().pos.y - planetArr[0].pos.y, 2)); //Replace with given distance value
 
     const distRate = dist - this.prevDist;
@@ -48,7 +48,7 @@ export default class YourPropulsionController extends PropulsionController {
     var distOutput = 0;
     
     const KpDistOutput = dist * 300;
-    const KdDistOutput = distRate * 5000;
+    const KdDistOutput = distRate * 5000; 
 
     distOutput = KpDistOutput + KdDistOutput;
 
