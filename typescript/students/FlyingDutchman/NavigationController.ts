@@ -80,41 +80,33 @@ export default class YourNavigationController extends NavigationController {
 	// tries to update target
 	updateTarget() {
 		let d = 100000 // distance to target, used in x and y calculation
-		// if target is not set - condition isnt necessary????
-		if ((this.targetIsPlanet === null)) {	
-			for (var val of this.possibleObjects) {
-
-				// If the target is a planet
-				if (val.type === 'Other') {
-					// add to list of explored objects?
-					if (!(val.distance === undefined)) {
-						d = val.distance
-					}
-
-					// Calculate target vector
-					this.target.set(d * Math.cos(val.angle), d * Math.sin(val.angle))
-					this.targetIsPlanet = true;
-					break;
-				} else {		// If target is not a planet
-
-					
-					this.targetIsPlanet = false;
-					if (!(val.distance === undefined)) {
-						d = val.distance
-					}
-
-					// Calculate target vector
-					this.target.set(d * Math.cos(val.angle), d * Math.sin(val.angle))
+		for (var val of this.possibleObjects) {
+			// If the target is a planet
+			if (val.type === 'Other') {
+				// add to list of explored objects?
+				if (!(val.distance === undefined)) {
+					d = val.distance
 				}
-			} 
-		}
-		
-		else {
-			// dont update otherwise
-			if (this.targetIsPlanet) {
-				// something
+
+				// Calculate target vector
+				this.target.set(d * Math.cos(val.angle), d * Math.sin(val.angle))
+				if (this.targetIsPlanet === null)
+					this.targetIsPlanet = true;
+				break;
+			} else {		// If target is not a planet
+				
+				if (!(val.distance === undefined)) {
+					d = val.distance
+				}
+
+				// Calculate target vector
+				this.target.set(d * Math.cos(val.angle), d * Math.sin(val.angle))
+				if (this.targetIsPlanet === null)
+					this.targetIsPlanet = false;
 			}
-		}
+		} 
+	
+		
 	}
 
 
