@@ -373,7 +373,7 @@ let DOM: any = {
 	},
 	doneLoad: () => {
 		contexts['background'].drawImage(images['background'], 0, 0, windowSize.x * unit, windowSize.y * unit);
-		(<any>window).game = game = new Game(windowSize.x, windowSize.y, images, contexts, DOM.landSuccessful);
+		game = new Game(windowSize.x, windowSize.y, images, contexts, DOM.landSuccessful);
 		game.unit = unit
 		DOM.loaded = true
 		DOM.initialize()
