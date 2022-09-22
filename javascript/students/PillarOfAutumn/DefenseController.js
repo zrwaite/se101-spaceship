@@ -16,6 +16,7 @@ export default class YourDefenceController extends DefenceController {
                     console.log(ast);
                     i++;
                 }
+                this.sensors.asteroidHeading = [];
             });
         }
         this.timeCounter++;
