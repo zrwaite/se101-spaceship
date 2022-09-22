@@ -13,6 +13,7 @@ export default class YourNavigationController extends NavigationController {
 	sensors: YourSensorsController // @ts-ignore
 	propulsion: YourPropulsionController
 	angle=0; //initializes angle
+	angularVelocity = 0; // initing angularvelocity
 	
 	
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
@@ -27,5 +28,6 @@ export default class YourNavigationController extends NavigationController {
     });
 		
 		this.angle = getShipStatus("angle");
+		this.angularVelocity = getShipStatus('angularVelocity');
 	}
 }
