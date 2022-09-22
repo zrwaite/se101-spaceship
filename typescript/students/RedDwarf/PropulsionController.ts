@@ -6,7 +6,7 @@ import YourNavigationController from "./NavigationController.js";
 import YourSensorsController from "./SensorsController.js";
 import { angleDiff } from "../../src/helpers/Angles.js";
 
-// import { getPlanets, getShip } from "./utils.js";
+import { getPlanets, getShip, getWarpGates } from "./utils.js";
 
 export default class YourPropulsionController extends PropulsionController {
   // To get other subsystem information, use the attributes below.
@@ -37,11 +37,21 @@ export default class YourPropulsionController extends PropulsionController {
       this.sensors.target.heading
     );
 
-    // const planetArr = getPlanets(); //function to make the ship slow down
+    const planetArr = getPlanets(); //function to make the ship slow down
+    const warpArr = getWarpGates();
+
+    let target = 0;
+    let dist = 0;
+
+    if(warpArr.length == 0 ){
+      dist = Math.sqrt(Math.pow(getShip().pos.x - planetArr[0].pos.x, 2) + Math.pow(getShip().pos.y - planetArr[0].pos.y, 2)); //Replace with given distance value
+    }else{
+      dist = Math.sqrt(Math.pow(getShip().pos.x - warpArr[0].pos.x, 2) + Math.pow(getShip().pos.y - warpArr[0].pos.y, 2)); //Replace with given distance value
+    }
+    // const target = totalArr[0];
 
 
-    // const dist = Math.sqrt(Math.pow(getShip().pos.x - planetArr[0].pos.x, 2) + Math.pow(getShip().pos.y - planetArr[0].pos.y, 2)); //Replace with given distance value
-    const dist = 20;
+    // const dist = 20;
 
 
     const distRate = dist - this.prevDist;

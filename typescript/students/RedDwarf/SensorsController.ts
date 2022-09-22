@@ -28,7 +28,7 @@ export default class YourSensorsController extends SensorsController {
 
 		if (!(scanResult instanceof Error)) {
 
-      if (!this.target){
+    //   if (!this.target){
         // checks if scan object already exists in all Objects
 		// Two passive scans are started, so the positions of moving objects are
 		// different in each of the passsive scans.
@@ -38,12 +38,13 @@ export default class YourSensorsController extends SensorsController {
           if(JSON.stringify(planet) == JSON.stringify(scanResult)){
             console.log("found the planet", scanResult[0])					
             this.target = scanResult[0] // sets target to planet
+			console.log("ALDKJSALDKJ")
           }
         });
 
 		allObjects.push(scanResult) // adds object to array
       }
-	}
+	// }
 
 	//else if found target
 	else{
