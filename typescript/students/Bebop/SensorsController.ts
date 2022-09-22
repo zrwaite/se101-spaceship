@@ -13,6 +13,7 @@ export default class YourSensorsController extends SensorsController {
 
 	//Add additional attributes here
 	target: PassiveReading | null = null;
+	passiveScanData: PassiveReading[] | null = null;
 	activeScanData: EMSReading[] | null = null;
 
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
