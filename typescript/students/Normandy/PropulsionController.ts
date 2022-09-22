@@ -4,6 +4,7 @@ import PropulsionController from '../../src/subsystems/propulsionController.js'
 import YourDefenceController from './DefenseController.js'
 import YourNavigationController from './NavigationController.js'
 import YourSensorsController from './SensorsController.js'
+import { EMSReading } from '../types.js'
 export default class YourPropulsionController extends PropulsionController {
 	// To get other subsystem information, use the attributes below.
 	// @ts-ignore
@@ -70,19 +71,41 @@ export default class YourPropulsionController extends PropulsionController {
             }
         }
 
-        if(Math.abs(headingDiff) < 0.25) {
+        var EMS:(EMSReading[] | Error) = this.sensors.activeScans[0]
+        var dist=0
+        const heading = this.sensors.target.heading;
+        if(!(EMS instanceof Error ) && (EMS != null))  {
+            EMS.forEach( (element) => {
+                if(Math.abs(element.angle - heading) <= 0.001) {
+                    dist = element.distance;
+                }
+            });
+        }
+        if(Math.abs(headingDiff) < 0.25 && dist >= 400) {
+            setThruster('bow', 0);
             setThruster('main', 100);
-        } else {
-            setThruster('main', 0);
+        }
+        if(Math.abs(headingDiff) < 0.25 && dist < 400) {
+            var sped = this.calculateVelocity(Math.sqrt(this.navigation.linearVelocityX*this.navigation.linearVelocityX  + this.navigation.linearVelocityY*this.navigation.linearVelocityY), dist)
+            setThruster('main', 0)
+            setThruster('bow', sped)
+            console.log(sped)
+
         }
 
+
         //console.log(headingDiff);
+    }
+    calculateVelocity (currentVelocity: number, distance: number) {
+        var val = currentVelocity*currentVelocity/(2*distance);
+        console.log(val);
+        return val;
     }
 
     calculateAccelAngle(currentAngVelo: number, currentAngle: number, targetAngle: number) {
         //console.log(currentAngVelo + " " + currentAngle + " " + targetAngle)
         var val = 99999*Math.abs((currentAngVelo*currentAngVelo)/(2*angleDiff(currentAngle,targetAngle)))
-        console.log(val + " " + currentAngVelo + " " + angleDiff(currentAngle,targetAngle))
+        // console.log(val + " " + currentAngVelo + " " + angleDiff(currentAngle,targetAngle))
 		return val
 	}
 }

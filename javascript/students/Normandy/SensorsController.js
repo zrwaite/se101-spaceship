@@ -16,7 +16,7 @@ export default class YourSensorsController extends SensorsController {
         };
     }
     sensorsUpdate(activeScan, passiveScan) {
-        if (this.passiveCooldown > 0) {
+        if (this.passiveCooldown <= 0) {
             const scanResult = passiveScan();
             if (!(scanResult instanceof Error)) {
                 this.target = scanResult[0];

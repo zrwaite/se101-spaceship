@@ -80,6 +80,7 @@ export default class YourNavigationController extends NavigationController {
 
 		//update position function
 		const UpdatePosition = () => {
+			this.angularVelocity = getShipStatus('angularVelocity')
 			this.angle = getShipStatus('angle');
 			this.positionX = getShipStatus('positionX');
 			this.positionY = getShipStatus('positionY');
