@@ -15,10 +15,6 @@ export default class YourSensorsController extends SensorsController {
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {
 		const scanResult = passiveScan();
 		if(!(scanResult instanceof Error)) this.target = scanResult[0];
-<<<<<<< HEAD
-=======
-		
-
 		/**
 		 * Scanning Algorithm:
 		 * First, split the map into smaller regions
@@ -32,6 +28,5 @@ export default class YourSensorsController extends SensorsController {
 		 * 
 		 * Repeat this algorithm until a warp gate or a planet is found
 		 */
->>>>>>> 64a5350732900e9766936e3ab997fc30aa1605d6
 	}
 }
