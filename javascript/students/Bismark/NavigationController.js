@@ -1,7 +1,7 @@
 import NavigationController from "../../src/subsystems/navigationController.js";
 export default class YourNavigationController extends NavigationController {
     navigationUpdate(getShipStatus, warp, land, getMapData) {
-        var _a, _b, _c, _d, _e, _f;
+        var _a, _b, _c, _d, _e;
         this.angle = getShipStatus("angle");
         this.angularVelocity = getShipStatus("angularVelocity");
         this.linearVelocityX = getShipStatus("linearVelocityX");
@@ -22,11 +22,14 @@ export default class YourNavigationController extends NavigationController {
         /*
         
         */
-        if (((_a = this.sensors.targetDetails) === null || _a === void 0 ? void 0 : _a.distance) !== undefined && ((_b = this.sensors.targetDetails) === null || _b === void 0 ? void 0 : _b.distance) <= 60) { // May be able to be deleted later.
-            if (((_d = (_c = this.sensors.targetDetails) === null || _c === void 0 ? void 0 : _c.closeRange) === null || _d === void 0 ? void 0 : _d.type) === 'Planet') {
+        const distanceToTarget = (_a = this.sensors.targetDetails) === null || _a === void 0 ? void 0 : _a.distance;
+        if (distanceToTarget && distanceToTarget <= 60) {
+            console.log("HERE");
+            // May be able to be deleted later.
+            if (((_c = (_b = this.sensors.targetDetails) === null || _b === void 0 ? void 0 : _b.closeRange) === null || _c === void 0 ? void 0 : _c.type) === "Planet") {
                 land();
             }
-            else if (((_f = (_e = this.sensors.targetDetails) === null || _e === void 0 ? void 0 : _e.closeRange) === null || _f === void 0 ? void 0 : _f.type) === 'WarpGate') {
+            else if (((_e = (_d = this.sensors.targetDetails) === null || _d === void 0 ? void 0 : _d.closeRange) === null || _e === void 0 ? void 0 : _e.type) === "WarpGate") {
                 warp();
             }
         }
