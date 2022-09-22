@@ -34,24 +34,6 @@ export default class YourNavigationController extends NavigationController {
 	galaxyMap = new Map<String, GalaxyData>(); 
 
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {
-		warp();
-		land();
-		//update position function
-		const UpdatePosition = () => {
-			this.angle = getShipStatus('angle');
-			this.positionX = getShipStatus('positionX');
-			this.positionY = getShipStatus('positionY');
-			this.angularVelocity = getShipStatus('angularVelocity');
-			this.linearVelocityX = getShipStatus('linearVelocityX');
-			this.linearVelocityY = getShipStatus('linearVelocityY');
-		}
-
-		UpdatePosition();
-
-		/*uncomment this later
-
-		//galaxy MAP
-		let galaxyMap = new Map<string, SolarSystem[]>();
 
 		//get data from sensors
 		let passiveScan = this.sensors.passiveScans[0];
@@ -83,8 +65,7 @@ export default class YourNavigationController extends NavigationController {
 			this.angle = getShipStatus('angle');
 			this.positionX = getShipStatus('positionX');
 			this.positionY = getShipStatus('positionY');
-			this.angularVelocity = getShipStatus('angularVelocity');
-		this.linearVelocityX = getShipStatus('linearVelocityX');
+			this.linearVelocityX = getShipStatus('linearVelocityX');
 			this.linearVelocityY = getShipStatus('linearVelocityY');
 		}
 
