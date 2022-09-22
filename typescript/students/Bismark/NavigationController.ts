@@ -28,5 +28,6 @@ export default class YourNavigationController extends NavigationController {
     this.angle = getShipStatus("angle");
 	this.angVel = getShipStatus("angularVelocity");
     land();
+	warp();
 	}
 }
