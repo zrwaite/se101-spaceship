@@ -26,6 +26,7 @@ export default class YourNavigationController extends NavigationController {
 	position: Vector2 = new Vector2(0,0)
 	angularVelocity: number = 0
 	target: Vector2 = new Vector2(0,0)
+	targetAngle: number = 0
 	targetIsPlanet: boolean | null = null
 
 	landingDistance: number = 50; // change if needed
@@ -83,11 +84,13 @@ export default class YourNavigationController extends NavigationController {
 		for (var val of this.possibleObjects) {
 			// If the target is a planet
 			if (val.type === 'Other') {
-				// add to list of explored objects?
+
 				if (!(val.distance === undefined)) {
 					d = val.distance
 				}
 
+				// save target angle
+				this.targetAngle = val.angle
 				// Calculate target vector
 				this.target.set(d * Math.cos(val.angle), d * Math.sin(val.angle))
 				if (this.targetIsPlanet === null)
@@ -98,6 +101,9 @@ export default class YourNavigationController extends NavigationController {
 				if (!(val.distance === undefined)) {
 					d = val.distance
 				}
+				
+				// save target angle
+				this.targetAngle = val.angle
 
 				// Calculate target vector
 				this.target.set(d * Math.cos(val.angle), d * Math.sin(val.angle))
@@ -120,7 +126,7 @@ export default class YourNavigationController extends NavigationController {
 		return this.angularVelocity
 	}
 	public get getTargetAngle() {
-		return this.target.angle()
+		return this.targetAngle
 	}
 
 	public get getTargetMagnitude() {
