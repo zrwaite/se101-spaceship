@@ -24,6 +24,7 @@ export default class YourNavigationController extends NavigationController {
 
 	scanned: boolean = false
 	position: Vector2 = new Vector2(0,0)
+	angularVelocity: number = 0
 	target: Vector2 = new Vector2(0,0)
 	targetIsPlanet: boolean | null = null
 
@@ -40,6 +41,7 @@ export default class YourNavigationController extends NavigationController {
 
 		// Constantly update position
 		this.position = new Vector2(getShipStatus('positionX'), getShipStatus('positionY'))
+		this.angularVelocity = getShipStatus('angularVelocity')
 		this.angle = getShipStatus('angle')
 
 		// If target has been set
@@ -122,5 +124,9 @@ export default class YourNavigationController extends NavigationController {
 		return this.position
 	}
 
+	// Public get function to get angular velocity of ship
+	public get getAngularVelocity() {
+		return this.angularVelocity
+	}
 	
 }
