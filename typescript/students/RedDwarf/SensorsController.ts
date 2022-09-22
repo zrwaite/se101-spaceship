@@ -7,9 +7,9 @@ import { EMSReading, PassiveReading } from "../types.js";
 import Sprite from "../../src/sprite.js";
 
 let allObjects: object[] = []; // array of all objects in galaxy
-let activeScanObjects: EMSReading[][] = [];
+// let activeScanObjects: Object[] = [];
 
-function isNumber(n: any) { return !isNaN(parseFloat(n)) && !isNaN(n - 0) }
+// function isNumber(n: any) { return !isNaN(parseFloat(n)) && !isNaN(n - 0) }
 
 export default class YourSensorsController extends SensorsController {
 	// To get other subsystem information, use the attributes below.
@@ -19,7 +19,7 @@ export default class YourSensorsController extends SensorsController {
 	propulsion: YourPropulsionController
 	target: PassiveReading | null=null
 	// @ts-ignore
-	activeScanResult: EMSReading[] | Error
+	// activeScanResult: EMSReading[] | Error
 
 	//Add additional attributes here
 
@@ -47,10 +47,11 @@ export default class YourSensorsController extends SensorsController {
 
 	//else if found target
 	else{
-		const activeScanResult = activeScan(this.target!.heading, 0.6, 5)
-		this.activeScanResult = activeScanResult;
+		const activeScanResult = activeScan(1, 3, 5)
+		// this.activeScanResult = activeScanResult;
 		if(!(activeScanResult instanceof Error)){
-			activeScanObjects.push(activeScanResult);
+			console.log(activeScanResult)
+			// activeScanObjects.push(activeScanResult);
 		}
 	}
 	}

@@ -1,12 +1,14 @@
 import SensorsController from "../../src/subsystems/sensorsController.js";
 let allObjects = []; // array of all objects in galaxy
-let activeScanObjects = [];
-function isNumber(n) { return !isNaN(parseFloat(n)) && !isNaN(n - 0); }
+// let activeScanObjects: Object[] = [];
+// function isNumber(n: any) { return !isNaN(parseFloat(n)) && !isNaN(n - 0) }
 export default class YourSensorsController extends SensorsController {
     constructor() {
         super(...arguments);
         this.target = null;
     }
+    // @ts-ignore
+    // activeScanResult: EMSReading[] | Error
     //Add additional attributes here
     sensorsUpdate(activeScan, passiveScan) {
         const scanResult = passiveScan();
@@ -28,10 +30,11 @@ export default class YourSensorsController extends SensorsController {
         }
         //else if found target
         else {
-            const activeScanResult = activeScan(this.target.heading, 0.6, 5);
-            this.activeScanResult = activeScanResult;
+            const activeScanResult = activeScan(1, 3, 5);
+            // this.activeScanResult = activeScanResult;
             if (!(activeScanResult instanceof Error)) {
-                activeScanObjects.push(activeScanResult);
+                console.log(activeScanResult);
+                // activeScanObjects.push(activeScanResult);
             }
         }
     }
