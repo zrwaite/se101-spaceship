@@ -1,5 +1,5 @@
-import { angleDiff } from "../helpers.js";
-import PropulsionController from "../../src/subsystems/propulsionController.js";
+import { angleDiff } from '../helpers.js';
+import PropulsionController from '../../src/subsystems/propulsionController.js';
 export default class YourPropulsionController extends PropulsionController {
     //Add additional attributes here
     propulsionUpdate(setThruster) {
