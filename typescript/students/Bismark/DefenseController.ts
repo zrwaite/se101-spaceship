@@ -20,7 +20,11 @@ export default class YourDefenceController extends DefenceController {
     fireTorpedo: (i: number) => Error | null
   ) {
     if (!this.sensors.target) return;
-    aimTurret(this.sensors.target.heading);
-    fireTorpedo(0);
+    // if(this.sensors.target.heading < 1){
+      aimTurret(this.sensors.target.heading); 
+      fireTorpedo(0);
+      console.log(this.sensors.target.heading)
+    // }
   }
+
 }
