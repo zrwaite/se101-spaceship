@@ -392,8 +392,7 @@ let DOM = {
     },
     doneLoad: () => {
         contexts['background'].drawImage(images['background'], 0, 0, windowSize.x * unit, windowSize.y * unit);
-        ;
-        window.game = game = new Game(windowSize.x, windowSize.y, images, contexts, DOM.landSuccessful);
+        game = new Game(windowSize.x, windowSize.y, images, contexts, DOM.landSuccessful);
         game.unit = unit;
         DOM.loaded = true;
         DOM.initialize();
@@ -496,7 +495,7 @@ let DOM = {
             }
         }
         game.endGame();
-        window.game = game = new Game(windowSize.x, windowSize.y, images, contexts, DOM.landSuccessful);
+        game = new Game(windowSize.x, windowSize.y, images, contexts, DOM.landSuccessful);
         game.unit = unit;
         game.zoom = DOM.data['zoom'];
         game.paused = true;
