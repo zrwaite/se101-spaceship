@@ -18,17 +18,13 @@ export default class YourPropulsionController extends PropulsionController {
   ) {
     const angle = this.navigation.angle;
     const heading = this.navigation.targetAngle;
-    const headingDiff = angleDiff(
-      angle,
-      heading
-    );
+    const headingDiff = angleDiff(angle, heading);
     const force = Math.min(Math.abs(500 * headingDiff), 100);
     if (headingDiff < 0) {
       setThruster("clockwise", force);
 
       //Adding countersteer.
-      setThruster("counterClockwise", force - 20 );
-
+      setThruster("counterClockwise", force - 20);
     } else {
       setThruster("counterClockwise", force);
 
@@ -37,10 +33,16 @@ export default class YourPropulsionController extends PropulsionController {
     }
 
     //Rocket thrusts towards target within a greater range.
-    if(this.navigation.shipPlanetDistance){
-      setThruster("main", Math.abs(headingDiff) < 1 ? this.navigation.shipPlanetDistance/40 : 0);
-    }else{
-      setThruster("main", Math.abs(headingDiff) < 1 ? this.navigation.shipWarpDistance/40 : 0);
-    };
-  };
+    if (this.navigation.shipPlanetDistance) {
+      setThruster(
+        "main",
+        Math.abs(headingDiff) < 1 ? this.navigation.shipPlanetDistance / 40 : 0
+      );
+    } else {
+      setThruster(
+        "main",
+        Math.abs(headingDiff) < 1 ? this.navigation.shipWarpDistance / 40 : 0
+      );
+    }
+  }
 };
