@@ -14,6 +14,8 @@ export default class YourNavigationController extends NavigationController {
   propulsion: YourPropulsionController;
   angle = 0;
   angularVelocity = 0;
+  shipX = 0;
+  shipY = 0;
 
   //Add additional attributes here
 
@@ -25,11 +27,24 @@ export default class YourNavigationController extends NavigationController {
   ) {
     this.angle = getShipStatus("angle");
     this.angularVelocity = getShipStatus("angularVelocity");
+    this.shipX = getShipStatus("positionX");
+    this.shipY = getShipStatus("positionY");
 
-    // run land function  
-    land();
-    warp();
-    // if (YourSensorsController.onPlanet) {
-    // }
+
+    
+
+
+    //If we are close to target
+    if(this.propulsion.currDist < 50){
+      //If gravity is pos -> planet -> land
+      //If gravity is neg -> warp gate -> warps
+      if(this.sensors.target && this.sensors.target.gravity > 0){
+        land();
+      }else{
+        warp();
+
+      }
+
+    }
   }
 }
