@@ -6,7 +6,6 @@ import YourNavigationController from "./NavigationController.js";
 import YourSensorsController from "./SensorsController.js";
 import { angleDiff } from "../../src/helpers/Angles.js";
 
-import { getPlanets, getShip, getWarpGates } from "./utils.js";
 
 export default class YourPropulsionController extends PropulsionController {
   // To get other subsystem information, use the attributes below.
@@ -14,6 +13,8 @@ export default class YourPropulsionController extends PropulsionController {
   defence: YourDefenceController; // @ts-ignore
   sensors: YourSensorsController; // @ts-ignore
   navigation: YourNavigationController;
+
+  currDist: number = 0;
 
   //Add additional attributes here
 
@@ -37,23 +38,21 @@ export default class YourPropulsionController extends PropulsionController {
       this.sensors.target.heading
     );
 
-    const planetArr = getPlanets(); //function to make the ship slow down
-    const warpArr = getWarpGates();
 
     let target = 0;
     let dist = 0;
 
-    if(warpArr.length == 0 ){
-      dist = Math.sqrt(Math.pow(getShip().pos.x - planetArr[0].pos.x, 2) + Math.pow(getShip().pos.y - planetArr[0].pos.y, 2)); //Replace with given distance value
-    }else{
-      dist = Math.sqrt(Math.pow(getShip().pos.x - warpArr[0].pos.x, 2) + Math.pow(getShip().pos.y - warpArr[0].pos.y, 2)); //Replace with given distance value
-    }
-    // const target = totalArr[0];
+    //Calculate distance from target
+    dist = Math.sqrt(Math.pow(this.navigation.shipX - this.sensors.targetX, 2) + Math.pow(this.navigation.shipY - this.sensors.targetY, 2)); //Replace with given distance value
+    this.currDist = dist;
+    console.log("DIST: " + dist)
+		console.log("GRAV: " + this.sensors.target.gravity)
+    debugger
 
 
-    // const dist = 20;
 
 
+    //PD control calculations
     const distRate = dist - this.prevDist;
 
     var distOutput = 0;
@@ -61,12 +60,13 @@ export default class YourPropulsionController extends PropulsionController {
     const KpDistOutput = dist * 1;
     const KdDistOutput = distRate * 300;
 
-    distOutput = KpDistOutput + KdDistOutput;
+    if(dist > 50){ //Long range: Use PD control
+      distOutput = KpDistOutput + KdDistOutput;
 
+    }else{ //Short range: Slowly go forward
+      distOutput = 20;
 
-
-
-
+    }
 
     var headingOutput = 0;
 
@@ -77,16 +77,17 @@ export default class YourPropulsionController extends PropulsionController {
     headingOutput = KpHeadingOutput + KdHeadingOutput;
 
 
-    // console.log("OUTPUT: " + headingOutput);
 
+    //Clamp outputs between -100 and 100
     headingOutput = Math.min(Math.max(headingOutput, -100), 100);
     distOutput = Math.min(Math.max(distOutput, -100), 100);
 
     console.log("DO: " + distOutput)
-    // console.log("GET: " + distRate)
 
     this.maxOutput = Math.max(this.maxOutput, Math.abs(headingOutput))
 
+
+    //Turn the ship
     if (headingOutput < 0) {
       setThruster('clockwise', Math.abs(headingOutput))
       setThruster('counterClockwise', 0)
@@ -94,9 +95,9 @@ export default class YourPropulsionController extends PropulsionController {
       setThruster('counterClockwise', Math.abs(headingOutput))
       setThruster('clockwise', 0)
     }
-    // setThruster("main", Math.abs(currHeadingDiff) < 0.2 ? 30 : 0);
 
 
+    //Drive the ship 
     if (Math.abs(currHeadingDiff) < Math.PI / 180 * 10) {
       if (distOutput < 0) {
         setThruster('main', 0)
