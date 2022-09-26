@@ -48,6 +48,7 @@ export default class ColonyShip extends Sprite {
 	maxSpeed = 5
 	energyTimeCount = 0
 	destructed = false
+	running = true
 
 	constructor(
 		name: string,
@@ -84,6 +85,7 @@ export default class ColonyShip extends Sprite {
 		this.solarSystem = this.process.solarSystem
 	}
 	update() {
+		if (!this.running) return
 		if (this.destructed) return
 		this.energyTimeCount++
 		if (this.energyTimeCount > 4) {
@@ -239,17 +241,27 @@ export default class ColonyShip extends Sprite {
 	}
 
 	land(planet: Planet) {
-		this.game.landSuccessful(planet)
-		this.game.running = false
+		if (!this.game.allShips) {
+			this.game.landSuccessful(planet)
+			this.game.running = false
+		} else {
+			alert(`${this.name} landed on planet ${planet.name}!`)
+			this.running = false;
+		}
 	}
 
 	draw() {
 		if (this.destructed) return
-		this.activeSensors.draw()
-		this.passiveSensors.draw()
-		super.draw()
+		if (this.running) {
+			this.activeSensors.draw()
+			this.passiveSensors.draw()
+		}
+		if (this.game.allShips) super.draw(this.name)
+		else super.draw()
 		this.turretControls.draw()
-		this.thrusterController.draw()
+		if (this.running) {
+			this.thrusterController.draw()
+		}
 	}
 
 	selfDestruct() {

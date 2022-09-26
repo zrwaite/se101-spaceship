@@ -10,7 +10,7 @@ export default class RenderedObject {
         this.game = game;
         this.pos = pos;
     }
-    draw() {
+    draw(name = '') {
         if (!this.image)
             return;
         // Set the context's translation.
@@ -20,6 +20,10 @@ export default class RenderedObject {
             ctx.rotate(this.angle);
         // Draw the image with a half-size offset, so that rotating works properly and the coordinate represent the center.
         ctx.drawImage(this.image, ((-(this.size.x / 10) * this.game.unit) / 2) * this.game.zoom, ((-(this.size.y / 10) * this.game.unit) / 2) * this.game.zoom, (this.size.x / 10) * this.game.unit * this.game.zoom, (this.size.y / 10) * this.game.unit * this.game.zoom);
+        if (name !== '') {
+            ctx.fillStyle = 'white';
+            ctx.fillText(name, ((-(this.size.x / 10) * this.game.unit) / 2) * this.game.zoom, ((-(this.size.y / 10) * this.game.unit) / 2) * this.game.zoom);
+        }
     }
     update() { }
 }

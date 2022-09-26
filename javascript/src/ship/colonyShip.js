@@ -22,6 +22,7 @@ export default class ColonyShip extends Sprite {
         this.maxSpeed = 5;
         this.energyTimeCount = 0;
         this.destructed = false;
+        this.running = true;
         this.name = name;
         this.process = process;
         this.defenceController = new DefenceClass();
@@ -44,6 +45,8 @@ export default class ColonyShip extends Sprite {
         this.solarSystem = this.process.solarSystem;
     }
     update() {
+        if (!this.running)
+            return;
         if (this.destructed)
             return;
         this.energyTimeCount++;
@@ -209,17 +212,30 @@ export default class ColonyShip extends Sprite {
         return new Error('No planets in range');
     }
     land(planet) {
-        this.game.landSuccessful(planet);
-        this.game.running = false;
+        if (!this.game.allShips) {
+            this.game.landSuccessful(planet);
+            this.game.running = false;
+        }
+        else {
+            alert(`${this.name} landed on planet ${planet.name}!`);
+            this.running = false;
+        }
     }
     draw() {
         if (this.destructed)
             return;
-        this.activeSensors.draw();
-        this.passiveSensors.draw();
-        super.draw();
+        if (this.running) {
+            this.activeSensors.draw();
+            this.passiveSensors.draw();
+        }
+        if (this.game.allShips)
+            super.draw(this.name);
+        else
+            super.draw();
         this.turretControls.draw();
-        this.thrusterController.draw();
+        if (this.running) {
+            this.thrusterController.draw();
+        }
     }
     selfDestruct() {
         const explosion = new Torpedo(Vector2.zero, this.pos, this.game);

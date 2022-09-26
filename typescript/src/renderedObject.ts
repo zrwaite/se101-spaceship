@@ -17,7 +17,7 @@ export default abstract class RenderedObject {
 		this.game = game
 		this.pos = pos
 	}
-	draw() {
+	draw(name: string = '') {
 		if (!this.image) return
 		// Set the context's translation.
 		let ctx: CanvasRenderingContext2D = this.game.contexts[this.ctx]
@@ -31,6 +31,14 @@ export default abstract class RenderedObject {
 			(this.size.x / 10) * this.game.unit * this.game.zoom,
 			(this.size.y / 10) * this.game.unit * this.game.zoom
 		)
+		if (name !== '') {
+			ctx.fillStyle = 'white'
+			ctx.fillText(
+				name,
+				((-(this.size.x / 10) * this.game.unit) / 2) * this.game.zoom,
+				((-(this.size.y / 10) * this.game.unit) / 2) * this.game.zoom,
+			)
+		}
 	}
 	update() {}
 }
