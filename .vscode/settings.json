@@ -2,5 +2,4 @@
 	"files.exclude": {
     	"**/*.js": true	
 	},
-	"workbench.editor.enablePreview": false
 }
