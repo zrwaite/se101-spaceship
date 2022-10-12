@@ -1,19 +1,114 @@
-import { Vector2, withinPiRange } from '../helpers.js'
-import { ThrusterName } from '../types.js'
-import PropulsionController from '../../src/subsystems/propulsionController.js'
-import YourDefenceController from './DefenseController.js'
-import YourNavigationController from './NavigationController.js'
-import YourSensorsController from './SensorsController.js'
+import { Vector2, withinPiRange } from "../helpers.js";
+import { ThrusterName } from "../types.js";
+import PropulsionController from "../../src/subsystems/propulsionController.js";
+import YourDefenceController from "./DefenseController.js";
+import YourNavigationController from "./NavigationController.js";
+import YourSensorsController from "./SensorsController.js";
+import { angleDiff } from "../../src/helpers/Angles.js";
+
+
 export default class YourPropulsionController extends PropulsionController {
-	// To get other subsystem information, use the attributes below.
-	// @ts-ignore
-	defence: YourDefenceController // @ts-ignore
-	sensors: YourSensorsController // @ts-ignore
-	navigation: YourNavigationController
+  // To get other subsystem information, use the attributes below.
+  // @ts-ignore
+  defence: YourDefenceController; // @ts-ignore
+  sensors: YourSensorsController; // @ts-ignore
+  navigation: YourNavigationController;
 
-	//Add additional attributes here
+  currDist: number = 0;
 
-	propulsionUpdate(setThruster: (thruster: ThrusterName, power: number) => Error | null) {
-		//Student code goes here
-	}
+  //Add additional attributes here
+
+  prevHeadingDiff: number = 0;
+  maxOutput: number = 0;
+
+  KpWHeading: number = 300;
+  KdWHeading: number = 5000;
+
+  prevDist: number = 0;
+
+  //propulsion update pulls data about the ship and its trajectory
+  propulsionUpdate(
+    setThruster: (thruster: ThrusterName, power: number) => Error | null
+  ) {
+
+    if (!this.sensors.target) return;
+
+    const currHeadingDiff = angleDiff( //calculate heading angle
+      this.navigation.angle,
+      this.sensors.target.heading
+    );
+
+
+    let target = 0;
+    let dist = 0;
+
+    //Calculate distance from target
+    dist = Math.sqrt(Math.pow(this.navigation.shipX - this.sensors.targetX, 2) + Math.pow(this.navigation.shipY - this.sensors.targetY, 2)); //Replace with given distance value
+    this.currDist = dist;
+    console.log("DIST: " + dist)
+		console.log("GRAV: " + this.sensors.target.gravity)
+    debugger
+
+
+
+
+    //PD control calculations
+    const distRate = dist - this.prevDist;
+
+    var distOutput = 0;
+
+    const KpDistOutput = dist * 1;
+    const KdDistOutput = distRate * 300;
+
+    if(dist > 50){ //Long range: Use PD control
+      distOutput = KpDistOutput + KdDistOutput;
+
+    }else{ //Short range: Slowly go forward
+      distOutput = 20;
+
+    }
+
+    var headingOutput = 0;
+
+    const headingDiffRate = currHeadingDiff - this.prevHeadingDiff; //Find "derivative" of error
+
+    const KpHeadingOutput = currHeadingDiff * this.KpWHeading; //Calculate terms
+    const KdHeadingOutput = headingDiffRate * this.KdWHeading;
+    headingOutput = KpHeadingOutput + KdHeadingOutput;
+
+
+
+    //Clamp outputs between -100 and 100
+    headingOutput = Math.min(Math.max(headingOutput, -100), 100);
+    distOutput = Math.min(Math.max(distOutput, -100), 100);
+
+    console.log("DO: " + distOutput)
+
+    this.maxOutput = Math.max(this.maxOutput, Math.abs(headingOutput))
+
+
+    //Turn the ship
+    if (headingOutput < 0) {
+      setThruster('clockwise', Math.abs(headingOutput))
+      setThruster('counterClockwise', 0)
+    } else {
+      setThruster('counterClockwise', Math.abs(headingOutput))
+      setThruster('clockwise', 0)
+    }
+
+
+    //Drive the ship 
+    if (Math.abs(currHeadingDiff) < Math.PI / 180 * 10) {
+      if (distOutput < 0) {
+        setThruster('main', 0)
+        setThruster('bow', Math.abs(distOutput))
+      } else {
+        setThruster('main', Math.abs(distOutput))
+        setThruster('bow', Math.abs(distOutput))
+      }
+    }
+
+    this.prevHeadingDiff = currHeadingDiff;
+    this.prevDist = dist;
+  }
 }
