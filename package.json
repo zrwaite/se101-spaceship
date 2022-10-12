@@ -1,27 +1,27 @@
 {
-	"name": "se101spaceship",
-	"version": "1.0.0",
-	"description": "Replacement for the SE101 Godot Spaceship System",
-	"main": "src/index.js",
-	"scripts": {
-		"dev": "tsc --watch",
-		"compile": "tsc;"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/zrwaite/SE101-Spaceship.git"
-	},
-	"keywords": [],
-	"author": "Zac Waite, Josiah Plett",
-	"license": "ISC",
-	"dependencies": {
-		"typescript": "^4.6.4"
-	},
-	"bugs": {
-		"url": "https://github.com/zrwaite/SE101-Spaceship/issues"
-	},
-	"homepage": "https://github.com/zrwaite/SE101-Spaceship#readme",
-	"exclude": [
-		"node_modules"
-	]
+  "name": "se101spaceship",
+  "version": "1.0.0",
+  "description": "Replacement for the SE101 Godot Spaceship System",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "tsc --watch",
+    "compile": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zrwaite/SE101-Spaceship.git"
+  },
+  "keywords": [],
+  "author": "Zac Waite, Josiah Plett",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.6.4"
+  },
+  "bugs": {
+    "url": "https://github.com/zrwaite/SE101-Spaceship/issues"
+  },
+  "homepage": "https://github.com/zrwaite/SE101-Spaceship#readme",
+  "exclude": [
+    "node_modules"
+  ]
 }
