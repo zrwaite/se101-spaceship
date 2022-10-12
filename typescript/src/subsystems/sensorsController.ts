@@ -1,6 +1,7 @@
 
 import { EMSReading } from '../ship/EMSReading.js'
 import { PassiveReading } from '../ship/passiveReading.js'
+import Sprite from '../sprite.js'
 import DefenceController from './defenceController.js'
 import NavigationController from './navigationController.js'
 import PropulsionController from './propulsionController.js'
@@ -12,6 +13,9 @@ export default class SensorsController {
 	defence: DefenceController
 	// @ts-ignore
 	propulsion: PropulsionController
+	// @ts-ignore
+	target: PassiveReading | null = null;
+
 	constructor() {
 		// @ts-ignore
 		this.navigation = null
@@ -19,6 +23,8 @@ export default class SensorsController {
 		this.defence = null
 		// @ts-ignore
 		this.propulsion = null
+		// @ts-ignore
+		this.target = null
 	}
 	sensorsUpdate(activeScan: (heading: number, arc: number, range: number) => EMSReading[] | Error, passiveScan: () => PassiveReading[] | Error) {}
 	initializeConnection = (
@@ -31,5 +37,4 @@ export default class SensorsController {
 		this.navigation = navigation
 	}
 }
-
 

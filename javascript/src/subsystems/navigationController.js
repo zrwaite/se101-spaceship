@@ -9,8 +9,10 @@ export default class NavigationController {
         this.defence = null;
         // @ts-ignore
         this.propulsion = null;
-        // @ts-ignore
+        // @ts-ignore 🥰
         this.sensors = null;
+        // @ts-ignore
+        this.angle = 0;
     }
     navigationUpdate(getShipStatus, warp, land, getMapData) { }
 }
