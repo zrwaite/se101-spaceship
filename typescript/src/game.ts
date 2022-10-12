@@ -239,4 +239,4 @@ ctx.lineWidth = "5";
 ctx.strokeStyle = "red";
 ctx.beginPath();
 ctx.rect(this.camera.x, this.camera.y, Math.floor(this.width / this.zoom * this.unit), Math.floor(this.height / this.zoom * this.unit));
-ctx.stroke();*/
+ctx.stroke();*/     

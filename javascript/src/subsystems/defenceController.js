@@ -12,5 +12,10 @@ export default class DefenceController {
         // @ts-ignore
         this.sensors = null;
     }
-    defenceUpdate(aimTurret, getTubeCooldown, fireTorpedo) { }
+    defenceUpdate(aimTurret, getTubeCooldown, fireTorpedo) {
+        if (!this.sensors.target)
+            return;
+        aimTurret(this.sensors.target.heading);
+        fireTorpedo(0);
+    }
 }
