@@ -10,7 +10,7 @@ export default class NavigationController {
 	propulsion: PropulsionController
 	// @ts-ignore
 	sensors: SensorsController
-	angle: number
+  
 	navigationUpdate(getShipStatus: (key: keyof ShipStatus) => number, warp: () => Error|null, land: () => Error|null, getMapData: () => MapData) {}
 	constructor() {
 		// @ts-ignore
@@ -25,7 +25,7 @@ export default class NavigationController {
 	initializeConnection = (
 		defence: DefenceController,
 		propulsion: PropulsionController,
-		sensors: SensorsController
+		sensors: SensorsController,
 	) => {
 		this.defence = defence
 		this.propulsion = propulsion
