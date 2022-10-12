@@ -750,5 +750,14 @@ This information is useful for identifying what type of object different scanned
 | Star      | ~39000         | ~50     |
 
 **Newton's Gravity Equation**:
-- F = ( G * m1 * m2 ) / (r^2)
+- `F = ( G * m1 * m2 ) / (r^2)`
 - In our Universe, G = 1/3, and Gravity is measured in force
+
+**Max Ship Speed**: `5`
+
+**Map Ship Angular Speed**: `0.3`
+
+**Max landing speed**: `2`
+
+**Torpedo Speed**: (Relative to ship): `3`
+
